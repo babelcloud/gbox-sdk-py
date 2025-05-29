@@ -7,6 +7,14 @@ from typing_extensions import Literal, overload
 
 import httpx
 
+from .fs import (
+    FsResource,
+    AsyncFsResource,
+    FsResourceWithRawResponse,
+    AsyncFsResourceWithRawResponse,
+    FsResourceWithStreamingResponse,
+    AsyncFsResourceWithStreamingResponse,
+)
 from .actions import (
     ActionsResource,
     AsyncActionsResource,
@@ -52,6 +60,10 @@ class BoxesResource(SyncAPIResource):
     @cached_property
     def actions(self) -> ActionsResource:
         return ActionsResource(self._client)
+
+    @cached_property
+    def fs(self) -> FsResource:
+        return FsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> BoxesResourceWithRawResponse:
@@ -508,6 +520,10 @@ class AsyncBoxesResource(AsyncAPIResource):
     @cached_property
     def actions(self) -> AsyncActionsResource:
         return AsyncActionsResource(self._client)
+
+    @cached_property
+    def fs(self) -> AsyncFsResource:
+        return AsyncFsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncBoxesResourceWithRawResponse:
@@ -996,6 +1012,10 @@ class BoxesResourceWithRawResponse:
     def actions(self) -> ActionsResourceWithRawResponse:
         return ActionsResourceWithRawResponse(self._boxes.actions)
 
+    @cached_property
+    def fs(self) -> FsResourceWithRawResponse:
+        return FsResourceWithRawResponse(self._boxes.fs)
+
 
 class AsyncBoxesResourceWithRawResponse:
     def __init__(self, boxes: AsyncBoxesResource) -> None:
@@ -1032,6 +1052,10 @@ class AsyncBoxesResourceWithRawResponse:
     @cached_property
     def actions(self) -> AsyncActionsResourceWithRawResponse:
         return AsyncActionsResourceWithRawResponse(self._boxes.actions)
+
+    @cached_property
+    def fs(self) -> AsyncFsResourceWithRawResponse:
+        return AsyncFsResourceWithRawResponse(self._boxes.fs)
 
 
 class BoxesResourceWithStreamingResponse:
@@ -1070,6 +1094,10 @@ class BoxesResourceWithStreamingResponse:
     def actions(self) -> ActionsResourceWithStreamingResponse:
         return ActionsResourceWithStreamingResponse(self._boxes.actions)
 
+    @cached_property
+    def fs(self) -> FsResourceWithStreamingResponse:
+        return FsResourceWithStreamingResponse(self._boxes.fs)
+
 
 class AsyncBoxesResourceWithStreamingResponse:
     def __init__(self, boxes: AsyncBoxesResource) -> None:
@@ -1106,3 +1134,7 @@ class AsyncBoxesResourceWithStreamingResponse:
     @cached_property
     def actions(self) -> AsyncActionsResourceWithStreamingResponse:
         return AsyncActionsResourceWithStreamingResponse(self._boxes.actions)
+
+    @cached_property
+    def fs(self) -> AsyncFsResourceWithStreamingResponse:
+        return AsyncFsResourceWithStreamingResponse(self._boxes.fs)

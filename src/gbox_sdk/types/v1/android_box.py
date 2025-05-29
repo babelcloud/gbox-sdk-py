@@ -1,0 +1,72 @@
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+from datetime import datetime
+from typing_extensions import Literal
+
+from pydantic import Field as FieldInfo
+
+from ..._models import BaseModel
+
+__all__ = ["AndroidBox", "Config", "ConfigBrowser", "ConfigOs"]
+
+
+class ConfigBrowser(BaseModel):
+    type: Literal["Chrome for Android", "UC Browser for Android"]
+    """Supported browser types for Android boxes"""
+
+    version: str
+    """Browser version string (e.g. '136')"""
+
+
+class ConfigOs(BaseModel):
+    version: Literal["12", "13"]
+    """Supported Android versions"""
+
+
+class Config(BaseModel):
+    browser: ConfigBrowser
+    """Browser configuration"""
+
+    cpu: float
+    """CPU cores allocated to the box"""
+
+    envs: object
+    """Environment variables for the box"""
+
+    labels: object
+    """Key-value pairs of labels for the box"""
+
+    memory: float
+    """Memory allocated to the box in MB"""
+
+    os: ConfigOs
+    """Android operating system configuration"""
+
+    storage: float
+    """Storage allocated to the box in GB"""
+
+    working_dir: str = FieldInfo(alias="workingDir")
+    """Working directory path for the box"""
+
+
+class AndroidBox(BaseModel):
+    id: str
+    """Unique identifier for the box"""
+
+    config: Config
+    """Configuration for an Android box instance"""
+
+    created_at: datetime = FieldInfo(alias="createdAt")
+    """Creation timestamp of the box"""
+
+    expires_at: datetime = FieldInfo(alias="expiresAt")
+    """Expiration timestamp of the box"""
+
+    status: Literal["pending", "running", "stopped", "error"]
+    """The current status of a box instance"""
+
+    type: Literal["linux", "android"]
+    """Box type is Android"""
+
+    updated_at: datetime = FieldInfo(alias="updatedAt")
+    """Last update timestamp of the box"""

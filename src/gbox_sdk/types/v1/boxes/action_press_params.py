@@ -7,10 +7,10 @@ from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from ...._utils import PropertyInfo
 
-__all__ = ["ActionKeypressParams"]
+__all__ = ["ActionPressParams"]
 
 
-class ActionKeypressParams(TypedDict, total=False):
+class ActionPressParams(TypedDict, total=False):
     keys: Required[List[str]]
     """Array of keys to press"""
 

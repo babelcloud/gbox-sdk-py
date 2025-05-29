@@ -23,9 +23,9 @@ from ....types.v1.boxes import (
     action_move_params,
     action_type_params,
     action_click_params,
+    action_press_params,
     action_touch_params,
     action_scroll_params,
-    action_keypress_params,
     action_screenshot_params,
 )
 from ....types.v1.linux_box import LinuxBox
@@ -167,54 +167,6 @@ class ActionsResource(SyncAPIResource):
             cast_to=ActionResult,
         )
 
-    def keypress(
-        self,
-        id: str,
-        *,
-        keys: List[str],
-        type: object,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionResult:
-        """
-        Args:
-          keys: Array of keys to press
-
-          type: Action type for keyboard key press
-
-          output_format: Type of the URI
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return self._post(
-            f"/api/v1/boxes/{id}/actions/keypress",
-            body=maybe_transform(
-                {
-                    "keys": keys,
-                    "type": type,
-                    "output_format": output_format,
-                },
-                action_keypress_params.ActionKeypressParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ActionResult,
-        )
-
     def move(
         self,
         id: str,
@@ -260,6 +212,54 @@ class ActionsResource(SyncAPIResource):
                     "output_format": output_format,
                 },
                 action_move_params.ActionMoveParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
+        )
+
+    def press(
+        self,
+        id: str,
+        *,
+        keys: List[str],
+        type: object,
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionResult:
+        """
+        Args:
+          keys: Array of keys to press
+
+          type: Action type for keyboard key press
+
+          output_format: Type of the URI
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._post(
+            f"/api/v1/boxes/{id}/actions/press",
+            body=maybe_transform(
+                {
+                    "keys": keys,
+                    "type": type,
+                    "output_format": output_format,
+                },
+                action_press_params.ActionPressParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -604,54 +604,6 @@ class AsyncActionsResource(AsyncAPIResource):
             cast_to=ActionResult,
         )
 
-    async def keypress(
-        self,
-        id: str,
-        *,
-        keys: List[str],
-        type: object,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionResult:
-        """
-        Args:
-          keys: Array of keys to press
-
-          type: Action type for keyboard key press
-
-          output_format: Type of the URI
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return await self._post(
-            f"/api/v1/boxes/{id}/actions/keypress",
-            body=await async_maybe_transform(
-                {
-                    "keys": keys,
-                    "type": type,
-                    "output_format": output_format,
-                },
-                action_keypress_params.ActionKeypressParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ActionResult,
-        )
-
     async def move(
         self,
         id: str,
@@ -697,6 +649,54 @@ class AsyncActionsResource(AsyncAPIResource):
                     "output_format": output_format,
                 },
                 action_move_params.ActionMoveParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
+        )
+
+    async def press(
+        self,
+        id: str,
+        *,
+        keys: List[str],
+        type: object,
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionResult:
+        """
+        Args:
+          keys: Array of keys to press
+
+          type: Action type for keyboard key press
+
+          output_format: Type of the URI
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._post(
+            f"/api/v1/boxes/{id}/actions/press",
+            body=await async_maybe_transform(
+                {
+                    "keys": keys,
+                    "type": type,
+                    "output_format": output_format,
+                },
+                action_press_params.ActionPressParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -919,11 +919,11 @@ class ActionsResourceWithRawResponse:
         self.drag = to_raw_response_wrapper(
             actions.drag,
         )
-        self.keypress = to_raw_response_wrapper(
-            actions.keypress,
-        )
         self.move = to_raw_response_wrapper(
             actions.move,
+        )
+        self.press = to_raw_response_wrapper(
+            actions.press,
         )
         self.screenshot = to_raw_response_wrapper(
             actions.screenshot,
@@ -949,11 +949,11 @@ class AsyncActionsResourceWithRawResponse:
         self.drag = async_to_raw_response_wrapper(
             actions.drag,
         )
-        self.keypress = async_to_raw_response_wrapper(
-            actions.keypress,
-        )
         self.move = async_to_raw_response_wrapper(
             actions.move,
+        )
+        self.press = async_to_raw_response_wrapper(
+            actions.press,
         )
         self.screenshot = async_to_raw_response_wrapper(
             actions.screenshot,
@@ -979,11 +979,11 @@ class ActionsResourceWithStreamingResponse:
         self.drag = to_streamed_response_wrapper(
             actions.drag,
         )
-        self.keypress = to_streamed_response_wrapper(
-            actions.keypress,
-        )
         self.move = to_streamed_response_wrapper(
             actions.move,
+        )
+        self.press = to_streamed_response_wrapper(
+            actions.press,
         )
         self.screenshot = to_streamed_response_wrapper(
             actions.screenshot,
@@ -1009,11 +1009,11 @@ class AsyncActionsResourceWithStreamingResponse:
         self.drag = async_to_streamed_response_wrapper(
             actions.drag,
         )
-        self.keypress = async_to_streamed_response_wrapper(
-            actions.keypress,
-        )
         self.move = async_to_streamed_response_wrapper(
             actions.move,
+        )
+        self.press = async_to_streamed_response_wrapper(
+            actions.press,
         )
         self.screenshot = async_to_streamed_response_wrapper(
             actions.screenshot,

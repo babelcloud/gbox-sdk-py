@@ -24,6 +24,14 @@ from .actions import (
     ActionsResourceWithStreamingResponse,
     AsyncActionsResourceWithStreamingResponse,
 )
+from .browser import (
+    BrowserResource,
+    AsyncBrowserResource,
+    BrowserResourceWithRawResponse,
+    AsyncBrowserResourceWithRawResponse,
+    BrowserResourceWithStreamingResponse,
+    AsyncBrowserResourceWithStreamingResponse,
+)
 
 __all__ = [
     "ActionsResource",
@@ -38,6 +46,12 @@ __all__ = [
     "AsyncFsResourceWithRawResponse",
     "FsResourceWithStreamingResponse",
     "AsyncFsResourceWithStreamingResponse",
+    "BrowserResource",
+    "AsyncBrowserResource",
+    "BrowserResourceWithRawResponse",
+    "AsyncBrowserResourceWithRawResponse",
+    "BrowserResourceWithStreamingResponse",
+    "AsyncBrowserResourceWithStreamingResponse",
     "BoxesResource",
     "AsyncBoxesResource",
     "BoxesResourceWithRawResponse",

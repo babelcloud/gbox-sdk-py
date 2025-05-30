@@ -65,3 +65,16 @@ Methods:
 - <code title="get /api/v1/boxes/{id}/fs/list">client.v1.boxes.fs.<a href="./src/gbox_sdk/resources/v1/boxes/fs.py">list</a>(id, \*\*<a href="src/gbox_sdk/types/v1/boxes/f_list_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/f_list_response.py">FListResponse</a></code>
 - <code title="get /api/v1/boxes/{id}/fs/read">client.v1.boxes.fs.<a href="./src/gbox_sdk/resources/v1/boxes/fs.py">read</a>(id, \*\*<a href="src/gbox_sdk/types/v1/boxes/f_read_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/f_read_response.py">FReadResponse</a></code>
 - <code title="post /api/v1/boxes/{id}/fs/write">client.v1.boxes.fs.<a href="./src/gbox_sdk/resources/v1/boxes/fs.py">write</a>(id, \*\*<a href="src/gbox_sdk/types/v1/boxes/f_write_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/f_write_response.py">FWriteResponse</a></code>
+
+### Browser
+
+Types:
+
+```python
+from gbox_sdk.types.v1.boxes import BrowserCdpURLResponse, BrowserConnectURLResponse
+```
+
+Methods:
+
+- <code title="get /api/v1/boxes/{id}/browser/connect-url/cdp">client.v1.boxes.browser.<a href="./src/gbox_sdk/resources/v1/boxes/browser.py">cdp_url</a>(id) -> str</code>
+- <code title="get /api/v1/boxes/{id}/browser/connect-url">client.v1.boxes.browser.<a href="./src/gbox_sdk/resources/v1/boxes/browser.py">connect_url</a>(id) -> <a href="./src/gbox_sdk/types/v1/boxes/browser_connect_url_response.py">BrowserConnectURLResponse</a></code>

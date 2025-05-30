@@ -17,4 +17,6 @@ from .action_press_params import ActionPressParams as ActionPressParams
 from .action_touch_params import ActionTouchParams as ActionTouchParams
 from .action_scroll_params import ActionScrollParams as ActionScrollParams
 from .action_screenshot_params import ActionScreenshotParams as ActionScreenshotParams
+from .browser_cdp_url_response import BrowserCdpURLResponse as BrowserCdpURLResponse
 from .action_screenshot_response import ActionScreenshotResponse as ActionScreenshotResponse
+from .browser_connect_url_response import BrowserConnectURLResponse as BrowserConnectURLResponse

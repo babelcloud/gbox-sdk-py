@@ -9,7 +9,6 @@ import pytest
 
 from gbox_sdk import GboxClient, AsyncGboxClient
 from tests.utils import assert_matches_type
-from gbox_sdk.types.v1 import LinuxBox
 from gbox_sdk.types.v1.boxes import (
     ActionResult,
     ActionScreenshotResponse,
@@ -30,7 +29,7 @@ class TestActions:
             x=100,
             y=100,
         )
-        assert_matches_type(LinuxBox, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -44,7 +43,7 @@ class TestActions:
             double=True,
             output_format="base64",
         )
-        assert_matches_type(LinuxBox, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -59,7 +58,7 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(LinuxBox, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -74,7 +73,7 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(LinuxBox, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -628,7 +627,7 @@ class TestAsyncActions:
             x=100,
             y=100,
         )
-        assert_matches_type(LinuxBox, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -642,7 +641,7 @@ class TestAsyncActions:
             double=True,
             output_format="base64",
         )
-        assert_matches_type(LinuxBox, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -657,7 +656,7 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(LinuxBox, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -672,7 +671,7 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(LinuxBox, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

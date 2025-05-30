@@ -98,6 +98,8 @@ class BoxesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxCreateResponse:
         """
+        Create box
+
         Args:
           type: Box type is Linux
 
@@ -127,6 +129,8 @@ class BoxesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxCreateResponse:
         """
+        Create box
+
         Args:
           type: Box type is Android
 
@@ -185,6 +189,8 @@ class BoxesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxRetrieveResponse:
         """
+        Get box detail
+
         Args:
           extra_headers: Send extra headers
 
@@ -222,6 +228,8 @@ class BoxesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxListResponse:
         """
+        List box
+
         Args:
           page: Page number
 
@@ -266,6 +274,8 @@ class BoxesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AndroidBox:
         """
+        Create android box
+
         Args:
           type: Box type is Android
 
@@ -307,6 +317,8 @@ class BoxesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> LinuxBox:
         """
+        Create linux box
+
         Args:
           type: Box type is Linux
 
@@ -459,6 +471,8 @@ class BoxesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxStartResponse:
         """
+        Start box
+
         Args:
           extra_headers: Send extra headers
 
@@ -493,6 +507,8 @@ class BoxesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxStopResponse:
         """
+        Stop box
+
         Args:
           extra_headers: Send extra headers
 
@@ -558,6 +574,8 @@ class AsyncBoxesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxCreateResponse:
         """
+        Create box
+
         Args:
           type: Box type is Linux
 
@@ -587,6 +605,8 @@ class AsyncBoxesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxCreateResponse:
         """
+        Create box
+
         Args:
           type: Box type is Android
 
@@ -645,6 +665,8 @@ class AsyncBoxesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxRetrieveResponse:
         """
+        Get box detail
+
         Args:
           extra_headers: Send extra headers
 
@@ -682,6 +704,8 @@ class AsyncBoxesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxListResponse:
         """
+        List box
+
         Args:
           page: Page number
 
@@ -726,6 +750,8 @@ class AsyncBoxesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AndroidBox:
         """
+        Create android box
+
         Args:
           type: Box type is Android
 
@@ -767,6 +793,8 @@ class AsyncBoxesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> LinuxBox:
         """
+        Create linux box
+
         Args:
           type: Box type is Linux
 
@@ -919,6 +947,8 @@ class AsyncBoxesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxStartResponse:
         """
+        Start box
+
         Args:
           extra_headers: Send extra headers
 
@@ -953,6 +983,8 @@ class AsyncBoxesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxStopResponse:
         """
+        Stop box
+
         Args:
           extra_headers: Send extra headers
 

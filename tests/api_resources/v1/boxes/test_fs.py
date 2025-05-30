@@ -26,8 +26,17 @@ class TestFs:
     def test_method_list(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.list(
             id="id",
-            depth=0,
             path="path",
+        )
+        assert_matches_type(FListResponse, f, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_list_with_all_params(self, client: GboxClient) -> None:
+        f = client.v1.boxes.fs.list(
+            id="id",
+            path="path",
+            depth=0,
         )
         assert_matches_type(FListResponse, f, path=["response"])
 
@@ -36,7 +45,6 @@ class TestFs:
     def test_raw_response_list(self, client: GboxClient) -> None:
         response = client.v1.boxes.fs.with_raw_response.list(
             id="id",
-            depth=0,
             path="path",
         )
 
@@ -50,7 +58,6 @@ class TestFs:
     def test_streaming_response_list(self, client: GboxClient) -> None:
         with client.v1.boxes.fs.with_streaming_response.list(
             id="id",
-            depth=0,
             path="path",
         ) as response:
             assert not response.is_closed
@@ -67,7 +74,6 @@ class TestFs:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.v1.boxes.fs.with_raw_response.list(
                 id="",
-                depth=0,
                 path="path",
             )
 
@@ -176,8 +182,17 @@ class TestAsyncFs:
     async def test_method_list(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.list(
             id="id",
-            depth=0,
             path="path",
+        )
+        assert_matches_type(FListResponse, f, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_list_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        f = await async_client.v1.boxes.fs.list(
+            id="id",
+            path="path",
+            depth=0,
         )
         assert_matches_type(FListResponse, f, path=["response"])
 
@@ -186,7 +201,6 @@ class TestAsyncFs:
     async def test_raw_response_list(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.fs.with_raw_response.list(
             id="id",
-            depth=0,
             path="path",
         )
 
@@ -200,7 +214,6 @@ class TestAsyncFs:
     async def test_streaming_response_list(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.fs.with_streaming_response.list(
             id="id",
-            depth=0,
             path="path",
         ) as response:
             assert not response.is_closed
@@ -217,7 +230,6 @@ class TestAsyncFs:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.v1.boxes.fs.with_raw_response.list(
                 id="",
-                depth=0,
                 path="path",
             )
 

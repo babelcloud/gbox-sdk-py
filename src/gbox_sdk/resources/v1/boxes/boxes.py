@@ -23,6 +23,14 @@ from .actions import (
     ActionsResourceWithStreamingResponse,
     AsyncActionsResourceWithStreamingResponse,
 )
+from .browser import (
+    BrowserResource,
+    AsyncBrowserResource,
+    BrowserResourceWithRawResponse,
+    AsyncBrowserResourceWithRawResponse,
+    BrowserResourceWithStreamingResponse,
+    AsyncBrowserResourceWithStreamingResponse,
+)
 from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ...._utils import required_args, maybe_transform, async_maybe_transform
 from ...._compat import cached_property
@@ -64,6 +72,10 @@ class BoxesResource(SyncAPIResource):
     @cached_property
     def fs(self) -> FsResource:
         return FsResource(self._client)
+
+    @cached_property
+    def browser(self) -> BrowserResource:
+        return BrowserResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> BoxesResourceWithRawResponse:
@@ -540,6 +552,10 @@ class AsyncBoxesResource(AsyncAPIResource):
     @cached_property
     def fs(self) -> AsyncFsResource:
         return AsyncFsResource(self._client)
+
+    @cached_property
+    def browser(self) -> AsyncBrowserResource:
+        return AsyncBrowserResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncBoxesResourceWithRawResponse:
@@ -1048,6 +1064,10 @@ class BoxesResourceWithRawResponse:
     def fs(self) -> FsResourceWithRawResponse:
         return FsResourceWithRawResponse(self._boxes.fs)
 
+    @cached_property
+    def browser(self) -> BrowserResourceWithRawResponse:
+        return BrowserResourceWithRawResponse(self._boxes.browser)
+
 
 class AsyncBoxesResourceWithRawResponse:
     def __init__(self, boxes: AsyncBoxesResource) -> None:
@@ -1088,6 +1108,10 @@ class AsyncBoxesResourceWithRawResponse:
     @cached_property
     def fs(self) -> AsyncFsResourceWithRawResponse:
         return AsyncFsResourceWithRawResponse(self._boxes.fs)
+
+    @cached_property
+    def browser(self) -> AsyncBrowserResourceWithRawResponse:
+        return AsyncBrowserResourceWithRawResponse(self._boxes.browser)
 
 
 class BoxesResourceWithStreamingResponse:
@@ -1130,6 +1154,10 @@ class BoxesResourceWithStreamingResponse:
     def fs(self) -> FsResourceWithStreamingResponse:
         return FsResourceWithStreamingResponse(self._boxes.fs)
 
+    @cached_property
+    def browser(self) -> BrowserResourceWithStreamingResponse:
+        return BrowserResourceWithStreamingResponse(self._boxes.browser)
+
 
 class AsyncBoxesResourceWithStreamingResponse:
     def __init__(self, boxes: AsyncBoxesResource) -> None:
@@ -1170,3 +1198,7 @@ class AsyncBoxesResourceWithStreamingResponse:
     @cached_property
     def fs(self) -> AsyncFsResourceWithStreamingResponse:
         return AsyncFsResourceWithStreamingResponse(self._boxes.fs)
+
+    @cached_property
+    def browser(self) -> AsyncBrowserResourceWithStreamingResponse:
+        return AsyncBrowserResourceWithStreamingResponse(self._boxes.browser)

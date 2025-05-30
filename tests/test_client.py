@@ -342,7 +342,7 @@ class TestGboxClient:
         assert request.headers.get("Authorization") == f"Bearer {api_key}"
 
         with pytest.raises(GboxClientError):
-            with update_env(**{"GBOX_SDK_API_KEY": Omit()}):
+            with update_env(**{"GBOX_API_KEY": Omit()}):
                 client2 = GboxClient(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
@@ -1116,7 +1116,7 @@ class TestAsyncGboxClient:
         assert request.headers.get("Authorization") == f"Bearer {api_key}"
 
         with pytest.raises(GboxClientError):
-            with update_env(**{"GBOX_SDK_API_KEY": Omit()}):
+            with update_env(**{"GBOX_API_KEY": Omit()}):
                 client2 = AsyncGboxClient(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 

@@ -28,7 +28,6 @@ from ....types.v1.boxes import (
     action_scroll_params,
     action_screenshot_params,
 )
-from ....types.v1.linux_box import LinuxBox
 from ....types.v1.boxes.action_result import ActionResult
 from ....types.v1.boxes.action_screenshot_response import ActionScreenshotResponse
 
@@ -71,7 +70,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> LinuxBox:
+    ) -> ActionResult:
         """
         Args:
           type: Action type for mouse click
@@ -112,7 +111,7 @@ class ActionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=LinuxBox,
+            cast_to=ActionResult,
         )
 
     def drag(
@@ -508,7 +507,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> LinuxBox:
+    ) -> ActionResult:
         """
         Args:
           type: Action type for mouse click
@@ -549,7 +548,7 @@ class AsyncActionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=LinuxBox,
+            cast_to=ActionResult,
         )
 
     async def drag(

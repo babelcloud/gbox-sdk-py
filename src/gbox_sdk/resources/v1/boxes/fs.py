@@ -47,8 +47,8 @@ class FsResource(SyncAPIResource):
         self,
         id: str,
         *,
-        depth: float,
         path: str,
+        depth: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -58,9 +58,9 @@ class FsResource(SyncAPIResource):
     ) -> FListResponse:
         """
         Args:
-          depth: Depth of the directory
-
           path: Path to the directory
+
+          depth: Depth of the directory
 
           extra_headers: Send extra headers
 
@@ -81,8 +81,8 @@ class FsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "depth": depth,
                         "path": path,
+                        "depth": depth,
                     },
                     f_list_params.FListParams,
                 ),
@@ -197,8 +197,8 @@ class AsyncFsResource(AsyncAPIResource):
         self,
         id: str,
         *,
-        depth: float,
         path: str,
+        depth: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -208,9 +208,9 @@ class AsyncFsResource(AsyncAPIResource):
     ) -> FListResponse:
         """
         Args:
-          depth: Depth of the directory
-
           path: Path to the directory
+
+          depth: Depth of the directory
 
           extra_headers: Send extra headers
 
@@ -231,8 +231,8 @@ class AsyncFsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "depth": depth,
                         "path": path,
+                        "depth": depth,
                     },
                     f_list_params.FListParams,
                 ),

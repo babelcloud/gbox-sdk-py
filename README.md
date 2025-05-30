@@ -31,7 +31,7 @@ import os
 from gbox_sdk import GboxClient
 
 client = GboxClient(
-    api_key=os.environ.get("GBOX_SDK_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get("GBOX_API_KEY"),  # This is the default and can be omitted
 )
 
 box = client.v1.boxes.create(
@@ -41,7 +41,7 @@ box = client.v1.boxes.create(
 
 While you can provide an `api_key` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `GBOX_SDK_API_KEY="My API Key"` to your `.env` file
+to add `GBOX_API_KEY="My API Key"` to your `.env` file
 so that your API Key is not stored in source control.
 
 ## Async usage
@@ -54,7 +54,7 @@ import asyncio
 from gbox_sdk import AsyncGboxClient
 
 client = AsyncGboxClient(
-    api_key=os.environ.get("GBOX_SDK_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get("GBOX_API_KEY"),  # This is the default and can be omitted
 )
 
 

@@ -100,7 +100,7 @@ class BoxesResource(SyncAPIResource):
     def create(
         self,
         *,
-        type: Literal["linux", "android"],
+        type: Literal["linux"],
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -131,7 +131,7 @@ class BoxesResource(SyncAPIResource):
     def create(
         self,
         *,
-        type: Literal["linux", "android"],
+        type: Literal["android"],
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -162,7 +162,7 @@ class BoxesResource(SyncAPIResource):
     def create(
         self,
         *,
-        type: Literal["linux", "android"],
+        type: Literal["linux"] | Literal["android"],
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -276,7 +276,7 @@ class BoxesResource(SyncAPIResource):
     def create_android(
         self,
         *,
-        type: Literal["linux", "android"],
+        type: Literal["android"],
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -319,7 +319,7 @@ class BoxesResource(SyncAPIResource):
     def create_linux(
         self,
         *,
-        type: Literal["linux", "android"],
+        type: Literal["linux"],
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -580,7 +580,7 @@ class AsyncBoxesResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        type: Literal["linux", "android"],
+        type: Literal["linux"],
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -611,7 +611,7 @@ class AsyncBoxesResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        type: Literal["linux", "android"],
+        type: Literal["android"],
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -642,7 +642,7 @@ class AsyncBoxesResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        type: Literal["linux", "android"],
+        type: Literal["linux"] | Literal["android"],
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -756,7 +756,7 @@ class AsyncBoxesResource(AsyncAPIResource):
     async def create_android(
         self,
         *,
-        type: Literal["linux", "android"],
+        type: Literal["android"],
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -799,7 +799,7 @@ class AsyncBoxesResource(AsyncAPIResource):
     async def create_linux(
         self,
         *,
-        type: Literal["linux", "android"],
+        type: Literal["linux"],
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.

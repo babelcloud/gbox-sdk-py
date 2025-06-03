@@ -89,11 +89,7 @@ client = GboxClient()
 
 box = client.v1.boxes.create(
     type="linux",
-    config={
-        "envs": {},
-        "expires_in": "expiresIn",
-        "labels": {},
-    },
+    config={},
 )
 print(box.config)
 ```

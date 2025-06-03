@@ -78,7 +78,7 @@ class TestBoxes:
     @parametrize
     def test_method_create_overload_2(self, client: GboxClient) -> None:
         box = client.v1.boxes.create(
-            type="linux",
+            type="android",
         )
         assert_matches_type(BoxCreateResponse, box, path=["response"])
 
@@ -86,7 +86,7 @@ class TestBoxes:
     @parametrize
     def test_method_create_with_all_params_overload_2(self, client: GboxClient) -> None:
         box = client.v1.boxes.create(
-            type="linux",
+            type="android",
             config={
                 "envs": {},
                 "expires_in": "expiresIn",
@@ -99,7 +99,7 @@ class TestBoxes:
     @parametrize
     def test_raw_response_create_overload_2(self, client: GboxClient) -> None:
         response = client.v1.boxes.with_raw_response.create(
-            type="linux",
+            type="android",
         )
 
         assert response.is_closed is True
@@ -111,7 +111,7 @@ class TestBoxes:
     @parametrize
     def test_streaming_response_create_overload_2(self, client: GboxClient) -> None:
         with client.v1.boxes.with_streaming_response.create(
-            type="linux",
+            type="android",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -204,7 +204,7 @@ class TestBoxes:
     @parametrize
     def test_method_create_android(self, client: GboxClient) -> None:
         box = client.v1.boxes.create_android(
-            type="linux",
+            type="android",
         )
         assert_matches_type(AndroidBox, box, path=["response"])
 
@@ -212,7 +212,7 @@ class TestBoxes:
     @parametrize
     def test_method_create_android_with_all_params(self, client: GboxClient) -> None:
         box = client.v1.boxes.create_android(
-            type="linux",
+            type="android",
             config={
                 "envs": {},
                 "expires_in": "expiresIn",
@@ -225,7 +225,7 @@ class TestBoxes:
     @parametrize
     def test_raw_response_create_android(self, client: GboxClient) -> None:
         response = client.v1.boxes.with_raw_response.create_android(
-            type="linux",
+            type="android",
         )
 
         assert response.is_closed is True
@@ -237,7 +237,7 @@ class TestBoxes:
     @parametrize
     def test_streaming_response_create_android(self, client: GboxClient) -> None:
         with client.v1.boxes.with_streaming_response.create_android(
-            type="linux",
+            type="android",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -555,7 +555,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_method_create_overload_2(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.create(
-            type="linux",
+            type="android",
         )
         assert_matches_type(BoxCreateResponse, box, path=["response"])
 
@@ -563,7 +563,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_method_create_with_all_params_overload_2(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.create(
-            type="linux",
+            type="android",
             config={
                 "envs": {},
                 "expires_in": "expiresIn",
@@ -576,7 +576,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_raw_response_create_overload_2(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.with_raw_response.create(
-            type="linux",
+            type="android",
         )
 
         assert response.is_closed is True
@@ -588,7 +588,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_streaming_response_create_overload_2(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.with_streaming_response.create(
-            type="linux",
+            type="android",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -681,7 +681,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_method_create_android(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.create_android(
-            type="linux",
+            type="android",
         )
         assert_matches_type(AndroidBox, box, path=["response"])
 
@@ -689,7 +689,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_method_create_android_with_all_params(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.create_android(
-            type="linux",
+            type="android",
             config={
                 "envs": {},
                 "expires_in": "expiresIn",
@@ -702,7 +702,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_raw_response_create_android(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.with_raw_response.create_android(
-            type="linux",
+            type="android",
         )
 
         assert response.is_closed is True
@@ -714,7 +714,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_streaming_response_create_android(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.with_streaming_response.create_android(
-            type="linux",
+            type="android",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

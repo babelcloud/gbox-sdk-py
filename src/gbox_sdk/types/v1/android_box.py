@@ -7,7 +7,7 @@ from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
-__all__ = ["AndroidBox", "Config", "ConfigBrowser", "ConfigOs"]
+__all__ = ["AndroidBox", "Config", "ConfigBrowser", "ConfigOs", "ConfigResolution"]
 
 
 class ConfigBrowser(BaseModel):
@@ -21,6 +21,14 @@ class ConfigBrowser(BaseModel):
 class ConfigOs(BaseModel):
     version: Literal["12", "13"]
     """Supported Android versions"""
+
+
+class ConfigResolution(BaseModel):
+    height: float
+    """Height of the box"""
+
+    width: float
+    """Width of the box"""
 
 
 class Config(BaseModel):
@@ -41,6 +49,9 @@ class Config(BaseModel):
 
     os: ConfigOs
     """Android operating system configuration"""
+
+    resolution: ConfigResolution
+    """Resolution of the box"""
 
     storage: float
     """Storage allocated to the box in GB"""
@@ -65,7 +76,7 @@ class AndroidBox(BaseModel):
     status: Literal["pending", "running", "stopped", "error"]
     """The current status of a box instance"""
 
-    type: Literal["linux", "android"]
+    type: Literal["android"]
     """Box type is Android"""
 
     updated_at: datetime = FieldInfo(alias="updatedAt")

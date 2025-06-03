@@ -10,7 +10,7 @@ __all__ = ["CreateAndroidBoxParam"]
 
 
 class CreateAndroidBoxParam(TypedDict, total=False):
-    type: Required[Literal["linux", "android"]]
+    type: Required[Literal["android"]]
     """Box type is Android"""
 
     config: CreateBoxConfigParam

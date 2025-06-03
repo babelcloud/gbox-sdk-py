@@ -65,7 +65,7 @@ class LinuxBox(BaseModel):
     status: Literal["pending", "running", "stopped", "error"]
     """The current status of a box instance"""
 
-    type: Literal["linux", "android"]
+    type: Literal["linux"]
     """Box type is Linux"""
 
     updated_at: datetime = FieldInfo(alias="updatedAt")

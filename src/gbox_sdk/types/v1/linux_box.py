@@ -7,7 +7,7 @@ from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
-__all__ = ["LinuxBox", "Config", "ConfigBrowser", "ConfigOs"]
+__all__ = ["LinuxBox", "Config", "ConfigBrowser", "ConfigOs", "ConfigResolution"]
 
 
 class ConfigBrowser(BaseModel):
@@ -21,6 +21,14 @@ class ConfigBrowser(BaseModel):
 class ConfigOs(BaseModel):
     version: str
     """OS version string (e.g. 'ubuntu-20.04')"""
+
+
+class ConfigResolution(BaseModel):
+    height: float
+    """Height of the box"""
+
+    width: float
+    """Width of the box"""
 
 
 class Config(BaseModel):
@@ -41,6 +49,9 @@ class Config(BaseModel):
 
     os: ConfigOs
     """Operating system configuration"""
+
+    resolution: ConfigResolution
+    """Resolution of the box"""
 
     storage: float
     """Storage allocated to the box in GB."""

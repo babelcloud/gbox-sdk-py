@@ -14,9 +14,6 @@ class ActionTouchParams(TypedDict, total=False):
     points: Required[Iterable[Point]]
     """Array of touch points and their actions"""
 
-    type: Required[object]
-    """Action type for touch interaction"""
-
     output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
     """Type of the URI"""
 

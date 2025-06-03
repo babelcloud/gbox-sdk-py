@@ -14,8 +14,5 @@ class ActionPressParams(TypedDict, total=False):
     keys: Required[List[str]]
     """Array of keys to press"""
 
-    type: Required[object]
-    """Action type for keyboard key press"""
-
     output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
     """Type of the URI"""

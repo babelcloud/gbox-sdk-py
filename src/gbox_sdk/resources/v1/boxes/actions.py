@@ -58,7 +58,6 @@ class ActionsResource(SyncAPIResource):
         self,
         id: str,
         *,
-        type: object,
         x: float,
         y: float,
         button: Literal["left", "right", "middle"] | NotGiven = NOT_GIVEN,
@@ -73,8 +72,6 @@ class ActionsResource(SyncAPIResource):
     ) -> ActionResult:
         """
         Args:
-          type: Action type for mouse click
-
           x: X coordinate of the click
 
           y: Y coordinate of the click
@@ -99,7 +96,6 @@ class ActionsResource(SyncAPIResource):
             f"/api/v1/boxes/{id}/actions/click",
             body=maybe_transform(
                 {
-                    "type": type,
                     "x": x,
                     "y": y,
                     "button": button,
@@ -119,7 +115,6 @@ class ActionsResource(SyncAPIResource):
         id: str,
         *,
         path: Iterable[action_drag_params.Path],
-        type: object,
         duration: str | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -132,8 +127,6 @@ class ActionsResource(SyncAPIResource):
         """
         Args:
           path: Path of the drag action as a series of coordinates
-
-          type: Action type for drag interaction
 
           duration: Time interval between points (e.g. "50ms")
 
@@ -154,7 +147,6 @@ class ActionsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "path": path,
-                    "type": type,
                     "duration": duration,
                     "output_format": output_format,
                 },
@@ -170,7 +162,6 @@ class ActionsResource(SyncAPIResource):
         self,
         id: str,
         *,
-        type: object,
         x: float,
         y: float,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
@@ -183,8 +174,6 @@ class ActionsResource(SyncAPIResource):
     ) -> ActionResult:
         """
         Args:
-          type: Action type for cursor movement
-
           x: X coordinate to move to
 
           y: Y coordinate to move to
@@ -205,7 +194,6 @@ class ActionsResource(SyncAPIResource):
             f"/api/v1/boxes/{id}/actions/move",
             body=maybe_transform(
                 {
-                    "type": type,
                     "x": x,
                     "y": y,
                     "output_format": output_format,
@@ -223,7 +211,6 @@ class ActionsResource(SyncAPIResource):
         id: str,
         *,
         keys: List[str],
-        type: object,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -235,8 +222,6 @@ class ActionsResource(SyncAPIResource):
         """
         Args:
           keys: Array of keys to press
-
-          type: Action type for keyboard key press
 
           output_format: Type of the URI
 
@@ -255,7 +240,6 @@ class ActionsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "keys": keys,
-                    "type": type,
                     "output_format": output_format,
                 },
                 action_press_params.ActionPressParams,
@@ -272,7 +256,6 @@ class ActionsResource(SyncAPIResource):
         *,
         clip: action_screenshot_params.Clip | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        type: Literal["png", "jpeg"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -285,8 +268,6 @@ class ActionsResource(SyncAPIResource):
           clip: clip of the screenshot
 
           output_format: Type of the URI
-
-          type: Action type for screenshot
 
           extra_headers: Send extra headers
 
@@ -304,7 +285,6 @@ class ActionsResource(SyncAPIResource):
                 {
                     "clip": clip,
                     "output_format": output_format,
-                    "type": type,
                 },
                 action_screenshot_params.ActionScreenshotParams,
             ),
@@ -320,7 +300,6 @@ class ActionsResource(SyncAPIResource):
         *,
         scroll_x: float,
         scroll_y: float,
-        type: object,
         x: float,
         y: float,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
@@ -336,8 +315,6 @@ class ActionsResource(SyncAPIResource):
           scroll_x: Horizontal scroll amount
 
           scroll_y: Vertical scroll amount
-
-          type: Action type for scroll interaction
 
           x: X coordinate of the scroll position
 
@@ -361,7 +338,6 @@ class ActionsResource(SyncAPIResource):
                 {
                     "scroll_x": scroll_x,
                     "scroll_y": scroll_y,
-                    "type": type,
                     "x": x,
                     "y": y,
                     "output_format": output_format,
@@ -379,7 +355,6 @@ class ActionsResource(SyncAPIResource):
         id: str,
         *,
         points: Iterable[action_touch_params.Point],
-        type: object,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -391,8 +366,6 @@ class ActionsResource(SyncAPIResource):
         """
         Args:
           points: Array of touch points and their actions
-
-          type: Action type for touch interaction
 
           output_format: Type of the URI
 
@@ -411,7 +384,6 @@ class ActionsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "points": points,
-                    "type": type,
                     "output_format": output_format,
                 },
                 action_touch_params.ActionTouchParams,
@@ -427,7 +399,6 @@ class ActionsResource(SyncAPIResource):
         id: str,
         *,
         text: str,
-        type: object,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -439,8 +410,6 @@ class ActionsResource(SyncAPIResource):
         """
         Args:
           text: Text to type
-
-          type: Action type for typing text
 
           output_format: Type of the URI
 
@@ -459,7 +428,6 @@ class ActionsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "text": text,
-                    "type": type,
                     "output_format": output_format,
                 },
                 action_type_params.ActionTypeParams,
@@ -495,7 +463,6 @@ class AsyncActionsResource(AsyncAPIResource):
         self,
         id: str,
         *,
-        type: object,
         x: float,
         y: float,
         button: Literal["left", "right", "middle"] | NotGiven = NOT_GIVEN,
@@ -510,8 +477,6 @@ class AsyncActionsResource(AsyncAPIResource):
     ) -> ActionResult:
         """
         Args:
-          type: Action type for mouse click
-
           x: X coordinate of the click
 
           y: Y coordinate of the click
@@ -536,7 +501,6 @@ class AsyncActionsResource(AsyncAPIResource):
             f"/api/v1/boxes/{id}/actions/click",
             body=await async_maybe_transform(
                 {
-                    "type": type,
                     "x": x,
                     "y": y,
                     "button": button,
@@ -556,7 +520,6 @@ class AsyncActionsResource(AsyncAPIResource):
         id: str,
         *,
         path: Iterable[action_drag_params.Path],
-        type: object,
         duration: str | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -569,8 +532,6 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         Args:
           path: Path of the drag action as a series of coordinates
-
-          type: Action type for drag interaction
 
           duration: Time interval between points (e.g. "50ms")
 
@@ -591,7 +552,6 @@ class AsyncActionsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "path": path,
-                    "type": type,
                     "duration": duration,
                     "output_format": output_format,
                 },
@@ -607,7 +567,6 @@ class AsyncActionsResource(AsyncAPIResource):
         self,
         id: str,
         *,
-        type: object,
         x: float,
         y: float,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
@@ -620,8 +579,6 @@ class AsyncActionsResource(AsyncAPIResource):
     ) -> ActionResult:
         """
         Args:
-          type: Action type for cursor movement
-
           x: X coordinate to move to
 
           y: Y coordinate to move to
@@ -642,7 +599,6 @@ class AsyncActionsResource(AsyncAPIResource):
             f"/api/v1/boxes/{id}/actions/move",
             body=await async_maybe_transform(
                 {
-                    "type": type,
                     "x": x,
                     "y": y,
                     "output_format": output_format,
@@ -660,7 +616,6 @@ class AsyncActionsResource(AsyncAPIResource):
         id: str,
         *,
         keys: List[str],
-        type: object,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -672,8 +627,6 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         Args:
           keys: Array of keys to press
-
-          type: Action type for keyboard key press
 
           output_format: Type of the URI
 
@@ -692,7 +645,6 @@ class AsyncActionsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "keys": keys,
-                    "type": type,
                     "output_format": output_format,
                 },
                 action_press_params.ActionPressParams,
@@ -709,7 +661,6 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         clip: action_screenshot_params.Clip | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        type: Literal["png", "jpeg"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -722,8 +673,6 @@ class AsyncActionsResource(AsyncAPIResource):
           clip: clip of the screenshot
 
           output_format: Type of the URI
-
-          type: Action type for screenshot
 
           extra_headers: Send extra headers
 
@@ -741,7 +690,6 @@ class AsyncActionsResource(AsyncAPIResource):
                 {
                     "clip": clip,
                     "output_format": output_format,
-                    "type": type,
                 },
                 action_screenshot_params.ActionScreenshotParams,
             ),
@@ -757,7 +705,6 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         scroll_x: float,
         scroll_y: float,
-        type: object,
         x: float,
         y: float,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
@@ -773,8 +720,6 @@ class AsyncActionsResource(AsyncAPIResource):
           scroll_x: Horizontal scroll amount
 
           scroll_y: Vertical scroll amount
-
-          type: Action type for scroll interaction
 
           x: X coordinate of the scroll position
 
@@ -798,7 +743,6 @@ class AsyncActionsResource(AsyncAPIResource):
                 {
                     "scroll_x": scroll_x,
                     "scroll_y": scroll_y,
-                    "type": type,
                     "x": x,
                     "y": y,
                     "output_format": output_format,
@@ -816,7 +760,6 @@ class AsyncActionsResource(AsyncAPIResource):
         id: str,
         *,
         points: Iterable[action_touch_params.Point],
-        type: object,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -828,8 +771,6 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         Args:
           points: Array of touch points and their actions
-
-          type: Action type for touch interaction
 
           output_format: Type of the URI
 
@@ -848,7 +789,6 @@ class AsyncActionsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "points": points,
-                    "type": type,
                     "output_format": output_format,
                 },
                 action_touch_params.ActionTouchParams,
@@ -864,7 +804,6 @@ class AsyncActionsResource(AsyncAPIResource):
         id: str,
         *,
         text: str,
-        type: object,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -876,8 +815,6 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         Args:
           text: Text to type
-
-          type: Action type for typing text
 
           output_format: Type of the URI
 
@@ -896,7 +833,6 @@ class AsyncActionsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "text": text,
-                    "type": type,
                     "output_format": output_format,
                 },
                 action_type_params.ActionTypeParams,

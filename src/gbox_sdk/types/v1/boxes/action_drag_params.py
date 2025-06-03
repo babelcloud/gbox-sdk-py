@@ -14,9 +14,6 @@ class ActionDragParams(TypedDict, total=False):
     path: Required[Iterable[Path]]
     """Path of the drag action as a series of coordinates"""
 
-    type: Required[object]
-    """Action type for drag interaction"""
-
     duration: str
     """Time interval between points (e.g. "50ms")"""
 

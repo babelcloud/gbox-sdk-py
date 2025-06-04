@@ -14,14 +14,14 @@ class BoxRunCodeParams(TypedDict, total=False):
     code: Required[str]
     """The code to run"""
 
-    type: Required[Literal["bash", "python3", "typescript"]]
-    """The type of the code."""
-
     argv: List[str]
     """The arguments to run the code. e.g. ["-h"]"""
 
     envs: object
     """The environment variables to run the code"""
+
+    language: Literal["bash", "python3", "typescript"]
+    """The language of the code."""
 
     api_timeout: Annotated[str, PropertyInfo(alias="timeout")]
     """The timeout of the code. e.g. "30s" """

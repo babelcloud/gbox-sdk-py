@@ -166,6 +166,12 @@ class TestBoxes:
     @pytest.mark.skip()
     @parametrize
     def test_method_list(self, client: GboxClient) -> None:
+        box = client.v1.boxes.list()
+        assert_matches_type(BoxListResponse, box, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_list_with_all_params(self, client: GboxClient) -> None:
         box = client.v1.boxes.list(
             page=0,
             page_size=0,
@@ -175,10 +181,7 @@ class TestBoxes:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_list(self, client: GboxClient) -> None:
-        response = client.v1.boxes.with_raw_response.list(
-            page=0,
-            page_size=0,
-        )
+        response = client.v1.boxes.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -188,10 +191,7 @@ class TestBoxes:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_list(self, client: GboxClient) -> None:
-        with client.v1.boxes.with_streaming_response.list(
-            page=0,
-            page_size=0,
-        ) as response:
+        with client.v1.boxes.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -358,7 +358,6 @@ class TestBoxes:
         box = client.v1.boxes.run_code(
             id="id",
             code='print("Hello, World!")',
-            type="bash",
         )
         assert_matches_type(BoxRunCodeResponse, box, path=["response"])
 
@@ -368,9 +367,9 @@ class TestBoxes:
         box = client.v1.boxes.run_code(
             id="id",
             code='print("Hello, World!")',
-            type="bash",
             argv=["string"],
             envs={},
+            language="bash",
             api_timeout="timeout",
             working_dir="workingDir",
         )
@@ -382,7 +381,6 @@ class TestBoxes:
         response = client.v1.boxes.with_raw_response.run_code(
             id="id",
             code='print("Hello, World!")',
-            type="bash",
         )
 
         assert response.is_closed is True
@@ -396,7 +394,6 @@ class TestBoxes:
         with client.v1.boxes.with_streaming_response.run_code(
             id="id",
             code='print("Hello, World!")',
-            type="bash",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -413,7 +410,6 @@ class TestBoxes:
             client.v1.boxes.with_raw_response.run_code(
                 id="",
                 code='print("Hello, World!")',
-                type="bash",
             )
 
     @pytest.mark.skip()
@@ -643,6 +639,12 @@ class TestAsyncBoxes:
     @pytest.mark.skip()
     @parametrize
     async def test_method_list(self, async_client: AsyncGboxClient) -> None:
+        box = await async_client.v1.boxes.list()
+        assert_matches_type(BoxListResponse, box, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_list_with_all_params(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.list(
             page=0,
             page_size=0,
@@ -652,10 +654,7 @@ class TestAsyncBoxes:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGboxClient) -> None:
-        response = await async_client.v1.boxes.with_raw_response.list(
-            page=0,
-            page_size=0,
-        )
+        response = await async_client.v1.boxes.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -665,10 +664,7 @@ class TestAsyncBoxes:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGboxClient) -> None:
-        async with async_client.v1.boxes.with_streaming_response.list(
-            page=0,
-            page_size=0,
-        ) as response:
+        async with async_client.v1.boxes.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -835,7 +831,6 @@ class TestAsyncBoxes:
         box = await async_client.v1.boxes.run_code(
             id="id",
             code='print("Hello, World!")',
-            type="bash",
         )
         assert_matches_type(BoxRunCodeResponse, box, path=["response"])
 
@@ -845,9 +840,9 @@ class TestAsyncBoxes:
         box = await async_client.v1.boxes.run_code(
             id="id",
             code='print("Hello, World!")',
-            type="bash",
             argv=["string"],
             envs={},
+            language="bash",
             api_timeout="timeout",
             working_dir="workingDir",
         )
@@ -859,7 +854,6 @@ class TestAsyncBoxes:
         response = await async_client.v1.boxes.with_raw_response.run_code(
             id="id",
             code='print("Hello, World!")',
-            type="bash",
         )
 
         assert response.is_closed is True
@@ -873,7 +867,6 @@ class TestAsyncBoxes:
         async with async_client.v1.boxes.with_streaming_response.run_code(
             id="id",
             code='print("Hello, World!")',
-            type="bash",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -890,7 +883,6 @@ class TestAsyncBoxes:
             await async_client.v1.boxes.with_raw_response.run_code(
                 id="",
                 code='print("Hello, World!")',
-                type="bash",
             )
 
     @pytest.mark.skip()

@@ -230,8 +230,8 @@ class BoxesResource(SyncAPIResource):
     def list(
         self,
         *,
-        page: float,
-        page_size: float,
+        page: float | NotGiven = NOT_GIVEN,
+        page_size: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -416,9 +416,9 @@ class BoxesResource(SyncAPIResource):
         id: str,
         *,
         code: str,
-        type: Literal["bash", "python3", "typescript"],
         argv: List[str] | NotGiven = NOT_GIVEN,
         envs: object | NotGiven = NOT_GIVEN,
+        language: Literal["bash", "python3", "typescript"] | NotGiven = NOT_GIVEN,
         api_timeout: str | NotGiven = NOT_GIVEN,
         working_dir: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -428,15 +428,16 @@ class BoxesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxRunCodeResponse:
-        """
-        Args:
+        """Args:
           code: The code to run
 
-          type: The type of the code.
+          argv: The arguments to run the code.
 
-          argv: The arguments to run the code. e.g. ["-h"]
+        e.g. ["-h"]
 
           envs: The environment variables to run the code
+
+          language: The language of the code.
 
           api_timeout: The timeout of the code. e.g. "30s"
 
@@ -457,9 +458,9 @@ class BoxesResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "code": code,
-                    "type": type,
                     "argv": argv,
                     "envs": envs,
+                    "language": language,
                     "api_timeout": api_timeout,
                     "working_dir": working_dir,
                 },
@@ -710,8 +711,8 @@ class AsyncBoxesResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        page: float,
-        page_size: float,
+        page: float | NotGiven = NOT_GIVEN,
+        page_size: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -896,9 +897,9 @@ class AsyncBoxesResource(AsyncAPIResource):
         id: str,
         *,
         code: str,
-        type: Literal["bash", "python3", "typescript"],
         argv: List[str] | NotGiven = NOT_GIVEN,
         envs: object | NotGiven = NOT_GIVEN,
+        language: Literal["bash", "python3", "typescript"] | NotGiven = NOT_GIVEN,
         api_timeout: str | NotGiven = NOT_GIVEN,
         working_dir: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -908,15 +909,16 @@ class AsyncBoxesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxRunCodeResponse:
-        """
-        Args:
+        """Args:
           code: The code to run
 
-          type: The type of the code.
+          argv: The arguments to run the code.
 
-          argv: The arguments to run the code. e.g. ["-h"]
+        e.g. ["-h"]
 
           envs: The environment variables to run the code
+
+          language: The language of the code.
 
           api_timeout: The timeout of the code. e.g. "30s"
 
@@ -937,9 +939,9 @@ class AsyncBoxesResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "code": code,
-                    "type": type,
                     "argv": argv,
                     "envs": envs,
+                    "language": language,
                     "api_timeout": api_timeout,
                     "working_dir": working_dir,
                 },

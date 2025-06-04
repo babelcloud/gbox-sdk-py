@@ -63,7 +63,7 @@ class BrowserResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
-            f"/api/v1/boxes/{id}/browser/connect-url/cdp",
+            f"/boxes/{id}/browser/connect-url/cdp",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -94,7 +94,7 @@ class BrowserResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
-            f"/api/v1/boxes/{id}/browser/connect-url",
+            f"/boxes/{id}/browser/connect-url",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -146,7 +146,7 @@ class AsyncBrowserResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._get(
-            f"/api/v1/boxes/{id}/browser/connect-url/cdp",
+            f"/boxes/{id}/browser/connect-url/cdp",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -177,7 +177,7 @@ class AsyncBrowserResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._get(
-            f"/api/v1/boxes/{id}/browser/connect-url",
+            f"/boxes/{id}/browser/connect-url",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

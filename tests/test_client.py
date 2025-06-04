@@ -722,11 +722,11 @@ class TestGboxClient:
     @mock.patch("gbox_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/api/v1/boxes").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/boxes").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             self.client.post(
-                "/api/v1/boxes",
+                "/boxes",
                 body=cast(object, maybe_transform(dict(type="linux"), CreateLinuxBox)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
@@ -737,11 +737,11 @@ class TestGboxClient:
     @mock.patch("gbox_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/api/v1/boxes").mock(return_value=httpx.Response(500))
+        respx_mock.post("/boxes").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             self.client.post(
-                "/api/v1/boxes",
+                "/boxes",
                 body=cast(object, maybe_transform(dict(type="linux"), CreateLinuxBox)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
@@ -773,7 +773,7 @@ class TestGboxClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/api/v1/boxes").mock(side_effect=retry_handler)
+        respx_mock.post("/boxes").mock(side_effect=retry_handler)
 
         response = client.v1.boxes.with_raw_response.create(type="linux")
 
@@ -797,7 +797,7 @@ class TestGboxClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/api/v1/boxes").mock(side_effect=retry_handler)
+        respx_mock.post("/boxes").mock(side_effect=retry_handler)
 
         response = client.v1.boxes.with_raw_response.create(
             type="linux", extra_headers={"x-stainless-retry-count": Omit()}
@@ -822,7 +822,7 @@ class TestGboxClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/api/v1/boxes").mock(side_effect=retry_handler)
+        respx_mock.post("/boxes").mock(side_effect=retry_handler)
 
         response = client.v1.boxes.with_raw_response.create(
             type="linux", extra_headers={"x-stainless-retry-count": "42"}
@@ -1529,11 +1529,11 @@ class TestAsyncGboxClient:
     @mock.patch("gbox_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/api/v1/boxes").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/boxes").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             await self.client.post(
-                "/api/v1/boxes",
+                "/boxes",
                 body=cast(object, maybe_transform(dict(type="linux"), CreateLinuxBox)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
@@ -1544,11 +1544,11 @@ class TestAsyncGboxClient:
     @mock.patch("gbox_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/api/v1/boxes").mock(return_value=httpx.Response(500))
+        respx_mock.post("/boxes").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             await self.client.post(
-                "/api/v1/boxes",
+                "/boxes",
                 body=cast(object, maybe_transform(dict(type="linux"), CreateLinuxBox)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
@@ -1581,7 +1581,7 @@ class TestAsyncGboxClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/api/v1/boxes").mock(side_effect=retry_handler)
+        respx_mock.post("/boxes").mock(side_effect=retry_handler)
 
         response = await client.v1.boxes.with_raw_response.create(type="linux")
 
@@ -1606,7 +1606,7 @@ class TestAsyncGboxClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/api/v1/boxes").mock(side_effect=retry_handler)
+        respx_mock.post("/boxes").mock(side_effect=retry_handler)
 
         response = await client.v1.boxes.with_raw_response.create(
             type="linux", extra_headers={"x-stainless-retry-count": Omit()}
@@ -1632,7 +1632,7 @@ class TestAsyncGboxClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/api/v1/boxes").mock(side_effect=retry_handler)
+        respx_mock.post("/boxes").mock(side_effect=retry_handler)
 
         response = await client.v1.boxes.with_raw_response.create(
             type="linux", extra_headers={"x-stainless-retry-count": "42"}

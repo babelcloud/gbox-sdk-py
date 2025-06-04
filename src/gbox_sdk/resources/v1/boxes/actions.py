@@ -93,7 +93,7 @@ class ActionsResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
-            f"/api/v1/boxes/{id}/actions/click",
+            f"/boxes/{id}/actions/click",
             body=maybe_transform(
                 {
                     "x": x,
@@ -143,7 +143,7 @@ class ActionsResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
-            f"/api/v1/boxes/{id}/actions/drag",
+            f"/boxes/{id}/actions/drag",
             body=maybe_transform(
                 {
                     "path": path,
@@ -191,7 +191,7 @@ class ActionsResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
-            f"/api/v1/boxes/{id}/actions/move",
+            f"/boxes/{id}/actions/move",
             body=maybe_transform(
                 {
                     "x": x,
@@ -236,7 +236,7 @@ class ActionsResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
-            f"/api/v1/boxes/{id}/actions/press",
+            f"/boxes/{id}/actions/press",
             body=maybe_transform(
                 {
                     "keys": keys,
@@ -280,7 +280,7 @@ class ActionsResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
-            f"/api/v1/boxes/{id}/actions/screenshot",
+            f"/boxes/{id}/actions/screenshot",
             body=maybe_transform(
                 {
                     "clip": clip,
@@ -333,7 +333,7 @@ class ActionsResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
-            f"/api/v1/boxes/{id}/actions/scroll",
+            f"/boxes/{id}/actions/scroll",
             body=maybe_transform(
                 {
                     "scroll_x": scroll_x,
@@ -380,7 +380,7 @@ class ActionsResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
-            f"/api/v1/boxes/{id}/actions/touch",
+            f"/boxes/{id}/actions/touch",
             body=maybe_transform(
                 {
                     "points": points,
@@ -424,7 +424,7 @@ class ActionsResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
-            f"/api/v1/boxes/{id}/actions/type",
+            f"/boxes/{id}/actions/type",
             body=maybe_transform(
                 {
                     "text": text,
@@ -498,7 +498,7 @@ class AsyncActionsResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
-            f"/api/v1/boxes/{id}/actions/click",
+            f"/boxes/{id}/actions/click",
             body=await async_maybe_transform(
                 {
                     "x": x,
@@ -548,7 +548,7 @@ class AsyncActionsResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
-            f"/api/v1/boxes/{id}/actions/drag",
+            f"/boxes/{id}/actions/drag",
             body=await async_maybe_transform(
                 {
                     "path": path,
@@ -596,7 +596,7 @@ class AsyncActionsResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
-            f"/api/v1/boxes/{id}/actions/move",
+            f"/boxes/{id}/actions/move",
             body=await async_maybe_transform(
                 {
                     "x": x,
@@ -641,7 +641,7 @@ class AsyncActionsResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
-            f"/api/v1/boxes/{id}/actions/press",
+            f"/boxes/{id}/actions/press",
             body=await async_maybe_transform(
                 {
                     "keys": keys,
@@ -685,7 +685,7 @@ class AsyncActionsResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
-            f"/api/v1/boxes/{id}/actions/screenshot",
+            f"/boxes/{id}/actions/screenshot",
             body=await async_maybe_transform(
                 {
                     "clip": clip,
@@ -738,7 +738,7 @@ class AsyncActionsResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
-            f"/api/v1/boxes/{id}/actions/scroll",
+            f"/boxes/{id}/actions/scroll",
             body=await async_maybe_transform(
                 {
                     "scroll_x": scroll_x,
@@ -785,7 +785,7 @@ class AsyncActionsResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
-            f"/api/v1/boxes/{id}/actions/touch",
+            f"/boxes/{id}/actions/touch",
             body=await async_maybe_transform(
                 {
                     "points": points,
@@ -829,7 +829,7 @@ class AsyncActionsResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
-            f"/api/v1/boxes/{id}/actions/type",
+            f"/boxes/{id}/actions/type",
             body=await async_maybe_transform(
                 {
                     "text": text,

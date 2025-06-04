@@ -174,7 +174,7 @@ class BoxesResource(SyncAPIResource):
         return cast(
             BoxCreateResponse,
             self._post(
-                "/api/v1/boxes",
+                "/boxes",
                 body=maybe_transform(
                     {
                         "type": type,
@@ -217,7 +217,7 @@ class BoxesResource(SyncAPIResource):
         return cast(
             BoxRetrieveResponse,
             self._get(
-                f"/api/v1/boxes/{id}",
+                f"/boxes/{id}",
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
@@ -256,7 +256,7 @@ class BoxesResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            "/api/v1/boxes",
+            "/boxes",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -302,7 +302,7 @@ class BoxesResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/api/v1/boxes/android",
+            "/boxes/android",
             body=maybe_transform(
                 {
                     "type": type,
@@ -345,7 +345,7 @@ class BoxesResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/api/v1/boxes/linux",
+            "/boxes/linux",
             body=maybe_transform(
                 {
                     "type": type,
@@ -395,7 +395,7 @@ class BoxesResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
-            f"/api/v1/boxes/{id}/commands",
+            f"/boxes/{id}/commands",
             body=maybe_transform(
                 {
                     "commands": commands,
@@ -453,7 +453,7 @@ class BoxesResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
-            f"/api/v1/boxes/{id}/run-code",
+            f"/boxes/{id}/run-code",
             body=maybe_transform(
                 {
                     "code": code,
@@ -499,7 +499,7 @@ class BoxesResource(SyncAPIResource):
         return cast(
             BoxStartResponse,
             self._post(
-                f"/api/v1/boxes/{id}/start",
+                f"/boxes/{id}/start",
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
@@ -535,7 +535,7 @@ class BoxesResource(SyncAPIResource):
         return cast(
             BoxStopResponse,
             self._post(
-                f"/api/v1/boxes/{id}/stop",
+                f"/boxes/{id}/stop",
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
@@ -654,7 +654,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         return cast(
             BoxCreateResponse,
             await self._post(
-                "/api/v1/boxes",
+                "/boxes",
                 body=await async_maybe_transform(
                     {
                         "type": type,
@@ -697,7 +697,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         return cast(
             BoxRetrieveResponse,
             await self._get(
-                f"/api/v1/boxes/{id}",
+                f"/boxes/{id}",
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
@@ -736,7 +736,7 @@ class AsyncBoxesResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            "/api/v1/boxes",
+            "/boxes",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -782,7 +782,7 @@ class AsyncBoxesResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/api/v1/boxes/android",
+            "/boxes/android",
             body=await async_maybe_transform(
                 {
                     "type": type,
@@ -825,7 +825,7 @@ class AsyncBoxesResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/api/v1/boxes/linux",
+            "/boxes/linux",
             body=await async_maybe_transform(
                 {
                     "type": type,
@@ -875,7 +875,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
-            f"/api/v1/boxes/{id}/commands",
+            f"/boxes/{id}/commands",
             body=await async_maybe_transform(
                 {
                     "commands": commands,
@@ -933,7 +933,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
-            f"/api/v1/boxes/{id}/run-code",
+            f"/boxes/{id}/run-code",
             body=await async_maybe_transform(
                 {
                     "code": code,
@@ -979,7 +979,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         return cast(
             BoxStartResponse,
             await self._post(
-                f"/api/v1/boxes/{id}/start",
+                f"/boxes/{id}/start",
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
@@ -1015,7 +1015,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         return cast(
             BoxStopResponse,
             await self._post(
-                f"/api/v1/boxes/{id}/stop",
+                f"/boxes/{id}/stop",
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),

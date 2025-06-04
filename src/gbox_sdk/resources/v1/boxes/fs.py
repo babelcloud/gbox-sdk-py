@@ -73,7 +73,7 @@ class FsResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
-            f"/api/v1/boxes/{id}/fs/list",
+            f"/boxes/{id}/fs/list",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -117,7 +117,7 @@ class FsResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
-            f"/api/v1/boxes/{id}/fs/read",
+            f"/boxes/{id}/fs/read",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -158,7 +158,7 @@ class FsResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
-            f"/api/v1/boxes/{id}/fs/write",
+            f"/boxes/{id}/fs/write",
             body=maybe_transform(
                 {
                     "content": content,
@@ -223,7 +223,7 @@ class AsyncFsResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._get(
-            f"/api/v1/boxes/{id}/fs/list",
+            f"/boxes/{id}/fs/list",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -267,7 +267,7 @@ class AsyncFsResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._get(
-            f"/api/v1/boxes/{id}/fs/read",
+            f"/boxes/{id}/fs/read",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -308,7 +308,7 @@ class AsyncFsResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
-            f"/api/v1/boxes/{id}/fs/write",
+            f"/boxes/{id}/fs/write",
             body=await async_maybe_transform(
                 {
                     "content": content,

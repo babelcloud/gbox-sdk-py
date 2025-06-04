@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, List, cast
+from typing import Any, List, Union, cast
 from typing_extensions import Literal, overload
 
 import httpx
@@ -397,7 +397,7 @@ class BoxesResource(SyncAPIResource):
         self,
         id: str,
         *,
-        commands: List[str],
+        commands: Union[str, List[str]],
         envs: object | NotGiven = NOT_GIVEN,
         api_timeout: str | NotGiven = NOT_GIVEN,
         working_dir: str | NotGiven = NOT_GIVEN,
@@ -408,9 +408,10 @@ class BoxesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxExecuteCommandsResponse:
-        """
-        Args:
-          commands: The command to run
+        """Args:
+          commands: The command to run.
+
+        Can be a single string or an array of strings
 
           envs: The environment variables to run the command
 
@@ -912,7 +913,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         self,
         id: str,
         *,
-        commands: List[str],
+        commands: Union[str, List[str]],
         envs: object | NotGiven = NOT_GIVEN,
         api_timeout: str | NotGiven = NOT_GIVEN,
         working_dir: str | NotGiven = NOT_GIVEN,
@@ -923,9 +924,10 @@ class AsyncBoxesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxExecuteCommandsResponse:
-        """
-        Args:
-          commands: The command to run
+        """Args:
+          commands: The command to run.
+
+        Can be a single string or an array of strings
 
           envs: The environment variables to run the command
 

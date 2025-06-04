@@ -202,6 +202,48 @@ class TestBoxes:
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_delete(self, client: GboxClient) -> None:
+        box = client.v1.boxes.delete(
+            "id",
+        )
+        assert box is None
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_delete(self, client: GboxClient) -> None:
+        response = client.v1.boxes.with_raw_response.delete(
+            "id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        box = response.parse()
+        assert box is None
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_delete(self, client: GboxClient) -> None:
+        with client.v1.boxes.with_streaming_response.delete(
+            "id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            box = response.parse()
+            assert box is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_delete(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            client.v1.boxes.with_raw_response.delete(
+                "",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
     def test_method_create_android(self, client: GboxClient) -> None:
         box = client.v1.boxes.create_android(
             type="android",
@@ -672,6 +714,48 @@ class TestAsyncBoxes:
             assert_matches_type(BoxListResponse, box, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_delete(self, async_client: AsyncGboxClient) -> None:
+        box = await async_client.v1.boxes.delete(
+            "id",
+        )
+        assert box is None
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_delete(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.with_raw_response.delete(
+            "id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        box = await response.parse()
+        assert box is None
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_delete(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.with_streaming_response.delete(
+            "id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            box = await response.parse()
+            assert box is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_delete(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            await async_client.v1.boxes.with_raw_response.delete(
+                "",
+            )
 
     @pytest.mark.skip()
     @parametrize

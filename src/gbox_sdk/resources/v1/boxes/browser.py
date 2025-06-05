@@ -26,7 +26,7 @@ class BrowserResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/babelcloud/gbox-sdk-py#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/gbox-sdk-python#accessing-raw-response-data-eg-headers
         """
         return BrowserResourceWithRawResponse(self)
 
@@ -35,7 +35,7 @@ class BrowserResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/babelcloud/gbox-sdk-py#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/gbox-sdk-python#with_streaming_response
         """
         return BrowserResourceWithStreamingResponse(self)
 
@@ -63,7 +63,7 @@ class BrowserResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
-            f"/api/v1/boxes/{id}/browser/connect-url/cdp",
+            f"/boxes/{id}/browser/connect-url/cdp",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -94,7 +94,7 @@ class BrowserResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
-            f"/api/v1/boxes/{id}/browser/connect-url",
+            f"/boxes/{id}/browser/connect-url",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -109,7 +109,7 @@ class AsyncBrowserResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/babelcloud/gbox-sdk-py#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/gbox-sdk-python#accessing-raw-response-data-eg-headers
         """
         return AsyncBrowserResourceWithRawResponse(self)
 
@@ -118,7 +118,7 @@ class AsyncBrowserResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/babelcloud/gbox-sdk-py#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/gbox-sdk-python#with_streaming_response
         """
         return AsyncBrowserResourceWithStreamingResponse(self)
 
@@ -146,7 +146,7 @@ class AsyncBrowserResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._get(
-            f"/api/v1/boxes/{id}/browser/connect-url/cdp",
+            f"/boxes/{id}/browser/connect-url/cdp",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -177,7 +177,7 @@ class AsyncBrowserResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._get(
-            f"/api/v1/boxes/{id}/browser/connect-url",
+            f"/boxes/{id}/browser/connect-url",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

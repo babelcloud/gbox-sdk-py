@@ -16,9 +16,6 @@ class ActionScrollParams(TypedDict, total=False):
     scroll_y: Required[Annotated[float, PropertyInfo(alias="scrollY")]]
     """Vertical scroll amount"""
 
-    type: Required[object]
-    """Action type for scroll interaction"""
-
     x: Required[float]
     """X coordinate of the scroll position"""
 

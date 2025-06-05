@@ -10,9 +10,6 @@ __all__ = ["ActionClickParams"]
 
 
 class ActionClickParams(TypedDict, total=False):
-    type: Required[object]
-    """Action type for mouse click"""
-
     x: Required[float]
     """X coordinate of the click"""
 

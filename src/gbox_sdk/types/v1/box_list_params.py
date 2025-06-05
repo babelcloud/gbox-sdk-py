@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, Annotated, TypedDict
+from typing_extensions import Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 
@@ -10,8 +10,13 @@ __all__ = ["BoxListParams"]
 
 
 class BoxListParams(TypedDict, total=False):
-    page: Required[float]
+    page: float
     """Page number"""
 
-    page_size: Required[Annotated[float, PropertyInfo(alias="pageSize")]]
+    page_size: Annotated[float, PropertyInfo(alias="pageSize")]
     """Page size"""
+
+    status: str
+    """
+    Filter boxes by their current status (pending, running, stopped, error, deleted)
+    """

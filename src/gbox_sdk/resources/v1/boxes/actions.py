@@ -41,7 +41,7 @@ class ActionsResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/babelcloud/gbox-sdk-py#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/gbox-sdk-python#accessing-raw-response-data-eg-headers
         """
         return ActionsResourceWithRawResponse(self)
 
@@ -50,7 +50,7 @@ class ActionsResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/babelcloud/gbox-sdk-py#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/gbox-sdk-python#with_streaming_response
         """
         return ActionsResourceWithStreamingResponse(self)
 
@@ -58,7 +58,6 @@ class ActionsResource(SyncAPIResource):
         self,
         id: str,
         *,
-        type: object,
         x: float,
         y: float,
         button: Literal["left", "right", "middle"] | NotGiven = NOT_GIVEN,
@@ -73,8 +72,6 @@ class ActionsResource(SyncAPIResource):
     ) -> ActionResult:
         """
         Args:
-          type: Action type for mouse click
-
           x: X coordinate of the click
 
           y: Y coordinate of the click
@@ -96,10 +93,9 @@ class ActionsResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
-            f"/api/v1/boxes/{id}/actions/click",
+            f"/boxes/{id}/actions/click",
             body=maybe_transform(
                 {
-                    "type": type,
                     "x": x,
                     "y": y,
                     "button": button,
@@ -119,7 +115,6 @@ class ActionsResource(SyncAPIResource):
         id: str,
         *,
         path: Iterable[action_drag_params.Path],
-        type: object,
         duration: str | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -132,8 +127,6 @@ class ActionsResource(SyncAPIResource):
         """
         Args:
           path: Path of the drag action as a series of coordinates
-
-          type: Action type for drag interaction
 
           duration: Time interval between points (e.g. "50ms")
 
@@ -150,11 +143,10 @@ class ActionsResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
-            f"/api/v1/boxes/{id}/actions/drag",
+            f"/boxes/{id}/actions/drag",
             body=maybe_transform(
                 {
                     "path": path,
-                    "type": type,
                     "duration": duration,
                     "output_format": output_format,
                 },
@@ -170,7 +162,6 @@ class ActionsResource(SyncAPIResource):
         self,
         id: str,
         *,
-        type: object,
         x: float,
         y: float,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
@@ -183,8 +174,6 @@ class ActionsResource(SyncAPIResource):
     ) -> ActionResult:
         """
         Args:
-          type: Action type for cursor movement
-
           x: X coordinate to move to
 
           y: Y coordinate to move to
@@ -202,10 +191,9 @@ class ActionsResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
-            f"/api/v1/boxes/{id}/actions/move",
+            f"/boxes/{id}/actions/move",
             body=maybe_transform(
                 {
-                    "type": type,
                     "x": x,
                     "y": y,
                     "output_format": output_format,
@@ -223,7 +211,6 @@ class ActionsResource(SyncAPIResource):
         id: str,
         *,
         keys: List[str],
-        type: object,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -235,8 +222,6 @@ class ActionsResource(SyncAPIResource):
         """
         Args:
           keys: Array of keys to press
-
-          type: Action type for keyboard key press
 
           output_format: Type of the URI
 
@@ -251,11 +236,10 @@ class ActionsResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
-            f"/api/v1/boxes/{id}/actions/press",
+            f"/boxes/{id}/actions/press",
             body=maybe_transform(
                 {
                     "keys": keys,
-                    "type": type,
                     "output_format": output_format,
                 },
                 action_press_params.ActionPressParams,
@@ -272,7 +256,6 @@ class ActionsResource(SyncAPIResource):
         *,
         clip: action_screenshot_params.Clip | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        type: Literal["png", "jpeg"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -286,8 +269,6 @@ class ActionsResource(SyncAPIResource):
 
           output_format: Type of the URI
 
-          type: Action type for screenshot
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -299,12 +280,11 @@ class ActionsResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
-            f"/api/v1/boxes/{id}/actions/screenshot",
+            f"/boxes/{id}/actions/screenshot",
             body=maybe_transform(
                 {
                     "clip": clip,
                     "output_format": output_format,
-                    "type": type,
                 },
                 action_screenshot_params.ActionScreenshotParams,
             ),
@@ -320,7 +300,6 @@ class ActionsResource(SyncAPIResource):
         *,
         scroll_x: float,
         scroll_y: float,
-        type: object,
         x: float,
         y: float,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
@@ -336,8 +315,6 @@ class ActionsResource(SyncAPIResource):
           scroll_x: Horizontal scroll amount
 
           scroll_y: Vertical scroll amount
-
-          type: Action type for scroll interaction
 
           x: X coordinate of the scroll position
 
@@ -356,12 +333,11 @@ class ActionsResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
-            f"/api/v1/boxes/{id}/actions/scroll",
+            f"/boxes/{id}/actions/scroll",
             body=maybe_transform(
                 {
                     "scroll_x": scroll_x,
                     "scroll_y": scroll_y,
-                    "type": type,
                     "x": x,
                     "y": y,
                     "output_format": output_format,
@@ -379,7 +355,6 @@ class ActionsResource(SyncAPIResource):
         id: str,
         *,
         points: Iterable[action_touch_params.Point],
-        type: object,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -391,8 +366,6 @@ class ActionsResource(SyncAPIResource):
         """
         Args:
           points: Array of touch points and their actions
-
-          type: Action type for touch interaction
 
           output_format: Type of the URI
 
@@ -407,11 +380,10 @@ class ActionsResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
-            f"/api/v1/boxes/{id}/actions/touch",
+            f"/boxes/{id}/actions/touch",
             body=maybe_transform(
                 {
                     "points": points,
-                    "type": type,
                     "output_format": output_format,
                 },
                 action_touch_params.ActionTouchParams,
@@ -427,7 +399,6 @@ class ActionsResource(SyncAPIResource):
         id: str,
         *,
         text: str,
-        type: object,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -439,8 +410,6 @@ class ActionsResource(SyncAPIResource):
         """
         Args:
           text: Text to type
-
-          type: Action type for typing text
 
           output_format: Type of the URI
 
@@ -455,11 +424,10 @@ class ActionsResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
-            f"/api/v1/boxes/{id}/actions/type",
+            f"/boxes/{id}/actions/type",
             body=maybe_transform(
                 {
                     "text": text,
-                    "type": type,
                     "output_format": output_format,
                 },
                 action_type_params.ActionTypeParams,
@@ -478,7 +446,7 @@ class AsyncActionsResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/babelcloud/gbox-sdk-py#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/gbox-sdk-python#accessing-raw-response-data-eg-headers
         """
         return AsyncActionsResourceWithRawResponse(self)
 
@@ -487,7 +455,7 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/babelcloud/gbox-sdk-py#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/gbox-sdk-python#with_streaming_response
         """
         return AsyncActionsResourceWithStreamingResponse(self)
 
@@ -495,7 +463,6 @@ class AsyncActionsResource(AsyncAPIResource):
         self,
         id: str,
         *,
-        type: object,
         x: float,
         y: float,
         button: Literal["left", "right", "middle"] | NotGiven = NOT_GIVEN,
@@ -510,8 +477,6 @@ class AsyncActionsResource(AsyncAPIResource):
     ) -> ActionResult:
         """
         Args:
-          type: Action type for mouse click
-
           x: X coordinate of the click
 
           y: Y coordinate of the click
@@ -533,10 +498,9 @@ class AsyncActionsResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
-            f"/api/v1/boxes/{id}/actions/click",
+            f"/boxes/{id}/actions/click",
             body=await async_maybe_transform(
                 {
-                    "type": type,
                     "x": x,
                     "y": y,
                     "button": button,
@@ -556,7 +520,6 @@ class AsyncActionsResource(AsyncAPIResource):
         id: str,
         *,
         path: Iterable[action_drag_params.Path],
-        type: object,
         duration: str | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -569,8 +532,6 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         Args:
           path: Path of the drag action as a series of coordinates
-
-          type: Action type for drag interaction
 
           duration: Time interval between points (e.g. "50ms")
 
@@ -587,11 +548,10 @@ class AsyncActionsResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
-            f"/api/v1/boxes/{id}/actions/drag",
+            f"/boxes/{id}/actions/drag",
             body=await async_maybe_transform(
                 {
                     "path": path,
-                    "type": type,
                     "duration": duration,
                     "output_format": output_format,
                 },
@@ -607,7 +567,6 @@ class AsyncActionsResource(AsyncAPIResource):
         self,
         id: str,
         *,
-        type: object,
         x: float,
         y: float,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
@@ -620,8 +579,6 @@ class AsyncActionsResource(AsyncAPIResource):
     ) -> ActionResult:
         """
         Args:
-          type: Action type for cursor movement
-
           x: X coordinate to move to
 
           y: Y coordinate to move to
@@ -639,10 +596,9 @@ class AsyncActionsResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
-            f"/api/v1/boxes/{id}/actions/move",
+            f"/boxes/{id}/actions/move",
             body=await async_maybe_transform(
                 {
-                    "type": type,
                     "x": x,
                     "y": y,
                     "output_format": output_format,
@@ -660,7 +616,6 @@ class AsyncActionsResource(AsyncAPIResource):
         id: str,
         *,
         keys: List[str],
-        type: object,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -672,8 +627,6 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         Args:
           keys: Array of keys to press
-
-          type: Action type for keyboard key press
 
           output_format: Type of the URI
 
@@ -688,11 +641,10 @@ class AsyncActionsResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
-            f"/api/v1/boxes/{id}/actions/press",
+            f"/boxes/{id}/actions/press",
             body=await async_maybe_transform(
                 {
                     "keys": keys,
-                    "type": type,
                     "output_format": output_format,
                 },
                 action_press_params.ActionPressParams,
@@ -709,7 +661,6 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         clip: action_screenshot_params.Clip | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        type: Literal["png", "jpeg"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -723,8 +674,6 @@ class AsyncActionsResource(AsyncAPIResource):
 
           output_format: Type of the URI
 
-          type: Action type for screenshot
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -736,12 +685,11 @@ class AsyncActionsResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
-            f"/api/v1/boxes/{id}/actions/screenshot",
+            f"/boxes/{id}/actions/screenshot",
             body=await async_maybe_transform(
                 {
                     "clip": clip,
                     "output_format": output_format,
-                    "type": type,
                 },
                 action_screenshot_params.ActionScreenshotParams,
             ),
@@ -757,7 +705,6 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         scroll_x: float,
         scroll_y: float,
-        type: object,
         x: float,
         y: float,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
@@ -773,8 +720,6 @@ class AsyncActionsResource(AsyncAPIResource):
           scroll_x: Horizontal scroll amount
 
           scroll_y: Vertical scroll amount
-
-          type: Action type for scroll interaction
 
           x: X coordinate of the scroll position
 
@@ -793,12 +738,11 @@ class AsyncActionsResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
-            f"/api/v1/boxes/{id}/actions/scroll",
+            f"/boxes/{id}/actions/scroll",
             body=await async_maybe_transform(
                 {
                     "scroll_x": scroll_x,
                     "scroll_y": scroll_y,
-                    "type": type,
                     "x": x,
                     "y": y,
                     "output_format": output_format,
@@ -816,7 +760,6 @@ class AsyncActionsResource(AsyncAPIResource):
         id: str,
         *,
         points: Iterable[action_touch_params.Point],
-        type: object,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -828,8 +771,6 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         Args:
           points: Array of touch points and their actions
-
-          type: Action type for touch interaction
 
           output_format: Type of the URI
 
@@ -844,11 +785,10 @@ class AsyncActionsResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
-            f"/api/v1/boxes/{id}/actions/touch",
+            f"/boxes/{id}/actions/touch",
             body=await async_maybe_transform(
                 {
                     "points": points,
-                    "type": type,
                     "output_format": output_format,
                 },
                 action_touch_params.ActionTouchParams,
@@ -864,7 +804,6 @@ class AsyncActionsResource(AsyncAPIResource):
         id: str,
         *,
         text: str,
-        type: object,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -876,8 +815,6 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         Args:
           text: Text to type
-
-          type: Action type for typing text
 
           output_format: Type of the URI
 
@@ -892,11 +829,10 @@ class AsyncActionsResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
-            f"/api/v1/boxes/{id}/actions/type",
+            f"/boxes/{id}/actions/type",
             body=await async_maybe_transform(
                 {
                     "text": text,
-                    "type": type,
                     "output_format": output_format,
                 },
                 action_type_params.ActionTypeParams,

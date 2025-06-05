@@ -25,7 +25,6 @@ class TestActions:
     def test_method_click(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.click(
             id="id",
-            type={},
             x=100,
             y=100,
         )
@@ -36,7 +35,6 @@ class TestActions:
     def test_method_click_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.click(
             id="id",
-            type={},
             x=100,
             y=100,
             button="left",
@@ -50,7 +48,6 @@ class TestActions:
     def test_raw_response_click(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.click(
             id="id",
-            type={},
             x=100,
             y=100,
         )
@@ -65,7 +62,6 @@ class TestActions:
     def test_streaming_response_click(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.click(
             id="id",
-            type={},
             x=100,
             y=100,
         ) as response:
@@ -83,7 +79,6 @@ class TestActions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.v1.boxes.actions.with_raw_response.click(
                 id="",
-                type={},
                 x=100,
                 y=100,
             )
@@ -103,7 +98,6 @@ class TestActions:
                     "y": 200,
                 },
             ],
-            type={},
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -122,7 +116,6 @@ class TestActions:
                     "y": 200,
                 },
             ],
-            type={},
             duration="duration",
             output_format="base64",
         )
@@ -143,7 +136,6 @@ class TestActions:
                     "y": 200,
                 },
             ],
-            type={},
         )
 
         assert response.is_closed is True
@@ -166,7 +158,6 @@ class TestActions:
                     "y": 200,
                 },
             ],
-            type={},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -192,7 +183,6 @@ class TestActions:
                         "y": 200,
                     },
                 ],
-                type={},
             )
 
     @pytest.mark.skip()
@@ -200,7 +190,6 @@ class TestActions:
     def test_method_move(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.move(
             id="id",
-            type={},
             x=200,
             y=300,
         )
@@ -211,7 +200,6 @@ class TestActions:
     def test_method_move_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.move(
             id="id",
-            type={},
             x=200,
             y=300,
             output_format="base64",
@@ -223,7 +211,6 @@ class TestActions:
     def test_raw_response_move(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.move(
             id="id",
-            type={},
             x=200,
             y=300,
         )
@@ -238,7 +225,6 @@ class TestActions:
     def test_streaming_response_move(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.move(
             id="id",
-            type={},
             x=200,
             y=300,
         ) as response:
@@ -256,7 +242,6 @@ class TestActions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.v1.boxes.actions.with_raw_response.move(
                 id="",
-                type={},
                 x=200,
                 y=300,
             )
@@ -267,7 +252,6 @@ class TestActions:
         action = client.v1.boxes.actions.press(
             id="id",
             keys=["Enter"],
-            type={},
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -277,7 +261,6 @@ class TestActions:
         action = client.v1.boxes.actions.press(
             id="id",
             keys=["Enter"],
-            type={},
             output_format="base64",
         )
         assert_matches_type(ActionResult, action, path=["response"])
@@ -288,7 +271,6 @@ class TestActions:
         response = client.v1.boxes.actions.with_raw_response.press(
             id="id",
             keys=["Enter"],
-            type={},
         )
 
         assert response.is_closed is True
@@ -302,7 +284,6 @@ class TestActions:
         with client.v1.boxes.actions.with_streaming_response.press(
             id="id",
             keys=["Enter"],
-            type={},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -319,7 +300,6 @@ class TestActions:
             client.v1.boxes.actions.with_raw_response.press(
                 id="",
                 keys=["Enter"],
-                type={},
             )
 
     @pytest.mark.skip()
@@ -342,7 +322,6 @@ class TestActions:
                 "y": 0,
             },
             output_format="base64",
-            type="png",
         )
         assert_matches_type(ActionScreenshotResponse, action, path=["response"])
 
@@ -387,7 +366,6 @@ class TestActions:
             id="id",
             scroll_x=0,
             scroll_y=100,
-            type={},
             x=100,
             y=100,
         )
@@ -400,7 +378,6 @@ class TestActions:
             id="id",
             scroll_x=0,
             scroll_y=100,
-            type={},
             x=100,
             y=100,
             output_format="base64",
@@ -414,7 +391,6 @@ class TestActions:
             id="id",
             scroll_x=0,
             scroll_y=100,
-            type={},
             x=100,
             y=100,
         )
@@ -431,7 +407,6 @@ class TestActions:
             id="id",
             scroll_x=0,
             scroll_y=100,
-            type={},
             x=100,
             y=100,
         ) as response:
@@ -451,7 +426,6 @@ class TestActions:
                 id="",
                 scroll_x=0,
                 scroll_y=100,
-                type={},
                 x=100,
                 y=100,
             )
@@ -469,7 +443,6 @@ class TestActions:
                     }
                 }
             ],
-            type={},
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -487,7 +460,6 @@ class TestActions:
                     "actions": [{}],
                 }
             ],
-            type={},
             output_format="base64",
         )
         assert_matches_type(ActionResult, action, path=["response"])
@@ -505,7 +477,6 @@ class TestActions:
                     }
                 }
             ],
-            type={},
         )
 
         assert response.is_closed is True
@@ -526,7 +497,6 @@ class TestActions:
                     }
                 }
             ],
-            type={},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -550,7 +520,6 @@ class TestActions:
                         }
                     }
                 ],
-                type={},
             )
 
     @pytest.mark.skip()
@@ -559,7 +528,6 @@ class TestActions:
         action = client.v1.boxes.actions.type(
             id="id",
             text="Hello World",
-            type={},
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -569,7 +537,6 @@ class TestActions:
         action = client.v1.boxes.actions.type(
             id="id",
             text="Hello World",
-            type={},
             output_format="base64",
         )
         assert_matches_type(ActionResult, action, path=["response"])
@@ -580,7 +547,6 @@ class TestActions:
         response = client.v1.boxes.actions.with_raw_response.type(
             id="id",
             text="Hello World",
-            type={},
         )
 
         assert response.is_closed is True
@@ -594,7 +560,6 @@ class TestActions:
         with client.v1.boxes.actions.with_streaming_response.type(
             id="id",
             text="Hello World",
-            type={},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -611,7 +576,6 @@ class TestActions:
             client.v1.boxes.actions.with_raw_response.type(
                 id="",
                 text="Hello World",
-                type={},
             )
 
 
@@ -623,7 +587,6 @@ class TestAsyncActions:
     async def test_method_click(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.click(
             id="id",
-            type={},
             x=100,
             y=100,
         )
@@ -634,7 +597,6 @@ class TestAsyncActions:
     async def test_method_click_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.click(
             id="id",
-            type={},
             x=100,
             y=100,
             button="left",
@@ -648,7 +610,6 @@ class TestAsyncActions:
     async def test_raw_response_click(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.click(
             id="id",
-            type={},
             x=100,
             y=100,
         )
@@ -663,7 +624,6 @@ class TestAsyncActions:
     async def test_streaming_response_click(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.click(
             id="id",
-            type={},
             x=100,
             y=100,
         ) as response:
@@ -681,7 +641,6 @@ class TestAsyncActions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.click(
                 id="",
-                type={},
                 x=100,
                 y=100,
             )
@@ -701,7 +660,6 @@ class TestAsyncActions:
                     "y": 200,
                 },
             ],
-            type={},
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -720,7 +678,6 @@ class TestAsyncActions:
                     "y": 200,
                 },
             ],
-            type={},
             duration="duration",
             output_format="base64",
         )
@@ -741,7 +698,6 @@ class TestAsyncActions:
                     "y": 200,
                 },
             ],
-            type={},
         )
 
         assert response.is_closed is True
@@ -764,7 +720,6 @@ class TestAsyncActions:
                     "y": 200,
                 },
             ],
-            type={},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -790,7 +745,6 @@ class TestAsyncActions:
                         "y": 200,
                     },
                 ],
-                type={},
             )
 
     @pytest.mark.skip()
@@ -798,7 +752,6 @@ class TestAsyncActions:
     async def test_method_move(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.move(
             id="id",
-            type={},
             x=200,
             y=300,
         )
@@ -809,7 +762,6 @@ class TestAsyncActions:
     async def test_method_move_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.move(
             id="id",
-            type={},
             x=200,
             y=300,
             output_format="base64",
@@ -821,7 +773,6 @@ class TestAsyncActions:
     async def test_raw_response_move(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.move(
             id="id",
-            type={},
             x=200,
             y=300,
         )
@@ -836,7 +787,6 @@ class TestAsyncActions:
     async def test_streaming_response_move(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.move(
             id="id",
-            type={},
             x=200,
             y=300,
         ) as response:
@@ -854,7 +804,6 @@ class TestAsyncActions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.move(
                 id="",
-                type={},
                 x=200,
                 y=300,
             )
@@ -865,7 +814,6 @@ class TestAsyncActions:
         action = await async_client.v1.boxes.actions.press(
             id="id",
             keys=["Enter"],
-            type={},
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -875,7 +823,6 @@ class TestAsyncActions:
         action = await async_client.v1.boxes.actions.press(
             id="id",
             keys=["Enter"],
-            type={},
             output_format="base64",
         )
         assert_matches_type(ActionResult, action, path=["response"])
@@ -886,7 +833,6 @@ class TestAsyncActions:
         response = await async_client.v1.boxes.actions.with_raw_response.press(
             id="id",
             keys=["Enter"],
-            type={},
         )
 
         assert response.is_closed is True
@@ -900,7 +846,6 @@ class TestAsyncActions:
         async with async_client.v1.boxes.actions.with_streaming_response.press(
             id="id",
             keys=["Enter"],
-            type={},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -917,7 +862,6 @@ class TestAsyncActions:
             await async_client.v1.boxes.actions.with_raw_response.press(
                 id="",
                 keys=["Enter"],
-                type={},
             )
 
     @pytest.mark.skip()
@@ -940,7 +884,6 @@ class TestAsyncActions:
                 "y": 0,
             },
             output_format="base64",
-            type="png",
         )
         assert_matches_type(ActionScreenshotResponse, action, path=["response"])
 
@@ -985,7 +928,6 @@ class TestAsyncActions:
             id="id",
             scroll_x=0,
             scroll_y=100,
-            type={},
             x=100,
             y=100,
         )
@@ -998,7 +940,6 @@ class TestAsyncActions:
             id="id",
             scroll_x=0,
             scroll_y=100,
-            type={},
             x=100,
             y=100,
             output_format="base64",
@@ -1012,7 +953,6 @@ class TestAsyncActions:
             id="id",
             scroll_x=0,
             scroll_y=100,
-            type={},
             x=100,
             y=100,
         )
@@ -1029,7 +969,6 @@ class TestAsyncActions:
             id="id",
             scroll_x=0,
             scroll_y=100,
-            type={},
             x=100,
             y=100,
         ) as response:
@@ -1049,7 +988,6 @@ class TestAsyncActions:
                 id="",
                 scroll_x=0,
                 scroll_y=100,
-                type={},
                 x=100,
                 y=100,
             )
@@ -1067,7 +1005,6 @@ class TestAsyncActions:
                     }
                 }
             ],
-            type={},
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -1085,7 +1022,6 @@ class TestAsyncActions:
                     "actions": [{}],
                 }
             ],
-            type={},
             output_format="base64",
         )
         assert_matches_type(ActionResult, action, path=["response"])
@@ -1103,7 +1039,6 @@ class TestAsyncActions:
                     }
                 }
             ],
-            type={},
         )
 
         assert response.is_closed is True
@@ -1124,7 +1059,6 @@ class TestAsyncActions:
                     }
                 }
             ],
-            type={},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1148,7 +1082,6 @@ class TestAsyncActions:
                         }
                     }
                 ],
-                type={},
             )
 
     @pytest.mark.skip()
@@ -1157,7 +1090,6 @@ class TestAsyncActions:
         action = await async_client.v1.boxes.actions.type(
             id="id",
             text="Hello World",
-            type={},
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -1167,7 +1099,6 @@ class TestAsyncActions:
         action = await async_client.v1.boxes.actions.type(
             id="id",
             text="Hello World",
-            type={},
             output_format="base64",
         )
         assert_matches_type(ActionResult, action, path=["response"])
@@ -1178,7 +1109,6 @@ class TestAsyncActions:
         response = await async_client.v1.boxes.actions.with_raw_response.type(
             id="id",
             text="Hello World",
-            type={},
         )
 
         assert response.is_closed is True
@@ -1192,7 +1122,6 @@ class TestAsyncActions:
         async with async_client.v1.boxes.actions.with_streaming_response.type(
             id="id",
             text="Hello World",
-            type={},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1209,5 +1138,4 @@ class TestAsyncActions:
             await async_client.v1.boxes.actions.with_raw_response.type(
                 id="",
                 text="Hello World",
-                type={},
             )

@@ -13,8 +13,5 @@ class ActionTypeParams(TypedDict, total=False):
     text: Required[str]
     """Text to type"""
 
-    type: Required[object]
-    """Action type for typing text"""
-
     output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
     """Type of the URI"""

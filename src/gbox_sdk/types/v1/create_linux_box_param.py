@@ -15,3 +15,9 @@ class CreateLinuxBoxParam(TypedDict, total=False):
 
     config: CreateBoxConfigParam
     """Configuration for a Linux box instance"""
+
+    timeout: str
+    """Timeout for the box operation to be completed, default is 30s"""
+
+    wait: bool
+    """Wait for the box operation to be completed, default is true"""

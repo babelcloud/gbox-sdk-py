@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, List, cast
+from typing import Any, List, Union, cast
 from typing_extensions import Literal, overload
 
 import httpx
@@ -31,12 +31,13 @@ from .browser import (
     BrowserResourceWithStreamingResponse,
     AsyncBrowserResourceWithStreamingResponse,
 )
-from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from ...._utils import required_args, maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ....types.v1 import (
     box_list_params,
     box_create_params,
+    box_delete_params,
     box_run_code_params,
     box_create_linux_params,
     box_create_android_params,
@@ -83,7 +84,7 @@ class BoxesResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/babelcloud/gbox-sdk-py#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/gbox-sdk-python#accessing-raw-response-data-eg-headers
         """
         return BoxesResourceWithRawResponse(self)
 
@@ -92,7 +93,7 @@ class BoxesResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/babelcloud/gbox-sdk-py#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/gbox-sdk-python#with_streaming_response
         """
         return BoxesResourceWithStreamingResponse(self)
 
@@ -102,6 +103,8 @@ class BoxesResource(SyncAPIResource):
         *,
         type: Literal["linux"],
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
+        api_timeout: str | NotGiven = NOT_GIVEN,
+        wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -116,6 +119,10 @@ class BoxesResource(SyncAPIResource):
           type: Box type is Linux
 
           config: Configuration for a Linux box instance
+
+          api_timeout: Timeout for the box operation to be completed, default is 30s
+
+          wait: Wait for the box operation to be completed, default is true
 
           extra_headers: Send extra headers
 
@@ -133,6 +140,8 @@ class BoxesResource(SyncAPIResource):
         *,
         type: Literal["android"],
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
+        api_timeout: str | NotGiven = NOT_GIVEN,
+        wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -147,6 +156,10 @@ class BoxesResource(SyncAPIResource):
           type: Box type is Android
 
           config: Configuration for an Android box instance
+
+          api_timeout: Timeout for the box operation to be completed, default is 30s
+
+          wait: Wait for the box operation to be completed, default is true
 
           extra_headers: Send extra headers
 
@@ -164,6 +177,8 @@ class BoxesResource(SyncAPIResource):
         *,
         type: Literal["linux"] | Literal["android"],
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
+        api_timeout: str | NotGiven = NOT_GIVEN,
+        wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -174,11 +189,13 @@ class BoxesResource(SyncAPIResource):
         return cast(
             BoxCreateResponse,
             self._post(
-                "/api/v1/boxes",
+                "/boxes",
                 body=maybe_transform(
                     {
                         "type": type,
                         "config": config,
+                        "api_timeout": api_timeout,
+                        "wait": wait,
                     },
                     box_create_params.BoxCreateParams,
                 ),
@@ -217,7 +234,7 @@ class BoxesResource(SyncAPIResource):
         return cast(
             BoxRetrieveResponse,
             self._get(
-                f"/api/v1/boxes/{id}",
+                f"/boxes/{id}",
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
@@ -230,8 +247,9 @@ class BoxesResource(SyncAPIResource):
     def list(
         self,
         *,
-        page: float,
-        page_size: float,
+        page: float | NotGiven = NOT_GIVEN,
+        page_size: float | NotGiven = NOT_GIVEN,
+        status: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -247,6 +265,8 @@ class BoxesResource(SyncAPIResource):
 
           page_size: Page size
 
+          status: Filter boxes by their current status (pending, running, stopped, error, deleted)
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -256,7 +276,7 @@ class BoxesResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            "/api/v1/boxes",
+            "/boxes",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -266,6 +286,7 @@ class BoxesResource(SyncAPIResource):
                     {
                         "page": page,
                         "page_size": page_size,
+                        "status": status,
                     },
                     box_list_params.BoxListParams,
                 ),
@@ -273,11 +294,60 @@ class BoxesResource(SyncAPIResource):
             cast_to=BoxListResponse,
         )
 
+    def delete(
+        self,
+        id: str,
+        *,
+        api_timeout: str | NotGiven = NOT_GIVEN,
+        wait: bool | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Delete box
+
+        Args:
+          api_timeout: Timeout for the box operation to be completed, default is 30s
+
+          wait: Wait for the box operation to be completed, default is true
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._delete(
+            f"/boxes/{id}",
+            body=maybe_transform(
+                {
+                    "api_timeout": api_timeout,
+                    "wait": wait,
+                },
+                box_delete_params.BoxDeleteParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
     def create_android(
         self,
         *,
         type: Literal["android"],
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
+        api_timeout: str | NotGiven = NOT_GIVEN,
+        wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -293,6 +363,10 @@ class BoxesResource(SyncAPIResource):
 
           config: Configuration for an Android box instance
 
+          api_timeout: Timeout for the box operation to be completed, default is 30s
+
+          wait: Wait for the box operation to be completed, default is true
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -302,11 +376,13 @@ class BoxesResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/api/v1/boxes/android",
+            "/boxes/android",
             body=maybe_transform(
                 {
                     "type": type,
                     "config": config,
+                    "api_timeout": api_timeout,
+                    "wait": wait,
                 },
                 box_create_android_params.BoxCreateAndroidParams,
             ),
@@ -321,6 +397,8 @@ class BoxesResource(SyncAPIResource):
         *,
         type: Literal["linux"],
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
+        api_timeout: str | NotGiven = NOT_GIVEN,
+        wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -336,6 +414,10 @@ class BoxesResource(SyncAPIResource):
 
           config: Configuration for a Linux box instance
 
+          api_timeout: Timeout for the box operation to be completed, default is 30s
+
+          wait: Wait for the box operation to be completed, default is true
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -345,11 +427,13 @@ class BoxesResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/api/v1/boxes/linux",
+            "/boxes/linux",
             body=maybe_transform(
                 {
                     "type": type,
                     "config": config,
+                    "api_timeout": api_timeout,
+                    "wait": wait,
                 },
                 box_create_linux_params.BoxCreateLinuxParams,
             ),
@@ -363,7 +447,7 @@ class BoxesResource(SyncAPIResource):
         self,
         id: str,
         *,
-        commands: List[str],
+        commands: Union[str, List[str]],
         envs: object | NotGiven = NOT_GIVEN,
         api_timeout: str | NotGiven = NOT_GIVEN,
         working_dir: str | NotGiven = NOT_GIVEN,
@@ -374,9 +458,10 @@ class BoxesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxExecuteCommandsResponse:
-        """
-        Args:
-          commands: The command to run
+        """Args:
+          commands: The command to run.
+
+        Can be a single string or an array of strings
 
           envs: The environment variables to run the command
 
@@ -395,7 +480,7 @@ class BoxesResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
-            f"/api/v1/boxes/{id}/commands",
+            f"/boxes/{id}/commands",
             body=maybe_transform(
                 {
                     "commands": commands,
@@ -416,9 +501,9 @@ class BoxesResource(SyncAPIResource):
         id: str,
         *,
         code: str,
-        type: Literal["bash", "python3", "typescript"],
         argv: List[str] | NotGiven = NOT_GIVEN,
         envs: object | NotGiven = NOT_GIVEN,
+        language: Literal["bash", "python3", "typescript"] | NotGiven = NOT_GIVEN,
         api_timeout: str | NotGiven = NOT_GIVEN,
         working_dir: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -428,15 +513,16 @@ class BoxesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxRunCodeResponse:
-        """
-        Args:
+        """Args:
           code: The code to run
 
-          type: The type of the code.
+          argv: The arguments to run the code.
 
-          argv: The arguments to run the code. e.g. ["-h"]
+        e.g. ["-h"]
 
           envs: The environment variables to run the code
+
+          language: The language of the code.
 
           api_timeout: The timeout of the code. e.g. "30s"
 
@@ -453,13 +539,13 @@ class BoxesResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
-            f"/api/v1/boxes/{id}/run-code",
+            f"/boxes/{id}/run-code",
             body=maybe_transform(
                 {
                     "code": code,
-                    "type": type,
                     "argv": argv,
                     "envs": envs,
+                    "language": language,
                     "api_timeout": api_timeout,
                     "working_dir": working_dir,
                 },
@@ -499,7 +585,7 @@ class BoxesResource(SyncAPIResource):
         return cast(
             BoxStartResponse,
             self._post(
-                f"/api/v1/boxes/{id}/start",
+                f"/boxes/{id}/start",
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
@@ -535,7 +621,7 @@ class BoxesResource(SyncAPIResource):
         return cast(
             BoxStopResponse,
             self._post(
-                f"/api/v1/boxes/{id}/stop",
+                f"/boxes/{id}/stop",
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
@@ -563,7 +649,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/babelcloud/gbox-sdk-py#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/gbox-sdk-python#accessing-raw-response-data-eg-headers
         """
         return AsyncBoxesResourceWithRawResponse(self)
 
@@ -572,7 +658,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/babelcloud/gbox-sdk-py#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/gbox-sdk-python#with_streaming_response
         """
         return AsyncBoxesResourceWithStreamingResponse(self)
 
@@ -582,6 +668,8 @@ class AsyncBoxesResource(AsyncAPIResource):
         *,
         type: Literal["linux"],
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
+        api_timeout: str | NotGiven = NOT_GIVEN,
+        wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -596,6 +684,10 @@ class AsyncBoxesResource(AsyncAPIResource):
           type: Box type is Linux
 
           config: Configuration for a Linux box instance
+
+          api_timeout: Timeout for the box operation to be completed, default is 30s
+
+          wait: Wait for the box operation to be completed, default is true
 
           extra_headers: Send extra headers
 
@@ -613,6 +705,8 @@ class AsyncBoxesResource(AsyncAPIResource):
         *,
         type: Literal["android"],
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
+        api_timeout: str | NotGiven = NOT_GIVEN,
+        wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -627,6 +721,10 @@ class AsyncBoxesResource(AsyncAPIResource):
           type: Box type is Android
 
           config: Configuration for an Android box instance
+
+          api_timeout: Timeout for the box operation to be completed, default is 30s
+
+          wait: Wait for the box operation to be completed, default is true
 
           extra_headers: Send extra headers
 
@@ -644,6 +742,8 @@ class AsyncBoxesResource(AsyncAPIResource):
         *,
         type: Literal["linux"] | Literal["android"],
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
+        api_timeout: str | NotGiven = NOT_GIVEN,
+        wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -654,11 +754,13 @@ class AsyncBoxesResource(AsyncAPIResource):
         return cast(
             BoxCreateResponse,
             await self._post(
-                "/api/v1/boxes",
+                "/boxes",
                 body=await async_maybe_transform(
                     {
                         "type": type,
                         "config": config,
+                        "api_timeout": api_timeout,
+                        "wait": wait,
                     },
                     box_create_params.BoxCreateParams,
                 ),
@@ -697,7 +799,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         return cast(
             BoxRetrieveResponse,
             await self._get(
-                f"/api/v1/boxes/{id}",
+                f"/boxes/{id}",
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
@@ -710,8 +812,9 @@ class AsyncBoxesResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        page: float,
-        page_size: float,
+        page: float | NotGiven = NOT_GIVEN,
+        page_size: float | NotGiven = NOT_GIVEN,
+        status: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -727,6 +830,8 @@ class AsyncBoxesResource(AsyncAPIResource):
 
           page_size: Page size
 
+          status: Filter boxes by their current status (pending, running, stopped, error, deleted)
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -736,7 +841,7 @@ class AsyncBoxesResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            "/api/v1/boxes",
+            "/boxes",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -746,6 +851,7 @@ class AsyncBoxesResource(AsyncAPIResource):
                     {
                         "page": page,
                         "page_size": page_size,
+                        "status": status,
                     },
                     box_list_params.BoxListParams,
                 ),
@@ -753,11 +859,60 @@ class AsyncBoxesResource(AsyncAPIResource):
             cast_to=BoxListResponse,
         )
 
+    async def delete(
+        self,
+        id: str,
+        *,
+        api_timeout: str | NotGiven = NOT_GIVEN,
+        wait: bool | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Delete box
+
+        Args:
+          api_timeout: Timeout for the box operation to be completed, default is 30s
+
+          wait: Wait for the box operation to be completed, default is true
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._delete(
+            f"/boxes/{id}",
+            body=await async_maybe_transform(
+                {
+                    "api_timeout": api_timeout,
+                    "wait": wait,
+                },
+                box_delete_params.BoxDeleteParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
     async def create_android(
         self,
         *,
         type: Literal["android"],
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
+        api_timeout: str | NotGiven = NOT_GIVEN,
+        wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -773,6 +928,10 @@ class AsyncBoxesResource(AsyncAPIResource):
 
           config: Configuration for an Android box instance
 
+          api_timeout: Timeout for the box operation to be completed, default is 30s
+
+          wait: Wait for the box operation to be completed, default is true
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -782,11 +941,13 @@ class AsyncBoxesResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/api/v1/boxes/android",
+            "/boxes/android",
             body=await async_maybe_transform(
                 {
                     "type": type,
                     "config": config,
+                    "api_timeout": api_timeout,
+                    "wait": wait,
                 },
                 box_create_android_params.BoxCreateAndroidParams,
             ),
@@ -801,6 +962,8 @@ class AsyncBoxesResource(AsyncAPIResource):
         *,
         type: Literal["linux"],
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
+        api_timeout: str | NotGiven = NOT_GIVEN,
+        wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -816,6 +979,10 @@ class AsyncBoxesResource(AsyncAPIResource):
 
           config: Configuration for a Linux box instance
 
+          api_timeout: Timeout for the box operation to be completed, default is 30s
+
+          wait: Wait for the box operation to be completed, default is true
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -825,11 +992,13 @@ class AsyncBoxesResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/api/v1/boxes/linux",
+            "/boxes/linux",
             body=await async_maybe_transform(
                 {
                     "type": type,
                     "config": config,
+                    "api_timeout": api_timeout,
+                    "wait": wait,
                 },
                 box_create_linux_params.BoxCreateLinuxParams,
             ),
@@ -843,7 +1012,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         self,
         id: str,
         *,
-        commands: List[str],
+        commands: Union[str, List[str]],
         envs: object | NotGiven = NOT_GIVEN,
         api_timeout: str | NotGiven = NOT_GIVEN,
         working_dir: str | NotGiven = NOT_GIVEN,
@@ -854,9 +1023,10 @@ class AsyncBoxesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxExecuteCommandsResponse:
-        """
-        Args:
-          commands: The command to run
+        """Args:
+          commands: The command to run.
+
+        Can be a single string or an array of strings
 
           envs: The environment variables to run the command
 
@@ -875,7 +1045,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
-            f"/api/v1/boxes/{id}/commands",
+            f"/boxes/{id}/commands",
             body=await async_maybe_transform(
                 {
                     "commands": commands,
@@ -896,9 +1066,9 @@ class AsyncBoxesResource(AsyncAPIResource):
         id: str,
         *,
         code: str,
-        type: Literal["bash", "python3", "typescript"],
         argv: List[str] | NotGiven = NOT_GIVEN,
         envs: object | NotGiven = NOT_GIVEN,
+        language: Literal["bash", "python3", "typescript"] | NotGiven = NOT_GIVEN,
         api_timeout: str | NotGiven = NOT_GIVEN,
         working_dir: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -908,15 +1078,16 @@ class AsyncBoxesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxRunCodeResponse:
-        """
-        Args:
+        """Args:
           code: The code to run
 
-          type: The type of the code.
+          argv: The arguments to run the code.
 
-          argv: The arguments to run the code. e.g. ["-h"]
+        e.g. ["-h"]
 
           envs: The environment variables to run the code
+
+          language: The language of the code.
 
           api_timeout: The timeout of the code. e.g. "30s"
 
@@ -933,13 +1104,13 @@ class AsyncBoxesResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
-            f"/api/v1/boxes/{id}/run-code",
+            f"/boxes/{id}/run-code",
             body=await async_maybe_transform(
                 {
                     "code": code,
-                    "type": type,
                     "argv": argv,
                     "envs": envs,
+                    "language": language,
                     "api_timeout": api_timeout,
                     "working_dir": working_dir,
                 },
@@ -979,7 +1150,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         return cast(
             BoxStartResponse,
             await self._post(
-                f"/api/v1/boxes/{id}/start",
+                f"/boxes/{id}/start",
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
@@ -1015,7 +1186,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         return cast(
             BoxStopResponse,
             await self._post(
-                f"/api/v1/boxes/{id}/stop",
+                f"/boxes/{id}/stop",
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
@@ -1036,6 +1207,9 @@ class BoxesResourceWithRawResponse:
         )
         self.list = to_raw_response_wrapper(
             boxes.list,
+        )
+        self.delete = to_raw_response_wrapper(
+            boxes.delete,
         )
         self.create_android = to_raw_response_wrapper(
             boxes.create_android,
@@ -1082,6 +1256,9 @@ class AsyncBoxesResourceWithRawResponse:
         self.list = async_to_raw_response_wrapper(
             boxes.list,
         )
+        self.delete = async_to_raw_response_wrapper(
+            boxes.delete,
+        )
         self.create_android = async_to_raw_response_wrapper(
             boxes.create_android,
         )
@@ -1127,6 +1304,9 @@ class BoxesResourceWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             boxes.list,
         )
+        self.delete = to_streamed_response_wrapper(
+            boxes.delete,
+        )
         self.create_android = to_streamed_response_wrapper(
             boxes.create_android,
         )
@@ -1171,6 +1351,9 @@ class AsyncBoxesResourceWithStreamingResponse:
         )
         self.list = async_to_streamed_response_wrapper(
             boxes.list,
+        )
+        self.delete = async_to_streamed_response_wrapper(
+            boxes.delete,
         )
         self.create_android = async_to_streamed_response_wrapper(
             boxes.create_android,

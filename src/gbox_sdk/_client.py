@@ -88,7 +88,7 @@ class GboxClient(SyncAPIClient):
         if base_url is None:
             base_url = os.environ.get("GBOX_CLIENT_BASE_URL")
         if base_url is None:
-            base_url = f"https://gbox.cloud/api/v1/"
+            base_url = f"https://alpha.gbox.cloud/api/v1/"
 
         super().__init__(
             version=__version__,
@@ -256,7 +256,7 @@ class AsyncGboxClient(AsyncAPIClient):
         if base_url is None:
             base_url = os.environ.get("GBOX_CLIENT_BASE_URL")
         if base_url is None:
-            base_url = f"https://gbox.cloud/api/v1/"
+            base_url = f"https://alpha.gbox.cloud/api/v1/"
 
         super().__init__(
             version=__version__,

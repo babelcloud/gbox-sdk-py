@@ -16,9 +16,6 @@ class ActionScreenshotParams(TypedDict, total=False):
     output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
     """Type of the URI"""
 
-    type: Literal["png", "jpeg"]
-    """Action type for screenshot"""
-
 
 class Clip(TypedDict, total=False):
     height: Required[float]

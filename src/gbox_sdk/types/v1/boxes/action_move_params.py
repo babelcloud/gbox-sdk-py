@@ -10,9 +10,6 @@ __all__ = ["ActionMoveParams"]
 
 
 class ActionMoveParams(TypedDict, total=False):
-    type: Required[object]
-    """Action type for cursor movement"""
-
     x: Required[float]
     """X coordinate to move to"""
 

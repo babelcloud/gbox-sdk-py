@@ -722,11 +722,11 @@ class TestGboxClient:
     @mock.patch("gbox_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/api/v1/boxes").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/boxes").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             self.client.post(
-                "/api/v1/boxes",
+                "/boxes",
                 body=cast(object, maybe_transform(dict(type="linux"), CreateLinuxBox)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
@@ -737,11 +737,11 @@ class TestGboxClient:
     @mock.patch("gbox_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/api/v1/boxes").mock(return_value=httpx.Response(500))
+        respx_mock.post("/boxes").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             self.client.post(
-                "/api/v1/boxes",
+                "/boxes",
                 body=cast(object, maybe_transform(dict(type="linux"), CreateLinuxBox)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
@@ -773,7 +773,7 @@ class TestGboxClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/api/v1/boxes").mock(side_effect=retry_handler)
+        respx_mock.post("/boxes").mock(side_effect=retry_handler)
 
         response = client.v1.boxes.with_raw_response.create(type="linux")
 
@@ -797,7 +797,7 @@ class TestGboxClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/api/v1/boxes").mock(side_effect=retry_handler)
+        respx_mock.post("/boxes").mock(side_effect=retry_handler)
 
         response = client.v1.boxes.with_raw_response.create(
             type="linux", extra_headers={"x-stainless-retry-count": Omit()}
@@ -822,13 +822,40 @@ class TestGboxClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/api/v1/boxes").mock(side_effect=retry_handler)
+        respx_mock.post("/boxes").mock(side_effect=retry_handler)
 
         response = client.v1.boxes.with_raw_response.create(
             type="linux", extra_headers={"x-stainless-retry-count": "42"}
         )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
+
+    @pytest.mark.respx(base_url=base_url)
+    def test_follow_redirects(self, respx_mock: MockRouter) -> None:
+        # Test that the default follow_redirects=True allows following redirects
+        respx_mock.post("/redirect").mock(
+            return_value=httpx.Response(302, headers={"Location": f"{base_url}/redirected"})
+        )
+        respx_mock.get("/redirected").mock(return_value=httpx.Response(200, json={"status": "ok"}))
+
+        response = self.client.post("/redirect", body={"key": "value"}, cast_to=httpx.Response)
+        assert response.status_code == 200
+        assert response.json() == {"status": "ok"}
+
+    @pytest.mark.respx(base_url=base_url)
+    def test_follow_redirects_disabled(self, respx_mock: MockRouter) -> None:
+        # Test that follow_redirects=False prevents following redirects
+        respx_mock.post("/redirect").mock(
+            return_value=httpx.Response(302, headers={"Location": f"{base_url}/redirected"})
+        )
+
+        with pytest.raises(APIStatusError) as exc_info:
+            self.client.post(
+                "/redirect", body={"key": "value"}, options={"follow_redirects": False}, cast_to=httpx.Response
+            )
+
+        assert exc_info.value.response.status_code == 302
+        assert exc_info.value.response.headers["Location"] == f"{base_url}/redirected"
 
 
 class TestAsyncGboxClient:
@@ -1502,11 +1529,11 @@ class TestAsyncGboxClient:
     @mock.patch("gbox_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/api/v1/boxes").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/boxes").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             await self.client.post(
-                "/api/v1/boxes",
+                "/boxes",
                 body=cast(object, maybe_transform(dict(type="linux"), CreateLinuxBox)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
@@ -1517,11 +1544,11 @@ class TestAsyncGboxClient:
     @mock.patch("gbox_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/api/v1/boxes").mock(return_value=httpx.Response(500))
+        respx_mock.post("/boxes").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             await self.client.post(
-                "/api/v1/boxes",
+                "/boxes",
                 body=cast(object, maybe_transform(dict(type="linux"), CreateLinuxBox)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
@@ -1554,7 +1581,7 @@ class TestAsyncGboxClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/api/v1/boxes").mock(side_effect=retry_handler)
+        respx_mock.post("/boxes").mock(side_effect=retry_handler)
 
         response = await client.v1.boxes.with_raw_response.create(type="linux")
 
@@ -1579,7 +1606,7 @@ class TestAsyncGboxClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/api/v1/boxes").mock(side_effect=retry_handler)
+        respx_mock.post("/boxes").mock(side_effect=retry_handler)
 
         response = await client.v1.boxes.with_raw_response.create(
             type="linux", extra_headers={"x-stainless-retry-count": Omit()}
@@ -1605,7 +1632,7 @@ class TestAsyncGboxClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/api/v1/boxes").mock(side_effect=retry_handler)
+        respx_mock.post("/boxes").mock(side_effect=retry_handler)
 
         response = await client.v1.boxes.with_raw_response.create(
             type="linux", extra_headers={"x-stainless-retry-count": "42"}
@@ -1657,3 +1684,30 @@ class TestAsyncGboxClient:
                     raise AssertionError("calling get_platform using asyncify resulted in a hung process")
 
                 time.sleep(0.1)
+
+    @pytest.mark.respx(base_url=base_url)
+    async def test_follow_redirects(self, respx_mock: MockRouter) -> None:
+        # Test that the default follow_redirects=True allows following redirects
+        respx_mock.post("/redirect").mock(
+            return_value=httpx.Response(302, headers={"Location": f"{base_url}/redirected"})
+        )
+        respx_mock.get("/redirected").mock(return_value=httpx.Response(200, json={"status": "ok"}))
+
+        response = await self.client.post("/redirect", body={"key": "value"}, cast_to=httpx.Response)
+        assert response.status_code == 200
+        assert response.json() == {"status": "ok"}
+
+    @pytest.mark.respx(base_url=base_url)
+    async def test_follow_redirects_disabled(self, respx_mock: MockRouter) -> None:
+        # Test that follow_redirects=False prevents following redirects
+        respx_mock.post("/redirect").mock(
+            return_value=httpx.Response(302, headers={"Location": f"{base_url}/redirected"})
+        )
+
+        with pytest.raises(APIStatusError) as exc_info:
+            await self.client.post(
+                "/redirect", body={"key": "value"}, options={"follow_redirects": False}, cast_to=httpx.Response
+            )
+
+        assert exc_info.value.response.status_code == 302
+        assert exc_info.value.response.headers["Location"] == f"{base_url}/redirected"

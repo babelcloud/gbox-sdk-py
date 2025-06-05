@@ -10,10 +10,10 @@ __all__ = ["BoxListParams"]
 
 
 class BoxListParams(TypedDict, total=False):
-    page: float
+    page: int
     """Page number"""
 
-    page_size: Annotated[float, PropertyInfo(alias="pageSize")]
+    page_size: Annotated[int, PropertyInfo(alias="pageSize")]
     """Page size"""
 
     status: str

@@ -18,11 +18,11 @@ class BoxListResponse(BaseModel):
     data: List[Data]
     """A box instance that can be either Linux or Android type"""
 
-    page: float
+    page: int
     """Page number"""
 
-    page_size: float = FieldInfo(alias="pageSize")
+    page_size: int = FieldInfo(alias="pageSize")
     """Page size"""
 
-    total: float
+    total: int
     """Total number of items"""

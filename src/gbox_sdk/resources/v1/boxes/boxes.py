@@ -249,6 +249,7 @@ class BoxesResource(SyncAPIResource):
         *,
         page: float | NotGiven = NOT_GIVEN,
         page_size: float | NotGiven = NOT_GIVEN,
+        status: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -263,6 +264,8 @@ class BoxesResource(SyncAPIResource):
           page: Page number
 
           page_size: Page size
+
+          status: Filter boxes by their current status (pending, running, stopped, error, deleted)
 
           extra_headers: Send extra headers
 
@@ -283,6 +286,7 @@ class BoxesResource(SyncAPIResource):
                     {
                         "page": page,
                         "page_size": page_size,
+                        "status": status,
                     },
                     box_list_params.BoxListParams,
                 ),
@@ -810,6 +814,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         *,
         page: float | NotGiven = NOT_GIVEN,
         page_size: float | NotGiven = NOT_GIVEN,
+        status: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -824,6 +829,8 @@ class AsyncBoxesResource(AsyncAPIResource):
           page: Page number
 
           page_size: Page size
+
+          status: Filter boxes by their current status (pending, running, stopped, error, deleted)
 
           extra_headers: Send extra headers
 
@@ -844,6 +851,7 @@ class AsyncBoxesResource(AsyncAPIResource):
                     {
                         "page": page,
                         "page_size": page_size,
+                        "status": status,
                     },
                     box_list_params.BoxListParams,
                 ),

@@ -179,6 +179,7 @@ class TestBoxes:
         box = client.v1.boxes.list(
             page=0,
             page_size=0,
+            status="status",
         )
         assert_matches_type(BoxListResponse, box, path=["response"])
 
@@ -712,6 +713,7 @@ class TestAsyncBoxes:
         box = await async_client.v1.boxes.list(
             page=0,
             page_size=0,
+            status="status",
         )
         assert_matches_type(BoxListResponse, box, path=["response"])
 

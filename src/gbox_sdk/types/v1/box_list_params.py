@@ -15,3 +15,8 @@ class BoxListParams(TypedDict, total=False):
 
     page_size: Annotated[float, PropertyInfo(alias="pageSize")]
     """Page size"""
+
+    status: str
+    """
+    Filter boxes by their current status (pending, running, stopped, error, deleted)
+    """

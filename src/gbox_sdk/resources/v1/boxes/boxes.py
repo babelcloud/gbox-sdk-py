@@ -84,7 +84,7 @@ class BoxesResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/babelcloud/gbox-sdk-py#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/gbox-sdk-python#accessing-raw-response-data-eg-headers
         """
         return BoxesResourceWithRawResponse(self)
 
@@ -93,7 +93,7 @@ class BoxesResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/babelcloud/gbox-sdk-py#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/gbox-sdk-python#with_streaming_response
         """
         return BoxesResourceWithStreamingResponse(self)
 
@@ -247,8 +247,8 @@ class BoxesResource(SyncAPIResource):
     def list(
         self,
         *,
-        page: float | NotGiven = NOT_GIVEN,
-        page_size: float | NotGiven = NOT_GIVEN,
+        page: int | NotGiven = NOT_GIVEN,
+        page_size: int | NotGiven = NOT_GIVEN,
         status: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -649,7 +649,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/babelcloud/gbox-sdk-py#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/gbox-sdk-python#accessing-raw-response-data-eg-headers
         """
         return AsyncBoxesResourceWithRawResponse(self)
 
@@ -658,7 +658,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/babelcloud/gbox-sdk-py#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/gbox-sdk-python#with_streaming_response
         """
         return AsyncBoxesResourceWithStreamingResponse(self)
 
@@ -812,8 +812,8 @@ class AsyncBoxesResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        page: float | NotGiven = NOT_GIVEN,
-        page_size: float | NotGiven = NOT_GIVEN,
+        page: int | NotGiven = NOT_GIVEN,
+        page_size: int | NotGiven = NOT_GIVEN,
         status: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.

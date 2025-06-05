@@ -6,6 +6,7 @@ from .linux_box import LinuxBox as LinuxBox
 from .android_box import AndroidBox as AndroidBox
 from .box_list_params import BoxListParams as BoxListParams
 from .box_create_params import BoxCreateParams as BoxCreateParams
+from .box_delete_params import BoxDeleteParams as BoxDeleteParams
 from .box_list_response import BoxListResponse as BoxListResponse
 from .box_stop_response import BoxStopResponse as BoxStopResponse
 from .box_start_response import BoxStartResponse as BoxStartResponse

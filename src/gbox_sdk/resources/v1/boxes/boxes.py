@@ -37,6 +37,7 @@ from ...._compat import cached_property
 from ....types.v1 import (
     box_list_params,
     box_create_params,
+    box_delete_params,
     box_run_code_params,
     box_create_linux_params,
     box_create_android_params,
@@ -102,6 +103,8 @@ class BoxesResource(SyncAPIResource):
         *,
         type: Literal["linux"],
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
+        api_timeout: str | NotGiven = NOT_GIVEN,
+        wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -116,6 +119,10 @@ class BoxesResource(SyncAPIResource):
           type: Box type is Linux
 
           config: Configuration for a Linux box instance
+
+          api_timeout: Timeout for the box operation to be completed, default is 30s
+
+          wait: Wait for the box operation to be completed, default is true
 
           extra_headers: Send extra headers
 
@@ -133,6 +140,8 @@ class BoxesResource(SyncAPIResource):
         *,
         type: Literal["android"],
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
+        api_timeout: str | NotGiven = NOT_GIVEN,
+        wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -147,6 +156,10 @@ class BoxesResource(SyncAPIResource):
           type: Box type is Android
 
           config: Configuration for an Android box instance
+
+          api_timeout: Timeout for the box operation to be completed, default is 30s
+
+          wait: Wait for the box operation to be completed, default is true
 
           extra_headers: Send extra headers
 
@@ -164,6 +177,8 @@ class BoxesResource(SyncAPIResource):
         *,
         type: Literal["linux"] | Literal["android"],
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
+        api_timeout: str | NotGiven = NOT_GIVEN,
+        wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -179,6 +194,8 @@ class BoxesResource(SyncAPIResource):
                     {
                         "type": type,
                         "config": config,
+                        "api_timeout": api_timeout,
+                        "wait": wait,
                     },
                     box_create_params.BoxCreateParams,
                 ),
@@ -277,6 +294,8 @@ class BoxesResource(SyncAPIResource):
         self,
         id: str,
         *,
+        api_timeout: str | NotGiven = NOT_GIVEN,
+        wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -288,6 +307,10 @@ class BoxesResource(SyncAPIResource):
         Delete box
 
         Args:
+          api_timeout: Timeout for the box operation to be completed, default is 30s
+
+          wait: Wait for the box operation to be completed, default is true
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -301,6 +324,13 @@ class BoxesResource(SyncAPIResource):
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
             f"/boxes/{id}",
+            body=maybe_transform(
+                {
+                    "api_timeout": api_timeout,
+                    "wait": wait,
+                },
+                box_delete_params.BoxDeleteParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -312,6 +342,8 @@ class BoxesResource(SyncAPIResource):
         *,
         type: Literal["android"],
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
+        api_timeout: str | NotGiven = NOT_GIVEN,
+        wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -327,6 +359,10 @@ class BoxesResource(SyncAPIResource):
 
           config: Configuration for an Android box instance
 
+          api_timeout: Timeout for the box operation to be completed, default is 30s
+
+          wait: Wait for the box operation to be completed, default is true
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -341,6 +377,8 @@ class BoxesResource(SyncAPIResource):
                 {
                     "type": type,
                     "config": config,
+                    "api_timeout": api_timeout,
+                    "wait": wait,
                 },
                 box_create_android_params.BoxCreateAndroidParams,
             ),
@@ -355,6 +393,8 @@ class BoxesResource(SyncAPIResource):
         *,
         type: Literal["linux"],
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
+        api_timeout: str | NotGiven = NOT_GIVEN,
+        wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -370,6 +410,10 @@ class BoxesResource(SyncAPIResource):
 
           config: Configuration for a Linux box instance
 
+          api_timeout: Timeout for the box operation to be completed, default is 30s
+
+          wait: Wait for the box operation to be completed, default is true
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -384,6 +428,8 @@ class BoxesResource(SyncAPIResource):
                 {
                     "type": type,
                     "config": config,
+                    "api_timeout": api_timeout,
+                    "wait": wait,
                 },
                 box_create_linux_params.BoxCreateLinuxParams,
             ),
@@ -618,6 +664,8 @@ class AsyncBoxesResource(AsyncAPIResource):
         *,
         type: Literal["linux"],
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
+        api_timeout: str | NotGiven = NOT_GIVEN,
+        wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -632,6 +680,10 @@ class AsyncBoxesResource(AsyncAPIResource):
           type: Box type is Linux
 
           config: Configuration for a Linux box instance
+
+          api_timeout: Timeout for the box operation to be completed, default is 30s
+
+          wait: Wait for the box operation to be completed, default is true
 
           extra_headers: Send extra headers
 
@@ -649,6 +701,8 @@ class AsyncBoxesResource(AsyncAPIResource):
         *,
         type: Literal["android"],
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
+        api_timeout: str | NotGiven = NOT_GIVEN,
+        wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -663,6 +717,10 @@ class AsyncBoxesResource(AsyncAPIResource):
           type: Box type is Android
 
           config: Configuration for an Android box instance
+
+          api_timeout: Timeout for the box operation to be completed, default is 30s
+
+          wait: Wait for the box operation to be completed, default is true
 
           extra_headers: Send extra headers
 
@@ -680,6 +738,8 @@ class AsyncBoxesResource(AsyncAPIResource):
         *,
         type: Literal["linux"] | Literal["android"],
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
+        api_timeout: str | NotGiven = NOT_GIVEN,
+        wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -695,6 +755,8 @@ class AsyncBoxesResource(AsyncAPIResource):
                     {
                         "type": type,
                         "config": config,
+                        "api_timeout": api_timeout,
+                        "wait": wait,
                     },
                     box_create_params.BoxCreateParams,
                 ),
@@ -793,6 +855,8 @@ class AsyncBoxesResource(AsyncAPIResource):
         self,
         id: str,
         *,
+        api_timeout: str | NotGiven = NOT_GIVEN,
+        wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -804,6 +868,10 @@ class AsyncBoxesResource(AsyncAPIResource):
         Delete box
 
         Args:
+          api_timeout: Timeout for the box operation to be completed, default is 30s
+
+          wait: Wait for the box operation to be completed, default is true
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -817,6 +885,13 @@ class AsyncBoxesResource(AsyncAPIResource):
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
             f"/boxes/{id}",
+            body=await async_maybe_transform(
+                {
+                    "api_timeout": api_timeout,
+                    "wait": wait,
+                },
+                box_delete_params.BoxDeleteParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -828,6 +903,8 @@ class AsyncBoxesResource(AsyncAPIResource):
         *,
         type: Literal["android"],
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
+        api_timeout: str | NotGiven = NOT_GIVEN,
+        wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -843,6 +920,10 @@ class AsyncBoxesResource(AsyncAPIResource):
 
           config: Configuration for an Android box instance
 
+          api_timeout: Timeout for the box operation to be completed, default is 30s
+
+          wait: Wait for the box operation to be completed, default is true
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -857,6 +938,8 @@ class AsyncBoxesResource(AsyncAPIResource):
                 {
                     "type": type,
                     "config": config,
+                    "api_timeout": api_timeout,
+                    "wait": wait,
                 },
                 box_create_android_params.BoxCreateAndroidParams,
             ),
@@ -871,6 +954,8 @@ class AsyncBoxesResource(AsyncAPIResource):
         *,
         type: Literal["linux"],
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
+        api_timeout: str | NotGiven = NOT_GIVEN,
+        wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -886,6 +971,10 @@ class AsyncBoxesResource(AsyncAPIResource):
 
           config: Configuration for a Linux box instance
 
+          api_timeout: Timeout for the box operation to be completed, default is 30s
+
+          wait: Wait for the box operation to be completed, default is true
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -900,6 +989,8 @@ class AsyncBoxesResource(AsyncAPIResource):
                 {
                     "type": type,
                     "config": config,
+                    "api_timeout": api_timeout,
+                    "wait": wait,
                 },
                 box_create_linux_params.BoxCreateLinuxParams,
             ),

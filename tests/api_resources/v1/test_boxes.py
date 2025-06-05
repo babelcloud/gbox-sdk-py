@@ -45,6 +45,8 @@ class TestBoxes:
                 "expires_in": "expiresIn",
                 "labels": {},
             },
+            api_timeout="timeout",
+            wait=True,
         )
         assert_matches_type(BoxCreateResponse, box, path=["response"])
 
@@ -92,6 +94,8 @@ class TestBoxes:
                 "expires_in": "expiresIn",
                 "labels": {},
             },
+            api_timeout="timeout",
+            wait=True,
         )
         assert_matches_type(BoxCreateResponse, box, path=["response"])
 
@@ -204,7 +208,17 @@ class TestBoxes:
     @parametrize
     def test_method_delete(self, client: GboxClient) -> None:
         box = client.v1.boxes.delete(
-            "id",
+            id="id",
+        )
+        assert box is None
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_delete_with_all_params(self, client: GboxClient) -> None:
+        box = client.v1.boxes.delete(
+            id="id",
+            api_timeout="timeout",
+            wait=True,
         )
         assert box is None
 
@@ -212,7 +226,7 @@ class TestBoxes:
     @parametrize
     def test_raw_response_delete(self, client: GboxClient) -> None:
         response = client.v1.boxes.with_raw_response.delete(
-            "id",
+            id="id",
         )
 
         assert response.is_closed is True
@@ -224,7 +238,7 @@ class TestBoxes:
     @parametrize
     def test_streaming_response_delete(self, client: GboxClient) -> None:
         with client.v1.boxes.with_streaming_response.delete(
-            "id",
+            id="id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -239,7 +253,7 @@ class TestBoxes:
     def test_path_params_delete(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.v1.boxes.with_raw_response.delete(
-                "",
+                id="",
             )
 
     @pytest.mark.skip()
@@ -260,6 +274,8 @@ class TestBoxes:
                 "expires_in": "expiresIn",
                 "labels": {},
             },
+            api_timeout="timeout",
+            wait=True,
         )
         assert_matches_type(AndroidBox, box, path=["response"])
 
@@ -307,6 +323,8 @@ class TestBoxes:
                 "expires_in": "expiresIn",
                 "labels": {},
             },
+            api_timeout="timeout",
+            wait=True,
         )
         assert_matches_type(LinuxBox, box, path=["response"])
 
@@ -560,6 +578,8 @@ class TestAsyncBoxes:
                 "expires_in": "expiresIn",
                 "labels": {},
             },
+            api_timeout="timeout",
+            wait=True,
         )
         assert_matches_type(BoxCreateResponse, box, path=["response"])
 
@@ -607,6 +627,8 @@ class TestAsyncBoxes:
                 "expires_in": "expiresIn",
                 "labels": {},
             },
+            api_timeout="timeout",
+            wait=True,
         )
         assert_matches_type(BoxCreateResponse, box, path=["response"])
 
@@ -719,7 +741,17 @@ class TestAsyncBoxes:
     @parametrize
     async def test_method_delete(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.delete(
-            "id",
+            id="id",
+        )
+        assert box is None
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_delete_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        box = await async_client.v1.boxes.delete(
+            id="id",
+            api_timeout="timeout",
+            wait=True,
         )
         assert box is None
 
@@ -727,7 +759,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.with_raw_response.delete(
-            "id",
+            id="id",
         )
 
         assert response.is_closed is True
@@ -739,7 +771,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.with_streaming_response.delete(
-            "id",
+            id="id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -754,7 +786,7 @@ class TestAsyncBoxes:
     async def test_path_params_delete(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.v1.boxes.with_raw_response.delete(
-                "",
+                id="",
             )
 
     @pytest.mark.skip()
@@ -775,6 +807,8 @@ class TestAsyncBoxes:
                 "expires_in": "expiresIn",
                 "labels": {},
             },
+            api_timeout="timeout",
+            wait=True,
         )
         assert_matches_type(AndroidBox, box, path=["response"])
 
@@ -822,6 +856,8 @@ class TestAsyncBoxes:
                 "expires_in": "expiresIn",
                 "labels": {},
             },
+            api_timeout="timeout",
+            wait=True,
         )
         assert_matches_type(LinuxBox, box, path=["response"])
 

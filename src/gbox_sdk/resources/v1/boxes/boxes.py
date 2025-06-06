@@ -23,6 +23,14 @@ from .actions import (
     ActionsResourceWithStreamingResponse,
     AsyncActionsResourceWithStreamingResponse,
 )
+from .android import (
+    AndroidResource,
+    AsyncAndroidResource,
+    AndroidResourceWithRawResponse,
+    AsyncAndroidResourceWithRawResponse,
+    AndroidResourceWithStreamingResponse,
+    AsyncAndroidResourceWithStreamingResponse,
+)
 from .browser import (
     BrowserResource,
     AsyncBrowserResource,
@@ -77,6 +85,10 @@ class BoxesResource(SyncAPIResource):
     @cached_property
     def browser(self) -> BrowserResource:
         return BrowserResource(self._client)
+
+    @cached_property
+    def android(self) -> AndroidResource:
+        return AndroidResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> BoxesResourceWithRawResponse:
@@ -642,6 +654,10 @@ class AsyncBoxesResource(AsyncAPIResource):
     @cached_property
     def browser(self) -> AsyncBrowserResource:
         return AsyncBrowserResource(self._client)
+
+    @cached_property
+    def android(self) -> AsyncAndroidResource:
+        return AsyncAndroidResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncBoxesResourceWithRawResponse:
@@ -1242,6 +1258,10 @@ class BoxesResourceWithRawResponse:
     def browser(self) -> BrowserResourceWithRawResponse:
         return BrowserResourceWithRawResponse(self._boxes.browser)
 
+    @cached_property
+    def android(self) -> AndroidResourceWithRawResponse:
+        return AndroidResourceWithRawResponse(self._boxes.android)
+
 
 class AsyncBoxesResourceWithRawResponse:
     def __init__(self, boxes: AsyncBoxesResource) -> None:
@@ -1289,6 +1309,10 @@ class AsyncBoxesResourceWithRawResponse:
     @cached_property
     def browser(self) -> AsyncBrowserResourceWithRawResponse:
         return AsyncBrowserResourceWithRawResponse(self._boxes.browser)
+
+    @cached_property
+    def android(self) -> AsyncAndroidResourceWithRawResponse:
+        return AsyncAndroidResourceWithRawResponse(self._boxes.android)
 
 
 class BoxesResourceWithStreamingResponse:
@@ -1338,6 +1362,10 @@ class BoxesResourceWithStreamingResponse:
     def browser(self) -> BrowserResourceWithStreamingResponse:
         return BrowserResourceWithStreamingResponse(self._boxes.browser)
 
+    @cached_property
+    def android(self) -> AndroidResourceWithStreamingResponse:
+        return AndroidResourceWithStreamingResponse(self._boxes.android)
+
 
 class AsyncBoxesResourceWithStreamingResponse:
     def __init__(self, boxes: AsyncBoxesResource) -> None:
@@ -1385,3 +1413,7 @@ class AsyncBoxesResourceWithStreamingResponse:
     @cached_property
     def browser(self) -> AsyncBrowserResourceWithStreamingResponse:
         return AsyncBrowserResourceWithStreamingResponse(self._boxes.browser)
+
+    @cached_property
+    def android(self) -> AsyncAndroidResourceWithStreamingResponse:
+        return AsyncAndroidResourceWithStreamingResponse(self._boxes.android)

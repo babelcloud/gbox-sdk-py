@@ -129,7 +129,7 @@ class TestBoxes:
     @parametrize
     def test_method_retrieve(self, client: GboxClient) -> None:
         box = client.v1.boxes.retrieve(
-            "id",
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
         assert_matches_type(BoxRetrieveResponse, box, path=["response"])
 
@@ -137,7 +137,7 @@ class TestBoxes:
     @parametrize
     def test_raw_response_retrieve(self, client: GboxClient) -> None:
         response = client.v1.boxes.with_raw_response.retrieve(
-            "id",
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
@@ -149,7 +149,7 @@ class TestBoxes:
     @parametrize
     def test_streaming_response_retrieve(self, client: GboxClient) -> None:
         with client.v1.boxes.with_streaming_response.retrieve(
-            "id",
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -209,7 +209,7 @@ class TestBoxes:
     @parametrize
     def test_method_delete(self, client: GboxClient) -> None:
         box = client.v1.boxes.delete(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
         assert box is None
 
@@ -217,7 +217,7 @@ class TestBoxes:
     @parametrize
     def test_method_delete_with_all_params(self, client: GboxClient) -> None:
         box = client.v1.boxes.delete(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             api_timeout="timeout",
             wait=True,
         )
@@ -227,7 +227,7 @@ class TestBoxes:
     @parametrize
     def test_raw_response_delete(self, client: GboxClient) -> None:
         response = client.v1.boxes.with_raw_response.delete(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
@@ -239,7 +239,7 @@ class TestBoxes:
     @parametrize
     def test_streaming_response_delete(self, client: GboxClient) -> None:
         with client.v1.boxes.with_streaming_response.delete(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -359,7 +359,7 @@ class TestBoxes:
     @parametrize
     def test_method_execute_commands(self, client: GboxClient) -> None:
         box = client.v1.boxes.execute_commands(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             commands=["ls", "-l"],
         )
         assert_matches_type(BoxExecuteCommandsResponse, box, path=["response"])
@@ -368,7 +368,7 @@ class TestBoxes:
     @parametrize
     def test_method_execute_commands_with_all_params(self, client: GboxClient) -> None:
         box = client.v1.boxes.execute_commands(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             commands=["ls", "-l"],
             envs={},
             api_timeout="30s",
@@ -380,7 +380,7 @@ class TestBoxes:
     @parametrize
     def test_raw_response_execute_commands(self, client: GboxClient) -> None:
         response = client.v1.boxes.with_raw_response.execute_commands(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             commands=["ls", "-l"],
         )
 
@@ -393,7 +393,7 @@ class TestBoxes:
     @parametrize
     def test_streaming_response_execute_commands(self, client: GboxClient) -> None:
         with client.v1.boxes.with_streaming_response.execute_commands(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             commands=["ls", "-l"],
         ) as response:
             assert not response.is_closed
@@ -417,7 +417,7 @@ class TestBoxes:
     @parametrize
     def test_method_run_code(self, client: GboxClient) -> None:
         box = client.v1.boxes.run_code(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             code='print("Hello, World!")',
         )
         assert_matches_type(BoxRunCodeResponse, box, path=["response"])
@@ -426,7 +426,7 @@ class TestBoxes:
     @parametrize
     def test_method_run_code_with_all_params(self, client: GboxClient) -> None:
         box = client.v1.boxes.run_code(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             code='print("Hello, World!")',
             argv=["string"],
             envs={},
@@ -440,7 +440,7 @@ class TestBoxes:
     @parametrize
     def test_raw_response_run_code(self, client: GboxClient) -> None:
         response = client.v1.boxes.with_raw_response.run_code(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             code='print("Hello, World!")',
         )
 
@@ -453,7 +453,7 @@ class TestBoxes:
     @parametrize
     def test_streaming_response_run_code(self, client: GboxClient) -> None:
         with client.v1.boxes.with_streaming_response.run_code(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             code='print("Hello, World!")',
         ) as response:
             assert not response.is_closed
@@ -477,7 +477,7 @@ class TestBoxes:
     @parametrize
     def test_method_start(self, client: GboxClient) -> None:
         box = client.v1.boxes.start(
-            "id",
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
         assert_matches_type(BoxStartResponse, box, path=["response"])
 
@@ -485,7 +485,7 @@ class TestBoxes:
     @parametrize
     def test_raw_response_start(self, client: GboxClient) -> None:
         response = client.v1.boxes.with_raw_response.start(
-            "id",
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
@@ -497,7 +497,7 @@ class TestBoxes:
     @parametrize
     def test_streaming_response_start(self, client: GboxClient) -> None:
         with client.v1.boxes.with_streaming_response.start(
-            "id",
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -519,7 +519,7 @@ class TestBoxes:
     @parametrize
     def test_method_stop(self, client: GboxClient) -> None:
         box = client.v1.boxes.stop(
-            "id",
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
         assert_matches_type(BoxStopResponse, box, path=["response"])
 
@@ -527,7 +527,7 @@ class TestBoxes:
     @parametrize
     def test_raw_response_stop(self, client: GboxClient) -> None:
         response = client.v1.boxes.with_raw_response.stop(
-            "id",
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
@@ -539,7 +539,7 @@ class TestBoxes:
     @parametrize
     def test_streaming_response_stop(self, client: GboxClient) -> None:
         with client.v1.boxes.with_streaming_response.stop(
-            "id",
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -663,7 +663,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.retrieve(
-            "id",
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
         assert_matches_type(BoxRetrieveResponse, box, path=["response"])
 
@@ -671,7 +671,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.with_raw_response.retrieve(
-            "id",
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
@@ -683,7 +683,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.with_streaming_response.retrieve(
-            "id",
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -743,7 +743,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_method_delete(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.delete(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
         assert box is None
 
@@ -751,7 +751,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_method_delete_with_all_params(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.delete(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             api_timeout="timeout",
             wait=True,
         )
@@ -761,7 +761,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.with_raw_response.delete(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
@@ -773,7 +773,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.with_streaming_response.delete(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -893,7 +893,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_method_execute_commands(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.execute_commands(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             commands=["ls", "-l"],
         )
         assert_matches_type(BoxExecuteCommandsResponse, box, path=["response"])
@@ -902,7 +902,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_method_execute_commands_with_all_params(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.execute_commands(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             commands=["ls", "-l"],
             envs={},
             api_timeout="30s",
@@ -914,7 +914,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_raw_response_execute_commands(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.with_raw_response.execute_commands(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             commands=["ls", "-l"],
         )
 
@@ -927,7 +927,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_streaming_response_execute_commands(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.with_streaming_response.execute_commands(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             commands=["ls", "-l"],
         ) as response:
             assert not response.is_closed
@@ -951,7 +951,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_method_run_code(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.run_code(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             code='print("Hello, World!")',
         )
         assert_matches_type(BoxRunCodeResponse, box, path=["response"])
@@ -960,7 +960,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_method_run_code_with_all_params(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.run_code(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             code='print("Hello, World!")',
             argv=["string"],
             envs={},
@@ -974,7 +974,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_raw_response_run_code(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.with_raw_response.run_code(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             code='print("Hello, World!")',
         )
 
@@ -987,7 +987,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_streaming_response_run_code(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.with_streaming_response.run_code(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             code='print("Hello, World!")',
         ) as response:
             assert not response.is_closed
@@ -1011,7 +1011,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_method_start(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.start(
-            "id",
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
         assert_matches_type(BoxStartResponse, box, path=["response"])
 
@@ -1019,7 +1019,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_raw_response_start(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.with_raw_response.start(
-            "id",
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
@@ -1031,7 +1031,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_streaming_response_start(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.with_streaming_response.start(
-            "id",
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1053,7 +1053,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_method_stop(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.stop(
-            "id",
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
         assert_matches_type(BoxStopResponse, box, path=["response"])
 
@@ -1061,7 +1061,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_raw_response_stop(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.with_raw_response.stop(
-            "id",
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
@@ -1073,7 +1073,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_streaming_response_stop(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.with_streaming_response.stop(
-            "id",
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

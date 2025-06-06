@@ -21,7 +21,7 @@ class TestBrowser:
     @parametrize
     def test_method_cdp_url(self, client: GboxClient) -> None:
         browser = client.v1.boxes.browser.cdp_url(
-            "id",
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
         assert_matches_type(str, browser, path=["response"])
 
@@ -29,7 +29,7 @@ class TestBrowser:
     @parametrize
     def test_raw_response_cdp_url(self, client: GboxClient) -> None:
         response = client.v1.boxes.browser.with_raw_response.cdp_url(
-            "id",
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
@@ -41,7 +41,7 @@ class TestBrowser:
     @parametrize
     def test_streaming_response_cdp_url(self, client: GboxClient) -> None:
         with client.v1.boxes.browser.with_streaming_response.cdp_url(
-            "id",
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -63,7 +63,7 @@ class TestBrowser:
     @parametrize
     def test_method_connect_url(self, client: GboxClient) -> None:
         browser = client.v1.boxes.browser.connect_url(
-            "id",
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
         assert_matches_type(BrowserConnectURLResponse, browser, path=["response"])
 
@@ -71,7 +71,7 @@ class TestBrowser:
     @parametrize
     def test_raw_response_connect_url(self, client: GboxClient) -> None:
         response = client.v1.boxes.browser.with_raw_response.connect_url(
-            "id",
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
@@ -83,7 +83,7 @@ class TestBrowser:
     @parametrize
     def test_streaming_response_connect_url(self, client: GboxClient) -> None:
         with client.v1.boxes.browser.with_streaming_response.connect_url(
-            "id",
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -109,7 +109,7 @@ class TestAsyncBrowser:
     @parametrize
     async def test_method_cdp_url(self, async_client: AsyncGboxClient) -> None:
         browser = await async_client.v1.boxes.browser.cdp_url(
-            "id",
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
         assert_matches_type(str, browser, path=["response"])
 
@@ -117,7 +117,7 @@ class TestAsyncBrowser:
     @parametrize
     async def test_raw_response_cdp_url(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.browser.with_raw_response.cdp_url(
-            "id",
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
@@ -129,7 +129,7 @@ class TestAsyncBrowser:
     @parametrize
     async def test_streaming_response_cdp_url(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.browser.with_streaming_response.cdp_url(
-            "id",
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -151,7 +151,7 @@ class TestAsyncBrowser:
     @parametrize
     async def test_method_connect_url(self, async_client: AsyncGboxClient) -> None:
         browser = await async_client.v1.boxes.browser.connect_url(
-            "id",
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
         assert_matches_type(BrowserConnectURLResponse, browser, path=["response"])
 
@@ -159,7 +159,7 @@ class TestAsyncBrowser:
     @parametrize
     async def test_raw_response_connect_url(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.browser.with_raw_response.connect_url(
-            "id",
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
@@ -171,7 +171,7 @@ class TestAsyncBrowser:
     @parametrize
     async def test_streaming_response_connect_url(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.browser.with_streaming_response.connect_url(
-            "id",
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

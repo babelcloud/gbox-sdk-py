@@ -25,7 +25,7 @@ class TestFs:
     @parametrize
     def test_method_list(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.list(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path="path",
         )
         assert_matches_type(FListResponse, f, path=["response"])
@@ -34,7 +34,7 @@ class TestFs:
     @parametrize
     def test_method_list_with_all_params(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.list(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path="path",
             depth=0,
         )
@@ -44,7 +44,7 @@ class TestFs:
     @parametrize
     def test_raw_response_list(self, client: GboxClient) -> None:
         response = client.v1.boxes.fs.with_raw_response.list(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path="path",
         )
 
@@ -57,7 +57,7 @@ class TestFs:
     @parametrize
     def test_streaming_response_list(self, client: GboxClient) -> None:
         with client.v1.boxes.fs.with_streaming_response.list(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path="path",
         ) as response:
             assert not response.is_closed
@@ -81,7 +81,7 @@ class TestFs:
     @parametrize
     def test_method_read(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.read(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path="path",
         )
         assert_matches_type(FReadResponse, f, path=["response"])
@@ -90,7 +90,7 @@ class TestFs:
     @parametrize
     def test_raw_response_read(self, client: GboxClient) -> None:
         response = client.v1.boxes.fs.with_raw_response.read(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path="path",
         )
 
@@ -103,7 +103,7 @@ class TestFs:
     @parametrize
     def test_streaming_response_read(self, client: GboxClient) -> None:
         with client.v1.boxes.fs.with_streaming_response.read(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path="path",
         ) as response:
             assert not response.is_closed
@@ -127,7 +127,7 @@ class TestFs:
     @parametrize
     def test_method_write(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.write(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             content="content",
             path="path",
         )
@@ -137,7 +137,7 @@ class TestFs:
     @parametrize
     def test_raw_response_write(self, client: GboxClient) -> None:
         response = client.v1.boxes.fs.with_raw_response.write(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             content="content",
             path="path",
         )
@@ -151,7 +151,7 @@ class TestFs:
     @parametrize
     def test_streaming_response_write(self, client: GboxClient) -> None:
         with client.v1.boxes.fs.with_streaming_response.write(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             content="content",
             path="path",
         ) as response:
@@ -181,7 +181,7 @@ class TestAsyncFs:
     @parametrize
     async def test_method_list(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.list(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path="path",
         )
         assert_matches_type(FListResponse, f, path=["response"])
@@ -190,7 +190,7 @@ class TestAsyncFs:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.list(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path="path",
             depth=0,
         )
@@ -200,7 +200,7 @@ class TestAsyncFs:
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.fs.with_raw_response.list(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path="path",
         )
 
@@ -213,7 +213,7 @@ class TestAsyncFs:
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.fs.with_streaming_response.list(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path="path",
         ) as response:
             assert not response.is_closed
@@ -237,7 +237,7 @@ class TestAsyncFs:
     @parametrize
     async def test_method_read(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.read(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path="path",
         )
         assert_matches_type(FReadResponse, f, path=["response"])
@@ -246,7 +246,7 @@ class TestAsyncFs:
     @parametrize
     async def test_raw_response_read(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.fs.with_raw_response.read(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path="path",
         )
 
@@ -259,7 +259,7 @@ class TestAsyncFs:
     @parametrize
     async def test_streaming_response_read(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.fs.with_streaming_response.read(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path="path",
         ) as response:
             assert not response.is_closed
@@ -283,7 +283,7 @@ class TestAsyncFs:
     @parametrize
     async def test_method_write(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.write(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             content="content",
             path="path",
         )
@@ -293,7 +293,7 @@ class TestAsyncFs:
     @parametrize
     async def test_raw_response_write(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.fs.with_raw_response.write(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             content="content",
             path="path",
         )
@@ -307,7 +307,7 @@ class TestAsyncFs:
     @parametrize
     async def test_streaming_response_write(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.fs.with_streaming_response.write(
-            id="id",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             content="content",
             path="path",
         ) as response:

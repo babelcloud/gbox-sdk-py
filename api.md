@@ -79,3 +79,18 @@ Methods:
 
 - <code title="get /boxes/{id}/browser/connect-url/cdp">client.v1.boxes.browser.<a href="./src/gbox_sdk/resources/v1/boxes/browser.py">cdp_url</a>(id) -> str</code>
 - <code title="get /boxes/{id}/browser/connect-url">client.v1.boxes.browser.<a href="./src/gbox_sdk/resources/v1/boxes/browser.py">connect_url</a>(id) -> <a href="./src/gbox_sdk/types/v1/boxes/browser_connect_url_response.py">BrowserConnectURLResponse</a></code>
+
+### Android
+
+Types:
+
+```python
+from gbox_sdk.types.v1.boxes import AndroidApp, AndroidListResponse
+```
+
+Methods:
+
+- <code title="get /boxes/{id}/android/apps">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">list</a>(id) -> <a href="./src/gbox_sdk/types/v1/boxes/android_list_response.py">AndroidListResponse</a></code>
+- <code title="get /boxes/{id}/android/apps/{packageName}">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">get</a>(package_name, \*, id) -> <a href="./src/gbox_sdk/types/v1/boxes/android_app.py">AndroidApp</a></code>
+- <code title="post /boxes/{id}/android/apps">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">install</a>(id, \*\*<a href="src/gbox_sdk/types/v1/boxes/android_install_params.py">params</a>) -> None</code>
+- <code title="delete /boxes/{id}/android/apps/{packageName}">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">uninstall</a>(package_name, \*, id) -> None</code>

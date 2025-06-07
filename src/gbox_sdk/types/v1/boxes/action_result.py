@@ -22,15 +22,15 @@ class ScreenshotHighlight(BaseModel):
 
 class Screenshot(BaseModel):
     after: ScreenshotAfter
-    """URI of the screenshot after the action"""
+    """Screenshot taken after action execution"""
 
     before: ScreenshotBefore
-    """URI of the screenshot before the action"""
+    """Screenshot taken before action execution"""
 
     highlight: ScreenshotHighlight
-    """URI of the screenshot before the action with highlight"""
+    """Screenshot with action highlight"""
 
 
 class ActionResult(BaseModel):
     screenshot: Screenshot
-    """screenshot"""
+    """Complete screenshot result with highlight, before and after images"""

@@ -33,7 +33,7 @@ class ConfigResolution(BaseModel):
 
 class Config(BaseModel):
     browser: ConfigBrowser
-    """Browser configuration"""
+    """Linux browser configuration settings"""
 
     cpu: float
     """CPU cores allocated to the box"""
@@ -48,10 +48,10 @@ class Config(BaseModel):
     """Memory allocated to the box in MB"""
 
     os: ConfigOs
-    """Operating system configuration"""
+    """Linux operating system configuration"""
 
     resolution: ConfigResolution
-    """Resolution of the box"""
+    """Box display resolution configuration"""
 
     storage: float
     """Storage allocated to the box in GB."""
@@ -65,7 +65,7 @@ class LinuxBox(BaseModel):
     """Unique identifier for the box"""
 
     config: Config
-    """Configuration for a Linux box instance"""
+    """Complete configuration for Linux box instance"""
 
     created_at: datetime = FieldInfo(alias="createdAt")
     """Creation timestamp of the box"""

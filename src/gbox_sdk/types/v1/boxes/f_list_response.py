@@ -44,4 +44,4 @@ Data: TypeAlias = Union[DataFile, DataDir]
 
 class FListResponse(BaseModel):
     data: List[Data]
-    """A box instance that can be either Linux or Android type"""
+    """Array of files and directories"""

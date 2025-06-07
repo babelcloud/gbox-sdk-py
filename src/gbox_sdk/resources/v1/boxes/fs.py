@@ -57,6 +57,8 @@ class FsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FListResponse:
         """
+        List box files
+
         Args:
           path: Path to the directory
 
@@ -103,6 +105,8 @@ class FsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FReadResponse:
         """
+        Read box file
+
         Args:
           path: Path to the file
 
@@ -142,6 +146,8 @@ class FsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FWriteResponse:
         """
+        Write box file
+
         Args:
           content: Content of the file
 
@@ -207,6 +213,8 @@ class AsyncFsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FListResponse:
         """
+        List box files
+
         Args:
           path: Path to the directory
 
@@ -253,6 +261,8 @@ class AsyncFsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FReadResponse:
         """
+        Read box file
+
         Args:
           path: Path to the file
 
@@ -292,6 +302,8 @@ class AsyncFsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FWriteResponse:
         """
+        Write box file
+
         Args:
           content: Content of the file
 

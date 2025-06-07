@@ -41,11 +41,17 @@ class TestBoxes:
         box = client.v1.boxes.create(
             type="linux",
             config={
-                "envs": {},
-                "expires_in": "expiresIn",
-                "labels": {},
+                "envs": {
+                    "DEBUG": "true",
+                    "API_URL": "https://api.example.com",
+                },
+                "expires_in": "10m",
+                "labels": {
+                    "project": "web-automation",
+                    "environment": "testing",
+                },
             },
-            api_timeout="timeout",
+            api_timeout="30s",
             wait=True,
         )
         assert_matches_type(BoxCreateResponse, box, path=["response"])
@@ -90,11 +96,17 @@ class TestBoxes:
         box = client.v1.boxes.create(
             type="android",
             config={
-                "envs": {},
-                "expires_in": "expiresIn",
-                "labels": {},
+                "envs": {
+                    "ANDROID_LOG_TAGS": "*:V",
+                    "ADB_TRACE": "all",
+                },
+                "expires_in": "15m",
+                "labels": {
+                    "app": "mobile-testing",
+                    "version": "v1.0",
+                },
             },
-            api_timeout="timeout",
+            api_timeout="30s",
             wait=True,
         )
         assert_matches_type(BoxCreateResponse, box, path=["response"])
@@ -177,9 +189,9 @@ class TestBoxes:
     @parametrize
     def test_method_list_with_all_params(self, client: GboxClient) -> None:
         box = client.v1.boxes.list(
-            page=0,
-            page_size=0,
-            status="status",
+            page=1,
+            page_size=10,
+            status="running",
         )
         assert_matches_type(BoxListResponse, box, path=["response"])
 
@@ -218,7 +230,7 @@ class TestBoxes:
     def test_method_delete_with_all_params(self, client: GboxClient) -> None:
         box = client.v1.boxes.delete(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            api_timeout="timeout",
+            api_timeout="30s",
             wait=True,
         )
         assert box is None
@@ -271,11 +283,17 @@ class TestBoxes:
         box = client.v1.boxes.create_android(
             type="android",
             config={
-                "envs": {},
-                "expires_in": "expiresIn",
-                "labels": {},
+                "envs": {
+                    "ANDROID_LOG_TAGS": "*:V",
+                    "ADB_TRACE": "all",
+                },
+                "expires_in": "15m",
+                "labels": {
+                    "app": "mobile-testing",
+                    "version": "v1.0",
+                },
             },
-            api_timeout="timeout",
+            api_timeout="30s",
             wait=True,
         )
         assert_matches_type(AndroidBox, box, path=["response"])
@@ -320,11 +338,17 @@ class TestBoxes:
         box = client.v1.boxes.create_linux(
             type="linux",
             config={
-                "envs": {},
-                "expires_in": "expiresIn",
-                "labels": {},
+                "envs": {
+                    "DEBUG": "true",
+                    "API_URL": "https://api.example.com",
+                },
+                "expires_in": "10m",
+                "labels": {
+                    "project": "web-automation",
+                    "environment": "testing",
+                },
             },
-            api_timeout="timeout",
+            api_timeout="30s",
             wait=True,
         )
         assert_matches_type(LinuxBox, box, path=["response"])
@@ -370,9 +394,12 @@ class TestBoxes:
         box = client.v1.boxes.execute_commands(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             commands=["ls", "-l"],
-            envs={},
+            envs={
+                "PATH": "/usr/bin:/bin",
+                "NODE_ENV": "production",
+            },
             api_timeout="30s",
-            working_dir="workingDir",
+            working_dir="/home/user/projects",
         )
         assert_matches_type(BoxExecuteCommandsResponse, box, path=["response"])
 
@@ -428,11 +455,14 @@ class TestBoxes:
         box = client.v1.boxes.run_code(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             code='print("Hello, World!")',
-            argv=["string"],
-            envs={},
-            language="bash",
+            argv=["-v", "--help"],
+            envs={
+                "PYTHONPATH": "/usr/lib/python3",
+                "DEBUG": "true",
+            },
+            language="python3",
             api_timeout="timeout",
-            working_dir="workingDir",
+            working_dir="/home/user/scripts",
         )
         assert_matches_type(BoxRunCodeResponse, box, path=["response"])
 
@@ -575,11 +605,17 @@ class TestAsyncBoxes:
         box = await async_client.v1.boxes.create(
             type="linux",
             config={
-                "envs": {},
-                "expires_in": "expiresIn",
-                "labels": {},
+                "envs": {
+                    "DEBUG": "true",
+                    "API_URL": "https://api.example.com",
+                },
+                "expires_in": "10m",
+                "labels": {
+                    "project": "web-automation",
+                    "environment": "testing",
+                },
             },
-            api_timeout="timeout",
+            api_timeout="30s",
             wait=True,
         )
         assert_matches_type(BoxCreateResponse, box, path=["response"])
@@ -624,11 +660,17 @@ class TestAsyncBoxes:
         box = await async_client.v1.boxes.create(
             type="android",
             config={
-                "envs": {},
-                "expires_in": "expiresIn",
-                "labels": {},
+                "envs": {
+                    "ANDROID_LOG_TAGS": "*:V",
+                    "ADB_TRACE": "all",
+                },
+                "expires_in": "15m",
+                "labels": {
+                    "app": "mobile-testing",
+                    "version": "v1.0",
+                },
             },
-            api_timeout="timeout",
+            api_timeout="30s",
             wait=True,
         )
         assert_matches_type(BoxCreateResponse, box, path=["response"])
@@ -711,9 +753,9 @@ class TestAsyncBoxes:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.list(
-            page=0,
-            page_size=0,
-            status="status",
+            page=1,
+            page_size=10,
+            status="running",
         )
         assert_matches_type(BoxListResponse, box, path=["response"])
 
@@ -752,7 +794,7 @@ class TestAsyncBoxes:
     async def test_method_delete_with_all_params(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.delete(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            api_timeout="timeout",
+            api_timeout="30s",
             wait=True,
         )
         assert box is None
@@ -805,11 +847,17 @@ class TestAsyncBoxes:
         box = await async_client.v1.boxes.create_android(
             type="android",
             config={
-                "envs": {},
-                "expires_in": "expiresIn",
-                "labels": {},
+                "envs": {
+                    "ANDROID_LOG_TAGS": "*:V",
+                    "ADB_TRACE": "all",
+                },
+                "expires_in": "15m",
+                "labels": {
+                    "app": "mobile-testing",
+                    "version": "v1.0",
+                },
             },
-            api_timeout="timeout",
+            api_timeout="30s",
             wait=True,
         )
         assert_matches_type(AndroidBox, box, path=["response"])
@@ -854,11 +902,17 @@ class TestAsyncBoxes:
         box = await async_client.v1.boxes.create_linux(
             type="linux",
             config={
-                "envs": {},
-                "expires_in": "expiresIn",
-                "labels": {},
+                "envs": {
+                    "DEBUG": "true",
+                    "API_URL": "https://api.example.com",
+                },
+                "expires_in": "10m",
+                "labels": {
+                    "project": "web-automation",
+                    "environment": "testing",
+                },
             },
-            api_timeout="timeout",
+            api_timeout="30s",
             wait=True,
         )
         assert_matches_type(LinuxBox, box, path=["response"])
@@ -904,9 +958,12 @@ class TestAsyncBoxes:
         box = await async_client.v1.boxes.execute_commands(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             commands=["ls", "-l"],
-            envs={},
+            envs={
+                "PATH": "/usr/bin:/bin",
+                "NODE_ENV": "production",
+            },
             api_timeout="30s",
-            working_dir="workingDir",
+            working_dir="/home/user/projects",
         )
         assert_matches_type(BoxExecuteCommandsResponse, box, path=["response"])
 
@@ -962,11 +1019,14 @@ class TestAsyncBoxes:
         box = await async_client.v1.boxes.run_code(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             code='print("Hello, World!")',
-            argv=["string"],
-            envs={},
-            language="bash",
+            argv=["-v", "--help"],
+            envs={
+                "PYTHONPATH": "/usr/lib/python3",
+                "DEBUG": "true",
+            },
+            language="python3",
             api_timeout="timeout",
-            working_dir="workingDir",
+            working_dir="/home/user/scripts",
         )
         assert_matches_type(BoxRunCodeResponse, box, path=["response"])
 

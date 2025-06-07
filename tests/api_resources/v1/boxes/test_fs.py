@@ -26,7 +26,7 @@ class TestFs:
     def test_method_list(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.list(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            path="path",
+            path="/home/user/documents",
         )
         assert_matches_type(FListResponse, f, path=["response"])
 
@@ -35,8 +35,8 @@ class TestFs:
     def test_method_list_with_all_params(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.list(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            path="path",
-            depth=0,
+            path="/home/user/documents",
+            depth=2,
         )
         assert_matches_type(FListResponse, f, path=["response"])
 
@@ -45,7 +45,7 @@ class TestFs:
     def test_raw_response_list(self, client: GboxClient) -> None:
         response = client.v1.boxes.fs.with_raw_response.list(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            path="path",
+            path="/home/user/documents",
         )
 
         assert response.is_closed is True
@@ -58,7 +58,7 @@ class TestFs:
     def test_streaming_response_list(self, client: GboxClient) -> None:
         with client.v1.boxes.fs.with_streaming_response.list(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            path="path",
+            path="/home/user/documents",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -74,7 +74,7 @@ class TestFs:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.v1.boxes.fs.with_raw_response.list(
                 id="",
-                path="path",
+                path="/home/user/documents",
             )
 
     @pytest.mark.skip()
@@ -82,7 +82,7 @@ class TestFs:
     def test_method_read(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.read(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            path="path",
+            path="/home/user/documents/config.json",
         )
         assert_matches_type(FReadResponse, f, path=["response"])
 
@@ -91,7 +91,7 @@ class TestFs:
     def test_raw_response_read(self, client: GboxClient) -> None:
         response = client.v1.boxes.fs.with_raw_response.read(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            path="path",
+            path="/home/user/documents/config.json",
         )
 
         assert response.is_closed is True
@@ -104,7 +104,7 @@ class TestFs:
     def test_streaming_response_read(self, client: GboxClient) -> None:
         with client.v1.boxes.fs.with_streaming_response.read(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            path="path",
+            path="/home/user/documents/config.json",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -120,7 +120,7 @@ class TestFs:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.v1.boxes.fs.with_raw_response.read(
                 id="",
-                path="path",
+                path="/home/user/documents/config.json",
             )
 
     @pytest.mark.skip()
@@ -128,8 +128,8 @@ class TestFs:
     def test_method_write(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.write(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            content="content",
-            path="path",
+            content="Hello, World!\nThis is file content.",
+            path="/home/user/documents/output.txt",
         )
         assert_matches_type(FWriteResponse, f, path=["response"])
 
@@ -138,8 +138,8 @@ class TestFs:
     def test_raw_response_write(self, client: GboxClient) -> None:
         response = client.v1.boxes.fs.with_raw_response.write(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            content="content",
-            path="path",
+            content="Hello, World!\nThis is file content.",
+            path="/home/user/documents/output.txt",
         )
 
         assert response.is_closed is True
@@ -152,8 +152,8 @@ class TestFs:
     def test_streaming_response_write(self, client: GboxClient) -> None:
         with client.v1.boxes.fs.with_streaming_response.write(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            content="content",
-            path="path",
+            content="Hello, World!\nThis is file content.",
+            path="/home/user/documents/output.txt",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -169,8 +169,8 @@ class TestFs:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.v1.boxes.fs.with_raw_response.write(
                 id="",
-                content="content",
-                path="path",
+                content="Hello, World!\nThis is file content.",
+                path="/home/user/documents/output.txt",
             )
 
 
@@ -182,7 +182,7 @@ class TestAsyncFs:
     async def test_method_list(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.list(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            path="path",
+            path="/home/user/documents",
         )
         assert_matches_type(FListResponse, f, path=["response"])
 
@@ -191,8 +191,8 @@ class TestAsyncFs:
     async def test_method_list_with_all_params(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.list(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            path="path",
-            depth=0,
+            path="/home/user/documents",
+            depth=2,
         )
         assert_matches_type(FListResponse, f, path=["response"])
 
@@ -201,7 +201,7 @@ class TestAsyncFs:
     async def test_raw_response_list(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.fs.with_raw_response.list(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            path="path",
+            path="/home/user/documents",
         )
 
         assert response.is_closed is True
@@ -214,7 +214,7 @@ class TestAsyncFs:
     async def test_streaming_response_list(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.fs.with_streaming_response.list(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            path="path",
+            path="/home/user/documents",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -230,7 +230,7 @@ class TestAsyncFs:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.v1.boxes.fs.with_raw_response.list(
                 id="",
-                path="path",
+                path="/home/user/documents",
             )
 
     @pytest.mark.skip()
@@ -238,7 +238,7 @@ class TestAsyncFs:
     async def test_method_read(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.read(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            path="path",
+            path="/home/user/documents/config.json",
         )
         assert_matches_type(FReadResponse, f, path=["response"])
 
@@ -247,7 +247,7 @@ class TestAsyncFs:
     async def test_raw_response_read(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.fs.with_raw_response.read(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            path="path",
+            path="/home/user/documents/config.json",
         )
 
         assert response.is_closed is True
@@ -260,7 +260,7 @@ class TestAsyncFs:
     async def test_streaming_response_read(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.fs.with_streaming_response.read(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            path="path",
+            path="/home/user/documents/config.json",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -276,7 +276,7 @@ class TestAsyncFs:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.v1.boxes.fs.with_raw_response.read(
                 id="",
-                path="path",
+                path="/home/user/documents/config.json",
             )
 
     @pytest.mark.skip()
@@ -284,8 +284,8 @@ class TestAsyncFs:
     async def test_method_write(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.write(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            content="content",
-            path="path",
+            content="Hello, World!\nThis is file content.",
+            path="/home/user/documents/output.txt",
         )
         assert_matches_type(FWriteResponse, f, path=["response"])
 
@@ -294,8 +294,8 @@ class TestAsyncFs:
     async def test_raw_response_write(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.fs.with_raw_response.write(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            content="content",
-            path="path",
+            content="Hello, World!\nThis is file content.",
+            path="/home/user/documents/output.txt",
         )
 
         assert response.is_closed is True
@@ -308,8 +308,8 @@ class TestAsyncFs:
     async def test_streaming_response_write(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.fs.with_streaming_response.write(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            content="content",
-            path="path",
+            content="Hello, World!\nThis is file content.",
+            path="/home/user/documents/output.txt",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -325,6 +325,6 @@ class TestAsyncFs:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.v1.boxes.fs.with_raw_response.write(
                 id="",
-                content="content",
-                path="path",
+                content="Hello, World!\nThis is file content.",
+                path="/home/user/documents/output.txt",
             )

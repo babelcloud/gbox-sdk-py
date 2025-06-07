@@ -130,7 +130,7 @@ class BoxesResource(SyncAPIResource):
         Args:
           type: Box type is Linux
 
-          config: Configuration for a Linux box instance
+          config: Configuration for a box instance
 
           api_timeout: Timeout for the box operation to be completed, default is 30s
 
@@ -167,7 +167,7 @@ class BoxesResource(SyncAPIResource):
         Args:
           type: Box type is Android
 
-          config: Configuration for an Android box instance
+          config: Configuration for a box instance
 
           api_timeout: Timeout for the box operation to be completed, default is 30s
 
@@ -373,7 +373,7 @@ class BoxesResource(SyncAPIResource):
         Args:
           type: Box type is Android
 
-          config: Configuration for an Android box instance
+          config: Configuration for a box instance
 
           api_timeout: Timeout for the box operation to be completed, default is 30s
 
@@ -424,7 +424,7 @@ class BoxesResource(SyncAPIResource):
         Args:
           type: Box type is Linux
 
-          config: Configuration for a Linux box instance
+          config: Configuration for a box instance
 
           api_timeout: Timeout for the box operation to be completed, default is 30s
 
@@ -470,7 +470,9 @@ class BoxesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxExecuteCommandsResponse:
-        """Args:
+        """Exec command
+
+        Args:
           commands: The command to run.
 
         Can be a single string or an array of strings
@@ -525,12 +527,13 @@ class BoxesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxRunCodeResponse:
-        """Args:
+        """
+        Run code on the box
+
+        Args:
           code: The code to run
 
-          argv: The arguments to run the code.
-
-        e.g. ["-h"]
+          argv: The arguments to run the code. e.g. ["-h"]
 
           envs: The environment variables to run the code
 
@@ -699,7 +702,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         Args:
           type: Box type is Linux
 
-          config: Configuration for a Linux box instance
+          config: Configuration for a box instance
 
           api_timeout: Timeout for the box operation to be completed, default is 30s
 
@@ -736,7 +739,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         Args:
           type: Box type is Android
 
-          config: Configuration for an Android box instance
+          config: Configuration for a box instance
 
           api_timeout: Timeout for the box operation to be completed, default is 30s
 
@@ -942,7 +945,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         Args:
           type: Box type is Android
 
-          config: Configuration for an Android box instance
+          config: Configuration for a box instance
 
           api_timeout: Timeout for the box operation to be completed, default is 30s
 
@@ -993,7 +996,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         Args:
           type: Box type is Linux
 
-          config: Configuration for a Linux box instance
+          config: Configuration for a box instance
 
           api_timeout: Timeout for the box operation to be completed, default is 30s
 
@@ -1039,7 +1042,9 @@ class AsyncBoxesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxExecuteCommandsResponse:
-        """Args:
+        """Exec command
+
+        Args:
           commands: The command to run.
 
         Can be a single string or an array of strings
@@ -1094,12 +1099,13 @@ class AsyncBoxesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxRunCodeResponse:
-        """Args:
+        """
+        Run code on the box
+
+        Args:
           code: The code to run
 
-          argv: The arguments to run the code.
-
-        e.g. ["-h"]
+          argv: The arguments to run the code. e.g. ["-h"]
 
           envs: The environment variables to run the code
 

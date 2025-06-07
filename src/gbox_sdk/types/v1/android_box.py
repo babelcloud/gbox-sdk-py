@@ -33,7 +33,7 @@ class ConfigResolution(BaseModel):
 
 class Config(BaseModel):
     browser: ConfigBrowser
-    """Browser configuration"""
+    """Android browser configuration settings"""
 
     cpu: float
     """CPU cores allocated to the box"""
@@ -51,7 +51,7 @@ class Config(BaseModel):
     """Android operating system configuration"""
 
     resolution: ConfigResolution
-    """Resolution of the box"""
+    """Box display resolution configuration"""
 
     storage: float
     """Storage allocated to the box in GB"""
@@ -65,7 +65,7 @@ class AndroidBox(BaseModel):
     """Unique identifier for the box"""
 
     config: Config
-    """Configuration for an Android box instance"""
+    """Complete configuration for Android box instance"""
 
     created_at: datetime = FieldInfo(alias="createdAt")
     """Creation timestamp of the box"""

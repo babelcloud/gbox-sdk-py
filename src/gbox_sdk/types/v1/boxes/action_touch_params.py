@@ -28,7 +28,7 @@ class PointStart(TypedDict, total=False):
 
 class Point(TypedDict, total=False):
     start: Required[PointStart]
-    """Starting position for touch"""
+    """Initial touch point position"""
 
     actions: Iterable[object]
     """Sequence of actions to perform after initial touch"""

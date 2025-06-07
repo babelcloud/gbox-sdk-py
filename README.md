@@ -89,7 +89,17 @@ client = GboxClient()
 
 box = client.v1.boxes.create(
     type="linux",
-    config={},
+    config={
+        "envs": {
+            "DEBUG": "true",
+            "API_URL": "https://api.example.com",
+        },
+        "expires_in": "10m",
+        "labels": {
+            "project": "web-automation",
+            "environment": "testing",
+        },
+    },
 )
 print(box.config)
 ```

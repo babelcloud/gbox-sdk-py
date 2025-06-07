@@ -71,6 +71,8 @@ class ActionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionResult:
         """
+        Click
+
         Args:
           x: X coordinate of the click
 
@@ -125,6 +127,8 @@ class ActionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionResult:
         """
+        Drag
+
         Args:
           path: Path of the drag action as a series of coordinates
 
@@ -173,6 +177,8 @@ class ActionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionResult:
         """
+        Move to position
+
         Args:
           x: X coordinate to move to
 
@@ -220,6 +226,8 @@ class ActionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionResult:
         """
+        Press key
+
         Args:
           keys: Array of keys to press
 
@@ -264,8 +272,10 @@ class ActionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionScreenshotResponse:
         """
+        Take screenshot
+
         Args:
-          clip: clip of the screenshot
+          clip: Clipping region for screenshot capture
 
           output_format: Type of the URI
 
@@ -311,6 +321,8 @@ class ActionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionResult:
         """
+        Scroll
+
         Args:
           scroll_x: Horizontal scroll amount
 
@@ -364,6 +376,8 @@ class ActionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionResult:
         """
+        Touch
+
         Args:
           points: Array of touch points and their actions
 
@@ -408,6 +422,8 @@ class ActionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionResult:
         """
+        Type text
+
         Args:
           text: Text to type
 
@@ -476,6 +492,8 @@ class AsyncActionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionResult:
         """
+        Click
+
         Args:
           x: X coordinate of the click
 
@@ -530,6 +548,8 @@ class AsyncActionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionResult:
         """
+        Drag
+
         Args:
           path: Path of the drag action as a series of coordinates
 
@@ -578,6 +598,8 @@ class AsyncActionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionResult:
         """
+        Move to position
+
         Args:
           x: X coordinate to move to
 
@@ -625,6 +647,8 @@ class AsyncActionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionResult:
         """
+        Press key
+
         Args:
           keys: Array of keys to press
 
@@ -669,8 +693,10 @@ class AsyncActionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionScreenshotResponse:
         """
+        Take screenshot
+
         Args:
-          clip: clip of the screenshot
+          clip: Clipping region for screenshot capture
 
           output_format: Type of the URI
 
@@ -716,6 +742,8 @@ class AsyncActionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionResult:
         """
+        Scroll
+
         Args:
           scroll_x: Horizontal scroll amount
 
@@ -769,6 +797,8 @@ class AsyncActionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionResult:
         """
+        Touch
+
         Args:
           points: Array of touch points and their actions
 
@@ -813,6 +843,8 @@ class AsyncActionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionResult:
         """
+        Type text
+
         Args:
           text: Text to type
 

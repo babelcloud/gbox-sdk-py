@@ -15,7 +15,7 @@ class BoxCreateLinuxParams(TypedDict, total=False):
     """Box type is Linux"""
 
     config: CreateBoxConfigParam
-    """Configuration for a Linux box instance"""
+    """Configuration for a box instance"""
 
     api_timeout: Annotated[str, PropertyInfo(alias="timeout")]
     """Timeout for the box operation to be completed, default is 30s"""

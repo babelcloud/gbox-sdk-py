@@ -14,7 +14,7 @@ class CreateAndroidBoxParam(TypedDict, total=False):
     """Box type is Android"""
 
     config: CreateBoxConfigParam
-    """Configuration for an Android box instance"""
+    """Configuration for a box instance"""
 
     timeout: str
     """Timeout for the box operation to be completed, default is 30s"""

@@ -38,7 +38,7 @@ class TestActions:
             x=100,
             y=100,
             button="left",
-            double=True,
+            double=False,
             output_format="base64",
         )
         assert_matches_type(ActionResult, action, path=["response"])
@@ -116,7 +116,7 @@ class TestActions:
                     "y": 200,
                 },
             ],
-            duration="duration",
+            duration="50ms",
             output_format="base64",
         )
         assert_matches_type(ActionResult, action, path=["response"])
@@ -316,10 +316,10 @@ class TestActions:
         action = client.v1.boxes.actions.screenshot(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             clip={
-                "height": 0,
-                "width": 0,
-                "x": 0,
-                "y": 0,
+                "height": 600,
+                "width": 800,
+                "x": 100,
+                "y": 50,
             },
             output_format="base64",
         )
@@ -438,8 +438,8 @@ class TestActions:
             points=[
                 {
                     "start": {
-                        "x": 0,
-                        "y": 0,
+                        "x": 100,
+                        "y": 150,
                     }
                 }
             ],
@@ -454,10 +454,17 @@ class TestActions:
             points=[
                 {
                     "start": {
-                        "x": 0,
-                        "y": 0,
+                        "x": 100,
+                        "y": 150,
                     },
-                    "actions": [{}],
+                    "actions": [
+                        {
+                            "x": 400,
+                            "y": 300,
+                            "duration": "200ms",
+                        },
+                        {"duration": "500ms"},
+                    ],
                 }
             ],
             output_format="base64",
@@ -472,8 +479,8 @@ class TestActions:
             points=[
                 {
                     "start": {
-                        "x": 0,
-                        "y": 0,
+                        "x": 100,
+                        "y": 150,
                     }
                 }
             ],
@@ -492,8 +499,8 @@ class TestActions:
             points=[
                 {
                     "start": {
-                        "x": 0,
-                        "y": 0,
+                        "x": 100,
+                        "y": 150,
                     }
                 }
             ],
@@ -515,8 +522,8 @@ class TestActions:
                 points=[
                     {
                         "start": {
-                            "x": 0,
-                            "y": 0,
+                            "x": 100,
+                            "y": 150,
                         }
                     }
                 ],
@@ -600,7 +607,7 @@ class TestAsyncActions:
             x=100,
             y=100,
             button="left",
-            double=True,
+            double=False,
             output_format="base64",
         )
         assert_matches_type(ActionResult, action, path=["response"])
@@ -678,7 +685,7 @@ class TestAsyncActions:
                     "y": 200,
                 },
             ],
-            duration="duration",
+            duration="50ms",
             output_format="base64",
         )
         assert_matches_type(ActionResult, action, path=["response"])
@@ -878,10 +885,10 @@ class TestAsyncActions:
         action = await async_client.v1.boxes.actions.screenshot(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             clip={
-                "height": 0,
-                "width": 0,
-                "x": 0,
-                "y": 0,
+                "height": 600,
+                "width": 800,
+                "x": 100,
+                "y": 50,
             },
             output_format="base64",
         )
@@ -1000,8 +1007,8 @@ class TestAsyncActions:
             points=[
                 {
                     "start": {
-                        "x": 0,
-                        "y": 0,
+                        "x": 100,
+                        "y": 150,
                     }
                 }
             ],
@@ -1016,10 +1023,17 @@ class TestAsyncActions:
             points=[
                 {
                     "start": {
-                        "x": 0,
-                        "y": 0,
+                        "x": 100,
+                        "y": 150,
                     },
-                    "actions": [{}],
+                    "actions": [
+                        {
+                            "x": 400,
+                            "y": 300,
+                            "duration": "200ms",
+                        },
+                        {"duration": "500ms"},
+                    ],
                 }
             ],
             output_format="base64",
@@ -1034,8 +1048,8 @@ class TestAsyncActions:
             points=[
                 {
                     "start": {
-                        "x": 0,
-                        "y": 0,
+                        "x": 100,
+                        "y": 150,
                     }
                 }
             ],
@@ -1054,8 +1068,8 @@ class TestAsyncActions:
             points=[
                 {
                     "start": {
-                        "x": 0,
-                        "y": 0,
+                        "x": 100,
+                        "y": 150,
                     }
                 }
             ],
@@ -1077,8 +1091,8 @@ class TestAsyncActions:
                 points=[
                     {
                         "start": {
-                            "x": 0,
-                            "y": 0,
+                            "x": 100,
+                            "y": 150,
                         }
                     }
                 ],

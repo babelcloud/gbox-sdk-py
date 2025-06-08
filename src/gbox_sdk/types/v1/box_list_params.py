@@ -20,3 +20,6 @@ class BoxListParams(TypedDict, total=False):
     """
     Filter boxes by their current status (pending, running, stopped, error, deleted)
     """
+
+    type: str
+    """Filter boxes by their type (linux, android etc.) , default is all"""

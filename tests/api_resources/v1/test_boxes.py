@@ -15,7 +15,6 @@ from gbox_sdk.types.v1 import (
     BoxListResponse,
     BoxStopResponse,
     BoxStartResponse,
-    BoxCreateResponse,
     BoxRunCodeResponse,
     BoxRetrieveResponse,
     BoxExecuteCommandsResponse,
@@ -26,116 +25,6 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 class TestBoxes:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_create_overload_1(self, client: GboxClient) -> None:
-        box = client.v1.boxes.create(
-            type="linux",
-        )
-        assert_matches_type(BoxCreateResponse, box, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_create_with_all_params_overload_1(self, client: GboxClient) -> None:
-        box = client.v1.boxes.create(
-            type="linux",
-            config={
-                "envs": {
-                    "DEBUG": "true",
-                    "API_URL": "https://api.example.com",
-                },
-                "expires_in": "10m",
-                "labels": {
-                    "project": "web-automation",
-                    "environment": "testing",
-                },
-            },
-            api_timeout="30s",
-            wait=True,
-        )
-        assert_matches_type(BoxCreateResponse, box, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_create_overload_1(self, client: GboxClient) -> None:
-        response = client.v1.boxes.with_raw_response.create(
-            type="linux",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        box = response.parse()
-        assert_matches_type(BoxCreateResponse, box, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_create_overload_1(self, client: GboxClient) -> None:
-        with client.v1.boxes.with_streaming_response.create(
-            type="linux",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            box = response.parse()
-            assert_matches_type(BoxCreateResponse, box, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_create_overload_2(self, client: GboxClient) -> None:
-        box = client.v1.boxes.create(
-            type="android",
-        )
-        assert_matches_type(BoxCreateResponse, box, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_create_with_all_params_overload_2(self, client: GboxClient) -> None:
-        box = client.v1.boxes.create(
-            type="android",
-            config={
-                "envs": {
-                    "ANDROID_LOG_TAGS": "*:V",
-                    "ADB_TRACE": "all",
-                },
-                "expires_in": "15m",
-                "labels": {
-                    "app": "mobile-testing",
-                    "version": "v1.0",
-                },
-            },
-            api_timeout="30s",
-            wait=True,
-        )
-        assert_matches_type(BoxCreateResponse, box, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_create_overload_2(self, client: GboxClient) -> None:
-        response = client.v1.boxes.with_raw_response.create(
-            type="android",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        box = response.parse()
-        assert_matches_type(BoxCreateResponse, box, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_create_overload_2(self, client: GboxClient) -> None:
-        with client.v1.boxes.with_streaming_response.create(
-            type="android",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            box = response.parse()
-            assert_matches_type(BoxCreateResponse, box, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
@@ -192,6 +81,7 @@ class TestBoxes:
             page=1,
             page_size=10,
             status="running",
+            type="linux",
         )
         assert_matches_type(BoxListResponse, box, path=["response"])
 
@@ -272,16 +162,13 @@ class TestBoxes:
     @pytest.mark.skip()
     @parametrize
     def test_method_create_android(self, client: GboxClient) -> None:
-        box = client.v1.boxes.create_android(
-            type="android",
-        )
+        box = client.v1.boxes.create_android()
         assert_matches_type(AndroidBox, box, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_method_create_android_with_all_params(self, client: GboxClient) -> None:
         box = client.v1.boxes.create_android(
-            type="android",
             config={
                 "envs": {
                     "ANDROID_LOG_TAGS": "*:V",
@@ -301,9 +188,7 @@ class TestBoxes:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_create_android(self, client: GboxClient) -> None:
-        response = client.v1.boxes.with_raw_response.create_android(
-            type="android",
-        )
+        response = client.v1.boxes.with_raw_response.create_android()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -313,9 +198,7 @@ class TestBoxes:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_create_android(self, client: GboxClient) -> None:
-        with client.v1.boxes.with_streaming_response.create_android(
-            type="android",
-        ) as response:
+        with client.v1.boxes.with_streaming_response.create_android() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -327,16 +210,13 @@ class TestBoxes:
     @pytest.mark.skip()
     @parametrize
     def test_method_create_linux(self, client: GboxClient) -> None:
-        box = client.v1.boxes.create_linux(
-            type="linux",
-        )
+        box = client.v1.boxes.create_linux()
         assert_matches_type(LinuxBox, box, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_method_create_linux_with_all_params(self, client: GboxClient) -> None:
         box = client.v1.boxes.create_linux(
-            type="linux",
             config={
                 "envs": {
                     "DEBUG": "true",
@@ -356,9 +236,7 @@ class TestBoxes:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_create_linux(self, client: GboxClient) -> None:
-        response = client.v1.boxes.with_raw_response.create_linux(
-            type="linux",
-        )
+        response = client.v1.boxes.with_raw_response.create_linux()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -368,9 +246,7 @@ class TestBoxes:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_create_linux(self, client: GboxClient) -> None:
-        with client.v1.boxes.with_streaming_response.create_linux(
-            type="linux",
-        ) as response:
+        with client.v1.boxes.with_streaming_response.create_linux() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -507,7 +383,17 @@ class TestBoxes:
     @parametrize
     def test_method_start(self, client: GboxClient) -> None:
         box = client.v1.boxes.start(
-            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert_matches_type(BoxStartResponse, box, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_start_with_all_params(self, client: GboxClient) -> None:
+        box = client.v1.boxes.start(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            api_timeout="30s",
+            wait=True,
         )
         assert_matches_type(BoxStartResponse, box, path=["response"])
 
@@ -515,7 +401,7 @@ class TestBoxes:
     @parametrize
     def test_raw_response_start(self, client: GboxClient) -> None:
         response = client.v1.boxes.with_raw_response.start(
-            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
@@ -527,7 +413,7 @@ class TestBoxes:
     @parametrize
     def test_streaming_response_start(self, client: GboxClient) -> None:
         with client.v1.boxes.with_streaming_response.start(
-            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -542,14 +428,24 @@ class TestBoxes:
     def test_path_params_start(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.v1.boxes.with_raw_response.start(
-                "",
+                id="",
             )
 
     @pytest.mark.skip()
     @parametrize
     def test_method_stop(self, client: GboxClient) -> None:
         box = client.v1.boxes.stop(
-            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert_matches_type(BoxStopResponse, box, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_stop_with_all_params(self, client: GboxClient) -> None:
+        box = client.v1.boxes.stop(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            api_timeout="30s",
+            wait=True,
         )
         assert_matches_type(BoxStopResponse, box, path=["response"])
 
@@ -557,7 +453,7 @@ class TestBoxes:
     @parametrize
     def test_raw_response_stop(self, client: GboxClient) -> None:
         response = client.v1.boxes.with_raw_response.stop(
-            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
@@ -569,7 +465,7 @@ class TestBoxes:
     @parametrize
     def test_streaming_response_stop(self, client: GboxClient) -> None:
         with client.v1.boxes.with_streaming_response.stop(
-            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -584,122 +480,12 @@ class TestBoxes:
     def test_path_params_stop(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.v1.boxes.with_raw_response.stop(
-                "",
+                id="",
             )
 
 
 class TestAsyncBoxes:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_create_overload_1(self, async_client: AsyncGboxClient) -> None:
-        box = await async_client.v1.boxes.create(
-            type="linux",
-        )
-        assert_matches_type(BoxCreateResponse, box, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_create_with_all_params_overload_1(self, async_client: AsyncGboxClient) -> None:
-        box = await async_client.v1.boxes.create(
-            type="linux",
-            config={
-                "envs": {
-                    "DEBUG": "true",
-                    "API_URL": "https://api.example.com",
-                },
-                "expires_in": "10m",
-                "labels": {
-                    "project": "web-automation",
-                    "environment": "testing",
-                },
-            },
-            api_timeout="30s",
-            wait=True,
-        )
-        assert_matches_type(BoxCreateResponse, box, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_create_overload_1(self, async_client: AsyncGboxClient) -> None:
-        response = await async_client.v1.boxes.with_raw_response.create(
-            type="linux",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        box = await response.parse()
-        assert_matches_type(BoxCreateResponse, box, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_create_overload_1(self, async_client: AsyncGboxClient) -> None:
-        async with async_client.v1.boxes.with_streaming_response.create(
-            type="linux",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            box = await response.parse()
-            assert_matches_type(BoxCreateResponse, box, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_create_overload_2(self, async_client: AsyncGboxClient) -> None:
-        box = await async_client.v1.boxes.create(
-            type="android",
-        )
-        assert_matches_type(BoxCreateResponse, box, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_create_with_all_params_overload_2(self, async_client: AsyncGboxClient) -> None:
-        box = await async_client.v1.boxes.create(
-            type="android",
-            config={
-                "envs": {
-                    "ANDROID_LOG_TAGS": "*:V",
-                    "ADB_TRACE": "all",
-                },
-                "expires_in": "15m",
-                "labels": {
-                    "app": "mobile-testing",
-                    "version": "v1.0",
-                },
-            },
-            api_timeout="30s",
-            wait=True,
-        )
-        assert_matches_type(BoxCreateResponse, box, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_create_overload_2(self, async_client: AsyncGboxClient) -> None:
-        response = await async_client.v1.boxes.with_raw_response.create(
-            type="android",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        box = await response.parse()
-        assert_matches_type(BoxCreateResponse, box, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_create_overload_2(self, async_client: AsyncGboxClient) -> None:
-        async with async_client.v1.boxes.with_streaming_response.create(
-            type="android",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            box = await response.parse()
-            assert_matches_type(BoxCreateResponse, box, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
@@ -756,6 +542,7 @@ class TestAsyncBoxes:
             page=1,
             page_size=10,
             status="running",
+            type="linux",
         )
         assert_matches_type(BoxListResponse, box, path=["response"])
 
@@ -836,16 +623,13 @@ class TestAsyncBoxes:
     @pytest.mark.skip()
     @parametrize
     async def test_method_create_android(self, async_client: AsyncGboxClient) -> None:
-        box = await async_client.v1.boxes.create_android(
-            type="android",
-        )
+        box = await async_client.v1.boxes.create_android()
         assert_matches_type(AndroidBox, box, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_create_android_with_all_params(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.create_android(
-            type="android",
             config={
                 "envs": {
                     "ANDROID_LOG_TAGS": "*:V",
@@ -865,9 +649,7 @@ class TestAsyncBoxes:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_create_android(self, async_client: AsyncGboxClient) -> None:
-        response = await async_client.v1.boxes.with_raw_response.create_android(
-            type="android",
-        )
+        response = await async_client.v1.boxes.with_raw_response.create_android()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -877,9 +659,7 @@ class TestAsyncBoxes:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_create_android(self, async_client: AsyncGboxClient) -> None:
-        async with async_client.v1.boxes.with_streaming_response.create_android(
-            type="android",
-        ) as response:
+        async with async_client.v1.boxes.with_streaming_response.create_android() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -891,16 +671,13 @@ class TestAsyncBoxes:
     @pytest.mark.skip()
     @parametrize
     async def test_method_create_linux(self, async_client: AsyncGboxClient) -> None:
-        box = await async_client.v1.boxes.create_linux(
-            type="linux",
-        )
+        box = await async_client.v1.boxes.create_linux()
         assert_matches_type(LinuxBox, box, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_create_linux_with_all_params(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.create_linux(
-            type="linux",
             config={
                 "envs": {
                     "DEBUG": "true",
@@ -920,9 +697,7 @@ class TestAsyncBoxes:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_create_linux(self, async_client: AsyncGboxClient) -> None:
-        response = await async_client.v1.boxes.with_raw_response.create_linux(
-            type="linux",
-        )
+        response = await async_client.v1.boxes.with_raw_response.create_linux()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -932,9 +707,7 @@ class TestAsyncBoxes:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_create_linux(self, async_client: AsyncGboxClient) -> None:
-        async with async_client.v1.boxes.with_streaming_response.create_linux(
-            type="linux",
-        ) as response:
+        async with async_client.v1.boxes.with_streaming_response.create_linux() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -1071,7 +844,17 @@ class TestAsyncBoxes:
     @parametrize
     async def test_method_start(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.start(
-            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert_matches_type(BoxStartResponse, box, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_start_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        box = await async_client.v1.boxes.start(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            api_timeout="30s",
+            wait=True,
         )
         assert_matches_type(BoxStartResponse, box, path=["response"])
 
@@ -1079,7 +862,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_raw_response_start(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.with_raw_response.start(
-            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
@@ -1091,7 +874,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_streaming_response_start(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.with_streaming_response.start(
-            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1106,14 +889,24 @@ class TestAsyncBoxes:
     async def test_path_params_start(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.v1.boxes.with_raw_response.start(
-                "",
+                id="",
             )
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_stop(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.stop(
-            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert_matches_type(BoxStopResponse, box, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_stop_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        box = await async_client.v1.boxes.stop(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            api_timeout="30s",
+            wait=True,
         )
         assert_matches_type(BoxStopResponse, box, path=["response"])
 
@@ -1121,7 +914,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_raw_response_stop(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.with_raw_response.stop(
-            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
@@ -1133,7 +926,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_streaming_response_stop(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.with_streaming_response.stop(
-            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1148,5 +941,5 @@ class TestAsyncBoxes:
     async def test_path_params_stop(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.v1.boxes.with_raw_response.stop(
-                "",
+                id="",
             )

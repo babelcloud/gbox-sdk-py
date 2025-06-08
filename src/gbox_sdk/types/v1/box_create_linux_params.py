@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing_extensions import Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 from .create_box_config_param import CreateBoxConfigParam
@@ -11,9 +11,6 @@ __all__ = ["BoxCreateLinuxParams"]
 
 
 class BoxCreateLinuxParams(TypedDict, total=False):
-    type: Required[Literal["linux"]]
-    """Box type is Linux"""
-
     config: CreateBoxConfigParam
     """Configuration for a box instance"""
 

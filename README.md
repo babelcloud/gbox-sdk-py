@@ -34,8 +34,8 @@ client = GboxClient(
     api_key=os.environ.get("GBOX_API_KEY"),  # This is the default and can be omitted
 )
 
-box = client.v1.boxes.create(
-    type="linux",
+box = client.v1.boxes.retrieve(
+    "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
 )
 ```
 
@@ -59,8 +59,8 @@ client = AsyncGboxClient(
 
 
 async def main() -> None:
-    box = await client.v1.boxes.create(
-        type="linux",
+    box = await client.v1.boxes.retrieve(
+        "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
     )
 
 
@@ -87,21 +87,20 @@ from gbox_sdk import GboxClient
 
 client = GboxClient()
 
-box = client.v1.boxes.create(
-    type="linux",
+android_box = client.v1.boxes.create_android(
     config={
         "envs": {
-            "DEBUG": "true",
-            "API_URL": "https://api.example.com",
+            "ANDROID_LOG_TAGS": "*:V",
+            "ADB_TRACE": "all",
         },
-        "expires_in": "10m",
+        "expires_in": "15m",
         "labels": {
-            "project": "web-automation",
-            "environment": "testing",
+            "app": "mobile-testing",
+            "version": "v1.0",
         },
     },
 )
-print(box.config)
+print(android_box.config)
 ```
 
 ## File uploads
@@ -138,8 +137,8 @@ from gbox_sdk import GboxClient
 client = GboxClient()
 
 try:
-    client.v1.boxes.create(
-        type="linux",
+    client.v1.boxes.retrieve(
+        "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
     )
 except gbox_sdk.APIConnectionError as e:
     print("The server could not be reached")
@@ -183,8 +182,8 @@ client = GboxClient(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).v1.boxes.create(
-    type="linux",
+client.with_options(max_retries=5).v1.boxes.retrieve(
+    "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
 )
 ```
 
@@ -208,8 +207,8 @@ client = GboxClient(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).v1.boxes.create(
-    type="linux",
+client.with_options(timeout=5.0).v1.boxes.retrieve(
+    "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
 )
 ```
 
@@ -251,12 +250,12 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from gbox_sdk import GboxClient
 
 client = GboxClient()
-response = client.v1.boxes.with_raw_response.create(
-    type="linux",
+response = client.v1.boxes.with_raw_response.retrieve(
+    "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
 )
 print(response.headers.get('X-My-Header'))
 
-box = response.parse()  # get the object that `v1.boxes.create()` would have returned
+box = response.parse()  # get the object that `v1.boxes.retrieve()` would have returned
 print(box)
 ```
 
@@ -271,8 +270,8 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.v1.boxes.with_streaming_response.create(
-    type="linux",
+with client.v1.boxes.with_streaming_response.retrieve(
+    "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
 ) as response:
     print(response.headers.get("X-My-Header"))
 

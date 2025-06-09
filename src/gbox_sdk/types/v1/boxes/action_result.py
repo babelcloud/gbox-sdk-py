@@ -2,7 +2,7 @@
 
 from ...._models import BaseModel
 
-__all__ = ["ActionResult", "Screenshot", "ScreenshotAfter", "ScreenshotBefore", "ScreenshotHighlight"]
+__all__ = ["ActionResult", "Screenshot", "ScreenshotAfter", "ScreenshotBefore", "ScreenshotTrace"]
 
 
 class ScreenshotAfter(BaseModel):
@@ -15,9 +15,9 @@ class ScreenshotBefore(BaseModel):
     """URI of the screenshot before the action"""
 
 
-class ScreenshotHighlight(BaseModel):
+class ScreenshotTrace(BaseModel):
     uri: str
-    """URI of the screenshot before the action with highlight"""
+    """URI of the screenshot with operation trace"""
 
 
 class Screenshot(BaseModel):
@@ -27,10 +27,10 @@ class Screenshot(BaseModel):
     before: ScreenshotBefore
     """Screenshot taken before action execution"""
 
-    highlight: ScreenshotHighlight
-    """Screenshot with action highlight"""
+    trace: ScreenshotTrace
+    """Screenshot with action operation trace"""
 
 
 class ActionResult(BaseModel):
     screenshot: Screenshot
-    """Complete screenshot result with highlight, before and after images"""
+    """Complete screenshot result with operation trace, before and after images"""

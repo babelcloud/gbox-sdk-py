@@ -34,9 +34,8 @@ client = GboxClient(
     api_key=os.environ.get("GBOX_API_KEY"),  # This is the default and can be omitted
 )
 
-box = client.v1.boxes.retrieve(
-    "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-)
+android_box = client.v1.boxes.create_android()
+print(android_box.id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -59,9 +58,8 @@ client = AsyncGboxClient(
 
 
 async def main() -> None:
-    box = await client.v1.boxes.retrieve(
-        "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-    )
+    android_box = await client.v1.boxes.create_android()
+    print(android_box.id)
 
 
 asyncio.run(main())
@@ -137,9 +135,7 @@ from gbox_sdk import GboxClient
 client = GboxClient()
 
 try:
-    client.v1.boxes.retrieve(
-        "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-    )
+    client.v1.boxes.create_android()
 except gbox_sdk.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
@@ -182,9 +178,7 @@ client = GboxClient(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).v1.boxes.retrieve(
-    "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-)
+client.with_options(max_retries=5).v1.boxes.create_android()
 ```
 
 ### Timeouts
@@ -207,9 +201,7 @@ client = GboxClient(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).v1.boxes.retrieve(
-    "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-)
+client.with_options(timeout=5.0).v1.boxes.create_android()
 ```
 
 On timeout, an `APITimeoutError` is thrown.
@@ -250,13 +242,11 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from gbox_sdk import GboxClient
 
 client = GboxClient()
-response = client.v1.boxes.with_raw_response.retrieve(
-    "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-)
+response = client.v1.boxes.with_raw_response.create_android()
 print(response.headers.get('X-My-Header'))
 
-box = response.parse()  # get the object that `v1.boxes.retrieve()` would have returned
-print(box)
+box = response.parse()  # get the object that `v1.boxes.create_android()` would have returned
+print(box.id)
 ```
 
 These methods return an [`APIResponse`](https://github.com/stainless-sdks/gbox-sdk-python/tree/main/src/gbox_sdk/_response.py) object.
@@ -270,9 +260,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.v1.boxes.with_streaming_response.retrieve(
-    "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-) as response:
+with client.v1.boxes.with_streaming_response.create_android() as response:
     print(response.headers.get("X-My-Header"))
 
     for line in response.iter_lines():

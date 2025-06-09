@@ -23,6 +23,7 @@ from pydantic import ValidationError
 
 from gbox_sdk import GboxClient, AsyncGboxClient, APIResponseValidationError
 from gbox_sdk._types import Omit
+from gbox_sdk._utils import maybe_transform
 from gbox_sdk._models import BaseModel, FinalRequestOptions
 from gbox_sdk._constants import RAW_RESPONSE_HEADER
 from gbox_sdk._exceptions import APIStatusError, APITimeoutError, GboxClientError, APIResponseValidationError
@@ -32,6 +33,7 @@ from gbox_sdk._base_client import (
     BaseClient,
     make_request_options,
 )
+from gbox_sdk.types.v1.box_create_android_params import BoxCreateAndroidParams
 
 from .utils import update_env
 
@@ -720,13 +722,12 @@ class TestGboxClient:
     @mock.patch("gbox_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.get("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d").mock(
-            side_effect=httpx.TimeoutException("Test timeout error")
-        )
+        respx_mock.post("/boxes/android").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            self.client.get(
-                "/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            self.client.post(
+                "/boxes/android",
+                body=cast(object, maybe_transform({}, BoxCreateAndroidParams)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -736,11 +737,12 @@ class TestGboxClient:
     @mock.patch("gbox_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.get("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d").mock(return_value=httpx.Response(500))
+        respx_mock.post("/boxes/android").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            self.client.get(
-                "/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            self.client.post(
+                "/boxes/android",
+                body=cast(object, maybe_transform({}, BoxCreateAndroidParams)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -771,9 +773,9 @@ class TestGboxClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d").mock(side_effect=retry_handler)
+        respx_mock.post("/boxes/android").mock(side_effect=retry_handler)
 
-        response = client.v1.boxes.with_raw_response.retrieve("c9bdc193-b54b-4ddb-a035-5ac0c598d32d")
+        response = client.v1.boxes.with_raw_response.create_android()
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -795,11 +797,9 @@ class TestGboxClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d").mock(side_effect=retry_handler)
+        respx_mock.post("/boxes/android").mock(side_effect=retry_handler)
 
-        response = client.v1.boxes.with_raw_response.retrieve(
-            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d", extra_headers={"x-stainless-retry-count": Omit()}
-        )
+        response = client.v1.boxes.with_raw_response.create_android(extra_headers={"x-stainless-retry-count": Omit()})
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -820,11 +820,9 @@ class TestGboxClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d").mock(side_effect=retry_handler)
+        respx_mock.post("/boxes/android").mock(side_effect=retry_handler)
 
-        response = client.v1.boxes.with_raw_response.retrieve(
-            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d", extra_headers={"x-stainless-retry-count": "42"}
-        )
+        response = client.v1.boxes.with_raw_response.create_android(extra_headers={"x-stainless-retry-count": "42"})
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
@@ -1527,13 +1525,12 @@ class TestAsyncGboxClient:
     @mock.patch("gbox_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.get("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d").mock(
-            side_effect=httpx.TimeoutException("Test timeout error")
-        )
+        respx_mock.post("/boxes/android").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            await self.client.get(
-                "/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            await self.client.post(
+                "/boxes/android",
+                body=cast(object, maybe_transform({}, BoxCreateAndroidParams)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1543,11 +1540,12 @@ class TestAsyncGboxClient:
     @mock.patch("gbox_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.get("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d").mock(return_value=httpx.Response(500))
+        respx_mock.post("/boxes/android").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await self.client.get(
-                "/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            await self.client.post(
+                "/boxes/android",
+                body=cast(object, maybe_transform({}, BoxCreateAndroidParams)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1579,9 +1577,9 @@ class TestAsyncGboxClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d").mock(side_effect=retry_handler)
+        respx_mock.post("/boxes/android").mock(side_effect=retry_handler)
 
-        response = await client.v1.boxes.with_raw_response.retrieve("c9bdc193-b54b-4ddb-a035-5ac0c598d32d")
+        response = await client.v1.boxes.with_raw_response.create_android()
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1604,10 +1602,10 @@ class TestAsyncGboxClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d").mock(side_effect=retry_handler)
+        respx_mock.post("/boxes/android").mock(side_effect=retry_handler)
 
-        response = await client.v1.boxes.with_raw_response.retrieve(
-            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d", extra_headers={"x-stainless-retry-count": Omit()}
+        response = await client.v1.boxes.with_raw_response.create_android(
+            extra_headers={"x-stainless-retry-count": Omit()}
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
@@ -1630,10 +1628,10 @@ class TestAsyncGboxClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d").mock(side_effect=retry_handler)
+        respx_mock.post("/boxes/android").mock(side_effect=retry_handler)
 
-        response = await client.v1.boxes.with_raw_response.retrieve(
-            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d", extra_headers={"x-stainless-retry-count": "42"}
+        response = await client.v1.boxes.with_raw_response.create_android(
+            extra_headers={"x-stainless-retry-count": "42"}
         )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"

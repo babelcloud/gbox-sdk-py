@@ -12,5 +12,5 @@ __all__ = ["AndroidUninstallParams"]
 class AndroidUninstallParams(TypedDict, total=False):
     id: Required[str]
 
-    keep_data: Required[Annotated[bool, PropertyInfo(alias="keepData")]]
+    keep_data: Annotated[bool, PropertyInfo(alias="keepData")]
     """uninstalls the application while retaining the data/cache"""

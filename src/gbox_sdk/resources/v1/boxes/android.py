@@ -18,7 +18,7 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.v1.boxes import android_install_params
+from ....types.v1.boxes import android_install_params, android_uninstall_params
 from ....types.v1.boxes.android_app import AndroidApp
 from ....types.v1.boxes.android_list_response import AndroidListResponse
 
@@ -209,6 +209,7 @@ class AndroidResource(SyncAPIResource):
         package_name: str,
         *,
         id: str,
+        keep_data: bool,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -220,6 +221,8 @@ class AndroidResource(SyncAPIResource):
         Uninstall Android app
 
         Args:
+          keep_data: uninstalls the application while retaining the data/cache
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -235,6 +238,7 @@ class AndroidResource(SyncAPIResource):
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
             f"/boxes/{id}/android/apps/{package_name}",
+            body=maybe_transform({"keep_data": keep_data}, android_uninstall_params.AndroidUninstallParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -426,6 +430,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         package_name: str,
         *,
         id: str,
+        keep_data: bool,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -437,6 +442,8 @@ class AsyncAndroidResource(AsyncAPIResource):
         Uninstall Android app
 
         Args:
+          keep_data: uninstalls the application while retaining the data/cache
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -452,6 +459,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
             f"/boxes/{id}/android/apps/{package_name}",
+            body=await async_maybe_transform({"keep_data": keep_data}, android_uninstall_params.AndroidUninstallParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

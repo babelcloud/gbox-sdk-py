@@ -209,6 +209,7 @@ class TestAndroid:
         android = client.v1.boxes.android.uninstall(
             package_name="com.example.myapp",
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            keep_data=True,
         )
         assert android is None
 
@@ -218,6 +219,7 @@ class TestAndroid:
         response = client.v1.boxes.android.with_raw_response.uninstall(
             package_name="com.example.myapp",
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            keep_data=True,
         )
 
         assert response.is_closed is True
@@ -231,6 +233,7 @@ class TestAndroid:
         with client.v1.boxes.android.with_streaming_response.uninstall(
             package_name="com.example.myapp",
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            keep_data=True,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -247,12 +250,14 @@ class TestAndroid:
             client.v1.boxes.android.with_raw_response.uninstall(
                 package_name="com.example.myapp",
                 id="",
+                keep_data=True,
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `package_name` but received ''"):
             client.v1.boxes.android.with_raw_response.uninstall(
                 package_name="",
                 id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+                keep_data=True,
             )
 
 
@@ -451,6 +456,7 @@ class TestAsyncAndroid:
         android = await async_client.v1.boxes.android.uninstall(
             package_name="com.example.myapp",
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            keep_data=True,
         )
         assert android is None
 
@@ -460,6 +466,7 @@ class TestAsyncAndroid:
         response = await async_client.v1.boxes.android.with_raw_response.uninstall(
             package_name="com.example.myapp",
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            keep_data=True,
         )
 
         assert response.is_closed is True
@@ -473,6 +480,7 @@ class TestAsyncAndroid:
         async with async_client.v1.boxes.android.with_streaming_response.uninstall(
             package_name="com.example.myapp",
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            keep_data=True,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -489,10 +497,12 @@ class TestAsyncAndroid:
             await async_client.v1.boxes.android.with_raw_response.uninstall(
                 package_name="com.example.myapp",
                 id="",
+                keep_data=True,
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `package_name` but received ''"):
             await async_client.v1.boxes.android.with_raw_response.uninstall(
                 package_name="",
                 id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+                keep_data=True,
             )

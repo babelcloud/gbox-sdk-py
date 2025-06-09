@@ -38,6 +38,9 @@ class Config(BaseModel):
     cpu: float
     """CPU cores allocated to the box"""
 
+    device_type: Literal["virtual", "physical"] = FieldInfo(alias="deviceType")
+    """Device type - virtual or physical Android device"""
+
     envs: object
     """Environment variables for the box"""
 

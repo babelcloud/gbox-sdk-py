@@ -121,7 +121,7 @@ class BoxesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxRetrieveResponse:
         """
-        Get box info
+        Get box
 
         Args:
           extra_headers: Send extra headers
@@ -606,7 +606,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxRetrieveResponse:
         """
-        Get box info
+        Get box
 
         Args:
           extra_headers: Send extra headers

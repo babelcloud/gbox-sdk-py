@@ -20,6 +20,7 @@ from .action_scroll_params import ActionScrollParams as ActionScrollParams
 from .android_list_response import AndroidListResponse as AndroidListResponse
 from .android_install_params import AndroidInstallParams as AndroidInstallParams
 from .action_screenshot_params import ActionScreenshotParams as ActionScreenshotParams
+from .android_uninstall_params import AndroidUninstallParams as AndroidUninstallParams
 from .browser_cdp_url_response import BrowserCdpURLResponse as BrowserCdpURLResponse
 from .action_screenshot_response import ActionScreenshotResponse as ActionScreenshotResponse
 from .browser_connect_url_response import BrowserConnectURLResponse as BrowserConnectURLResponse

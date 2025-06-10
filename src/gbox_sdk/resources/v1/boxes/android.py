@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Mapping, cast
-from typing_extensions import overload
+from typing_extensions import Literal, overload
 
 import httpx
 
@@ -18,7 +18,7 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.v1.boxes import android_install_params, android_uninstall_params
+from ....types.v1.boxes import android_list_params, android_install_params, android_uninstall_params
 from ....types.v1.boxes.android_app import AndroidApp
 from ....types.v1.boxes.android_list_response import AndroidListResponse
 
@@ -49,6 +49,8 @@ class AndroidResource(SyncAPIResource):
         self,
         id: str,
         *,
+        app_type: Literal["system", "third-party"] | NotGiven = NOT_GIVEN,
+        is_running: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -60,6 +62,10 @@ class AndroidResource(SyncAPIResource):
         List android app
 
         Args:
+          app_type: Application type: system or third-party, default is all
+
+          is_running: Whether to include running apps, default is all
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -73,7 +79,17 @@ class AndroidResource(SyncAPIResource):
         return self._get(
             f"/boxes/{id}/android/apps",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "app_type": app_type,
+                        "is_running": is_running,
+                    },
+                    android_list_params.AndroidListParams,
+                ),
             ),
             cast_to=AndroidListResponse,
         )
@@ -270,6 +286,8 @@ class AsyncAndroidResource(AsyncAPIResource):
         self,
         id: str,
         *,
+        app_type: Literal["system", "third-party"] | NotGiven = NOT_GIVEN,
+        is_running: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -281,6 +299,10 @@ class AsyncAndroidResource(AsyncAPIResource):
         List android app
 
         Args:
+          app_type: Application type: system or third-party, default is all
+
+          is_running: Whether to include running apps, default is all
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -294,7 +316,17 @@ class AsyncAndroidResource(AsyncAPIResource):
         return await self._get(
             f"/boxes/{id}/android/apps",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "app_type": app_type,
+                        "is_running": is_running,
+                    },
+                    android_list_params.AndroidListParams,
+                ),
             ),
             cast_to=AndroidListResponse,
         )

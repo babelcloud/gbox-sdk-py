@@ -16,6 +16,7 @@ from .action_type_params import ActionTypeParams as ActionTypeParams
 from .action_click_params import ActionClickParams as ActionClickParams
 from .action_press_params import ActionPressParams as ActionPressParams
 from .action_touch_params import ActionTouchParams as ActionTouchParams
+from .android_list_params import AndroidListParams as AndroidListParams
 from .action_scroll_params import ActionScrollParams as ActionScrollParams
 from .android_list_response import AndroidListResponse as AndroidListResponse
 from .android_install_params import AndroidInstallParams as AndroidInstallParams

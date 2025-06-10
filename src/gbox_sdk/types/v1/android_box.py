@@ -1,5 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from typing import Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -38,9 +39,6 @@ class Config(BaseModel):
     cpu: float
     """CPU cores allocated to the box"""
 
-    device_type: Literal["virtual", "physical"] = FieldInfo(alias="deviceType")
-    """Device type - virtual or physical Android device"""
-
     envs: object
     """Environment variables for the box"""
 
@@ -61,6 +59,9 @@ class Config(BaseModel):
 
     working_dir: str = FieldInfo(alias="workingDir")
     """Working directory path for the box"""
+
+    device_type: Optional[Literal["virtual", "physical"]] = FieldInfo(alias="deviceType", default=None)
+    """Device type - virtual or physical Android device"""
 
 
 class AndroidBox(BaseModel):

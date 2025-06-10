@@ -229,7 +229,7 @@ class ActionsResource(SyncAPIResource):
         Press key
 
         Args:
-          keys: Array of keys to press
+          keys: This is an array of strings, each representing a key
 
           output_format: Type of the URI
 
@@ -413,6 +413,7 @@ class ActionsResource(SyncAPIResource):
         id: str,
         *,
         text: str,
+        delay: str | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -421,11 +422,14 @@ class ActionsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionResult:
-        """
-        Type text
+        """Type text
 
         Args:
           text: Text to type
+
+          delay: Time to wait between key presses.
+
+        Defaults to 0ms.
 
           output_format: Type of the URI
 
@@ -444,6 +448,7 @@ class ActionsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "text": text,
+                    "delay": delay,
                     "output_format": output_format,
                 },
                 action_type_params.ActionTypeParams,
@@ -650,7 +655,7 @@ class AsyncActionsResource(AsyncAPIResource):
         Press key
 
         Args:
-          keys: Array of keys to press
+          keys: This is an array of strings, each representing a key
 
           output_format: Type of the URI
 
@@ -834,6 +839,7 @@ class AsyncActionsResource(AsyncAPIResource):
         id: str,
         *,
         text: str,
+        delay: str | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -842,11 +848,14 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionResult:
-        """
-        Type text
+        """Type text
 
         Args:
           text: Text to type
+
+          delay: Time to wait between key presses.
+
+        Defaults to 0ms.
 
           output_format: Type of the URI
 
@@ -865,6 +874,7 @@ class AsyncActionsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "text": text,
+                    "delay": delay,
                     "output_format": output_format,
                 },
                 action_type_params.ActionTypeParams,

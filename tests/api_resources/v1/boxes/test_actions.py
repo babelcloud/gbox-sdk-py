@@ -544,6 +544,7 @@ class TestActions:
         action = client.v1.boxes.actions.type(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             text="Hello World",
+            delay="100ms",
             output_format="base64",
         )
         assert_matches_type(ActionResult, action, path=["response"])
@@ -1113,6 +1114,7 @@ class TestAsyncActions:
         action = await async_client.v1.boxes.actions.type(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             text="Hello World",
+            delay="100ms",
             output_format="base64",
         )
         assert_matches_type(ActionResult, action, path=["response"])

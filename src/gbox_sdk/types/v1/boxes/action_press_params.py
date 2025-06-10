@@ -12,7 +12,7 @@ __all__ = ["ActionPressParams"]
 
 class ActionPressParams(TypedDict, total=False):
     keys: Required[List[str]]
-    """Array of keys to press"""
+    """This is an array of strings, each representing a key"""
 
     output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
     """Type of the URI"""

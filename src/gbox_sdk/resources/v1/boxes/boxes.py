@@ -150,6 +150,7 @@ class BoxesResource(SyncAPIResource):
     def list(
         self,
         *,
+        labels: object | NotGiven = NOT_GIVEN,
         page: int | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         status: str | NotGiven = NOT_GIVEN,
@@ -165,6 +166,8 @@ class BoxesResource(SyncAPIResource):
         List box
 
         Args:
+          labels: Filter boxes by their labels, default is all
+
           page: Page number
 
           page_size: Page size
@@ -190,6 +193,7 @@ class BoxesResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "labels": labels,
                         "page": page,
                         "page_size": page_size,
                         "status": status,
@@ -635,6 +639,7 @@ class AsyncBoxesResource(AsyncAPIResource):
     async def list(
         self,
         *,
+        labels: object | NotGiven = NOT_GIVEN,
         page: int | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         status: str | NotGiven = NOT_GIVEN,
@@ -650,6 +655,8 @@ class AsyncBoxesResource(AsyncAPIResource):
         List box
 
         Args:
+          labels: Filter boxes by their labels, default is all
+
           page: Page number
 
           page_size: Page size
@@ -675,6 +682,7 @@ class AsyncBoxesResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
+                        "labels": labels,
                         "page": page,
                         "page_size": page_size,
                         "status": status,

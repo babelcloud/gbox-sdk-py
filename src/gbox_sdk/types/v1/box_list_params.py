@@ -10,6 +10,9 @@ __all__ = ["BoxListParams"]
 
 
 class BoxListParams(TypedDict, total=False):
+    labels: object
+    """Filter boxes by their labels, default is all"""
+
     page: int
     """Page number"""
 

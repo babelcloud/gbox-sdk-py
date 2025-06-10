@@ -57,7 +57,7 @@ class AndroidResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AndroidListResponse:
         """
-        List Android app
+        List android app
 
         Args:
           extra_headers: Send extra headers
@@ -91,7 +91,7 @@ class AndroidResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AndroidApp:
         """
-        Get Android app
+        Get android app
 
         Args:
           extra_headers: Send extra headers
@@ -128,7 +128,7 @@ class AndroidResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Install Android app
+        Install android app
 
         Args:
           apk: APK file to install (max file size: 200MB)
@@ -157,7 +157,7 @@ class AndroidResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Install Android app
+        Install android app
 
         Args:
           apk: HTTP URL to download APK file (max file size: 200MB)
@@ -218,7 +218,7 @@ class AndroidResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Uninstall Android app
+        Uninstall android app
 
         Args:
           keep_data: uninstalls the application while retaining the data/cache
@@ -278,7 +278,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AndroidListResponse:
         """
-        List Android app
+        List android app
 
         Args:
           extra_headers: Send extra headers
@@ -312,7 +312,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AndroidApp:
         """
-        Get Android app
+        Get android app
 
         Args:
           extra_headers: Send extra headers
@@ -349,7 +349,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Install Android app
+        Install android app
 
         Args:
           apk: APK file to install (max file size: 200MB)
@@ -378,7 +378,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Install Android app
+        Install android app
 
         Args:
           apk: HTTP URL to download APK file (max file size: 200MB)
@@ -439,7 +439,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Uninstall Android app
+        Uninstall android app
 
         Args:
           keep_data: uninstalls the application while retaining the data/cache

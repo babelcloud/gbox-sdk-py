@@ -216,7 +216,120 @@ class ActionsResource(SyncAPIResource):
         self,
         id: str,
         *,
-        keys: List[str],
+        keys: List[
+            Literal[
+                "a",
+                "b",
+                "c",
+                "d",
+                "e",
+                "f",
+                "g",
+                "h",
+                "i",
+                "j",
+                "k",
+                "l",
+                "m",
+                "n",
+                "o",
+                "p",
+                "q",
+                "r",
+                "s",
+                "t",
+                "u",
+                "v",
+                "w",
+                "x",
+                "y",
+                "z",
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "f1",
+                "f2",
+                "f3",
+                "f4",
+                "f5",
+                "f6",
+                "f7",
+                "f8",
+                "f9",
+                "f10",
+                "f11",
+                "f12",
+                "control",
+                "alt",
+                "shift",
+                "meta",
+                "win",
+                "cmd",
+                "option",
+                "arrowUp",
+                "arrowDown",
+                "arrowLeft",
+                "arrowRight",
+                "home",
+                "end",
+                "pageUp",
+                "pageDown",
+                "enter",
+                "space",
+                "tab",
+                "escape",
+                "backspace",
+                "delete",
+                "insert",
+                "capsLock",
+                "numLock",
+                "scrollLock",
+                "pause",
+                "printScreen",
+                ";",
+                "=",
+                ",",
+                "-",
+                ".",
+                "/",
+                "`",
+                "[",
+                "\\",
+                "]",
+                "'",
+                "numpad0",
+                "numpad1",
+                "numpad2",
+                "numpad3",
+                "numpad4",
+                "numpad5",
+                "numpad6",
+                "numpad7",
+                "numpad8",
+                "numpad9",
+                "numpadAdd",
+                "numpadSubtract",
+                "numpadMultiply",
+                "numpadDivide",
+                "numpadDecimal",
+                "numpadEnter",
+                "numpadEqual",
+                "volumeUp",
+                "volumeDown",
+                "volumeMute",
+                "mediaPlayPause",
+                "mediaStop",
+                "mediaNextTrack",
+                "mediaPreviousTrack",
+            ]
+        ],
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -226,10 +339,13 @@ class ActionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionResult:
         """
-        Press key
+        Simulates pressing a specific key by triggering the complete physical key event
+        chain (keydown, keypress, keyup). Use this to activate physical key event
+        listeners such as shortcuts or form submissions.
 
         Args:
-          keys: This is an array of strings, each representing a key
+          keys: This is an array of physical keys to press. Supports cross-platform
+              compatibility.
 
           output_format: Type of the URI
 
@@ -413,7 +529,6 @@ class ActionsResource(SyncAPIResource):
         id: str,
         *,
         text: str,
-        delay: str | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -422,14 +537,13 @@ class ActionsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionResult:
-        """Type text
+        """
+        Directly inputs text content without triggering physical key events (keydown,
+        etc.), ideal for quickly filling large amounts of text when intermediate input
+        events aren't needed.
 
         Args:
           text: Text to type
-
-          delay: Time to wait between key presses.
-
-        Defaults to 0ms.
 
           output_format: Type of the URI
 
@@ -448,7 +562,6 @@ class ActionsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "text": text,
-                    "delay": delay,
                     "output_format": output_format,
                 },
                 action_type_params.ActionTypeParams,
@@ -642,7 +755,120 @@ class AsyncActionsResource(AsyncAPIResource):
         self,
         id: str,
         *,
-        keys: List[str],
+        keys: List[
+            Literal[
+                "a",
+                "b",
+                "c",
+                "d",
+                "e",
+                "f",
+                "g",
+                "h",
+                "i",
+                "j",
+                "k",
+                "l",
+                "m",
+                "n",
+                "o",
+                "p",
+                "q",
+                "r",
+                "s",
+                "t",
+                "u",
+                "v",
+                "w",
+                "x",
+                "y",
+                "z",
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "f1",
+                "f2",
+                "f3",
+                "f4",
+                "f5",
+                "f6",
+                "f7",
+                "f8",
+                "f9",
+                "f10",
+                "f11",
+                "f12",
+                "control",
+                "alt",
+                "shift",
+                "meta",
+                "win",
+                "cmd",
+                "option",
+                "arrowUp",
+                "arrowDown",
+                "arrowLeft",
+                "arrowRight",
+                "home",
+                "end",
+                "pageUp",
+                "pageDown",
+                "enter",
+                "space",
+                "tab",
+                "escape",
+                "backspace",
+                "delete",
+                "insert",
+                "capsLock",
+                "numLock",
+                "scrollLock",
+                "pause",
+                "printScreen",
+                ";",
+                "=",
+                ",",
+                "-",
+                ".",
+                "/",
+                "`",
+                "[",
+                "\\",
+                "]",
+                "'",
+                "numpad0",
+                "numpad1",
+                "numpad2",
+                "numpad3",
+                "numpad4",
+                "numpad5",
+                "numpad6",
+                "numpad7",
+                "numpad8",
+                "numpad9",
+                "numpadAdd",
+                "numpadSubtract",
+                "numpadMultiply",
+                "numpadDivide",
+                "numpadDecimal",
+                "numpadEnter",
+                "numpadEqual",
+                "volumeUp",
+                "volumeDown",
+                "volumeMute",
+                "mediaPlayPause",
+                "mediaStop",
+                "mediaNextTrack",
+                "mediaPreviousTrack",
+            ]
+        ],
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -652,10 +878,13 @@ class AsyncActionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionResult:
         """
-        Press key
+        Simulates pressing a specific key by triggering the complete physical key event
+        chain (keydown, keypress, keyup). Use this to activate physical key event
+        listeners such as shortcuts or form submissions.
 
         Args:
-          keys: This is an array of strings, each representing a key
+          keys: This is an array of physical keys to press. Supports cross-platform
+              compatibility.
 
           output_format: Type of the URI
 
@@ -839,7 +1068,6 @@ class AsyncActionsResource(AsyncAPIResource):
         id: str,
         *,
         text: str,
-        delay: str | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -848,14 +1076,13 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionResult:
-        """Type text
+        """
+        Directly inputs text content without triggering physical key events (keydown,
+        etc.), ideal for quickly filling large amounts of text when intermediate input
+        events aren't needed.
 
         Args:
           text: Text to type
-
-          delay: Time to wait between key presses.
-
-        Defaults to 0ms.
 
           output_format: Type of the URI
 
@@ -874,7 +1101,6 @@ class AsyncActionsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "text": text,
-                    "delay": delay,
                     "output_format": output_format,
                 },
                 action_type_params.ActionTypeParams,

@@ -18,7 +18,12 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.v1.boxes import android_list_params, android_install_params, android_uninstall_params
+from ....types.v1.boxes import (
+    android_list_params,
+    android_open_params,
+    android_install_params,
+    android_uninstall_params,
+)
 from ....types.v1.boxes.android_app import AndroidApp
 from ....types.v1.boxes.android_list_response import AndroidListResponse
 
@@ -59,7 +64,7 @@ class AndroidResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AndroidListResponse:
         """
-        List android app
+        List apps
 
         Args:
           app_type: Application type: system or third-party, default is all
@@ -94,6 +99,43 @@ class AndroidResource(SyncAPIResource):
             cast_to=AndroidListResponse,
         )
 
+    def close(
+        self,
+        package_name: str,
+        *,
+        id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Close app
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not package_name:
+            raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._post(
+            f"/boxes/{id}/android/apps/{package_name}/close",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
     def get(
         self,
         package_name: str,
@@ -107,7 +149,7 @@ class AndroidResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AndroidApp:
         """
-        Get android app
+        Get app
 
         Args:
           extra_headers: Send extra headers
@@ -144,7 +186,7 @@ class AndroidResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Install android app
+        Install app
 
         Args:
           apk: APK file to install (max file size: 200MB)
@@ -173,7 +215,7 @@ class AndroidResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Install android app
+        Install app
 
         Args:
           apk: HTTP URL to download APK file (max file size: 200MB)
@@ -220,6 +262,84 @@ class AndroidResource(SyncAPIResource):
             cast_to=NoneType,
         )
 
+    def open(
+        self,
+        package_name: str,
+        *,
+        id: str,
+        activity_name: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Open app
+
+        Args:
+          activity_name: Activity name, default is the main activity.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not package_name:
+            raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._post(
+            f"/boxes/{id}/android/apps/{package_name}/open",
+            body=maybe_transform({"activity_name": activity_name}, android_open_params.AndroidOpenParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    def restart(
+        self,
+        package_name: str,
+        *,
+        id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Restart app
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not package_name:
+            raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._post(
+            f"/boxes/{id}/android/apps/{package_name}/restart",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
     def uninstall(
         self,
         package_name: str,
@@ -234,7 +354,7 @@ class AndroidResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Uninstall android app
+        Uninstall app
 
         Args:
           keep_data: uninstalls the application while retaining the data/cache
@@ -296,7 +416,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AndroidListResponse:
         """
-        List android app
+        List apps
 
         Args:
           app_type: Application type: system or third-party, default is all
@@ -331,6 +451,43 @@ class AsyncAndroidResource(AsyncAPIResource):
             cast_to=AndroidListResponse,
         )
 
+    async def close(
+        self,
+        package_name: str,
+        *,
+        id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Close app
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not package_name:
+            raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._post(
+            f"/boxes/{id}/android/apps/{package_name}/close",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
     async def get(
         self,
         package_name: str,
@@ -344,7 +501,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AndroidApp:
         """
-        Get android app
+        Get app
 
         Args:
           extra_headers: Send extra headers
@@ -381,7 +538,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Install android app
+        Install app
 
         Args:
           apk: APK file to install (max file size: 200MB)
@@ -410,7 +567,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Install android app
+        Install app
 
         Args:
           apk: HTTP URL to download APK file (max file size: 200MB)
@@ -457,6 +614,84 @@ class AsyncAndroidResource(AsyncAPIResource):
             cast_to=NoneType,
         )
 
+    async def open(
+        self,
+        package_name: str,
+        *,
+        id: str,
+        activity_name: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Open app
+
+        Args:
+          activity_name: Activity name, default is the main activity.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not package_name:
+            raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._post(
+            f"/boxes/{id}/android/apps/{package_name}/open",
+            body=await async_maybe_transform({"activity_name": activity_name}, android_open_params.AndroidOpenParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    async def restart(
+        self,
+        package_name: str,
+        *,
+        id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Restart app
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not package_name:
+            raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._post(
+            f"/boxes/{id}/android/apps/{package_name}/restart",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
     async def uninstall(
         self,
         package_name: str,
@@ -471,7 +706,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Uninstall android app
+        Uninstall app
 
         Args:
           keep_data: uninstalls the application while retaining the data/cache
@@ -506,11 +741,20 @@ class AndroidResourceWithRawResponse:
         self.list = to_raw_response_wrapper(
             android.list,
         )
+        self.close = to_raw_response_wrapper(
+            android.close,
+        )
         self.get = to_raw_response_wrapper(
             android.get,
         )
         self.install = to_raw_response_wrapper(
             android.install,
+        )
+        self.open = to_raw_response_wrapper(
+            android.open,
+        )
+        self.restart = to_raw_response_wrapper(
+            android.restart,
         )
         self.uninstall = to_raw_response_wrapper(
             android.uninstall,
@@ -524,11 +768,20 @@ class AsyncAndroidResourceWithRawResponse:
         self.list = async_to_raw_response_wrapper(
             android.list,
         )
+        self.close = async_to_raw_response_wrapper(
+            android.close,
+        )
         self.get = async_to_raw_response_wrapper(
             android.get,
         )
         self.install = async_to_raw_response_wrapper(
             android.install,
+        )
+        self.open = async_to_raw_response_wrapper(
+            android.open,
+        )
+        self.restart = async_to_raw_response_wrapper(
+            android.restart,
         )
         self.uninstall = async_to_raw_response_wrapper(
             android.uninstall,
@@ -542,11 +795,20 @@ class AndroidResourceWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             android.list,
         )
+        self.close = to_streamed_response_wrapper(
+            android.close,
+        )
         self.get = to_streamed_response_wrapper(
             android.get,
         )
         self.install = to_streamed_response_wrapper(
             android.install,
+        )
+        self.open = to_streamed_response_wrapper(
+            android.open,
+        )
+        self.restart = to_streamed_response_wrapper(
+            android.restart,
         )
         self.uninstall = to_streamed_response_wrapper(
             android.uninstall,
@@ -560,11 +822,20 @@ class AsyncAndroidResourceWithStreamingResponse:
         self.list = async_to_streamed_response_wrapper(
             android.list,
         )
+        self.close = async_to_streamed_response_wrapper(
+            android.close,
+        )
         self.get = async_to_streamed_response_wrapper(
             android.get,
         )
         self.install = async_to_streamed_response_wrapper(
             android.install,
+        )
+        self.open = async_to_streamed_response_wrapper(
+            android.open,
+        )
+        self.restart = async_to_streamed_response_wrapper(
+            android.restart,
         )
         self.uninstall = async_to_streamed_response_wrapper(
             android.uninstall,

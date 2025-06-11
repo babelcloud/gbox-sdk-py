@@ -251,7 +251,7 @@ class TestActions:
     def test_method_press(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.press(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            keys=["Enter"],
+            keys=["enter"],
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -260,7 +260,7 @@ class TestActions:
     def test_method_press_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.press(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            keys=["Enter"],
+            keys=["enter"],
             output_format="base64",
         )
         assert_matches_type(ActionResult, action, path=["response"])
@@ -270,7 +270,7 @@ class TestActions:
     def test_raw_response_press(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.press(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            keys=["Enter"],
+            keys=["enter"],
         )
 
         assert response.is_closed is True
@@ -283,7 +283,7 @@ class TestActions:
     def test_streaming_response_press(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.press(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            keys=["Enter"],
+            keys=["enter"],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -299,7 +299,7 @@ class TestActions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.v1.boxes.actions.with_raw_response.press(
                 id="",
-                keys=["Enter"],
+                keys=["enter"],
             )
 
     @pytest.mark.skip()
@@ -544,7 +544,6 @@ class TestActions:
         action = client.v1.boxes.actions.type(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             text="Hello World",
-            delay="100ms",
             output_format="base64",
         )
         assert_matches_type(ActionResult, action, path=["response"])
@@ -821,7 +820,7 @@ class TestAsyncActions:
     async def test_method_press(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.press(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            keys=["Enter"],
+            keys=["enter"],
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -830,7 +829,7 @@ class TestAsyncActions:
     async def test_method_press_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.press(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            keys=["Enter"],
+            keys=["enter"],
             output_format="base64",
         )
         assert_matches_type(ActionResult, action, path=["response"])
@@ -840,7 +839,7 @@ class TestAsyncActions:
     async def test_raw_response_press(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.press(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            keys=["Enter"],
+            keys=["enter"],
         )
 
         assert response.is_closed is True
@@ -853,7 +852,7 @@ class TestAsyncActions:
     async def test_streaming_response_press(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.press(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            keys=["Enter"],
+            keys=["enter"],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -869,7 +868,7 @@ class TestAsyncActions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.press(
                 id="",
-                keys=["Enter"],
+                keys=["enter"],
             )
 
     @pytest.mark.skip()
@@ -1114,7 +1113,6 @@ class TestAsyncActions:
         action = await async_client.v1.boxes.actions.type(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             text="Hello World",
-            delay="100ms",
             output_format="base64",
         )
         assert_matches_type(ActionResult, action, path=["response"])

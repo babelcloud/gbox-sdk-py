@@ -13,8 +13,5 @@ class ActionTypeParams(TypedDict, total=False):
     text: Required[str]
     """Text to type"""
 
-    delay: str
-    """Time to wait between key presses. Defaults to 0ms."""
-
     output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
     """Type of the URI"""

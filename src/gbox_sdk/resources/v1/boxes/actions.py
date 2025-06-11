@@ -23,10 +23,11 @@ from ....types.v1.boxes import (
     action_move_params,
     action_type_params,
     action_click_params,
-    action_press_params,
     action_touch_params,
     action_scroll_params,
+    action_press_key_params,
     action_screenshot_params,
+    action_press_button_params,
 )
 from ....types.v1.boxes.action_result import ActionResult
 from ....types.v1.boxes.action_screenshot_response import ActionScreenshotResponse
@@ -212,7 +213,55 @@ class ActionsResource(SyncAPIResource):
             cast_to=ActionResult,
         )
 
-    def press(
+    def press_button(
+        self,
+        id: str,
+        *,
+        buttons: List[str],
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionResult:
+        """Press button on the device.
+
+        like power button, volume up button, volume down
+        button, etc.
+
+        Args:
+          buttons: Button to press
+
+          output_format: Type of the URI
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._post(
+            f"/boxes/{id}/actions/press-button",
+            body=maybe_transform(
+                {
+                    "buttons": buttons,
+                    "output_format": output_format,
+                },
+                action_press_button_params.ActionPressButtonParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
+        )
+
+    def press_key(
         self,
         id: str,
         *,
@@ -339,12 +388,12 @@ class ActionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionResult:
         """
-        Simulates pressing a specific key by triggering the complete physical key event
-        chain (keydown, keypress, keyup). Use this to activate physical key event
+        Simulates pressing a specific key by triggering the complete keyboard key event
+        chain (keydown, keypress, keyup). Use this to activate keyboard key event
         listeners such as shortcuts or form submissions.
 
         Args:
-          keys: This is an array of physical keys to press. Supports cross-platform
+          keys: This is an array of keyboard keys to press. Supports cross-platform
               compatibility.
 
           output_format: Type of the URI
@@ -360,13 +409,13 @@ class ActionsResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
-            f"/boxes/{id}/actions/press",
+            f"/boxes/{id}/actions/press-key",
             body=maybe_transform(
                 {
                     "keys": keys,
                     "output_format": output_format,
                 },
-                action_press_params.ActionPressParams,
+                action_press_key_params.ActionPressKeyParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -751,7 +800,55 @@ class AsyncActionsResource(AsyncAPIResource):
             cast_to=ActionResult,
         )
 
-    async def press(
+    async def press_button(
+        self,
+        id: str,
+        *,
+        buttons: List[str],
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionResult:
+        """Press button on the device.
+
+        like power button, volume up button, volume down
+        button, etc.
+
+        Args:
+          buttons: Button to press
+
+          output_format: Type of the URI
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._post(
+            f"/boxes/{id}/actions/press-button",
+            body=await async_maybe_transform(
+                {
+                    "buttons": buttons,
+                    "output_format": output_format,
+                },
+                action_press_button_params.ActionPressButtonParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
+        )
+
+    async def press_key(
         self,
         id: str,
         *,
@@ -878,12 +975,12 @@ class AsyncActionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionResult:
         """
-        Simulates pressing a specific key by triggering the complete physical key event
-        chain (keydown, keypress, keyup). Use this to activate physical key event
+        Simulates pressing a specific key by triggering the complete keyboard key event
+        chain (keydown, keypress, keyup). Use this to activate keyboard key event
         listeners such as shortcuts or form submissions.
 
         Args:
-          keys: This is an array of physical keys to press. Supports cross-platform
+          keys: This is an array of keyboard keys to press. Supports cross-platform
               compatibility.
 
           output_format: Type of the URI
@@ -899,13 +996,13 @@ class AsyncActionsResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
-            f"/boxes/{id}/actions/press",
+            f"/boxes/{id}/actions/press-key",
             body=await async_maybe_transform(
                 {
                     "keys": keys,
                     "output_format": output_format,
                 },
-                action_press_params.ActionPressParams,
+                action_press_key_params.ActionPressKeyParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -1125,8 +1222,11 @@ class ActionsResourceWithRawResponse:
         self.move = to_raw_response_wrapper(
             actions.move,
         )
-        self.press = to_raw_response_wrapper(
-            actions.press,
+        self.press_button = to_raw_response_wrapper(
+            actions.press_button,
+        )
+        self.press_key = to_raw_response_wrapper(
+            actions.press_key,
         )
         self.screenshot = to_raw_response_wrapper(
             actions.screenshot,
@@ -1155,8 +1255,11 @@ class AsyncActionsResourceWithRawResponse:
         self.move = async_to_raw_response_wrapper(
             actions.move,
         )
-        self.press = async_to_raw_response_wrapper(
-            actions.press,
+        self.press_button = async_to_raw_response_wrapper(
+            actions.press_button,
+        )
+        self.press_key = async_to_raw_response_wrapper(
+            actions.press_key,
         )
         self.screenshot = async_to_raw_response_wrapper(
             actions.screenshot,
@@ -1185,8 +1288,11 @@ class ActionsResourceWithStreamingResponse:
         self.move = to_streamed_response_wrapper(
             actions.move,
         )
-        self.press = to_streamed_response_wrapper(
-            actions.press,
+        self.press_button = to_streamed_response_wrapper(
+            actions.press_button,
+        )
+        self.press_key = to_streamed_response_wrapper(
+            actions.press_key,
         )
         self.screenshot = to_streamed_response_wrapper(
             actions.screenshot,
@@ -1215,8 +1321,11 @@ class AsyncActionsResourceWithStreamingResponse:
         self.move = async_to_streamed_response_wrapper(
             actions.move,
         )
-        self.press = async_to_streamed_response_wrapper(
-            actions.press,
+        self.press_button = async_to_streamed_response_wrapper(
+            actions.press_button,
+        )
+        self.press_key = async_to_streamed_response_wrapper(
+            actions.press_key,
         )
         self.screenshot = async_to_streamed_response_wrapper(
             actions.screenshot,

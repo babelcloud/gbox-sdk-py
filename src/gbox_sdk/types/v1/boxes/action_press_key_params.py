@@ -7,10 +7,10 @@ from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from ...._utils import PropertyInfo
 
-__all__ = ["ActionPressParams"]
+__all__ = ["ActionPressKeyParams"]
 
 
-class ActionPressParams(TypedDict, total=False):
+class ActionPressKeyParams(TypedDict, total=False):
     keys: Required[
         List[
             Literal[
@@ -127,7 +127,7 @@ class ActionPressParams(TypedDict, total=False):
             ]
         ]
     ]
-    """This is an array of physical keys to press.
+    """This is an array of keyboard keys to press.
 
     Supports cross-platform compatibility.
     """

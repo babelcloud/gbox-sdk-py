@@ -51,7 +51,7 @@ class BrowserResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Get browser CDP url
+        Get CDP url
 
         Args:
           extra_headers: Send extra headers
@@ -84,7 +84,7 @@ class BrowserResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BrowserConnectURLResponse:
         """
-        Get browser connect url
+        Get connect url
 
         Args:
           extra_headers: Send extra headers
@@ -138,7 +138,7 @@ class AsyncBrowserResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Get browser CDP url
+        Get CDP url
 
         Args:
           extra_headers: Send extra headers
@@ -171,7 +171,7 @@ class AsyncBrowserResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BrowserConnectURLResponse:
         """
-        Get browser connect url
+        Get connect url
 
         Args:
           extra_headers: Send extra headers

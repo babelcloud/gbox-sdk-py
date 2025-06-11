@@ -248,8 +248,64 @@ class TestActions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_press(self, client: GboxClient) -> None:
-        action = client.v1.boxes.actions.press(
+    def test_method_press_button(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.press_button(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            buttons=["power"],
+        )
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_press_button_with_all_params(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.press_button(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            buttons=["power"],
+            output_format="base64",
+        )
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_press_button(self, client: GboxClient) -> None:
+        response = client.v1.boxes.actions.with_raw_response.press_button(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            buttons=["power"],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = response.parse()
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_press_button(self, client: GboxClient) -> None:
+        with client.v1.boxes.actions.with_streaming_response.press_button(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            buttons=["power"],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = response.parse()
+            assert_matches_type(ActionResult, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_press_button(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            client.v1.boxes.actions.with_raw_response.press_button(
+                id="",
+                buttons=["power"],
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_press_key(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.press_key(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             keys=["enter"],
         )
@@ -257,8 +313,8 @@ class TestActions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_press_with_all_params(self, client: GboxClient) -> None:
-        action = client.v1.boxes.actions.press(
+    def test_method_press_key_with_all_params(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.press_key(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             keys=["enter"],
             output_format="base64",
@@ -267,8 +323,8 @@ class TestActions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_press(self, client: GboxClient) -> None:
-        response = client.v1.boxes.actions.with_raw_response.press(
+    def test_raw_response_press_key(self, client: GboxClient) -> None:
+        response = client.v1.boxes.actions.with_raw_response.press_key(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             keys=["enter"],
         )
@@ -280,8 +336,8 @@ class TestActions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_press(self, client: GboxClient) -> None:
-        with client.v1.boxes.actions.with_streaming_response.press(
+    def test_streaming_response_press_key(self, client: GboxClient) -> None:
+        with client.v1.boxes.actions.with_streaming_response.press_key(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             keys=["enter"],
         ) as response:
@@ -295,9 +351,9 @@ class TestActions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_path_params_press(self, client: GboxClient) -> None:
+    def test_path_params_press_key(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            client.v1.boxes.actions.with_raw_response.press(
+            client.v1.boxes.actions.with_raw_response.press_key(
                 id="",
                 keys=["enter"],
             )
@@ -817,8 +873,64 @@ class TestAsyncActions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_press(self, async_client: AsyncGboxClient) -> None:
-        action = await async_client.v1.boxes.actions.press(
+    async def test_method_press_button(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.press_button(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            buttons=["power"],
+        )
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_press_button_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.press_button(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            buttons=["power"],
+            output_format="base64",
+        )
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_press_button(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.actions.with_raw_response.press_button(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            buttons=["power"],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = await response.parse()
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_press_button(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.actions.with_streaming_response.press_button(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            buttons=["power"],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = await response.parse()
+            assert_matches_type(ActionResult, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_press_button(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            await async_client.v1.boxes.actions.with_raw_response.press_button(
+                id="",
+                buttons=["power"],
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_press_key(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.press_key(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             keys=["enter"],
         )
@@ -826,8 +938,8 @@ class TestAsyncActions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_press_with_all_params(self, async_client: AsyncGboxClient) -> None:
-        action = await async_client.v1.boxes.actions.press(
+    async def test_method_press_key_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.press_key(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             keys=["enter"],
             output_format="base64",
@@ -836,8 +948,8 @@ class TestAsyncActions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_press(self, async_client: AsyncGboxClient) -> None:
-        response = await async_client.v1.boxes.actions.with_raw_response.press(
+    async def test_raw_response_press_key(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.actions.with_raw_response.press_key(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             keys=["enter"],
         )
@@ -849,8 +961,8 @@ class TestAsyncActions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_press(self, async_client: AsyncGboxClient) -> None:
-        async with async_client.v1.boxes.actions.with_streaming_response.press(
+    async def test_streaming_response_press_key(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.actions.with_streaming_response.press_key(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             keys=["enter"],
         ) as response:
@@ -864,9 +976,9 @@ class TestAsyncActions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_path_params_press(self, async_client: AsyncGboxClient) -> None:
+    async def test_path_params_press_key(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            await async_client.v1.boxes.actions.with_raw_response.press(
+            await async_client.v1.boxes.actions.with_raw_response.press_key(
                 id="",
                 keys=["enter"],
             )

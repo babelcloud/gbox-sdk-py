@@ -14,14 +14,15 @@ from .action_drag_params import ActionDragParams as ActionDragParams
 from .action_move_params import ActionMoveParams as ActionMoveParams
 from .action_type_params import ActionTypeParams as ActionTypeParams
 from .action_click_params import ActionClickParams as ActionClickParams
-from .action_press_params import ActionPressParams as ActionPressParams
 from .action_touch_params import ActionTouchParams as ActionTouchParams
 from .android_list_params import AndroidListParams as AndroidListParams
 from .action_scroll_params import ActionScrollParams as ActionScrollParams
 from .android_list_response import AndroidListResponse as AndroidListResponse
 from .android_install_params import AndroidInstallParams as AndroidInstallParams
+from .action_press_key_params import ActionPressKeyParams as ActionPressKeyParams
 from .action_screenshot_params import ActionScreenshotParams as ActionScreenshotParams
 from .android_uninstall_params import AndroidUninstallParams as AndroidUninstallParams
 from .browser_cdp_url_response import BrowserCdpURLResponse as BrowserCdpURLResponse
+from .action_press_button_params import ActionPressButtonParams as ActionPressButtonParams
 from .action_screenshot_response import ActionScreenshotResponse as ActionScreenshotResponse
 from .browser_connect_url_response import BrowserConnectURLResponse as BrowserConnectURLResponse

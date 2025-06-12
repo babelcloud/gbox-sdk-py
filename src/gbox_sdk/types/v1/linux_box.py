@@ -1,5 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from typing import Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -7,15 +8,7 @@ from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
-__all__ = ["LinuxBox", "Config", "ConfigBrowser", "ConfigOs", "ConfigResolution"]
-
-
-class ConfigBrowser(BaseModel):
-    type: Literal["chromium", "firefox", "webkit"]
-    """Supported browser types for Linux boxes"""
-
-    version: str
-    """Browser version string (e.g. '12')"""
+__all__ = ["LinuxBox", "Config", "ConfigOs", "ConfigResolution", "ConfigBrowser"]
 
 
 class ConfigOs(BaseModel):
@@ -31,10 +24,15 @@ class ConfigResolution(BaseModel):
     """Width of the box"""
 
 
-class Config(BaseModel):
-    browser: ConfigBrowser
-    """Linux browser configuration settings"""
+class ConfigBrowser(BaseModel):
+    type: Literal["chromium", "firefox", "webkit"]
+    """Supported browser types for Linux boxes"""
 
+    version: str
+    """Browser version string (e.g. '12')"""
+
+
+class Config(BaseModel):
     cpu: float
     """CPU cores allocated to the box"""
 
@@ -56,7 +54,10 @@ class Config(BaseModel):
     storage: float
     """Storage allocated to the box in GB."""
 
-    working_dir: str = FieldInfo(alias="workingDir")
+    browser: Optional[ConfigBrowser] = None
+    """Linux browser configuration settings"""
+
+    working_dir: Optional[str] = FieldInfo(alias="workingDir", default=None)
     """Working directory path for the box"""
 
 

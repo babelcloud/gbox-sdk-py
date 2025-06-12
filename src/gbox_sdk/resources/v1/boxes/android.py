@@ -138,9 +138,8 @@ class AndroidResource(SyncAPIResource):
 
     def close_all(
         self,
-        package_name: str,
-        *,
         id: str,
+        *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -162,11 +161,9 @@ class AndroidResource(SyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        if not package_name:
-            raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{id}/android/apps/{package_name}/close-all",
+            f"/boxes/{id}/android/apps/close-all",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -527,9 +524,8 @@ class AsyncAndroidResource(AsyncAPIResource):
 
     async def close_all(
         self,
-        package_name: str,
-        *,
         id: str,
+        *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -551,11 +547,9 @@ class AsyncAndroidResource(AsyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        if not package_name:
-            raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{id}/android/apps/{package_name}/close-all",
+            f"/boxes/{id}/android/apps/close-all",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

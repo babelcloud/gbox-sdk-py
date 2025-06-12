@@ -8,15 +8,7 @@ from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
-__all__ = ["AndroidBox", "Config", "ConfigBrowser", "ConfigOs", "ConfigResolution"]
-
-
-class ConfigBrowser(BaseModel):
-    type: Literal["Chrome for Android", "UC Browser for Android"]
-    """Supported browser types for Android boxes"""
-
-    version: str
-    """Browser version string (e.g. '136')"""
+__all__ = ["AndroidBox", "Config", "ConfigOs", "ConfigResolution", "ConfigBrowser"]
 
 
 class ConfigOs(BaseModel):
@@ -32,10 +24,15 @@ class ConfigResolution(BaseModel):
     """Width of the box"""
 
 
-class Config(BaseModel):
-    browser: ConfigBrowser
-    """Android browser configuration settings"""
+class ConfigBrowser(BaseModel):
+    type: Literal["Chrome for Android", "UC Browser for Android"]
+    """Supported browser types for Android boxes"""
 
+    version: str
+    """Browser version string (e.g. '136')"""
+
+
+class Config(BaseModel):
     cpu: float
     """CPU cores allocated to the box"""
 
@@ -57,11 +54,14 @@ class Config(BaseModel):
     storage: float
     """Storage allocated to the box in GB"""
 
-    working_dir: str = FieldInfo(alias="workingDir")
-    """Working directory path for the box"""
+    browser: Optional[ConfigBrowser] = None
+    """Android browser configuration settings"""
 
     device_type: Optional[Literal["virtual", "physical"]] = FieldInfo(alias="deviceType", default=None)
     """Device type - virtual or physical Android device"""
+
+    working_dir: Optional[str] = FieldInfo(alias="workingDir", default=None)
+    """Working directory path for the box"""
 
 
 class AndroidBox(BaseModel):

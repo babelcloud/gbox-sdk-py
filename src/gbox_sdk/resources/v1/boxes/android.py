@@ -26,6 +26,7 @@ from ....types.v1.boxes import (
 )
 from ....types.v1.boxes.android_app import AndroidApp
 from ....types.v1.boxes.android_list_response import AndroidListResponse
+from ....types.v1.boxes.android_get_connect_address_response import AndroidGetConnectAddressResponse
 
 __all__ = ["AndroidResource", "AsyncAndroidResource"]
 
@@ -204,6 +205,39 @@ class AndroidResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AndroidApp,
+        )
+
+    def get_connect_address(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AndroidGetConnectAddressResponse:
+        """
+        Get connect address
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._get(
+            f"/boxes/{id}/android/connect-address",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AndroidGetConnectAddressResponse,
         )
 
     @overload
@@ -592,6 +626,39 @@ class AsyncAndroidResource(AsyncAPIResource):
             cast_to=AndroidApp,
         )
 
+    async def get_connect_address(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AndroidGetConnectAddressResponse:
+        """
+        Get connect address
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._get(
+            f"/boxes/{id}/android/connect-address",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AndroidGetConnectAddressResponse,
+        )
+
     @overload
     async def install(
         self,
@@ -818,6 +885,9 @@ class AndroidResourceWithRawResponse:
         self.get = to_raw_response_wrapper(
             android.get,
         )
+        self.get_connect_address = to_raw_response_wrapper(
+            android.get_connect_address,
+        )
         self.install = to_raw_response_wrapper(
             android.install,
         )
@@ -847,6 +917,9 @@ class AsyncAndroidResourceWithRawResponse:
         )
         self.get = async_to_raw_response_wrapper(
             android.get,
+        )
+        self.get_connect_address = async_to_raw_response_wrapper(
+            android.get_connect_address,
         )
         self.install = async_to_raw_response_wrapper(
             android.install,
@@ -878,6 +951,9 @@ class AndroidResourceWithStreamingResponse:
         self.get = to_streamed_response_wrapper(
             android.get,
         )
+        self.get_connect_address = to_streamed_response_wrapper(
+            android.get_connect_address,
+        )
         self.install = to_streamed_response_wrapper(
             android.install,
         )
@@ -907,6 +983,9 @@ class AsyncAndroidResourceWithStreamingResponse:
         )
         self.get = async_to_streamed_response_wrapper(
             android.get,
+        )
+        self.get_connect_address = async_to_streamed_response_wrapper(
+            android.get_connect_address,
         )
         self.install = async_to_streamed_response_wrapper(
             android.install,

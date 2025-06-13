@@ -223,7 +223,7 @@ class TestBoxes:
                     "DEBUG": "true",
                     "API_URL": "https://api.example.com",
                 },
-                "expires_in": "10m",
+                "expires_in": "60m",
                 "labels": {
                     "project": "web-automation",
                     "environment": "testing",
@@ -685,7 +685,7 @@ class TestAsyncBoxes:
                     "DEBUG": "true",
                     "API_URL": "https://api.example.com",
                 },
-                "expires_in": "10m",
+                "expires_in": "60m",
                 "labels": {
                     "project": "web-automation",
                     "environment": "testing",

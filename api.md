@@ -84,7 +84,11 @@ Methods:
 Types:
 
 ```python
-from gbox_sdk.types.v1.boxes import AndroidApp, AndroidListResponse
+from gbox_sdk.types.v1.boxes import (
+    AndroidApp,
+    AndroidListResponse,
+    AndroidGetConnectAddressResponse,
+)
 ```
 
 Methods:
@@ -93,6 +97,7 @@ Methods:
 - <code title="post /boxes/{id}/android/apps/{packageName}/close">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">close</a>(package_name, \*, id) -> None</code>
 - <code title="post /boxes/{id}/android/apps/close-all">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">close_all</a>(id) -> None</code>
 - <code title="get /boxes/{id}/android/apps/{packageName}">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">get</a>(package_name, \*, id) -> <a href="./src/gbox_sdk/types/v1/boxes/android_app.py">AndroidApp</a></code>
+- <code title="get /boxes/{id}/android/connect-address">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">get_connect_address</a>(id) -> <a href="./src/gbox_sdk/types/v1/boxes/android_get_connect_address_response.py">AndroidGetConnectAddressResponse</a></code>
 - <code title="post /boxes/{id}/android/apps">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">install</a>(id, \*\*<a href="src/gbox_sdk/types/v1/boxes/android_install_params.py">params</a>) -> None</code>
 - <code title="post /boxes/{id}/android/apps/{packageName}/open">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">open</a>(package_name, \*, id, \*\*<a href="src/gbox_sdk/types/v1/boxes/android_open_params.py">params</a>) -> None</code>
 - <code title="post /boxes/{id}/android/apps/{packageName}/restart">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">restart</a>(package_name, \*, id) -> None</code>

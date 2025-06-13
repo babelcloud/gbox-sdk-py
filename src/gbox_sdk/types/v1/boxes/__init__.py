@@ -27,3 +27,4 @@ from .browser_cdp_url_response import BrowserCdpURLResponse as BrowserCdpURLResp
 from .action_press_button_params import ActionPressButtonParams as ActionPressButtonParams
 from .action_screenshot_response import ActionScreenshotResponse as ActionScreenshotResponse
 from .browser_connect_url_response import BrowserConnectURLResponse as BrowserConnectURLResponse
+from .android_get_connect_address_response import AndroidGetConnectAddressResponse as AndroidGetConnectAddressResponse

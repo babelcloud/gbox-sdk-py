@@ -32,6 +32,8 @@ from gbox_sdk import GboxClient
 
 client = GboxClient(
     api_key=os.environ.get("GBOX_API_KEY"),  # This is the default and can be omitted
+    # defaults to "production".
+    environment="selfHost",
 )
 
 android_box = client.v1.boxes.create_android()
@@ -54,6 +56,8 @@ from gbox_sdk import AsyncGboxClient
 
 client = AsyncGboxClient(
     api_key=os.environ.get("GBOX_API_KEY"),  # This is the default and can be omitted
+    # defaults to "production".
+    environment="selfHost",
 )
 
 

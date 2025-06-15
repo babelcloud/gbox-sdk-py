@@ -15,7 +15,11 @@ class BoxRunCodeParams(TypedDict, total=False):
     """The code to run"""
 
     argv: List[str]
-    """The arguments to run the code. e.g. ["-h"]"""
+    """The arguments to run the code.
+
+    For example, if you want to run "python index.py --help", you should pass
+    ["--help"] as arguments.
+    """
 
     envs: object
     """The environment variables to run the code"""

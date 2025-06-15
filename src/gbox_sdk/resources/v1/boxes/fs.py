@@ -145,8 +145,10 @@ class FsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FWriteResponse:
-        """
-        Write box file
+        """Creates or overwrites a file.
+
+        Creates necessary directories in the path if they
+        don't exist.
 
         Args:
           content: Content of the file
@@ -301,8 +303,10 @@ class AsyncFsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FWriteResponse:
-        """
-        Write box file
+        """Creates or overwrites a file.
+
+        Creates necessary directories in the path if they
+        don't exist.
 
         Args:
           content: Content of the file

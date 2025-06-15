@@ -15,10 +15,12 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.v1.boxes import f_list_params, f_read_params, f_write_params
+from ....types.v1.boxes import f_list_params, f_read_params, f_write_params, f_remove_params, f_rename_params
 from ....types.v1.boxes.f_list_response import FListResponse
 from ....types.v1.boxes.f_read_response import FReadResponse
 from ....types.v1.boxes.f_write_response import FWriteResponse
+from ....types.v1.boxes.f_remove_response import FRemoveResponse
+from ....types.v1.boxes.f_rename_response import FRenameResponse
 
 __all__ = ["FsResource", "AsyncFsResource"]
 
@@ -130,6 +132,89 @@ class FsResource(SyncAPIResource):
                 query=maybe_transform({"path": path}, f_read_params.FReadParams),
             ),
             cast_to=FReadResponse,
+        )
+
+    def remove(
+        self,
+        id: str,
+        *,
+        path: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> FRemoveResponse:
+        """
+        Delete box file/directory
+
+        Args:
+          path: Path to the file/directory
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._delete(
+            f"/boxes/{id}/fs",
+            body=maybe_transform({"path": path}, f_remove_params.FRemoveParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=FRemoveResponse,
+        )
+
+    def rename(
+        self,
+        id: str,
+        *,
+        new_path: str,
+        old_path: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> FRenameResponse:
+        """
+        Rename box file
+
+        Args:
+          new_path: New path for the file/directory
+
+          old_path: Old path to the file/directory
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._post(
+            f"/boxes/{id}/fs/rename",
+            body=maybe_transform(
+                {
+                    "new_path": new_path,
+                    "old_path": old_path,
+                },
+                f_rename_params.FRenameParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=FRenameResponse,
         )
 
     def write(
@@ -290,6 +375,89 @@ class AsyncFsResource(AsyncAPIResource):
             cast_to=FReadResponse,
         )
 
+    async def remove(
+        self,
+        id: str,
+        *,
+        path: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> FRemoveResponse:
+        """
+        Delete box file/directory
+
+        Args:
+          path: Path to the file/directory
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._delete(
+            f"/boxes/{id}/fs",
+            body=await async_maybe_transform({"path": path}, f_remove_params.FRemoveParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=FRemoveResponse,
+        )
+
+    async def rename(
+        self,
+        id: str,
+        *,
+        new_path: str,
+        old_path: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> FRenameResponse:
+        """
+        Rename box file
+
+        Args:
+          new_path: New path for the file/directory
+
+          old_path: Old path to the file/directory
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._post(
+            f"/boxes/{id}/fs/rename",
+            body=await async_maybe_transform(
+                {
+                    "new_path": new_path,
+                    "old_path": old_path,
+                },
+                f_rename_params.FRenameParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=FRenameResponse,
+        )
+
     async def write(
         self,
         id: str,
@@ -349,6 +517,12 @@ class FsResourceWithRawResponse:
         self.read = to_raw_response_wrapper(
             fs.read,
         )
+        self.remove = to_raw_response_wrapper(
+            fs.remove,
+        )
+        self.rename = to_raw_response_wrapper(
+            fs.rename,
+        )
         self.write = to_raw_response_wrapper(
             fs.write,
         )
@@ -363,6 +537,12 @@ class AsyncFsResourceWithRawResponse:
         )
         self.read = async_to_raw_response_wrapper(
             fs.read,
+        )
+        self.remove = async_to_raw_response_wrapper(
+            fs.remove,
+        )
+        self.rename = async_to_raw_response_wrapper(
+            fs.rename,
         )
         self.write = async_to_raw_response_wrapper(
             fs.write,
@@ -379,6 +559,12 @@ class FsResourceWithStreamingResponse:
         self.read = to_streamed_response_wrapper(
             fs.read,
         )
+        self.remove = to_streamed_response_wrapper(
+            fs.remove,
+        )
+        self.rename = to_streamed_response_wrapper(
+            fs.rename,
+        )
         self.write = to_streamed_response_wrapper(
             fs.write,
         )
@@ -393,6 +579,12 @@ class AsyncFsResourceWithStreamingResponse:
         )
         self.read = async_to_streamed_response_wrapper(
             fs.read,
+        )
+        self.remove = async_to_streamed_response_wrapper(
+            fs.remove,
+        )
+        self.rename = async_to_streamed_response_wrapper(
+            fs.rename,
         )
         self.write = async_to_streamed_response_wrapper(
             fs.write,

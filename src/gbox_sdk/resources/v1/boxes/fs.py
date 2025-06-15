@@ -15,10 +15,18 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.v1.boxes import f_list_params, f_read_params, f_write_params, f_remove_params, f_rename_params
+from ....types.v1.boxes import (
+    f_list_params,
+    f_read_params,
+    f_write_params,
+    f_exists_params,
+    f_remove_params,
+    f_rename_params,
+)
 from ....types.v1.boxes.f_list_response import FListResponse
 from ....types.v1.boxes.f_read_response import FReadResponse
 from ....types.v1.boxes.f_write_response import FWriteResponse
+from ....types.v1.boxes.f_exists_response import FExistsResponse
 from ....types.v1.boxes.f_remove_response import FRemoveResponse
 from ....types.v1.boxes.f_rename_response import FRenameResponse
 
@@ -92,6 +100,43 @@ class FsResource(SyncAPIResource):
                 ),
             ),
             cast_to=FListResponse,
+        )
+
+    def exists(
+        self,
+        id: str,
+        *,
+        path: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> FExistsResponse:
+        """
+        Check if file exists
+
+        Args:
+          path: Path to the file/directory
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._post(
+            f"/boxes/{id}/fs/exists",
+            body=maybe_transform({"path": path}, f_exists_params.FExistsParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=FExistsResponse,
         )
 
     def read(
@@ -335,6 +380,43 @@ class AsyncFsResource(AsyncAPIResource):
             cast_to=FListResponse,
         )
 
+    async def exists(
+        self,
+        id: str,
+        *,
+        path: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> FExistsResponse:
+        """
+        Check if file exists
+
+        Args:
+          path: Path to the file/directory
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._post(
+            f"/boxes/{id}/fs/exists",
+            body=await async_maybe_transform({"path": path}, f_exists_params.FExistsParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=FExistsResponse,
+        )
+
     async def read(
         self,
         id: str,
@@ -514,6 +596,9 @@ class FsResourceWithRawResponse:
         self.list = to_raw_response_wrapper(
             fs.list,
         )
+        self.exists = to_raw_response_wrapper(
+            fs.exists,
+        )
         self.read = to_raw_response_wrapper(
             fs.read,
         )
@@ -534,6 +619,9 @@ class AsyncFsResourceWithRawResponse:
 
         self.list = async_to_raw_response_wrapper(
             fs.list,
+        )
+        self.exists = async_to_raw_response_wrapper(
+            fs.exists,
         )
         self.read = async_to_raw_response_wrapper(
             fs.read,
@@ -556,6 +644,9 @@ class FsResourceWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             fs.list,
         )
+        self.exists = to_streamed_response_wrapper(
+            fs.exists,
+        )
         self.read = to_streamed_response_wrapper(
             fs.read,
         )
@@ -576,6 +667,9 @@ class AsyncFsResourceWithStreamingResponse:
 
         self.list = async_to_streamed_response_wrapper(
             fs.list,
+        )
+        self.exists = async_to_streamed_response_wrapper(
+            fs.exists,
         )
         self.read = async_to_streamed_response_wrapper(
             fs.read,

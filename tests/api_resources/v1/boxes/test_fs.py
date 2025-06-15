@@ -91,6 +91,16 @@ class TestFs:
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_exists_with_all_params(self, client: GboxClient) -> None:
+        f = client.v1.boxes.fs.exists(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            path="/home/user/documents/output.txt",
+            working_dir="/home/user/documents",
+        )
+        assert_matches_type(FExistsResponse, f, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
     def test_raw_response_exists(self, client: GboxClient) -> None:
         response = client.v1.boxes.fs.with_raw_response.exists(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
@@ -137,6 +147,16 @@ class TestFs:
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_read_with_all_params(self, client: GboxClient) -> None:
+        f = client.v1.boxes.fs.read(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            path="/home/user/documents/config.json",
+            working_dir="/home/user/documents",
+        )
+        assert_matches_type(FReadResponse, f, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
     def test_raw_response_read(self, client: GboxClient) -> None:
         response = client.v1.boxes.fs.with_raw_response.read(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
@@ -178,6 +198,16 @@ class TestFs:
         f = client.v1.boxes.fs.remove(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path="/home/user/documents/output.txt",
+        )
+        assert_matches_type(FRemoveResponse, f, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_remove_with_all_params(self, client: GboxClient) -> None:
+        f = client.v1.boxes.fs.remove(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            path="/home/user/documents/output.txt",
+            working_dir="/home/user/documents",
         )
         assert_matches_type(FRemoveResponse, f, path=["response"])
 
@@ -230,6 +260,17 @@ class TestFs:
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_rename_with_all_params(self, client: GboxClient) -> None:
+        f = client.v1.boxes.fs.rename(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            new_path="/home/user/documents/new-name.txt",
+            old_path="/home/user/documents/output.txt",
+            working_dir="/home/user/documents",
+        )
+        assert_matches_type(FRenameResponse, f, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
     def test_raw_response_rename(self, client: GboxClient) -> None:
         response = client.v1.boxes.fs.with_raw_response.rename(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
@@ -275,6 +316,17 @@ class TestFs:
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             content="Hello, World!\nThis is file content.",
             path="/home/user/documents/output.txt",
+        )
+        assert_matches_type(FWriteResponse, f, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_write_with_all_params(self, client: GboxClient) -> None:
+        f = client.v1.boxes.fs.write(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            content="Hello, World!\nThis is file content.",
+            path="/home/user/documents/output.txt",
+            working_dir="/home/user/documents",
         )
         assert_matches_type(FWriteResponse, f, path=["response"])
 
@@ -389,6 +441,16 @@ class TestAsyncFs:
 
     @pytest.mark.skip()
     @parametrize
+    async def test_method_exists_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        f = await async_client.v1.boxes.fs.exists(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            path="/home/user/documents/output.txt",
+            working_dir="/home/user/documents",
+        )
+        assert_matches_type(FExistsResponse, f, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
     async def test_raw_response_exists(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.fs.with_raw_response.exists(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
@@ -435,6 +497,16 @@ class TestAsyncFs:
 
     @pytest.mark.skip()
     @parametrize
+    async def test_method_read_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        f = await async_client.v1.boxes.fs.read(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            path="/home/user/documents/config.json",
+            working_dir="/home/user/documents",
+        )
+        assert_matches_type(FReadResponse, f, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
     async def test_raw_response_read(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.fs.with_raw_response.read(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
@@ -476,6 +548,16 @@ class TestAsyncFs:
         f = await async_client.v1.boxes.fs.remove(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path="/home/user/documents/output.txt",
+        )
+        assert_matches_type(FRemoveResponse, f, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_remove_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        f = await async_client.v1.boxes.fs.remove(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            path="/home/user/documents/output.txt",
+            working_dir="/home/user/documents",
         )
         assert_matches_type(FRemoveResponse, f, path=["response"])
 
@@ -528,6 +610,17 @@ class TestAsyncFs:
 
     @pytest.mark.skip()
     @parametrize
+    async def test_method_rename_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        f = await async_client.v1.boxes.fs.rename(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            new_path="/home/user/documents/new-name.txt",
+            old_path="/home/user/documents/output.txt",
+            working_dir="/home/user/documents",
+        )
+        assert_matches_type(FRenameResponse, f, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
     async def test_raw_response_rename(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.fs.with_raw_response.rename(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
@@ -573,6 +666,17 @@ class TestAsyncFs:
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             content="Hello, World!\nThis is file content.",
             path="/home/user/documents/output.txt",
+        )
+        assert_matches_type(FWriteResponse, f, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_write_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        f = await async_client.v1.boxes.fs.write(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            content="Hello, World!\nThis is file content.",
+            path="/home/user/documents/output.txt",
+            working_dir="/home/user/documents",
         )
         assert_matches_type(FWriteResponse, f, path=["response"])
 

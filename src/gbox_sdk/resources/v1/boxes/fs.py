@@ -107,6 +107,7 @@ class FsResource(SyncAPIResource):
         id: str,
         *,
         path: str,
+        working_dir: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -114,11 +115,16 @@ class FsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FExistsResponse:
-        """
-        Check if file exists
+        """Check if file exists
 
         Args:
-          path: Path to the file/directory
+          path: Path to the file/directory.
+
+        If the path is not start with '/', the
+              file/directory will be checked from the working directory
+
+          working_dir: Working directory. If not provided, the file will be read from the root
+              directory.
 
           extra_headers: Send extra headers
 
@@ -132,7 +138,13 @@ class FsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
             f"/boxes/{id}/fs/exists",
-            body=maybe_transform({"path": path}, f_exists_params.FExistsParams),
+            body=maybe_transform(
+                {
+                    "path": path,
+                    "working_dir": working_dir,
+                },
+                f_exists_params.FExistsParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -144,6 +156,7 @@ class FsResource(SyncAPIResource):
         id: str,
         *,
         path: str,
+        working_dir: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -151,11 +164,16 @@ class FsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FReadResponse:
-        """
-        Read box file
+        """Read box file
 
         Args:
-          path: Path to the file
+          path: Path to the file.
+
+        If the path is not start with '/', the file will be read from
+              the working directory.
+
+          working_dir: Working directory. If not provided, the file will be read from the root
+              directory.
 
           extra_headers: Send extra headers
 
@@ -174,7 +192,13 @@ class FsResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"path": path}, f_read_params.FReadParams),
+                query=maybe_transform(
+                    {
+                        "path": path,
+                        "working_dir": working_dir,
+                    },
+                    f_read_params.FReadParams,
+                ),
             ),
             cast_to=FReadResponse,
         )
@@ -184,6 +208,7 @@ class FsResource(SyncAPIResource):
         id: str,
         *,
         path: str,
+        working_dir: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -191,11 +216,16 @@ class FsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FRemoveResponse:
-        """
-        Delete box file/directory
+        """Delete box file/directory
 
         Args:
-          path: Path to the file/directory
+          path: Path to the file/directory.
+
+        If the path is not start with '/', the
+              file/directory will be deleted from the working directory
+
+          working_dir: Working directory. If not provided, the file will be read from the root
+              directory.
 
           extra_headers: Send extra headers
 
@@ -209,7 +239,13 @@ class FsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._delete(
             f"/boxes/{id}/fs",
-            body=maybe_transform({"path": path}, f_remove_params.FRemoveParams),
+            body=maybe_transform(
+                {
+                    "path": path,
+                    "working_dir": working_dir,
+                },
+                f_remove_params.FRemoveParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -222,6 +258,7 @@ class FsResource(SyncAPIResource):
         *,
         new_path: str,
         old_path: str,
+        working_dir: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -229,13 +266,19 @@ class FsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FRenameResponse:
-        """
-        Rename box file
+        """Rename box file
 
         Args:
-          new_path: New path for the file/directory
+          new_path: New path for the file/directory.
 
-          old_path: Old path to the file/directory
+        If the path is not start with '/', the
+              file/directory will be renamed to the working directory
+
+          old_path: Old path to the file/directory. If the path is not start with '/', the
+              file/directory will be renamed from the working directory
+
+          working_dir: Working directory. If not provided, the file will be read from the root
+              directory.
 
           extra_headers: Send extra headers
 
@@ -253,6 +296,7 @@ class FsResource(SyncAPIResource):
                 {
                     "new_path": new_path,
                     "old_path": old_path,
+                    "working_dir": working_dir,
                 },
                 f_rename_params.FRenameParams,
             ),
@@ -268,6 +312,7 @@ class FsResource(SyncAPIResource):
         *,
         content: str,
         path: str,
+        working_dir: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -283,7 +328,11 @@ class FsResource(SyncAPIResource):
         Args:
           content: Content of the file
 
-          path: Path to the file
+          path: Path to the file. If the path is not start with '/', the file will be written to
+              the working directory
+
+          working_dir: Working directory. If not provided, the file will be read from the root
+              directory.
 
           extra_headers: Send extra headers
 
@@ -301,6 +350,7 @@ class FsResource(SyncAPIResource):
                 {
                     "content": content,
                     "path": path,
+                    "working_dir": working_dir,
                 },
                 f_write_params.FWriteParams,
             ),
@@ -385,6 +435,7 @@ class AsyncFsResource(AsyncAPIResource):
         id: str,
         *,
         path: str,
+        working_dir: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -392,11 +443,16 @@ class AsyncFsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FExistsResponse:
-        """
-        Check if file exists
+        """Check if file exists
 
         Args:
-          path: Path to the file/directory
+          path: Path to the file/directory.
+
+        If the path is not start with '/', the
+              file/directory will be checked from the working directory
+
+          working_dir: Working directory. If not provided, the file will be read from the root
+              directory.
 
           extra_headers: Send extra headers
 
@@ -410,7 +466,13 @@ class AsyncFsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
             f"/boxes/{id}/fs/exists",
-            body=await async_maybe_transform({"path": path}, f_exists_params.FExistsParams),
+            body=await async_maybe_transform(
+                {
+                    "path": path,
+                    "working_dir": working_dir,
+                },
+                f_exists_params.FExistsParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -422,6 +484,7 @@ class AsyncFsResource(AsyncAPIResource):
         id: str,
         *,
         path: str,
+        working_dir: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -429,11 +492,16 @@ class AsyncFsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FReadResponse:
-        """
-        Read box file
+        """Read box file
 
         Args:
-          path: Path to the file
+          path: Path to the file.
+
+        If the path is not start with '/', the file will be read from
+              the working directory.
+
+          working_dir: Working directory. If not provided, the file will be read from the root
+              directory.
 
           extra_headers: Send extra headers
 
@@ -452,7 +520,13 @@ class AsyncFsResource(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform({"path": path}, f_read_params.FReadParams),
+                query=await async_maybe_transform(
+                    {
+                        "path": path,
+                        "working_dir": working_dir,
+                    },
+                    f_read_params.FReadParams,
+                ),
             ),
             cast_to=FReadResponse,
         )
@@ -462,6 +536,7 @@ class AsyncFsResource(AsyncAPIResource):
         id: str,
         *,
         path: str,
+        working_dir: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -469,11 +544,16 @@ class AsyncFsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FRemoveResponse:
-        """
-        Delete box file/directory
+        """Delete box file/directory
 
         Args:
-          path: Path to the file/directory
+          path: Path to the file/directory.
+
+        If the path is not start with '/', the
+              file/directory will be deleted from the working directory
+
+          working_dir: Working directory. If not provided, the file will be read from the root
+              directory.
 
           extra_headers: Send extra headers
 
@@ -487,7 +567,13 @@ class AsyncFsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._delete(
             f"/boxes/{id}/fs",
-            body=await async_maybe_transform({"path": path}, f_remove_params.FRemoveParams),
+            body=await async_maybe_transform(
+                {
+                    "path": path,
+                    "working_dir": working_dir,
+                },
+                f_remove_params.FRemoveParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -500,6 +586,7 @@ class AsyncFsResource(AsyncAPIResource):
         *,
         new_path: str,
         old_path: str,
+        working_dir: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -507,13 +594,19 @@ class AsyncFsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FRenameResponse:
-        """
-        Rename box file
+        """Rename box file
 
         Args:
-          new_path: New path for the file/directory
+          new_path: New path for the file/directory.
 
-          old_path: Old path to the file/directory
+        If the path is not start with '/', the
+              file/directory will be renamed to the working directory
+
+          old_path: Old path to the file/directory. If the path is not start with '/', the
+              file/directory will be renamed from the working directory
+
+          working_dir: Working directory. If not provided, the file will be read from the root
+              directory.
 
           extra_headers: Send extra headers
 
@@ -531,6 +624,7 @@ class AsyncFsResource(AsyncAPIResource):
                 {
                     "new_path": new_path,
                     "old_path": old_path,
+                    "working_dir": working_dir,
                 },
                 f_rename_params.FRenameParams,
             ),
@@ -546,6 +640,7 @@ class AsyncFsResource(AsyncAPIResource):
         *,
         content: str,
         path: str,
+        working_dir: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -561,7 +656,11 @@ class AsyncFsResource(AsyncAPIResource):
         Args:
           content: Content of the file
 
-          path: Path to the file
+          path: Path to the file. If the path is not start with '/', the file will be written to
+              the working directory
+
+          working_dir: Working directory. If not provided, the file will be read from the root
+              directory.
 
           extra_headers: Send extra headers
 
@@ -579,6 +678,7 @@ class AsyncFsResource(AsyncAPIResource):
                 {
                     "content": content,
                     "path": path,
+                    "working_dir": working_dir,
                 },
                 f_write_params.FWriteParams,
             ),

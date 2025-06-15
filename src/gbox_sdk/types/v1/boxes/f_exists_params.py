@@ -2,11 +2,23 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
+
+from ...._utils import PropertyInfo
 
 __all__ = ["FExistsParams"]
 
 
 class FExistsParams(TypedDict, total=False):
     path: Required[str]
-    """Path to the file/directory"""
+    """Path to the file/directory.
+
+    If the path is not start with '/', the file/directory will be checked from the
+    working directory
+    """
+
+    working_dir: Annotated[str, PropertyInfo(alias="workingDir")]
+    """Working directory.
+
+    If not provided, the file will be read from the root directory.
+    """

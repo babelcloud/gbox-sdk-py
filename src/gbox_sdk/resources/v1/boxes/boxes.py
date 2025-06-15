@@ -424,7 +424,8 @@ class BoxesResource(SyncAPIResource):
         Args:
           code: The code to run
 
-          argv: The arguments to run the code. e.g. ["-h"]
+          argv: The arguments to run the code. For example, if you want to run "python index.py
+              --help", you should pass ["--help"] as arguments.
 
           envs: The environment variables to run the code
 
@@ -913,7 +914,8 @@ class AsyncBoxesResource(AsyncAPIResource):
         Args:
           code: The code to run
 
-          argv: The arguments to run the code. e.g. ["-h"]
+          argv: The arguments to run the code. For example, if you want to run "python index.py
+              --help", you should pass ["--help"] as arguments.
 
           envs: The environment variables to run the code
 

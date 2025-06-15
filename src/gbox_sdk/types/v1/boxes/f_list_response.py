@@ -15,6 +15,9 @@ class DataFile(BaseModel):
     last_modified: datetime = FieldInfo(alias="lastModified")
     """Last modified time of the file"""
 
+    mode: str
+    """File metadata"""
+
     name: str
     """Name of the file"""
 
@@ -29,6 +32,12 @@ class DataFile(BaseModel):
 
 
 class DataDir(BaseModel):
+    last_modified: datetime = FieldInfo(alias="lastModified")
+    """Last modified time of the directory"""
+
+    mode: str
+    """Directory metadata"""
+
     name: str
     """Name of the directory"""
 

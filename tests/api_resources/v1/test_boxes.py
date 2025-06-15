@@ -332,7 +332,7 @@ class TestBoxes:
         box = client.v1.boxes.run_code(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             code='print("Hello, World!")',
-            argv=["-v", "--help"],
+            argv=["--help"],
             envs={
                 "PYTHONPATH": "/usr/lib/python3",
                 "DEBUG": "true",
@@ -794,7 +794,7 @@ class TestAsyncBoxes:
         box = await async_client.v1.boxes.run_code(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             code='print("Hello, World!")',
-            argv=["-v", "--help"],
+            argv=["--help"],
             envs={
                 "PYTHONPATH": "/usr/lib/python3",
                 "DEBUG": "true",

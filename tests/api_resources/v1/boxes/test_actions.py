@@ -383,7 +383,6 @@ class TestActions:
                 "y": 50,
             },
             output_format="base64",
-            screenshot_delay="500ms",
         )
         assert_matches_type(ActionScreenshotResponse, action, path=["response"])
 
@@ -1017,7 +1016,6 @@ class TestAsyncActions:
                 "y": 50,
             },
             output_format="base64",
-            screenshot_delay="500ms",
         )
         assert_matches_type(ActionScreenshotResponse, action, path=["response"])
 

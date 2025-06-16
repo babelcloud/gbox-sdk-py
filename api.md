@@ -81,13 +81,12 @@ Methods:
 Types:
 
 ```python
-from gbox_sdk.types.v1.boxes import BrowserCdpURLResponse, BrowserConnectURLResponse
+from gbox_sdk.types.v1.boxes import BrowserCdpURLResponse
 ```
 
 Methods:
 
 - <code title="get /boxes/{id}/browser/connect-url/cdp">client.v1.boxes.browser.<a href="./src/gbox_sdk/resources/v1/boxes/browser.py">cdp_url</a>(id) -> str</code>
-- <code title="get /boxes/{id}/browser/connect-url">client.v1.boxes.browser.<a href="./src/gbox_sdk/resources/v1/boxes/browser.py">connect_url</a>(id) -> <a href="./src/gbox_sdk/types/v1/boxes/browser_connect_url_response.py">BrowserConnectURLResponse</a></code>
 
 ### Android
 

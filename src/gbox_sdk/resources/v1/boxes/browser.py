@@ -14,7 +14,6 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.v1.boxes.browser_connect_url_response import BrowserConnectURLResponse
 
 __all__ = ["BrowserResource", "AsyncBrowserResource"]
 
@@ -72,39 +71,6 @@ class BrowserResource(SyncAPIResource):
             cast_to=str,
         )
 
-    def connect_url(
-        self,
-        id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> BrowserConnectURLResponse:
-        """
-        Get connect url
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return self._get(
-            f"/boxes/{id}/browser/connect-url",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=BrowserConnectURLResponse,
-        )
-
 
 class AsyncBrowserResource(AsyncAPIResource):
     @cached_property
@@ -159,39 +125,6 @@ class AsyncBrowserResource(AsyncAPIResource):
             cast_to=str,
         )
 
-    async def connect_url(
-        self,
-        id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> BrowserConnectURLResponse:
-        """
-        Get connect url
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return await self._get(
-            f"/boxes/{id}/browser/connect-url",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=BrowserConnectURLResponse,
-        )
-
 
 class BrowserResourceWithRawResponse:
     def __init__(self, browser: BrowserResource) -> None:
@@ -199,9 +132,6 @@ class BrowserResourceWithRawResponse:
 
         self.cdp_url = to_raw_response_wrapper(
             browser.cdp_url,
-        )
-        self.connect_url = to_raw_response_wrapper(
-            browser.connect_url,
         )
 
 
@@ -212,9 +142,6 @@ class AsyncBrowserResourceWithRawResponse:
         self.cdp_url = async_to_raw_response_wrapper(
             browser.cdp_url,
         )
-        self.connect_url = async_to_raw_response_wrapper(
-            browser.connect_url,
-        )
 
 
 class BrowserResourceWithStreamingResponse:
@@ -224,9 +151,6 @@ class BrowserResourceWithStreamingResponse:
         self.cdp_url = to_streamed_response_wrapper(
             browser.cdp_url,
         )
-        self.connect_url = to_streamed_response_wrapper(
-            browser.connect_url,
-        )
 
 
 class AsyncBrowserResourceWithStreamingResponse:
@@ -235,7 +159,4 @@ class AsyncBrowserResourceWithStreamingResponse:
 
         self.cdp_url = async_to_streamed_response_wrapper(
             browser.cdp_url,
-        )
-        self.connect_url = async_to_streamed_response_wrapper(
-            browser.connect_url,
         )

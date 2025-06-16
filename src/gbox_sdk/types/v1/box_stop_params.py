@@ -2,16 +2,11 @@
 
 from __future__ import annotations
 
-from typing_extensions import Annotated, TypedDict
-
-from ..._utils import PropertyInfo
+from typing_extensions import TypedDict
 
 __all__ = ["BoxStopParams"]
 
 
 class BoxStopParams(TypedDict, total=False):
-    api_timeout: Annotated[str, PropertyInfo(alias="timeout")]
-    """Timeout for the box operation to be completed, default is 30s"""
-
     wait: bool
     """Wait for the box operation to be completed, default is true"""

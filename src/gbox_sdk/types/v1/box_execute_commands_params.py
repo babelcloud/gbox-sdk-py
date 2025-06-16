@@ -18,7 +18,11 @@ class BoxExecuteCommandsParams(TypedDict, total=False):
     """The environment variables to run the command"""
 
     api_timeout: Annotated[str, PropertyInfo(alias="timeout")]
-    """The timeout of the command. e.g. '30s'"""
+    """The timeout of the command.
+
+    e.g. '30s' or '1m' or '1h'. If the command times out, the exit code will be 124.
+    For example: 'timeout 5s sleep 10s' will result in exit code 124.
+    """
 
     working_dir: Annotated[str, PropertyInfo(alias="workingDir")]
     """The working directory of the command"""

@@ -2,9 +2,8 @@
 
 from __future__ import annotations
 
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import TypedDict
 
-from ..._utils import PropertyInfo
 from .create_box_config_param import CreateBoxConfigParam
 
 __all__ = ["BoxCreateAndroidParams"]
@@ -13,9 +12,6 @@ __all__ = ["BoxCreateAndroidParams"]
 class BoxCreateAndroidParams(TypedDict, total=False):
     config: CreateBoxConfigParam
     """Configuration for a box instance"""
-
-    api_timeout: Annotated[str, PropertyInfo(alias="timeout")]
-    """Timeout for the box operation to be completed, default is 30s"""
 
     wait: bool
     """Wait for the box operation to be completed, default is true"""

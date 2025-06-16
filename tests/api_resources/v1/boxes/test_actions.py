@@ -40,6 +40,7 @@ class TestActions:
             button="left",
             double=False,
             output_format="base64",
+            screenshot_delay="500ms",
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -118,6 +119,7 @@ class TestActions:
             ],
             duration="50ms",
             output_format="base64",
+            screenshot_delay="500ms",
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -203,6 +205,7 @@ class TestActions:
             x=200,
             y=300,
             output_format="base64",
+            screenshot_delay="500ms",
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -262,6 +265,7 @@ class TestActions:
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             buttons=["power"],
             output_format="base64",
+            screenshot_delay="500ms",
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -318,6 +322,7 @@ class TestActions:
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             keys=["enter"],
             output_format="base64",
+            screenshot_delay="500ms",
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -378,6 +383,7 @@ class TestActions:
                 "y": 50,
             },
             output_format="base64",
+            screenshot_delay="500ms",
         )
         assert_matches_type(ActionScreenshotResponse, action, path=["response"])
 
@@ -437,6 +443,7 @@ class TestActions:
             x=100,
             y=100,
             output_format="base64",
+            screenshot_delay="500ms",
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -524,6 +531,7 @@ class TestActions:
                 }
             ],
             output_format="base64",
+            screenshot_delay="500ms",
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -601,6 +609,7 @@ class TestActions:
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             text="Hello World",
             output_format="base64",
+            screenshot_delay="500ms",
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -665,6 +674,7 @@ class TestAsyncActions:
             button="left",
             double=False,
             output_format="base64",
+            screenshot_delay="500ms",
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -743,6 +753,7 @@ class TestAsyncActions:
             ],
             duration="50ms",
             output_format="base64",
+            screenshot_delay="500ms",
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -828,6 +839,7 @@ class TestAsyncActions:
             x=200,
             y=300,
             output_format="base64",
+            screenshot_delay="500ms",
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -887,6 +899,7 @@ class TestAsyncActions:
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             buttons=["power"],
             output_format="base64",
+            screenshot_delay="500ms",
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -943,6 +956,7 @@ class TestAsyncActions:
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             keys=["enter"],
             output_format="base64",
+            screenshot_delay="500ms",
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -1003,6 +1017,7 @@ class TestAsyncActions:
                 "y": 50,
             },
             output_format="base64",
+            screenshot_delay="500ms",
         )
         assert_matches_type(ActionScreenshotResponse, action, path=["response"])
 
@@ -1062,6 +1077,7 @@ class TestAsyncActions:
             x=100,
             y=100,
             output_format="base64",
+            screenshot_delay="500ms",
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -1149,6 +1165,7 @@ class TestAsyncActions:
                 }
             ],
             output_format="base64",
+            screenshot_delay="500ms",
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -1226,6 +1243,7 @@ class TestAsyncActions:
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             text="Hello World",
             output_format="base64",
+            screenshot_delay="500ms",
         )
         assert_matches_type(ActionResult, action, path=["response"])
 

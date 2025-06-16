@@ -64,6 +64,7 @@ class ActionsResource(SyncAPIResource):
         button: Literal["left", "right", "middle"] | NotGiven = NOT_GIVEN,
         double: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -83,7 +84,19 @@ class ActionsResource(SyncAPIResource):
 
           double: Whether to perform a double click
 
-          output_format: Type of the URI
+          output_format: Type of the URI. default is base64.
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
 
           extra_headers: Send extra headers
 
@@ -104,6 +117,7 @@ class ActionsResource(SyncAPIResource):
                     "button": button,
                     "double": double,
                     "output_format": output_format,
+                    "screenshot_delay": screenshot_delay,
                 },
                 action_click_params.ActionClickParams,
             ),
@@ -120,6 +134,7 @@ class ActionsResource(SyncAPIResource):
         path: Iterable[action_drag_params.Path],
         duration: str | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -135,7 +150,19 @@ class ActionsResource(SyncAPIResource):
 
           duration: Time interval between points (e.g. "50ms")
 
-          output_format: Type of the URI
+          output_format: Type of the URI. default is base64.
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
 
           extra_headers: Send extra headers
 
@@ -154,6 +181,7 @@ class ActionsResource(SyncAPIResource):
                     "path": path,
                     "duration": duration,
                     "output_format": output_format,
+                    "screenshot_delay": screenshot_delay,
                 },
                 action_drag_params.ActionDragParams,
             ),
@@ -170,6 +198,7 @@ class ActionsResource(SyncAPIResource):
         x: float,
         y: float,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -185,7 +214,19 @@ class ActionsResource(SyncAPIResource):
 
           y: Y coordinate to move to
 
-          output_format: Type of the URI
+          output_format: Type of the URI. default is base64.
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
 
           extra_headers: Send extra headers
 
@@ -204,6 +245,7 @@ class ActionsResource(SyncAPIResource):
                     "x": x,
                     "y": y,
                     "output_format": output_format,
+                    "screenshot_delay": screenshot_delay,
                 },
                 action_move_params.ActionMoveParams,
             ),
@@ -219,6 +261,7 @@ class ActionsResource(SyncAPIResource):
         *,
         buttons: List[Literal["power", "volumeUp", "volumeDown", "volumeMute", "home", "back", "menu"]],
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -234,7 +277,19 @@ class ActionsResource(SyncAPIResource):
         Args:
           buttons: Button to press
 
-          output_format: Type of the URI
+          output_format: Type of the URI. default is base64.
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
 
           extra_headers: Send extra headers
 
@@ -252,6 +307,7 @@ class ActionsResource(SyncAPIResource):
                 {
                     "buttons": buttons,
                     "output_format": output_format,
+                    "screenshot_delay": screenshot_delay,
                 },
                 action_press_button_params.ActionPressButtonParams,
             ),
@@ -380,6 +436,7 @@ class ActionsResource(SyncAPIResource):
             ]
         ],
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -396,7 +453,19 @@ class ActionsResource(SyncAPIResource):
           keys: This is an array of keyboard keys to press. Supports cross-platform
               compatibility.
 
-          output_format: Type of the URI
+          output_format: Type of the URI. default is base64.
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
 
           extra_headers: Send extra headers
 
@@ -414,6 +483,7 @@ class ActionsResource(SyncAPIResource):
                 {
                     "keys": keys,
                     "output_format": output_format,
+                    "screenshot_delay": screenshot_delay,
                 },
                 action_press_key_params.ActionPressKeyParams,
             ),
@@ -429,6 +499,7 @@ class ActionsResource(SyncAPIResource):
         *,
         clip: action_screenshot_params.Clip | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -442,7 +513,19 @@ class ActionsResource(SyncAPIResource):
         Args:
           clip: Clipping region for screenshot capture
 
-          output_format: Type of the URI
+          output_format: Type of the URI. default is base64.
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
 
           extra_headers: Send extra headers
 
@@ -460,6 +543,7 @@ class ActionsResource(SyncAPIResource):
                 {
                     "clip": clip,
                     "output_format": output_format,
+                    "screenshot_delay": screenshot_delay,
                 },
                 action_screenshot_params.ActionScreenshotParams,
             ),
@@ -478,6 +562,7 @@ class ActionsResource(SyncAPIResource):
         x: float,
         y: float,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -497,7 +582,19 @@ class ActionsResource(SyncAPIResource):
 
           y: Y coordinate of the scroll position
 
-          output_format: Type of the URI
+          output_format: Type of the URI. default is base64.
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
 
           extra_headers: Send extra headers
 
@@ -518,6 +615,7 @@ class ActionsResource(SyncAPIResource):
                     "x": x,
                     "y": y,
                     "output_format": output_format,
+                    "screenshot_delay": screenshot_delay,
                 },
                 action_scroll_params.ActionScrollParams,
             ),
@@ -533,6 +631,7 @@ class ActionsResource(SyncAPIResource):
         *,
         points: Iterable[action_touch_params.Point],
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -546,7 +645,19 @@ class ActionsResource(SyncAPIResource):
         Args:
           points: Array of touch points and their actions
 
-          output_format: Type of the URI
+          output_format: Type of the URI. default is base64.
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
 
           extra_headers: Send extra headers
 
@@ -564,6 +675,7 @@ class ActionsResource(SyncAPIResource):
                 {
                     "points": points,
                     "output_format": output_format,
+                    "screenshot_delay": screenshot_delay,
                 },
                 action_touch_params.ActionTouchParams,
             ),
@@ -579,6 +691,7 @@ class ActionsResource(SyncAPIResource):
         *,
         text: str,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -594,7 +707,19 @@ class ActionsResource(SyncAPIResource):
         Args:
           text: Text to type
 
-          output_format: Type of the URI
+          output_format: Type of the URI. default is base64.
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
 
           extra_headers: Send extra headers
 
@@ -612,6 +737,7 @@ class ActionsResource(SyncAPIResource):
                 {
                     "text": text,
                     "output_format": output_format,
+                    "screenshot_delay": screenshot_delay,
                 },
                 action_type_params.ActionTypeParams,
             ),
@@ -651,6 +777,7 @@ class AsyncActionsResource(AsyncAPIResource):
         button: Literal["left", "right", "middle"] | NotGiven = NOT_GIVEN,
         double: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -670,7 +797,19 @@ class AsyncActionsResource(AsyncAPIResource):
 
           double: Whether to perform a double click
 
-          output_format: Type of the URI
+          output_format: Type of the URI. default is base64.
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
 
           extra_headers: Send extra headers
 
@@ -691,6 +830,7 @@ class AsyncActionsResource(AsyncAPIResource):
                     "button": button,
                     "double": double,
                     "output_format": output_format,
+                    "screenshot_delay": screenshot_delay,
                 },
                 action_click_params.ActionClickParams,
             ),
@@ -707,6 +847,7 @@ class AsyncActionsResource(AsyncAPIResource):
         path: Iterable[action_drag_params.Path],
         duration: str | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -722,7 +863,19 @@ class AsyncActionsResource(AsyncAPIResource):
 
           duration: Time interval between points (e.g. "50ms")
 
-          output_format: Type of the URI
+          output_format: Type of the URI. default is base64.
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
 
           extra_headers: Send extra headers
 
@@ -741,6 +894,7 @@ class AsyncActionsResource(AsyncAPIResource):
                     "path": path,
                     "duration": duration,
                     "output_format": output_format,
+                    "screenshot_delay": screenshot_delay,
                 },
                 action_drag_params.ActionDragParams,
             ),
@@ -757,6 +911,7 @@ class AsyncActionsResource(AsyncAPIResource):
         x: float,
         y: float,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -772,7 +927,19 @@ class AsyncActionsResource(AsyncAPIResource):
 
           y: Y coordinate to move to
 
-          output_format: Type of the URI
+          output_format: Type of the URI. default is base64.
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
 
           extra_headers: Send extra headers
 
@@ -791,6 +958,7 @@ class AsyncActionsResource(AsyncAPIResource):
                     "x": x,
                     "y": y,
                     "output_format": output_format,
+                    "screenshot_delay": screenshot_delay,
                 },
                 action_move_params.ActionMoveParams,
             ),
@@ -806,6 +974,7 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         buttons: List[Literal["power", "volumeUp", "volumeDown", "volumeMute", "home", "back", "menu"]],
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -821,7 +990,19 @@ class AsyncActionsResource(AsyncAPIResource):
         Args:
           buttons: Button to press
 
-          output_format: Type of the URI
+          output_format: Type of the URI. default is base64.
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
 
           extra_headers: Send extra headers
 
@@ -839,6 +1020,7 @@ class AsyncActionsResource(AsyncAPIResource):
                 {
                     "buttons": buttons,
                     "output_format": output_format,
+                    "screenshot_delay": screenshot_delay,
                 },
                 action_press_button_params.ActionPressButtonParams,
             ),
@@ -967,6 +1149,7 @@ class AsyncActionsResource(AsyncAPIResource):
             ]
         ],
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -983,7 +1166,19 @@ class AsyncActionsResource(AsyncAPIResource):
           keys: This is an array of keyboard keys to press. Supports cross-platform
               compatibility.
 
-          output_format: Type of the URI
+          output_format: Type of the URI. default is base64.
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
 
           extra_headers: Send extra headers
 
@@ -1001,6 +1196,7 @@ class AsyncActionsResource(AsyncAPIResource):
                 {
                     "keys": keys,
                     "output_format": output_format,
+                    "screenshot_delay": screenshot_delay,
                 },
                 action_press_key_params.ActionPressKeyParams,
             ),
@@ -1016,6 +1212,7 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         clip: action_screenshot_params.Clip | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1029,7 +1226,19 @@ class AsyncActionsResource(AsyncAPIResource):
         Args:
           clip: Clipping region for screenshot capture
 
-          output_format: Type of the URI
+          output_format: Type of the URI. default is base64.
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
 
           extra_headers: Send extra headers
 
@@ -1047,6 +1256,7 @@ class AsyncActionsResource(AsyncAPIResource):
                 {
                     "clip": clip,
                     "output_format": output_format,
+                    "screenshot_delay": screenshot_delay,
                 },
                 action_screenshot_params.ActionScreenshotParams,
             ),
@@ -1065,6 +1275,7 @@ class AsyncActionsResource(AsyncAPIResource):
         x: float,
         y: float,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1084,7 +1295,19 @@ class AsyncActionsResource(AsyncAPIResource):
 
           y: Y coordinate of the scroll position
 
-          output_format: Type of the URI
+          output_format: Type of the URI. default is base64.
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
 
           extra_headers: Send extra headers
 
@@ -1105,6 +1328,7 @@ class AsyncActionsResource(AsyncAPIResource):
                     "x": x,
                     "y": y,
                     "output_format": output_format,
+                    "screenshot_delay": screenshot_delay,
                 },
                 action_scroll_params.ActionScrollParams,
             ),
@@ -1120,6 +1344,7 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         points: Iterable[action_touch_params.Point],
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1133,7 +1358,19 @@ class AsyncActionsResource(AsyncAPIResource):
         Args:
           points: Array of touch points and their actions
 
-          output_format: Type of the URI
+          output_format: Type of the URI. default is base64.
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
 
           extra_headers: Send extra headers
 
@@ -1151,6 +1388,7 @@ class AsyncActionsResource(AsyncAPIResource):
                 {
                     "points": points,
                     "output_format": output_format,
+                    "screenshot_delay": screenshot_delay,
                 },
                 action_touch_params.ActionTouchParams,
             ),
@@ -1166,6 +1404,7 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         text: str,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1181,7 +1420,19 @@ class AsyncActionsResource(AsyncAPIResource):
         Args:
           text: Text to type
 
-          output_format: Type of the URI
+          output_format: Type of the URI. default is base64.
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
 
           extra_headers: Send extra headers
 
@@ -1199,6 +1450,7 @@ class AsyncActionsResource(AsyncAPIResource):
                 {
                     "text": text,
                     "output_format": output_format,
+                    "screenshot_delay": screenshot_delay,
                 },
                 action_type_params.ActionTypeParams,
             ),

@@ -209,7 +209,6 @@ class BoxesResource(SyncAPIResource):
         self,
         id: str,
         *,
-        api_timeout: str | NotGiven = NOT_GIVEN,
         wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -222,8 +221,6 @@ class BoxesResource(SyncAPIResource):
         Delete box
 
         Args:
-          api_timeout: Timeout for the box operation to be completed, default is 30s
-
           wait: Wait for the box operation to be completed, default is true
 
           extra_headers: Send extra headers
@@ -239,13 +236,7 @@ class BoxesResource(SyncAPIResource):
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
             f"/boxes/{id}",
-            body=maybe_transform(
-                {
-                    "api_timeout": api_timeout,
-                    "wait": wait,
-                },
-                box_delete_params.BoxDeleteParams,
-            ),
+            body=maybe_transform({"wait": wait}, box_delete_params.BoxDeleteParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -256,7 +247,6 @@ class BoxesResource(SyncAPIResource):
         self,
         *,
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
-        api_timeout: str | NotGiven = NOT_GIVEN,
         wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -270,8 +260,6 @@ class BoxesResource(SyncAPIResource):
 
         Args:
           config: Configuration for a box instance
-
-          api_timeout: Timeout for the box operation to be completed, default is 30s
 
           wait: Wait for the box operation to be completed, default is true
 
@@ -288,7 +276,6 @@ class BoxesResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "config": config,
-                    "api_timeout": api_timeout,
                     "wait": wait,
                 },
                 box_create_android_params.BoxCreateAndroidParams,
@@ -303,7 +290,6 @@ class BoxesResource(SyncAPIResource):
         self,
         *,
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
-        api_timeout: str | NotGiven = NOT_GIVEN,
         wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -317,8 +303,6 @@ class BoxesResource(SyncAPIResource):
 
         Args:
           config: Configuration for a box instance
-
-          api_timeout: Timeout for the box operation to be completed, default is 30s
 
           wait: Wait for the box operation to be completed, default is true
 
@@ -335,7 +319,6 @@ class BoxesResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "config": config,
-                    "api_timeout": api_timeout,
                     "wait": wait,
                 },
                 box_create_linux_params.BoxCreateLinuxParams,
@@ -370,7 +353,9 @@ class BoxesResource(SyncAPIResource):
 
           envs: The environment variables to run the command
 
-          api_timeout: The timeout of the command. e.g. '30s'
+          api_timeout: The timeout of the command. e.g. '30s' or '1m' or '1h'. If the command times
+              out, the exit code will be 124. For example: 'timeout 5s sleep 10s' will result
+              in exit code 124.
 
           working_dir: The working directory of the command
 
@@ -431,7 +416,8 @@ class BoxesResource(SyncAPIResource):
 
           language: The language of the code.
 
-          api_timeout: The timeout of the code. e.g. "30s"
+          api_timeout: The timeout of the code execution. e.g. "30s" or "1m" or "1h". If the code
+              execution times out, the exit code will be 124.
 
           working_dir: The working directory of the code.
 
@@ -468,7 +454,6 @@ class BoxesResource(SyncAPIResource):
         self,
         id: str,
         *,
-        api_timeout: str | NotGiven = NOT_GIVEN,
         wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -481,8 +466,6 @@ class BoxesResource(SyncAPIResource):
         Start box
 
         Args:
-          api_timeout: Timeout for the box operation to be completed, default is 30s
-
           wait: Wait for the box operation to be completed, default is true
 
           extra_headers: Send extra headers
@@ -499,13 +482,7 @@ class BoxesResource(SyncAPIResource):
             BoxStartResponse,
             self._post(
                 f"/boxes/{id}/start",
-                body=maybe_transform(
-                    {
-                        "api_timeout": api_timeout,
-                        "wait": wait,
-                    },
-                    box_start_params.BoxStartParams,
-                ),
+                body=maybe_transform({"wait": wait}, box_start_params.BoxStartParams),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
@@ -517,7 +494,6 @@ class BoxesResource(SyncAPIResource):
         self,
         id: str,
         *,
-        api_timeout: str | NotGiven = NOT_GIVEN,
         wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -530,8 +506,6 @@ class BoxesResource(SyncAPIResource):
         Stop box
 
         Args:
-          api_timeout: Timeout for the box operation to be completed, default is 30s
-
           wait: Wait for the box operation to be completed, default is true
 
           extra_headers: Send extra headers
@@ -548,13 +522,7 @@ class BoxesResource(SyncAPIResource):
             BoxStopResponse,
             self._post(
                 f"/boxes/{id}/stop",
-                body=maybe_transform(
-                    {
-                        "api_timeout": api_timeout,
-                        "wait": wait,
-                    },
-                    box_stop_params.BoxStopParams,
-                ),
+                body=maybe_transform({"wait": wait}, box_stop_params.BoxStopParams),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
@@ -699,7 +667,6 @@ class AsyncBoxesResource(AsyncAPIResource):
         self,
         id: str,
         *,
-        api_timeout: str | NotGiven = NOT_GIVEN,
         wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -712,8 +679,6 @@ class AsyncBoxesResource(AsyncAPIResource):
         Delete box
 
         Args:
-          api_timeout: Timeout for the box operation to be completed, default is 30s
-
           wait: Wait for the box operation to be completed, default is true
 
           extra_headers: Send extra headers
@@ -729,13 +694,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
             f"/boxes/{id}",
-            body=await async_maybe_transform(
-                {
-                    "api_timeout": api_timeout,
-                    "wait": wait,
-                },
-                box_delete_params.BoxDeleteParams,
-            ),
+            body=await async_maybe_transform({"wait": wait}, box_delete_params.BoxDeleteParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -746,7 +705,6 @@ class AsyncBoxesResource(AsyncAPIResource):
         self,
         *,
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
-        api_timeout: str | NotGiven = NOT_GIVEN,
         wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -760,8 +718,6 @@ class AsyncBoxesResource(AsyncAPIResource):
 
         Args:
           config: Configuration for a box instance
-
-          api_timeout: Timeout for the box operation to be completed, default is 30s
 
           wait: Wait for the box operation to be completed, default is true
 
@@ -778,7 +734,6 @@ class AsyncBoxesResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "config": config,
-                    "api_timeout": api_timeout,
                     "wait": wait,
                 },
                 box_create_android_params.BoxCreateAndroidParams,
@@ -793,7 +748,6 @@ class AsyncBoxesResource(AsyncAPIResource):
         self,
         *,
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
-        api_timeout: str | NotGiven = NOT_GIVEN,
         wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -807,8 +761,6 @@ class AsyncBoxesResource(AsyncAPIResource):
 
         Args:
           config: Configuration for a box instance
-
-          api_timeout: Timeout for the box operation to be completed, default is 30s
 
           wait: Wait for the box operation to be completed, default is true
 
@@ -825,7 +777,6 @@ class AsyncBoxesResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "config": config,
-                    "api_timeout": api_timeout,
                     "wait": wait,
                 },
                 box_create_linux_params.BoxCreateLinuxParams,
@@ -860,7 +811,9 @@ class AsyncBoxesResource(AsyncAPIResource):
 
           envs: The environment variables to run the command
 
-          api_timeout: The timeout of the command. e.g. '30s'
+          api_timeout: The timeout of the command. e.g. '30s' or '1m' or '1h'. If the command times
+              out, the exit code will be 124. For example: 'timeout 5s sleep 10s' will result
+              in exit code 124.
 
           working_dir: The working directory of the command
 
@@ -921,7 +874,8 @@ class AsyncBoxesResource(AsyncAPIResource):
 
           language: The language of the code.
 
-          api_timeout: The timeout of the code. e.g. "30s"
+          api_timeout: The timeout of the code execution. e.g. "30s" or "1m" or "1h". If the code
+              execution times out, the exit code will be 124.
 
           working_dir: The working directory of the code.
 
@@ -958,7 +912,6 @@ class AsyncBoxesResource(AsyncAPIResource):
         self,
         id: str,
         *,
-        api_timeout: str | NotGiven = NOT_GIVEN,
         wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -971,8 +924,6 @@ class AsyncBoxesResource(AsyncAPIResource):
         Start box
 
         Args:
-          api_timeout: Timeout for the box operation to be completed, default is 30s
-
           wait: Wait for the box operation to be completed, default is true
 
           extra_headers: Send extra headers
@@ -989,13 +940,7 @@ class AsyncBoxesResource(AsyncAPIResource):
             BoxStartResponse,
             await self._post(
                 f"/boxes/{id}/start",
-                body=await async_maybe_transform(
-                    {
-                        "api_timeout": api_timeout,
-                        "wait": wait,
-                    },
-                    box_start_params.BoxStartParams,
-                ),
+                body=await async_maybe_transform({"wait": wait}, box_start_params.BoxStartParams),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
@@ -1007,7 +952,6 @@ class AsyncBoxesResource(AsyncAPIResource):
         self,
         id: str,
         *,
-        api_timeout: str | NotGiven = NOT_GIVEN,
         wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1020,8 +964,6 @@ class AsyncBoxesResource(AsyncAPIResource):
         Stop box
 
         Args:
-          api_timeout: Timeout for the box operation to be completed, default is 30s
-
           wait: Wait for the box operation to be completed, default is true
 
           extra_headers: Send extra headers
@@ -1038,13 +980,7 @@ class AsyncBoxesResource(AsyncAPIResource):
             BoxStopResponse,
             await self._post(
                 f"/boxes/{id}/stop",
-                body=await async_maybe_transform(
-                    {
-                        "api_timeout": api_timeout,
-                        "wait": wait,
-                    },
-                    box_stop_params.BoxStopParams,
-                ),
+                body=await async_maybe_transform({"wait": wait}, box_stop_params.BoxStopParams),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),

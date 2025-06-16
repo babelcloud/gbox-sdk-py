@@ -28,7 +28,11 @@ class BoxRunCodeParams(TypedDict, total=False):
     """The language of the code."""
 
     api_timeout: Annotated[str, PropertyInfo(alias="timeout")]
-    """The timeout of the code. e.g. "30s" """
+    """The timeout of the code execution.
+
+    e.g. "30s" or "1m" or "1h". If the code execution times out, the exit code will
+    be 124.
+    """
 
     working_dir: Annotated[str, PropertyInfo(alias="workingDir")]
     """The working directory of the code."""

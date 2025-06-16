@@ -121,7 +121,6 @@ class TestBoxes:
     def test_method_delete_with_all_params(self, client: GboxClient) -> None:
         box = client.v1.boxes.delete(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            api_timeout="30s",
             wait=True,
         )
         assert box is None
@@ -181,7 +180,6 @@ class TestBoxes:
                     "version": "v1.0",
                 },
             },
-            api_timeout="30s",
             wait=True,
         )
         assert_matches_type(AndroidBox, box, path=["response"])
@@ -229,7 +227,6 @@ class TestBoxes:
                     "environment": "testing",
                 },
             },
-            api_timeout="30s",
             wait=True,
         )
         assert_matches_type(LinuxBox, box, path=["response"])
@@ -393,7 +390,6 @@ class TestBoxes:
     def test_method_start_with_all_params(self, client: GboxClient) -> None:
         box = client.v1.boxes.start(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            api_timeout="30s",
             wait=True,
         )
         assert_matches_type(BoxStartResponse, box, path=["response"])
@@ -445,7 +441,6 @@ class TestBoxes:
     def test_method_stop_with_all_params(self, client: GboxClient) -> None:
         box = client.v1.boxes.stop(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            api_timeout="30s",
             wait=True,
         )
         assert_matches_type(BoxStopResponse, box, path=["response"])
@@ -583,7 +578,6 @@ class TestAsyncBoxes:
     async def test_method_delete_with_all_params(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.delete(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            api_timeout="30s",
             wait=True,
         )
         assert box is None
@@ -643,7 +637,6 @@ class TestAsyncBoxes:
                     "version": "v1.0",
                 },
             },
-            api_timeout="30s",
             wait=True,
         )
         assert_matches_type(AndroidBox, box, path=["response"])
@@ -691,7 +684,6 @@ class TestAsyncBoxes:
                     "environment": "testing",
                 },
             },
-            api_timeout="30s",
             wait=True,
         )
         assert_matches_type(LinuxBox, box, path=["response"])
@@ -855,7 +847,6 @@ class TestAsyncBoxes:
     async def test_method_start_with_all_params(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.start(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            api_timeout="30s",
             wait=True,
         )
         assert_matches_type(BoxStartResponse, box, path=["response"])
@@ -907,7 +898,6 @@ class TestAsyncBoxes:
     async def test_method_stop_with_all_params(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.stop(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            api_timeout="30s",
             wait=True,
         )
         assert_matches_type(BoxStopResponse, box, path=["response"])

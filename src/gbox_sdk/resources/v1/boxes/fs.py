@@ -16,6 +16,7 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.v1.boxes import (
+    f_info_params,
     f_list_params,
     f_read_params,
     f_write_params,
@@ -23,6 +24,7 @@ from ....types.v1.boxes import (
     f_remove_params,
     f_rename_params,
 )
+from ....types.v1.boxes.f_info_response import FInfoResponse
 from ....types.v1.boxes.f_list_response import FListResponse
 from ....types.v1.boxes.f_read_response import FReadResponse
 from ....types.v1.boxes.f_write_response import FWriteResponse
@@ -59,6 +61,7 @@ class FsResource(SyncAPIResource):
         *,
         path: str,
         depth: float | NotGiven = NOT_GIVEN,
+        working_dir: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -73,6 +76,9 @@ class FsResource(SyncAPIResource):
           path: Path to the directory
 
           depth: Depth of the directory
+
+          working_dir: Working directory. If not provided, the file will be read from the root
+              directory.
 
           extra_headers: Send extra headers
 
@@ -95,6 +101,7 @@ class FsResource(SyncAPIResource):
                     {
                         "path": path,
                         "depth": depth,
+                        "working_dir": working_dir,
                     },
                     f_list_params.FListParams,
                 ),
@@ -149,6 +156,58 @@ class FsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=FExistsResponse,
+        )
+
+    def info(
+        self,
+        id: str,
+        *,
+        path: str,
+        working_dir: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> FInfoResponse:
+        """Get file/directory
+
+        Args:
+          path: Path to the file/directory.
+
+        If the path is not start with '/', the
+              file/directory will be checked from the working directory
+
+          working_dir: Working directory. If not provided, the file will be read from the root
+              directory.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._get(
+            f"/boxes/{id}/fs/info",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "path": path,
+                        "working_dir": working_dir,
+                    },
+                    f_info_params.FInfoParams,
+                ),
+            ),
+            cast_to=FInfoResponse,
         )
 
     def read(
@@ -323,7 +382,7 @@ class FsResource(SyncAPIResource):
         """Creates or overwrites a file.
 
         Creates necessary directories in the path if they
-        don't exist.
+        don't exist. if the path is a directory, the write will be failed.
 
         Args:
           content: Content of the file
@@ -387,6 +446,7 @@ class AsyncFsResource(AsyncAPIResource):
         *,
         path: str,
         depth: float | NotGiven = NOT_GIVEN,
+        working_dir: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -401,6 +461,9 @@ class AsyncFsResource(AsyncAPIResource):
           path: Path to the directory
 
           depth: Depth of the directory
+
+          working_dir: Working directory. If not provided, the file will be read from the root
+              directory.
 
           extra_headers: Send extra headers
 
@@ -423,6 +486,7 @@ class AsyncFsResource(AsyncAPIResource):
                     {
                         "path": path,
                         "depth": depth,
+                        "working_dir": working_dir,
                     },
                     f_list_params.FListParams,
                 ),
@@ -477,6 +541,58 @@ class AsyncFsResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=FExistsResponse,
+        )
+
+    async def info(
+        self,
+        id: str,
+        *,
+        path: str,
+        working_dir: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> FInfoResponse:
+        """Get file/directory
+
+        Args:
+          path: Path to the file/directory.
+
+        If the path is not start with '/', the
+              file/directory will be checked from the working directory
+
+          working_dir: Working directory. If not provided, the file will be read from the root
+              directory.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._get(
+            f"/boxes/{id}/fs/info",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "path": path,
+                        "working_dir": working_dir,
+                    },
+                    f_info_params.FInfoParams,
+                ),
+            ),
+            cast_to=FInfoResponse,
         )
 
     async def read(
@@ -651,7 +767,7 @@ class AsyncFsResource(AsyncAPIResource):
         """Creates or overwrites a file.
 
         Creates necessary directories in the path if they
-        don't exist.
+        don't exist. if the path is a directory, the write will be failed.
 
         Args:
           content: Content of the file
@@ -699,6 +815,9 @@ class FsResourceWithRawResponse:
         self.exists = to_raw_response_wrapper(
             fs.exists,
         )
+        self.info = to_raw_response_wrapper(
+            fs.info,
+        )
         self.read = to_raw_response_wrapper(
             fs.read,
         )
@@ -722,6 +841,9 @@ class AsyncFsResourceWithRawResponse:
         )
         self.exists = async_to_raw_response_wrapper(
             fs.exists,
+        )
+        self.info = async_to_raw_response_wrapper(
+            fs.info,
         )
         self.read = async_to_raw_response_wrapper(
             fs.read,
@@ -747,6 +869,9 @@ class FsResourceWithStreamingResponse:
         self.exists = to_streamed_response_wrapper(
             fs.exists,
         )
+        self.info = to_streamed_response_wrapper(
+            fs.info,
+        )
         self.read = to_streamed_response_wrapper(
             fs.read,
         )
@@ -770,6 +895,9 @@ class AsyncFsResourceWithStreamingResponse:
         )
         self.exists = async_to_streamed_response_wrapper(
             fs.exists,
+        )
+        self.info = async_to_streamed_response_wrapper(
+            fs.info,
         )
         self.read = async_to_streamed_response_wrapper(
             fs.read,

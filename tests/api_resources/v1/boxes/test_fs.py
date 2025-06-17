@@ -10,6 +10,7 @@ import pytest
 from gbox_sdk import GboxClient, AsyncGboxClient
 from tests.utils import assert_matches_type
 from gbox_sdk.types.v1.boxes import (
+    FInfoResponse,
     FListResponse,
     FReadResponse,
     FWriteResponse,
@@ -40,6 +41,7 @@ class TestFs:
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path="/home/user/documents",
             depth=2,
+            working_dir="/home/user/documents",
         )
         assert_matches_type(FListResponse, f, path=["response"])
 
@@ -132,6 +134,62 @@ class TestFs:
     def test_path_params_exists(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.v1.boxes.fs.with_raw_response.exists(
+                id="",
+                path="/home/user/documents/output.txt",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_info(self, client: GboxClient) -> None:
+        f = client.v1.boxes.fs.info(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            path="/home/user/documents/output.txt",
+        )
+        assert_matches_type(FInfoResponse, f, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_info_with_all_params(self, client: GboxClient) -> None:
+        f = client.v1.boxes.fs.info(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            path="/home/user/documents/output.txt",
+            working_dir="/home/user/documents",
+        )
+        assert_matches_type(FInfoResponse, f, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_info(self, client: GboxClient) -> None:
+        response = client.v1.boxes.fs.with_raw_response.info(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            path="/home/user/documents/output.txt",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        f = response.parse()
+        assert_matches_type(FInfoResponse, f, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_info(self, client: GboxClient) -> None:
+        with client.v1.boxes.fs.with_streaming_response.info(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            path="/home/user/documents/output.txt",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            f = response.parse()
+            assert_matches_type(FInfoResponse, f, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_info(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            client.v1.boxes.fs.with_raw_response.info(
                 id="",
                 path="/home/user/documents/output.txt",
             )
@@ -390,6 +448,7 @@ class TestAsyncFs:
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path="/home/user/documents",
             depth=2,
+            working_dir="/home/user/documents",
         )
         assert_matches_type(FListResponse, f, path=["response"])
 
@@ -482,6 +541,62 @@ class TestAsyncFs:
     async def test_path_params_exists(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.v1.boxes.fs.with_raw_response.exists(
+                id="",
+                path="/home/user/documents/output.txt",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_info(self, async_client: AsyncGboxClient) -> None:
+        f = await async_client.v1.boxes.fs.info(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            path="/home/user/documents/output.txt",
+        )
+        assert_matches_type(FInfoResponse, f, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_info_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        f = await async_client.v1.boxes.fs.info(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            path="/home/user/documents/output.txt",
+            working_dir="/home/user/documents",
+        )
+        assert_matches_type(FInfoResponse, f, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_info(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.fs.with_raw_response.info(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            path="/home/user/documents/output.txt",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        f = await response.parse()
+        assert_matches_type(FInfoResponse, f, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_info(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.fs.with_streaming_response.info(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            path="/home/user/documents/output.txt",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            f = await response.parse()
+            assert_matches_type(FInfoResponse, f, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_info(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            await async_client.v1.boxes.fs.with_raw_response.info(
                 id="",
                 path="/home/user/documents/output.txt",
             )

@@ -6,15 +6,16 @@ from typing_extensions import Required, Annotated, TypedDict
 
 from ...._utils import PropertyInfo
 
-__all__ = ["FListParams"]
+__all__ = ["FInfoParams"]
 
 
-class FListParams(TypedDict, total=False):
+class FInfoParams(TypedDict, total=False):
     path: Required[str]
-    """Path to the directory"""
+    """Path to the file/directory.
 
-    depth: float
-    """Depth of the directory"""
+    If the path is not start with '/', the file/directory will be checked from the
+    working directory
+    """
 
     working_dir: Annotated[str, PropertyInfo(alias="workingDir")]
     """Working directory.

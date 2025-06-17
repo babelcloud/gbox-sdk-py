@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Any, cast
+
 import httpx
 
 from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
@@ -192,22 +194,25 @@ class FsResource(SyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return self._get(
-            f"/boxes/{id}/fs/info",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "path": path,
-                        "working_dir": working_dir,
-                    },
-                    f_info_params.FInfoParams,
+        return cast(
+            FInfoResponse,
+            self._get(
+                f"/boxes/{id}/fs/info",
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    query=maybe_transform(
+                        {
+                            "path": path,
+                            "working_dir": working_dir,
+                        },
+                        f_info_params.FInfoParams,
+                    ),
                 ),
+                cast_to=cast(Any, FInfoResponse),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=FInfoResponse,
         )
 
     def read(
@@ -577,22 +582,25 @@ class AsyncFsResource(AsyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return await self._get(
-            f"/boxes/{id}/fs/info",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "path": path,
-                        "working_dir": working_dir,
-                    },
-                    f_info_params.FInfoParams,
+        return cast(
+            FInfoResponse,
+            await self._get(
+                f"/boxes/{id}/fs/info",
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    query=await async_maybe_transform(
+                        {
+                            "path": path,
+                            "working_dir": working_dir,
+                        },
+                        f_info_params.FInfoParams,
+                    ),
                 ),
+                cast_to=cast(Any, FInfoResponse),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=FInfoResponse,
         )
 
     async def read(

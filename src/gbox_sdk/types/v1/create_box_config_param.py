@@ -16,5 +16,7 @@ class CreateBoxConfigParam(TypedDict, total=False):
     expires_in: Annotated[str, PropertyInfo(alias="expiresIn")]
     """The box will be alive for the given duration (e.g. '10m')"""
 
+    is_real_device: Annotated[bool, PropertyInfo(alias="isRealDevice")]
+
     labels: object
     """Key-value pairs of labels for the box"""

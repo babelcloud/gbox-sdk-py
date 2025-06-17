@@ -1,24 +1,51 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import Union
+from datetime import datetime
+from typing_extensions import Literal, TypeAlias
 
 from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
 
-__all__ = ["FInfoResponse"]
+__all__ = ["FInfoResponse", "File", "Dir"]
 
 
-class FInfoResponse(BaseModel):
+class File(BaseModel):
+    last_modified: datetime = FieldInfo(alias="lastModified")
+    """Last modified time of the file"""
+
+    mode: str
+    """File metadata"""
+
+    name: str
+    """Name of the file"""
+
     path: str
-    """Path to the file/directory.
+    """Full path to the file"""
 
-    If the path is not start with '/', the file/directory will be checked from the
-    working directory
-    """
+    size: str
+    """Size of the file"""
 
-    working_dir: Optional[str] = FieldInfo(alias="workingDir", default=None)
-    """Working directory.
+    type: Literal["file"]
+    """File type indicator"""
 
-    If not provided, the file will be read from the root directory.
-    """
+
+class Dir(BaseModel):
+    last_modified: datetime = FieldInfo(alias="lastModified")
+    """Last modified time of the directory"""
+
+    mode: str
+    """Directory metadata"""
+
+    name: str
+    """Name of the directory"""
+
+    path: str
+    """Full path to the directory"""
+
+    type: Literal["dir"]
+    """Directory type indicator"""
+
+
+FInfoResponse: TypeAlias = Union[File, Dir]

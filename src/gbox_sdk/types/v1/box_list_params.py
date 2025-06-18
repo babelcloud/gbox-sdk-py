@@ -21,7 +21,8 @@ class BoxListParams(TypedDict, total=False):
 
     status: str
     """
-    Filter boxes by their current status (pending, running, stopped, error, deleted)
+    Filter boxes by their current status (pending, running, stopped, error,
+    terminated)
     """
 
     type: str

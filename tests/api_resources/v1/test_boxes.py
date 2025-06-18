@@ -170,12 +170,12 @@ class TestBoxes:
     def test_method_create_android_with_all_params(self, client: GboxClient) -> None:
         box = client.v1.boxes.create_android(
             config={
+                "device_type": "virtual",
                 "envs": {
                     "ANDROID_LOG_TAGS": "*:V",
                     "ADB_TRACE": "all",
                 },
                 "expires_in": "15m",
-                "is_real_device": True,
                 "labels": {
                     "app": "mobile-testing",
                     "version": "v1.0",
@@ -218,12 +218,12 @@ class TestBoxes:
     def test_method_create_linux_with_all_params(self, client: GboxClient) -> None:
         box = client.v1.boxes.create_linux(
             config={
+                "device_type": "virtual",
                 "envs": {
                     "DEBUG": "true",
                     "API_URL": "https://api.example.com",
                 },
                 "expires_in": "60m",
-                "is_real_device": True,
                 "labels": {
                     "project": "web-automation",
                     "environment": "testing",
@@ -629,12 +629,12 @@ class TestAsyncBoxes:
     async def test_method_create_android_with_all_params(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.create_android(
             config={
+                "device_type": "virtual",
                 "envs": {
                     "ANDROID_LOG_TAGS": "*:V",
                     "ADB_TRACE": "all",
                 },
                 "expires_in": "15m",
-                "is_real_device": True,
                 "labels": {
                     "app": "mobile-testing",
                     "version": "v1.0",
@@ -677,12 +677,12 @@ class TestAsyncBoxes:
     async def test_method_create_linux_with_all_params(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.create_linux(
             config={
+                "device_type": "virtual",
                 "envs": {
                     "DEBUG": "true",
                     "API_URL": "https://api.example.com",
                 },
                 "expires_in": "60m",
-                "is_real_device": True,
                 "labels": {
                     "project": "web-automation",
                     "environment": "testing",

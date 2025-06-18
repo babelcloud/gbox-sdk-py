@@ -173,7 +173,7 @@ class BoxesResource(SyncAPIResource):
           page_size: Page size
 
           status: Filter boxes by their current status (pending, running, stopped, error,
-              terminated)
+              terminated).
 
           type: Filter boxes by their type (linux, android etc.) , default is all
 
@@ -627,7 +627,7 @@ class AsyncBoxesResource(AsyncAPIResource):
           page_size: Page size
 
           status: Filter boxes by their current status (pending, running, stopped, error,
-              terminated)
+              terminated).
 
           type: Filter boxes by their type (linux, android etc.) , default is all
 

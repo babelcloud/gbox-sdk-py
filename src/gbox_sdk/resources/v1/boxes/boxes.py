@@ -39,7 +39,7 @@ from .browser import (
     BrowserResourceWithStreamingResponse,
     AsyncBrowserResourceWithStreamingResponse,
 )
-from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ....types.v1 import (
@@ -47,6 +47,7 @@ from ....types.v1 import (
     box_stop_params,
     box_start_params,
     box_run_code_params,
+    box_terminate_params,
     box_create_linux_params,
     box_create_android_params,
     box_execute_commands_params,
@@ -526,6 +527,44 @@ class BoxesResource(SyncAPIResource):
             ),
         )
 
+    def terminate(
+        self,
+        id: str,
+        *,
+        wait: bool | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Terminate box
+
+        Args:
+          wait: Wait for the box operation to be completed, default is true
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._post(
+            f"/boxes/{id}/terminate",
+            body=maybe_transform({"wait": wait}, box_terminate_params.BoxTerminateParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
 
 class AsyncBoxesResource(AsyncAPIResource):
     @cached_property
@@ -980,6 +1019,44 @@ class AsyncBoxesResource(AsyncAPIResource):
             ),
         )
 
+    async def terminate(
+        self,
+        id: str,
+        *,
+        wait: bool | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Terminate box
+
+        Args:
+          wait: Wait for the box operation to be completed, default is true
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._post(
+            f"/boxes/{id}/terminate",
+            body=await async_maybe_transform({"wait": wait}, box_terminate_params.BoxTerminateParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
 
 class BoxesResourceWithRawResponse:
     def __init__(self, boxes: BoxesResource) -> None:
@@ -1011,6 +1088,9 @@ class BoxesResourceWithRawResponse:
         )
         self.stop = to_raw_response_wrapper(
             boxes.stop,
+        )
+        self.terminate = to_raw_response_wrapper(
+            boxes.terminate,
         )
 
     @cached_property
@@ -1061,6 +1141,9 @@ class AsyncBoxesResourceWithRawResponse:
         self.stop = async_to_raw_response_wrapper(
             boxes.stop,
         )
+        self.terminate = async_to_raw_response_wrapper(
+            boxes.terminate,
+        )
 
     @cached_property
     def actions(self) -> AsyncActionsResourceWithRawResponse:
@@ -1110,6 +1193,9 @@ class BoxesResourceWithStreamingResponse:
         self.stop = to_streamed_response_wrapper(
             boxes.stop,
         )
+        self.terminate = to_streamed_response_wrapper(
+            boxes.terminate,
+        )
 
     @cached_property
     def actions(self) -> ActionsResourceWithStreamingResponse:
@@ -1158,6 +1244,9 @@ class AsyncBoxesResourceWithStreamingResponse:
         )
         self.stop = async_to_streamed_response_wrapper(
             boxes.stop,
+        )
+        self.terminate = async_to_streamed_response_wrapper(
+            boxes.terminate,
         )
 
     @cached_property

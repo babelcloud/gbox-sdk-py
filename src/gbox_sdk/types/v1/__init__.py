@@ -11,6 +11,7 @@ from .box_list_response import BoxListResponse as BoxListResponse
 from .box_stop_response import BoxStopResponse as BoxStopResponse
 from .box_start_response import BoxStartResponse as BoxStartResponse
 from .box_run_code_params import BoxRunCodeParams as BoxRunCodeParams
+from .box_terminate_params import BoxTerminateParams as BoxTerminateParams
 from .box_retrieve_response import BoxRetrieveResponse as BoxRetrieveResponse
 from .box_run_code_response import BoxRunCodeResponse as BoxRunCodeResponse
 from .box_create_linux_params import BoxCreateLinuxParams as BoxCreateLinuxParams

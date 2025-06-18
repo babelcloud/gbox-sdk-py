@@ -7,7 +7,6 @@ from .android_box import AndroidBox as AndroidBox
 from .box_list_params import BoxListParams as BoxListParams
 from .box_stop_params import BoxStopParams as BoxStopParams
 from .box_start_params import BoxStartParams as BoxStartParams
-from .box_delete_params import BoxDeleteParams as BoxDeleteParams
 from .box_list_response import BoxListResponse as BoxListResponse
 from .box_stop_response import BoxStopResponse as BoxStopResponse
 from .box_start_response import BoxStartResponse as BoxStartResponse

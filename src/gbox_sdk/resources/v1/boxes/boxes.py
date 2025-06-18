@@ -68,6 +68,7 @@ from ....types.v1.box_start_response import BoxStartResponse
 from ....types.v1.box_retrieve_response import BoxRetrieveResponse
 from ....types.v1.box_run_code_response import BoxRunCodeResponse
 from ....types.v1.create_box_config_param import CreateBoxConfigParam
+from ....types.v1.box_live_view_url_response import BoxLiveViewURLResponse
 from ....types.v1.box_execute_commands_response import BoxExecuteCommandsResponse
 
 __all__ = ["BoxesResource", "AsyncBoxesResource"]
@@ -384,6 +385,39 @@ class BoxesResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=BoxExecuteCommandsResponse,
+        )
+
+    def live_view_url(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BoxLiveViewURLResponse:
+        """
+        Get live view url
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._get(
+            f"/boxes/{id}/live-view-url",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BoxLiveViewURLResponse,
         )
 
     def run_code(
@@ -844,6 +878,39 @@ class AsyncBoxesResource(AsyncAPIResource):
             cast_to=BoxExecuteCommandsResponse,
         )
 
+    async def live_view_url(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BoxLiveViewURLResponse:
+        """
+        Get live view url
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._get(
+            f"/boxes/{id}/live-view-url",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BoxLiveViewURLResponse,
+        )
+
     async def run_code(
         self,
         id: str,
@@ -1011,6 +1078,9 @@ class BoxesResourceWithRawResponse:
         self.execute_commands = to_raw_response_wrapper(
             boxes.execute_commands,
         )
+        self.live_view_url = to_raw_response_wrapper(
+            boxes.live_view_url,
+        )
         self.run_code = to_raw_response_wrapper(
             boxes.run_code,
         )
@@ -1059,6 +1129,9 @@ class AsyncBoxesResourceWithRawResponse:
         )
         self.execute_commands = async_to_raw_response_wrapper(
             boxes.execute_commands,
+        )
+        self.live_view_url = async_to_raw_response_wrapper(
+            boxes.live_view_url,
         )
         self.run_code = async_to_raw_response_wrapper(
             boxes.run_code,
@@ -1109,6 +1182,9 @@ class BoxesResourceWithStreamingResponse:
         self.execute_commands = to_streamed_response_wrapper(
             boxes.execute_commands,
         )
+        self.live_view_url = to_streamed_response_wrapper(
+            boxes.live_view_url,
+        )
         self.run_code = to_streamed_response_wrapper(
             boxes.run_code,
         )
@@ -1157,6 +1233,9 @@ class AsyncBoxesResourceWithStreamingResponse:
         )
         self.execute_commands = async_to_streamed_response_wrapper(
             boxes.execute_commands,
+        )
+        self.live_view_url = async_to_streamed_response_wrapper(
+            boxes.live_view_url,
         )
         self.run_code = async_to_streamed_response_wrapper(
             boxes.run_code,

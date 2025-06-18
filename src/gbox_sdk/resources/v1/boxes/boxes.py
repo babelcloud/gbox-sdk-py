@@ -154,8 +154,8 @@ class BoxesResource(SyncAPIResource):
         labels: object | NotGiven = NOT_GIVEN,
         page: int | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
-        status: str | NotGiven = NOT_GIVEN,
-        type: str | NotGiven = NOT_GIVEN,
+        status: List[Literal["all", "pending", "running", "stopped", "error", "terminated"]] | NotGiven = NOT_GIVEN,
+        type: List[Literal["all", "linux", "android"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -174,9 +174,11 @@ class BoxesResource(SyncAPIResource):
           page_size: Page size
 
           status: Filter boxes by their current status (pending, running, stopped, error,
-              terminated).
+              terminated, all). Must be an array of statuses. Use 'all' to get boxes with any
+              status.
 
-          type: Filter boxes by their type (linux, android etc.) , default is all
+          type: Filter boxes by their type (linux, android, all). Must be an array of types. Use
+              'all' to get boxes of any type.
 
           extra_headers: Send extra headers
 
@@ -646,8 +648,8 @@ class AsyncBoxesResource(AsyncAPIResource):
         labels: object | NotGiven = NOT_GIVEN,
         page: int | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
-        status: str | NotGiven = NOT_GIVEN,
-        type: str | NotGiven = NOT_GIVEN,
+        status: List[Literal["all", "pending", "running", "stopped", "error", "terminated"]] | NotGiven = NOT_GIVEN,
+        type: List[Literal["all", "linux", "android"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -666,9 +668,11 @@ class AsyncBoxesResource(AsyncAPIResource):
           page_size: Page size
 
           status: Filter boxes by their current status (pending, running, stopped, error,
-              terminated).
+              terminated, all). Must be an array of statuses. Use 'all' to get boxes with any
+              status.
 
-          type: Filter boxes by their type (linux, android etc.) , default is all
+          type: Filter boxes by their type (linux, android, all). Must be an array of types. Use
+              'all' to get boxes of any type.
 
           extra_headers: Send extra headers
 

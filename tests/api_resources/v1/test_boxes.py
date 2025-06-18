@@ -82,8 +82,8 @@ class TestBoxes:
             labels={},
             page=1,
             page_size=10,
-            status="running",
-            type="linux",
+            status=["running"],
+            type=["linux"],
         )
         assert_matches_type(BoxListResponse, box, path=["response"])
 
@@ -583,8 +583,8 @@ class TestAsyncBoxes:
             labels={},
             page=1,
             page_size=10,
-            status="running",
-            type="linux",
+            status=["running"],
+            type=["linux"],
         )
         assert_matches_type(BoxListResponse, box, path=["response"])
 

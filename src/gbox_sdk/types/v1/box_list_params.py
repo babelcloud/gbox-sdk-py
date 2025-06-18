@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from typing_extensions import Annotated, TypedDict
+from typing import List
+from typing_extensions import Literal, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 
@@ -19,11 +20,15 @@ class BoxListParams(TypedDict, total=False):
     page_size: Annotated[int, PropertyInfo(alias="pageSize")]
     """Page size"""
 
-    status: str
+    status: List[Literal["all", "pending", "running", "stopped", "error", "terminated"]]
     """
     Filter boxes by their current status (pending, running, stopped, error,
-    terminated).
+    terminated, all). Must be an array of statuses. Use 'all' to get boxes with any
+    status.
     """
 
-    type: str
-    """Filter boxes by their type (linux, android etc.) , default is all"""
+    type: List[Literal["all", "linux", "android"]]
+    """Filter boxes by their type (linux, android, all).
+
+    Must be an array of types. Use 'all' to get boxes of any type.
+    """

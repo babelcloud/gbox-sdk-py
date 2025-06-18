@@ -12,7 +12,7 @@ __all__ = ["AndroidBox", "Config", "ConfigOs", "ConfigResolution", "ConfigBrowse
 
 
 class ConfigOs(BaseModel):
-    version: Literal["12", "13"]
+    version: Literal["12", "13", "15"]
     """Supported Android versions"""
 
 

@@ -479,6 +479,16 @@ class TestAndroid:
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_restart_with_all_params(self, client: GboxClient) -> None:
+        android = client.v1.boxes.android.restart(
+            package_name="com.example.myapp",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            activity_name="com.android.settings.Settings",
+        )
+        assert android is None
+
+    @pytest.mark.skip()
+    @parametrize
     def test_raw_response_restart(self, client: GboxClient) -> None:
         response = client.v1.boxes.android.with_raw_response.restart(
             package_name="com.example.myapp",
@@ -1088,6 +1098,16 @@ class TestAsyncAndroid:
         android = await async_client.v1.boxes.android.restart(
             package_name="com.example.myapp",
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert android is None
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_restart_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        android = await async_client.v1.boxes.android.restart(
+            package_name="com.example.myapp",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            activity_name="com.android.settings.Settings",
         )
         assert android is None
 

@@ -22,6 +22,7 @@ from ....types.v1.boxes import (
     android_list_params,
     android_open_params,
     android_install_params,
+    android_restart_params,
     android_uninstall_params,
     android_rotate_screen_params,
 )
@@ -40,7 +41,7 @@ class AndroidResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/babelcloud/gbox-sdk-py#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/gbox-sdk-python#accessing-raw-response-data-eg-headers
         """
         return AndroidResourceWithRawResponse(self)
 
@@ -49,7 +50,7 @@ class AndroidResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/babelcloud/gbox-sdk-py#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/gbox-sdk-python#with_streaming_response
         """
         return AndroidResourceWithStreamingResponse(self)
 
@@ -414,6 +415,7 @@ class AndroidResource(SyncAPIResource):
         package_name: str,
         *,
         id: str,
+        activity_name: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -425,6 +427,8 @@ class AndroidResource(SyncAPIResource):
         Restart app
 
         Args:
+          activity_name: Activity name, default is the main activity.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -440,6 +444,7 @@ class AndroidResource(SyncAPIResource):
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
             f"/boxes/{id}/android/apps/{package_name}/restart",
+            body=maybe_transform({"activity_name": activity_name}, android_restart_params.AndroidRestartParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -542,7 +547,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/babelcloud/gbox-sdk-py#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/gbox-sdk-python#accessing-raw-response-data-eg-headers
         """
         return AsyncAndroidResourceWithRawResponse(self)
 
@@ -551,7 +556,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/babelcloud/gbox-sdk-py#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/gbox-sdk-python#with_streaming_response
         """
         return AsyncAndroidResourceWithStreamingResponse(self)
 
@@ -916,6 +921,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         package_name: str,
         *,
         id: str,
+        activity_name: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -927,6 +933,8 @@ class AsyncAndroidResource(AsyncAPIResource):
         Restart app
 
         Args:
+          activity_name: Activity name, default is the main activity.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -942,6 +950,9 @@ class AsyncAndroidResource(AsyncAPIResource):
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
             f"/boxes/{id}/android/apps/{package_name}/restart",
+            body=await async_maybe_transform(
+                {"activity_name": activity_name}, android_restart_params.AndroidRestartParams
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

@@ -369,7 +369,7 @@ class TestFs:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_write(self, client: GboxClient) -> None:
+    def test_method_write_overload_1(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.write(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             content="Hello, World!\nThis is file content.",
@@ -379,7 +379,7 @@ class TestFs:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_write_with_all_params(self, client: GboxClient) -> None:
+    def test_method_write_with_all_params_overload_1(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.write(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             content="Hello, World!\nThis is file content.",
@@ -390,7 +390,7 @@ class TestFs:
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_write(self, client: GboxClient) -> None:
+    def test_raw_response_write_overload_1(self, client: GboxClient) -> None:
         response = client.v1.boxes.fs.with_raw_response.write(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             content="Hello, World!\nThis is file content.",
@@ -404,7 +404,7 @@ class TestFs:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_write(self, client: GboxClient) -> None:
+    def test_streaming_response_write_overload_1(self, client: GboxClient) -> None:
         with client.v1.boxes.fs.with_streaming_response.write(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             content="Hello, World!\nThis is file content.",
@@ -420,11 +420,72 @@ class TestFs:
 
     @pytest.mark.skip()
     @parametrize
-    def test_path_params_write(self, client: GboxClient) -> None:
+    def test_path_params_write_overload_1(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.v1.boxes.fs.with_raw_response.write(
                 id="",
                 content="Hello, World!\nThis is file content.",
+                path="/home/user/documents/output.txt",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_write_overload_2(self, client: GboxClient) -> None:
+        f = client.v1.boxes.fs.write(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            content=b"raw file contents",
+            path="/home/user/documents/output.txt",
+        )
+        assert_matches_type(FWriteResponse, f, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_write_with_all_params_overload_2(self, client: GboxClient) -> None:
+        f = client.v1.boxes.fs.write(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            content=b"raw file contents",
+            path="/home/user/documents/output.txt",
+            working_dir="/home/user/documents",
+        )
+        assert_matches_type(FWriteResponse, f, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_write_overload_2(self, client: GboxClient) -> None:
+        response = client.v1.boxes.fs.with_raw_response.write(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            content=b"raw file contents",
+            path="/home/user/documents/output.txt",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        f = response.parse()
+        assert_matches_type(FWriteResponse, f, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_write_overload_2(self, client: GboxClient) -> None:
+        with client.v1.boxes.fs.with_streaming_response.write(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            content=b"raw file contents",
+            path="/home/user/documents/output.txt",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            f = response.parse()
+            assert_matches_type(FWriteResponse, f, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_write_overload_2(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            client.v1.boxes.fs.with_raw_response.write(
+                id="",
+                content=b"raw file contents",
                 path="/home/user/documents/output.txt",
             )
 
@@ -776,7 +837,7 @@ class TestAsyncFs:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_write(self, async_client: AsyncGboxClient) -> None:
+    async def test_method_write_overload_1(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.write(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             content="Hello, World!\nThis is file content.",
@@ -786,7 +847,7 @@ class TestAsyncFs:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_write_with_all_params(self, async_client: AsyncGboxClient) -> None:
+    async def test_method_write_with_all_params_overload_1(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.write(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             content="Hello, World!\nThis is file content.",
@@ -797,7 +858,7 @@ class TestAsyncFs:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_write(self, async_client: AsyncGboxClient) -> None:
+    async def test_raw_response_write_overload_1(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.fs.with_raw_response.write(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             content="Hello, World!\nThis is file content.",
@@ -811,7 +872,7 @@ class TestAsyncFs:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_write(self, async_client: AsyncGboxClient) -> None:
+    async def test_streaming_response_write_overload_1(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.fs.with_streaming_response.write(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             content="Hello, World!\nThis is file content.",
@@ -827,10 +888,71 @@ class TestAsyncFs:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_path_params_write(self, async_client: AsyncGboxClient) -> None:
+    async def test_path_params_write_overload_1(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.v1.boxes.fs.with_raw_response.write(
                 id="",
                 content="Hello, World!\nThis is file content.",
+                path="/home/user/documents/output.txt",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_write_overload_2(self, async_client: AsyncGboxClient) -> None:
+        f = await async_client.v1.boxes.fs.write(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            content=b"raw file contents",
+            path="/home/user/documents/output.txt",
+        )
+        assert_matches_type(FWriteResponse, f, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_write_with_all_params_overload_2(self, async_client: AsyncGboxClient) -> None:
+        f = await async_client.v1.boxes.fs.write(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            content=b"raw file contents",
+            path="/home/user/documents/output.txt",
+            working_dir="/home/user/documents",
+        )
+        assert_matches_type(FWriteResponse, f, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_write_overload_2(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.fs.with_raw_response.write(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            content=b"raw file contents",
+            path="/home/user/documents/output.txt",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        f = await response.parse()
+        assert_matches_type(FWriteResponse, f, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_write_overload_2(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.fs.with_streaming_response.write(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            content=b"raw file contents",
+            path="/home/user/documents/output.txt",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            f = await response.parse()
+            assert_matches_type(FWriteResponse, f, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_write_overload_2(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            await async_client.v1.boxes.fs.with_raw_response.write(
+                id="",
+                content=b"raw file contents",
                 path="/home/user/documents/output.txt",
             )

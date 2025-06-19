@@ -12,10 +12,18 @@ from ...._utils import extract_files, required_args, maybe_transform, deepcopy_m
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import (
+    BinaryAPIResponse,
+    AsyncBinaryAPIResponse,
+    StreamedBinaryAPIResponse,
+    AsyncStreamedBinaryAPIResponse,
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
+    to_custom_raw_response_wrapper,
     async_to_streamed_response_wrapper,
+    to_custom_streamed_response_wrapper,
+    async_to_custom_raw_response_wrapper,
+    async_to_custom_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
 from ....types.v1.boxes import (
@@ -23,6 +31,7 @@ from ....types.v1.boxes import (
     android_open_params,
     android_install_params,
     android_restart_params,
+    android_restore_params,
     android_uninstall_params,
     android_list_simple_params,
     android_rotate_screen_params,
@@ -103,6 +112,77 @@ class AndroidResource(SyncAPIResource):
                 ),
             ),
             cast_to=AndroidListResponse,
+        )
+
+    def backup(
+        self,
+        package_name: str,
+        *,
+        id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BinaryAPIResponse:
+        """
+        Backup app
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not package_name:
+            raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
+        extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
+        return self._post(
+            f"/boxes/{id}/android/apps/{package_name}/backup",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BinaryAPIResponse,
+        )
+
+    def backup_all(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BinaryAPIResponse:
+        """
+        Backup all apps
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
+        return self._post(
+            f"/boxes/{id}/android/apps/backup-all",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BinaryAPIResponse,
         )
 
     def close(
@@ -493,6 +573,44 @@ class AndroidResource(SyncAPIResource):
             cast_to=NoneType,
         )
 
+    def restore(
+        self,
+        id: str,
+        *,
+        backup: FileTypes,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Restore app
+
+        Args:
+          backup: Backup file to restore (max file size: 100MB)
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._post(
+            f"/boxes/{id}/android/apps/restore",
+            body=maybe_transform({"backup": backup}, android_restore_params.AndroidRestoreParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
     def rotate_screen(
         self,
         id: str,
@@ -649,6 +767,77 @@ class AsyncAndroidResource(AsyncAPIResource):
                 ),
             ),
             cast_to=AndroidListResponse,
+        )
+
+    async def backup(
+        self,
+        package_name: str,
+        *,
+        id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AsyncBinaryAPIResponse:
+        """
+        Backup app
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not package_name:
+            raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
+        extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
+        return await self._post(
+            f"/boxes/{id}/android/apps/{package_name}/backup",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AsyncBinaryAPIResponse,
+        )
+
+    async def backup_all(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AsyncBinaryAPIResponse:
+        """
+        Backup all apps
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
+        return await self._post(
+            f"/boxes/{id}/android/apps/backup-all",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AsyncBinaryAPIResponse,
         )
 
     async def close(
@@ -1043,6 +1232,44 @@ class AsyncAndroidResource(AsyncAPIResource):
             cast_to=NoneType,
         )
 
+    async def restore(
+        self,
+        id: str,
+        *,
+        backup: FileTypes,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Restore app
+
+        Args:
+          backup: Backup file to restore (max file size: 100MB)
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._post(
+            f"/boxes/{id}/android/apps/restore",
+            body=await async_maybe_transform({"backup": backup}, android_restore_params.AndroidRestoreParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
     async def rotate_screen(
         self,
         id: str,
@@ -1139,6 +1366,14 @@ class AndroidResourceWithRawResponse:
         self.list = to_raw_response_wrapper(
             android.list,
         )
+        self.backup = to_custom_raw_response_wrapper(
+            android.backup,
+            BinaryAPIResponse,
+        )
+        self.backup_all = to_custom_raw_response_wrapper(
+            android.backup_all,
+            BinaryAPIResponse,
+        )
         self.close = to_raw_response_wrapper(
             android.close,
         )
@@ -1166,6 +1401,9 @@ class AndroidResourceWithRawResponse:
         self.restart = to_raw_response_wrapper(
             android.restart,
         )
+        self.restore = to_raw_response_wrapper(
+            android.restore,
+        )
         self.rotate_screen = to_raw_response_wrapper(
             android.rotate_screen,
         )
@@ -1180,6 +1418,14 @@ class AsyncAndroidResourceWithRawResponse:
 
         self.list = async_to_raw_response_wrapper(
             android.list,
+        )
+        self.backup = async_to_custom_raw_response_wrapper(
+            android.backup,
+            AsyncBinaryAPIResponse,
+        )
+        self.backup_all = async_to_custom_raw_response_wrapper(
+            android.backup_all,
+            AsyncBinaryAPIResponse,
         )
         self.close = async_to_raw_response_wrapper(
             android.close,
@@ -1208,6 +1454,9 @@ class AsyncAndroidResourceWithRawResponse:
         self.restart = async_to_raw_response_wrapper(
             android.restart,
         )
+        self.restore = async_to_raw_response_wrapper(
+            android.restore,
+        )
         self.rotate_screen = async_to_raw_response_wrapper(
             android.rotate_screen,
         )
@@ -1222,6 +1471,14 @@ class AndroidResourceWithStreamingResponse:
 
         self.list = to_streamed_response_wrapper(
             android.list,
+        )
+        self.backup = to_custom_streamed_response_wrapper(
+            android.backup,
+            StreamedBinaryAPIResponse,
+        )
+        self.backup_all = to_custom_streamed_response_wrapper(
+            android.backup_all,
+            StreamedBinaryAPIResponse,
         )
         self.close = to_streamed_response_wrapper(
             android.close,
@@ -1250,6 +1507,9 @@ class AndroidResourceWithStreamingResponse:
         self.restart = to_streamed_response_wrapper(
             android.restart,
         )
+        self.restore = to_streamed_response_wrapper(
+            android.restore,
+        )
         self.rotate_screen = to_streamed_response_wrapper(
             android.rotate_screen,
         )
@@ -1264,6 +1524,14 @@ class AsyncAndroidResourceWithStreamingResponse:
 
         self.list = async_to_streamed_response_wrapper(
             android.list,
+        )
+        self.backup = async_to_custom_streamed_response_wrapper(
+            android.backup,
+            AsyncStreamedBinaryAPIResponse,
+        )
+        self.backup_all = async_to_custom_streamed_response_wrapper(
+            android.backup_all,
+            AsyncStreamedBinaryAPIResponse,
         )
         self.close = async_to_streamed_response_wrapper(
             android.close,
@@ -1291,6 +1559,9 @@ class AsyncAndroidResourceWithStreamingResponse:
         )
         self.restart = async_to_streamed_response_wrapper(
             android.restart,
+        )
+        self.restore = async_to_streamed_response_wrapper(
+            android.restore,
         )
         self.rotate_screen = async_to_streamed_response_wrapper(
             android.rotate_screen,

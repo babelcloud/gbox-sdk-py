@@ -5,10 +5,18 @@ from __future__ import annotations
 import os
 from typing import Any, cast
 
+import httpx
 import pytest
+from respx import MockRouter
 
 from gbox_sdk import GboxClient, AsyncGboxClient
 from tests.utils import assert_matches_type
+from gbox_sdk._response import (
+    BinaryAPIResponse,
+    AsyncBinaryAPIResponse,
+    StreamedBinaryAPIResponse,
+    AsyncStreamedBinaryAPIResponse,
+)
 from gbox_sdk.types.v1.boxes import (
     AndroidApp,
     AndroidListResponse,
@@ -73,6 +81,136 @@ class TestAndroid:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.v1.boxes.android.with_raw_response.list(
                 id="",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    @pytest.mark.respx(base_url=base_url)
+    def test_method_backup(self, client: GboxClient, respx_mock: MockRouter) -> None:
+        respx_mock.post("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d/android/apps/com.example.myapp/backup").mock(
+            return_value=httpx.Response(200, json={"foo": "bar"})
+        )
+        android = client.v1.boxes.android.backup(
+            package_name="com.example.myapp",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert android.is_closed
+        assert android.json() == {"foo": "bar"}
+        assert cast(Any, android.is_closed) is True
+        assert isinstance(android, BinaryAPIResponse)
+
+    @pytest.mark.skip()
+    @parametrize
+    @pytest.mark.respx(base_url=base_url)
+    def test_raw_response_backup(self, client: GboxClient, respx_mock: MockRouter) -> None:
+        respx_mock.post("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d/android/apps/com.example.myapp/backup").mock(
+            return_value=httpx.Response(200, json={"foo": "bar"})
+        )
+
+        android = client.v1.boxes.android.with_raw_response.backup(
+            package_name="com.example.myapp",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+
+        assert android.is_closed is True
+        assert android.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert android.json() == {"foo": "bar"}
+        assert isinstance(android, BinaryAPIResponse)
+
+    @pytest.mark.skip()
+    @parametrize
+    @pytest.mark.respx(base_url=base_url)
+    def test_streaming_response_backup(self, client: GboxClient, respx_mock: MockRouter) -> None:
+        respx_mock.post("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d/android/apps/com.example.myapp/backup").mock(
+            return_value=httpx.Response(200, json={"foo": "bar"})
+        )
+        with client.v1.boxes.android.with_streaming_response.backup(
+            package_name="com.example.myapp",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        ) as android:
+            assert not android.is_closed
+            assert android.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            assert android.json() == {"foo": "bar"}
+            assert cast(Any, android.is_closed) is True
+            assert isinstance(android, StreamedBinaryAPIResponse)
+
+        assert cast(Any, android.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    @pytest.mark.respx(base_url=base_url)
+    def test_path_params_backup(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            client.v1.boxes.android.with_raw_response.backup(
+                package_name="com.example.myapp",
+                id="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `package_name` but received ''"):
+            client.v1.boxes.android.with_raw_response.backup(
+                package_name="",
+                id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    @pytest.mark.respx(base_url=base_url)
+    def test_method_backup_all(self, client: GboxClient, respx_mock: MockRouter) -> None:
+        respx_mock.post("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d/android/apps/backup-all").mock(
+            return_value=httpx.Response(200, json={"foo": "bar"})
+        )
+        android = client.v1.boxes.android.backup_all(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert android.is_closed
+        assert android.json() == {"foo": "bar"}
+        assert cast(Any, android.is_closed) is True
+        assert isinstance(android, BinaryAPIResponse)
+
+    @pytest.mark.skip()
+    @parametrize
+    @pytest.mark.respx(base_url=base_url)
+    def test_raw_response_backup_all(self, client: GboxClient, respx_mock: MockRouter) -> None:
+        respx_mock.post("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d/android/apps/backup-all").mock(
+            return_value=httpx.Response(200, json={"foo": "bar"})
+        )
+
+        android = client.v1.boxes.android.with_raw_response.backup_all(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+
+        assert android.is_closed is True
+        assert android.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert android.json() == {"foo": "bar"}
+        assert isinstance(android, BinaryAPIResponse)
+
+    @pytest.mark.skip()
+    @parametrize
+    @pytest.mark.respx(base_url=base_url)
+    def test_streaming_response_backup_all(self, client: GboxClient, respx_mock: MockRouter) -> None:
+        respx_mock.post("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d/android/apps/backup-all").mock(
+            return_value=httpx.Response(200, json={"foo": "bar"})
+        )
+        with client.v1.boxes.android.with_streaming_response.backup_all(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        ) as android:
+            assert not android.is_closed
+            assert android.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            assert android.json() == {"foo": "bar"}
+            assert cast(Any, android.is_closed) is True
+            assert isinstance(android, StreamedBinaryAPIResponse)
+
+        assert cast(Any, android.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    @pytest.mark.respx(base_url=base_url)
+    def test_path_params_backup_all(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            client.v1.boxes.android.with_raw_response.backup_all(
+                "",
             )
 
     @pytest.mark.skip()
@@ -584,6 +722,52 @@ class TestAndroid:
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_restore(self, client: GboxClient) -> None:
+        android = client.v1.boxes.android.restore(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            backup=b"raw file contents",
+        )
+        assert android is None
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_restore(self, client: GboxClient) -> None:
+        response = client.v1.boxes.android.with_raw_response.restore(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            backup=b"raw file contents",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        android = response.parse()
+        assert android is None
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_restore(self, client: GboxClient) -> None:
+        with client.v1.boxes.android.with_streaming_response.restore(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            backup=b"raw file contents",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            android = response.parse()
+            assert android is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_restore(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            client.v1.boxes.android.with_raw_response.restore(
+                id="",
+                backup=b"raw file contents",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
     def test_method_rotate_screen(self, client: GboxClient) -> None:
         android = client.v1.boxes.android.rotate_screen(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
@@ -748,6 +932,136 @@ class TestAsyncAndroid:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.v1.boxes.android.with_raw_response.list(
                 id="",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    @pytest.mark.respx(base_url=base_url)
+    async def test_method_backup(self, async_client: AsyncGboxClient, respx_mock: MockRouter) -> None:
+        respx_mock.post("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d/android/apps/com.example.myapp/backup").mock(
+            return_value=httpx.Response(200, json={"foo": "bar"})
+        )
+        android = await async_client.v1.boxes.android.backup(
+            package_name="com.example.myapp",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert android.is_closed
+        assert await android.json() == {"foo": "bar"}
+        assert cast(Any, android.is_closed) is True
+        assert isinstance(android, AsyncBinaryAPIResponse)
+
+    @pytest.mark.skip()
+    @parametrize
+    @pytest.mark.respx(base_url=base_url)
+    async def test_raw_response_backup(self, async_client: AsyncGboxClient, respx_mock: MockRouter) -> None:
+        respx_mock.post("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d/android/apps/com.example.myapp/backup").mock(
+            return_value=httpx.Response(200, json={"foo": "bar"})
+        )
+
+        android = await async_client.v1.boxes.android.with_raw_response.backup(
+            package_name="com.example.myapp",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+
+        assert android.is_closed is True
+        assert android.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert await android.json() == {"foo": "bar"}
+        assert isinstance(android, AsyncBinaryAPIResponse)
+
+    @pytest.mark.skip()
+    @parametrize
+    @pytest.mark.respx(base_url=base_url)
+    async def test_streaming_response_backup(self, async_client: AsyncGboxClient, respx_mock: MockRouter) -> None:
+        respx_mock.post("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d/android/apps/com.example.myapp/backup").mock(
+            return_value=httpx.Response(200, json={"foo": "bar"})
+        )
+        async with async_client.v1.boxes.android.with_streaming_response.backup(
+            package_name="com.example.myapp",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        ) as android:
+            assert not android.is_closed
+            assert android.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            assert await android.json() == {"foo": "bar"}
+            assert cast(Any, android.is_closed) is True
+            assert isinstance(android, AsyncStreamedBinaryAPIResponse)
+
+        assert cast(Any, android.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    @pytest.mark.respx(base_url=base_url)
+    async def test_path_params_backup(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            await async_client.v1.boxes.android.with_raw_response.backup(
+                package_name="com.example.myapp",
+                id="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `package_name` but received ''"):
+            await async_client.v1.boxes.android.with_raw_response.backup(
+                package_name="",
+                id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    @pytest.mark.respx(base_url=base_url)
+    async def test_method_backup_all(self, async_client: AsyncGboxClient, respx_mock: MockRouter) -> None:
+        respx_mock.post("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d/android/apps/backup-all").mock(
+            return_value=httpx.Response(200, json={"foo": "bar"})
+        )
+        android = await async_client.v1.boxes.android.backup_all(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert android.is_closed
+        assert await android.json() == {"foo": "bar"}
+        assert cast(Any, android.is_closed) is True
+        assert isinstance(android, AsyncBinaryAPIResponse)
+
+    @pytest.mark.skip()
+    @parametrize
+    @pytest.mark.respx(base_url=base_url)
+    async def test_raw_response_backup_all(self, async_client: AsyncGboxClient, respx_mock: MockRouter) -> None:
+        respx_mock.post("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d/android/apps/backup-all").mock(
+            return_value=httpx.Response(200, json={"foo": "bar"})
+        )
+
+        android = await async_client.v1.boxes.android.with_raw_response.backup_all(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+
+        assert android.is_closed is True
+        assert android.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert await android.json() == {"foo": "bar"}
+        assert isinstance(android, AsyncBinaryAPIResponse)
+
+    @pytest.mark.skip()
+    @parametrize
+    @pytest.mark.respx(base_url=base_url)
+    async def test_streaming_response_backup_all(self, async_client: AsyncGboxClient, respx_mock: MockRouter) -> None:
+        respx_mock.post("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d/android/apps/backup-all").mock(
+            return_value=httpx.Response(200, json={"foo": "bar"})
+        )
+        async with async_client.v1.boxes.android.with_streaming_response.backup_all(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        ) as android:
+            assert not android.is_closed
+            assert android.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            assert await android.json() == {"foo": "bar"}
+            assert cast(Any, android.is_closed) is True
+            assert isinstance(android, AsyncStreamedBinaryAPIResponse)
+
+        assert cast(Any, android.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    @pytest.mark.respx(base_url=base_url)
+    async def test_path_params_backup_all(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            await async_client.v1.boxes.android.with_raw_response.backup_all(
+                "",
             )
 
     @pytest.mark.skip()
@@ -1255,6 +1569,52 @@ class TestAsyncAndroid:
             await async_client.v1.boxes.android.with_raw_response.restart(
                 package_name="",
                 id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_restore(self, async_client: AsyncGboxClient) -> None:
+        android = await async_client.v1.boxes.android.restore(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            backup=b"raw file contents",
+        )
+        assert android is None
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_restore(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.android.with_raw_response.restore(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            backup=b"raw file contents",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        android = await response.parse()
+        assert android is None
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_restore(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.android.with_streaming_response.restore(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            backup=b"raw file contents",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            android = await response.parse()
+            assert android is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_restore(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            await async_client.v1.boxes.android.with_raw_response.restore(
+                id="",
+                backup=b"raw file contents",
             )
 
     @pytest.mark.skip()

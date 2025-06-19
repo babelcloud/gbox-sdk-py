@@ -6,12 +6,9 @@ from typing_extensions import Literal, Annotated, TypedDict
 
 from ...._utils import PropertyInfo
 
-__all__ = ["AndroidListParams"]
+__all__ = ["AndroidListSimpleParams"]
 
 
-class AndroidListParams(TypedDict, total=False):
+class AndroidListSimpleParams(TypedDict, total=False):
     app_type: Annotated[Literal["system", "third-party"], PropertyInfo(alias="appType")]
     """Application type: system or third-party, default is third-party"""
-
-    is_running: Annotated[bool, PropertyInfo(alias="isRunning")]
-    """Whether to include running apps, default is all"""

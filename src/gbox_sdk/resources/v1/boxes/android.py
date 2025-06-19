@@ -24,10 +24,12 @@ from ....types.v1.boxes import (
     android_install_params,
     android_restart_params,
     android_uninstall_params,
+    android_list_simple_params,
     android_rotate_screen_params,
 )
 from ....types.v1.boxes.android_app import AndroidApp
 from ....types.v1.boxes.android_list_response import AndroidListResponse
+from ....types.v1.boxes.android_list_simple_response import AndroidListSimpleResponse
 from ....types.v1.boxes.android_list_activities_response import AndroidListActivitiesResponse
 from ....types.v1.boxes.android_get_connect_address_response import AndroidGetConnectAddressResponse
 
@@ -71,7 +73,7 @@ class AndroidResource(SyncAPIResource):
         List apps
 
         Args:
-          app_type: Application type: system or third-party, default is all
+          app_type: Application type: system or third-party, default is third-party
 
           is_running: Whether to include running apps, default is all
 
@@ -260,7 +262,7 @@ class AndroidResource(SyncAPIResource):
         Install app
 
         Args:
-          apk: APK file to install (max file size: 200MB)
+          apk: APK file to install (max file size: 512MB)
 
           extra_headers: Send extra headers
 
@@ -289,7 +291,7 @@ class AndroidResource(SyncAPIResource):
         Install app
 
         Args:
-          apk: HTTP URL to download APK file (max file size: 200MB)
+          apk: HTTP URL to download APK file (max file size: 512MB)
 
           extra_headers: Send extra headers
 
@@ -367,6 +369,46 @@ class AndroidResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AndroidListActivitiesResponse,
+        )
+
+    def list_simple(
+        self,
+        id: str,
+        *,
+        app_type: Literal["system", "third-party"] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AndroidListSimpleResponse:
+        """
+        List apps simple
+
+        Args:
+          app_type: Application type: system or third-party, default is third-party
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._get(
+            f"/boxes/{id}/android/apps/simple",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform({"app_type": app_type}, android_list_simple_params.AndroidListSimpleParams),
+            ),
+            cast_to=AndroidListSimpleResponse,
         )
 
     def open(
@@ -577,7 +619,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         List apps
 
         Args:
-          app_type: Application type: system or third-party, default is all
+          app_type: Application type: system or third-party, default is third-party
 
           is_running: Whether to include running apps, default is all
 
@@ -766,7 +808,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         Install app
 
         Args:
-          apk: APK file to install (max file size: 200MB)
+          apk: APK file to install (max file size: 512MB)
 
           extra_headers: Send extra headers
 
@@ -795,7 +837,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         Install app
 
         Args:
-          apk: HTTP URL to download APK file (max file size: 200MB)
+          apk: HTTP URL to download APK file (max file size: 512MB)
 
           extra_headers: Send extra headers
 
@@ -873,6 +915,48 @@ class AsyncAndroidResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AndroidListActivitiesResponse,
+        )
+
+    async def list_simple(
+        self,
+        id: str,
+        *,
+        app_type: Literal["system", "third-party"] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AndroidListSimpleResponse:
+        """
+        List apps simple
+
+        Args:
+          app_type: Application type: system or third-party, default is third-party
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._get(
+            f"/boxes/{id}/android/apps/simple",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"app_type": app_type}, android_list_simple_params.AndroidListSimpleParams
+                ),
+            ),
+            cast_to=AndroidListSimpleResponse,
         )
 
     async def open(
@@ -1073,6 +1157,9 @@ class AndroidResourceWithRawResponse:
         self.list_activities = to_raw_response_wrapper(
             android.list_activities,
         )
+        self.list_simple = to_raw_response_wrapper(
+            android.list_simple,
+        )
         self.open = to_raw_response_wrapper(
             android.open,
         )
@@ -1111,6 +1198,9 @@ class AsyncAndroidResourceWithRawResponse:
         )
         self.list_activities = async_to_raw_response_wrapper(
             android.list_activities,
+        )
+        self.list_simple = async_to_raw_response_wrapper(
+            android.list_simple,
         )
         self.open = async_to_raw_response_wrapper(
             android.open,
@@ -1151,6 +1241,9 @@ class AndroidResourceWithStreamingResponse:
         self.list_activities = to_streamed_response_wrapper(
             android.list_activities,
         )
+        self.list_simple = to_streamed_response_wrapper(
+            android.list_simple,
+        )
         self.open = to_streamed_response_wrapper(
             android.open,
         )
@@ -1189,6 +1282,9 @@ class AsyncAndroidResourceWithStreamingResponse:
         )
         self.list_activities = async_to_streamed_response_wrapper(
             android.list_activities,
+        )
+        self.list_simple = async_to_streamed_response_wrapper(
+            android.list_simple,
         )
         self.open = async_to_streamed_response_wrapper(
             android.open,

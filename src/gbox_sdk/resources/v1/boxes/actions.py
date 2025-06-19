@@ -3,12 +3,12 @@
 from __future__ import annotations
 
 from typing import List, Iterable
-from typing_extensions import Literal
+from typing_extensions import Literal, overload
 
 import httpx
 
 from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ...._utils import maybe_transform, async_maybe_transform
+from ...._utils import required_args, maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import (
@@ -612,11 +612,14 @@ class ActionsResource(SyncAPIResource):
             cast_to=ActionResult,
         )
 
+    @overload
     def swipe(
         self,
         id: str,
         *,
-        body: object,
+        direction: Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"],
+        distance: float | NotGiven = NOT_GIVEN,
+        duration: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -628,6 +631,13 @@ class ActionsResource(SyncAPIResource):
         Performs a swipe in the specified direction
 
         Args:
+          direction: Direction of the swipe
+
+          distance: Distance of the swipe in pixels. If not provided, will use a default distance
+              based on screen size
+
+          duration: Duration of the swipe
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -636,11 +646,95 @@ class ActionsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        ...
+
+    @overload
+    def swipe(
+        self,
+        id: str,
+        *,
+        end: object,
+        start: object,
+        duration: str | NotGiven = NOT_GIVEN,
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionResult:
+        """
+        Performs a swipe in the specified direction
+
+        Args:
+          end: End point of the swipe path
+
+          start: Start point of the swipe path
+
+          duration: Duration of the swipe
+
+          output_format: Type of the URI. default is base64.
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @required_args(["direction"], ["end", "start"])
+    def swipe(
+        self,
+        id: str,
+        *,
+        direction: Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"]
+        | NotGiven = NOT_GIVEN,
+        distance: float | NotGiven = NOT_GIVEN,
+        duration: str | NotGiven = NOT_GIVEN,
+        end: object | NotGiven = NOT_GIVEN,
+        start: object | NotGiven = NOT_GIVEN,
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionResult:
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
             f"/boxes/{id}/actions/swipe",
-            body=maybe_transform(body, action_swipe_params.ActionSwipeParams),
+            body=maybe_transform(
+                {
+                    "direction": direction,
+                    "distance": distance,
+                    "duration": duration,
+                    "end": end,
+                    "start": start,
+                    "output_format": output_format,
+                    "screenshot_delay": screenshot_delay,
+                },
+                action_swipe_params.ActionSwipeParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1346,11 +1440,14 @@ class AsyncActionsResource(AsyncAPIResource):
             cast_to=ActionResult,
         )
 
+    @overload
     async def swipe(
         self,
         id: str,
         *,
-        body: object,
+        direction: Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"],
+        distance: float | NotGiven = NOT_GIVEN,
+        duration: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1362,6 +1459,13 @@ class AsyncActionsResource(AsyncAPIResource):
         Performs a swipe in the specified direction
 
         Args:
+          direction: Direction of the swipe
+
+          distance: Distance of the swipe in pixels. If not provided, will use a default distance
+              based on screen size
+
+          duration: Duration of the swipe
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -1370,11 +1474,95 @@ class AsyncActionsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        ...
+
+    @overload
+    async def swipe(
+        self,
+        id: str,
+        *,
+        end: object,
+        start: object,
+        duration: str | NotGiven = NOT_GIVEN,
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionResult:
+        """
+        Performs a swipe in the specified direction
+
+        Args:
+          end: End point of the swipe path
+
+          start: Start point of the swipe path
+
+          duration: Duration of the swipe
+
+          output_format: Type of the URI. default is base64.
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @required_args(["direction"], ["end", "start"])
+    async def swipe(
+        self,
+        id: str,
+        *,
+        direction: Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"]
+        | NotGiven = NOT_GIVEN,
+        distance: float | NotGiven = NOT_GIVEN,
+        duration: str | NotGiven = NOT_GIVEN,
+        end: object | NotGiven = NOT_GIVEN,
+        start: object | NotGiven = NOT_GIVEN,
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionResult:
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
             f"/boxes/{id}/actions/swipe",
-            body=await async_maybe_transform(body, action_swipe_params.ActionSwipeParams),
+            body=await async_maybe_transform(
+                {
+                    "direction": direction,
+                    "distance": distance,
+                    "duration": duration,
+                    "end": end,
+                    "start": start,
+                    "output_format": output_format,
+                    "screenshot_delay": screenshot_delay,
+                },
+                action_swipe_params.ActionSwipeParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

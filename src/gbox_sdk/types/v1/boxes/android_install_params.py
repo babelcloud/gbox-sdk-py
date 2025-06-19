@@ -12,12 +12,12 @@ __all__ = ["AndroidInstallParams", "InstallAndroidAppByFile", "InstallAndroidApp
 
 class InstallAndroidAppByFile(TypedDict, total=False):
     apk: Required[FileTypes]
-    """APK file to install (max file size: 200MB)"""
+    """APK file to install (max file size: 512MB)"""
 
 
 class InstallAndroidAppByURL(TypedDict, total=False):
     apk: Required[str]
-    """HTTP URL to download APK file (max file size: 200MB)"""
+    """HTTP URL to download APK file (max file size: 512MB)"""
 
 
 AndroidInstallParams: TypeAlias = Union[InstallAndroidAppByFile, InstallAndroidAppByURL]

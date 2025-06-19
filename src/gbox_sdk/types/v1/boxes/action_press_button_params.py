@@ -11,7 +11,9 @@ __all__ = ["ActionPressButtonParams"]
 
 
 class ActionPressButtonParams(TypedDict, total=False):
-    buttons: Required[List[Literal["power", "volumeUp", "volumeDown", "volumeMute", "home", "back", "menu"]]]
+    buttons: Required[
+        List[Literal["power", "volumeUp", "volumeDown", "volumeMute", "home", "back", "menu", "appSwitch"]]
+    ]
     """Button to press"""
 
     output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]

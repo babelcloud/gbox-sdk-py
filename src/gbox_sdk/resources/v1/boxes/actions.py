@@ -259,7 +259,7 @@ class ActionsResource(SyncAPIResource):
         self,
         id: str,
         *,
-        buttons: List[Literal["power", "volumeUp", "volumeDown", "volumeMute", "home", "back", "menu"]],
+        buttons: List[Literal["power", "volumeUp", "volumeDown", "volumeMute", "home", "back", "menu", "appSwitch"]],
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -958,7 +958,7 @@ class AsyncActionsResource(AsyncAPIResource):
         self,
         id: str,
         *,
-        buttons: List[Literal["power", "volumeUp", "volumeDown", "volumeMute", "home", "back", "menu"]],
+        buttons: List[Literal["power", "volumeUp", "volumeDown", "volumeMute", "home", "back", "menu", "appSwitch"]],
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.

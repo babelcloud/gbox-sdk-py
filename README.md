@@ -112,9 +112,10 @@ from gbox_sdk import GboxClient
 
 client = GboxClient()
 
-client.v1.boxes.android.install(
+client.v1.boxes.fs.write(
     id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-    apk=Path("/path/to/file"),
+    content=Path("/path/to/file"),
+    path="/home/user/documents/output.txt",
 )
 ```
 

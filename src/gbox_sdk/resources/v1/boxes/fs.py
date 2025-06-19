@@ -3,11 +3,12 @@
 from __future__ import annotations
 
 from typing import Any, cast
+from typing_extensions import overload
 
 import httpx
 
-from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ...._utils import maybe_transform, async_maybe_transform
+from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven, FileTypes
+from ...._utils import required_args, maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import (
@@ -370,6 +371,7 @@ class FsResource(SyncAPIResource):
             cast_to=FRenameResponse,
         )
 
+    @overload
     def write(
         self,
         id: str,
@@ -390,7 +392,7 @@ class FsResource(SyncAPIResource):
         don't exist. if the path is a directory, the write will be failed.
 
         Args:
-          content: Content of the file
+          content: Content of the file (Max size: 512MB)
 
           path: Path to the file. If the path is not start with '/', the file will be written to
               the working directory
@@ -406,6 +408,62 @@ class FsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        ...
+
+    @overload
+    def write(
+        self,
+        id: str,
+        *,
+        content: FileTypes,
+        path: str,
+        working_dir: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> FWriteResponse:
+        """Creates or overwrites a file.
+
+        Creates necessary directories in the path if they
+        don't exist. if the path is a directory, the write will be failed.
+
+        Args:
+          content: Binary content of the file (Max file size: 512MB)
+
+          path: Path to the file. If the path is not start with '/', the file will be written to
+              the working directory
+
+          working_dir: Working directory. If not provided, the file will be read from the root
+              directory.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @required_args(["content", "path"])
+    def write(
+        self,
+        id: str,
+        *,
+        content: str | FileTypes,
+        path: str,
+        working_dir: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> FWriteResponse:
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
@@ -758,6 +816,7 @@ class AsyncFsResource(AsyncAPIResource):
             cast_to=FRenameResponse,
         )
 
+    @overload
     async def write(
         self,
         id: str,
@@ -778,7 +837,7 @@ class AsyncFsResource(AsyncAPIResource):
         don't exist. if the path is a directory, the write will be failed.
 
         Args:
-          content: Content of the file
+          content: Content of the file (Max size: 512MB)
 
           path: Path to the file. If the path is not start with '/', the file will be written to
               the working directory
@@ -794,6 +853,62 @@ class AsyncFsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        ...
+
+    @overload
+    async def write(
+        self,
+        id: str,
+        *,
+        content: FileTypes,
+        path: str,
+        working_dir: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> FWriteResponse:
+        """Creates or overwrites a file.
+
+        Creates necessary directories in the path if they
+        don't exist. if the path is a directory, the write will be failed.
+
+        Args:
+          content: Binary content of the file (Max file size: 512MB)
+
+          path: Path to the file. If the path is not start with '/', the file will be written to
+              the working directory
+
+          working_dir: Working directory. If not provided, the file will be read from the root
+              directory.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @required_args(["content", "path"])
+    async def write(
+        self,
+        id: str,
+        *,
+        content: str | FileTypes,
+        path: str,
+        working_dir: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> FWriteResponse:
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(

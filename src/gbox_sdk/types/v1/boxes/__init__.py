@@ -22,6 +22,7 @@ from .action_drag_params import ActionDragParams as ActionDragParams
 from .action_move_params import ActionMoveParams as ActionMoveParams
 from .action_type_params import ActionTypeParams as ActionTypeParams
 from .action_click_params import ActionClickParams as ActionClickParams
+from .action_swipe_params import ActionSwipeParams as ActionSwipeParams
 from .action_touch_params import ActionTouchParams as ActionTouchParams
 from .android_list_params import AndroidListParams as AndroidListParams
 from .android_open_params import AndroidOpenParams as AndroidOpenParams

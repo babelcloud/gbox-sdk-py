@@ -23,6 +23,7 @@ from ....types.v1.boxes import (
     action_move_params,
     action_type_params,
     action_click_params,
+    action_swipe_params,
     action_touch_params,
     action_scroll_params,
     action_press_key_params,
@@ -605,6 +606,41 @@ class ActionsResource(SyncAPIResource):
                 },
                 action_scroll_params.ActionScrollParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
+        )
+
+    def swipe(
+        self,
+        id: str,
+        *,
+        body: object,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionResult:
+        """
+        Performs a swipe in the specified direction
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._post(
+            f"/boxes/{id}/actions/swipe",
+            body=maybe_transform(body, action_swipe_params.ActionSwipeParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1310,6 +1346,41 @@ class AsyncActionsResource(AsyncAPIResource):
             cast_to=ActionResult,
         )
 
+    async def swipe(
+        self,
+        id: str,
+        *,
+        body: object,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionResult:
+        """
+        Performs a swipe in the specified direction
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._post(
+            f"/boxes/{id}/actions/swipe",
+            body=await async_maybe_transform(body, action_swipe_params.ActionSwipeParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
+        )
+
     async def touch(
         self,
         id: str,
@@ -1458,6 +1529,9 @@ class ActionsResourceWithRawResponse:
         self.scroll = to_raw_response_wrapper(
             actions.scroll,
         )
+        self.swipe = to_raw_response_wrapper(
+            actions.swipe,
+        )
         self.touch = to_raw_response_wrapper(
             actions.touch,
         )
@@ -1490,6 +1564,9 @@ class AsyncActionsResourceWithRawResponse:
         )
         self.scroll = async_to_raw_response_wrapper(
             actions.scroll,
+        )
+        self.swipe = async_to_raw_response_wrapper(
+            actions.swipe,
         )
         self.touch = async_to_raw_response_wrapper(
             actions.touch,
@@ -1524,6 +1601,9 @@ class ActionsResourceWithStreamingResponse:
         self.scroll = to_streamed_response_wrapper(
             actions.scroll,
         )
+        self.swipe = to_streamed_response_wrapper(
+            actions.swipe,
+        )
         self.touch = to_streamed_response_wrapper(
             actions.touch,
         )
@@ -1556,6 +1636,9 @@ class AsyncActionsResourceWithStreamingResponse:
         )
         self.scroll = async_to_streamed_response_wrapper(
             actions.scroll,
+        )
+        self.swipe = async_to_streamed_response_wrapper(
+            actions.swipe,
         )
         self.touch = async_to_streamed_response_wrapper(
             actions.touch,

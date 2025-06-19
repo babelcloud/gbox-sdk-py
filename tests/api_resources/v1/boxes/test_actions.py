@@ -494,6 +494,52 @@ class TestActions:
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_swipe(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.swipe(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            body={"direction": "up"},
+        )
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_swipe(self, client: GboxClient) -> None:
+        response = client.v1.boxes.actions.with_raw_response.swipe(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            body={"direction": "up"},
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = response.parse()
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_swipe(self, client: GboxClient) -> None:
+        with client.v1.boxes.actions.with_streaming_response.swipe(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            body={"direction": "up"},
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = response.parse()
+            assert_matches_type(ActionResult, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_swipe(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            client.v1.boxes.actions.with_raw_response.swipe(
+                id="",
+                body={"direction": "up"},
+            )
+
+    @pytest.mark.skip()
+    @parametrize
     def test_method_touch(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.touch(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
@@ -1123,6 +1169,52 @@ class TestAsyncActions:
                 scroll_y=100,
                 x=100,
                 y=100,
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_swipe(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.swipe(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            body={"direction": "up"},
+        )
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_swipe(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.actions.with_raw_response.swipe(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            body={"direction": "up"},
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = await response.parse()
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_swipe(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.actions.with_streaming_response.swipe(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            body={"direction": "up"},
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = await response.parse()
+            assert_matches_type(ActionResult, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_swipe(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            await async_client.v1.boxes.actions.with_raw_response.swipe(
+                id="",
+                body={"direction": "up"},
             )
 
     @pytest.mark.skip()

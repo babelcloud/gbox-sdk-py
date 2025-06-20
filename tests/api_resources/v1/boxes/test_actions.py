@@ -509,6 +509,8 @@ class TestActions:
             direction="up",
             distance=300,
             duration="200ms",
+            output_format="base64",
+            screenshot_delay="500ms",
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -1292,6 +1294,8 @@ class TestAsyncActions:
             direction="up",
             distance=300,
             duration="200ms",
+            output_format="base64",
+            screenshot_delay="500ms",
         )
         assert_matches_type(ActionResult, action, path=["response"])
 

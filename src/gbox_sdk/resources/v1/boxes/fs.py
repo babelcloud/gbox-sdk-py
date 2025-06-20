@@ -80,8 +80,8 @@ class FsResource(SyncAPIResource):
 
           depth: Depth of the directory
 
-          working_dir: Working directory. If not provided, the file will be read from the root
-              directory.
+          working_dir: Working directory. If not provided, the file will be read from the
+              `box.config.workingDir` directory.
 
           extra_headers: Send extra headers
 
@@ -133,8 +133,8 @@ class FsResource(SyncAPIResource):
         If the path is not start with '/', the
               file/directory will be checked from the working directory
 
-          working_dir: Working directory. If not provided, the file will be read from the root
-              directory.
+          working_dir: Working directory. If not provided, the file will be read from the
+              `box.config.workingDir` directory.
 
           extra_headers: Send extra headers
 
@@ -182,8 +182,8 @@ class FsResource(SyncAPIResource):
         If the path is not start with '/', the
               file/directory will be checked from the working directory
 
-          working_dir: Working directory. If not provided, the file will be read from the root
-              directory.
+          working_dir: Working directory. If not provided, the file will be read from the
+              `box.config.workingDir` directory.
 
           extra_headers: Send extra headers
 
@@ -237,8 +237,8 @@ class FsResource(SyncAPIResource):
         If the path is not start with '/', the file will be read from
               the working directory.
 
-          working_dir: Working directory. If not provided, the file will be read from the root
-              directory.
+          working_dir: Working directory. If not provided, the file will be read from the
+              `box.config.workingDir` directory.
 
           extra_headers: Send extra headers
 
@@ -289,8 +289,8 @@ class FsResource(SyncAPIResource):
         If the path is not start with '/', the
               file/directory will be deleted from the working directory
 
-          working_dir: Working directory. If not provided, the file will be read from the root
-              directory.
+          working_dir: Working directory. If not provided, the file will be read from the
+              `box.config.workingDir` directory.
 
           extra_headers: Send extra headers
 
@@ -342,8 +342,8 @@ class FsResource(SyncAPIResource):
           old_path: Old path to the file/directory. If the path is not start with '/', the
               file/directory will be renamed from the working directory
 
-          working_dir: Working directory. If not provided, the file will be read from the root
-              directory.
+          working_dir: Working directory. If not provided, the file will be read from the
+              `box.config.workingDir` directory.
 
           extra_headers: Send extra headers
 
@@ -397,8 +397,8 @@ class FsResource(SyncAPIResource):
           path: Path to the file. If the path is not start with '/', the file will be written to
               the working directory
 
-          working_dir: Working directory. If not provided, the file will be read from the root
-              directory.
+          working_dir: Working directory. If not provided, the file will be read from the
+              `box.config.workingDir` directory.
 
           extra_headers: Send extra headers
 
@@ -436,8 +436,8 @@ class FsResource(SyncAPIResource):
           path: Path to the file. If the path is not start with '/', the file will be written to
               the working directory
 
-          working_dir: Working directory. If not provided, the file will be read from the root
-              directory.
+          working_dir: Working directory. If not provided, the file will be read from the
+              `box.config.workingDir` directory.
 
           extra_headers: Send extra headers
 
@@ -525,8 +525,8 @@ class AsyncFsResource(AsyncAPIResource):
 
           depth: Depth of the directory
 
-          working_dir: Working directory. If not provided, the file will be read from the root
-              directory.
+          working_dir: Working directory. If not provided, the file will be read from the
+              `box.config.workingDir` directory.
 
           extra_headers: Send extra headers
 
@@ -578,8 +578,8 @@ class AsyncFsResource(AsyncAPIResource):
         If the path is not start with '/', the
               file/directory will be checked from the working directory
 
-          working_dir: Working directory. If not provided, the file will be read from the root
-              directory.
+          working_dir: Working directory. If not provided, the file will be read from the
+              `box.config.workingDir` directory.
 
           extra_headers: Send extra headers
 
@@ -627,8 +627,8 @@ class AsyncFsResource(AsyncAPIResource):
         If the path is not start with '/', the
               file/directory will be checked from the working directory
 
-          working_dir: Working directory. If not provided, the file will be read from the root
-              directory.
+          working_dir: Working directory. If not provided, the file will be read from the
+              `box.config.workingDir` directory.
 
           extra_headers: Send extra headers
 
@@ -682,8 +682,8 @@ class AsyncFsResource(AsyncAPIResource):
         If the path is not start with '/', the file will be read from
               the working directory.
 
-          working_dir: Working directory. If not provided, the file will be read from the root
-              directory.
+          working_dir: Working directory. If not provided, the file will be read from the
+              `box.config.workingDir` directory.
 
           extra_headers: Send extra headers
 
@@ -734,8 +734,8 @@ class AsyncFsResource(AsyncAPIResource):
         If the path is not start with '/', the
               file/directory will be deleted from the working directory
 
-          working_dir: Working directory. If not provided, the file will be read from the root
-              directory.
+          working_dir: Working directory. If not provided, the file will be read from the
+              `box.config.workingDir` directory.
 
           extra_headers: Send extra headers
 
@@ -787,8 +787,8 @@ class AsyncFsResource(AsyncAPIResource):
           old_path: Old path to the file/directory. If the path is not start with '/', the
               file/directory will be renamed from the working directory
 
-          working_dir: Working directory. If not provided, the file will be read from the root
-              directory.
+          working_dir: Working directory. If not provided, the file will be read from the
+              `box.config.workingDir` directory.
 
           extra_headers: Send extra headers
 
@@ -842,8 +842,8 @@ class AsyncFsResource(AsyncAPIResource):
           path: Path to the file. If the path is not start with '/', the file will be written to
               the working directory
 
-          working_dir: Working directory. If not provided, the file will be read from the root
-              directory.
+          working_dir: Working directory. If not provided, the file will be read from the
+              `box.config.workingDir` directory.
 
           extra_headers: Send extra headers
 
@@ -881,8 +881,8 @@ class AsyncFsResource(AsyncAPIResource):
           path: Path to the file. If the path is not start with '/', the file will be written to
               the working directory
 
-          working_dir: Working directory. If not provided, the file will be read from the root
-              directory.
+          working_dir: Working directory. If not provided, the file will be read from the
+              `box.config.workingDir` directory.
 
           extra_headers: Send extra headers
 

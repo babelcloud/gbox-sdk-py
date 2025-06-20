@@ -326,7 +326,8 @@ class BoxesResource(SyncAPIResource):
               out, the exit code will be 124. For example: 'timeout 5s sleep 10s' will result
               in exit code 124.
 
-          working_dir: The working directory of the command
+          working_dir: The working directory of the command. It not provided, the command will be run
+              in the `box.config.workingDir` directory.
 
           extra_headers: Send extra headers
 
@@ -426,7 +427,8 @@ class BoxesResource(SyncAPIResource):
           api_timeout: The timeout of the code execution. e.g. "30s" or "1m" or "1h". If the code
               execution times out, the exit code will be 124.
 
-          working_dir: The working directory of the code.
+          working_dir: The working directory of the code. It not provided, the code will be run in the
+              `box.config.workingDir` directory.
 
           extra_headers: Send extra headers
 
@@ -863,7 +865,8 @@ class AsyncBoxesResource(AsyncAPIResource):
               out, the exit code will be 124. For example: 'timeout 5s sleep 10s' will result
               in exit code 124.
 
-          working_dir: The working directory of the command
+          working_dir: The working directory of the command. It not provided, the command will be run
+              in the `box.config.workingDir` directory.
 
           extra_headers: Send extra headers
 
@@ -963,7 +966,8 @@ class AsyncBoxesResource(AsyncAPIResource):
           api_timeout: The timeout of the code execution. e.g. "30s" or "1m" or "1h". If the code
               execution times out, the exit code will be 124.
 
-          working_dir: The working directory of the code.
+          working_dir: The working directory of the code. It not provided, the code will be run in the
+              `box.config.workingDir` directory.
 
           extra_headers: Send extra headers
 

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, Annotated, TypedDict
+from typing_extensions import Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 
@@ -10,9 +10,6 @@ __all__ = ["CreateBoxConfigParam"]
 
 
 class CreateBoxConfigParam(TypedDict, total=False):
-    device_type: Annotated[Literal["virtual", "physical"], PropertyInfo(alias="deviceType")]
-    """Device type - virtual or physical Android device"""
-
     envs: object
     """Environment variables for the box"""
 

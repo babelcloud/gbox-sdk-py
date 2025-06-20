@@ -392,7 +392,7 @@ class BoxesResource(SyncAPIResource):
         code: str,
         argv: List[str] | NotGiven = NOT_GIVEN,
         envs: object | NotGiven = NOT_GIVEN,
-        language: Literal["bash", "python3", "typescript"] | NotGiven = NOT_GIVEN,
+        language: Literal["bash", "python", "typescript"] | NotGiven = NOT_GIVEN,
         api_timeout: str | NotGiven = NOT_GIVEN,
         working_dir: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -886,7 +886,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         code: str,
         argv: List[str] | NotGiven = NOT_GIVEN,
         envs: object | NotGiven = NOT_GIVEN,
-        language: Literal["bash", "python3", "typescript"] | NotGiven = NOT_GIVEN,
+        language: Literal["bash", "python", "typescript"] | NotGiven = NOT_GIVEN,
         api_timeout: str | NotGiven = NOT_GIVEN,
         working_dir: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.

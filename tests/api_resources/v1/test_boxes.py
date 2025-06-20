@@ -323,10 +323,10 @@ class TestBoxes:
             code='print("Hello, World!")',
             argv=["--help"],
             envs={
-                "PYTHONPATH": "/usr/lib/python3",
+                "PYTHONPATH": "/usr/lib/python",
                 "DEBUG": "true",
             },
-            language="python3",
+            language="python",
             api_timeout="timeout",
             working_dir="/home/user/scripts",
         )
@@ -822,10 +822,10 @@ class TestAsyncBoxes:
             code='print("Hello, World!")',
             argv=["--help"],
             envs={
-                "PYTHONPATH": "/usr/lib/python3",
+                "PYTHONPATH": "/usr/lib/python",
                 "DEBUG": "true",
             },
-            language="python3",
+            language="python",
             api_timeout="timeout",
             working_dir="/home/user/scripts",
         )

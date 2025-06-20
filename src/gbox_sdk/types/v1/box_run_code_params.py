@@ -24,7 +24,7 @@ class BoxRunCodeParams(TypedDict, total=False):
     envs: object
     """The environment variables to run the code"""
 
-    language: Literal["bash", "python3", "typescript"]
+    language: Literal["bash", "python", "typescript"]
     """The language of the code."""
 
     api_timeout: Annotated[str, PropertyInfo(alias="timeout")]

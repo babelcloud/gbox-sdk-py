@@ -25,4 +25,8 @@ class BoxExecuteCommandsParams(TypedDict, total=False):
     """
 
     working_dir: Annotated[str, PropertyInfo(alias="workingDir")]
-    """The working directory of the command"""
+    """The working directory of the command.
+
+    It not provided, the command will be run in the `box.config.workingDir`
+    directory.
+    """

@@ -20,5 +20,6 @@ class FExistsParams(TypedDict, total=False):
     working_dir: Annotated[str, PropertyInfo(alias="workingDir")]
     """Working directory.
 
-    If not provided, the file will be read from the root directory.
+    If not provided, the file will be read from the `box.config.workingDir`
+    directory.
     """

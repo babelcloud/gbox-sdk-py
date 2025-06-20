@@ -35,4 +35,7 @@ class BoxRunCodeParams(TypedDict, total=False):
     """
 
     working_dir: Annotated[str, PropertyInfo(alias="workingDir")]
-    """The working directory of the code."""
+    """The working directory of the code.
+
+    It not provided, the code will be run in the `box.config.workingDir` directory.
+    """

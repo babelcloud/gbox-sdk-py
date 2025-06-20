@@ -620,6 +620,8 @@ class ActionsResource(SyncAPIResource):
         direction: Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"],
         distance: float | NotGiven = NOT_GIVEN,
         duration: str | NotGiven = NOT_GIVEN,
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -637,6 +639,20 @@ class ActionsResource(SyncAPIResource):
               based on screen size
 
           duration: Duration of the swipe
+
+          output_format: Type of the URI. default is base64.
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
 
           extra_headers: Send extra headers
 
@@ -708,10 +724,10 @@ class ActionsResource(SyncAPIResource):
         | NotGiven = NOT_GIVEN,
         distance: float | NotGiven = NOT_GIVEN,
         duration: str | NotGiven = NOT_GIVEN,
-        end: object | NotGiven = NOT_GIVEN,
-        start: object | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
+        end: object | NotGiven = NOT_GIVEN,
+        start: object | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -728,10 +744,10 @@ class ActionsResource(SyncAPIResource):
                     "direction": direction,
                     "distance": distance,
                     "duration": duration,
-                    "end": end,
-                    "start": start,
                     "output_format": output_format,
                     "screenshot_delay": screenshot_delay,
+                    "end": end,
+                    "start": start,
                 },
                 action_swipe_params.ActionSwipeParams,
             ),
@@ -1448,6 +1464,8 @@ class AsyncActionsResource(AsyncAPIResource):
         direction: Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"],
         distance: float | NotGiven = NOT_GIVEN,
         duration: str | NotGiven = NOT_GIVEN,
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1465,6 +1483,20 @@ class AsyncActionsResource(AsyncAPIResource):
               based on screen size
 
           duration: Duration of the swipe
+
+          output_format: Type of the URI. default is base64.
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
 
           extra_headers: Send extra headers
 
@@ -1536,10 +1568,10 @@ class AsyncActionsResource(AsyncAPIResource):
         | NotGiven = NOT_GIVEN,
         distance: float | NotGiven = NOT_GIVEN,
         duration: str | NotGiven = NOT_GIVEN,
-        end: object | NotGiven = NOT_GIVEN,
-        start: object | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
+        end: object | NotGiven = NOT_GIVEN,
+        start: object | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1556,10 +1588,10 @@ class AsyncActionsResource(AsyncAPIResource):
                     "direction": direction,
                     "distance": distance,
                     "duration": duration,
-                    "end": end,
-                    "start": start,
                     "output_format": output_format,
                     "screenshot_delay": screenshot_delay,
+                    "end": end,
+                    "start": start,
                 },
                 action_swipe_params.ActionSwipeParams,
             ),

@@ -18,6 +18,7 @@ from gbox_sdk.types.v1 import (
     BoxRunCodeResponse,
     BoxRetrieveResponse,
     BoxLiveViewURLResponse,
+    BoxWebTerminalURLResponse,
     BoxExecuteCommandsResponse,
 )
 
@@ -268,7 +269,16 @@ class TestBoxes:
     @parametrize
     def test_method_live_view_url(self, client: GboxClient) -> None:
         box = client.v1.boxes.live_view_url(
-            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert_matches_type(BoxLiveViewURLResponse, box, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_live_view_url_with_all_params(self, client: GboxClient) -> None:
+        box = client.v1.boxes.live_view_url(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            expires_in="180m",
         )
         assert_matches_type(BoxLiveViewURLResponse, box, path=["response"])
 
@@ -276,7 +286,7 @@ class TestBoxes:
     @parametrize
     def test_raw_response_live_view_url(self, client: GboxClient) -> None:
         response = client.v1.boxes.with_raw_response.live_view_url(
-            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
@@ -288,7 +298,7 @@ class TestBoxes:
     @parametrize
     def test_streaming_response_live_view_url(self, client: GboxClient) -> None:
         with client.v1.boxes.with_streaming_response.live_view_url(
-            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -303,7 +313,7 @@ class TestBoxes:
     def test_path_params_live_view_url(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.v1.boxes.with_raw_response.live_view_url(
-                "",
+                id="",
             )
 
     @pytest.mark.skip()
@@ -519,6 +529,57 @@ class TestBoxes:
     def test_path_params_terminate(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.v1.boxes.with_raw_response.terminate(
+                id="",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_web_terminal_url(self, client: GboxClient) -> None:
+        box = client.v1.boxes.web_terminal_url(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert_matches_type(BoxWebTerminalURLResponse, box, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_web_terminal_url_with_all_params(self, client: GboxClient) -> None:
+        box = client.v1.boxes.web_terminal_url(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            expires_in="180m",
+        )
+        assert_matches_type(BoxWebTerminalURLResponse, box, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_web_terminal_url(self, client: GboxClient) -> None:
+        response = client.v1.boxes.with_raw_response.web_terminal_url(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        box = response.parse()
+        assert_matches_type(BoxWebTerminalURLResponse, box, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_web_terminal_url(self, client: GboxClient) -> None:
+        with client.v1.boxes.with_streaming_response.web_terminal_url(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            box = response.parse()
+            assert_matches_type(BoxWebTerminalURLResponse, box, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_web_terminal_url(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            client.v1.boxes.with_raw_response.web_terminal_url(
                 id="",
             )
 
@@ -767,7 +828,16 @@ class TestAsyncBoxes:
     @parametrize
     async def test_method_live_view_url(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.live_view_url(
-            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert_matches_type(BoxLiveViewURLResponse, box, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_live_view_url_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        box = await async_client.v1.boxes.live_view_url(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            expires_in="180m",
         )
         assert_matches_type(BoxLiveViewURLResponse, box, path=["response"])
 
@@ -775,7 +845,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_raw_response_live_view_url(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.with_raw_response.live_view_url(
-            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
@@ -787,7 +857,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_streaming_response_live_view_url(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.with_streaming_response.live_view_url(
-            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -802,7 +872,7 @@ class TestAsyncBoxes:
     async def test_path_params_live_view_url(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.v1.boxes.with_raw_response.live_view_url(
-                "",
+                id="",
             )
 
     @pytest.mark.skip()
@@ -1018,5 +1088,56 @@ class TestAsyncBoxes:
     async def test_path_params_terminate(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.v1.boxes.with_raw_response.terminate(
+                id="",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_web_terminal_url(self, async_client: AsyncGboxClient) -> None:
+        box = await async_client.v1.boxes.web_terminal_url(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert_matches_type(BoxWebTerminalURLResponse, box, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_web_terminal_url_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        box = await async_client.v1.boxes.web_terminal_url(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            expires_in="180m",
+        )
+        assert_matches_type(BoxWebTerminalURLResponse, box, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_web_terminal_url(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.with_raw_response.web_terminal_url(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        box = await response.parse()
+        assert_matches_type(BoxWebTerminalURLResponse, box, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_web_terminal_url(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.with_streaming_response.web_terminal_url(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            box = await response.parse()
+            assert_matches_type(BoxWebTerminalURLResponse, box, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_web_terminal_url(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            await async_client.v1.boxes.with_raw_response.web_terminal_url(
                 id="",
             )

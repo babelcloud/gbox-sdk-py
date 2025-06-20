@@ -78,8 +78,10 @@ class AndroidResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AndroidListResponse:
-        """
-        List apps
+        """Retrieve detailed information for all installed applications.
+
+        This endpoint
+        provides comprehensive app details
 
         Args:
           app_type: Application type: system or third-party, default is third-party
@@ -463,8 +465,11 @@ class AndroidResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AndroidListSimpleResponse:
-        """
-        List apps simple
+        """A faster endpoint to quickly retrieve basic app information.
+
+        This API provides
+        better performance for scenarios where you need to get essential app details
+        quickly
 
         Args:
           app_type: Application type: system or third-party, default is third-party
@@ -733,8 +738,10 @@ class AsyncAndroidResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AndroidListResponse:
-        """
-        List apps
+        """Retrieve detailed information for all installed applications.
+
+        This endpoint
+        provides comprehensive app details
 
         Args:
           app_type: Application type: system or third-party, default is third-party
@@ -1118,8 +1125,11 @@ class AsyncAndroidResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AndroidListSimpleResponse:
-        """
-        List apps simple
+        """A faster endpoint to quickly retrieve basic app information.
+
+        This API provides
+        better performance for scenarios where you need to get essential app details
+        quickly
 
         Args:
           app_type: Application type: system or third-party, default is third-party

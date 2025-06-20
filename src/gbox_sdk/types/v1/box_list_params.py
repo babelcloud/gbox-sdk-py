@@ -12,7 +12,12 @@ __all__ = ["BoxListParams"]
 
 class BoxListParams(TypedDict, total=False):
     labels: object
-    """Filter boxes by their labels, default is all"""
+    """Filter boxes by their labels.
+
+    Labels are key-value pairs that help identify and categorize boxes. Use this to
+    filter boxes that match specific label criteria. For example, you can filter by
+    project, environment, team, or any custom labels you've added to your boxes.
+    """
 
     page: int
     """Page number"""

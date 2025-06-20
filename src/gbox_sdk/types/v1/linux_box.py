@@ -37,10 +37,20 @@ class Config(BaseModel):
     """CPU cores allocated to the box"""
 
     envs: object
-    """Environment variables for the box"""
+    """Environment variables for the box.
+
+    These variables will be available in all operations including command execution,
+    code running, and other box behaviors
+    """
 
     labels: object
-    """Key-value pairs of labels for the box"""
+    """Key-value pairs of labels for the box.
+
+    Labels are used to add custom metadata to help identify, categorize, and manage
+    boxes. Common use cases include project names, environments, teams,
+    applications, or any other organizational tags that help you organize and filter
+    your boxes.
+    """
 
     memory: float
     """Memory allocated to the box in MB"""
@@ -58,7 +68,13 @@ class Config(BaseModel):
     """Linux browser configuration settings"""
 
     working_dir: Optional[str] = FieldInfo(alias="workingDir", default=None)
-    """Working directory path for the box"""
+    """Working directory path for the box.
+
+    This directory serves as the default starting point for all operations including
+    command execution, code running, and file system operations. When you execute
+    commands or run code, they will start from this directory unless explicitly
+    specified otherwise.
+    """
 
 
 class LinuxBox(BaseModel):

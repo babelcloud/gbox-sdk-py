@@ -166,11 +166,15 @@ class BoxesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxListResponse:
-        """
-        List box
+        """List box
 
         Args:
-          labels: Filter boxes by their labels, default is all
+          labels: Filter boxes by their labels.
+
+        Labels are key-value pairs that help identify and
+              categorize boxes. Use this to filter boxes that match specific label criteria.
+              For example, you can filter by project, environment, team, or any custom labels
+              you've added to your boxes.
 
           page: Page number
 
@@ -705,11 +709,15 @@ class AsyncBoxesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxListResponse:
-        """
-        List box
+        """List box
 
         Args:
-          labels: Filter boxes by their labels, default is all
+          labels: Filter boxes by their labels.
+
+        Labels are key-value pairs that help identify and
+              categorize boxes. Use this to filter boxes that match specific label criteria.
+              For example, you can filter by project, environment, team, or any custom labels
+              you've added to your boxes.
 
           page: Page number
 

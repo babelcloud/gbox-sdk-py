@@ -49,8 +49,10 @@ from ....types.v1 import (
     box_run_code_params,
     box_terminate_params,
     box_create_linux_params,
+    box_live_view_url_params,
     box_create_android_params,
     box_execute_commands_params,
+    box_web_terminal_url_params,
 )
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import (
@@ -70,6 +72,7 @@ from ....types.v1.box_run_code_response import BoxRunCodeResponse
 from ....types.v1.create_box_config_param import CreateBoxConfigParam
 from ....types.v1.box_live_view_url_response import BoxLiveViewURLResponse
 from ....types.v1.box_execute_commands_response import BoxExecuteCommandsResponse
+from ....types.v1.box_web_terminal_url_response import BoxWebTerminalURLResponse
 
 __all__ = ["BoxesResource", "AsyncBoxesResource"]
 
@@ -356,6 +359,7 @@ class BoxesResource(SyncAPIResource):
         self,
         id: str,
         *,
+        expires_in: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -364,9 +368,12 @@ class BoxesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxLiveViewURLResponse:
         """
-        Get live view url
+        Generate pre-signed live view url
 
         Args:
+          expires_in: The live view will be alive for the given duration (e.g. '10m' or '1h'). Default
+              is 180m.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -377,8 +384,9 @@ class BoxesResource(SyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return self._get(
+        return self._post(
             f"/boxes/{id}/live-view-url",
+            body=maybe_transform({"expires_in": expires_in}, box_live_view_url_params.BoxLiveViewURLParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -565,6 +573,44 @@ class BoxesResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=NoneType,
+        )
+
+    def web_terminal_url(
+        self,
+        id: str,
+        *,
+        expires_in: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BoxWebTerminalURLResponse:
+        """
+        Generate pre-signed web terminal url
+
+        Args:
+          expires_in: The web terminal will be alive for the given duration (e.g. '10m' or '1h').
+              Default is 180m.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._post(
+            f"/boxes/{id}/web-terminal-url",
+            body=maybe_transform({"expires_in": expires_in}, box_web_terminal_url_params.BoxWebTerminalURLParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BoxWebTerminalURLResponse,
         )
 
 
@@ -850,6 +896,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         self,
         id: str,
         *,
+        expires_in: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -858,9 +905,12 @@ class AsyncBoxesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxLiveViewURLResponse:
         """
-        Get live view url
+        Generate pre-signed live view url
 
         Args:
+          expires_in: The live view will be alive for the given duration (e.g. '10m' or '1h'). Default
+              is 180m.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -871,8 +921,9 @@ class AsyncBoxesResource(AsyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return await self._get(
+        return await self._post(
             f"/boxes/{id}/live-view-url",
+            body=await async_maybe_transform({"expires_in": expires_in}, box_live_view_url_params.BoxLiveViewURLParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1061,6 +1112,46 @@ class AsyncBoxesResource(AsyncAPIResource):
             cast_to=NoneType,
         )
 
+    async def web_terminal_url(
+        self,
+        id: str,
+        *,
+        expires_in: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BoxWebTerminalURLResponse:
+        """
+        Generate pre-signed web terminal url
+
+        Args:
+          expires_in: The web terminal will be alive for the given duration (e.g. '10m' or '1h').
+              Default is 180m.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._post(
+            f"/boxes/{id}/web-terminal-url",
+            body=await async_maybe_transform(
+                {"expires_in": expires_in}, box_web_terminal_url_params.BoxWebTerminalURLParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BoxWebTerminalURLResponse,
+        )
+
 
 class BoxesResourceWithRawResponse:
     def __init__(self, boxes: BoxesResource) -> None:
@@ -1095,6 +1186,9 @@ class BoxesResourceWithRawResponse:
         )
         self.terminate = to_raw_response_wrapper(
             boxes.terminate,
+        )
+        self.web_terminal_url = to_raw_response_wrapper(
+            boxes.web_terminal_url,
         )
 
     @cached_property
@@ -1148,6 +1242,9 @@ class AsyncBoxesResourceWithRawResponse:
         self.terminate = async_to_raw_response_wrapper(
             boxes.terminate,
         )
+        self.web_terminal_url = async_to_raw_response_wrapper(
+            boxes.web_terminal_url,
+        )
 
     @cached_property
     def actions(self) -> AsyncActionsResourceWithRawResponse:
@@ -1200,6 +1297,9 @@ class BoxesResourceWithStreamingResponse:
         self.terminate = to_streamed_response_wrapper(
             boxes.terminate,
         )
+        self.web_terminal_url = to_streamed_response_wrapper(
+            boxes.web_terminal_url,
+        )
 
     @cached_property
     def actions(self) -> ActionsResourceWithStreamingResponse:
@@ -1251,6 +1351,9 @@ class AsyncBoxesResourceWithStreamingResponse:
         )
         self.terminate = async_to_streamed_response_wrapper(
             boxes.terminate,
+        )
+        self.web_terminal_url = async_to_streamed_response_wrapper(
+            boxes.web_terminal_url,
         )
 
     @cached_property

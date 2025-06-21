@@ -29,6 +29,7 @@ from ....types.v1.boxes import (
     action_press_key_params,
     action_screenshot_params,
     action_press_button_params,
+    action_screen_rotation_params,
 )
 from ....types.v1.boxes.action_result import ActionResult
 from ....types.v1.boxes.action_screenshot_response import ActionScreenshotResponse
@@ -487,6 +488,52 @@ class ActionsResource(SyncAPIResource):
                     "screenshot_delay": screenshot_delay,
                 },
                 action_press_key_params.ActionPressKeyParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
+        )
+
+    def screen_rotation(
+        self,
+        id: str,
+        *,
+        angle: Literal[90, 180, 270],
+        direction: Literal["clockwise", "counter-clockwise"],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionResult:
+        """
+        Rotate screen
+
+        Args:
+          angle: Rotation angle in degrees
+
+          direction: Rotation direction
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._post(
+            f"/boxes/{id}/actions/screen-rotation",
+            body=maybe_transform(
+                {
+                    "angle": angle,
+                    "direction": direction,
+                },
+                action_screen_rotation_params.ActionScreenRotationParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -1338,6 +1385,52 @@ class AsyncActionsResource(AsyncAPIResource):
             cast_to=ActionResult,
         )
 
+    async def screen_rotation(
+        self,
+        id: str,
+        *,
+        angle: Literal[90, 180, 270],
+        direction: Literal["clockwise", "counter-clockwise"],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionResult:
+        """
+        Rotate screen
+
+        Args:
+          angle: Rotation angle in degrees
+
+          direction: Rotation direction
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._post(
+            f"/boxes/{id}/actions/screen-rotation",
+            body=await async_maybe_transform(
+                {
+                    "angle": angle,
+                    "direction": direction,
+                },
+                action_screen_rotation_params.ActionScreenRotationParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
+        )
+
     async def screenshot(
         self,
         id: str,
@@ -1743,6 +1836,9 @@ class ActionsResourceWithRawResponse:
         self.press_key = to_raw_response_wrapper(
             actions.press_key,
         )
+        self.screen_rotation = to_raw_response_wrapper(
+            actions.screen_rotation,
+        )
         self.screenshot = to_raw_response_wrapper(
             actions.screenshot,
         )
@@ -1778,6 +1874,9 @@ class AsyncActionsResourceWithRawResponse:
         )
         self.press_key = async_to_raw_response_wrapper(
             actions.press_key,
+        )
+        self.screen_rotation = async_to_raw_response_wrapper(
+            actions.screen_rotation,
         )
         self.screenshot = async_to_raw_response_wrapper(
             actions.screenshot,
@@ -1815,6 +1914,9 @@ class ActionsResourceWithStreamingResponse:
         self.press_key = to_streamed_response_wrapper(
             actions.press_key,
         )
+        self.screen_rotation = to_streamed_response_wrapper(
+            actions.screen_rotation,
+        )
         self.screenshot = to_streamed_response_wrapper(
             actions.screenshot,
         )
@@ -1850,6 +1952,9 @@ class AsyncActionsResourceWithStreamingResponse:
         )
         self.press_key = async_to_streamed_response_wrapper(
             actions.press_key,
+        )
+        self.screen_rotation = async_to_streamed_response_wrapper(
+            actions.screen_rotation,
         )
         self.screenshot = async_to_streamed_response_wrapper(
             actions.screenshot,

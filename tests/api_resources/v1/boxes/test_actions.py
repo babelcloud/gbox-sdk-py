@@ -365,6 +365,56 @@ class TestActions:
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_screen_rotation(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.screen_rotation(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            angle=90,
+            direction="clockwise",
+        )
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_screen_rotation(self, client: GboxClient) -> None:
+        response = client.v1.boxes.actions.with_raw_response.screen_rotation(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            angle=90,
+            direction="clockwise",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = response.parse()
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_screen_rotation(self, client: GboxClient) -> None:
+        with client.v1.boxes.actions.with_streaming_response.screen_rotation(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            angle=90,
+            direction="clockwise",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = response.parse()
+            assert_matches_type(ActionResult, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_screen_rotation(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            client.v1.boxes.actions.with_raw_response.screen_rotation(
+                id="",
+                angle=90,
+                direction="clockwise",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
     def test_method_screenshot(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.screenshot(
             id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
@@ -1148,6 +1198,56 @@ class TestAsyncActions:
             await async_client.v1.boxes.actions.with_raw_response.press_key(
                 id="",
                 keys=["enter"],
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_screen_rotation(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.screen_rotation(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            angle=90,
+            direction="clockwise",
+        )
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_screen_rotation(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.actions.with_raw_response.screen_rotation(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            angle=90,
+            direction="clockwise",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = await response.parse()
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_screen_rotation(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.actions.with_streaming_response.screen_rotation(
+            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            angle=90,
+            direction="clockwise",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = await response.parse()
+            assert_matches_type(ActionResult, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_screen_rotation(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            await async_client.v1.boxes.actions.with_raw_response.screen_rotation(
+                id="",
+                angle=90,
+                direction="clockwise",
             )
 
     @pytest.mark.skip()

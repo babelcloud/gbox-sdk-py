@@ -93,7 +93,7 @@ from gbox_sdk.types.v1.boxes import BrowserCdpURLResponse
 
 Methods:
 
-- <code title="get /boxes/{id}/browser/connect-url/cdp">client.v1.boxes.browser.<a href="./src/gbox_sdk/resources/v1/boxes/browser.py">cdp_url</a>(id) -> str</code>
+- <code title="post /boxes/{id}/browser/connect-url/cdp">client.v1.boxes.browser.<a href="./src/gbox_sdk/resources/v1/boxes/browser.py">cdp_url</a>(id, \*\*<a href="src/gbox_sdk/types/v1/boxes/browser_cdp_url_params.py">params</a>) -> str</code>
 
 ### Android
 

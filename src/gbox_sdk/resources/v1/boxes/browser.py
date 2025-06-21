@@ -5,6 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import (
@@ -14,6 +15,7 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
+from ....types.v1.boxes import browser_cdp_url_params
 
 __all__ = ["BrowserResource", "AsyncBrowserResource"]
 
@@ -42,6 +44,7 @@ class BrowserResource(SyncAPIResource):
         self,
         id: str,
         *,
+        expires_in: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -50,9 +53,11 @@ class BrowserResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Get CDP url
+        Generate pre-signed CDP url
 
         Args:
+          expires_in: The CDP url will be alive for the given duration (e.g. '120m')
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -63,8 +68,9 @@ class BrowserResource(SyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return self._get(
+        return self._post(
             f"/boxes/{id}/browser/connect-url/cdp",
+            body=maybe_transform({"expires_in": expires_in}, browser_cdp_url_params.BrowserCdpURLParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -96,6 +102,7 @@ class AsyncBrowserResource(AsyncAPIResource):
         self,
         id: str,
         *,
+        expires_in: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -104,9 +111,11 @@ class AsyncBrowserResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Get CDP url
+        Generate pre-signed CDP url
 
         Args:
+          expires_in: The CDP url will be alive for the given duration (e.g. '120m')
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -117,8 +126,9 @@ class AsyncBrowserResource(AsyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return await self._get(
+        return await self._post(
             f"/boxes/{id}/browser/connect-url/cdp",
+            body=await async_maybe_transform({"expires_in": expires_in}, browser_cdp_url_params.BrowserCdpURLParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

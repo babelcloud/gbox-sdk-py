@@ -31,6 +31,7 @@ from .android_list_response import AndroidListResponse as AndroidListResponse
 from .android_install_params import AndroidInstallParams as AndroidInstallParams
 from .android_restart_params import AndroidRestartParams as AndroidRestartParams
 from .android_restore_params import AndroidRestoreParams as AndroidRestoreParams
+from .browser_cdp_url_params import BrowserCdpURLParams as BrowserCdpURLParams
 from .action_press_key_params import ActionPressKeyParams as ActionPressKeyParams
 from .action_screenshot_params import ActionScreenshotParams as ActionScreenshotParams
 from .android_uninstall_params import AndroidUninstallParams as AndroidUninstallParams

@@ -34,7 +34,6 @@ from ....types.v1.boxes import (
     android_restore_params,
     android_uninstall_params,
     android_list_simple_params,
-    android_rotate_screen_params,
 )
 from ....types.v1.boxes.android_app import AndroidApp
 from ....types.v1.boxes.android_list_response import AndroidListResponse
@@ -610,53 +609,6 @@ class AndroidResource(SyncAPIResource):
         return self._post(
             f"/boxes/{id}/android/apps/restore",
             body=maybe_transform({"backup": backup}, android_restore_params.AndroidRestoreParams),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=NoneType,
-        )
-
-    def rotate_screen(
-        self,
-        id: str,
-        *,
-        angle: Literal[90, 180, 270],
-        direction: Literal["clockwise", "counter-clockwise"],
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
-        """
-        Rotate screen
-
-        Args:
-          angle: Rotation angle in degrees
-
-          direction: Rotation direction
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        return self._post(
-            f"/boxes/{id}/android/screen/rotate",
-            body=maybe_transform(
-                {
-                    "angle": angle,
-                    "direction": direction,
-                },
-                android_rotate_screen_params.AndroidRotateScreenParams,
-            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1280,53 +1232,6 @@ class AsyncAndroidResource(AsyncAPIResource):
             cast_to=NoneType,
         )
 
-    async def rotate_screen(
-        self,
-        id: str,
-        *,
-        angle: Literal[90, 180, 270],
-        direction: Literal["clockwise", "counter-clockwise"],
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
-        """
-        Rotate screen
-
-        Args:
-          angle: Rotation angle in degrees
-
-          direction: Rotation direction
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        return await self._post(
-            f"/boxes/{id}/android/screen/rotate",
-            body=await async_maybe_transform(
-                {
-                    "angle": angle,
-                    "direction": direction,
-                },
-                android_rotate_screen_params.AndroidRotateScreenParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=NoneType,
-        )
-
     async def uninstall(
         self,
         package_name: str,
@@ -1414,9 +1319,6 @@ class AndroidResourceWithRawResponse:
         self.restore = to_raw_response_wrapper(
             android.restore,
         )
-        self.rotate_screen = to_raw_response_wrapper(
-            android.rotate_screen,
-        )
         self.uninstall = to_raw_response_wrapper(
             android.uninstall,
         )
@@ -1466,9 +1368,6 @@ class AsyncAndroidResourceWithRawResponse:
         )
         self.restore = async_to_raw_response_wrapper(
             android.restore,
-        )
-        self.rotate_screen = async_to_raw_response_wrapper(
-            android.rotate_screen,
         )
         self.uninstall = async_to_raw_response_wrapper(
             android.uninstall,
@@ -1520,9 +1419,6 @@ class AndroidResourceWithStreamingResponse:
         self.restore = to_streamed_response_wrapper(
             android.restore,
         )
-        self.rotate_screen = to_streamed_response_wrapper(
-            android.rotate_screen,
-        )
         self.uninstall = to_streamed_response_wrapper(
             android.uninstall,
         )
@@ -1572,9 +1468,6 @@ class AsyncAndroidResourceWithStreamingResponse:
         )
         self.restore = async_to_streamed_response_wrapper(
             android.restore,
-        )
-        self.rotate_screen = async_to_streamed_response_wrapper(
-            android.rotate_screen,
         )
         self.uninstall = async_to_streamed_response_wrapper(
             android.uninstall,

@@ -4,10 +4,10 @@ from __future__ import annotations
 
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["AndroidRotateScreenParams"]
+__all__ = ["ActionScreenRotationParams"]
 
 
-class AndroidRotateScreenParams(TypedDict, total=False):
+class ActionScreenRotationParams(TypedDict, total=False):
     angle: Required[Literal[90, 180, 270]]
     """Rotation angle in degrees"""
 

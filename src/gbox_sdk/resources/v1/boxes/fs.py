@@ -60,7 +60,7 @@ class FsResource(SyncAPIResource):
 
     def list(
         self,
-        id: str,
+        box_id: str,
         *,
         path: str,
         depth: float | NotGiven = NOT_GIVEN,
@@ -91,10 +91,10 @@ class FsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._get(
-            f"/boxes/{id}/fs/list",
+            f"/boxes/{box_id}/fs/list",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -114,7 +114,7 @@ class FsResource(SyncAPIResource):
 
     def exists(
         self,
-        id: str,
+        box_id: str,
         *,
         path: str,
         working_dir: str | NotGiven = NOT_GIVEN,
@@ -144,10 +144,10 @@ class FsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{id}/fs/exists",
+            f"/boxes/{box_id}/fs/exists",
             body=maybe_transform(
                 {
                     "path": path,
@@ -163,7 +163,7 @@ class FsResource(SyncAPIResource):
 
     def info(
         self,
-        id: str,
+        box_id: str,
         *,
         path: str,
         working_dir: str | NotGiven = NOT_GIVEN,
@@ -193,12 +193,12 @@ class FsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return cast(
             FInfoResponse,
             self._get(
-                f"/boxes/{id}/fs/info",
+                f"/boxes/{box_id}/fs/info",
                 options=make_request_options(
                     extra_headers=extra_headers,
                     extra_query=extra_query,
@@ -218,7 +218,7 @@ class FsResource(SyncAPIResource):
 
     def read(
         self,
-        id: str,
+        box_id: str,
         *,
         path: str,
         working_dir: str | NotGiven = NOT_GIVEN,
@@ -248,10 +248,10 @@ class FsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._get(
-            f"/boxes/{id}/fs/read",
+            f"/boxes/{box_id}/fs/read",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -270,7 +270,7 @@ class FsResource(SyncAPIResource):
 
     def remove(
         self,
-        id: str,
+        box_id: str,
         *,
         path: str,
         working_dir: str | NotGiven = NOT_GIVEN,
@@ -300,10 +300,10 @@ class FsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._delete(
-            f"/boxes/{id}/fs",
+            f"/boxes/{box_id}/fs",
             body=maybe_transform(
                 {
                     "path": path,
@@ -319,7 +319,7 @@ class FsResource(SyncAPIResource):
 
     def rename(
         self,
-        id: str,
+        box_id: str,
         *,
         new_path: str,
         old_path: str,
@@ -353,10 +353,10 @@ class FsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{id}/fs/rename",
+            f"/boxes/{box_id}/fs/rename",
             body=maybe_transform(
                 {
                     "new_path": new_path,
@@ -374,7 +374,7 @@ class FsResource(SyncAPIResource):
     @overload
     def write(
         self,
-        id: str,
+        box_id: str,
         *,
         content: str,
         path: str,
@@ -413,7 +413,7 @@ class FsResource(SyncAPIResource):
     @overload
     def write(
         self,
-        id: str,
+        box_id: str,
         *,
         content: FileTypes,
         path: str,
@@ -452,7 +452,7 @@ class FsResource(SyncAPIResource):
     @required_args(["content", "path"])
     def write(
         self,
-        id: str,
+        box_id: str,
         *,
         content: str | FileTypes,
         path: str,
@@ -464,10 +464,10 @@ class FsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FWriteResponse:
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{id}/fs/write",
+            f"/boxes/{box_id}/fs/write",
             body=maybe_transform(
                 {
                     "content": content,
@@ -505,7 +505,7 @@ class AsyncFsResource(AsyncAPIResource):
 
     async def list(
         self,
-        id: str,
+        box_id: str,
         *,
         path: str,
         depth: float | NotGiven = NOT_GIVEN,
@@ -536,10 +536,10 @@ class AsyncFsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._get(
-            f"/boxes/{id}/fs/list",
+            f"/boxes/{box_id}/fs/list",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -559,7 +559,7 @@ class AsyncFsResource(AsyncAPIResource):
 
     async def exists(
         self,
-        id: str,
+        box_id: str,
         *,
         path: str,
         working_dir: str | NotGiven = NOT_GIVEN,
@@ -589,10 +589,10 @@ class AsyncFsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{id}/fs/exists",
+            f"/boxes/{box_id}/fs/exists",
             body=await async_maybe_transform(
                 {
                     "path": path,
@@ -608,7 +608,7 @@ class AsyncFsResource(AsyncAPIResource):
 
     async def info(
         self,
-        id: str,
+        box_id: str,
         *,
         path: str,
         working_dir: str | NotGiven = NOT_GIVEN,
@@ -638,12 +638,12 @@ class AsyncFsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return cast(
             FInfoResponse,
             await self._get(
-                f"/boxes/{id}/fs/info",
+                f"/boxes/{box_id}/fs/info",
                 options=make_request_options(
                     extra_headers=extra_headers,
                     extra_query=extra_query,
@@ -663,7 +663,7 @@ class AsyncFsResource(AsyncAPIResource):
 
     async def read(
         self,
-        id: str,
+        box_id: str,
         *,
         path: str,
         working_dir: str | NotGiven = NOT_GIVEN,
@@ -693,10 +693,10 @@ class AsyncFsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._get(
-            f"/boxes/{id}/fs/read",
+            f"/boxes/{box_id}/fs/read",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -715,7 +715,7 @@ class AsyncFsResource(AsyncAPIResource):
 
     async def remove(
         self,
-        id: str,
+        box_id: str,
         *,
         path: str,
         working_dir: str | NotGiven = NOT_GIVEN,
@@ -745,10 +745,10 @@ class AsyncFsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._delete(
-            f"/boxes/{id}/fs",
+            f"/boxes/{box_id}/fs",
             body=await async_maybe_transform(
                 {
                     "path": path,
@@ -764,7 +764,7 @@ class AsyncFsResource(AsyncAPIResource):
 
     async def rename(
         self,
-        id: str,
+        box_id: str,
         *,
         new_path: str,
         old_path: str,
@@ -798,10 +798,10 @@ class AsyncFsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{id}/fs/rename",
+            f"/boxes/{box_id}/fs/rename",
             body=await async_maybe_transform(
                 {
                     "new_path": new_path,
@@ -819,7 +819,7 @@ class AsyncFsResource(AsyncAPIResource):
     @overload
     async def write(
         self,
-        id: str,
+        box_id: str,
         *,
         content: str,
         path: str,
@@ -858,7 +858,7 @@ class AsyncFsResource(AsyncAPIResource):
     @overload
     async def write(
         self,
-        id: str,
+        box_id: str,
         *,
         content: FileTypes,
         path: str,
@@ -897,7 +897,7 @@ class AsyncFsResource(AsyncAPIResource):
     @required_args(["content", "path"])
     async def write(
         self,
-        id: str,
+        box_id: str,
         *,
         content: str | FileTypes,
         path: str,
@@ -909,10 +909,10 @@ class AsyncFsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FWriteResponse:
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{id}/fs/write",
+            f"/boxes/{box_id}/fs/write",
             body=await async_maybe_transform(
                 {
                     "content": content,

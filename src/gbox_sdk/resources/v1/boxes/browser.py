@@ -42,7 +42,7 @@ class BrowserResource(SyncAPIResource):
 
     def cdp_url(
         self,
-        id: str,
+        box_id: str,
         *,
         expires_in: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -66,10 +66,10 @@ class BrowserResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{id}/browser/connect-url/cdp",
+            f"/boxes/{box_id}/browser/connect-url/cdp",
             body=maybe_transform({"expires_in": expires_in}, browser_cdp_url_params.BrowserCdpURLParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -100,7 +100,7 @@ class AsyncBrowserResource(AsyncAPIResource):
 
     async def cdp_url(
         self,
-        id: str,
+        box_id: str,
         *,
         expires_in: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -124,10 +124,10 @@ class AsyncBrowserResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{id}/browser/connect-url/cdp",
+            f"/boxes/{box_id}/browser/connect-url/cdp",
             body=await async_maybe_transform({"expires_in": expires_in}, browser_cdp_url_params.BrowserCdpURLParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout

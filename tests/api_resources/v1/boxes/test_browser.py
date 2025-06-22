@@ -20,7 +20,7 @@ class TestBrowser:
     @parametrize
     def test_method_cdp_url(self, client: GboxClient) -> None:
         browser = client.v1.boxes.browser.cdp_url(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
         )
         assert_matches_type(str, browser, path=["response"])
 
@@ -28,7 +28,7 @@ class TestBrowser:
     @parametrize
     def test_method_cdp_url_with_all_params(self, client: GboxClient) -> None:
         browser = client.v1.boxes.browser.cdp_url(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             expires_in="120m",
         )
         assert_matches_type(str, browser, path=["response"])
@@ -37,7 +37,7 @@ class TestBrowser:
     @parametrize
     def test_raw_response_cdp_url(self, client: GboxClient) -> None:
         response = client.v1.boxes.browser.with_raw_response.cdp_url(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
         )
 
         assert response.is_closed is True
@@ -49,7 +49,7 @@ class TestBrowser:
     @parametrize
     def test_streaming_response_cdp_url(self, client: GboxClient) -> None:
         with client.v1.boxes.browser.with_streaming_response.cdp_url(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -62,9 +62,9 @@ class TestBrowser:
     @pytest.mark.skip()
     @parametrize
     def test_path_params_cdp_url(self, client: GboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.browser.with_raw_response.cdp_url(
-                id="",
+                box_id="",
             )
 
 
@@ -77,7 +77,7 @@ class TestAsyncBrowser:
     @parametrize
     async def test_method_cdp_url(self, async_client: AsyncGboxClient) -> None:
         browser = await async_client.v1.boxes.browser.cdp_url(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
         )
         assert_matches_type(str, browser, path=["response"])
 
@@ -85,7 +85,7 @@ class TestAsyncBrowser:
     @parametrize
     async def test_method_cdp_url_with_all_params(self, async_client: AsyncGboxClient) -> None:
         browser = await async_client.v1.boxes.browser.cdp_url(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             expires_in="120m",
         )
         assert_matches_type(str, browser, path=["response"])
@@ -94,7 +94,7 @@ class TestAsyncBrowser:
     @parametrize
     async def test_raw_response_cdp_url(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.browser.with_raw_response.cdp_url(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
         )
 
         assert response.is_closed is True
@@ -106,7 +106,7 @@ class TestAsyncBrowser:
     @parametrize
     async def test_streaming_response_cdp_url(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.browser.with_streaming_response.cdp_url(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -119,7 +119,7 @@ class TestAsyncBrowser:
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_cdp_url(self, async_client: AsyncGboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.browser.with_raw_response.cdp_url(
-                id="",
+                box_id="",
             )

@@ -24,7 +24,7 @@ class TestActions:
     @parametrize
     def test_method_click(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.click(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             x=100,
             y=100,
         )
@@ -34,7 +34,7 @@ class TestActions:
     @parametrize
     def test_method_click_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.click(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             x=100,
             y=100,
             button="left",
@@ -48,7 +48,7 @@ class TestActions:
     @parametrize
     def test_raw_response_click(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.click(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             x=100,
             y=100,
         )
@@ -62,7 +62,7 @@ class TestActions:
     @parametrize
     def test_streaming_response_click(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.click(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             x=100,
             y=100,
         ) as response:
@@ -77,9 +77,9 @@ class TestActions:
     @pytest.mark.skip()
     @parametrize
     def test_path_params_click(self, client: GboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.actions.with_raw_response.click(
-                id="",
+                box_id="",
                 x=100,
                 y=100,
             )
@@ -88,7 +88,7 @@ class TestActions:
     @parametrize
     def test_method_drag(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.drag(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path=[
                 {
                     "x": 100,
@@ -106,7 +106,7 @@ class TestActions:
     @parametrize
     def test_method_drag_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.drag(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path=[
                 {
                     "x": 100,
@@ -127,7 +127,7 @@ class TestActions:
     @parametrize
     def test_raw_response_drag(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.drag(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path=[
                 {
                     "x": 100,
@@ -149,7 +149,7 @@ class TestActions:
     @parametrize
     def test_streaming_response_drag(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.drag(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path=[
                 {
                     "x": 100,
@@ -172,9 +172,9 @@ class TestActions:
     @pytest.mark.skip()
     @parametrize
     def test_path_params_drag(self, client: GboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.actions.with_raw_response.drag(
-                id="",
+                box_id="",
                 path=[
                     {
                         "x": 100,
@@ -191,7 +191,7 @@ class TestActions:
     @parametrize
     def test_method_move(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.move(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             x=200,
             y=300,
         )
@@ -201,7 +201,7 @@ class TestActions:
     @parametrize
     def test_method_move_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.move(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             x=200,
             y=300,
             output_format="base64",
@@ -213,7 +213,7 @@ class TestActions:
     @parametrize
     def test_raw_response_move(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.move(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             x=200,
             y=300,
         )
@@ -227,7 +227,7 @@ class TestActions:
     @parametrize
     def test_streaming_response_move(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.move(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             x=200,
             y=300,
         ) as response:
@@ -242,9 +242,9 @@ class TestActions:
     @pytest.mark.skip()
     @parametrize
     def test_path_params_move(self, client: GboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.actions.with_raw_response.move(
-                id="",
+                box_id="",
                 x=200,
                 y=300,
             )
@@ -253,7 +253,7 @@ class TestActions:
     @parametrize
     def test_method_press_button(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.press_button(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             buttons=["power"],
         )
         assert_matches_type(ActionResult, action, path=["response"])
@@ -262,7 +262,7 @@ class TestActions:
     @parametrize
     def test_method_press_button_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.press_button(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             buttons=["power"],
             output_format="base64",
             screenshot_delay="500ms",
@@ -273,7 +273,7 @@ class TestActions:
     @parametrize
     def test_raw_response_press_button(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.press_button(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             buttons=["power"],
         )
 
@@ -286,7 +286,7 @@ class TestActions:
     @parametrize
     def test_streaming_response_press_button(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.press_button(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             buttons=["power"],
         ) as response:
             assert not response.is_closed
@@ -300,9 +300,9 @@ class TestActions:
     @pytest.mark.skip()
     @parametrize
     def test_path_params_press_button(self, client: GboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.actions.with_raw_response.press_button(
-                id="",
+                box_id="",
                 buttons=["power"],
             )
 
@@ -310,7 +310,7 @@ class TestActions:
     @parametrize
     def test_method_press_key(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.press_key(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             keys=["enter"],
         )
         assert_matches_type(ActionResult, action, path=["response"])
@@ -319,7 +319,7 @@ class TestActions:
     @parametrize
     def test_method_press_key_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.press_key(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             keys=["enter"],
             output_format="base64",
             screenshot_delay="500ms",
@@ -330,7 +330,7 @@ class TestActions:
     @parametrize
     def test_raw_response_press_key(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.press_key(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             keys=["enter"],
         )
 
@@ -343,7 +343,7 @@ class TestActions:
     @parametrize
     def test_streaming_response_press_key(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.press_key(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             keys=["enter"],
         ) as response:
             assert not response.is_closed
@@ -357,9 +357,9 @@ class TestActions:
     @pytest.mark.skip()
     @parametrize
     def test_path_params_press_key(self, client: GboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.actions.with_raw_response.press_key(
-                id="",
+                box_id="",
                 keys=["enter"],
             )
 
@@ -367,7 +367,7 @@ class TestActions:
     @parametrize
     def test_method_screen_rotation(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.screen_rotation(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             angle=90,
             direction="clockwise",
         )
@@ -377,7 +377,7 @@ class TestActions:
     @parametrize
     def test_raw_response_screen_rotation(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.screen_rotation(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             angle=90,
             direction="clockwise",
         )
@@ -391,7 +391,7 @@ class TestActions:
     @parametrize
     def test_streaming_response_screen_rotation(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.screen_rotation(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             angle=90,
             direction="clockwise",
         ) as response:
@@ -406,9 +406,9 @@ class TestActions:
     @pytest.mark.skip()
     @parametrize
     def test_path_params_screen_rotation(self, client: GboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.actions.with_raw_response.screen_rotation(
-                id="",
+                box_id="",
                 angle=90,
                 direction="clockwise",
             )
@@ -417,7 +417,7 @@ class TestActions:
     @parametrize
     def test_method_screenshot(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.screenshot(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
         )
         assert_matches_type(ActionScreenshotResponse, action, path=["response"])
 
@@ -425,7 +425,7 @@ class TestActions:
     @parametrize
     def test_method_screenshot_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.screenshot(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             clip={
                 "height": 600,
                 "width": 800,
@@ -440,7 +440,7 @@ class TestActions:
     @parametrize
     def test_raw_response_screenshot(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.screenshot(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
         )
 
         assert response.is_closed is True
@@ -452,7 +452,7 @@ class TestActions:
     @parametrize
     def test_streaming_response_screenshot(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.screenshot(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -465,16 +465,16 @@ class TestActions:
     @pytest.mark.skip()
     @parametrize
     def test_path_params_screenshot(self, client: GboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.actions.with_raw_response.screenshot(
-                id="",
+                box_id="",
             )
 
     @pytest.mark.skip()
     @parametrize
     def test_method_scroll(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.scroll(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             scroll_x=0,
             scroll_y=100,
             x=100,
@@ -486,7 +486,7 @@ class TestActions:
     @parametrize
     def test_method_scroll_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.scroll(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             scroll_x=0,
             scroll_y=100,
             x=100,
@@ -500,7 +500,7 @@ class TestActions:
     @parametrize
     def test_raw_response_scroll(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.scroll(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             scroll_x=0,
             scroll_y=100,
             x=100,
@@ -516,7 +516,7 @@ class TestActions:
     @parametrize
     def test_streaming_response_scroll(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.scroll(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             scroll_x=0,
             scroll_y=100,
             x=100,
@@ -533,9 +533,9 @@ class TestActions:
     @pytest.mark.skip()
     @parametrize
     def test_path_params_scroll(self, client: GboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.actions.with_raw_response.scroll(
-                id="",
+                box_id="",
                 scroll_x=0,
                 scroll_y=100,
                 x=100,
@@ -546,7 +546,7 @@ class TestActions:
     @parametrize
     def test_method_swipe_overload_1(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.swipe(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             direction="up",
         )
         assert_matches_type(ActionResult, action, path=["response"])
@@ -555,7 +555,7 @@ class TestActions:
     @parametrize
     def test_method_swipe_with_all_params_overload_1(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.swipe(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             direction="up",
             distance=300,
             duration="200ms",
@@ -568,7 +568,7 @@ class TestActions:
     @parametrize
     def test_raw_response_swipe_overload_1(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.swipe(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             direction="up",
         )
 
@@ -581,7 +581,7 @@ class TestActions:
     @parametrize
     def test_streaming_response_swipe_overload_1(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.swipe(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             direction="up",
         ) as response:
             assert not response.is_closed
@@ -595,9 +595,9 @@ class TestActions:
     @pytest.mark.skip()
     @parametrize
     def test_path_params_swipe_overload_1(self, client: GboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.actions.with_raw_response.swipe(
-                id="",
+                box_id="",
                 direction="up",
             )
 
@@ -605,7 +605,7 @@ class TestActions:
     @parametrize
     def test_method_swipe_overload_2(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.swipe(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             end={
                 "x": 400,
                 "y": 300,
@@ -621,7 +621,7 @@ class TestActions:
     @parametrize
     def test_method_swipe_with_all_params_overload_2(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.swipe(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             end={
                 "x": 400,
                 "y": 300,
@@ -640,7 +640,7 @@ class TestActions:
     @parametrize
     def test_raw_response_swipe_overload_2(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.swipe(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             end={
                 "x": 400,
                 "y": 300,
@@ -660,7 +660,7 @@ class TestActions:
     @parametrize
     def test_streaming_response_swipe_overload_2(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.swipe(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             end={
                 "x": 400,
                 "y": 300,
@@ -681,9 +681,9 @@ class TestActions:
     @pytest.mark.skip()
     @parametrize
     def test_path_params_swipe_overload_2(self, client: GboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.actions.with_raw_response.swipe(
-                id="",
+                box_id="",
                 end={
                     "x": 400,
                     "y": 300,
@@ -698,7 +698,7 @@ class TestActions:
     @parametrize
     def test_method_touch(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.touch(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             points=[
                 {
                     "start": {
@@ -714,7 +714,7 @@ class TestActions:
     @parametrize
     def test_method_touch_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.touch(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             points=[
                 {
                     "start": {
@@ -740,7 +740,7 @@ class TestActions:
     @parametrize
     def test_raw_response_touch(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.touch(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             points=[
                 {
                     "start": {
@@ -760,7 +760,7 @@ class TestActions:
     @parametrize
     def test_streaming_response_touch(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.touch(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             points=[
                 {
                     "start": {
@@ -781,9 +781,9 @@ class TestActions:
     @pytest.mark.skip()
     @parametrize
     def test_path_params_touch(self, client: GboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.actions.with_raw_response.touch(
-                id="",
+                box_id="",
                 points=[
                     {
                         "start": {
@@ -798,7 +798,7 @@ class TestActions:
     @parametrize
     def test_method_type(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.type(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             text="Hello World",
         )
         assert_matches_type(ActionResult, action, path=["response"])
@@ -807,7 +807,7 @@ class TestActions:
     @parametrize
     def test_method_type_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.type(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             text="Hello World",
             output_format="base64",
             screenshot_delay="500ms",
@@ -818,7 +818,7 @@ class TestActions:
     @parametrize
     def test_raw_response_type(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.type(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             text="Hello World",
         )
 
@@ -831,7 +831,7 @@ class TestActions:
     @parametrize
     def test_streaming_response_type(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.type(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             text="Hello World",
         ) as response:
             assert not response.is_closed
@@ -845,9 +845,9 @@ class TestActions:
     @pytest.mark.skip()
     @parametrize
     def test_path_params_type(self, client: GboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.actions.with_raw_response.type(
-                id="",
+                box_id="",
                 text="Hello World",
             )
 
@@ -861,7 +861,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_click(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.click(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             x=100,
             y=100,
         )
@@ -871,7 +871,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_click_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.click(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             x=100,
             y=100,
             button="left",
@@ -885,7 +885,7 @@ class TestAsyncActions:
     @parametrize
     async def test_raw_response_click(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.click(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             x=100,
             y=100,
         )
@@ -899,7 +899,7 @@ class TestAsyncActions:
     @parametrize
     async def test_streaming_response_click(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.click(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             x=100,
             y=100,
         ) as response:
@@ -914,9 +914,9 @@ class TestAsyncActions:
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_click(self, async_client: AsyncGboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.click(
-                id="",
+                box_id="",
                 x=100,
                 y=100,
             )
@@ -925,7 +925,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_drag(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.drag(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path=[
                 {
                     "x": 100,
@@ -943,7 +943,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_drag_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.drag(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path=[
                 {
                     "x": 100,
@@ -964,7 +964,7 @@ class TestAsyncActions:
     @parametrize
     async def test_raw_response_drag(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.drag(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path=[
                 {
                     "x": 100,
@@ -986,7 +986,7 @@ class TestAsyncActions:
     @parametrize
     async def test_streaming_response_drag(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.drag(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path=[
                 {
                     "x": 100,
@@ -1009,9 +1009,9 @@ class TestAsyncActions:
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_drag(self, async_client: AsyncGboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.drag(
-                id="",
+                box_id="",
                 path=[
                     {
                         "x": 100,
@@ -1028,7 +1028,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_move(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.move(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             x=200,
             y=300,
         )
@@ -1038,7 +1038,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_move_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.move(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             x=200,
             y=300,
             output_format="base64",
@@ -1050,7 +1050,7 @@ class TestAsyncActions:
     @parametrize
     async def test_raw_response_move(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.move(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             x=200,
             y=300,
         )
@@ -1064,7 +1064,7 @@ class TestAsyncActions:
     @parametrize
     async def test_streaming_response_move(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.move(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             x=200,
             y=300,
         ) as response:
@@ -1079,9 +1079,9 @@ class TestAsyncActions:
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_move(self, async_client: AsyncGboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.move(
-                id="",
+                box_id="",
                 x=200,
                 y=300,
             )
@@ -1090,7 +1090,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_press_button(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.press_button(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             buttons=["power"],
         )
         assert_matches_type(ActionResult, action, path=["response"])
@@ -1099,7 +1099,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_press_button_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.press_button(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             buttons=["power"],
             output_format="base64",
             screenshot_delay="500ms",
@@ -1110,7 +1110,7 @@ class TestAsyncActions:
     @parametrize
     async def test_raw_response_press_button(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.press_button(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             buttons=["power"],
         )
 
@@ -1123,7 +1123,7 @@ class TestAsyncActions:
     @parametrize
     async def test_streaming_response_press_button(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.press_button(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             buttons=["power"],
         ) as response:
             assert not response.is_closed
@@ -1137,9 +1137,9 @@ class TestAsyncActions:
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_press_button(self, async_client: AsyncGboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.press_button(
-                id="",
+                box_id="",
                 buttons=["power"],
             )
 
@@ -1147,7 +1147,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_press_key(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.press_key(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             keys=["enter"],
         )
         assert_matches_type(ActionResult, action, path=["response"])
@@ -1156,7 +1156,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_press_key_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.press_key(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             keys=["enter"],
             output_format="base64",
             screenshot_delay="500ms",
@@ -1167,7 +1167,7 @@ class TestAsyncActions:
     @parametrize
     async def test_raw_response_press_key(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.press_key(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             keys=["enter"],
         )
 
@@ -1180,7 +1180,7 @@ class TestAsyncActions:
     @parametrize
     async def test_streaming_response_press_key(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.press_key(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             keys=["enter"],
         ) as response:
             assert not response.is_closed
@@ -1194,9 +1194,9 @@ class TestAsyncActions:
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_press_key(self, async_client: AsyncGboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.press_key(
-                id="",
+                box_id="",
                 keys=["enter"],
             )
 
@@ -1204,7 +1204,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_screen_rotation(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.screen_rotation(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             angle=90,
             direction="clockwise",
         )
@@ -1214,7 +1214,7 @@ class TestAsyncActions:
     @parametrize
     async def test_raw_response_screen_rotation(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.screen_rotation(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             angle=90,
             direction="clockwise",
         )
@@ -1228,7 +1228,7 @@ class TestAsyncActions:
     @parametrize
     async def test_streaming_response_screen_rotation(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.screen_rotation(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             angle=90,
             direction="clockwise",
         ) as response:
@@ -1243,9 +1243,9 @@ class TestAsyncActions:
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_screen_rotation(self, async_client: AsyncGboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.screen_rotation(
-                id="",
+                box_id="",
                 angle=90,
                 direction="clockwise",
             )
@@ -1254,7 +1254,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_screenshot(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.screenshot(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
         )
         assert_matches_type(ActionScreenshotResponse, action, path=["response"])
 
@@ -1262,7 +1262,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_screenshot_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.screenshot(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             clip={
                 "height": 600,
                 "width": 800,
@@ -1277,7 +1277,7 @@ class TestAsyncActions:
     @parametrize
     async def test_raw_response_screenshot(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.screenshot(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
         )
 
         assert response.is_closed is True
@@ -1289,7 +1289,7 @@ class TestAsyncActions:
     @parametrize
     async def test_streaming_response_screenshot(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.screenshot(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1302,16 +1302,16 @@ class TestAsyncActions:
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_screenshot(self, async_client: AsyncGboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.screenshot(
-                id="",
+                box_id="",
             )
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_scroll(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.scroll(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             scroll_x=0,
             scroll_y=100,
             x=100,
@@ -1323,7 +1323,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_scroll_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.scroll(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             scroll_x=0,
             scroll_y=100,
             x=100,
@@ -1337,7 +1337,7 @@ class TestAsyncActions:
     @parametrize
     async def test_raw_response_scroll(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.scroll(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             scroll_x=0,
             scroll_y=100,
             x=100,
@@ -1353,7 +1353,7 @@ class TestAsyncActions:
     @parametrize
     async def test_streaming_response_scroll(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.scroll(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             scroll_x=0,
             scroll_y=100,
             x=100,
@@ -1370,9 +1370,9 @@ class TestAsyncActions:
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_scroll(self, async_client: AsyncGboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.scroll(
-                id="",
+                box_id="",
                 scroll_x=0,
                 scroll_y=100,
                 x=100,
@@ -1383,7 +1383,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_swipe_overload_1(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.swipe(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             direction="up",
         )
         assert_matches_type(ActionResult, action, path=["response"])
@@ -1392,7 +1392,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_swipe_with_all_params_overload_1(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.swipe(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             direction="up",
             distance=300,
             duration="200ms",
@@ -1405,7 +1405,7 @@ class TestAsyncActions:
     @parametrize
     async def test_raw_response_swipe_overload_1(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.swipe(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             direction="up",
         )
 
@@ -1418,7 +1418,7 @@ class TestAsyncActions:
     @parametrize
     async def test_streaming_response_swipe_overload_1(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.swipe(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             direction="up",
         ) as response:
             assert not response.is_closed
@@ -1432,9 +1432,9 @@ class TestAsyncActions:
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_swipe_overload_1(self, async_client: AsyncGboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.swipe(
-                id="",
+                box_id="",
                 direction="up",
             )
 
@@ -1442,7 +1442,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_swipe_overload_2(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.swipe(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             end={
                 "x": 400,
                 "y": 300,
@@ -1458,7 +1458,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_swipe_with_all_params_overload_2(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.swipe(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             end={
                 "x": 400,
                 "y": 300,
@@ -1477,7 +1477,7 @@ class TestAsyncActions:
     @parametrize
     async def test_raw_response_swipe_overload_2(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.swipe(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             end={
                 "x": 400,
                 "y": 300,
@@ -1497,7 +1497,7 @@ class TestAsyncActions:
     @parametrize
     async def test_streaming_response_swipe_overload_2(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.swipe(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             end={
                 "x": 400,
                 "y": 300,
@@ -1518,9 +1518,9 @@ class TestAsyncActions:
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_swipe_overload_2(self, async_client: AsyncGboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.swipe(
-                id="",
+                box_id="",
                 end={
                     "x": 400,
                     "y": 300,
@@ -1535,7 +1535,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_touch(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.touch(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             points=[
                 {
                     "start": {
@@ -1551,7 +1551,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_touch_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.touch(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             points=[
                 {
                     "start": {
@@ -1577,7 +1577,7 @@ class TestAsyncActions:
     @parametrize
     async def test_raw_response_touch(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.touch(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             points=[
                 {
                     "start": {
@@ -1597,7 +1597,7 @@ class TestAsyncActions:
     @parametrize
     async def test_streaming_response_touch(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.touch(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             points=[
                 {
                     "start": {
@@ -1618,9 +1618,9 @@ class TestAsyncActions:
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_touch(self, async_client: AsyncGboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.touch(
-                id="",
+                box_id="",
                 points=[
                     {
                         "start": {
@@ -1635,7 +1635,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_type(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.type(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             text="Hello World",
         )
         assert_matches_type(ActionResult, action, path=["response"])
@@ -1644,7 +1644,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_type_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.type(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             text="Hello World",
             output_format="base64",
             screenshot_delay="500ms",
@@ -1655,7 +1655,7 @@ class TestAsyncActions:
     @parametrize
     async def test_raw_response_type(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.type(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             text="Hello World",
         )
 
@@ -1668,7 +1668,7 @@ class TestAsyncActions:
     @parametrize
     async def test_streaming_response_type(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.type(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             text="Hello World",
         ) as response:
             assert not response.is_closed
@@ -1682,8 +1682,8 @@ class TestAsyncActions:
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_type(self, async_client: AsyncGboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.type(
-                id="",
+                box_id="",
                 text="Hello World",
             )

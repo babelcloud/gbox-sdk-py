@@ -10,7 +10,7 @@ __all__ = ["AndroidRestartParams"]
 
 
 class AndroidRestartParams(TypedDict, total=False):
-    id: Required[str]
+    box_id: Required[Annotated[str, PropertyInfo(alias="boxId")]]
 
     activity_name: Annotated[str, PropertyInfo(alias="activityName")]
     """Activity name, default is the main activity."""

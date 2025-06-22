@@ -115,7 +115,7 @@ class BoxesResource(SyncAPIResource):
 
     def retrieve(
         self,
-        id: str,
+        box_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -136,12 +136,12 @@ class BoxesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return cast(
             BoxRetrieveResponse,
             self._get(
-                f"/boxes/{id}",
+                f"/boxes/{box_id}",
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
@@ -304,7 +304,7 @@ class BoxesResource(SyncAPIResource):
 
     def execute_commands(
         self,
-        id: str,
+        box_id: str,
         *,
         commands: Union[str, List[str]],
         envs: object | NotGiven = NOT_GIVEN,
@@ -341,10 +341,10 @@ class BoxesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{id}/commands",
+            f"/boxes/{box_id}/commands",
             body=maybe_transform(
                 {
                     "commands": commands,
@@ -362,7 +362,7 @@ class BoxesResource(SyncAPIResource):
 
     def live_view_url(
         self,
-        id: str,
+        box_id: str,
         *,
         expires_in: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -387,10 +387,10 @@ class BoxesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{id}/live-view-url",
+            f"/boxes/{box_id}/live-view-url",
             body=maybe_transform({"expires_in": expires_in}, box_live_view_url_params.BoxLiveViewURLParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -400,7 +400,7 @@ class BoxesResource(SyncAPIResource):
 
     def run_code(
         self,
-        id: str,
+        box_id: str,
         *,
         code: str,
         argv: List[str] | NotGiven = NOT_GIVEN,
@@ -442,10 +442,10 @@ class BoxesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{id}/run-code",
+            f"/boxes/{box_id}/run-code",
             body=maybe_transform(
                 {
                     "code": code,
@@ -465,7 +465,7 @@ class BoxesResource(SyncAPIResource):
 
     def start(
         self,
-        id: str,
+        box_id: str,
         *,
         wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -489,12 +489,12 @@ class BoxesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return cast(
             BoxStartResponse,
             self._post(
-                f"/boxes/{id}/start",
+                f"/boxes/{box_id}/start",
                 body=maybe_transform({"wait": wait}, box_start_params.BoxStartParams),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -505,7 +505,7 @@ class BoxesResource(SyncAPIResource):
 
     def stop(
         self,
-        id: str,
+        box_id: str,
         *,
         wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -529,12 +529,12 @@ class BoxesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return cast(
             BoxStopResponse,
             self._post(
-                f"/boxes/{id}/stop",
+                f"/boxes/{box_id}/stop",
                 body=maybe_transform({"wait": wait}, box_stop_params.BoxStopParams),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -545,7 +545,7 @@ class BoxesResource(SyncAPIResource):
 
     def terminate(
         self,
-        id: str,
+        box_id: str,
         *,
         wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -569,11 +569,11 @@ class BoxesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{id}/terminate",
+            f"/boxes/{box_id}/terminate",
             body=maybe_transform({"wait": wait}, box_terminate_params.BoxTerminateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -583,7 +583,7 @@ class BoxesResource(SyncAPIResource):
 
     def web_terminal_url(
         self,
-        id: str,
+        box_id: str,
         *,
         expires_in: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -608,10 +608,10 @@ class BoxesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{id}/web-terminal-url",
+            f"/boxes/{box_id}/web-terminal-url",
             body=maybe_transform({"expires_in": expires_in}, box_web_terminal_url_params.BoxWebTerminalURLParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -658,7 +658,7 @@ class AsyncBoxesResource(AsyncAPIResource):
 
     async def retrieve(
         self,
-        id: str,
+        box_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -679,12 +679,12 @@ class AsyncBoxesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return cast(
             BoxRetrieveResponse,
             await self._get(
-                f"/boxes/{id}",
+                f"/boxes/{box_id}",
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
@@ -847,7 +847,7 @@ class AsyncBoxesResource(AsyncAPIResource):
 
     async def execute_commands(
         self,
-        id: str,
+        box_id: str,
         *,
         commands: Union[str, List[str]],
         envs: object | NotGiven = NOT_GIVEN,
@@ -884,10 +884,10 @@ class AsyncBoxesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{id}/commands",
+            f"/boxes/{box_id}/commands",
             body=await async_maybe_transform(
                 {
                     "commands": commands,
@@ -905,7 +905,7 @@ class AsyncBoxesResource(AsyncAPIResource):
 
     async def live_view_url(
         self,
-        id: str,
+        box_id: str,
         *,
         expires_in: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -930,10 +930,10 @@ class AsyncBoxesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{id}/live-view-url",
+            f"/boxes/{box_id}/live-view-url",
             body=await async_maybe_transform({"expires_in": expires_in}, box_live_view_url_params.BoxLiveViewURLParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -943,7 +943,7 @@ class AsyncBoxesResource(AsyncAPIResource):
 
     async def run_code(
         self,
-        id: str,
+        box_id: str,
         *,
         code: str,
         argv: List[str] | NotGiven = NOT_GIVEN,
@@ -985,10 +985,10 @@ class AsyncBoxesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{id}/run-code",
+            f"/boxes/{box_id}/run-code",
             body=await async_maybe_transform(
                 {
                     "code": code,
@@ -1008,7 +1008,7 @@ class AsyncBoxesResource(AsyncAPIResource):
 
     async def start(
         self,
-        id: str,
+        box_id: str,
         *,
         wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1032,12 +1032,12 @@ class AsyncBoxesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return cast(
             BoxStartResponse,
             await self._post(
-                f"/boxes/{id}/start",
+                f"/boxes/{box_id}/start",
                 body=await async_maybe_transform({"wait": wait}, box_start_params.BoxStartParams),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -1048,7 +1048,7 @@ class AsyncBoxesResource(AsyncAPIResource):
 
     async def stop(
         self,
-        id: str,
+        box_id: str,
         *,
         wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1072,12 +1072,12 @@ class AsyncBoxesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return cast(
             BoxStopResponse,
             await self._post(
-                f"/boxes/{id}/stop",
+                f"/boxes/{box_id}/stop",
                 body=await async_maybe_transform({"wait": wait}, box_stop_params.BoxStopParams),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -1088,7 +1088,7 @@ class AsyncBoxesResource(AsyncAPIResource):
 
     async def terminate(
         self,
-        id: str,
+        box_id: str,
         *,
         wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1112,11 +1112,11 @@ class AsyncBoxesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{id}/terminate",
+            f"/boxes/{box_id}/terminate",
             body=await async_maybe_transform({"wait": wait}, box_terminate_params.BoxTerminateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -1126,7 +1126,7 @@ class AsyncBoxesResource(AsyncAPIResource):
 
     async def web_terminal_url(
         self,
-        id: str,
+        box_id: str,
         *,
         expires_in: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1151,10 +1151,10 @@ class AsyncBoxesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{id}/web-terminal-url",
+            f"/boxes/{box_id}/web-terminal-url",
             body=await async_maybe_transform(
                 {"expires_in": expires_in}, box_web_terminal_url_params.BoxWebTerminalURLParams
             ),

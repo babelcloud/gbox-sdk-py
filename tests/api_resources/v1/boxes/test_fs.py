@@ -29,7 +29,7 @@ class TestFs:
     @parametrize
     def test_method_list(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.list(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents",
         )
         assert_matches_type(FListResponse, f, path=["response"])
@@ -38,7 +38,7 @@ class TestFs:
     @parametrize
     def test_method_list_with_all_params(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.list(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents",
             depth=2,
             working_dir="/home/user/documents",
@@ -49,7 +49,7 @@ class TestFs:
     @parametrize
     def test_raw_response_list(self, client: GboxClient) -> None:
         response = client.v1.boxes.fs.with_raw_response.list(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents",
         )
 
@@ -62,7 +62,7 @@ class TestFs:
     @parametrize
     def test_streaming_response_list(self, client: GboxClient) -> None:
         with client.v1.boxes.fs.with_streaming_response.list(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents",
         ) as response:
             assert not response.is_closed
@@ -76,9 +76,9 @@ class TestFs:
     @pytest.mark.skip()
     @parametrize
     def test_path_params_list(self, client: GboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.fs.with_raw_response.list(
-                id="",
+                box_id="",
                 path="/home/user/documents",
             )
 
@@ -86,7 +86,7 @@ class TestFs:
     @parametrize
     def test_method_exists(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.exists(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/output.txt",
         )
         assert_matches_type(FExistsResponse, f, path=["response"])
@@ -95,7 +95,7 @@ class TestFs:
     @parametrize
     def test_method_exists_with_all_params(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.exists(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/output.txt",
             working_dir="/home/user/documents",
         )
@@ -105,7 +105,7 @@ class TestFs:
     @parametrize
     def test_raw_response_exists(self, client: GboxClient) -> None:
         response = client.v1.boxes.fs.with_raw_response.exists(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/output.txt",
         )
 
@@ -118,7 +118,7 @@ class TestFs:
     @parametrize
     def test_streaming_response_exists(self, client: GboxClient) -> None:
         with client.v1.boxes.fs.with_streaming_response.exists(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/output.txt",
         ) as response:
             assert not response.is_closed
@@ -132,9 +132,9 @@ class TestFs:
     @pytest.mark.skip()
     @parametrize
     def test_path_params_exists(self, client: GboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.fs.with_raw_response.exists(
-                id="",
+                box_id="",
                 path="/home/user/documents/output.txt",
             )
 
@@ -142,7 +142,7 @@ class TestFs:
     @parametrize
     def test_method_info(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.info(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/output.txt",
         )
         assert_matches_type(FInfoResponse, f, path=["response"])
@@ -151,7 +151,7 @@ class TestFs:
     @parametrize
     def test_method_info_with_all_params(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.info(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/output.txt",
             working_dir="/home/user/documents",
         )
@@ -161,7 +161,7 @@ class TestFs:
     @parametrize
     def test_raw_response_info(self, client: GboxClient) -> None:
         response = client.v1.boxes.fs.with_raw_response.info(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/output.txt",
         )
 
@@ -174,7 +174,7 @@ class TestFs:
     @parametrize
     def test_streaming_response_info(self, client: GboxClient) -> None:
         with client.v1.boxes.fs.with_streaming_response.info(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/output.txt",
         ) as response:
             assert not response.is_closed
@@ -188,9 +188,9 @@ class TestFs:
     @pytest.mark.skip()
     @parametrize
     def test_path_params_info(self, client: GboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.fs.with_raw_response.info(
-                id="",
+                box_id="",
                 path="/home/user/documents/output.txt",
             )
 
@@ -198,7 +198,7 @@ class TestFs:
     @parametrize
     def test_method_read(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.read(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/config.json",
         )
         assert_matches_type(FReadResponse, f, path=["response"])
@@ -207,7 +207,7 @@ class TestFs:
     @parametrize
     def test_method_read_with_all_params(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.read(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/config.json",
             working_dir="/home/user/documents",
         )
@@ -217,7 +217,7 @@ class TestFs:
     @parametrize
     def test_raw_response_read(self, client: GboxClient) -> None:
         response = client.v1.boxes.fs.with_raw_response.read(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/config.json",
         )
 
@@ -230,7 +230,7 @@ class TestFs:
     @parametrize
     def test_streaming_response_read(self, client: GboxClient) -> None:
         with client.v1.boxes.fs.with_streaming_response.read(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/config.json",
         ) as response:
             assert not response.is_closed
@@ -244,9 +244,9 @@ class TestFs:
     @pytest.mark.skip()
     @parametrize
     def test_path_params_read(self, client: GboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.fs.with_raw_response.read(
-                id="",
+                box_id="",
                 path="/home/user/documents/config.json",
             )
 
@@ -254,7 +254,7 @@ class TestFs:
     @parametrize
     def test_method_remove(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.remove(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/output.txt",
         )
         assert_matches_type(FRemoveResponse, f, path=["response"])
@@ -263,7 +263,7 @@ class TestFs:
     @parametrize
     def test_method_remove_with_all_params(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.remove(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/output.txt",
             working_dir="/home/user/documents",
         )
@@ -273,7 +273,7 @@ class TestFs:
     @parametrize
     def test_raw_response_remove(self, client: GboxClient) -> None:
         response = client.v1.boxes.fs.with_raw_response.remove(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/output.txt",
         )
 
@@ -286,7 +286,7 @@ class TestFs:
     @parametrize
     def test_streaming_response_remove(self, client: GboxClient) -> None:
         with client.v1.boxes.fs.with_streaming_response.remove(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/output.txt",
         ) as response:
             assert not response.is_closed
@@ -300,9 +300,9 @@ class TestFs:
     @pytest.mark.skip()
     @parametrize
     def test_path_params_remove(self, client: GboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.fs.with_raw_response.remove(
-                id="",
+                box_id="",
                 path="/home/user/documents/output.txt",
             )
 
@@ -310,7 +310,7 @@ class TestFs:
     @parametrize
     def test_method_rename(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.rename(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             new_path="/home/user/documents/new-name.txt",
             old_path="/home/user/documents/output.txt",
         )
@@ -320,7 +320,7 @@ class TestFs:
     @parametrize
     def test_method_rename_with_all_params(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.rename(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             new_path="/home/user/documents/new-name.txt",
             old_path="/home/user/documents/output.txt",
             working_dir="/home/user/documents",
@@ -331,7 +331,7 @@ class TestFs:
     @parametrize
     def test_raw_response_rename(self, client: GboxClient) -> None:
         response = client.v1.boxes.fs.with_raw_response.rename(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             new_path="/home/user/documents/new-name.txt",
             old_path="/home/user/documents/output.txt",
         )
@@ -345,7 +345,7 @@ class TestFs:
     @parametrize
     def test_streaming_response_rename(self, client: GboxClient) -> None:
         with client.v1.boxes.fs.with_streaming_response.rename(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             new_path="/home/user/documents/new-name.txt",
             old_path="/home/user/documents/output.txt",
         ) as response:
@@ -360,9 +360,9 @@ class TestFs:
     @pytest.mark.skip()
     @parametrize
     def test_path_params_rename(self, client: GboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.fs.with_raw_response.rename(
-                id="",
+                box_id="",
                 new_path="/home/user/documents/new-name.txt",
                 old_path="/home/user/documents/output.txt",
             )
@@ -371,7 +371,7 @@ class TestFs:
     @parametrize
     def test_method_write_overload_1(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.write(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             content="Hello, World!\nThis is file content.",
             path="/home/user/documents/output.txt",
         )
@@ -381,7 +381,7 @@ class TestFs:
     @parametrize
     def test_method_write_with_all_params_overload_1(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.write(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             content="Hello, World!\nThis is file content.",
             path="/home/user/documents/output.txt",
             working_dir="/home/user/documents",
@@ -392,7 +392,7 @@ class TestFs:
     @parametrize
     def test_raw_response_write_overload_1(self, client: GboxClient) -> None:
         response = client.v1.boxes.fs.with_raw_response.write(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             content="Hello, World!\nThis is file content.",
             path="/home/user/documents/output.txt",
         )
@@ -406,7 +406,7 @@ class TestFs:
     @parametrize
     def test_streaming_response_write_overload_1(self, client: GboxClient) -> None:
         with client.v1.boxes.fs.with_streaming_response.write(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             content="Hello, World!\nThis is file content.",
             path="/home/user/documents/output.txt",
         ) as response:
@@ -421,9 +421,9 @@ class TestFs:
     @pytest.mark.skip()
     @parametrize
     def test_path_params_write_overload_1(self, client: GboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.fs.with_raw_response.write(
-                id="",
+                box_id="",
                 content="Hello, World!\nThis is file content.",
                 path="/home/user/documents/output.txt",
             )
@@ -432,7 +432,7 @@ class TestFs:
     @parametrize
     def test_method_write_overload_2(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.write(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             content=b"raw file contents",
             path="/home/user/documents/output.txt",
         )
@@ -442,7 +442,7 @@ class TestFs:
     @parametrize
     def test_method_write_with_all_params_overload_2(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.write(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             content=b"raw file contents",
             path="/home/user/documents/output.txt",
             working_dir="/home/user/documents",
@@ -453,7 +453,7 @@ class TestFs:
     @parametrize
     def test_raw_response_write_overload_2(self, client: GboxClient) -> None:
         response = client.v1.boxes.fs.with_raw_response.write(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             content=b"raw file contents",
             path="/home/user/documents/output.txt",
         )
@@ -467,7 +467,7 @@ class TestFs:
     @parametrize
     def test_streaming_response_write_overload_2(self, client: GboxClient) -> None:
         with client.v1.boxes.fs.with_streaming_response.write(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             content=b"raw file contents",
             path="/home/user/documents/output.txt",
         ) as response:
@@ -482,9 +482,9 @@ class TestFs:
     @pytest.mark.skip()
     @parametrize
     def test_path_params_write_overload_2(self, client: GboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.fs.with_raw_response.write(
-                id="",
+                box_id="",
                 content=b"raw file contents",
                 path="/home/user/documents/output.txt",
             )
@@ -499,7 +499,7 @@ class TestAsyncFs:
     @parametrize
     async def test_method_list(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.list(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents",
         )
         assert_matches_type(FListResponse, f, path=["response"])
@@ -508,7 +508,7 @@ class TestAsyncFs:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.list(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents",
             depth=2,
             working_dir="/home/user/documents",
@@ -519,7 +519,7 @@ class TestAsyncFs:
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.fs.with_raw_response.list(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents",
         )
 
@@ -532,7 +532,7 @@ class TestAsyncFs:
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.fs.with_streaming_response.list(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents",
         ) as response:
             assert not response.is_closed
@@ -546,9 +546,9 @@ class TestAsyncFs:
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_list(self, async_client: AsyncGboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.fs.with_raw_response.list(
-                id="",
+                box_id="",
                 path="/home/user/documents",
             )
 
@@ -556,7 +556,7 @@ class TestAsyncFs:
     @parametrize
     async def test_method_exists(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.exists(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/output.txt",
         )
         assert_matches_type(FExistsResponse, f, path=["response"])
@@ -565,7 +565,7 @@ class TestAsyncFs:
     @parametrize
     async def test_method_exists_with_all_params(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.exists(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/output.txt",
             working_dir="/home/user/documents",
         )
@@ -575,7 +575,7 @@ class TestAsyncFs:
     @parametrize
     async def test_raw_response_exists(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.fs.with_raw_response.exists(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/output.txt",
         )
 
@@ -588,7 +588,7 @@ class TestAsyncFs:
     @parametrize
     async def test_streaming_response_exists(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.fs.with_streaming_response.exists(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/output.txt",
         ) as response:
             assert not response.is_closed
@@ -602,9 +602,9 @@ class TestAsyncFs:
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_exists(self, async_client: AsyncGboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.fs.with_raw_response.exists(
-                id="",
+                box_id="",
                 path="/home/user/documents/output.txt",
             )
 
@@ -612,7 +612,7 @@ class TestAsyncFs:
     @parametrize
     async def test_method_info(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.info(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/output.txt",
         )
         assert_matches_type(FInfoResponse, f, path=["response"])
@@ -621,7 +621,7 @@ class TestAsyncFs:
     @parametrize
     async def test_method_info_with_all_params(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.info(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/output.txt",
             working_dir="/home/user/documents",
         )
@@ -631,7 +631,7 @@ class TestAsyncFs:
     @parametrize
     async def test_raw_response_info(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.fs.with_raw_response.info(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/output.txt",
         )
 
@@ -644,7 +644,7 @@ class TestAsyncFs:
     @parametrize
     async def test_streaming_response_info(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.fs.with_streaming_response.info(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/output.txt",
         ) as response:
             assert not response.is_closed
@@ -658,9 +658,9 @@ class TestAsyncFs:
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_info(self, async_client: AsyncGboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.fs.with_raw_response.info(
-                id="",
+                box_id="",
                 path="/home/user/documents/output.txt",
             )
 
@@ -668,7 +668,7 @@ class TestAsyncFs:
     @parametrize
     async def test_method_read(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.read(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/config.json",
         )
         assert_matches_type(FReadResponse, f, path=["response"])
@@ -677,7 +677,7 @@ class TestAsyncFs:
     @parametrize
     async def test_method_read_with_all_params(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.read(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/config.json",
             working_dir="/home/user/documents",
         )
@@ -687,7 +687,7 @@ class TestAsyncFs:
     @parametrize
     async def test_raw_response_read(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.fs.with_raw_response.read(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/config.json",
         )
 
@@ -700,7 +700,7 @@ class TestAsyncFs:
     @parametrize
     async def test_streaming_response_read(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.fs.with_streaming_response.read(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/config.json",
         ) as response:
             assert not response.is_closed
@@ -714,9 +714,9 @@ class TestAsyncFs:
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_read(self, async_client: AsyncGboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.fs.with_raw_response.read(
-                id="",
+                box_id="",
                 path="/home/user/documents/config.json",
             )
 
@@ -724,7 +724,7 @@ class TestAsyncFs:
     @parametrize
     async def test_method_remove(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.remove(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/output.txt",
         )
         assert_matches_type(FRemoveResponse, f, path=["response"])
@@ -733,7 +733,7 @@ class TestAsyncFs:
     @parametrize
     async def test_method_remove_with_all_params(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.remove(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/output.txt",
             working_dir="/home/user/documents",
         )
@@ -743,7 +743,7 @@ class TestAsyncFs:
     @parametrize
     async def test_raw_response_remove(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.fs.with_raw_response.remove(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/output.txt",
         )
 
@@ -756,7 +756,7 @@ class TestAsyncFs:
     @parametrize
     async def test_streaming_response_remove(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.fs.with_streaming_response.remove(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             path="/home/user/documents/output.txt",
         ) as response:
             assert not response.is_closed
@@ -770,9 +770,9 @@ class TestAsyncFs:
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_remove(self, async_client: AsyncGboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.fs.with_raw_response.remove(
-                id="",
+                box_id="",
                 path="/home/user/documents/output.txt",
             )
 
@@ -780,7 +780,7 @@ class TestAsyncFs:
     @parametrize
     async def test_method_rename(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.rename(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             new_path="/home/user/documents/new-name.txt",
             old_path="/home/user/documents/output.txt",
         )
@@ -790,7 +790,7 @@ class TestAsyncFs:
     @parametrize
     async def test_method_rename_with_all_params(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.rename(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             new_path="/home/user/documents/new-name.txt",
             old_path="/home/user/documents/output.txt",
             working_dir="/home/user/documents",
@@ -801,7 +801,7 @@ class TestAsyncFs:
     @parametrize
     async def test_raw_response_rename(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.fs.with_raw_response.rename(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             new_path="/home/user/documents/new-name.txt",
             old_path="/home/user/documents/output.txt",
         )
@@ -815,7 +815,7 @@ class TestAsyncFs:
     @parametrize
     async def test_streaming_response_rename(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.fs.with_streaming_response.rename(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             new_path="/home/user/documents/new-name.txt",
             old_path="/home/user/documents/output.txt",
         ) as response:
@@ -830,9 +830,9 @@ class TestAsyncFs:
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_rename(self, async_client: AsyncGboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.fs.with_raw_response.rename(
-                id="",
+                box_id="",
                 new_path="/home/user/documents/new-name.txt",
                 old_path="/home/user/documents/output.txt",
             )
@@ -841,7 +841,7 @@ class TestAsyncFs:
     @parametrize
     async def test_method_write_overload_1(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.write(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             content="Hello, World!\nThis is file content.",
             path="/home/user/documents/output.txt",
         )
@@ -851,7 +851,7 @@ class TestAsyncFs:
     @parametrize
     async def test_method_write_with_all_params_overload_1(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.write(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             content="Hello, World!\nThis is file content.",
             path="/home/user/documents/output.txt",
             working_dir="/home/user/documents",
@@ -862,7 +862,7 @@ class TestAsyncFs:
     @parametrize
     async def test_raw_response_write_overload_1(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.fs.with_raw_response.write(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             content="Hello, World!\nThis is file content.",
             path="/home/user/documents/output.txt",
         )
@@ -876,7 +876,7 @@ class TestAsyncFs:
     @parametrize
     async def test_streaming_response_write_overload_1(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.fs.with_streaming_response.write(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             content="Hello, World!\nThis is file content.",
             path="/home/user/documents/output.txt",
         ) as response:
@@ -891,9 +891,9 @@ class TestAsyncFs:
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_write_overload_1(self, async_client: AsyncGboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.fs.with_raw_response.write(
-                id="",
+                box_id="",
                 content="Hello, World!\nThis is file content.",
                 path="/home/user/documents/output.txt",
             )
@@ -902,7 +902,7 @@ class TestAsyncFs:
     @parametrize
     async def test_method_write_overload_2(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.write(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             content=b"raw file contents",
             path="/home/user/documents/output.txt",
         )
@@ -912,7 +912,7 @@ class TestAsyncFs:
     @parametrize
     async def test_method_write_with_all_params_overload_2(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.write(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             content=b"raw file contents",
             path="/home/user/documents/output.txt",
             working_dir="/home/user/documents",
@@ -923,7 +923,7 @@ class TestAsyncFs:
     @parametrize
     async def test_raw_response_write_overload_2(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.fs.with_raw_response.write(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             content=b"raw file contents",
             path="/home/user/documents/output.txt",
         )
@@ -937,7 +937,7 @@ class TestAsyncFs:
     @parametrize
     async def test_streaming_response_write_overload_2(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.fs.with_streaming_response.write(
-            id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            box_id="boxId",
             content=b"raw file contents",
             path="/home/user/documents/output.txt",
         ) as response:
@@ -952,9 +952,9 @@ class TestAsyncFs:
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_write_overload_2(self, async_client: AsyncGboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.fs.with_raw_response.write(
-                id="",
+                box_id="",
                 content=b"raw file contents",
                 path="/home/user/documents/output.txt",
             )

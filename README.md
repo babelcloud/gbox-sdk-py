@@ -145,7 +145,7 @@ from gbox_sdk import GboxClient
 client = GboxClient()
 
 client.v1.boxes.fs.write(
-    id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+    box_id="boxId",
     content=Path("/path/to/file"),
     path="/home/user/documents/output.txt",
 )

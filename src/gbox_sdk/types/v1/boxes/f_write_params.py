@@ -19,7 +19,8 @@ class WriteFile(TypedDict, total=False):
     """Path to the file.
 
     If the path is not start with '/', the file will be written to the working
-    directory
+    directory. Creates necessary directories in the path if they don't exist. If
+    target path is already exists, the write will be failed.
     """
 
     working_dir: Annotated[str, PropertyInfo(alias="workingDir")]
@@ -38,7 +39,8 @@ class WriteFileByBinary(TypedDict, total=False):
     """Path to the file.
 
     If the path is not start with '/', the file will be written to the working
-    directory
+    directory. Creates necessary directories in the path if they don't exist. If
+    target path is already exists, the write will be failed.
     """
 
     working_dir: Annotated[str, PropertyInfo(alias="workingDir")]

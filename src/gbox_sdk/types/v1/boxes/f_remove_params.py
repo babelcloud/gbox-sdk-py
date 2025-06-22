@@ -14,7 +14,7 @@ class FRemoveParams(TypedDict, total=False):
     """Path to the file/directory.
 
     If the path is not start with '/', the file/directory will be deleted from the
-    working directory
+    working directory. If target path is not exists, the delete will be failed.
     """
 
     working_dir: Annotated[str, PropertyInfo(alias="workingDir")]

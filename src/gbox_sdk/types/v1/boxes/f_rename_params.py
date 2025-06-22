@@ -14,14 +14,15 @@ class FRenameParams(TypedDict, total=False):
     """New path for the file/directory.
 
     If the path is not start with '/', the file/directory will be renamed to the
-    working directory
+    working directory. If target newPath is already exists, the rename will be
+    failed.
     """
 
     old_path: Required[Annotated[str, PropertyInfo(alias="oldPath")]]
     """Old path to the file/directory.
 
     If the path is not start with '/', the file/directory will be renamed from the
-    working directory
+    working directory. If target oldPath is not exists, the rename will be failed.
     """
 
     working_dir: Annotated[str, PropertyInfo(alias="workingDir")]

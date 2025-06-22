@@ -34,6 +34,7 @@ from .android_restore_params import AndroidRestoreParams as AndroidRestoreParams
 from .browser_cdp_url_params import BrowserCdpURLParams as BrowserCdpURLParams
 from .action_press_key_params import ActionPressKeyParams as ActionPressKeyParams
 from .action_screenshot_params import ActionScreenshotParams as ActionScreenshotParams
+from .android_install_response import AndroidInstallResponse as AndroidInstallResponse
 from .android_uninstall_params import AndroidUninstallParams as AndroidUninstallParams
 from .browser_cdp_url_response import BrowserCdpURLResponse as BrowserCdpURLResponse
 from .action_press_button_params import ActionPressButtonParams as ActionPressButtonParams

@@ -680,10 +680,11 @@ class ActionsResource(SyncAPIResource):
         Performs a swipe in the specified direction
 
         Args:
-          direction: Direction of the swipe
+          direction: Direction to swipe. The gesture will be performed from the center of the screen
+              towards this direction.
 
-          distance: Distance of the swipe in pixels. If not provided, will use a default distance
-              based on screen size
+          distance: Distance of the swipe in pixels. If not provided, the swipe will be performed
+              from the center of the screen to the screen edge
 
           duration: Duration of the swipe
 
@@ -716,7 +717,7 @@ class ActionsResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        end: object,
+        end: action_swipe_params.SwipeAdvancedEnd,
         start: action_swipe_params.SwipeAdvancedStart,
         duration: str | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
@@ -773,7 +774,7 @@ class ActionsResource(SyncAPIResource):
         duration: str | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
-        end: object | NotGiven = NOT_GIVEN,
+        end: action_swipe_params.SwipeAdvancedEnd | NotGiven = NOT_GIVEN,
         start: action_swipe_params.SwipeAdvancedStart | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1570,10 +1571,11 @@ class AsyncActionsResource(AsyncAPIResource):
         Performs a swipe in the specified direction
 
         Args:
-          direction: Direction of the swipe
+          direction: Direction to swipe. The gesture will be performed from the center of the screen
+              towards this direction.
 
-          distance: Distance of the swipe in pixels. If not provided, will use a default distance
-              based on screen size
+          distance: Distance of the swipe in pixels. If not provided, the swipe will be performed
+              from the center of the screen to the screen edge
 
           duration: Duration of the swipe
 
@@ -1606,7 +1608,7 @@ class AsyncActionsResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        end: object,
+        end: action_swipe_params.SwipeAdvancedEnd,
         start: action_swipe_params.SwipeAdvancedStart,
         duration: str | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
@@ -1663,7 +1665,7 @@ class AsyncActionsResource(AsyncAPIResource):
         duration: str | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
-        end: object | NotGiven = NOT_GIVEN,
+        end: action_swipe_params.SwipeAdvancedEnd | NotGiven = NOT_GIVEN,
         start: action_swipe_params.SwipeAdvancedStart | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.

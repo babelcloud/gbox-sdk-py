@@ -37,6 +37,7 @@ from ....types.v1.boxes import (
 )
 from ....types.v1.boxes.android_app import AndroidApp
 from ....types.v1.boxes.android_list_response import AndroidListResponse
+from ....types.v1.boxes.android_install_response import AndroidInstallResponse
 from ....types.v1.boxes.android_list_simple_response import AndroidListSimpleResponse
 from ....types.v1.boxes.android_list_activities_response import AndroidListActivitiesResponse
 from ....types.v1.boxes.android_get_connect_address_response import AndroidGetConnectAddressResponse
@@ -338,7 +339,7 @@ class AndroidResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
+    ) -> AndroidInstallResponse:
         """
         Install app
 
@@ -367,7 +368,7 @@ class AndroidResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
+    ) -> AndroidInstallResponse:
         """
         Install app
 
@@ -396,16 +397,15 @@ class AndroidResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
+    ) -> AndroidInstallResponse:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         body = deepcopy_minimal({"apk": apk})
         files = extract_files(cast(Mapping[str, object], body), paths=[["apk"]])
         # It should be noted that the actual Content-Type header that will be
         # sent to the server will contain a `boundary` parameter, e.g.
         # multipart/form-data; boundary=---abc--
-        extra_headers["Content-Type"] = "multipart/form-data"
+        extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return self._post(
             f"/boxes/{box_id}/android/apps",
             body=maybe_transform(body, android_install_params.AndroidInstallParams),
@@ -413,7 +413,7 @@ class AndroidResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=AndroidInstallResponse,
         )
 
     def list_activities(
@@ -951,7 +951,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
+    ) -> AndroidInstallResponse:
         """
         Install app
 
@@ -980,7 +980,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
+    ) -> AndroidInstallResponse:
         """
         Install app
 
@@ -1009,16 +1009,15 @@ class AsyncAndroidResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
+    ) -> AndroidInstallResponse:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         body = deepcopy_minimal({"apk": apk})
         files = extract_files(cast(Mapping[str, object], body), paths=[["apk"]])
         # It should be noted that the actual Content-Type header that will be
         # sent to the server will contain a `boundary` parameter, e.g.
         # multipart/form-data; boundary=---abc--
-        extra_headers["Content-Type"] = "multipart/form-data"
+        extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return await self._post(
             f"/boxes/{box_id}/android/apps",
             body=await async_maybe_transform(body, android_install_params.AndroidInstallParams),
@@ -1026,7 +1025,7 @@ class AsyncAndroidResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=AndroidInstallResponse,
         )
 
     async def list_activities(

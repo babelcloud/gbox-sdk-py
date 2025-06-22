@@ -7,17 +7,22 @@ from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from ...._utils import PropertyInfo
 
-__all__ = ["ActionSwipeParams", "SwipeSimple", "SwipeAdvanced", "SwipeAdvancedStart"]
+__all__ = ["ActionSwipeParams", "SwipeSimple", "SwipeAdvanced", "SwipeAdvancedEnd", "SwipeAdvancedStart"]
 
 
 class SwipeSimple(TypedDict, total=False):
     direction: Required[Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"]]
-    """Direction of the swipe"""
+    """Direction to swipe.
+
+    The gesture will be performed from the center of the screen towards this
+    direction.
+    """
 
     distance: float
     """Distance of the swipe in pixels.
 
-    If not provided, will use a default distance based on screen size
+    If not provided, the swipe will be performed from the center of the screen to
+    the screen edge
     """
 
     duration: str
@@ -42,7 +47,7 @@ class SwipeSimple(TypedDict, total=False):
 
 
 class SwipeAdvanced(TypedDict, total=False):
-    end: Required[object]
+    end: Required[SwipeAdvancedEnd]
     """End point of the swipe path"""
 
     start: Required[SwipeAdvancedStart]
@@ -67,6 +72,14 @@ class SwipeAdvanced(TypedDict, total=False):
     Example: '500ms' means wait 500ms after the action before capturing the final
     screenshot.
     """
+
+
+class SwipeAdvancedEnd(TypedDict, total=False):
+    x: Required[float]
+    """Start/end x coordinate of the swipe path"""
+
+    y: Required[float]
+    """Start/end y coordinate of the swipe path"""
 
 
 class SwipeAdvancedStart(TypedDict, total=False):

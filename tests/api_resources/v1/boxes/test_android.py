@@ -20,6 +20,7 @@ from gbox_sdk._response import (
 from gbox_sdk.types.v1.boxes import (
     AndroidApp,
     AndroidListResponse,
+    AndroidInstallResponse,
     AndroidListSimpleResponse,
     AndroidListActivitiesResponse,
     AndroidGetConnectAddressResponse,
@@ -408,7 +409,7 @@ class TestAndroid:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             apk=b"raw file contents",
         )
-        assert android is None
+        assert_matches_type(AndroidInstallResponse, android, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -421,7 +422,7 @@ class TestAndroid:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         android = response.parse()
-        assert android is None
+        assert_matches_type(AndroidInstallResponse, android, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -434,7 +435,7 @@ class TestAndroid:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             android = response.parse()
-            assert android is None
+            assert_matches_type(AndroidInstallResponse, android, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -454,7 +455,7 @@ class TestAndroid:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             apk="https://example.com/app.apk",
         )
-        assert android is None
+        assert_matches_type(AndroidInstallResponse, android, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -467,7 +468,7 @@ class TestAndroid:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         android = response.parse()
-        assert android is None
+        assert_matches_type(AndroidInstallResponse, android, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -480,7 +481,7 @@ class TestAndroid:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             android = response.parse()
-            assert android is None
+            assert_matches_type(AndroidInstallResponse, android, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1211,7 +1212,7 @@ class TestAsyncAndroid:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             apk=b"raw file contents",
         )
-        assert android is None
+        assert_matches_type(AndroidInstallResponse, android, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -1224,7 +1225,7 @@ class TestAsyncAndroid:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         android = await response.parse()
-        assert android is None
+        assert_matches_type(AndroidInstallResponse, android, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -1237,7 +1238,7 @@ class TestAsyncAndroid:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             android = await response.parse()
-            assert android is None
+            assert_matches_type(AndroidInstallResponse, android, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1257,7 +1258,7 @@ class TestAsyncAndroid:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             apk="https://example.com/app.apk",
         )
-        assert android is None
+        assert_matches_type(AndroidInstallResponse, android, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -1270,7 +1271,7 @@ class TestAsyncAndroid:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         android = await response.parse()
-        assert android is None
+        assert_matches_type(AndroidInstallResponse, android, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -1283,7 +1284,7 @@ class TestAsyncAndroid:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             android = await response.parse()
-            assert android is None
+            assert_matches_type(AndroidInstallResponse, android, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

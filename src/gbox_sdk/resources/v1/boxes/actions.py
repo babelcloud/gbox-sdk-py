@@ -717,7 +717,7 @@ class ActionsResource(SyncAPIResource):
         box_id: str,
         *,
         end: object,
-        start: object,
+        start: action_swipe_params.SwipeAdvancedStart,
         duration: str | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -774,7 +774,7 @@ class ActionsResource(SyncAPIResource):
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         end: object | NotGiven = NOT_GIVEN,
-        start: object | NotGiven = NOT_GIVEN,
+        start: action_swipe_params.SwipeAdvancedStart | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1607,7 +1607,7 @@ class AsyncActionsResource(AsyncAPIResource):
         box_id: str,
         *,
         end: object,
-        start: object,
+        start: action_swipe_params.SwipeAdvancedStart,
         duration: str | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -1664,7 +1664,7 @@ class AsyncActionsResource(AsyncAPIResource):
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         end: object | NotGiven = NOT_GIVEN,
-        start: object | NotGiven = NOT_GIVEN,
+        start: action_swipe_params.SwipeAdvancedStart | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

@@ -7,7 +7,7 @@ from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from ...._utils import PropertyInfo
 
-__all__ = ["ActionSwipeParams", "SwipeSimple", "Swipe"]
+__all__ = ["ActionSwipeParams", "SwipeSimple", "SwipeAdvanced", "SwipeAdvancedStart"]
 
 
 class SwipeSimple(TypedDict, total=False):
@@ -41,11 +41,11 @@ class SwipeSimple(TypedDict, total=False):
     """
 
 
-class Swipe(TypedDict, total=False):
+class SwipeAdvanced(TypedDict, total=False):
     end: Required[object]
     """End point of the swipe path"""
 
-    start: Required[object]
+    start: Required[SwipeAdvancedStart]
     """Start point of the swipe path"""
 
     duration: str
@@ -69,4 +69,12 @@ class Swipe(TypedDict, total=False):
     """
 
 
-ActionSwipeParams: TypeAlias = Union[SwipeSimple, Swipe]
+class SwipeAdvancedStart(TypedDict, total=False):
+    x: Required[float]
+    """Start/end x coordinate of the swipe path"""
+
+    y: Required[float]
+    """Start/end y coordinate of the swipe path"""
+
+
+ActionSwipeParams: TypeAlias = Union[SwipeSimple, SwipeAdvanced]

@@ -125,7 +125,7 @@ class FsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FExistsResponse:
-        """Check if file exists
+        """Check if file/directory exists
 
         Args:
           path: Path to the file/directory.
@@ -146,19 +146,22 @@ class FsResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return self._post(
-            f"/boxes/{box_id}/fs/exists",
-            body=maybe_transform(
-                {
-                    "path": path,
-                    "working_dir": working_dir,
-                },
-                f_exists_params.FExistsParams,
+        return cast(
+            FExistsResponse,
+            self._post(
+                f"/boxes/{box_id}/fs/exists",
+                body=maybe_transform(
+                    {
+                        "path": path,
+                        "working_dir": working_dir,
+                    },
+                    f_exists_params.FExistsParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(Any, FExistsResponse),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=FExistsResponse,
         )
 
     def info(
@@ -281,13 +284,15 @@ class FsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FRemoveResponse:
-        """Delete box file/directory
+        """Delete a file or directory.
+
+        If target path is not exists, the delete will be
+        failed.
 
         Args:
-          path: Path to the file/directory.
-
-        If the path is not start with '/', the
-              file/directory will be deleted from the working directory
+          path: Path to the file/directory. If the path is not start with '/', the
+              file/directory will be deleted from the working directory. If target path is not
+              exists, the delete will be failed.
 
           working_dir: Working directory. If not provided, the file will be read from the
               `box.config.workingDir` directory.
@@ -331,16 +336,19 @@ class FsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FRenameResponse:
-        """Rename box file
+        """Rename a file or directory.
+
+        If target newPath is already exists, the rename will
+        be failed.
 
         Args:
-          new_path: New path for the file/directory.
-
-        If the path is not start with '/', the
-              file/directory will be renamed to the working directory
+          new_path: New path for the file/directory. If the path is not start with '/', the
+              file/directory will be renamed to the working directory. If target newPath is
+              already exists, the rename will be failed.
 
           old_path: Old path to the file/directory. If the path is not start with '/', the
-              file/directory will be renamed from the working directory
+              file/directory will be renamed from the working directory. If target oldPath is
+              not exists, the rename will be failed.
 
           working_dir: Working directory. If not provided, the file will be read from the
               `box.config.workingDir` directory.
@@ -355,20 +363,23 @@ class FsResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return self._post(
-            f"/boxes/{box_id}/fs/rename",
-            body=maybe_transform(
-                {
-                    "new_path": new_path,
-                    "old_path": old_path,
-                    "working_dir": working_dir,
-                },
-                f_rename_params.FRenameParams,
+        return cast(
+            FRenameResponse,
+            self._post(
+                f"/boxes/{box_id}/fs/rename",
+                body=maybe_transform(
+                    {
+                        "new_path": new_path,
+                        "old_path": old_path,
+                        "working_dir": working_dir,
+                    },
+                    f_rename_params.FRenameParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(Any, FRenameResponse),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=FRenameResponse,
         )
 
     @overload
@@ -389,13 +400,14 @@ class FsResource(SyncAPIResource):
         """Creates or overwrites a file.
 
         Creates necessary directories in the path if they
-        don't exist. if the path is a directory, the write will be failed.
+        don't exist. If target path is already exists, the write will be failed.
 
         Args:
           content: Content of the file (Max size: 512MB)
 
           path: Path to the file. If the path is not start with '/', the file will be written to
-              the working directory
+              the working directory. Creates necessary directories in the path if they don't
+              exist. If target path is already exists, the write will be failed.
 
           working_dir: Working directory. If not provided, the file will be read from the
               `box.config.workingDir` directory.
@@ -428,13 +440,14 @@ class FsResource(SyncAPIResource):
         """Creates or overwrites a file.
 
         Creates necessary directories in the path if they
-        don't exist. if the path is a directory, the write will be failed.
+        don't exist. If target path is already exists, the write will be failed.
 
         Args:
           content: Binary content of the file (Max file size: 512MB)
 
           path: Path to the file. If the path is not start with '/', the file will be written to
-              the working directory
+              the working directory. Creates necessary directories in the path if they don't
+              exist. If target path is already exists, the write will be failed.
 
           working_dir: Working directory. If not provided, the file will be read from the
               `box.config.workingDir` directory.
@@ -570,7 +583,7 @@ class AsyncFsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FExistsResponse:
-        """Check if file exists
+        """Check if file/directory exists
 
         Args:
           path: Path to the file/directory.
@@ -591,19 +604,22 @@ class AsyncFsResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return await self._post(
-            f"/boxes/{box_id}/fs/exists",
-            body=await async_maybe_transform(
-                {
-                    "path": path,
-                    "working_dir": working_dir,
-                },
-                f_exists_params.FExistsParams,
+        return cast(
+            FExistsResponse,
+            await self._post(
+                f"/boxes/{box_id}/fs/exists",
+                body=await async_maybe_transform(
+                    {
+                        "path": path,
+                        "working_dir": working_dir,
+                    },
+                    f_exists_params.FExistsParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(Any, FExistsResponse),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=FExistsResponse,
         )
 
     async def info(
@@ -726,13 +742,15 @@ class AsyncFsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FRemoveResponse:
-        """Delete box file/directory
+        """Delete a file or directory.
+
+        If target path is not exists, the delete will be
+        failed.
 
         Args:
-          path: Path to the file/directory.
-
-        If the path is not start with '/', the
-              file/directory will be deleted from the working directory
+          path: Path to the file/directory. If the path is not start with '/', the
+              file/directory will be deleted from the working directory. If target path is not
+              exists, the delete will be failed.
 
           working_dir: Working directory. If not provided, the file will be read from the
               `box.config.workingDir` directory.
@@ -776,16 +794,19 @@ class AsyncFsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FRenameResponse:
-        """Rename box file
+        """Rename a file or directory.
+
+        If target newPath is already exists, the rename will
+        be failed.
 
         Args:
-          new_path: New path for the file/directory.
-
-        If the path is not start with '/', the
-              file/directory will be renamed to the working directory
+          new_path: New path for the file/directory. If the path is not start with '/', the
+              file/directory will be renamed to the working directory. If target newPath is
+              already exists, the rename will be failed.
 
           old_path: Old path to the file/directory. If the path is not start with '/', the
-              file/directory will be renamed from the working directory
+              file/directory will be renamed from the working directory. If target oldPath is
+              not exists, the rename will be failed.
 
           working_dir: Working directory. If not provided, the file will be read from the
               `box.config.workingDir` directory.
@@ -800,20 +821,23 @@ class AsyncFsResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return await self._post(
-            f"/boxes/{box_id}/fs/rename",
-            body=await async_maybe_transform(
-                {
-                    "new_path": new_path,
-                    "old_path": old_path,
-                    "working_dir": working_dir,
-                },
-                f_rename_params.FRenameParams,
+        return cast(
+            FRenameResponse,
+            await self._post(
+                f"/boxes/{box_id}/fs/rename",
+                body=await async_maybe_transform(
+                    {
+                        "new_path": new_path,
+                        "old_path": old_path,
+                        "working_dir": working_dir,
+                    },
+                    f_rename_params.FRenameParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(Any, FRenameResponse),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=FRenameResponse,
         )
 
     @overload
@@ -834,13 +858,14 @@ class AsyncFsResource(AsyncAPIResource):
         """Creates or overwrites a file.
 
         Creates necessary directories in the path if they
-        don't exist. if the path is a directory, the write will be failed.
+        don't exist. If target path is already exists, the write will be failed.
 
         Args:
           content: Content of the file (Max size: 512MB)
 
           path: Path to the file. If the path is not start with '/', the file will be written to
-              the working directory
+              the working directory. Creates necessary directories in the path if they don't
+              exist. If target path is already exists, the write will be failed.
 
           working_dir: Working directory. If not provided, the file will be read from the
               `box.config.workingDir` directory.
@@ -873,13 +898,14 @@ class AsyncFsResource(AsyncAPIResource):
         """Creates or overwrites a file.
 
         Creates necessary directories in the path if they
-        don't exist. if the path is a directory, the write will be failed.
+        don't exist. If target path is already exists, the write will be failed.
 
         Args:
           content: Binary content of the file (Max file size: 512MB)
 
           path: Path to the file. If the path is not start with '/', the file will be written to
-              the working directory
+              the working directory. Creates necessary directories in the path if they don't
+              exist. If target path is already exists, the write will be failed.
 
           working_dir: Working directory. If not provided, the file will be read from the
               `box.config.workingDir` directory.

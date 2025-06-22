@@ -24,7 +24,7 @@ class TestActions:
     @parametrize
     def test_method_click(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.click(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=100,
             y=100,
         )
@@ -34,7 +34,7 @@ class TestActions:
     @parametrize
     def test_method_click_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.click(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=100,
             y=100,
             button="left",
@@ -48,7 +48,7 @@ class TestActions:
     @parametrize
     def test_raw_response_click(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.click(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=100,
             y=100,
         )
@@ -62,7 +62,7 @@ class TestActions:
     @parametrize
     def test_streaming_response_click(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.click(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=100,
             y=100,
         ) as response:
@@ -88,7 +88,7 @@ class TestActions:
     @parametrize
     def test_method_drag(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.drag(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path=[
                 {
                     "x": 100,
@@ -106,7 +106,7 @@ class TestActions:
     @parametrize
     def test_method_drag_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.drag(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path=[
                 {
                     "x": 100,
@@ -127,7 +127,7 @@ class TestActions:
     @parametrize
     def test_raw_response_drag(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.drag(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path=[
                 {
                     "x": 100,
@@ -149,7 +149,7 @@ class TestActions:
     @parametrize
     def test_streaming_response_drag(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.drag(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path=[
                 {
                     "x": 100,
@@ -191,7 +191,7 @@ class TestActions:
     @parametrize
     def test_method_move(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.move(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=200,
             y=300,
         )
@@ -201,7 +201,7 @@ class TestActions:
     @parametrize
     def test_method_move_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.move(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=200,
             y=300,
             output_format="base64",
@@ -213,7 +213,7 @@ class TestActions:
     @parametrize
     def test_raw_response_move(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.move(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=200,
             y=300,
         )
@@ -227,7 +227,7 @@ class TestActions:
     @parametrize
     def test_streaming_response_move(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.move(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=200,
             y=300,
         ) as response:
@@ -253,7 +253,7 @@ class TestActions:
     @parametrize
     def test_method_press_button(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.press_button(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             buttons=["power"],
         )
         assert_matches_type(ActionResult, action, path=["response"])
@@ -262,7 +262,7 @@ class TestActions:
     @parametrize
     def test_method_press_button_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.press_button(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             buttons=["power"],
             output_format="base64",
             screenshot_delay="500ms",
@@ -273,7 +273,7 @@ class TestActions:
     @parametrize
     def test_raw_response_press_button(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.press_button(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             buttons=["power"],
         )
 
@@ -286,7 +286,7 @@ class TestActions:
     @parametrize
     def test_streaming_response_press_button(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.press_button(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             buttons=["power"],
         ) as response:
             assert not response.is_closed
@@ -310,7 +310,7 @@ class TestActions:
     @parametrize
     def test_method_press_key(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.press_key(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             keys=["enter"],
         )
         assert_matches_type(ActionResult, action, path=["response"])
@@ -319,7 +319,7 @@ class TestActions:
     @parametrize
     def test_method_press_key_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.press_key(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             keys=["enter"],
             output_format="base64",
             screenshot_delay="500ms",
@@ -330,7 +330,7 @@ class TestActions:
     @parametrize
     def test_raw_response_press_key(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.press_key(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             keys=["enter"],
         )
 
@@ -343,7 +343,7 @@ class TestActions:
     @parametrize
     def test_streaming_response_press_key(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.press_key(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             keys=["enter"],
         ) as response:
             assert not response.is_closed
@@ -367,7 +367,7 @@ class TestActions:
     @parametrize
     def test_method_screen_rotation(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.screen_rotation(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             angle=90,
             direction="clockwise",
         )
@@ -377,7 +377,7 @@ class TestActions:
     @parametrize
     def test_raw_response_screen_rotation(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.screen_rotation(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             angle=90,
             direction="clockwise",
         )
@@ -391,7 +391,7 @@ class TestActions:
     @parametrize
     def test_streaming_response_screen_rotation(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.screen_rotation(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             angle=90,
             direction="clockwise",
         ) as response:
@@ -417,7 +417,7 @@ class TestActions:
     @parametrize
     def test_method_screenshot(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.screenshot(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
         assert_matches_type(ActionScreenshotResponse, action, path=["response"])
 
@@ -425,7 +425,7 @@ class TestActions:
     @parametrize
     def test_method_screenshot_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.screenshot(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             clip={
                 "height": 600,
                 "width": 800,
@@ -440,7 +440,7 @@ class TestActions:
     @parametrize
     def test_raw_response_screenshot(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.screenshot(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
@@ -452,7 +452,7 @@ class TestActions:
     @parametrize
     def test_streaming_response_screenshot(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.screenshot(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -474,7 +474,7 @@ class TestActions:
     @parametrize
     def test_method_scroll(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.scroll(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             scroll_x=0,
             scroll_y=100,
             x=100,
@@ -486,7 +486,7 @@ class TestActions:
     @parametrize
     def test_method_scroll_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.scroll(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             scroll_x=0,
             scroll_y=100,
             x=100,
@@ -500,7 +500,7 @@ class TestActions:
     @parametrize
     def test_raw_response_scroll(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.scroll(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             scroll_x=0,
             scroll_y=100,
             x=100,
@@ -516,7 +516,7 @@ class TestActions:
     @parametrize
     def test_streaming_response_scroll(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.scroll(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             scroll_x=0,
             scroll_y=100,
             x=100,
@@ -546,7 +546,7 @@ class TestActions:
     @parametrize
     def test_method_swipe_overload_1(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.swipe(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             direction="up",
         )
         assert_matches_type(ActionResult, action, path=["response"])
@@ -555,7 +555,7 @@ class TestActions:
     @parametrize
     def test_method_swipe_with_all_params_overload_1(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.swipe(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             direction="up",
             distance=300,
             duration="200ms",
@@ -568,7 +568,7 @@ class TestActions:
     @parametrize
     def test_raw_response_swipe_overload_1(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.swipe(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             direction="up",
         )
 
@@ -581,7 +581,7 @@ class TestActions:
     @parametrize
     def test_streaming_response_swipe_overload_1(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.swipe(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             direction="up",
         ) as response:
             assert not response.is_closed
@@ -605,7 +605,7 @@ class TestActions:
     @parametrize
     def test_method_swipe_overload_2(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.swipe(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             end={
                 "x": 400,
                 "y": 300,
@@ -621,7 +621,7 @@ class TestActions:
     @parametrize
     def test_method_swipe_with_all_params_overload_2(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.swipe(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             end={
                 "x": 400,
                 "y": 300,
@@ -640,7 +640,7 @@ class TestActions:
     @parametrize
     def test_raw_response_swipe_overload_2(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.swipe(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             end={
                 "x": 400,
                 "y": 300,
@@ -660,7 +660,7 @@ class TestActions:
     @parametrize
     def test_streaming_response_swipe_overload_2(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.swipe(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             end={
                 "x": 400,
                 "y": 300,
@@ -698,7 +698,7 @@ class TestActions:
     @parametrize
     def test_method_touch(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.touch(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             points=[
                 {
                     "start": {
@@ -714,7 +714,7 @@ class TestActions:
     @parametrize
     def test_method_touch_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.touch(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             points=[
                 {
                     "start": {
@@ -740,7 +740,7 @@ class TestActions:
     @parametrize
     def test_raw_response_touch(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.touch(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             points=[
                 {
                     "start": {
@@ -760,7 +760,7 @@ class TestActions:
     @parametrize
     def test_streaming_response_touch(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.touch(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             points=[
                 {
                     "start": {
@@ -798,7 +798,7 @@ class TestActions:
     @parametrize
     def test_method_type(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.type(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             text="Hello World",
         )
         assert_matches_type(ActionResult, action, path=["response"])
@@ -807,7 +807,7 @@ class TestActions:
     @parametrize
     def test_method_type_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.type(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             text="Hello World",
             output_format="base64",
             screenshot_delay="500ms",
@@ -818,7 +818,7 @@ class TestActions:
     @parametrize
     def test_raw_response_type(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.type(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             text="Hello World",
         )
 
@@ -831,7 +831,7 @@ class TestActions:
     @parametrize
     def test_streaming_response_type(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.type(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             text="Hello World",
         ) as response:
             assert not response.is_closed
@@ -861,7 +861,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_click(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.click(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=100,
             y=100,
         )
@@ -871,7 +871,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_click_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.click(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=100,
             y=100,
             button="left",
@@ -885,7 +885,7 @@ class TestAsyncActions:
     @parametrize
     async def test_raw_response_click(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.click(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=100,
             y=100,
         )
@@ -899,7 +899,7 @@ class TestAsyncActions:
     @parametrize
     async def test_streaming_response_click(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.click(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=100,
             y=100,
         ) as response:
@@ -925,7 +925,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_drag(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.drag(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path=[
                 {
                     "x": 100,
@@ -943,7 +943,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_drag_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.drag(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path=[
                 {
                     "x": 100,
@@ -964,7 +964,7 @@ class TestAsyncActions:
     @parametrize
     async def test_raw_response_drag(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.drag(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path=[
                 {
                     "x": 100,
@@ -986,7 +986,7 @@ class TestAsyncActions:
     @parametrize
     async def test_streaming_response_drag(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.drag(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path=[
                 {
                     "x": 100,
@@ -1028,7 +1028,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_move(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.move(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=200,
             y=300,
         )
@@ -1038,7 +1038,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_move_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.move(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=200,
             y=300,
             output_format="base64",
@@ -1050,7 +1050,7 @@ class TestAsyncActions:
     @parametrize
     async def test_raw_response_move(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.move(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=200,
             y=300,
         )
@@ -1064,7 +1064,7 @@ class TestAsyncActions:
     @parametrize
     async def test_streaming_response_move(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.move(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=200,
             y=300,
         ) as response:
@@ -1090,7 +1090,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_press_button(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.press_button(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             buttons=["power"],
         )
         assert_matches_type(ActionResult, action, path=["response"])
@@ -1099,7 +1099,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_press_button_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.press_button(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             buttons=["power"],
             output_format="base64",
             screenshot_delay="500ms",
@@ -1110,7 +1110,7 @@ class TestAsyncActions:
     @parametrize
     async def test_raw_response_press_button(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.press_button(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             buttons=["power"],
         )
 
@@ -1123,7 +1123,7 @@ class TestAsyncActions:
     @parametrize
     async def test_streaming_response_press_button(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.press_button(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             buttons=["power"],
         ) as response:
             assert not response.is_closed
@@ -1147,7 +1147,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_press_key(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.press_key(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             keys=["enter"],
         )
         assert_matches_type(ActionResult, action, path=["response"])
@@ -1156,7 +1156,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_press_key_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.press_key(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             keys=["enter"],
             output_format="base64",
             screenshot_delay="500ms",
@@ -1167,7 +1167,7 @@ class TestAsyncActions:
     @parametrize
     async def test_raw_response_press_key(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.press_key(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             keys=["enter"],
         )
 
@@ -1180,7 +1180,7 @@ class TestAsyncActions:
     @parametrize
     async def test_streaming_response_press_key(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.press_key(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             keys=["enter"],
         ) as response:
             assert not response.is_closed
@@ -1204,7 +1204,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_screen_rotation(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.screen_rotation(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             angle=90,
             direction="clockwise",
         )
@@ -1214,7 +1214,7 @@ class TestAsyncActions:
     @parametrize
     async def test_raw_response_screen_rotation(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.screen_rotation(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             angle=90,
             direction="clockwise",
         )
@@ -1228,7 +1228,7 @@ class TestAsyncActions:
     @parametrize
     async def test_streaming_response_screen_rotation(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.screen_rotation(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             angle=90,
             direction="clockwise",
         ) as response:
@@ -1254,7 +1254,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_screenshot(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.screenshot(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
         assert_matches_type(ActionScreenshotResponse, action, path=["response"])
 
@@ -1262,7 +1262,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_screenshot_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.screenshot(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             clip={
                 "height": 600,
                 "width": 800,
@@ -1277,7 +1277,7 @@ class TestAsyncActions:
     @parametrize
     async def test_raw_response_screenshot(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.screenshot(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
@@ -1289,7 +1289,7 @@ class TestAsyncActions:
     @parametrize
     async def test_streaming_response_screenshot(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.screenshot(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1311,7 +1311,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_scroll(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.scroll(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             scroll_x=0,
             scroll_y=100,
             x=100,
@@ -1323,7 +1323,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_scroll_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.scroll(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             scroll_x=0,
             scroll_y=100,
             x=100,
@@ -1337,7 +1337,7 @@ class TestAsyncActions:
     @parametrize
     async def test_raw_response_scroll(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.scroll(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             scroll_x=0,
             scroll_y=100,
             x=100,
@@ -1353,7 +1353,7 @@ class TestAsyncActions:
     @parametrize
     async def test_streaming_response_scroll(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.scroll(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             scroll_x=0,
             scroll_y=100,
             x=100,
@@ -1383,7 +1383,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_swipe_overload_1(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.swipe(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             direction="up",
         )
         assert_matches_type(ActionResult, action, path=["response"])
@@ -1392,7 +1392,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_swipe_with_all_params_overload_1(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.swipe(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             direction="up",
             distance=300,
             duration="200ms",
@@ -1405,7 +1405,7 @@ class TestAsyncActions:
     @parametrize
     async def test_raw_response_swipe_overload_1(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.swipe(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             direction="up",
         )
 
@@ -1418,7 +1418,7 @@ class TestAsyncActions:
     @parametrize
     async def test_streaming_response_swipe_overload_1(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.swipe(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             direction="up",
         ) as response:
             assert not response.is_closed
@@ -1442,7 +1442,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_swipe_overload_2(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.swipe(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             end={
                 "x": 400,
                 "y": 300,
@@ -1458,7 +1458,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_swipe_with_all_params_overload_2(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.swipe(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             end={
                 "x": 400,
                 "y": 300,
@@ -1477,7 +1477,7 @@ class TestAsyncActions:
     @parametrize
     async def test_raw_response_swipe_overload_2(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.swipe(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             end={
                 "x": 400,
                 "y": 300,
@@ -1497,7 +1497,7 @@ class TestAsyncActions:
     @parametrize
     async def test_streaming_response_swipe_overload_2(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.swipe(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             end={
                 "x": 400,
                 "y": 300,
@@ -1535,7 +1535,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_touch(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.touch(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             points=[
                 {
                     "start": {
@@ -1551,7 +1551,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_touch_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.touch(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             points=[
                 {
                     "start": {
@@ -1577,7 +1577,7 @@ class TestAsyncActions:
     @parametrize
     async def test_raw_response_touch(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.touch(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             points=[
                 {
                     "start": {
@@ -1597,7 +1597,7 @@ class TestAsyncActions:
     @parametrize
     async def test_streaming_response_touch(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.touch(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             points=[
                 {
                     "start": {
@@ -1635,7 +1635,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_type(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.type(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             text="Hello World",
         )
         assert_matches_type(ActionResult, action, path=["response"])
@@ -1644,7 +1644,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_type_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.type(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             text="Hello World",
             output_format="base64",
             screenshot_delay="500ms",
@@ -1655,7 +1655,7 @@ class TestAsyncActions:
     @parametrize
     async def test_raw_response_type(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.type(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             text="Hello World",
         )
 
@@ -1668,7 +1668,7 @@ class TestAsyncActions:
     @parametrize
     async def test_streaming_response_type(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.type(
-            box_id="boxId",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             text="Hello World",
         ) as response:
             assert not response.is_closed

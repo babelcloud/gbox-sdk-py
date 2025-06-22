@@ -59,7 +59,7 @@ class ActionsResource(SyncAPIResource):
 
     def click(
         self,
-        id: str,
+        box_id: str,
         *,
         x: float,
         y: float,
@@ -108,10 +108,10 @@ class ActionsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{id}/actions/click",
+            f"/boxes/{box_id}/actions/click",
             body=maybe_transform(
                 {
                     "x": x,
@@ -131,7 +131,7 @@ class ActionsResource(SyncAPIResource):
 
     def drag(
         self,
-        id: str,
+        box_id: str,
         *,
         path: Iterable[action_drag_params.Path],
         duration: str | NotGiven = NOT_GIVEN,
@@ -174,10 +174,10 @@ class ActionsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{id}/actions/drag",
+            f"/boxes/{box_id}/actions/drag",
             body=maybe_transform(
                 {
                     "path": path,
@@ -195,7 +195,7 @@ class ActionsResource(SyncAPIResource):
 
     def move(
         self,
-        id: str,
+        box_id: str,
         *,
         x: float,
         y: float,
@@ -238,10 +238,10 @@ class ActionsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{id}/actions/move",
+            f"/boxes/{box_id}/actions/move",
             body=maybe_transform(
                 {
                     "x": x,
@@ -259,7 +259,7 @@ class ActionsResource(SyncAPIResource):
 
     def press_button(
         self,
-        id: str,
+        box_id: str,
         *,
         buttons: List[Literal["power", "volumeUp", "volumeDown", "volumeMute", "home", "back", "menu", "appSwitch"]],
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
@@ -301,10 +301,10 @@ class ActionsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{id}/actions/press-button",
+            f"/boxes/{box_id}/actions/press-button",
             body=maybe_transform(
                 {
                     "buttons": buttons,
@@ -321,7 +321,7 @@ class ActionsResource(SyncAPIResource):
 
     def press_key(
         self,
-        id: str,
+        box_id: str,
         *,
         keys: List[
             Literal[
@@ -477,10 +477,10 @@ class ActionsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{id}/actions/press-key",
+            f"/boxes/{box_id}/actions/press-key",
             body=maybe_transform(
                 {
                     "keys": keys,
@@ -497,7 +497,7 @@ class ActionsResource(SyncAPIResource):
 
     def screen_rotation(
         self,
-        id: str,
+        box_id: str,
         *,
         angle: Literal[90, 180, 270],
         direction: Literal["clockwise", "counter-clockwise"],
@@ -524,10 +524,10 @@ class ActionsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{id}/actions/screen-rotation",
+            f"/boxes/{box_id}/actions/screen-rotation",
             body=maybe_transform(
                 {
                     "angle": angle,
@@ -543,7 +543,7 @@ class ActionsResource(SyncAPIResource):
 
     def screenshot(
         self,
-        id: str,
+        box_id: str,
         *,
         clip: action_screenshot_params.Clip | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
@@ -570,10 +570,10 @@ class ActionsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{id}/actions/screenshot",
+            f"/boxes/{box_id}/actions/screenshot",
             body=maybe_transform(
                 {
                     "clip": clip,
@@ -589,7 +589,7 @@ class ActionsResource(SyncAPIResource):
 
     def scroll(
         self,
-        id: str,
+        box_id: str,
         *,
         scroll_x: float,
         scroll_y: float,
@@ -638,10 +638,10 @@ class ActionsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{id}/actions/scroll",
+            f"/boxes/{box_id}/actions/scroll",
             body=maybe_transform(
                 {
                     "scroll_x": scroll_x,
@@ -662,7 +662,7 @@ class ActionsResource(SyncAPIResource):
     @overload
     def swipe(
         self,
-        id: str,
+        box_id: str,
         *,
         direction: Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"],
         distance: float | NotGiven = NOT_GIVEN,
@@ -714,7 +714,7 @@ class ActionsResource(SyncAPIResource):
     @overload
     def swipe(
         self,
-        id: str,
+        box_id: str,
         *,
         end: object,
         start: object,
@@ -765,7 +765,7 @@ class ActionsResource(SyncAPIResource):
     @required_args(["direction"], ["end", "start"])
     def swipe(
         self,
-        id: str,
+        box_id: str,
         *,
         direction: Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"]
         | NotGiven = NOT_GIVEN,
@@ -782,10 +782,10 @@ class ActionsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionResult:
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{id}/actions/swipe",
+            f"/boxes/{box_id}/actions/swipe",
             body=maybe_transform(
                 {
                     "direction": direction,
@@ -806,7 +806,7 @@ class ActionsResource(SyncAPIResource):
 
     def touch(
         self,
-        id: str,
+        box_id: str,
         *,
         points: Iterable[action_touch_params.Point],
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
@@ -846,10 +846,10 @@ class ActionsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{id}/actions/touch",
+            f"/boxes/{box_id}/actions/touch",
             body=maybe_transform(
                 {
                     "points": points,
@@ -866,7 +866,7 @@ class ActionsResource(SyncAPIResource):
 
     def type(
         self,
-        id: str,
+        box_id: str,
         *,
         text: str,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
@@ -908,10 +908,10 @@ class ActionsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{id}/actions/type",
+            f"/boxes/{box_id}/actions/type",
             body=maybe_transform(
                 {
                     "text": text,
@@ -949,7 +949,7 @@ class AsyncActionsResource(AsyncAPIResource):
 
     async def click(
         self,
-        id: str,
+        box_id: str,
         *,
         x: float,
         y: float,
@@ -998,10 +998,10 @@ class AsyncActionsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{id}/actions/click",
+            f"/boxes/{box_id}/actions/click",
             body=await async_maybe_transform(
                 {
                     "x": x,
@@ -1021,7 +1021,7 @@ class AsyncActionsResource(AsyncAPIResource):
 
     async def drag(
         self,
-        id: str,
+        box_id: str,
         *,
         path: Iterable[action_drag_params.Path],
         duration: str | NotGiven = NOT_GIVEN,
@@ -1064,10 +1064,10 @@ class AsyncActionsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{id}/actions/drag",
+            f"/boxes/{box_id}/actions/drag",
             body=await async_maybe_transform(
                 {
                     "path": path,
@@ -1085,7 +1085,7 @@ class AsyncActionsResource(AsyncAPIResource):
 
     async def move(
         self,
-        id: str,
+        box_id: str,
         *,
         x: float,
         y: float,
@@ -1128,10 +1128,10 @@ class AsyncActionsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{id}/actions/move",
+            f"/boxes/{box_id}/actions/move",
             body=await async_maybe_transform(
                 {
                     "x": x,
@@ -1149,7 +1149,7 @@ class AsyncActionsResource(AsyncAPIResource):
 
     async def press_button(
         self,
-        id: str,
+        box_id: str,
         *,
         buttons: List[Literal["power", "volumeUp", "volumeDown", "volumeMute", "home", "back", "menu", "appSwitch"]],
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
@@ -1191,10 +1191,10 @@ class AsyncActionsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{id}/actions/press-button",
+            f"/boxes/{box_id}/actions/press-button",
             body=await async_maybe_transform(
                 {
                     "buttons": buttons,
@@ -1211,7 +1211,7 @@ class AsyncActionsResource(AsyncAPIResource):
 
     async def press_key(
         self,
-        id: str,
+        box_id: str,
         *,
         keys: List[
             Literal[
@@ -1367,10 +1367,10 @@ class AsyncActionsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{id}/actions/press-key",
+            f"/boxes/{box_id}/actions/press-key",
             body=await async_maybe_transform(
                 {
                     "keys": keys,
@@ -1387,7 +1387,7 @@ class AsyncActionsResource(AsyncAPIResource):
 
     async def screen_rotation(
         self,
-        id: str,
+        box_id: str,
         *,
         angle: Literal[90, 180, 270],
         direction: Literal["clockwise", "counter-clockwise"],
@@ -1414,10 +1414,10 @@ class AsyncActionsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{id}/actions/screen-rotation",
+            f"/boxes/{box_id}/actions/screen-rotation",
             body=await async_maybe_transform(
                 {
                     "angle": angle,
@@ -1433,7 +1433,7 @@ class AsyncActionsResource(AsyncAPIResource):
 
     async def screenshot(
         self,
-        id: str,
+        box_id: str,
         *,
         clip: action_screenshot_params.Clip | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
@@ -1460,10 +1460,10 @@ class AsyncActionsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{id}/actions/screenshot",
+            f"/boxes/{box_id}/actions/screenshot",
             body=await async_maybe_transform(
                 {
                     "clip": clip,
@@ -1479,7 +1479,7 @@ class AsyncActionsResource(AsyncAPIResource):
 
     async def scroll(
         self,
-        id: str,
+        box_id: str,
         *,
         scroll_x: float,
         scroll_y: float,
@@ -1528,10 +1528,10 @@ class AsyncActionsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{id}/actions/scroll",
+            f"/boxes/{box_id}/actions/scroll",
             body=await async_maybe_transform(
                 {
                     "scroll_x": scroll_x,
@@ -1552,7 +1552,7 @@ class AsyncActionsResource(AsyncAPIResource):
     @overload
     async def swipe(
         self,
-        id: str,
+        box_id: str,
         *,
         direction: Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"],
         distance: float | NotGiven = NOT_GIVEN,
@@ -1604,7 +1604,7 @@ class AsyncActionsResource(AsyncAPIResource):
     @overload
     async def swipe(
         self,
-        id: str,
+        box_id: str,
         *,
         end: object,
         start: object,
@@ -1655,7 +1655,7 @@ class AsyncActionsResource(AsyncAPIResource):
     @required_args(["direction"], ["end", "start"])
     async def swipe(
         self,
-        id: str,
+        box_id: str,
         *,
         direction: Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"]
         | NotGiven = NOT_GIVEN,
@@ -1672,10 +1672,10 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionResult:
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{id}/actions/swipe",
+            f"/boxes/{box_id}/actions/swipe",
             body=await async_maybe_transform(
                 {
                     "direction": direction,
@@ -1696,7 +1696,7 @@ class AsyncActionsResource(AsyncAPIResource):
 
     async def touch(
         self,
-        id: str,
+        box_id: str,
         *,
         points: Iterable[action_touch_params.Point],
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
@@ -1736,10 +1736,10 @@ class AsyncActionsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{id}/actions/touch",
+            f"/boxes/{box_id}/actions/touch",
             body=await async_maybe_transform(
                 {
                     "points": points,
@@ -1756,7 +1756,7 @@ class AsyncActionsResource(AsyncAPIResource):
 
     async def type(
         self,
-        id: str,
+        box_id: str,
         *,
         text: str,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
@@ -1798,10 +1798,10 @@ class AsyncActionsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{id}/actions/type",
+            f"/boxes/{box_id}/actions/type",
             body=await async_maybe_transform(
                 {
                     "text": text,

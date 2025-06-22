@@ -66,7 +66,7 @@ class AndroidResource(SyncAPIResource):
 
     def list(
         self,
-        id: str,
+        box_id: str,
         *,
         app_type: Literal["system", "third-party"] | NotGiven = NOT_GIVEN,
         is_running: bool | NotGiven = NOT_GIVEN,
@@ -95,10 +95,10 @@ class AndroidResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._get(
-            f"/boxes/{id}/android/apps",
+            f"/boxes/{box_id}/android/apps",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -119,7 +119,7 @@ class AndroidResource(SyncAPIResource):
         self,
         package_name: str,
         *,
-        id: str,
+        box_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -139,13 +139,13 @@ class AndroidResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         if not package_name:
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{id}/android/apps/{package_name}/backup",
+            f"/boxes/{box_id}/android/apps/{package_name}/backup",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -154,7 +154,7 @@ class AndroidResource(SyncAPIResource):
 
     def backup_all(
         self,
-        id: str,
+        box_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -175,11 +175,11 @@ class AndroidResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{id}/android/apps/backup-all",
+            f"/boxes/{box_id}/android/apps/backup-all",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -190,7 +190,7 @@ class AndroidResource(SyncAPIResource):
         self,
         package_name: str,
         *,
-        id: str,
+        box_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -210,13 +210,13 @@ class AndroidResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         if not package_name:
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{id}/android/apps/{package_name}/close",
+            f"/boxes/{box_id}/android/apps/{package_name}/close",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -225,7 +225,7 @@ class AndroidResource(SyncAPIResource):
 
     def close_all(
         self,
-        id: str,
+        box_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -246,11 +246,11 @@ class AndroidResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{id}/android/apps/close-all",
+            f"/boxes/{box_id}/android/apps/close-all",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -261,7 +261,7 @@ class AndroidResource(SyncAPIResource):
         self,
         package_name: str,
         *,
-        id: str,
+        box_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -281,12 +281,12 @@ class AndroidResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         if not package_name:
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         return self._get(
-            f"/boxes/{id}/android/apps/{package_name}",
+            f"/boxes/{box_id}/android/apps/{package_name}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -295,7 +295,7 @@ class AndroidResource(SyncAPIResource):
 
     def get_connect_address(
         self,
-        id: str,
+        box_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -316,10 +316,10 @@ class AndroidResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._get(
-            f"/boxes/{id}/android/connect-address",
+            f"/boxes/{box_id}/android/connect-address",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -329,7 +329,7 @@ class AndroidResource(SyncAPIResource):
     @overload
     def install(
         self,
-        id: str,
+        box_id: str,
         *,
         apk: FileTypes,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -358,7 +358,7 @@ class AndroidResource(SyncAPIResource):
     @overload
     def install(
         self,
-        id: str,
+        box_id: str,
         *,
         apk: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -387,7 +387,7 @@ class AndroidResource(SyncAPIResource):
     @required_args(["apk"])
     def install(
         self,
-        id: str,
+        box_id: str,
         *,
         apk: FileTypes | str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -397,8 +397,8 @@ class AndroidResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         body = deepcopy_minimal({"apk": apk})
         files = extract_files(cast(Mapping[str, object], body), paths=[["apk"]])
@@ -407,7 +407,7 @@ class AndroidResource(SyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers["Content-Type"] = "multipart/form-data"
         return self._post(
-            f"/boxes/{id}/android/apps",
+            f"/boxes/{box_id}/android/apps",
             body=maybe_transform(body, android_install_params.AndroidInstallParams),
             files=files,
             options=make_request_options(
@@ -420,7 +420,7 @@ class AndroidResource(SyncAPIResource):
         self,
         package_name: str,
         *,
-        id: str,
+        box_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -440,12 +440,12 @@ class AndroidResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         if not package_name:
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         return self._get(
-            f"/boxes/{id}/android/apps/{package_name}/activities",
+            f"/boxes/{box_id}/android/apps/{package_name}/activities",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -454,7 +454,7 @@ class AndroidResource(SyncAPIResource):
 
     def list_simple(
         self,
-        id: str,
+        box_id: str,
         *,
         app_type: Literal["system", "third-party"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -481,10 +481,10 @@ class AndroidResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._get(
-            f"/boxes/{id}/android/apps/simple",
+            f"/boxes/{box_id}/android/apps/simple",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -499,7 +499,7 @@ class AndroidResource(SyncAPIResource):
         self,
         package_name: str,
         *,
-        id: str,
+        box_id: str,
         activity_name: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -522,13 +522,13 @@ class AndroidResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         if not package_name:
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{id}/android/apps/{package_name}/open",
+            f"/boxes/{box_id}/android/apps/{package_name}/open",
             body=maybe_transform({"activity_name": activity_name}, android_open_params.AndroidOpenParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -540,7 +540,7 @@ class AndroidResource(SyncAPIResource):
         self,
         package_name: str,
         *,
-        id: str,
+        box_id: str,
         activity_name: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -563,13 +563,13 @@ class AndroidResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         if not package_name:
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{id}/android/apps/{package_name}/restart",
+            f"/boxes/{box_id}/android/apps/{package_name}/restart",
             body=maybe_transform({"activity_name": activity_name}, android_restart_params.AndroidRestartParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -579,7 +579,7 @@ class AndroidResource(SyncAPIResource):
 
     def restore(
         self,
-        id: str,
+        box_id: str,
         *,
         backup: FileTypes,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -603,11 +603,11 @@ class AndroidResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{id}/android/apps/restore",
+            f"/boxes/{box_id}/android/apps/restore",
             body=maybe_transform({"backup": backup}, android_restore_params.AndroidRestoreParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -619,7 +619,7 @@ class AndroidResource(SyncAPIResource):
         self,
         package_name: str,
         *,
-        id: str,
+        box_id: str,
         keep_data: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -642,13 +642,13 @@ class AndroidResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         if not package_name:
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/boxes/{id}/android/apps/{package_name}",
+            f"/boxes/{box_id}/android/apps/{package_name}",
             body=maybe_transform({"keep_data": keep_data}, android_uninstall_params.AndroidUninstallParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -679,7 +679,7 @@ class AsyncAndroidResource(AsyncAPIResource):
 
     async def list(
         self,
-        id: str,
+        box_id: str,
         *,
         app_type: Literal["system", "third-party"] | NotGiven = NOT_GIVEN,
         is_running: bool | NotGiven = NOT_GIVEN,
@@ -708,10 +708,10 @@ class AsyncAndroidResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._get(
-            f"/boxes/{id}/android/apps",
+            f"/boxes/{box_id}/android/apps",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -732,7 +732,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         self,
         package_name: str,
         *,
-        id: str,
+        box_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -752,13 +752,13 @@ class AsyncAndroidResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         if not package_name:
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{id}/android/apps/{package_name}/backup",
+            f"/boxes/{box_id}/android/apps/{package_name}/backup",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -767,7 +767,7 @@ class AsyncAndroidResource(AsyncAPIResource):
 
     async def backup_all(
         self,
-        id: str,
+        box_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -788,11 +788,11 @@ class AsyncAndroidResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{id}/android/apps/backup-all",
+            f"/boxes/{box_id}/android/apps/backup-all",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -803,7 +803,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         self,
         package_name: str,
         *,
-        id: str,
+        box_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -823,13 +823,13 @@ class AsyncAndroidResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         if not package_name:
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{id}/android/apps/{package_name}/close",
+            f"/boxes/{box_id}/android/apps/{package_name}/close",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -838,7 +838,7 @@ class AsyncAndroidResource(AsyncAPIResource):
 
     async def close_all(
         self,
-        id: str,
+        box_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -859,11 +859,11 @@ class AsyncAndroidResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{id}/android/apps/close-all",
+            f"/boxes/{box_id}/android/apps/close-all",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -874,7 +874,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         self,
         package_name: str,
         *,
-        id: str,
+        box_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -894,12 +894,12 @@ class AsyncAndroidResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         if not package_name:
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         return await self._get(
-            f"/boxes/{id}/android/apps/{package_name}",
+            f"/boxes/{box_id}/android/apps/{package_name}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -908,7 +908,7 @@ class AsyncAndroidResource(AsyncAPIResource):
 
     async def get_connect_address(
         self,
-        id: str,
+        box_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -929,10 +929,10 @@ class AsyncAndroidResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._get(
-            f"/boxes/{id}/android/connect-address",
+            f"/boxes/{box_id}/android/connect-address",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -942,7 +942,7 @@ class AsyncAndroidResource(AsyncAPIResource):
     @overload
     async def install(
         self,
-        id: str,
+        box_id: str,
         *,
         apk: FileTypes,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -971,7 +971,7 @@ class AsyncAndroidResource(AsyncAPIResource):
     @overload
     async def install(
         self,
-        id: str,
+        box_id: str,
         *,
         apk: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1000,7 +1000,7 @@ class AsyncAndroidResource(AsyncAPIResource):
     @required_args(["apk"])
     async def install(
         self,
-        id: str,
+        box_id: str,
         *,
         apk: FileTypes | str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1010,8 +1010,8 @@ class AsyncAndroidResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         body = deepcopy_minimal({"apk": apk})
         files = extract_files(cast(Mapping[str, object], body), paths=[["apk"]])
@@ -1020,7 +1020,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers["Content-Type"] = "multipart/form-data"
         return await self._post(
-            f"/boxes/{id}/android/apps",
+            f"/boxes/{box_id}/android/apps",
             body=await async_maybe_transform(body, android_install_params.AndroidInstallParams),
             files=files,
             options=make_request_options(
@@ -1033,7 +1033,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         self,
         package_name: str,
         *,
-        id: str,
+        box_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1053,12 +1053,12 @@ class AsyncAndroidResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         if not package_name:
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         return await self._get(
-            f"/boxes/{id}/android/apps/{package_name}/activities",
+            f"/boxes/{box_id}/android/apps/{package_name}/activities",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1067,7 +1067,7 @@ class AsyncAndroidResource(AsyncAPIResource):
 
     async def list_simple(
         self,
-        id: str,
+        box_id: str,
         *,
         app_type: Literal["system", "third-party"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1094,10 +1094,10 @@ class AsyncAndroidResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._get(
-            f"/boxes/{id}/android/apps/simple",
+            f"/boxes/{box_id}/android/apps/simple",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -1114,7 +1114,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         self,
         package_name: str,
         *,
-        id: str,
+        box_id: str,
         activity_name: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1137,13 +1137,13 @@ class AsyncAndroidResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         if not package_name:
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{id}/android/apps/{package_name}/open",
+            f"/boxes/{box_id}/android/apps/{package_name}/open",
             body=await async_maybe_transform({"activity_name": activity_name}, android_open_params.AndroidOpenParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -1155,7 +1155,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         self,
         package_name: str,
         *,
-        id: str,
+        box_id: str,
         activity_name: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1178,13 +1178,13 @@ class AsyncAndroidResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         if not package_name:
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{id}/android/apps/{package_name}/restart",
+            f"/boxes/{box_id}/android/apps/{package_name}/restart",
             body=await async_maybe_transform(
                 {"activity_name": activity_name}, android_restart_params.AndroidRestartParams
             ),
@@ -1196,7 +1196,7 @@ class AsyncAndroidResource(AsyncAPIResource):
 
     async def restore(
         self,
-        id: str,
+        box_id: str,
         *,
         backup: FileTypes,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1220,11 +1220,11 @@ class AsyncAndroidResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{id}/android/apps/restore",
+            f"/boxes/{box_id}/android/apps/restore",
             body=await async_maybe_transform({"backup": backup}, android_restore_params.AndroidRestoreParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -1236,7 +1236,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         self,
         package_name: str,
         *,
-        id: str,
+        box_id: str,
         keep_data: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1259,13 +1259,13 @@ class AsyncAndroidResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         if not package_name:
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/boxes/{id}/android/apps/{package_name}",
+            f"/boxes/{box_id}/android/apps/{package_name}",
             body=await async_maybe_transform({"keep_data": keep_data}, android_uninstall_params.AndroidUninstallParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout

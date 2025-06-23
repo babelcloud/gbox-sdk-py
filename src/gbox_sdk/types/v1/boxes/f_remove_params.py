@@ -11,10 +11,11 @@ __all__ = ["FRemoveParams"]
 
 class FRemoveParams(TypedDict, total=False):
     path: Required[str]
-    """Path to the file/directory.
+    """Target path in the box.
 
-    If the path is not start with '/', the file/directory will be deleted from the
-    working directory. If target path is not exists, the delete will be failed.
+    If the path does not start with '/', the file/directory will be deleted relative
+    to the working directory. If the target path does not exist, the delete will
+    fail.
     """
 
     working_dir: Annotated[str, PropertyInfo(alias="workingDir")]

@@ -11,10 +11,10 @@ __all__ = ["FInfoParams"]
 
 class FInfoParams(TypedDict, total=False):
     path: Required[str]
-    """Path to the file/directory.
+    """Target path in the box.
 
-    If the path is not start with '/', the file/directory will be checked from the
-    working directory
+    If the path does not start with '/', the file/directory will be checked relative
+    to the working directory
     """
 
     working_dir: Annotated[str, PropertyInfo(alias="workingDir")]

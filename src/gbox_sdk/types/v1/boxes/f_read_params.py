@@ -11,9 +11,9 @@ __all__ = ["FReadParams"]
 
 class FReadParams(TypedDict, total=False):
     path: Required[str]
-    """Path to the file.
+    """Target path in the box.
 
-    If the path is not start with '/', the file will be read from the working
+    If the path does not start with '/', the file will be read from the working
     directory.
     """
 

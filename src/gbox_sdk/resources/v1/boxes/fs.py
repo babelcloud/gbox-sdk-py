@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-from typing import Any, cast
+from typing import Any, Mapping, cast
 from typing_extensions import overload
 
 import httpx
 
 from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven, FileTypes
-from ...._utils import required_args, maybe_transform, async_maybe_transform
+from ...._utils import extract_files, required_args, maybe_transform, deepcopy_minimal, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import (
@@ -76,7 +76,7 @@ class FsResource(SyncAPIResource):
         List box files
 
         Args:
-          path: Path to the directory
+          path: Target directory path in the box
 
           depth: Depth of the directory
 
@@ -128,10 +128,10 @@ class FsResource(SyncAPIResource):
         """Check if file/directory exists
 
         Args:
-          path: Path to the file/directory.
+          path: Target path in the box.
 
-        If the path is not start with '/', the
-              file/directory will be checked from the working directory
+        If the path does not start with '/', the file/directory
+              will be checked relative to the working directory
 
           working_dir: Working directory. If not provided, the file will be read from the
               `box.config.workingDir` directory.
@@ -180,10 +180,10 @@ class FsResource(SyncAPIResource):
         """Get file/directory
 
         Args:
-          path: Path to the file/directory.
+          path: Target path in the box.
 
-        If the path is not start with '/', the
-              file/directory will be checked from the working directory
+        If the path does not start with '/', the file/directory
+              will be checked relative to the working directory
 
           working_dir: Working directory. If not provided, the file will be read from the
               `box.config.workingDir` directory.
@@ -235,10 +235,10 @@ class FsResource(SyncAPIResource):
         """Read box file
 
         Args:
-          path: Path to the file.
+          path: Target path in the box.
 
-        If the path is not start with '/', the file will be read from
-              the working directory.
+        If the path does not start with '/', the file will be
+              read from the working directory.
 
           working_dir: Working directory. If not provided, the file will be read from the
               `box.config.workingDir` directory.
@@ -290,9 +290,9 @@ class FsResource(SyncAPIResource):
         failed.
 
         Args:
-          path: Path to the file/directory. If the path is not start with '/', the
-              file/directory will be deleted from the working directory. If target path is not
-              exists, the delete will be failed.
+          path: Target path in the box. If the path does not start with '/', the file/directory
+              will be deleted relative to the working directory. If the target path does not
+              exist, the delete will fail.
 
           working_dir: Working directory. If not provided, the file will be read from the
               `box.config.workingDir` directory.
@@ -342,13 +342,13 @@ class FsResource(SyncAPIResource):
         be failed.
 
         Args:
-          new_path: New path for the file/directory. If the path is not start with '/', the
-              file/directory will be renamed to the working directory. If target newPath is
-              already exists, the rename will be failed.
+          new_path: New path in the box. If the path does not start with '/', the file/directory
+              will be renamed relative to the working directory. If the newPath already
+              exists, the rename will fail.
 
-          old_path: Old path to the file/directory. If the path is not start with '/', the
-              file/directory will be renamed from the working directory. If target oldPath is
-              not exists, the rename will be failed.
+          old_path: Old path in the box. If the path does not start with '/', the file/directory
+              will be renamed relative to the working directory. If the oldPath does not
+              exist, the rename will fail.
 
           working_dir: Working directory. If not provided, the file will be read from the
               `box.config.workingDir` directory.
@@ -405,9 +405,10 @@ class FsResource(SyncAPIResource):
         Args:
           content: Content of the file (Max size: 512MB)
 
-          path: Path to the file. If the path is not start with '/', the file will be written to
-              the working directory. Creates necessary directories in the path if they don't
-              exist. If target path is already exists, the write will be failed.
+          path: Target path in the box. If the path does not start with '/', the file will be
+              written relative to the working directory. Creates necessary directories in the
+              path if they don't exist. If the target path already exists, the write will
+              fail.
 
           working_dir: Working directory. If not provided, the file will be read from the
               `box.config.workingDir` directory.
@@ -445,9 +446,10 @@ class FsResource(SyncAPIResource):
         Args:
           content: Binary content of the file (Max file size: 512MB)
 
-          path: Path to the file. If the path is not start with '/', the file will be written to
-              the working directory. Creates necessary directories in the path if they don't
-              exist. If target path is already exists, the write will be failed.
+          path: Target path in the box. If the path does not start with '/', the file will be
+              written relative to the working directory. Creates necessary directories in the
+              path if they don't exist. If the target path already exists, the write will
+              fail.
 
           working_dir: Working directory. If not provided, the file will be read from the
               `box.config.workingDir` directory.
@@ -479,16 +481,22 @@ class FsResource(SyncAPIResource):
     ) -> FWriteResponse:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        body = deepcopy_minimal(
+            {
+                "content": content,
+                "path": path,
+                "working_dir": working_dir,
+            }
+        )
+        files = extract_files(cast(Mapping[str, object], body), paths=[["content"]])
+        # It should be noted that the actual Content-Type header that will be
+        # sent to the server will contain a `boundary` parameter, e.g.
+        # multipart/form-data; boundary=---abc--
+        extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return self._post(
             f"/boxes/{box_id}/fs/write",
-            body=maybe_transform(
-                {
-                    "content": content,
-                    "path": path,
-                    "working_dir": working_dir,
-                },
-                f_write_params.FWriteParams,
-            ),
+            body=maybe_transform(body, f_write_params.FWriteParams),
+            files=files,
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -534,7 +542,7 @@ class AsyncFsResource(AsyncAPIResource):
         List box files
 
         Args:
-          path: Path to the directory
+          path: Target directory path in the box
 
           depth: Depth of the directory
 
@@ -586,10 +594,10 @@ class AsyncFsResource(AsyncAPIResource):
         """Check if file/directory exists
 
         Args:
-          path: Path to the file/directory.
+          path: Target path in the box.
 
-        If the path is not start with '/', the
-              file/directory will be checked from the working directory
+        If the path does not start with '/', the file/directory
+              will be checked relative to the working directory
 
           working_dir: Working directory. If not provided, the file will be read from the
               `box.config.workingDir` directory.
@@ -638,10 +646,10 @@ class AsyncFsResource(AsyncAPIResource):
         """Get file/directory
 
         Args:
-          path: Path to the file/directory.
+          path: Target path in the box.
 
-        If the path is not start with '/', the
-              file/directory will be checked from the working directory
+        If the path does not start with '/', the file/directory
+              will be checked relative to the working directory
 
           working_dir: Working directory. If not provided, the file will be read from the
               `box.config.workingDir` directory.
@@ -693,10 +701,10 @@ class AsyncFsResource(AsyncAPIResource):
         """Read box file
 
         Args:
-          path: Path to the file.
+          path: Target path in the box.
 
-        If the path is not start with '/', the file will be read from
-              the working directory.
+        If the path does not start with '/', the file will be
+              read from the working directory.
 
           working_dir: Working directory. If not provided, the file will be read from the
               `box.config.workingDir` directory.
@@ -748,9 +756,9 @@ class AsyncFsResource(AsyncAPIResource):
         failed.
 
         Args:
-          path: Path to the file/directory. If the path is not start with '/', the
-              file/directory will be deleted from the working directory. If target path is not
-              exists, the delete will be failed.
+          path: Target path in the box. If the path does not start with '/', the file/directory
+              will be deleted relative to the working directory. If the target path does not
+              exist, the delete will fail.
 
           working_dir: Working directory. If not provided, the file will be read from the
               `box.config.workingDir` directory.
@@ -800,13 +808,13 @@ class AsyncFsResource(AsyncAPIResource):
         be failed.
 
         Args:
-          new_path: New path for the file/directory. If the path is not start with '/', the
-              file/directory will be renamed to the working directory. If target newPath is
-              already exists, the rename will be failed.
+          new_path: New path in the box. If the path does not start with '/', the file/directory
+              will be renamed relative to the working directory. If the newPath already
+              exists, the rename will fail.
 
-          old_path: Old path to the file/directory. If the path is not start with '/', the
-              file/directory will be renamed from the working directory. If target oldPath is
-              not exists, the rename will be failed.
+          old_path: Old path in the box. If the path does not start with '/', the file/directory
+              will be renamed relative to the working directory. If the oldPath does not
+              exist, the rename will fail.
 
           working_dir: Working directory. If not provided, the file will be read from the
               `box.config.workingDir` directory.
@@ -863,9 +871,10 @@ class AsyncFsResource(AsyncAPIResource):
         Args:
           content: Content of the file (Max size: 512MB)
 
-          path: Path to the file. If the path is not start with '/', the file will be written to
-              the working directory. Creates necessary directories in the path if they don't
-              exist. If target path is already exists, the write will be failed.
+          path: Target path in the box. If the path does not start with '/', the file will be
+              written relative to the working directory. Creates necessary directories in the
+              path if they don't exist. If the target path already exists, the write will
+              fail.
 
           working_dir: Working directory. If not provided, the file will be read from the
               `box.config.workingDir` directory.
@@ -903,9 +912,10 @@ class AsyncFsResource(AsyncAPIResource):
         Args:
           content: Binary content of the file (Max file size: 512MB)
 
-          path: Path to the file. If the path is not start with '/', the file will be written to
-              the working directory. Creates necessary directories in the path if they don't
-              exist. If target path is already exists, the write will be failed.
+          path: Target path in the box. If the path does not start with '/', the file will be
+              written relative to the working directory. Creates necessary directories in the
+              path if they don't exist. If the target path already exists, the write will
+              fail.
 
           working_dir: Working directory. If not provided, the file will be read from the
               `box.config.workingDir` directory.
@@ -937,16 +947,22 @@ class AsyncFsResource(AsyncAPIResource):
     ) -> FWriteResponse:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        body = deepcopy_minimal(
+            {
+                "content": content,
+                "path": path,
+                "working_dir": working_dir,
+            }
+        )
+        files = extract_files(cast(Mapping[str, object], body), paths=[["content"]])
+        # It should be noted that the actual Content-Type header that will be
+        # sent to the server will contain a `boundary` parameter, e.g.
+        # multipart/form-data; boundary=---abc--
+        extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return await self._post(
             f"/boxes/{box_id}/fs/write",
-            body=await async_maybe_transform(
-                {
-                    "content": content,
-                    "path": path,
-                    "working_dir": working_dir,
-                },
-                f_write_params.FWriteParams,
-            ),
+            body=await async_maybe_transform(body, f_write_params.FWriteParams),
+            files=files,
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

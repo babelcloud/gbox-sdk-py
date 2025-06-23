@@ -44,7 +44,8 @@ __all__ = [
 
 ENVIRONMENTS: Dict[str, str] = {
     "production": "https://gbox.ai/api/v1/",
-    "selfHost": "http://localhost:28080/api/v1/",
+    "selfHosting": "http://localhost:28080/api/v1/",
+    "internal": "http://gru.localhost:2080/api/v1/",
 }
 
 
@@ -56,13 +57,13 @@ class GboxClient(SyncAPIClient):
     # client options
     api_key: str
 
-    _environment: Literal["production", "selfHost"] | NotGiven
+    _environment: Literal["production", "selfHosting", "internal"] | NotGiven
 
     def __init__(
         self,
         *,
         api_key: str | None = None,
-        environment: Literal["production", "selfHost"] | NotGiven = NOT_GIVEN,
+        environment: Literal["production", "selfHosting", "internal"] | NotGiven = NOT_GIVEN,
         base_url: str | httpx.URL | None | NotGiven = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -159,7 +160,7 @@ class GboxClient(SyncAPIClient):
         self,
         *,
         api_key: str | None = None,
-        environment: Literal["production", "selfHost"] | None = None,
+        environment: Literal["production", "selfHosting", "internal"] | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.Client | None = None,
@@ -250,13 +251,13 @@ class AsyncGboxClient(AsyncAPIClient):
     # client options
     api_key: str
 
-    _environment: Literal["production", "selfHost"] | NotGiven
+    _environment: Literal["production", "selfHosting", "internal"] | NotGiven
 
     def __init__(
         self,
         *,
         api_key: str | None = None,
-        environment: Literal["production", "selfHost"] | NotGiven = NOT_GIVEN,
+        environment: Literal["production", "selfHosting", "internal"] | NotGiven = NOT_GIVEN,
         base_url: str | httpx.URL | None | NotGiven = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -353,7 +354,7 @@ class AsyncGboxClient(AsyncAPIClient):
         self,
         *,
         api_key: str | None = None,
-        environment: Literal["production", "selfHost"] | None = None,
+        environment: Literal["production", "selfHosting", "internal"] | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.AsyncClient | None = None,

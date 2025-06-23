@@ -11,7 +11,7 @@ __all__ = ["FListParams"]
 
 class FListParams(TypedDict, total=False):
     path: Required[str]
-    """Path to the directory"""
+    """Target directory path in the box"""
 
     depth: float
     """Depth of the directory"""

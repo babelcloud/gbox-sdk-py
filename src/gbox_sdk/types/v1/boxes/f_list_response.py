@@ -22,7 +22,7 @@ class DataFile(BaseModel):
     """Name of the file"""
 
     path: str
-    """Full path to the file"""
+    """Full path to the file in the box"""
 
     size: str
     """Size of the file"""
@@ -42,7 +42,7 @@ class DataDir(BaseModel):
     """Name of the directory"""
 
     path: str
-    """Full path to the directory"""
+    """Full path to the directory in the box"""
 
     type: Literal["dir"]
     """Directory type indicator"""

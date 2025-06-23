@@ -11,18 +11,17 @@ __all__ = ["FRenameParams"]
 
 class FRenameParams(TypedDict, total=False):
     new_path: Required[Annotated[str, PropertyInfo(alias="newPath")]]
-    """New path for the file/directory.
+    """New path in the box.
 
-    If the path is not start with '/', the file/directory will be renamed to the
-    working directory. If target newPath is already exists, the rename will be
-    failed.
+    If the path does not start with '/', the file/directory will be renamed relative
+    to the working directory. If the newPath already exists, the rename will fail.
     """
 
     old_path: Required[Annotated[str, PropertyInfo(alias="oldPath")]]
-    """Old path to the file/directory.
+    """Old path in the box.
 
-    If the path is not start with '/', the file/directory will be renamed from the
-    working directory. If target oldPath is not exists, the rename will be failed.
+    If the path does not start with '/', the file/directory will be renamed relative
+    to the working directory. If the oldPath does not exist, the rename will fail.
     """
 
     working_dir: Annotated[str, PropertyInfo(alias="workingDir")]

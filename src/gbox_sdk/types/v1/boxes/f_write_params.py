@@ -16,11 +16,11 @@ class WriteFile(TypedDict, total=False):
     """Content of the file (Max size: 512MB)"""
 
     path: Required[str]
-    """Path to the file.
+    """Target path in the box.
 
-    If the path is not start with '/', the file will be written to the working
-    directory. Creates necessary directories in the path if they don't exist. If
-    target path is already exists, the write will be failed.
+    If the path does not start with '/', the file will be written relative to the
+    working directory. Creates necessary directories in the path if they don't
+    exist. If the target path already exists, the write will fail.
     """
 
     working_dir: Annotated[str, PropertyInfo(alias="workingDir")]
@@ -36,11 +36,11 @@ class WriteFileByBinary(TypedDict, total=False):
     """Binary content of the file (Max file size: 512MB)"""
 
     path: Required[str]
-    """Path to the file.
+    """Target path in the box.
 
-    If the path is not start with '/', the file will be written to the working
-    directory. Creates necessary directories in the path if they don't exist. If
-    target path is already exists, the write will be failed.
+    If the path does not start with '/', the file will be written relative to the
+    working directory. Creates necessary directories in the path if they don't
+    exist. If the target path already exists, the write will fail.
     """
 
     working_dir: Annotated[str, PropertyInfo(alias="workingDir")]

@@ -125,7 +125,7 @@ class FsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FExistsResponse:
-        """Check if file/directory exists
+        """Check if file/dir exists
 
         Args:
           path: Target path in the box.
@@ -177,7 +177,7 @@ class FsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FInfoResponse:
-        """Get file/directory
+        """Get file/dir
 
         Args:
           path: Target path in the box.
@@ -284,10 +284,9 @@ class FsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FRemoveResponse:
-        """Delete a file or directory.
+        """Delete a file or dir.
 
-        If target path is not exists, the delete will be
-        failed.
+        If target path is not exists, the delete will be failed.
 
         Args:
           path: Target path in the box. If the path does not start with '/', the file/directory
@@ -336,10 +335,10 @@ class FsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FRenameResponse:
-        """Rename a file or directory.
+        """Rename a file or dir.
 
-        If target newPath is already exists, the rename will
-        be failed.
+        If target newPath is already exists, the rename will be
+        failed.
 
         Args:
           new_path: New path in the box. If the path does not start with '/', the file/directory
@@ -591,7 +590,7 @@ class AsyncFsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FExistsResponse:
-        """Check if file/directory exists
+        """Check if file/dir exists
 
         Args:
           path: Target path in the box.
@@ -643,7 +642,7 @@ class AsyncFsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FInfoResponse:
-        """Get file/directory
+        """Get file/dir
 
         Args:
           path: Target path in the box.
@@ -750,10 +749,9 @@ class AsyncFsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FRemoveResponse:
-        """Delete a file or directory.
+        """Delete a file or dir.
 
-        If target path is not exists, the delete will be
-        failed.
+        If target path is not exists, the delete will be failed.
 
         Args:
           path: Target path in the box. If the path does not start with '/', the file/directory
@@ -802,10 +800,10 @@ class AsyncFsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> FRenameResponse:
-        """Rename a file or directory.
+        """Rename a file or dir.
 
-        If target newPath is already exists, the rename will
-        be failed.
+        If target newPath is already exists, the rename will be
+        failed.
 
         Args:
           new_path: New path in the box. If the path does not start with '/', the file/directory

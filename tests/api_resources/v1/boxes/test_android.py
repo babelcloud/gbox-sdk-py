@@ -45,8 +45,8 @@ class TestAndroid:
     def test_method_list_with_all_params(self, client: GboxClient) -> None:
         android = client.v1.boxes.android.list(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            app_type="system",
-            is_running=True,
+            app_type=["thirdParty"],
+            running_filter=["running", "notRunning"],
         )
         assert_matches_type(AndroidListResponse, android, path=["response"])
 
@@ -559,7 +559,7 @@ class TestAndroid:
     def test_method_list_simple_with_all_params(self, client: GboxClient) -> None:
         android = client.v1.boxes.android.list_simple(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            app_type="system",
+            app_type=["thirdParty"],
         )
         assert_matches_type(AndroidListSimpleResponse, android, path=["response"])
 
@@ -848,8 +848,8 @@ class TestAsyncAndroid:
     async def test_method_list_with_all_params(self, async_client: AsyncGboxClient) -> None:
         android = await async_client.v1.boxes.android.list(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            app_type="system",
-            is_running=True,
+            app_type=["thirdParty"],
+            running_filter=["running", "notRunning"],
         )
         assert_matches_type(AndroidListResponse, android, path=["response"])
 
@@ -1362,7 +1362,7 @@ class TestAsyncAndroid:
     async def test_method_list_simple_with_all_params(self, async_client: AsyncGboxClient) -> None:
         android = await async_client.v1.boxes.android.list_simple(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            app_type="system",
+            app_type=["thirdParty"],
         )
         assert_matches_type(AndroidListSimpleResponse, android, path=["response"])
 

@@ -558,7 +558,7 @@ class TestActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             direction="up",
             distance=300,
-            duration="200ms",
+            duration="500ms",
             output_format="base64",
             screenshot_delay="500ms",
         )
@@ -630,7 +630,7 @@ class TestActions:
                 "x": 100,
                 "y": 150,
             },
-            duration="200ms",
+            duration="500ms",
             output_format="base64",
             screenshot_delay="500ms",
         )
@@ -1395,7 +1395,7 @@ class TestAsyncActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             direction="up",
             distance=300,
-            duration="200ms",
+            duration="500ms",
             output_format="base64",
             screenshot_delay="500ms",
         )
@@ -1467,7 +1467,7 @@ class TestAsyncActions:
                 "x": 100,
                 "y": 150,
             },
-            duration="200ms",
+            duration="500ms",
             output_format="base64",
             screenshot_delay="500ms",
         )

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Dict
 from typing_extensions import Annotated, TypedDict
 
 from ..._utils import PropertyInfo
@@ -10,7 +11,7 @@ __all__ = ["CreateBoxConfigParam"]
 
 
 class CreateBoxConfigParam(TypedDict, total=False):
-    envs: object
+    envs: Dict[str, str]
     """Environment variables for the box.
 
     These variables will be available in all operations including command execution,
@@ -20,7 +21,7 @@ class CreateBoxConfigParam(TypedDict, total=False):
     expires_in: Annotated[str, PropertyInfo(alias="expiresIn")]
     """The box will be alive for the given duration (e.g. '10m')"""
 
-    labels: object
+    labels: Dict[str, str]
     """Key-value pairs of labels for the box.
 
     Labels are used to add custom metadata to help identify, categorize, and manage

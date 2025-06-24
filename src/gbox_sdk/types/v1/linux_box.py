@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import Dict, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -36,14 +36,14 @@ class Config(BaseModel):
     cpu: float
     """CPU cores allocated to the box"""
 
-    envs: object
+    envs: Dict[str, str]
     """Environment variables for the box.
 
     These variables will be available in all operations including command execution,
     code running, and other box behaviors
     """
 
-    labels: object
+    labels: Dict[str, str]
     """Key-value pairs of labels for the box.
 
     Labels are used to add custom metadata to help identify, categorize, and manage

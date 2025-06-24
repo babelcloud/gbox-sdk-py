@@ -154,6 +154,7 @@ class BoxesResource(SyncAPIResource):
     def list(
         self,
         *,
+        device_type: str | NotGiven = NOT_GIVEN,
         labels: object | NotGiven = NOT_GIVEN,
         page: int | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
@@ -166,12 +167,13 @@ class BoxesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxListResponse:
-        """List box
+        """
+        List box
 
         Args:
-          labels: Filter boxes by their labels.
+          device_type: Filter boxes by their device type (virtual, physical)
 
-        Labels are key-value pairs that help identify and
+          labels: Filter boxes by their labels. Labels are key-value pairs that help identify and
               categorize boxes. Use this to filter boxes that match specific label criteria.
               For example, you can filter by project, environment, team, or any custom labels
               you've added to your boxes.
@@ -204,6 +206,7 @@ class BoxesResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "device_type": device_type,
                         "labels": labels,
                         "page": page,
                         "page_size": page_size,
@@ -697,6 +700,7 @@ class AsyncBoxesResource(AsyncAPIResource):
     async def list(
         self,
         *,
+        device_type: str | NotGiven = NOT_GIVEN,
         labels: object | NotGiven = NOT_GIVEN,
         page: int | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
@@ -709,12 +713,13 @@ class AsyncBoxesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxListResponse:
-        """List box
+        """
+        List box
 
         Args:
-          labels: Filter boxes by their labels.
+          device_type: Filter boxes by their device type (virtual, physical)
 
-        Labels are key-value pairs that help identify and
+          labels: Filter boxes by their labels. Labels are key-value pairs that help identify and
               categorize boxes. Use this to filter boxes that match specific label criteria.
               For example, you can filter by project, environment, team, or any custom labels
               you've added to your boxes.
@@ -747,6 +752,7 @@ class AsyncBoxesResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
+                        "device_type": device_type,
                         "labels": labels,
                         "page": page,
                         "page_size": page_size,

@@ -80,6 +80,7 @@ class TestBoxes:
     @parametrize
     def test_method_list_with_all_params(self, client: GboxClient) -> None:
         box = client.v1.boxes.list(
+            device_type="virtual",
             labels={},
             page=1,
             page_size=10,
@@ -641,6 +642,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.list(
+            device_type="virtual",
             labels={},
             page=1,
             page_size=10,

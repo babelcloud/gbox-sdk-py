@@ -11,6 +11,9 @@ __all__ = ["BoxListParams"]
 
 
 class BoxListParams(TypedDict, total=False):
+    device_type: Annotated[str, PropertyInfo(alias="deviceType")]
+    """Filter boxes by their device type (virtual, physical)"""
+
     labels: object
     """Filter boxes by their labels.
 

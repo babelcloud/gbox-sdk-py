@@ -222,7 +222,7 @@ class BoxesResource(SyncAPIResource):
     def create_android(
         self,
         *,
-        config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
+        config: box_create_android_params.Config | NotGiven = NOT_GIVEN,
         wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -235,7 +235,7 @@ class BoxesResource(SyncAPIResource):
         Create android box
 
         Args:
-          config: Configuration for a box instance
+          config: Configuration for a Android box instance
 
           wait: Wait for the box operation to be completed, default is true
 
@@ -768,7 +768,7 @@ class AsyncBoxesResource(AsyncAPIResource):
     async def create_android(
         self,
         *,
-        config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
+        config: box_create_android_params.Config | NotGiven = NOT_GIVEN,
         wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -781,7 +781,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         Create android box
 
         Args:
-          config: Configuration for a box instance
+          config: Configuration for a Android box instance
 
           wait: Wait for the box operation to be completed, default is true
 

@@ -122,6 +122,7 @@ class TestBoxes:
     def test_method_create_android_with_all_params(self, client: GboxClient) -> None:
         box = client.v1.boxes.create_android(
             config={
+                "device_type": "virtual",
                 "envs": {
                     "ANDROID_LOG_TAGS": "*:V",
                     "ADB_TRACE": "all",
@@ -684,6 +685,7 @@ class TestAsyncBoxes:
     async def test_method_create_android_with_all_params(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.create_android(
             config={
+                "device_type": "virtual",
                 "envs": {
                     "ANDROID_LOG_TAGS": "*:V",
                     "ADB_TRACE": "all",

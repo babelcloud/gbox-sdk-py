@@ -2,16 +2,40 @@
 
 from __future__ import annotations
 
-from typing_extensions import TypedDict
+from typing_extensions import Literal, Annotated, TypedDict
 
-from .create_box_config_param import CreateBoxConfigParam
+from ..._utils import PropertyInfo
 
-__all__ = ["BoxCreateAndroidParams"]
+__all__ = ["BoxCreateAndroidParams", "Config"]
 
 
 class BoxCreateAndroidParams(TypedDict, total=False):
-    config: CreateBoxConfigParam
-    """Configuration for a box instance"""
+    config: Config
+    """Configuration for a Android box instance"""
 
     wait: bool
     """Wait for the box operation to be completed, default is true"""
+
+
+class Config(TypedDict, total=False):
+    device_type: Annotated[Literal["virtual", "physical"], PropertyInfo(alias="deviceType")]
+    """Device type - virtual or physical Android device"""
+
+    envs: object
+    """Environment variables for the box.
+
+    These variables will be available in all operations including command execution,
+    code running, and other box behaviors
+    """
+
+    expires_in: Annotated[str, PropertyInfo(alias="expiresIn")]
+    """The box will be alive for the given duration (e.g. '10m')"""
+
+    labels: object
+    """Key-value pairs of labels for the box.
+
+    Labels are used to add custom metadata to help identify, categorize, and manage
+    boxes. Common use cases include project names, environments, teams,
+    applications, or any other organizational tags that help you organize and filter
+    your boxes.
+    """

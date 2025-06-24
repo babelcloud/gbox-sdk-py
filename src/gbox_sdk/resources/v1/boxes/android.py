@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Mapping, cast
+from typing import List, Mapping, cast
 from typing_extensions import Literal, overload
 
 import httpx
@@ -69,8 +69,8 @@ class AndroidResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        app_type: Literal["system", "third-party"] | NotGiven = NOT_GIVEN,
-        is_running: bool | NotGiven = NOT_GIVEN,
+        app_type: List[Literal["system", "thirdParty"]] | NotGiven = NOT_GIVEN,
+        running_filter: List[Literal["running", "notRunning"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -86,7 +86,8 @@ class AndroidResource(SyncAPIResource):
         Args:
           app_type: Application type: system or third-party, default is third-party
 
-          is_running: Whether to include running apps, default is all
+          running_filter: Filter apps by running status: running (show only running apps), notRunning
+              (show only non-running apps). Default is all
 
           extra_headers: Send extra headers
 
@@ -108,7 +109,7 @@ class AndroidResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "app_type": app_type,
-                        "is_running": is_running,
+                        "running_filter": running_filter,
                     },
                     android_list_params.AndroidListParams,
                 ),
@@ -456,7 +457,7 @@ class AndroidResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        app_type: Literal["system", "third-party"] | NotGiven = NOT_GIVEN,
+        app_type: List[Literal["system", "thirdParty"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -681,8 +682,8 @@ class AsyncAndroidResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        app_type: Literal["system", "third-party"] | NotGiven = NOT_GIVEN,
-        is_running: bool | NotGiven = NOT_GIVEN,
+        app_type: List[Literal["system", "thirdParty"]] | NotGiven = NOT_GIVEN,
+        running_filter: List[Literal["running", "notRunning"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -698,7 +699,8 @@ class AsyncAndroidResource(AsyncAPIResource):
         Args:
           app_type: Application type: system or third-party, default is third-party
 
-          is_running: Whether to include running apps, default is all
+          running_filter: Filter apps by running status: running (show only running apps), notRunning
+              (show only non-running apps). Default is all
 
           extra_headers: Send extra headers
 
@@ -720,7 +722,7 @@ class AsyncAndroidResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "app_type": app_type,
-                        "is_running": is_running,
+                        "running_filter": running_filter,
                     },
                     android_list_params.AndroidListParams,
                 ),
@@ -1068,7 +1070,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        app_type: Literal["system", "third-party"] | NotGiven = NOT_GIVEN,
+        app_type: List[Literal["system", "thirdParty"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

@@ -13,7 +13,7 @@ class AndroidApp(BaseModel):
     apk_path: str = FieldInfo(alias="apkPath")
     """Android app apk path"""
 
-    app_type: Literal["system", "third-party"] = FieldInfo(alias="appType")
+    app_type: Literal["system", "thirdParty"] = FieldInfo(alias="appType")
     """Application type: system or third-party"""
 
     is_running: bool = FieldInfo(alias="isRunning")

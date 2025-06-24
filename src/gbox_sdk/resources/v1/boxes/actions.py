@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Iterable
+from typing import Any, List, Iterable, cast
 from typing_extensions import Literal, overload
 
 import httpx
@@ -31,8 +31,17 @@ from ....types.v1.boxes import (
     action_press_button_params,
     action_screen_rotation_params,
 )
-from ....types.v1.boxes.action_result import ActionResult
+from ....types.v1.boxes.action_drag_response import ActionDragResponse
+from ....types.v1.boxes.action_move_response import ActionMoveResponse
+from ....types.v1.boxes.action_type_response import ActionTypeResponse
+from ....types.v1.boxes.action_click_response import ActionClickResponse
+from ....types.v1.boxes.action_swipe_response import ActionSwipeResponse
+from ....types.v1.boxes.action_touch_response import ActionTouchResponse
+from ....types.v1.boxes.action_scroll_response import ActionScrollResponse
+from ....types.v1.boxes.action_press_key_response import ActionPressKeyResponse
 from ....types.v1.boxes.action_screenshot_response import ActionScreenshotResponse
+from ....types.v1.boxes.action_press_button_response import ActionPressButtonResponse
+from ....types.v1.boxes.action_screen_rotation_response import ActionScreenRotationResponse
 
 __all__ = ["ActionsResource", "AsyncActionsResource"]
 
@@ -65,6 +74,7 @@ class ActionsResource(SyncAPIResource):
         y: float,
         button: Literal["left", "right", "middle"] | NotGiven = NOT_GIVEN,
         double: bool | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -73,7 +83,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionResult:
+    ) -> ActionClickResponse:
         """
         Click
 
@@ -86,6 +96,9 @@ class ActionsResource(SyncAPIResource):
 
           double: Whether to perform a double click
 
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
           output_format: Type of the URI. default is base64.
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
@@ -98,7 +111,7 @@ class ActionsResource(SyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot.
+              screenshot. Maximum allowed delay is 30s.
 
           extra_headers: Send extra headers
 
@@ -110,23 +123,29 @@ class ActionsResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return self._post(
-            f"/boxes/{box_id}/actions/click",
-            body=maybe_transform(
-                {
-                    "x": x,
-                    "y": y,
-                    "button": button,
-                    "double": double,
-                    "output_format": output_format,
-                    "screenshot_delay": screenshot_delay,
-                },
-                action_click_params.ActionClickParams,
+        return cast(
+            ActionClickResponse,
+            self._post(
+                f"/boxes/{box_id}/actions/click",
+                body=maybe_transform(
+                    {
+                        "x": x,
+                        "y": y,
+                        "button": button,
+                        "double": double,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "screenshot_delay": screenshot_delay,
+                    },
+                    action_click_params.ActionClickParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, ActionClickResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ActionResult,
         )
 
     def drag(
@@ -135,6 +154,7 @@ class ActionsResource(SyncAPIResource):
         *,
         path: Iterable[action_drag_params.Path],
         duration: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -143,7 +163,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionResult:
+    ) -> ActionDragResponse:
         """
         Drag
 
@@ -152,6 +172,9 @@ class ActionsResource(SyncAPIResource):
 
           duration: Time interval between points (e.g. "50ms")
 
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
           output_format: Type of the URI. default is base64.
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
@@ -164,7 +187,7 @@ class ActionsResource(SyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot.
+              screenshot. Maximum allowed delay is 30s.
 
           extra_headers: Send extra headers
 
@@ -176,21 +199,27 @@ class ActionsResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return self._post(
-            f"/boxes/{box_id}/actions/drag",
-            body=maybe_transform(
-                {
-                    "path": path,
-                    "duration": duration,
-                    "output_format": output_format,
-                    "screenshot_delay": screenshot_delay,
-                },
-                action_drag_params.ActionDragParams,
+        return cast(
+            ActionDragResponse,
+            self._post(
+                f"/boxes/{box_id}/actions/drag",
+                body=maybe_transform(
+                    {
+                        "path": path,
+                        "duration": duration,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "screenshot_delay": screenshot_delay,
+                    },
+                    action_drag_params.ActionDragParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, ActionDragResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ActionResult,
         )
 
     def move(
@@ -199,6 +228,7 @@ class ActionsResource(SyncAPIResource):
         *,
         x: float,
         y: float,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -207,7 +237,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionResult:
+    ) -> ActionMoveResponse:
         """
         Move to position
 
@@ -216,6 +246,9 @@ class ActionsResource(SyncAPIResource):
 
           y: Y coordinate to move to
 
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
           output_format: Type of the URI. default is base64.
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
@@ -228,7 +261,7 @@ class ActionsResource(SyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot.
+              screenshot. Maximum allowed delay is 30s.
 
           extra_headers: Send extra headers
 
@@ -240,21 +273,27 @@ class ActionsResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return self._post(
-            f"/boxes/{box_id}/actions/move",
-            body=maybe_transform(
-                {
-                    "x": x,
-                    "y": y,
-                    "output_format": output_format,
-                    "screenshot_delay": screenshot_delay,
-                },
-                action_move_params.ActionMoveParams,
+        return cast(
+            ActionMoveResponse,
+            self._post(
+                f"/boxes/{box_id}/actions/move",
+                body=maybe_transform(
+                    {
+                        "x": x,
+                        "y": y,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "screenshot_delay": screenshot_delay,
+                    },
+                    action_move_params.ActionMoveParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, ActionMoveResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ActionResult,
         )
 
     def press_button(
@@ -262,6 +301,7 @@ class ActionsResource(SyncAPIResource):
         box_id: str,
         *,
         buttons: List[Literal["power", "volumeUp", "volumeDown", "volumeMute", "home", "back", "menu", "appSwitch"]],
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -270,7 +310,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionResult:
+    ) -> ActionPressButtonResponse:
         """Press button on the device.
 
         like power button, volume up button, volume down
@@ -278,6 +318,9 @@ class ActionsResource(SyncAPIResource):
 
         Args:
           buttons: Button to press
+
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
 
           output_format: Type of the URI. default is base64.
 
@@ -291,7 +334,7 @@ class ActionsResource(SyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot.
+              screenshot. Maximum allowed delay is 30s.
 
           extra_headers: Send extra headers
 
@@ -303,20 +346,26 @@ class ActionsResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return self._post(
-            f"/boxes/{box_id}/actions/press-button",
-            body=maybe_transform(
-                {
-                    "buttons": buttons,
-                    "output_format": output_format,
-                    "screenshot_delay": screenshot_delay,
-                },
-                action_press_button_params.ActionPressButtonParams,
+        return cast(
+            ActionPressButtonResponse,
+            self._post(
+                f"/boxes/{box_id}/actions/press-button",
+                body=maybe_transform(
+                    {
+                        "buttons": buttons,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "screenshot_delay": screenshot_delay,
+                    },
+                    action_press_button_params.ActionPressButtonParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, ActionPressButtonResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ActionResult,
         )
 
     def press_key(
@@ -437,6 +486,7 @@ class ActionsResource(SyncAPIResource):
                 "mediaPreviousTrack",
             ]
         ],
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -445,7 +495,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionResult:
+    ) -> ActionPressKeyResponse:
         """
         Simulates pressing a specific key by triggering the complete keyboard key event
         chain (keydown, keypress, keyup). Use this to activate keyboard key event
@@ -454,6 +504,9 @@ class ActionsResource(SyncAPIResource):
         Args:
           keys: This is an array of keyboard keys to press. Supports cross-platform
               compatibility.
+
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
 
           output_format: Type of the URI. default is base64.
 
@@ -467,7 +520,7 @@ class ActionsResource(SyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot.
+              screenshot. Maximum allowed delay is 30s.
 
           extra_headers: Send extra headers
 
@@ -479,20 +532,26 @@ class ActionsResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return self._post(
-            f"/boxes/{box_id}/actions/press-key",
-            body=maybe_transform(
-                {
-                    "keys": keys,
-                    "output_format": output_format,
-                    "screenshot_delay": screenshot_delay,
-                },
-                action_press_key_params.ActionPressKeyParams,
+        return cast(
+            ActionPressKeyResponse,
+            self._post(
+                f"/boxes/{box_id}/actions/press-key",
+                body=maybe_transform(
+                    {
+                        "keys": keys,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "screenshot_delay": screenshot_delay,
+                    },
+                    action_press_key_params.ActionPressKeyParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, ActionPressKeyResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ActionResult,
         )
 
     def screen_rotation(
@@ -507,7 +566,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionResult:
+    ) -> ActionScreenRotationResponse:
         """
         Rotate screen
 
@@ -526,19 +585,24 @@ class ActionsResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return self._post(
-            f"/boxes/{box_id}/actions/screen-rotation",
-            body=maybe_transform(
-                {
-                    "angle": angle,
-                    "direction": direction,
-                },
-                action_screen_rotation_params.ActionScreenRotationParams,
+        return cast(
+            ActionScreenRotationResponse,
+            self._post(
+                f"/boxes/{box_id}/actions/screen-rotation",
+                body=maybe_transform(
+                    {
+                        "angle": angle,
+                        "direction": direction,
+                    },
+                    action_screen_rotation_params.ActionScreenRotationParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, ActionScreenRotationResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ActionResult,
         )
 
     def screenshot(
@@ -595,6 +659,7 @@ class ActionsResource(SyncAPIResource):
         scroll_y: float,
         x: float,
         y: float,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -603,7 +668,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionResult:
+    ) -> ActionScrollResponse:
         """
         Scroll
 
@@ -616,6 +681,9 @@ class ActionsResource(SyncAPIResource):
 
           y: Y coordinate of the scroll position
 
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
           output_format: Type of the URI. default is base64.
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
@@ -628,7 +696,7 @@ class ActionsResource(SyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot.
+              screenshot. Maximum allowed delay is 30s.
 
           extra_headers: Send extra headers
 
@@ -640,23 +708,29 @@ class ActionsResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return self._post(
-            f"/boxes/{box_id}/actions/scroll",
-            body=maybe_transform(
-                {
-                    "scroll_x": scroll_x,
-                    "scroll_y": scroll_y,
-                    "x": x,
-                    "y": y,
-                    "output_format": output_format,
-                    "screenshot_delay": screenshot_delay,
-                },
-                action_scroll_params.ActionScrollParams,
+        return cast(
+            ActionScrollResponse,
+            self._post(
+                f"/boxes/{box_id}/actions/scroll",
+                body=maybe_transform(
+                    {
+                        "scroll_x": scroll_x,
+                        "scroll_y": scroll_y,
+                        "x": x,
+                        "y": y,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "screenshot_delay": screenshot_delay,
+                    },
+                    action_scroll_params.ActionScrollParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, ActionScrollResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ActionResult,
         )
 
     @overload
@@ -667,6 +741,7 @@ class ActionsResource(SyncAPIResource):
         direction: Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"],
         distance: float | NotGiven = NOT_GIVEN,
         duration: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -675,7 +750,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionResult:
+    ) -> ActionSwipeResponse:
         """
         Performs a swipe in the specified direction
 
@@ -688,6 +763,9 @@ class ActionsResource(SyncAPIResource):
 
           duration: Duration of the swipe
 
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
           output_format: Type of the URI. default is base64.
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
@@ -700,7 +778,7 @@ class ActionsResource(SyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot.
+              screenshot. Maximum allowed delay is 30s.
 
           extra_headers: Send extra headers
 
@@ -720,6 +798,7 @@ class ActionsResource(SyncAPIResource):
         end: action_swipe_params.SwipeAdvancedEnd,
         start: action_swipe_params.SwipeAdvancedStart,
         duration: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -728,7 +807,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionResult:
+    ) -> ActionSwipeResponse:
         """
         Performs a swipe in the specified direction
 
@@ -738,6 +817,9 @@ class ActionsResource(SyncAPIResource):
           start: Start point of the swipe path
 
           duration: Duration of the swipe
+
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
 
           output_format: Type of the URI. default is base64.
 
@@ -751,7 +833,7 @@ class ActionsResource(SyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot.
+              screenshot. Maximum allowed delay is 30s.
 
           extra_headers: Send extra headers
 
@@ -772,6 +854,7 @@ class ActionsResource(SyncAPIResource):
         | NotGiven = NOT_GIVEN,
         distance: float | NotGiven = NOT_GIVEN,
         duration: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         end: action_swipe_params.SwipeAdvancedEnd | NotGiven = NOT_GIVEN,
@@ -782,27 +865,33 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionResult:
+    ) -> ActionSwipeResponse:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return self._post(
-            f"/boxes/{box_id}/actions/swipe",
-            body=maybe_transform(
-                {
-                    "direction": direction,
-                    "distance": distance,
-                    "duration": duration,
-                    "output_format": output_format,
-                    "screenshot_delay": screenshot_delay,
-                    "end": end,
-                    "start": start,
-                },
-                action_swipe_params.ActionSwipeParams,
+        return cast(
+            ActionSwipeResponse,
+            self._post(
+                f"/boxes/{box_id}/actions/swipe",
+                body=maybe_transform(
+                    {
+                        "direction": direction,
+                        "distance": distance,
+                        "duration": duration,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "screenshot_delay": screenshot_delay,
+                        "end": end,
+                        "start": start,
+                    },
+                    action_swipe_params.ActionSwipeParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, ActionSwipeResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ActionResult,
         )
 
     def touch(
@@ -810,6 +899,7 @@ class ActionsResource(SyncAPIResource):
         box_id: str,
         *,
         points: Iterable[action_touch_params.Point],
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -818,12 +908,15 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionResult:
+    ) -> ActionTouchResponse:
         """
         Touch
 
         Args:
           points: Array of touch points and their actions
+
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
 
           output_format: Type of the URI. default is base64.
 
@@ -837,7 +930,7 @@ class ActionsResource(SyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot.
+              screenshot. Maximum allowed delay is 30s.
 
           extra_headers: Send extra headers
 
@@ -849,20 +942,26 @@ class ActionsResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return self._post(
-            f"/boxes/{box_id}/actions/touch",
-            body=maybe_transform(
-                {
-                    "points": points,
-                    "output_format": output_format,
-                    "screenshot_delay": screenshot_delay,
-                },
-                action_touch_params.ActionTouchParams,
+        return cast(
+            ActionTouchResponse,
+            self._post(
+                f"/boxes/{box_id}/actions/touch",
+                body=maybe_transform(
+                    {
+                        "points": points,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "screenshot_delay": screenshot_delay,
+                    },
+                    action_touch_params.ActionTouchParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, ActionTouchResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ActionResult,
         )
 
     def type(
@@ -870,6 +969,7 @@ class ActionsResource(SyncAPIResource):
         box_id: str,
         *,
         text: str,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -878,7 +978,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionResult:
+    ) -> ActionTypeResponse:
         """
         Directly inputs text content without triggering physical key events (keydown,
         etc.), ideal for quickly filling large amounts of text when intermediate input
@@ -887,6 +987,9 @@ class ActionsResource(SyncAPIResource):
         Args:
           text: Text to type
 
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
           output_format: Type of the URI. default is base64.
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
@@ -899,7 +1002,7 @@ class ActionsResource(SyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot.
+              screenshot. Maximum allowed delay is 30s.
 
           extra_headers: Send extra headers
 
@@ -911,20 +1014,26 @@ class ActionsResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return self._post(
-            f"/boxes/{box_id}/actions/type",
-            body=maybe_transform(
-                {
-                    "text": text,
-                    "output_format": output_format,
-                    "screenshot_delay": screenshot_delay,
-                },
-                action_type_params.ActionTypeParams,
+        return cast(
+            ActionTypeResponse,
+            self._post(
+                f"/boxes/{box_id}/actions/type",
+                body=maybe_transform(
+                    {
+                        "text": text,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "screenshot_delay": screenshot_delay,
+                    },
+                    action_type_params.ActionTypeParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, ActionTypeResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ActionResult,
         )
 
 
@@ -956,6 +1065,7 @@ class AsyncActionsResource(AsyncAPIResource):
         y: float,
         button: Literal["left", "right", "middle"] | NotGiven = NOT_GIVEN,
         double: bool | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -964,7 +1074,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionResult:
+    ) -> ActionClickResponse:
         """
         Click
 
@@ -977,6 +1087,9 @@ class AsyncActionsResource(AsyncAPIResource):
 
           double: Whether to perform a double click
 
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
           output_format: Type of the URI. default is base64.
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
@@ -989,7 +1102,7 @@ class AsyncActionsResource(AsyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot.
+              screenshot. Maximum allowed delay is 30s.
 
           extra_headers: Send extra headers
 
@@ -1001,23 +1114,29 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return await self._post(
-            f"/boxes/{box_id}/actions/click",
-            body=await async_maybe_transform(
-                {
-                    "x": x,
-                    "y": y,
-                    "button": button,
-                    "double": double,
-                    "output_format": output_format,
-                    "screenshot_delay": screenshot_delay,
-                },
-                action_click_params.ActionClickParams,
+        return cast(
+            ActionClickResponse,
+            await self._post(
+                f"/boxes/{box_id}/actions/click",
+                body=await async_maybe_transform(
+                    {
+                        "x": x,
+                        "y": y,
+                        "button": button,
+                        "double": double,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "screenshot_delay": screenshot_delay,
+                    },
+                    action_click_params.ActionClickParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, ActionClickResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ActionResult,
         )
 
     async def drag(
@@ -1026,6 +1145,7 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         path: Iterable[action_drag_params.Path],
         duration: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1034,7 +1154,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionResult:
+    ) -> ActionDragResponse:
         """
         Drag
 
@@ -1043,6 +1163,9 @@ class AsyncActionsResource(AsyncAPIResource):
 
           duration: Time interval between points (e.g. "50ms")
 
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
           output_format: Type of the URI. default is base64.
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
@@ -1055,7 +1178,7 @@ class AsyncActionsResource(AsyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot.
+              screenshot. Maximum allowed delay is 30s.
 
           extra_headers: Send extra headers
 
@@ -1067,21 +1190,27 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return await self._post(
-            f"/boxes/{box_id}/actions/drag",
-            body=await async_maybe_transform(
-                {
-                    "path": path,
-                    "duration": duration,
-                    "output_format": output_format,
-                    "screenshot_delay": screenshot_delay,
-                },
-                action_drag_params.ActionDragParams,
+        return cast(
+            ActionDragResponse,
+            await self._post(
+                f"/boxes/{box_id}/actions/drag",
+                body=await async_maybe_transform(
+                    {
+                        "path": path,
+                        "duration": duration,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "screenshot_delay": screenshot_delay,
+                    },
+                    action_drag_params.ActionDragParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, ActionDragResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ActionResult,
         )
 
     async def move(
@@ -1090,6 +1219,7 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         x: float,
         y: float,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1098,7 +1228,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionResult:
+    ) -> ActionMoveResponse:
         """
         Move to position
 
@@ -1107,6 +1237,9 @@ class AsyncActionsResource(AsyncAPIResource):
 
           y: Y coordinate to move to
 
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
           output_format: Type of the URI. default is base64.
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
@@ -1119,7 +1252,7 @@ class AsyncActionsResource(AsyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot.
+              screenshot. Maximum allowed delay is 30s.
 
           extra_headers: Send extra headers
 
@@ -1131,21 +1264,27 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return await self._post(
-            f"/boxes/{box_id}/actions/move",
-            body=await async_maybe_transform(
-                {
-                    "x": x,
-                    "y": y,
-                    "output_format": output_format,
-                    "screenshot_delay": screenshot_delay,
-                },
-                action_move_params.ActionMoveParams,
+        return cast(
+            ActionMoveResponse,
+            await self._post(
+                f"/boxes/{box_id}/actions/move",
+                body=await async_maybe_transform(
+                    {
+                        "x": x,
+                        "y": y,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "screenshot_delay": screenshot_delay,
+                    },
+                    action_move_params.ActionMoveParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, ActionMoveResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ActionResult,
         )
 
     async def press_button(
@@ -1153,6 +1292,7 @@ class AsyncActionsResource(AsyncAPIResource):
         box_id: str,
         *,
         buttons: List[Literal["power", "volumeUp", "volumeDown", "volumeMute", "home", "back", "menu", "appSwitch"]],
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1161,7 +1301,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionResult:
+    ) -> ActionPressButtonResponse:
         """Press button on the device.
 
         like power button, volume up button, volume down
@@ -1169,6 +1309,9 @@ class AsyncActionsResource(AsyncAPIResource):
 
         Args:
           buttons: Button to press
+
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
 
           output_format: Type of the URI. default is base64.
 
@@ -1182,7 +1325,7 @@ class AsyncActionsResource(AsyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot.
+              screenshot. Maximum allowed delay is 30s.
 
           extra_headers: Send extra headers
 
@@ -1194,20 +1337,26 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return await self._post(
-            f"/boxes/{box_id}/actions/press-button",
-            body=await async_maybe_transform(
-                {
-                    "buttons": buttons,
-                    "output_format": output_format,
-                    "screenshot_delay": screenshot_delay,
-                },
-                action_press_button_params.ActionPressButtonParams,
+        return cast(
+            ActionPressButtonResponse,
+            await self._post(
+                f"/boxes/{box_id}/actions/press-button",
+                body=await async_maybe_transform(
+                    {
+                        "buttons": buttons,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "screenshot_delay": screenshot_delay,
+                    },
+                    action_press_button_params.ActionPressButtonParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, ActionPressButtonResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ActionResult,
         )
 
     async def press_key(
@@ -1328,6 +1477,7 @@ class AsyncActionsResource(AsyncAPIResource):
                 "mediaPreviousTrack",
             ]
         ],
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1336,7 +1486,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionResult:
+    ) -> ActionPressKeyResponse:
         """
         Simulates pressing a specific key by triggering the complete keyboard key event
         chain (keydown, keypress, keyup). Use this to activate keyboard key event
@@ -1345,6 +1495,9 @@ class AsyncActionsResource(AsyncAPIResource):
         Args:
           keys: This is an array of keyboard keys to press. Supports cross-platform
               compatibility.
+
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
 
           output_format: Type of the URI. default is base64.
 
@@ -1358,7 +1511,7 @@ class AsyncActionsResource(AsyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot.
+              screenshot. Maximum allowed delay is 30s.
 
           extra_headers: Send extra headers
 
@@ -1370,20 +1523,26 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return await self._post(
-            f"/boxes/{box_id}/actions/press-key",
-            body=await async_maybe_transform(
-                {
-                    "keys": keys,
-                    "output_format": output_format,
-                    "screenshot_delay": screenshot_delay,
-                },
-                action_press_key_params.ActionPressKeyParams,
+        return cast(
+            ActionPressKeyResponse,
+            await self._post(
+                f"/boxes/{box_id}/actions/press-key",
+                body=await async_maybe_transform(
+                    {
+                        "keys": keys,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "screenshot_delay": screenshot_delay,
+                    },
+                    action_press_key_params.ActionPressKeyParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, ActionPressKeyResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ActionResult,
         )
 
     async def screen_rotation(
@@ -1398,7 +1557,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionResult:
+    ) -> ActionScreenRotationResponse:
         """
         Rotate screen
 
@@ -1417,19 +1576,24 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return await self._post(
-            f"/boxes/{box_id}/actions/screen-rotation",
-            body=await async_maybe_transform(
-                {
-                    "angle": angle,
-                    "direction": direction,
-                },
-                action_screen_rotation_params.ActionScreenRotationParams,
+        return cast(
+            ActionScreenRotationResponse,
+            await self._post(
+                f"/boxes/{box_id}/actions/screen-rotation",
+                body=await async_maybe_transform(
+                    {
+                        "angle": angle,
+                        "direction": direction,
+                    },
+                    action_screen_rotation_params.ActionScreenRotationParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, ActionScreenRotationResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ActionResult,
         )
 
     async def screenshot(
@@ -1486,6 +1650,7 @@ class AsyncActionsResource(AsyncAPIResource):
         scroll_y: float,
         x: float,
         y: float,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1494,7 +1659,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionResult:
+    ) -> ActionScrollResponse:
         """
         Scroll
 
@@ -1507,6 +1672,9 @@ class AsyncActionsResource(AsyncAPIResource):
 
           y: Y coordinate of the scroll position
 
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
           output_format: Type of the URI. default is base64.
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
@@ -1519,7 +1687,7 @@ class AsyncActionsResource(AsyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot.
+              screenshot. Maximum allowed delay is 30s.
 
           extra_headers: Send extra headers
 
@@ -1531,23 +1699,29 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return await self._post(
-            f"/boxes/{box_id}/actions/scroll",
-            body=await async_maybe_transform(
-                {
-                    "scroll_x": scroll_x,
-                    "scroll_y": scroll_y,
-                    "x": x,
-                    "y": y,
-                    "output_format": output_format,
-                    "screenshot_delay": screenshot_delay,
-                },
-                action_scroll_params.ActionScrollParams,
+        return cast(
+            ActionScrollResponse,
+            await self._post(
+                f"/boxes/{box_id}/actions/scroll",
+                body=await async_maybe_transform(
+                    {
+                        "scroll_x": scroll_x,
+                        "scroll_y": scroll_y,
+                        "x": x,
+                        "y": y,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "screenshot_delay": screenshot_delay,
+                    },
+                    action_scroll_params.ActionScrollParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, ActionScrollResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ActionResult,
         )
 
     @overload
@@ -1558,6 +1732,7 @@ class AsyncActionsResource(AsyncAPIResource):
         direction: Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"],
         distance: float | NotGiven = NOT_GIVEN,
         duration: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1566,7 +1741,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionResult:
+    ) -> ActionSwipeResponse:
         """
         Performs a swipe in the specified direction
 
@@ -1579,6 +1754,9 @@ class AsyncActionsResource(AsyncAPIResource):
 
           duration: Duration of the swipe
 
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
           output_format: Type of the URI. default is base64.
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
@@ -1591,7 +1769,7 @@ class AsyncActionsResource(AsyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot.
+              screenshot. Maximum allowed delay is 30s.
 
           extra_headers: Send extra headers
 
@@ -1611,6 +1789,7 @@ class AsyncActionsResource(AsyncAPIResource):
         end: action_swipe_params.SwipeAdvancedEnd,
         start: action_swipe_params.SwipeAdvancedStart,
         duration: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1619,7 +1798,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionResult:
+    ) -> ActionSwipeResponse:
         """
         Performs a swipe in the specified direction
 
@@ -1629,6 +1808,9 @@ class AsyncActionsResource(AsyncAPIResource):
           start: Start point of the swipe path
 
           duration: Duration of the swipe
+
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
 
           output_format: Type of the URI. default is base64.
 
@@ -1642,7 +1824,7 @@ class AsyncActionsResource(AsyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot.
+              screenshot. Maximum allowed delay is 30s.
 
           extra_headers: Send extra headers
 
@@ -1663,6 +1845,7 @@ class AsyncActionsResource(AsyncAPIResource):
         | NotGiven = NOT_GIVEN,
         distance: float | NotGiven = NOT_GIVEN,
         duration: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         end: action_swipe_params.SwipeAdvancedEnd | NotGiven = NOT_GIVEN,
@@ -1673,27 +1856,33 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionResult:
+    ) -> ActionSwipeResponse:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return await self._post(
-            f"/boxes/{box_id}/actions/swipe",
-            body=await async_maybe_transform(
-                {
-                    "direction": direction,
-                    "distance": distance,
-                    "duration": duration,
-                    "output_format": output_format,
-                    "screenshot_delay": screenshot_delay,
-                    "end": end,
-                    "start": start,
-                },
-                action_swipe_params.ActionSwipeParams,
+        return cast(
+            ActionSwipeResponse,
+            await self._post(
+                f"/boxes/{box_id}/actions/swipe",
+                body=await async_maybe_transform(
+                    {
+                        "direction": direction,
+                        "distance": distance,
+                        "duration": duration,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "screenshot_delay": screenshot_delay,
+                        "end": end,
+                        "start": start,
+                    },
+                    action_swipe_params.ActionSwipeParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, ActionSwipeResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ActionResult,
         )
 
     async def touch(
@@ -1701,6 +1890,7 @@ class AsyncActionsResource(AsyncAPIResource):
         box_id: str,
         *,
         points: Iterable[action_touch_params.Point],
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1709,12 +1899,15 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionResult:
+    ) -> ActionTouchResponse:
         """
         Touch
 
         Args:
           points: Array of touch points and their actions
+
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
 
           output_format: Type of the URI. default is base64.
 
@@ -1728,7 +1921,7 @@ class AsyncActionsResource(AsyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot.
+              screenshot. Maximum allowed delay is 30s.
 
           extra_headers: Send extra headers
 
@@ -1740,20 +1933,26 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return await self._post(
-            f"/boxes/{box_id}/actions/touch",
-            body=await async_maybe_transform(
-                {
-                    "points": points,
-                    "output_format": output_format,
-                    "screenshot_delay": screenshot_delay,
-                },
-                action_touch_params.ActionTouchParams,
+        return cast(
+            ActionTouchResponse,
+            await self._post(
+                f"/boxes/{box_id}/actions/touch",
+                body=await async_maybe_transform(
+                    {
+                        "points": points,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "screenshot_delay": screenshot_delay,
+                    },
+                    action_touch_params.ActionTouchParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, ActionTouchResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ActionResult,
         )
 
     async def type(
@@ -1761,6 +1960,7 @@ class AsyncActionsResource(AsyncAPIResource):
         box_id: str,
         *,
         text: str,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1769,7 +1969,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionResult:
+    ) -> ActionTypeResponse:
         """
         Directly inputs text content without triggering physical key events (keydown,
         etc.), ideal for quickly filling large amounts of text when intermediate input
@@ -1778,6 +1978,9 @@ class AsyncActionsResource(AsyncAPIResource):
         Args:
           text: Text to type
 
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
           output_format: Type of the URI. default is base64.
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
@@ -1790,7 +1993,7 @@ class AsyncActionsResource(AsyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot.
+              screenshot. Maximum allowed delay is 30s.
 
           extra_headers: Send extra headers
 
@@ -1802,20 +2005,26 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return await self._post(
-            f"/boxes/{box_id}/actions/type",
-            body=await async_maybe_transform(
-                {
-                    "text": text,
-                    "output_format": output_format,
-                    "screenshot_delay": screenshot_delay,
-                },
-                action_type_params.ActionTypeParams,
+        return cast(
+            ActionTypeResponse,
+            await self._post(
+                f"/boxes/{box_id}/actions/type",
+                body=await async_maybe_transform(
+                    {
+                        "text": text,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "screenshot_delay": screenshot_delay,
+                    },
+                    action_type_params.ActionTypeParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, ActionTypeResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ActionResult,
         )
 
 

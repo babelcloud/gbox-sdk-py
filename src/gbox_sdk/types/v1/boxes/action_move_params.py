@@ -16,6 +16,13 @@ class ActionMoveParams(TypedDict, total=False):
     y: Required[float]
     """Y coordinate to move to"""
 
+    include_screenshot: Annotated[bool, PropertyInfo(alias="includeScreenshot")]
+    """Whether to include screenshots in the action response.
+
+    If false, the screenshot object will still be returned but with empty URIs.
+    Default is false.
+    """
+
     output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
     """Type of the URI. default is base64."""
 
@@ -30,5 +37,5 @@ class ActionMoveParams(TypedDict, total=False):
     4. Take screenshot after action
 
     Example: '500ms' means wait 500ms after the action before capturing the final
-    screenshot.
+    screenshot. Maximum allowed delay is 30s.
     """

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from .android_app import AndroidApp as AndroidApp
 from .f_info_params import FInfoParams as FInfoParams
 from .f_list_params import FListParams as FListParams
 from .f_read_params import FReadParams as FReadParams

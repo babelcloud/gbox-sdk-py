@@ -35,6 +35,7 @@ from ....types.v1.boxes import (
     android_uninstall_params,
     android_list_pkg_simple_params,
 )
+from ....types.v1.boxes.android_app import AndroidApp
 from ....types.v1.boxes.android_get_response import AndroidGetResponse
 from ....types.v1.boxes.android_install_response import AndroidInstallResponse
 from ....types.v1.boxes.android_list_app_response import AndroidListAppResponse
@@ -255,7 +256,7 @@ class AndroidResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
+    ) -> AndroidApp:
         """
         Get app
 
@@ -272,13 +273,12 @@ class AndroidResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         if not package_name:
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._get(
             f"/boxes/{box_id}/android/apps/{package_name}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=AndroidApp,
         )
 
     def get_connect_address(
@@ -940,7 +940,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
+    ) -> AndroidApp:
         """
         Get app
 
@@ -957,13 +957,12 @@ class AsyncAndroidResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         if not package_name:
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._get(
             f"/boxes/{box_id}/android/apps/{package_name}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=AndroidApp,
         )
 
     async def get_connect_address(

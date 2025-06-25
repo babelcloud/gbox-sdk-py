@@ -839,9 +839,9 @@ class ActionsResource(SyncAPIResource):
         Performs a swipe in the specified direction
 
         Args:
-          end: End point of the swipe path
+          end: Swipe path
 
-          start: Start point of the swipe path
+          start: Swipe path
 
           duration: Duration of the swipe
 
@@ -1869,9 +1869,9 @@ class AsyncActionsResource(AsyncAPIResource):
         Performs a swipe in the specified direction
 
         Args:
-          end: End point of the swipe path
+          end: Swipe path
 
-          start: Start point of the swipe path
+          start: Swipe path
 
           duration: Duration of the swipe
 

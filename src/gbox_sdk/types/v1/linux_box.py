@@ -53,7 +53,7 @@ class Config(BaseModel):
     """
 
     memory: float
-    """Memory allocated to the box in MB"""
+    """Memory allocated to the box in MiB"""
 
     os: ConfigOs
     """Linux operating system configuration"""
@@ -62,7 +62,7 @@ class Config(BaseModel):
     """Box display resolution configuration"""
 
     storage: float
-    """Storage allocated to the box in GB."""
+    """Storage allocated to the box in GiB."""
 
     browser: Optional[ConfigBrowser] = None
     """Linux browser configuration settings"""

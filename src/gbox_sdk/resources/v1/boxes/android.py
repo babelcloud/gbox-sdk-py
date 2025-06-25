@@ -27,19 +27,20 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.v1.boxes import (
-    android_list_params,
     android_open_params,
     android_install_params,
     android_restart_params,
     android_restore_params,
+    android_list_pkg_params,
     android_uninstall_params,
-    android_list_simple_params,
+    android_list_pkg_simple_params,
 )
-from ....types.v1.boxes.android_app import AndroidApp
-from ....types.v1.boxes.android_list_response import AndroidListResponse
+from ....types.v1.boxes.android_get_response import AndroidGetResponse
 from ....types.v1.boxes.android_install_response import AndroidInstallResponse
-from ....types.v1.boxes.android_list_simple_response import AndroidListSimpleResponse
+from ....types.v1.boxes.android_list_app_response import AndroidListAppResponse
+from ....types.v1.boxes.android_list_pkg_response import AndroidListPkgResponse
 from ....types.v1.boxes.android_list_activities_response import AndroidListActivitiesResponse
+from ....types.v1.boxes.android_list_pkg_simple_response import AndroidListPkgSimpleResponse
 from ....types.v1.boxes.android_get_connect_address_response import AndroidGetConnectAddressResponse
 
 __all__ = ["AndroidResource", "AsyncAndroidResource"]
@@ -65,58 +66,6 @@ class AndroidResource(SyncAPIResource):
         """
         return AndroidResourceWithStreamingResponse(self)
 
-    def list(
-        self,
-        box_id: str,
-        *,
-        app_type: List[Literal["system", "thirdParty"]] | NotGiven = NOT_GIVEN,
-        running_filter: List[Literal["running", "notRunning"]] | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AndroidListResponse:
-        """Retrieve detailed information for all installed applications.
-
-        This endpoint
-        provides comprehensive app details
-
-        Args:
-          app_type: Application type: system or third-party, default is third-party
-
-          running_filter: Filter apps by running status: running (show only running apps), notRunning
-              (show only non-running apps). Default is all
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not box_id:
-            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return self._get(
-            f"/boxes/{box_id}/android/apps",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "app_type": app_type,
-                        "running_filter": running_filter,
-                    },
-                    android_list_params.AndroidListParams,
-                ),
-            ),
-            cast_to=AndroidListResponse,
-        )
-
     def backup(
         self,
         package_name: str,
@@ -130,7 +79,7 @@ class AndroidResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BinaryAPIResponse:
         """
-        Backup app
+        Backup
 
         Args:
           extra_headers: Send extra headers
@@ -147,7 +96,7 @@ class AndroidResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{box_id}/android/apps/{package_name}/backup",
+            f"/boxes/{box_id}/android/packages/{package_name}/backup",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -166,7 +115,7 @@ class AndroidResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BinaryAPIResponse:
         """
-        Backup all apps
+        Backup all
 
         Args:
           extra_headers: Send extra headers
@@ -181,7 +130,7 @@ class AndroidResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{box_id}/android/apps/backup-all",
+            f"/boxes/{box_id}/android/packages/backup-all",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -218,7 +167,7 @@ class AndroidResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{box_id}/android/apps/{package_name}/close",
+            f"/boxes/{box_id}/android/packages/{package_name}/close",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -252,7 +201,7 @@ class AndroidResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{box_id}/android/apps/close-all",
+            f"/boxes/{box_id}/android/packages/close-all",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -270,7 +219,7 @@ class AndroidResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AndroidApp:
+    ) -> AndroidGetResponse:
         """
         Get app
 
@@ -288,11 +237,11 @@ class AndroidResource(SyncAPIResource):
         if not package_name:
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         return self._get(
-            f"/boxes/{box_id}/android/apps/{package_name}",
+            f"/boxes/{box_id}/android/packages/{package_name}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AndroidApp,
+            cast_to=AndroidGetResponse,
         )
 
     def get_connect_address(
@@ -408,7 +357,7 @@ class AndroidResource(SyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{box_id}/android/apps",
+            f"/boxes/{box_id}/android/packages",
             body=maybe_transform(body, android_install_params.AndroidInstallParams),
             files=files,
             options=make_request_options(
@@ -430,7 +379,7 @@ class AndroidResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AndroidListActivitiesResponse:
         """
-        Get app activities
+        Get pkg activities
 
         Args:
           extra_headers: Send extra headers
@@ -446,33 +395,69 @@ class AndroidResource(SyncAPIResource):
         if not package_name:
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         return self._get(
-            f"/boxes/{box_id}/android/apps/{package_name}/activities",
+            f"/boxes/{box_id}/android/packages/{package_name}/activities",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AndroidListActivitiesResponse,
         )
 
-    def list_simple(
+    def list_app(
         self,
         box_id: str,
         *,
-        app_type: List[Literal["system", "thirdParty"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AndroidListSimpleResponse:
-        """A faster endpoint to quickly retrieve basic app information.
-
-        This API provides
-        better performance for scenarios where you need to get essential app details
-        quickly
+    ) -> AndroidListAppResponse:
+        """
+        List apps
 
         Args:
-          app_type: Application type: system or third-party, default is third-party
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return self._get(
+            f"/boxes/{box_id}/android/apps",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AndroidListAppResponse,
+        )
+
+    def list_pkg(
+        self,
+        box_id: str,
+        *,
+        pkg_type: List[Literal["system", "thirdParty"]] | NotGiven = NOT_GIVEN,
+        running_filter: List[Literal["running", "notRunning"]] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AndroidListPkgResponse:
+        """Retrieve detailed information for all installed pkgs.
+
+        This endpoint provides
+        comprehensive pkg details
+
+        Args:
+          pkg_type: Package type: system or third-party, default is third-party
+
+          running_filter: Filter pkgs by running status: running (show only running pkgs), notRunning
+              (show only non-running pkgs). Default is all
 
           extra_headers: Send extra headers
 
@@ -485,15 +470,66 @@ class AndroidResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._get(
-            f"/boxes/{box_id}/android/apps/simple",
+            f"/boxes/{box_id}/android/packages",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"app_type": app_type}, android_list_simple_params.AndroidListSimpleParams),
+                query=maybe_transform(
+                    {
+                        "pkg_type": pkg_type,
+                        "running_filter": running_filter,
+                    },
+                    android_list_pkg_params.AndroidListPkgParams,
+                ),
             ),
-            cast_to=AndroidListSimpleResponse,
+            cast_to=AndroidListPkgResponse,
+        )
+
+    def list_pkg_simple(
+        self,
+        box_id: str,
+        *,
+        pkg_type: List[Literal["system", "thirdParty"]] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AndroidListPkgSimpleResponse:
+        """A faster endpoint to quickly retrieve basic pkg information.
+
+        This API provides
+        better performance for scenarios where you need to get essential pkg details
+        quickly
+
+        Args:
+          pkg_type: Package type: system or third-party, default is third-party
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return self._get(
+            f"/boxes/{box_id}/android/packages/simple",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"pkg_type": pkg_type}, android_list_pkg_simple_params.AndroidListPkgSimpleParams
+                ),
+            ),
+            cast_to=AndroidListPkgSimpleResponse,
         )
 
     def open(
@@ -529,7 +565,7 @@ class AndroidResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{box_id}/android/apps/{package_name}/open",
+            f"/boxes/{box_id}/android/packages/{package_name}/open",
             body=maybe_transform({"activity_name": activity_name}, android_open_params.AndroidOpenParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -570,7 +606,7 @@ class AndroidResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{box_id}/android/apps/{package_name}/restart",
+            f"/boxes/{box_id}/android/packages/{package_name}/restart",
             body=maybe_transform({"activity_name": activity_name}, android_restart_params.AndroidRestartParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -591,7 +627,7 @@ class AndroidResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Restore app
+        Restore
 
         Args:
           backup: Backup file to restore (max file size: 100MB)
@@ -608,7 +644,7 @@ class AndroidResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{box_id}/android/apps/restore",
+            f"/boxes/{box_id}/android/packages/restore",
             body=maybe_transform({"backup": backup}, android_restore_params.AndroidRestoreParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -633,7 +669,7 @@ class AndroidResource(SyncAPIResource):
         Uninstall app
 
         Args:
-          keep_data: uninstalls the application while retaining the data/cache
+          keep_data: uninstalls the pkg while retaining the data/cache
 
           extra_headers: Send extra headers
 
@@ -649,7 +685,7 @@ class AndroidResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/boxes/{box_id}/android/apps/{package_name}",
+            f"/boxes/{box_id}/android/packages/{package_name}",
             body=maybe_transform({"keep_data": keep_data}, android_uninstall_params.AndroidUninstallParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -678,58 +714,6 @@ class AsyncAndroidResource(AsyncAPIResource):
         """
         return AsyncAndroidResourceWithStreamingResponse(self)
 
-    async def list(
-        self,
-        box_id: str,
-        *,
-        app_type: List[Literal["system", "thirdParty"]] | NotGiven = NOT_GIVEN,
-        running_filter: List[Literal["running", "notRunning"]] | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AndroidListResponse:
-        """Retrieve detailed information for all installed applications.
-
-        This endpoint
-        provides comprehensive app details
-
-        Args:
-          app_type: Application type: system or third-party, default is third-party
-
-          running_filter: Filter apps by running status: running (show only running apps), notRunning
-              (show only non-running apps). Default is all
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not box_id:
-            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return await self._get(
-            f"/boxes/{box_id}/android/apps",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "app_type": app_type,
-                        "running_filter": running_filter,
-                    },
-                    android_list_params.AndroidListParams,
-                ),
-            ),
-            cast_to=AndroidListResponse,
-        )
-
     async def backup(
         self,
         package_name: str,
@@ -743,7 +727,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AsyncBinaryAPIResponse:
         """
-        Backup app
+        Backup
 
         Args:
           extra_headers: Send extra headers
@@ -760,7 +744,7 @@ class AsyncAndroidResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{box_id}/android/apps/{package_name}/backup",
+            f"/boxes/{box_id}/android/packages/{package_name}/backup",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -779,7 +763,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AsyncBinaryAPIResponse:
         """
-        Backup all apps
+        Backup all
 
         Args:
           extra_headers: Send extra headers
@@ -794,7 +778,7 @@ class AsyncAndroidResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{box_id}/android/apps/backup-all",
+            f"/boxes/{box_id}/android/packages/backup-all",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -831,7 +815,7 @@ class AsyncAndroidResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{box_id}/android/apps/{package_name}/close",
+            f"/boxes/{box_id}/android/packages/{package_name}/close",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -865,7 +849,7 @@ class AsyncAndroidResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{box_id}/android/apps/close-all",
+            f"/boxes/{box_id}/android/packages/close-all",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -883,7 +867,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AndroidApp:
+    ) -> AndroidGetResponse:
         """
         Get app
 
@@ -901,11 +885,11 @@ class AsyncAndroidResource(AsyncAPIResource):
         if not package_name:
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         return await self._get(
-            f"/boxes/{box_id}/android/apps/{package_name}",
+            f"/boxes/{box_id}/android/packages/{package_name}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AndroidApp,
+            cast_to=AndroidGetResponse,
         )
 
     async def get_connect_address(
@@ -1021,7 +1005,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{box_id}/android/apps",
+            f"/boxes/{box_id}/android/packages",
             body=await async_maybe_transform(body, android_install_params.AndroidInstallParams),
             files=files,
             options=make_request_options(
@@ -1043,7 +1027,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AndroidListActivitiesResponse:
         """
-        Get app activities
+        Get pkg activities
 
         Args:
           extra_headers: Send extra headers
@@ -1059,33 +1043,69 @@ class AsyncAndroidResource(AsyncAPIResource):
         if not package_name:
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         return await self._get(
-            f"/boxes/{box_id}/android/apps/{package_name}/activities",
+            f"/boxes/{box_id}/android/packages/{package_name}/activities",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AndroidListActivitiesResponse,
         )
 
-    async def list_simple(
+    async def list_app(
         self,
         box_id: str,
         *,
-        app_type: List[Literal["system", "thirdParty"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AndroidListSimpleResponse:
-        """A faster endpoint to quickly retrieve basic app information.
-
-        This API provides
-        better performance for scenarios where you need to get essential app details
-        quickly
+    ) -> AndroidListAppResponse:
+        """
+        List apps
 
         Args:
-          app_type: Application type: system or third-party, default is third-party
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return await self._get(
+            f"/boxes/{box_id}/android/apps",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AndroidListAppResponse,
+        )
+
+    async def list_pkg(
+        self,
+        box_id: str,
+        *,
+        pkg_type: List[Literal["system", "thirdParty"]] | NotGiven = NOT_GIVEN,
+        running_filter: List[Literal["running", "notRunning"]] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AndroidListPkgResponse:
+        """Retrieve detailed information for all installed pkgs.
+
+        This endpoint provides
+        comprehensive pkg details
+
+        Args:
+          pkg_type: Package type: system or third-party, default is third-party
+
+          running_filter: Filter pkgs by running status: running (show only running pkgs), notRunning
+              (show only non-running pkgs). Default is all
 
           extra_headers: Send extra headers
 
@@ -1098,17 +1118,66 @@ class AsyncAndroidResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._get(
-            f"/boxes/{box_id}/android/apps/simple",
+            f"/boxes/{box_id}/android/packages",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"app_type": app_type}, android_list_simple_params.AndroidListSimpleParams
+                    {
+                        "pkg_type": pkg_type,
+                        "running_filter": running_filter,
+                    },
+                    android_list_pkg_params.AndroidListPkgParams,
                 ),
             ),
-            cast_to=AndroidListSimpleResponse,
+            cast_to=AndroidListPkgResponse,
+        )
+
+    async def list_pkg_simple(
+        self,
+        box_id: str,
+        *,
+        pkg_type: List[Literal["system", "thirdParty"]] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AndroidListPkgSimpleResponse:
+        """A faster endpoint to quickly retrieve basic pkg information.
+
+        This API provides
+        better performance for scenarios where you need to get essential pkg details
+        quickly
+
+        Args:
+          pkg_type: Package type: system or third-party, default is third-party
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return await self._get(
+            f"/boxes/{box_id}/android/packages/simple",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"pkg_type": pkg_type}, android_list_pkg_simple_params.AndroidListPkgSimpleParams
+                ),
+            ),
+            cast_to=AndroidListPkgSimpleResponse,
         )
 
     async def open(
@@ -1144,7 +1213,7 @@ class AsyncAndroidResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{box_id}/android/apps/{package_name}/open",
+            f"/boxes/{box_id}/android/packages/{package_name}/open",
             body=await async_maybe_transform({"activity_name": activity_name}, android_open_params.AndroidOpenParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -1185,7 +1254,7 @@ class AsyncAndroidResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{box_id}/android/apps/{package_name}/restart",
+            f"/boxes/{box_id}/android/packages/{package_name}/restart",
             body=await async_maybe_transform(
                 {"activity_name": activity_name}, android_restart_params.AndroidRestartParams
             ),
@@ -1208,7 +1277,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Restore app
+        Restore
 
         Args:
           backup: Backup file to restore (max file size: 100MB)
@@ -1225,7 +1294,7 @@ class AsyncAndroidResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{box_id}/android/apps/restore",
+            f"/boxes/{box_id}/android/packages/restore",
             body=await async_maybe_transform({"backup": backup}, android_restore_params.AndroidRestoreParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -1250,7 +1319,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         Uninstall app
 
         Args:
-          keep_data: uninstalls the application while retaining the data/cache
+          keep_data: uninstalls the pkg while retaining the data/cache
 
           extra_headers: Send extra headers
 
@@ -1266,7 +1335,7 @@ class AsyncAndroidResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/boxes/{box_id}/android/apps/{package_name}",
+            f"/boxes/{box_id}/android/packages/{package_name}",
             body=await async_maybe_transform({"keep_data": keep_data}, android_uninstall_params.AndroidUninstallParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -1279,9 +1348,6 @@ class AndroidResourceWithRawResponse:
     def __init__(self, android: AndroidResource) -> None:
         self._android = android
 
-        self.list = to_raw_response_wrapper(
-            android.list,
-        )
         self.backup = to_custom_raw_response_wrapper(
             android.backup,
             BinaryAPIResponse,
@@ -1308,8 +1374,14 @@ class AndroidResourceWithRawResponse:
         self.list_activities = to_raw_response_wrapper(
             android.list_activities,
         )
-        self.list_simple = to_raw_response_wrapper(
-            android.list_simple,
+        self.list_app = to_raw_response_wrapper(
+            android.list_app,
+        )
+        self.list_pkg = to_raw_response_wrapper(
+            android.list_pkg,
+        )
+        self.list_pkg_simple = to_raw_response_wrapper(
+            android.list_pkg_simple,
         )
         self.open = to_raw_response_wrapper(
             android.open,
@@ -1329,9 +1401,6 @@ class AsyncAndroidResourceWithRawResponse:
     def __init__(self, android: AsyncAndroidResource) -> None:
         self._android = android
 
-        self.list = async_to_raw_response_wrapper(
-            android.list,
-        )
         self.backup = async_to_custom_raw_response_wrapper(
             android.backup,
             AsyncBinaryAPIResponse,
@@ -1358,8 +1427,14 @@ class AsyncAndroidResourceWithRawResponse:
         self.list_activities = async_to_raw_response_wrapper(
             android.list_activities,
         )
-        self.list_simple = async_to_raw_response_wrapper(
-            android.list_simple,
+        self.list_app = async_to_raw_response_wrapper(
+            android.list_app,
+        )
+        self.list_pkg = async_to_raw_response_wrapper(
+            android.list_pkg,
+        )
+        self.list_pkg_simple = async_to_raw_response_wrapper(
+            android.list_pkg_simple,
         )
         self.open = async_to_raw_response_wrapper(
             android.open,
@@ -1379,9 +1454,6 @@ class AndroidResourceWithStreamingResponse:
     def __init__(self, android: AndroidResource) -> None:
         self._android = android
 
-        self.list = to_streamed_response_wrapper(
-            android.list,
-        )
         self.backup = to_custom_streamed_response_wrapper(
             android.backup,
             StreamedBinaryAPIResponse,
@@ -1408,8 +1480,14 @@ class AndroidResourceWithStreamingResponse:
         self.list_activities = to_streamed_response_wrapper(
             android.list_activities,
         )
-        self.list_simple = to_streamed_response_wrapper(
-            android.list_simple,
+        self.list_app = to_streamed_response_wrapper(
+            android.list_app,
+        )
+        self.list_pkg = to_streamed_response_wrapper(
+            android.list_pkg,
+        )
+        self.list_pkg_simple = to_streamed_response_wrapper(
+            android.list_pkg_simple,
         )
         self.open = to_streamed_response_wrapper(
             android.open,
@@ -1429,9 +1507,6 @@ class AsyncAndroidResourceWithStreamingResponse:
     def __init__(self, android: AsyncAndroidResource) -> None:
         self._android = android
 
-        self.list = async_to_streamed_response_wrapper(
-            android.list,
-        )
         self.backup = async_to_custom_streamed_response_wrapper(
             android.backup,
             AsyncStreamedBinaryAPIResponse,
@@ -1458,8 +1533,14 @@ class AsyncAndroidResourceWithStreamingResponse:
         self.list_activities = async_to_streamed_response_wrapper(
             android.list_activities,
         )
-        self.list_simple = async_to_streamed_response_wrapper(
-            android.list_simple,
+        self.list_app = async_to_streamed_response_wrapper(
+            android.list_app,
+        )
+        self.list_pkg = async_to_streamed_response_wrapper(
+            android.list_pkg,
+        )
+        self.list_pkg_simple = async_to_streamed_response_wrapper(
+            android.list_pkg_simple,
         )
         self.open = async_to_streamed_response_wrapper(
             android.open,

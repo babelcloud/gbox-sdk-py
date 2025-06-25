@@ -13,4 +13,4 @@ class AndroidUninstallParams(TypedDict, total=False):
     box_id: Required[Annotated[str, PropertyInfo(alias="boxId")]]
 
     keep_data: Annotated[bool, PropertyInfo(alias="keepData")]
-    """uninstalls the application while retaining the data/cache"""
+    """uninstalls the pkg while retaining the data/cache"""

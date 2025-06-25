@@ -266,6 +266,7 @@ class BoxesResource(SyncAPIResource):
         self,
         *,
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
+        expires_in: str | NotGiven = NOT_GIVEN,
         wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -279,6 +280,11 @@ class BoxesResource(SyncAPIResource):
 
         Args:
           config: Configuration for a box instance
+
+          expires_in: The box will be alive for the given duration
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 60m
 
           wait: Wait for the box operation to be completed, default is true
 
@@ -295,6 +301,7 @@ class BoxesResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "config": config,
+                    "expires_in": expires_in,
                     "wait": wait,
                 },
                 box_create_linux_params.BoxCreateLinuxParams,
@@ -821,6 +828,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         self,
         *,
         config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
+        expires_in: str | NotGiven = NOT_GIVEN,
         wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -834,6 +842,11 @@ class AsyncBoxesResource(AsyncAPIResource):
 
         Args:
           config: Configuration for a box instance
+
+          expires_in: The box will be alive for the given duration
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 60m
 
           wait: Wait for the box operation to be completed, default is true
 
@@ -850,6 +863,7 @@ class AsyncBoxesResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "config": config,
+                    "expires_in": expires_in,
                     "wait": wait,
                 },
                 box_create_linux_params.BoxCreateLinuxParams,

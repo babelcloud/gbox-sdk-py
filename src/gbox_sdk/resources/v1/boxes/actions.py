@@ -111,7 +111,10 @@ class ActionsResource(SyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot. Maximum allowed delay is 30s.
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
 
           extra_headers: Send extra headers
 
@@ -172,6 +175,9 @@ class ActionsResource(SyncAPIResource):
 
           duration: Time interval between points (e.g. "50ms")
 
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 50ms
+
           include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
               object will still be returned but with empty URIs. Default is false.
 
@@ -187,7 +193,10 @@ class ActionsResource(SyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot. Maximum allowed delay is 30s.
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
 
           extra_headers: Send extra headers
 
@@ -261,7 +270,10 @@ class ActionsResource(SyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot. Maximum allowed delay is 30s.
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
 
           extra_headers: Send extra headers
 
@@ -334,7 +346,10 @@ class ActionsResource(SyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot. Maximum allowed delay is 30s.
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
 
           extra_headers: Send extra headers
 
@@ -520,7 +535,10 @@ class ActionsResource(SyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot. Maximum allowed delay is 30s.
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
 
           extra_headers: Send extra headers
 
@@ -696,7 +714,10 @@ class ActionsResource(SyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot. Maximum allowed delay is 30s.
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
 
           extra_headers: Send extra headers
 
@@ -763,6 +784,9 @@ class ActionsResource(SyncAPIResource):
 
           duration: Duration of the swipe
 
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+
           include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
               object will still be returned but with empty URIs. Default is false.
 
@@ -778,7 +802,10 @@ class ActionsResource(SyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot. Maximum allowed delay is 30s.
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
 
           extra_headers: Send extra headers
 
@@ -818,6 +845,9 @@ class ActionsResource(SyncAPIResource):
 
           duration: Duration of the swipe
 
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+
           include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
               object will still be returned but with empty URIs. Default is false.
 
@@ -833,7 +863,10 @@ class ActionsResource(SyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot. Maximum allowed delay is 30s.
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
 
           extra_headers: Send extra headers
 
@@ -930,7 +963,10 @@ class ActionsResource(SyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot. Maximum allowed delay is 30s.
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
 
           extra_headers: Send extra headers
 
@@ -1002,7 +1038,10 @@ class ActionsResource(SyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot. Maximum allowed delay is 30s.
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
 
           extra_headers: Send extra headers
 
@@ -1102,7 +1141,10 @@ class AsyncActionsResource(AsyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot. Maximum allowed delay is 30s.
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
 
           extra_headers: Send extra headers
 
@@ -1163,6 +1205,9 @@ class AsyncActionsResource(AsyncAPIResource):
 
           duration: Time interval between points (e.g. "50ms")
 
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 50ms
+
           include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
               object will still be returned but with empty URIs. Default is false.
 
@@ -1178,7 +1223,10 @@ class AsyncActionsResource(AsyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot. Maximum allowed delay is 30s.
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
 
           extra_headers: Send extra headers
 
@@ -1252,7 +1300,10 @@ class AsyncActionsResource(AsyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot. Maximum allowed delay is 30s.
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
 
           extra_headers: Send extra headers
 
@@ -1325,7 +1376,10 @@ class AsyncActionsResource(AsyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot. Maximum allowed delay is 30s.
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
 
           extra_headers: Send extra headers
 
@@ -1511,7 +1565,10 @@ class AsyncActionsResource(AsyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot. Maximum allowed delay is 30s.
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
 
           extra_headers: Send extra headers
 
@@ -1687,7 +1744,10 @@ class AsyncActionsResource(AsyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot. Maximum allowed delay is 30s.
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
 
           extra_headers: Send extra headers
 
@@ -1754,6 +1814,9 @@ class AsyncActionsResource(AsyncAPIResource):
 
           duration: Duration of the swipe
 
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+
           include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
               object will still be returned but with empty URIs. Default is false.
 
@@ -1769,7 +1832,10 @@ class AsyncActionsResource(AsyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot. Maximum allowed delay is 30s.
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
 
           extra_headers: Send extra headers
 
@@ -1809,6 +1875,9 @@ class AsyncActionsResource(AsyncAPIResource):
 
           duration: Duration of the swipe
 
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+
           include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
               object will still be returned but with empty URIs. Default is false.
 
@@ -1824,7 +1893,10 @@ class AsyncActionsResource(AsyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot. Maximum allowed delay is 30s.
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
 
           extra_headers: Send extra headers
 
@@ -1921,7 +1993,10 @@ class AsyncActionsResource(AsyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot. Maximum allowed delay is 30s.
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
 
           extra_headers: Send extra headers
 
@@ -1993,7 +2068,10 @@ class AsyncActionsResource(AsyncAPIResource):
               4. Take screenshot after action
 
               Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot. Maximum allowed delay is 30s.
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
 
           extra_headers: Send extra headers
 

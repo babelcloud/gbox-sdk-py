@@ -329,9 +329,11 @@ class BoxesResource(SyncAPIResource):
 
           envs: The environment variables to run the command
 
-          api_timeout: The timeout of the command. e.g. '30s' or '1m' or '1h'. If the command times
-              out, the exit code will be 124. For example: 'timeout 5s sleep 10s' will result
-              in exit code 124.
+          api_timeout: The timeout of the command. If the command times out, the exit code will be 124.
+              For example: 'timeout 5s sleep 10s' will result in exit code 124.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30s
 
           working_dir: The working directory of the command. It not provided, the command will be run
               in the `box.config.workingDir` directory.
@@ -379,8 +381,10 @@ class BoxesResource(SyncAPIResource):
         Generate pre-signed live view url
 
         Args:
-          expires_in: The live view will be alive for the given duration (e.g. '10m' or '1h'). Default
-              is 180m.
+          expires_in: The live view will be alive for the given duration
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 180m
 
           extra_headers: Send extra headers
 
@@ -431,8 +435,11 @@ class BoxesResource(SyncAPIResource):
 
           language: The language of the code.
 
-          api_timeout: The timeout of the code execution. e.g. "30s" or "1m" or "1h". If the code
-              execution times out, the exit code will be 124.
+          api_timeout: The timeout of the code execution. If the code execution times out, the exit
+              code will be 124.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30s
 
           working_dir: The working directory of the code. It not provided, the code will be run in the
               `box.config.workingDir` directory.
@@ -600,8 +607,10 @@ class BoxesResource(SyncAPIResource):
         Generate pre-signed web terminal url
 
         Args:
-          expires_in: The web terminal will be alive for the given duration (e.g. '10m' or '1h').
-              Default is 180m.
+          expires_in: The web terminal will be alive for the given duration
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 180m
 
           extra_headers: Send extra headers
 
@@ -875,9 +884,11 @@ class AsyncBoxesResource(AsyncAPIResource):
 
           envs: The environment variables to run the command
 
-          api_timeout: The timeout of the command. e.g. '30s' or '1m' or '1h'. If the command times
-              out, the exit code will be 124. For example: 'timeout 5s sleep 10s' will result
-              in exit code 124.
+          api_timeout: The timeout of the command. If the command times out, the exit code will be 124.
+              For example: 'timeout 5s sleep 10s' will result in exit code 124.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30s
 
           working_dir: The working directory of the command. It not provided, the command will be run
               in the `box.config.workingDir` directory.
@@ -925,8 +936,10 @@ class AsyncBoxesResource(AsyncAPIResource):
         Generate pre-signed live view url
 
         Args:
-          expires_in: The live view will be alive for the given duration (e.g. '10m' or '1h'). Default
-              is 180m.
+          expires_in: The live view will be alive for the given duration
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 180m
 
           extra_headers: Send extra headers
 
@@ -977,8 +990,11 @@ class AsyncBoxesResource(AsyncAPIResource):
 
           language: The language of the code.
 
-          api_timeout: The timeout of the code execution. e.g. "30s" or "1m" or "1h". If the code
-              execution times out, the exit code will be 124.
+          api_timeout: The timeout of the code execution. If the code execution times out, the exit
+              code will be 124.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30s
 
           working_dir: The working directory of the code. It not provided, the code will be run in the
               `box.config.workingDir` directory.
@@ -1146,8 +1162,10 @@ class AsyncBoxesResource(AsyncAPIResource):
         Generate pre-signed web terminal url
 
         Args:
-          expires_in: The web terminal will be alive for the given duration (e.g. '10m' or '1h').
-              Default is 180m.
+          expires_in: The web terminal will be alive for the given duration
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 180m
 
           extra_headers: Send extra headers
 

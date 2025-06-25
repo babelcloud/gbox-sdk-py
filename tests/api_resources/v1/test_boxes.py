@@ -339,7 +339,7 @@ class TestBoxes:
                 "DEBUG": "true",
             },
             language="python",
-            api_timeout="timeout",
+            api_timeout="30s",
             working_dir="/home/user/scripts",
         )
         assert_matches_type(BoxRunCodeResponse, box, path=["response"])
@@ -902,7 +902,7 @@ class TestAsyncBoxes:
                 "DEBUG": "true",
             },
             language="python",
-            api_timeout="timeout",
+            api_timeout="30s",
             working_dir="/home/user/scripts",
         )
         assert_matches_type(BoxRunCodeResponse, box, path=["response"])

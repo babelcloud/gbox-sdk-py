@@ -56,7 +56,10 @@ class BrowserResource(SyncAPIResource):
         Generate pre-signed CDP url
 
         Args:
-          expires_in: The CDP url will be alive for the given duration (e.g. '120m')
+          expires_in: The CDP url will be alive for the given duration
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 120m
 
           extra_headers: Send extra headers
 
@@ -114,7 +117,10 @@ class AsyncBrowserResource(AsyncAPIResource):
         Generate pre-signed CDP url
 
         Args:
-          expires_in: The CDP url will be alive for the given duration (e.g. '120m')
+          expires_in: The CDP url will be alive for the given duration
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 120m
 
           extra_headers: Send extra headers
 

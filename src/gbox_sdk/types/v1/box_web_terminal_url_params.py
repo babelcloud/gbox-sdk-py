@@ -11,7 +11,8 @@ __all__ = ["BoxWebTerminalURLParams"]
 
 class BoxWebTerminalURLParams(TypedDict, total=False):
     expires_in: Annotated[str, PropertyInfo(alias="expiresIn")]
-    """The web terminal will be alive for the given duration (e.g.
+    """The web terminal will be alive for the given duration
 
-    '10m' or '1h'). Default is 180m.
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 180m
     """

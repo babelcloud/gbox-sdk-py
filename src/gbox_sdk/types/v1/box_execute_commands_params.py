@@ -20,8 +20,11 @@ class BoxExecuteCommandsParams(TypedDict, total=False):
     api_timeout: Annotated[str, PropertyInfo(alias="timeout")]
     """The timeout of the command.
 
-    e.g. '30s' or '1m' or '1h'. If the command times out, the exit code will be 124.
-    For example: 'timeout 5s sleep 10s' will result in exit code 124.
+    If the command times out, the exit code will be 124. For example: 'timeout 5s
+    sleep 10s' will result in exit code 124.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30s
     """
 
     working_dir: Annotated[str, PropertyInfo(alias="workingDir")]

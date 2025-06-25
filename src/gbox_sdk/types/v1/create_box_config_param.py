@@ -19,7 +19,11 @@ class CreateBoxConfigParam(TypedDict, total=False):
     """
 
     expires_in: Annotated[str, PropertyInfo(alias="expiresIn")]
-    """The box will be alive for the given duration (e.g. '10m')"""
+    """The box will be alive for the given duration
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 60m
+    """
 
     labels: Dict[str, str]
     """Key-value pairs of labels for the box.

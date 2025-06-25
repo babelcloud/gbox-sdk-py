@@ -26,7 +26,11 @@ class SwipeSimple(TypedDict, total=False):
     """
 
     duration: str
-    """Duration of the swipe"""
+    """Duration of the swipe
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+    """
 
     include_screenshot: Annotated[bool, PropertyInfo(alias="includeScreenshot")]
     """Whether to include screenshots in the action response.
@@ -49,7 +53,10 @@ class SwipeSimple(TypedDict, total=False):
     4. Take screenshot after action
 
     Example: '500ms' means wait 500ms after the action before capturing the final
-    screenshot. Maximum allowed delay is 30s.
+    screenshot.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
     """
 
 
@@ -61,7 +68,11 @@ class SwipeAdvanced(TypedDict, total=False):
     """Start point of the swipe path"""
 
     duration: str
-    """Duration of the swipe"""
+    """Duration of the swipe
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+    """
 
     include_screenshot: Annotated[bool, PropertyInfo(alias="includeScreenshot")]
     """Whether to include screenshots in the action response.
@@ -84,7 +95,10 @@ class SwipeAdvanced(TypedDict, total=False):
     4. Take screenshot after action
 
     Example: '500ms' means wait 500ms after the action before capturing the final
-    screenshot. Maximum allowed delay is 30s.
+    screenshot.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
     """
 
 

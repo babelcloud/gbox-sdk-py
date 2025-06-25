@@ -30,8 +30,10 @@ class BoxRunCodeParams(TypedDict, total=False):
     api_timeout: Annotated[str, PropertyInfo(alias="timeout")]
     """The timeout of the code execution.
 
-    e.g. "30s" or "1m" or "1h". If the code execution times out, the exit code will
-    be 124.
+    If the code execution times out, the exit code will be 124.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30s
     """
 
     working_dir: Annotated[str, PropertyInfo(alias="workingDir")]

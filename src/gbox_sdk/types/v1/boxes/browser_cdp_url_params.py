@@ -11,4 +11,8 @@ __all__ = ["BrowserCdpURLParams"]
 
 class BrowserCdpURLParams(TypedDict, total=False):
     expires_in: Annotated[str, PropertyInfo(alias="expiresIn")]
-    """The CDP url will be alive for the given duration (e.g. '120m')"""
+    """The CDP url will be alive for the given duration
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 120m
+    """

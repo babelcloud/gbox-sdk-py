@@ -34,5 +34,8 @@ class ActionTypeParams(TypedDict, total=False):
     4. Take screenshot after action
 
     Example: '500ms' means wait 500ms after the action before capturing the final
-    screenshot. Maximum allowed delay is 30s.
+    screenshot.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
     """

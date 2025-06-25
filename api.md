@@ -114,6 +114,7 @@ Types:
 
 ```python
 from gbox_sdk.types.v1.boxes import (
+    AndroidApp,
     AndroidGetResponse,
     AndroidGetConnectAddressResponse,
     AndroidInstallResponse,

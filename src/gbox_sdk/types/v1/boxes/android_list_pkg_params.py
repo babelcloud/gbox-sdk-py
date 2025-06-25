@@ -12,7 +12,7 @@ __all__ = ["AndroidListPkgParams"]
 
 class AndroidListPkgParams(TypedDict, total=False):
     pkg_type: Annotated[List[Literal["system", "thirdParty"]], PropertyInfo(alias="pkgType")]
-    """Package type: system or third-party, default is third-party"""
+    """Package type: system or thirdParty, default is thirdParty"""
 
     running_filter: Annotated[List[Literal["running", "notRunning"]], PropertyInfo(alias="runningFilter")]
     """

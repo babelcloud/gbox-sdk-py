@@ -454,7 +454,7 @@ class AndroidResource(SyncAPIResource):
         comprehensive pkg details
 
         Args:
-          pkg_type: Package type: system or third-party, default is third-party
+          pkg_type: Package type: system or thirdParty, default is thirdParty
 
           running_filter: Filter pkgs by running status: running (show only running pkgs), notRunning
               (show only non-running pkgs). Default is all
@@ -506,7 +506,7 @@ class AndroidResource(SyncAPIResource):
         quickly
 
         Args:
-          pkg_type: Package type: system or third-party, default is third-party
+          pkg_type: Package type: system or thirdParty, default is thirdParty
 
           extra_headers: Send extra headers
 
@@ -1102,7 +1102,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         comprehensive pkg details
 
         Args:
-          pkg_type: Package type: system or third-party, default is third-party
+          pkg_type: Package type: system or thirdParty, default is thirdParty
 
           running_filter: Filter pkgs by running status: running (show only running pkgs), notRunning
               (show only non-running pkgs). Default is all
@@ -1154,7 +1154,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         quickly
 
         Args:
-          pkg_type: Package type: system or third-party, default is third-party
+          pkg_type: Package type: system or thirdParty, default is thirdParty
 
           extra_headers: Send extra headers
 

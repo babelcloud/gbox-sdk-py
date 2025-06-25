@@ -485,7 +485,7 @@ class AndroidResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AndroidListPkgResponse:
-        """Retrieve detailed information for all installed pkgs.
+        """Retrieve detailed information for all installed pkg.
 
         This endpoint provides
         comprehensive pkg details
@@ -1169,7 +1169,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AndroidListPkgResponse:
-        """Retrieve detailed information for all installed pkgs.
+        """Retrieve detailed information for all installed pkg.
 
         This endpoint provides
         comprehensive pkg details

@@ -14,5 +14,5 @@ class AndroidApp(BaseModel):
     activity_name: str = FieldInfo(alias="activityName")
     """Activity name"""
 
-    pkg_name: str = FieldInfo(alias="pkgName")
+    package_name: str = FieldInfo(alias="packageName")
     """App package name"""

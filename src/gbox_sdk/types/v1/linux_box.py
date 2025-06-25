@@ -90,7 +90,7 @@ class LinuxBox(BaseModel):
     expires_at: datetime = FieldInfo(alias="expiresAt")
     """Expiration timestamp of the box"""
 
-    status: Literal["pending", "running", "stopped", "error", "terminated"]
+    status: Literal["pending", "running", "error", "terminated"]
     """The current status of a box instance"""
 
     type: Literal["linux"]

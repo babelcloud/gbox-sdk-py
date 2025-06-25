@@ -3,9 +3,7 @@
 from __future__ import annotations
 
 from typing import Dict
-from typing_extensions import Annotated, TypedDict
-
-from ..._utils import PropertyInfo
+from typing_extensions import TypedDict
 
 __all__ = ["CreateBoxConfigParam"]
 
@@ -16,13 +14,6 @@ class CreateBoxConfigParam(TypedDict, total=False):
 
     These variables will be available in all operations including command execution,
     code running, and other box behaviors
-    """
-
-    expires_in: Annotated[str, PropertyInfo(alias="expiresIn")]
-    """The box will be alive for the given duration
-
-    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-    Example formats: "500ms", "30s", "5m", "1h" Default: 60m
     """
 
     labels: Dict[str, str]

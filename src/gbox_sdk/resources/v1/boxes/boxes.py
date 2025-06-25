@@ -158,7 +158,7 @@ class BoxesResource(SyncAPIResource):
         labels: object | NotGiven = NOT_GIVEN,
         page: int | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
-        status: List[Literal["all", "pending", "running", "stopped", "error", "terminated"]] | NotGiven = NOT_GIVEN,
+        status: List[Literal["all", "pending", "running", "error", "terminated"]] | NotGiven = NOT_GIVEN,
         type: List[Literal["all", "linux", "android"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -713,7 +713,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         labels: object | NotGiven = NOT_GIVEN,
         page: int | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
-        status: List[Literal["all", "pending", "running", "stopped", "error", "terminated"]] | NotGiven = NOT_GIVEN,
+        status: List[Literal["all", "pending", "running", "error", "terminated"]] | NotGiven = NOT_GIVEN,
         type: List[Literal["all", "linux", "android"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.

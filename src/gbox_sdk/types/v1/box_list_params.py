@@ -28,7 +28,7 @@ class BoxListParams(TypedDict, total=False):
     page_size: Annotated[int, PropertyInfo(alias="pageSize")]
     """Page size"""
 
-    status: List[Literal["all", "pending", "running", "stopped", "error", "terminated"]]
+    status: List[Literal["all", "pending", "running", "error", "terminated"]]
     """
     Filter boxes by their current status (pending, running, stopped, error,
     terminated, all). Must be an array of statuses. Use 'all' to get boxes with any

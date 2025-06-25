@@ -62,10 +62,10 @@ class SwipeSimple(TypedDict, total=False):
 
 class SwipeAdvanced(TypedDict, total=False):
     end: Required[SwipeAdvancedEnd]
-    """End point of the swipe path"""
+    """Swipe path"""
 
     start: Required[SwipeAdvancedStart]
-    """Start point of the swipe path"""
+    """Swipe path"""
 
     duration: str
     """Duration of the swipe

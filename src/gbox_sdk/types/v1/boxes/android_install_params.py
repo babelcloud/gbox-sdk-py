@@ -7,17 +7,17 @@ from typing_extensions import Required, TypeAlias, TypedDict
 
 from ...._types import FileTypes
 
-__all__ = ["AndroidInstallParams", "InstallAndroidAppByFile", "InstallAndroidAppByURL"]
+__all__ = ["AndroidInstallParams", "InstallAndroidPkgByFile", "InstallAndroidPkgByURL"]
 
 
-class InstallAndroidAppByFile(TypedDict, total=False):
+class InstallAndroidPkgByFile(TypedDict, total=False):
     apk: Required[FileTypes]
     """APK file to install (max file size: 512MB)"""
 
 
-class InstallAndroidAppByURL(TypedDict, total=False):
+class InstallAndroidPkgByURL(TypedDict, total=False):
     apk: Required[str]
     """HTTP URL to download APK file (max file size: 512MB)"""
 
 
-AndroidInstallParams: TypeAlias = Union[InstallAndroidAppByFile, InstallAndroidAppByURL]
+AndroidInstallParams: TypeAlias = Union[InstallAndroidPkgByFile, InstallAndroidPkgByURL]

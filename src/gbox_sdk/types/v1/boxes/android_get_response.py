@@ -6,24 +6,24 @@ from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
 
-__all__ = ["AndroidApp"]
+__all__ = ["AndroidGetResponse"]
 
 
-class AndroidApp(BaseModel):
+class AndroidGetResponse(BaseModel):
     apk_path: str = FieldInfo(alias="apkPath")
-    """Android app apk path"""
-
-    app_type: Literal["system", "thirdParty"] = FieldInfo(alias="appType")
-    """Application type: system or third-party"""
+    """Android apk path"""
 
     is_running: bool = FieldInfo(alias="isRunning")
-    """Whether the application is currently running"""
+    """Whether the pkg is currently running"""
 
     name: str
-    """Android app name"""
+    """Android pkg name"""
 
     package_name: str = FieldInfo(alias="packageName")
-    """Android app package name"""
+    """Android package name"""
+
+    pkg_type: Literal["system", "thirdParty"] = FieldInfo(alias="pkgType")
+    """Package type: system or third-party"""
 
     version: str
-    """Android app version"""
+    """Android pkg version"""

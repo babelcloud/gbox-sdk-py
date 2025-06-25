@@ -114,28 +114,30 @@ Types:
 
 ```python
 from gbox_sdk.types.v1.boxes import (
-    AndroidApp,
-    AndroidListResponse,
+    AndroidGetResponse,
     AndroidGetConnectAddressResponse,
     AndroidInstallResponse,
     AndroidListActivitiesResponse,
-    AndroidListSimpleResponse,
+    AndroidListAppResponse,
+    AndroidListPkgResponse,
+    AndroidListPkgSimpleResponse,
 )
 ```
 
 Methods:
 
-- <code title="get /boxes/{boxId}/android/apps">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">list</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/android_list_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/android_list_response.py">AndroidListResponse</a></code>
-- <code title="post /boxes/{boxId}/android/apps/{packageName}/backup">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">backup</a>(package_name, \*, box_id) -> BinaryAPIResponse</code>
-- <code title="post /boxes/{boxId}/android/apps/backup-all">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">backup_all</a>(box_id) -> BinaryAPIResponse</code>
-- <code title="post /boxes/{boxId}/android/apps/{packageName}/close">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">close</a>(package_name, \*, box_id) -> None</code>
-- <code title="post /boxes/{boxId}/android/apps/close-all">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">close_all</a>(box_id) -> None</code>
-- <code title="get /boxes/{boxId}/android/apps/{packageName}">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">get</a>(package_name, \*, box_id) -> <a href="./src/gbox_sdk/types/v1/boxes/android_app.py">AndroidApp</a></code>
+- <code title="post /boxes/{boxId}/android/packages/{packageName}/backup">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">backup</a>(package_name, \*, box_id) -> BinaryAPIResponse</code>
+- <code title="post /boxes/{boxId}/android/packages/backup-all">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">backup_all</a>(box_id) -> BinaryAPIResponse</code>
+- <code title="post /boxes/{boxId}/android/packages/{packageName}/close">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">close</a>(package_name, \*, box_id) -> None</code>
+- <code title="post /boxes/{boxId}/android/packages/close-all">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">close_all</a>(box_id) -> None</code>
+- <code title="get /boxes/{boxId}/android/packages/{packageName}">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">get</a>(package_name, \*, box_id) -> <a href="./src/gbox_sdk/types/v1/boxes/android_get_response.py">AndroidGetResponse</a></code>
 - <code title="get /boxes/{boxId}/android/connect-address">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">get_connect_address</a>(box_id) -> <a href="./src/gbox_sdk/types/v1/boxes/android_get_connect_address_response.py">AndroidGetConnectAddressResponse</a></code>
-- <code title="post /boxes/{boxId}/android/apps">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">install</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/android_install_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/android_install_response.py">AndroidInstallResponse</a></code>
-- <code title="get /boxes/{boxId}/android/apps/{packageName}/activities">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">list_activities</a>(package_name, \*, box_id) -> <a href="./src/gbox_sdk/types/v1/boxes/android_list_activities_response.py">AndroidListActivitiesResponse</a></code>
-- <code title="get /boxes/{boxId}/android/apps/simple">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">list_simple</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/android_list_simple_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/android_list_simple_response.py">AndroidListSimpleResponse</a></code>
-- <code title="post /boxes/{boxId}/android/apps/{packageName}/open">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">open</a>(package_name, \*, box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/android_open_params.py">params</a>) -> None</code>
-- <code title="post /boxes/{boxId}/android/apps/{packageName}/restart">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">restart</a>(package_name, \*, box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/android_restart_params.py">params</a>) -> None</code>
-- <code title="post /boxes/{boxId}/android/apps/restore">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">restore</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/android_restore_params.py">params</a>) -> None</code>
-- <code title="delete /boxes/{boxId}/android/apps/{packageName}">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">uninstall</a>(package_name, \*, box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/android_uninstall_params.py">params</a>) -> None</code>
+- <code title="post /boxes/{boxId}/android/packages">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">install</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/android_install_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/android_install_response.py">AndroidInstallResponse</a></code>
+- <code title="get /boxes/{boxId}/android/packages/{packageName}/activities">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">list_activities</a>(package_name, \*, box_id) -> <a href="./src/gbox_sdk/types/v1/boxes/android_list_activities_response.py">AndroidListActivitiesResponse</a></code>
+- <code title="get /boxes/{boxId}/android/apps">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">list_app</a>(box_id) -> <a href="./src/gbox_sdk/types/v1/boxes/android_list_app_response.py">AndroidListAppResponse</a></code>
+- <code title="get /boxes/{boxId}/android/packages">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">list_pkg</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/android_list_pkg_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/android_list_pkg_response.py">AndroidListPkgResponse</a></code>
+- <code title="get /boxes/{boxId}/android/packages/simple">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">list_pkg_simple</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/android_list_pkg_simple_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/android_list_pkg_simple_response.py">AndroidListPkgSimpleResponse</a></code>
+- <code title="post /boxes/{boxId}/android/packages/{packageName}/open">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">open</a>(package_name, \*, box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/android_open_params.py">params</a>) -> None</code>
+- <code title="post /boxes/{boxId}/android/packages/{packageName}/restart">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">restart</a>(package_name, \*, box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/android_restart_params.py">params</a>) -> None</code>
+- <code title="post /boxes/{boxId}/android/packages/restore">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">restore</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/android_restore_params.py">params</a>) -> None</code>
+- <code title="delete /boxes/{boxId}/android/packages/{packageName}">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">uninstall</a>(package_name, \*, box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/android_uninstall_params.py">params</a>) -> None</code>

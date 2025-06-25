@@ -221,7 +221,7 @@ class AndroidResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AndroidGetResponse:
         """
-        Get app
+        Get pkg
 
         Args:
           extra_headers: Send extra headers
@@ -242,6 +242,43 @@ class AndroidResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AndroidGetResponse,
+        )
+
+    def get_app(
+        self,
+        package_name: str,
+        *,
+        box_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Get app
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        if not package_name:
+            raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._get(
+            f"/boxes/{box_id}/android/apps/{package_name}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
         )
 
     def get_connect_address(
@@ -869,7 +906,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AndroidGetResponse:
         """
-        Get app
+        Get pkg
 
         Args:
           extra_headers: Send extra headers
@@ -890,6 +927,43 @@ class AsyncAndroidResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AndroidGetResponse,
+        )
+
+    async def get_app(
+        self,
+        package_name: str,
+        *,
+        box_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Get app
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        if not package_name:
+            raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._get(
+            f"/boxes/{box_id}/android/apps/{package_name}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
         )
 
     async def get_connect_address(
@@ -1365,6 +1439,9 @@ class AndroidResourceWithRawResponse:
         self.get = to_raw_response_wrapper(
             android.get,
         )
+        self.get_app = to_raw_response_wrapper(
+            android.get_app,
+        )
         self.get_connect_address = to_raw_response_wrapper(
             android.get_connect_address,
         )
@@ -1417,6 +1494,9 @@ class AsyncAndroidResourceWithRawResponse:
         )
         self.get = async_to_raw_response_wrapper(
             android.get,
+        )
+        self.get_app = async_to_raw_response_wrapper(
+            android.get_app,
         )
         self.get_connect_address = async_to_raw_response_wrapper(
             android.get_connect_address,
@@ -1471,6 +1551,9 @@ class AndroidResourceWithStreamingResponse:
         self.get = to_streamed_response_wrapper(
             android.get,
         )
+        self.get_app = to_streamed_response_wrapper(
+            android.get_app,
+        )
         self.get_connect_address = to_streamed_response_wrapper(
             android.get_connect_address,
         )
@@ -1523,6 +1606,9 @@ class AsyncAndroidResourceWithStreamingResponse:
         )
         self.get = async_to_streamed_response_wrapper(
             android.get,
+        )
+        self.get_app = async_to_streamed_response_wrapper(
+            android.get_app,
         )
         self.get_connect_address = async_to_streamed_response_wrapper(
             android.get_connect_address,

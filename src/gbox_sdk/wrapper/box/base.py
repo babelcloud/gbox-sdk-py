@@ -18,7 +18,7 @@ from gbox_sdk.types.v1.box_web_terminal_url_response import BoxWebTerminalURLRes
 
 
 class BaseBox:
-    def __init__(self, data: Union[LinuxBox, AndroidBox], client: GboxClient):
+    def __init__(self, client: GboxClient, data: Union[LinuxBox, AndroidBox]):
         self.client = client
         self.data = data
 

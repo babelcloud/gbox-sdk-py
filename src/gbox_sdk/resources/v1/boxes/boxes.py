@@ -67,6 +67,7 @@ from ....types.v1.android_box import AndroidBox
 from ....types.v1.box_list_response import BoxListResponse
 from ....types.v1.box_stop_response import BoxStopResponse
 from ....types.v1.box_start_response import BoxStartResponse
+from ....types.v1.box_display_response import BoxDisplayResponse
 from ....types.v1.box_retrieve_response import BoxRetrieveResponse
 from ....types.v1.box_run_code_response import BoxRunCodeResponse
 from ....types.v1.create_box_config_param import CreateBoxConfigParam
@@ -310,6 +311,39 @@ class BoxesResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=LinuxBox,
+        )
+
+    def display(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BoxDisplayResponse:
+        """
+        Get box display
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return self._get(
+            f"/boxes/{box_id}/display",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BoxDisplayResponse,
         )
 
     def execute_commands(
@@ -874,6 +908,39 @@ class AsyncBoxesResource(AsyncAPIResource):
             cast_to=LinuxBox,
         )
 
+    async def display(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BoxDisplayResponse:
+        """
+        Get box display
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return await self._get(
+            f"/boxes/{box_id}/display",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BoxDisplayResponse,
+        )
+
     async def execute_commands(
         self,
         box_id: str,
@@ -1219,6 +1286,9 @@ class BoxesResourceWithRawResponse:
         self.create_linux = to_raw_response_wrapper(
             boxes.create_linux,
         )
+        self.display = to_raw_response_wrapper(
+            boxes.display,
+        )
         self.execute_commands = to_raw_response_wrapper(
             boxes.execute_commands,
         )
@@ -1273,6 +1343,9 @@ class AsyncBoxesResourceWithRawResponse:
         )
         self.create_linux = async_to_raw_response_wrapper(
             boxes.create_linux,
+        )
+        self.display = async_to_raw_response_wrapper(
+            boxes.display,
         )
         self.execute_commands = async_to_raw_response_wrapper(
             boxes.execute_commands,
@@ -1329,6 +1402,9 @@ class BoxesResourceWithStreamingResponse:
         self.create_linux = to_streamed_response_wrapper(
             boxes.create_linux,
         )
+        self.display = to_streamed_response_wrapper(
+            boxes.display,
+        )
         self.execute_commands = to_streamed_response_wrapper(
             boxes.execute_commands,
         )
@@ -1383,6 +1459,9 @@ class AsyncBoxesResourceWithStreamingResponse:
         )
         self.create_linux = async_to_streamed_response_wrapper(
             boxes.create_linux,
+        )
+        self.display = async_to_streamed_response_wrapper(
+            boxes.display,
         )
         self.execute_commands = async_to_streamed_response_wrapper(
             boxes.execute_commands,

@@ -34,27 +34,27 @@ __all__ = [
     "AIActionScreenshotResultScreenshotAfter",
     "AIActionScreenshotResultScreenshotBefore",
     "AIActionScreenshotResultScreenshotTrace",
-    "AIActionResultDto",
-    "AIActionResultDtoAIResponse",
-    "AIActionResultDtoAIResponseAction",
-    "AIActionResultDtoAIResponseActionTypedClickAction",
-    "AIActionResultDtoAIResponseActionTypedTouchAction",
-    "AIActionResultDtoAIResponseActionTypedTouchActionPoint",
-    "AIActionResultDtoAIResponseActionTypedTouchActionPointStart",
-    "AIActionResultDtoAIResponseActionTypedDragAction",
-    "AIActionResultDtoAIResponseActionTypedDragActionPath",
-    "AIActionResultDtoAIResponseActionTypedScrollAction",
-    "AIActionResultDtoAIResponseActionTypedSwipeSimpleAction",
-    "AIActionResultDtoAIResponseActionTypedSwipeAdvancedAction",
-    "AIActionResultDtoAIResponseActionTypedSwipeAdvancedActionEnd",
-    "AIActionResultDtoAIResponseActionTypedSwipeAdvancedActionStart",
-    "AIActionResultDtoAIResponseActionTypedPressKeyAction",
-    "AIActionResultDtoAIResponseActionTypedPressButtonAction",
-    "AIActionResultDtoAIResponseActionTypedTypeAction",
-    "AIActionResultDtoAIResponseActionTypedMoveAction",
-    "AIActionResultDtoAIResponseActionTypedScreenRotationAction",
-    "AIActionResultDtoAIResponseActionTypedScreenshotAction",
-    "AIActionResultDtoAIResponseActionTypedScreenshotActionClip",
+    "AIActionResult",
+    "AIActionResultAIResponse",
+    "AIActionResultAIResponseAction",
+    "AIActionResultAIResponseActionTypedClickAction",
+    "AIActionResultAIResponseActionTypedTouchAction",
+    "AIActionResultAIResponseActionTypedTouchActionPoint",
+    "AIActionResultAIResponseActionTypedTouchActionPointStart",
+    "AIActionResultAIResponseActionTypedDragAction",
+    "AIActionResultAIResponseActionTypedDragActionPath",
+    "AIActionResultAIResponseActionTypedScrollAction",
+    "AIActionResultAIResponseActionTypedSwipeSimpleAction",
+    "AIActionResultAIResponseActionTypedSwipeAdvancedAction",
+    "AIActionResultAIResponseActionTypedSwipeAdvancedActionEnd",
+    "AIActionResultAIResponseActionTypedSwipeAdvancedActionStart",
+    "AIActionResultAIResponseActionTypedPressKeyAction",
+    "AIActionResultAIResponseActionTypedPressButtonAction",
+    "AIActionResultAIResponseActionTypedTypeAction",
+    "AIActionResultAIResponseActionTypedMoveAction",
+    "AIActionResultAIResponseActionTypedScreenRotationAction",
+    "AIActionResultAIResponseActionTypedScreenshotAction",
+    "AIActionResultAIResponseActionTypedScreenshotActionClip",
 ]
 
 
@@ -687,7 +687,7 @@ class AIActionScreenshotResult(BaseModel):
     """Complete screenshot result with operation trace, before and after images"""
 
 
-class AIActionResultDtoAIResponseActionTypedClickAction(BaseModel):
+class AIActionResultAIResponseActionTypedClickAction(BaseModel):
     x: float
     """X coordinate of the click"""
 
@@ -728,7 +728,7 @@ class AIActionResultDtoAIResponseActionTypedClickAction(BaseModel):
     """
 
 
-class AIActionResultDtoAIResponseActionTypedTouchActionPointStart(BaseModel):
+class AIActionResultAIResponseActionTypedTouchActionPointStart(BaseModel):
     x: float
     """Starting X coordinate"""
 
@@ -736,16 +736,16 @@ class AIActionResultDtoAIResponseActionTypedTouchActionPointStart(BaseModel):
     """Starting Y coordinate"""
 
 
-class AIActionResultDtoAIResponseActionTypedTouchActionPoint(BaseModel):
-    start: AIActionResultDtoAIResponseActionTypedTouchActionPointStart
+class AIActionResultAIResponseActionTypedTouchActionPoint(BaseModel):
+    start: AIActionResultAIResponseActionTypedTouchActionPointStart
     """Initial touch point position"""
 
     actions: Optional[List[object]] = None
     """Sequence of actions to perform after initial touch"""
 
 
-class AIActionResultDtoAIResponseActionTypedTouchAction(BaseModel):
-    points: List[AIActionResultDtoAIResponseActionTypedTouchActionPoint]
+class AIActionResultAIResponseActionTypedTouchAction(BaseModel):
+    points: List[AIActionResultAIResponseActionTypedTouchActionPoint]
     """Array of touch points and their actions"""
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
@@ -776,7 +776,7 @@ class AIActionResultDtoAIResponseActionTypedTouchAction(BaseModel):
     """
 
 
-class AIActionResultDtoAIResponseActionTypedDragActionPath(BaseModel):
+class AIActionResultAIResponseActionTypedDragActionPath(BaseModel):
     x: float
     """X coordinate of a point in the drag path"""
 
@@ -784,8 +784,8 @@ class AIActionResultDtoAIResponseActionTypedDragActionPath(BaseModel):
     """Y coordinate of a point in the drag path"""
 
 
-class AIActionResultDtoAIResponseActionTypedDragAction(BaseModel):
-    path: List[AIActionResultDtoAIResponseActionTypedDragActionPath]
+class AIActionResultAIResponseActionTypedDragAction(BaseModel):
+    path: List[AIActionResultAIResponseActionTypedDragActionPath]
     """Path of the drag action as a series of coordinates"""
 
     duration: Optional[str] = None
@@ -823,7 +823,7 @@ class AIActionResultDtoAIResponseActionTypedDragAction(BaseModel):
     """
 
 
-class AIActionResultDtoAIResponseActionTypedScrollAction(BaseModel):
+class AIActionResultAIResponseActionTypedScrollAction(BaseModel):
     scroll_x: float = FieldInfo(alias="scrollX")
     """Horizontal scroll amount"""
 
@@ -864,7 +864,7 @@ class AIActionResultDtoAIResponseActionTypedScrollAction(BaseModel):
     """
 
 
-class AIActionResultDtoAIResponseActionTypedSwipeSimpleAction(BaseModel):
+class AIActionResultAIResponseActionTypedSwipeSimpleAction(BaseModel):
     direction: Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"]
     """Direction to swipe.
 
@@ -914,7 +914,7 @@ class AIActionResultDtoAIResponseActionTypedSwipeSimpleAction(BaseModel):
     """
 
 
-class AIActionResultDtoAIResponseActionTypedSwipeAdvancedActionEnd(BaseModel):
+class AIActionResultAIResponseActionTypedSwipeAdvancedActionEnd(BaseModel):
     x: float
     """Start/end x coordinate of the swipe path"""
 
@@ -922,7 +922,7 @@ class AIActionResultDtoAIResponseActionTypedSwipeAdvancedActionEnd(BaseModel):
     """Start/end y coordinate of the swipe path"""
 
 
-class AIActionResultDtoAIResponseActionTypedSwipeAdvancedActionStart(BaseModel):
+class AIActionResultAIResponseActionTypedSwipeAdvancedActionStart(BaseModel):
     x: float
     """Start/end x coordinate of the swipe path"""
 
@@ -930,11 +930,11 @@ class AIActionResultDtoAIResponseActionTypedSwipeAdvancedActionStart(BaseModel):
     """Start/end y coordinate of the swipe path"""
 
 
-class AIActionResultDtoAIResponseActionTypedSwipeAdvancedAction(BaseModel):
-    end: AIActionResultDtoAIResponseActionTypedSwipeAdvancedActionEnd
+class AIActionResultAIResponseActionTypedSwipeAdvancedAction(BaseModel):
+    end: AIActionResultAIResponseActionTypedSwipeAdvancedActionEnd
     """Swipe path"""
 
-    start: AIActionResultDtoAIResponseActionTypedSwipeAdvancedActionStart
+    start: AIActionResultAIResponseActionTypedSwipeAdvancedActionStart
     """Swipe path"""
 
     duration: Optional[str] = None
@@ -972,7 +972,7 @@ class AIActionResultDtoAIResponseActionTypedSwipeAdvancedAction(BaseModel):
     """
 
 
-class AIActionResultDtoAIResponseActionTypedPressKeyAction(BaseModel):
+class AIActionResultAIResponseActionTypedPressKeyAction(BaseModel):
     keys: List[
         Literal[
             "a",
@@ -1120,7 +1120,7 @@ class AIActionResultDtoAIResponseActionTypedPressKeyAction(BaseModel):
     """
 
 
-class AIActionResultDtoAIResponseActionTypedPressButtonAction(BaseModel):
+class AIActionResultAIResponseActionTypedPressButtonAction(BaseModel):
     buttons: List[Literal["power", "volumeUp", "volumeDown", "volumeMute", "home", "back", "menu", "appSwitch"]]
     """Button to press"""
 
@@ -1152,7 +1152,7 @@ class AIActionResultDtoAIResponseActionTypedPressButtonAction(BaseModel):
     """
 
 
-class AIActionResultDtoAIResponseActionTypedTypeAction(BaseModel):
+class AIActionResultAIResponseActionTypedTypeAction(BaseModel):
     text: str
     """Text to type"""
 
@@ -1184,7 +1184,7 @@ class AIActionResultDtoAIResponseActionTypedTypeAction(BaseModel):
     """
 
 
-class AIActionResultDtoAIResponseActionTypedMoveAction(BaseModel):
+class AIActionResultAIResponseActionTypedMoveAction(BaseModel):
     x: float
     """X coordinate to move to"""
 
@@ -1219,7 +1219,7 @@ class AIActionResultDtoAIResponseActionTypedMoveAction(BaseModel):
     """
 
 
-class AIActionResultDtoAIResponseActionTypedScreenRotationAction(BaseModel):
+class AIActionResultAIResponseActionTypedScreenRotationAction(BaseModel):
     angle: Literal[90, 180, 270]
     """Rotation angle in degrees"""
 
@@ -1227,7 +1227,7 @@ class AIActionResultDtoAIResponseActionTypedScreenRotationAction(BaseModel):
     """Rotation direction"""
 
 
-class AIActionResultDtoAIResponseActionTypedScreenshotActionClip(BaseModel):
+class AIActionResultAIResponseActionTypedScreenshotActionClip(BaseModel):
     height: float
     """Height of the clip"""
 
@@ -1241,32 +1241,32 @@ class AIActionResultDtoAIResponseActionTypedScreenshotActionClip(BaseModel):
     """Y coordinate of the clip"""
 
 
-class AIActionResultDtoAIResponseActionTypedScreenshotAction(BaseModel):
-    clip: Optional[AIActionResultDtoAIResponseActionTypedScreenshotActionClip] = None
+class AIActionResultAIResponseActionTypedScreenshotAction(BaseModel):
+    clip: Optional[AIActionResultAIResponseActionTypedScreenshotActionClip] = None
     """Clipping region for screenshot capture"""
 
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
     """Type of the URI. default is base64."""
 
 
-AIActionResultDtoAIResponseAction: TypeAlias = Union[
-    AIActionResultDtoAIResponseActionTypedClickAction,
-    AIActionResultDtoAIResponseActionTypedTouchAction,
-    AIActionResultDtoAIResponseActionTypedDragAction,
-    AIActionResultDtoAIResponseActionTypedScrollAction,
-    AIActionResultDtoAIResponseActionTypedSwipeSimpleAction,
-    AIActionResultDtoAIResponseActionTypedSwipeAdvancedAction,
-    AIActionResultDtoAIResponseActionTypedPressKeyAction,
-    AIActionResultDtoAIResponseActionTypedPressButtonAction,
-    AIActionResultDtoAIResponseActionTypedTypeAction,
-    AIActionResultDtoAIResponseActionTypedMoveAction,
-    AIActionResultDtoAIResponseActionTypedScreenRotationAction,
-    AIActionResultDtoAIResponseActionTypedScreenshotAction,
+AIActionResultAIResponseAction: TypeAlias = Union[
+    AIActionResultAIResponseActionTypedClickAction,
+    AIActionResultAIResponseActionTypedTouchAction,
+    AIActionResultAIResponseActionTypedDragAction,
+    AIActionResultAIResponseActionTypedScrollAction,
+    AIActionResultAIResponseActionTypedSwipeSimpleAction,
+    AIActionResultAIResponseActionTypedSwipeAdvancedAction,
+    AIActionResultAIResponseActionTypedPressKeyAction,
+    AIActionResultAIResponseActionTypedPressButtonAction,
+    AIActionResultAIResponseActionTypedTypeAction,
+    AIActionResultAIResponseActionTypedMoveAction,
+    AIActionResultAIResponseActionTypedScreenRotationAction,
+    AIActionResultAIResponseActionTypedScreenshotAction,
 ]
 
 
-class AIActionResultDtoAIResponse(BaseModel):
-    action: AIActionResultDtoAIResponseAction
+class AIActionResultAIResponse(BaseModel):
+    action: AIActionResultAIResponseAction
     """Action to be executed by the AI with type identifier"""
 
     messages: List[List[object]]
@@ -1279,12 +1279,12 @@ class AIActionResultDtoAIResponse(BaseModel):
     """reasoning"""
 
 
-class AIActionResultDto(BaseModel):
-    ai_response: AIActionResultDtoAIResponse = FieldInfo(alias="aiResponse")
+class AIActionResult(BaseModel):
+    ai_response: AIActionResultAIResponse = FieldInfo(alias="aiResponse")
     """Response of AI action execution"""
 
     message: str
     """message"""
 
 
-ActionAIResponse: TypeAlias = Union[AIActionScreenshotResult, AIActionResultDto]
+ActionAIResponse: TypeAlias = Union[AIActionScreenshotResult, AIActionResult]

@@ -7,10 +7,10 @@ from gbox_sdk._types import NOT_GIVEN, Timeout, NotGiven
 from gbox_sdk.wrapper.utils import is_linux_box, is_android_box
 from gbox_sdk.wrapper.box.linux import LinuxBoxOperator
 from gbox_sdk.types.v1.linux_box import LinuxBox
-from gbox_sdk.wrapper.box.adnroid import AndroidBoxOperator
 from gbox_sdk.types.v1.android_box import AndroidBox
 from gbox_sdk.types.v1.box_list_params import BoxListParams
 from gbox_sdk.types.v1.box_list_response import BoxListResponse
+from gbox_sdk.wrapper.box.android.android import AndroidBoxOperator
 from gbox_sdk.types.v1.box_terminate_params import BoxTerminateParams
 from gbox_sdk.types.v1.box_retrieve_response import BoxRetrieveResponse
 from gbox_sdk.types.v1.box_create_linux_params import BoxCreateLinuxParams
@@ -61,11 +61,11 @@ class GboxSDK:
 
     def create_android(self, body: BoxCreateAndroidParams) -> AndroidBoxOperator:
         res = self.client.v1.boxes.create_android(**body)
-        return AndroidBoxOperator(res, self.client)
+        return AndroidBoxOperator(self.client, res)
 
     def create_linux(self, body: BoxCreateLinuxParams) -> LinuxBoxOperator:
         res = self.client.v1.boxes.create_linux(**body)
-        return LinuxBoxOperator(res, self.client)
+        return LinuxBoxOperator(self.client, res)
 
     def list_info(self, query: Optional[BoxListParams] = None) -> BoxListResponse:
         if query is None:
@@ -100,10 +100,10 @@ class GboxSDK:
     def data_to_operator(self, data: Union[AndroidBox, LinuxBox]) -> BoxOperator:
         if is_android_box(data):
             android_box: AndroidBox = AndroidBox(**data.model_dump())
-            return AndroidBoxOperator(android_box, self.client)
+            return AndroidBoxOperator(self.client, android_box)
         elif is_linux_box(data):
             linux_box: LinuxBox = LinuxBox(**data.model_dump())
-            return LinuxBoxOperator(linux_box, self.client)
+            return LinuxBoxOperator(self.client, linux_box)
         else:
             raise ValueError(f"Invalid box type: {data.type}")
 

@@ -15,11 +15,14 @@ class DataFile(BaseModel):
     last_modified: datetime = FieldInfo(alias="lastModified")
     """Last modified time of the file"""
 
+    mode: str
+    """File metadata"""
+
     name: str
     """Name of the file"""
 
     path: str
-    """Full path to the file"""
+    """Full path to the file in the box"""
 
     size: str
     """Size of the file"""
@@ -29,11 +32,17 @@ class DataFile(BaseModel):
 
 
 class DataDir(BaseModel):
+    last_modified: datetime = FieldInfo(alias="lastModified")
+    """Last modified time of the directory"""
+
+    mode: str
+    """Directory metadata"""
+
     name: str
     """Name of the directory"""
 
     path: str
-    """Full path to the directory"""
+    """Full path to the directory in the box"""
 
     type: Literal["dir"]
     """Directory type indicator"""
@@ -44,4 +53,4 @@ Data: TypeAlias = Union[DataFile, DataDir]
 
 class FListResponse(BaseModel):
     data: List[Data]
-    """A box instance that can be either Linux or Android type"""
+    """Array of files and directories"""

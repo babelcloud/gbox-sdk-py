@@ -5,6 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import (
@@ -14,7 +15,7 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.v1.boxes.browser_connect_url_response import BrowserConnectURLResponse
+from ....types.v1.boxes import browser_cdp_url_params
 
 __all__ = ["BrowserResource", "AsyncBrowserResource"]
 
@@ -41,8 +42,9 @@ class BrowserResource(SyncAPIResource):
 
     def cdp_url(
         self,
-        id: str,
+        box_id: str,
         *,
+        expires_in: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -51,7 +53,14 @@ class BrowserResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
+        Generate pre-signed CDP url
+
         Args:
+          expires_in: The CDP url will be alive for the given duration
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 120m
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -60,45 +69,15 @@ class BrowserResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return self._get(
-            f"/api/v1/boxes/{id}/browser/connect-url/cdp",
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return self._post(
+            f"/boxes/{box_id}/browser/connect-url/cdp",
+            body=maybe_transform({"expires_in": expires_in}, browser_cdp_url_params.BrowserCdpURLParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=str,
-        )
-
-    def connect_url(
-        self,
-        id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> BrowserConnectURLResponse:
-        """
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return self._get(
-            f"/api/v1/boxes/{id}/browser/connect-url",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=BrowserConnectURLResponse,
         )
 
 
@@ -124,8 +103,9 @@ class AsyncBrowserResource(AsyncAPIResource):
 
     async def cdp_url(
         self,
-        id: str,
+        box_id: str,
         *,
+        expires_in: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -134,7 +114,14 @@ class AsyncBrowserResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
+        Generate pre-signed CDP url
+
         Args:
+          expires_in: The CDP url will be alive for the given duration
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 120m
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -143,45 +130,15 @@ class AsyncBrowserResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return await self._get(
-            f"/api/v1/boxes/{id}/browser/connect-url/cdp",
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return await self._post(
+            f"/boxes/{box_id}/browser/connect-url/cdp",
+            body=await async_maybe_transform({"expires_in": expires_in}, browser_cdp_url_params.BrowserCdpURLParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=str,
-        )
-
-    async def connect_url(
-        self,
-        id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> BrowserConnectURLResponse:
-        """
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return await self._get(
-            f"/api/v1/boxes/{id}/browser/connect-url",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=BrowserConnectURLResponse,
         )
 
 
@@ -192,9 +149,6 @@ class BrowserResourceWithRawResponse:
         self.cdp_url = to_raw_response_wrapper(
             browser.cdp_url,
         )
-        self.connect_url = to_raw_response_wrapper(
-            browser.connect_url,
-        )
 
 
 class AsyncBrowserResourceWithRawResponse:
@@ -203,9 +157,6 @@ class AsyncBrowserResourceWithRawResponse:
 
         self.cdp_url = async_to_raw_response_wrapper(
             browser.cdp_url,
-        )
-        self.connect_url = async_to_raw_response_wrapper(
-            browser.connect_url,
         )
 
 
@@ -216,9 +167,6 @@ class BrowserResourceWithStreamingResponse:
         self.cdp_url = to_streamed_response_wrapper(
             browser.cdp_url,
         )
-        self.connect_url = to_streamed_response_wrapper(
-            browser.connect_url,
-        )
 
 
 class AsyncBrowserResourceWithStreamingResponse:
@@ -227,7 +175,4 @@ class AsyncBrowserResourceWithStreamingResponse:
 
         self.cdp_url = async_to_streamed_response_wrapper(
             browser.cdp_url,
-        )
-        self.connect_url = async_to_streamed_response_wrapper(
-            browser.connect_url,
         )

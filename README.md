@@ -1,6 +1,6 @@
 # Gbox Client Python API library
 
-[![PyPI version](https://img.shields.io/pypi/v/gbox_sdk.svg)](https://pypi.org/project/gbox_sdk/)
+[![PyPI version](<https://img.shields.io/pypi/v/gbox_sdk.svg?label=pypi%20(stable)>)](https://pypi.org/project/gbox_sdk/)
 
 The Gbox Client Python library provides convenient access to the Gbox Client REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
@@ -15,12 +15,9 @@ The full API of this library can be found in [api.md](api.md).
 ## Installation
 
 ```sh
-# install from the production repo
-pip install git+ssh://git@github.com/babelcloud/gbox-sdk-py.git
+# install from PyPI
+pip install --pre gbox_sdk
 ```
-
-> [!NOTE]
-> Once this package is [published to PyPI](https://app.stainless.com/docs/guides/publish), this will become: `pip install --pre gbox_sdk`
 
 ## Usage
 
@@ -32,11 +29,12 @@ from gbox_sdk import GboxClient
 
 client = GboxClient(
     api_key=os.environ.get("GBOX_API_KEY"),  # This is the default and can be omitted
+    # or 'production' | 'internal'; defaults to "production".
+    environment="selfHosting",
 )
 
-box = client.v1.boxes.create(
-    type="linux",
-)
+android_box = client.v1.boxes.create_android()
+print(android_box.id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -55,19 +53,52 @@ from gbox_sdk import AsyncGboxClient
 
 client = AsyncGboxClient(
     api_key=os.environ.get("GBOX_API_KEY"),  # This is the default and can be omitted
+    # or 'production' | 'internal'; defaults to "production".
+    environment="selfHosting",
 )
 
 
 async def main() -> None:
-    box = await client.v1.boxes.create(
-        type="linux",
-    )
+    android_box = await client.v1.boxes.create_android()
+    print(android_box.id)
 
 
 asyncio.run(main())
 ```
 
 Functionality between the synchronous and asynchronous clients is otherwise identical.
+
+### With aiohttp
+
+By default, the async client uses `httpx` for HTTP requests. However, for improved concurrency performance you may also use `aiohttp` as the HTTP backend.
+
+You can enable this by installing `aiohttp`:
+
+```sh
+# install from PyPI
+pip install --pre gbox_sdk[aiohttp]
+```
+
+Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
+
+```python
+import os
+import asyncio
+from gbox_sdk import DefaultAioHttpClient
+from gbox_sdk import AsyncGboxClient
+
+
+async def main() -> None:
+    async with AsyncGboxClient(
+        api_key=os.environ.get("GBOX_API_KEY"),  # This is the default and can be omitted
+        http_client=DefaultAioHttpClient(),
+    ) as client:
+        android_box = await client.v1.boxes.create_android()
+        print(android_box.id)
+
+
+asyncio.run(main())
+```
 
 ## Using types
 
@@ -87,12 +118,40 @@ from gbox_sdk import GboxClient
 
 client = GboxClient()
 
-box = client.v1.boxes.create(
-    type="linux",
-    config={},
+android_box = client.v1.boxes.create_android(
+    config={
+        "envs": {
+            "ANDROID_LOG_TAGS": "*:V",
+            "ADB_TRACE": "all",
+        },
+        "expires_in": "15m",
+        "labels": {
+            "app": "mobile-testing",
+            "version": "v1.0",
+        },
+    },
 )
-print(box.config)
+print(android_box.config)
 ```
+
+## File uploads
+
+Request parameters that correspond to file uploads can be passed as `bytes`, or a [`PathLike`](https://docs.python.org/3/library/os.html#os.PathLike) instance or a tuple of `(filename, contents, media type)`.
+
+```python
+from pathlib import Path
+from gbox_sdk import GboxClient
+
+client = GboxClient()
+
+client.v1.boxes.fs.write(
+    box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+    content=Path("/path/to/file"),
+    path="/home/user/documents/output.txt",
+)
+```
+
+The async client uses the exact same interface. If you pass a [`PathLike`](https://docs.python.org/3/library/os.html#os.PathLike) instance, the file contents will be read asynchronously automatically.
 
 ## Handling errors
 
@@ -110,9 +169,7 @@ from gbox_sdk import GboxClient
 client = GboxClient()
 
 try:
-    client.v1.boxes.create(
-        type="linux",
-    )
+    client.v1.boxes.create_android()
 except gbox_sdk.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
@@ -139,7 +196,7 @@ Error codes are as follows:
 
 ### Retries
 
-Certain errors are automatically retried 2 times by default, with a short exponential backoff.
+Certain errors are automatically retried 0 times by default, with a short exponential backoff.
 Connection errors (for example, due to a network connectivity problem), 408 Request Timeout, 409 Conflict,
 429 Rate Limit, and >=500 Internal errors are all retried by default.
 
@@ -155,15 +212,13 @@ client = GboxClient(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).v1.boxes.create(
-    type="linux",
-)
+client.with_options(max_retries=5).v1.boxes.create_android()
 ```
 
 ### Timeouts
 
 By default requests time out after 1 minute. You can configure this with a `timeout` option,
-which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/#fine-tuning-the-configuration) object:
+which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/timeouts/#fine-tuning-the-configuration) object:
 
 ```python
 from gbox_sdk import GboxClient
@@ -180,9 +235,7 @@ client = GboxClient(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).v1.boxes.create(
-    type="linux",
-)
+client.with_options(timeout=5.0).v1.boxes.create_android()
 ```
 
 On timeout, an `APITimeoutError` is thrown.
@@ -223,13 +276,11 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from gbox_sdk import GboxClient
 
 client = GboxClient()
-response = client.v1.boxes.with_raw_response.create(
-    type="linux",
-)
+response = client.v1.boxes.with_raw_response.create_android()
 print(response.headers.get('X-My-Header'))
 
-box = response.parse()  # get the object that `v1.boxes.create()` would have returned
-print(box)
+box = response.parse()  # get the object that `v1.boxes.create_android()` would have returned
+print(box.id)
 ```
 
 These methods return an [`APIResponse`](https://github.com/babelcloud/gbox-sdk-py/tree/main/src/gbox_sdk/_response.py) object.
@@ -243,9 +294,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.v1.boxes.with_streaming_response.create(
-    type="linux",
-) as response:
+with client.v1.boxes.with_streaming_response.create_android() as response:
     print(response.headers.get("X-My-Header"))
 
     for line in response.iter_lines():

@@ -11,13 +11,10 @@ __all__ = ["ActionScreenshotParams", "Clip"]
 
 class ActionScreenshotParams(TypedDict, total=False):
     clip: Clip
-    """clip of the screenshot"""
+    """Clipping region for screenshot capture"""
 
     output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
-    """Type of the URI"""
-
-    type: Literal["png", "jpeg"]
-    """Action type for screenshot"""
+    """Type of the URI. default is base64."""
 
 
 class Clip(TypedDict, total=False):

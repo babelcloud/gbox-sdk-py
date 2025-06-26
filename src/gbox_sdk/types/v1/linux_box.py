@@ -1,5 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from typing import Dict, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -7,15 +8,7 @@ from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
-__all__ = ["LinuxBox", "Config", "ConfigBrowser", "ConfigOs", "ConfigResolution"]
-
-
-class ConfigBrowser(BaseModel):
-    type: Literal["chromium", "firefox", "webkit"]
-    """Supported browser types for Linux boxes"""
-
-    version: str
-    """Browser version string (e.g. '12')"""
+__all__ = ["LinuxBox", "Config", "ConfigOs", "ConfigResolution", "ConfigBrowser"]
 
 
 class ConfigOs(BaseModel):
@@ -31,33 +24,57 @@ class ConfigResolution(BaseModel):
     """Width of the box"""
 
 
-class Config(BaseModel):
-    browser: ConfigBrowser
-    """Browser configuration"""
+class ConfigBrowser(BaseModel):
+    type: Literal["chromium", "firefox", "webkit"]
+    """Supported browser types for Linux boxes"""
 
+    version: str
+    """Browser version string (e.g. '12')"""
+
+
+class Config(BaseModel):
     cpu: float
     """CPU cores allocated to the box"""
 
-    envs: object
-    """Environment variables for the box"""
+    envs: Dict[str, str]
+    """Environment variables for the box.
 
-    labels: object
-    """Key-value pairs of labels for the box"""
+    These variables will be available in all operations including command execution,
+    code running, and other box behaviors
+    """
+
+    labels: Dict[str, str]
+    """Key-value pairs of labels for the box.
+
+    Labels are used to add custom metadata to help identify, categorize, and manage
+    boxes. Common use cases include project names, environments, teams,
+    applications, or any other organizational tags that help you organize and filter
+    your boxes.
+    """
 
     memory: float
-    """Memory allocated to the box in MB"""
+    """Memory allocated to the box in MiB"""
 
     os: ConfigOs
-    """Operating system configuration"""
+    """Linux operating system configuration"""
 
     resolution: ConfigResolution
-    """Resolution of the box"""
+    """Box display resolution configuration"""
 
     storage: float
-    """Storage allocated to the box in GB."""
+    """Storage allocated to the box in GiB."""
 
-    working_dir: str = FieldInfo(alias="workingDir")
-    """Working directory path for the box"""
+    browser: Optional[ConfigBrowser] = None
+    """Linux browser configuration settings"""
+
+    working_dir: Optional[str] = FieldInfo(alias="workingDir", default=None)
+    """Working directory path for the box.
+
+    This directory serves as the default starting point for all operations including
+    command execution, code running, and file system operations. When you execute
+    commands or run code, they will start from this directory unless explicitly
+    specified otherwise.
+    """
 
 
 class LinuxBox(BaseModel):
@@ -65,7 +82,7 @@ class LinuxBox(BaseModel):
     """Unique identifier for the box"""
 
     config: Config
-    """Configuration for a Linux box instance"""
+    """Complete configuration for Linux box instance"""
 
     created_at: datetime = FieldInfo(alias="createdAt")
     """Creation timestamp of the box"""
@@ -73,7 +90,7 @@ class LinuxBox(BaseModel):
     expires_at: datetime = FieldInfo(alias="expiresAt")
     """Expiration timestamp of the box"""
 
-    status: Literal["pending", "running", "stopped", "error"]
+    status: Literal["pending", "running", "error", "terminated"]
     """The current status of a box instance"""
 
     type: Literal["linux"]

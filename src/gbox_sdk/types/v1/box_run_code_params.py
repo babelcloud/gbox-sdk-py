@@ -14,17 +14,30 @@ class BoxRunCodeParams(TypedDict, total=False):
     code: Required[str]
     """The code to run"""
 
-    type: Required[Literal["bash", "python3", "typescript"]]
-    """The type of the code."""
-
     argv: List[str]
-    """The arguments to run the code. e.g. ["-h"]"""
+    """The arguments to run the code.
+
+    For example, if you want to run "python index.py --help", you should pass
+    ["--help"] as arguments.
+    """
 
     envs: object
     """The environment variables to run the code"""
 
+    language: Literal["bash", "python", "typescript"]
+    """The language of the code."""
+
     api_timeout: Annotated[str, PropertyInfo(alias="timeout")]
-    """The timeout of the code. e.g. "30s" """
+    """The timeout of the code execution.
+
+    If the code execution times out, the exit code will be 124.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30s
+    """
 
     working_dir: Annotated[str, PropertyInfo(alias="workingDir")]
-    """The working directory of the code."""
+    """The working directory of the code.
+
+    It not provided, the code will be run in the `box.config.workingDir` directory.
+    """

@@ -1,5 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from typing import Dict, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -7,19 +8,11 @@ from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
-__all__ = ["AndroidBox", "Config", "ConfigBrowser", "ConfigOs", "ConfigResolution"]
-
-
-class ConfigBrowser(BaseModel):
-    type: Literal["Chrome for Android", "UC Browser for Android"]
-    """Supported browser types for Android boxes"""
-
-    version: str
-    """Browser version string (e.g. '136')"""
+__all__ = ["AndroidBox", "Config", "ConfigOs", "ConfigResolution", "ConfigBrowser"]
 
 
 class ConfigOs(BaseModel):
-    version: Literal["12", "13"]
+    version: Literal["12", "13", "15"]
     """Supported Android versions"""
 
 
@@ -31,33 +24,60 @@ class ConfigResolution(BaseModel):
     """Width of the box"""
 
 
-class Config(BaseModel):
-    browser: ConfigBrowser
-    """Browser configuration"""
+class ConfigBrowser(BaseModel):
+    type: Literal["Chrome for Android", "UC Browser for Android"]
+    """Supported browser types for Android boxes"""
 
+    version: str
+    """Browser version string (e.g. '136')"""
+
+
+class Config(BaseModel):
     cpu: float
     """CPU cores allocated to the box"""
 
-    envs: object
-    """Environment variables for the box"""
+    envs: Dict[str, str]
+    """Environment variables for the box.
 
-    labels: object
-    """Key-value pairs of labels for the box"""
+    These variables will be available in all operations including command execution,
+    code running, and other box behaviors
+    """
+
+    labels: Dict[str, str]
+    """Key-value pairs of labels for the box.
+
+    Labels are used to add custom metadata to help identify, categorize, and manage
+    boxes. Common use cases include project names, environments, teams,
+    applications, or any other organizational tags that help you organize and filter
+    your boxes.
+    """
 
     memory: float
-    """Memory allocated to the box in MB"""
+    """Memory allocated to the box in MiB"""
 
     os: ConfigOs
     """Android operating system configuration"""
 
     resolution: ConfigResolution
-    """Resolution of the box"""
+    """Box display resolution configuration"""
 
     storage: float
-    """Storage allocated to the box in GB"""
+    """Storage allocated to the box in GiB"""
 
-    working_dir: str = FieldInfo(alias="workingDir")
-    """Working directory path for the box"""
+    browser: Optional[ConfigBrowser] = None
+    """Android browser configuration settings"""
+
+    device_type: Optional[Literal["virtual", "physical"]] = FieldInfo(alias="deviceType", default=None)
+    """Device type - virtual or physical Android device"""
+
+    working_dir: Optional[str] = FieldInfo(alias="workingDir", default=None)
+    """Working directory path for the box.
+
+    This directory serves as the default starting point for all operations including
+    command execution, code running, and file system operations. When you execute
+    commands or run code, they will start from this directory unless explicitly
+    specified otherwise.
+    """
 
 
 class AndroidBox(BaseModel):
@@ -65,7 +85,7 @@ class AndroidBox(BaseModel):
     """Unique identifier for the box"""
 
     config: Config
-    """Configuration for an Android box instance"""
+    """Complete configuration for Android box instance"""
 
     created_at: datetime = FieldInfo(alias="createdAt")
     """Creation timestamp of the box"""
@@ -73,7 +93,7 @@ class AndroidBox(BaseModel):
     expires_at: datetime = FieldInfo(alias="expiresAt")
     """Expiration timestamp of the box"""
 
-    status: Literal["pending", "running", "stopped", "error"]
+    status: Literal["pending", "running", "error", "terminated"]
     """The current status of a box instance"""
 
     type: Literal["android"]

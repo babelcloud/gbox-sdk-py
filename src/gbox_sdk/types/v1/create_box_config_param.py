@@ -2,19 +2,25 @@
 
 from __future__ import annotations
 
-from typing_extensions import Annotated, TypedDict
-
-from ..._utils import PropertyInfo
+from typing import Dict
+from typing_extensions import TypedDict
 
 __all__ = ["CreateBoxConfigParam"]
 
 
 class CreateBoxConfigParam(TypedDict, total=False):
-    envs: object
-    """Environment variables for the box"""
+    envs: Dict[str, str]
+    """Environment variables for the box.
 
-    expires_in: Annotated[str, PropertyInfo(alias="expiresIn")]
-    """The box will be alive for the given duration (e.g. '10m')"""
+    These variables will be available in all operations including command execution,
+    code running, and other box behaviors
+    """
 
-    labels: object
-    """Key-value pairs of labels for the box"""
+    labels: Dict[str, str]
+    """Key-value pairs of labels for the box.
+
+    Labels are used to add custom metadata to help identify, categorize, and manage
+    boxes. Common use cases include project names, environments, teams,
+    applications, or any other organizational tags that help you organize and filter
+    your boxes.
+    """

@@ -10,8 +10,17 @@ import pytest
 from gbox_sdk import GboxClient, AsyncGboxClient
 from tests.utils import assert_matches_type
 from gbox_sdk.types.v1.boxes import (
-    ActionResult,
+    ActionDragResponse,
+    ActionMoveResponse,
+    ActionTypeResponse,
+    ActionClickResponse,
+    ActionSwipeResponse,
+    ActionTouchResponse,
+    ActionScrollResponse,
+    ActionPressKeyResponse,
     ActionScreenshotResponse,
+    ActionPressButtonResponse,
+    ActionScreenRotationResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -24,33 +33,32 @@ class TestActions:
     @parametrize
     def test_method_click(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.click(
-            id="id",
-            type={},
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=100,
             y=100,
         )
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionClickResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_method_click_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.click(
-            id="id",
-            type={},
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=100,
             y=100,
             button="left",
-            double=True,
+            double=False,
+            include_screenshot=False,
             output_format="base64",
+            screenshot_delay="500ms",
         )
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionClickResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_click(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.click(
-            id="id",
-            type={},
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=100,
             y=100,
         )
@@ -58,14 +66,13 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionClickResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_click(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.click(
-            id="id",
-            type={},
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=100,
             y=100,
         ) as response:
@@ -73,17 +80,16 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionResult, action, path=["response"])
+            assert_matches_type(ActionClickResponse, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
     def test_path_params_click(self, client: GboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.actions.with_raw_response.click(
-                id="",
-                type={},
+                box_id="",
                 x=100,
                 y=100,
             )
@@ -92,7 +98,7 @@ class TestActions:
     @parametrize
     def test_method_drag(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.drag(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path=[
                 {
                     "x": 100,
@@ -103,15 +109,14 @@ class TestActions:
                     "y": 200,
                 },
             ],
-            type={},
         )
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionDragResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_method_drag_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.drag(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path=[
                 {
                     "x": 100,
@@ -122,17 +127,18 @@ class TestActions:
                     "y": 200,
                 },
             ],
-            type={},
-            duration="duration",
+            duration="50ms",
+            include_screenshot=False,
             output_format="base64",
+            screenshot_delay="500ms",
         )
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionDragResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_drag(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.drag(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path=[
                 {
                     "x": 100,
@@ -143,19 +149,18 @@ class TestActions:
                     "y": 200,
                 },
             ],
-            type={},
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionDragResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_drag(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.drag(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path=[
                 {
                     "x": 100,
@@ -166,22 +171,21 @@ class TestActions:
                     "y": 200,
                 },
             ],
-            type={},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionResult, action, path=["response"])
+            assert_matches_type(ActionDragResponse, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
     def test_path_params_drag(self, client: GboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.actions.with_raw_response.drag(
-                id="",
+                box_id="",
                 path=[
                     {
                         "x": 100,
@@ -192,38 +196,36 @@ class TestActions:
                         "y": 200,
                     },
                 ],
-                type={},
             )
 
     @pytest.mark.skip()
     @parametrize
     def test_method_move(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.move(
-            id="id",
-            type={},
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=200,
             y=300,
         )
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionMoveResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_method_move_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.move(
-            id="id",
-            type={},
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=200,
             y=300,
+            include_screenshot=False,
             output_format="base64",
+            screenshot_delay="500ms",
         )
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionMoveResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_move(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.move(
-            id="id",
-            type={},
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=200,
             y=300,
         )
@@ -231,14 +233,13 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionMoveResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_move(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.move(
-            id="id",
-            type={},
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=200,
             y=300,
         ) as response:
@@ -246,87 +247,191 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionResult, action, path=["response"])
+            assert_matches_type(ActionMoveResponse, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
     def test_path_params_move(self, client: GboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.actions.with_raw_response.move(
-                id="",
-                type={},
+                box_id="",
                 x=200,
                 y=300,
             )
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_press(self, client: GboxClient) -> None:
-        action = client.v1.boxes.actions.press(
-            id="id",
-            keys=["Enter"],
-            type={},
+    def test_method_press_button(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.press_button(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            buttons=["power"],
         )
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionPressButtonResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_press_with_all_params(self, client: GboxClient) -> None:
-        action = client.v1.boxes.actions.press(
-            id="id",
-            keys=["Enter"],
-            type={},
+    def test_method_press_button_with_all_params(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.press_button(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            buttons=["power"],
+            include_screenshot=False,
             output_format="base64",
+            screenshot_delay="500ms",
         )
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionPressButtonResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_press(self, client: GboxClient) -> None:
-        response = client.v1.boxes.actions.with_raw_response.press(
-            id="id",
-            keys=["Enter"],
-            type={},
+    def test_raw_response_press_button(self, client: GboxClient) -> None:
+        response = client.v1.boxes.actions.with_raw_response.press_button(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            buttons=["power"],
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionPressButtonResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_press(self, client: GboxClient) -> None:
-        with client.v1.boxes.actions.with_streaming_response.press(
-            id="id",
-            keys=["Enter"],
-            type={},
+    def test_streaming_response_press_button(self, client: GboxClient) -> None:
+        with client.v1.boxes.actions.with_streaming_response.press_button(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            buttons=["power"],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionResult, action, path=["response"])
+            assert_matches_type(ActionPressButtonResponse, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
-    def test_path_params_press(self, client: GboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            client.v1.boxes.actions.with_raw_response.press(
-                id="",
-                keys=["Enter"],
-                type={},
+    def test_path_params_press_button(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            client.v1.boxes.actions.with_raw_response.press_button(
+                box_id="",
+                buttons=["power"],
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_press_key(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.press_key(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            keys=["enter"],
+        )
+        assert_matches_type(ActionPressKeyResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_press_key_with_all_params(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.press_key(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            keys=["enter"],
+            include_screenshot=False,
+            output_format="base64",
+            screenshot_delay="500ms",
+        )
+        assert_matches_type(ActionPressKeyResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_press_key(self, client: GboxClient) -> None:
+        response = client.v1.boxes.actions.with_raw_response.press_key(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            keys=["enter"],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = response.parse()
+        assert_matches_type(ActionPressKeyResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_press_key(self, client: GboxClient) -> None:
+        with client.v1.boxes.actions.with_streaming_response.press_key(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            keys=["enter"],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = response.parse()
+            assert_matches_type(ActionPressKeyResponse, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_press_key(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            client.v1.boxes.actions.with_raw_response.press_key(
+                box_id="",
+                keys=["enter"],
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_screen_rotation(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.screen_rotation(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            angle=90,
+            direction="clockwise",
+        )
+        assert_matches_type(ActionScreenRotationResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_screen_rotation(self, client: GboxClient) -> None:
+        response = client.v1.boxes.actions.with_raw_response.screen_rotation(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            angle=90,
+            direction="clockwise",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = response.parse()
+        assert_matches_type(ActionScreenRotationResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_screen_rotation(self, client: GboxClient) -> None:
+        with client.v1.boxes.actions.with_streaming_response.screen_rotation(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            angle=90,
+            direction="clockwise",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = response.parse()
+            assert_matches_type(ActionScreenRotationResponse, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_screen_rotation(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            client.v1.boxes.actions.with_raw_response.screen_rotation(
+                box_id="",
+                angle=90,
+                direction="clockwise",
             )
 
     @pytest.mark.skip()
     @parametrize
     def test_method_screenshot(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.screenshot(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
         assert_matches_type(ActionScreenshotResponse, action, path=["response"])
 
@@ -334,15 +439,14 @@ class TestActions:
     @parametrize
     def test_method_screenshot_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.screenshot(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             clip={
-                "height": 0,
-                "width": 0,
-                "x": 0,
-                "y": 0,
+                "height": 600,
+                "width": 800,
+                "x": 100,
+                "y": 50,
             },
             output_format="base64",
-            type="png",
         )
         assert_matches_type(ActionScreenshotResponse, action, path=["response"])
 
@@ -350,7 +454,7 @@ class TestActions:
     @parametrize
     def test_raw_response_screenshot(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.screenshot(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
@@ -362,7 +466,7 @@ class TestActions:
     @parametrize
     def test_streaming_response_screenshot(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.screenshot(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -375,46 +479,45 @@ class TestActions:
     @pytest.mark.skip()
     @parametrize
     def test_path_params_screenshot(self, client: GboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.actions.with_raw_response.screenshot(
-                id="",
+                box_id="",
             )
 
     @pytest.mark.skip()
     @parametrize
     def test_method_scroll(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.scroll(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             scroll_x=0,
             scroll_y=100,
-            type={},
             x=100,
             y=100,
         )
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionScrollResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_method_scroll_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.scroll(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             scroll_x=0,
             scroll_y=100,
-            type={},
             x=100,
             y=100,
+            include_screenshot=False,
             output_format="base64",
+            screenshot_delay="500ms",
         )
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionScrollResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_scroll(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.scroll(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             scroll_x=0,
             scroll_y=100,
-            type={},
             x=100,
             y=100,
         )
@@ -422,16 +525,15 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionScrollResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_scroll(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.scroll(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             scroll_x=0,
             scroll_y=100,
-            type={},
             x=100,
             y=100,
         ) as response:
@@ -439,216 +541,371 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionResult, action, path=["response"])
+            assert_matches_type(ActionScrollResponse, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
     def test_path_params_scroll(self, client: GboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.actions.with_raw_response.scroll(
-                id="",
+                box_id="",
                 scroll_x=0,
                 scroll_y=100,
-                type={},
                 x=100,
                 y=100,
             )
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_touch(self, client: GboxClient) -> None:
-        action = client.v1.boxes.actions.touch(
-            id="id",
-            points=[
-                {
-                    "start": {
-                        "x": 0,
-                        "y": 0,
-                    }
-                }
-            ],
-            type={},
+    def test_method_swipe_overload_1(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.swipe(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            direction="up",
         )
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionSwipeResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_touch_with_all_params(self, client: GboxClient) -> None:
-        action = client.v1.boxes.actions.touch(
-            id="id",
-            points=[
-                {
-                    "start": {
-                        "x": 0,
-                        "y": 0,
-                    },
-                    "actions": [{}],
-                }
-            ],
-            type={},
+    def test_method_swipe_with_all_params_overload_1(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.swipe(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            direction="up",
+            distance=300,
+            duration="500ms",
+            include_screenshot=False,
             output_format="base64",
+            screenshot_delay="500ms",
         )
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionSwipeResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_touch(self, client: GboxClient) -> None:
-        response = client.v1.boxes.actions.with_raw_response.touch(
-            id="id",
-            points=[
-                {
-                    "start": {
-                        "x": 0,
-                        "y": 0,
-                    }
-                }
-            ],
-            type={},
+    def test_raw_response_swipe_overload_1(self, client: GboxClient) -> None:
+        response = client.v1.boxes.actions.with_raw_response.swipe(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            direction="up",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionSwipeResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_touch(self, client: GboxClient) -> None:
-        with client.v1.boxes.actions.with_streaming_response.touch(
-            id="id",
-            points=[
-                {
-                    "start": {
-                        "x": 0,
-                        "y": 0,
-                    }
-                }
-            ],
-            type={},
+    def test_streaming_response_swipe_overload_1(self, client: GboxClient) -> None:
+        with client.v1.boxes.actions.with_streaming_response.swipe(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            direction="up",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionResult, action, path=["response"])
+            assert_matches_type(ActionSwipeResponse, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_swipe_overload_1(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            client.v1.boxes.actions.with_raw_response.swipe(
+                box_id="",
+                direction="up",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_swipe_overload_2(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.swipe(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            end={
+                "x": 400,
+                "y": 300,
+            },
+            start={
+                "x": 100,
+                "y": 150,
+            },
+        )
+        assert_matches_type(ActionSwipeResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_swipe_with_all_params_overload_2(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.swipe(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            end={
+                "x": 400,
+                "y": 300,
+            },
+            start={
+                "x": 100,
+                "y": 150,
+            },
+            duration="500ms",
+            include_screenshot=False,
+            output_format="base64",
+            screenshot_delay="500ms",
+        )
+        assert_matches_type(ActionSwipeResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_swipe_overload_2(self, client: GboxClient) -> None:
+        response = client.v1.boxes.actions.with_raw_response.swipe(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            end={
+                "x": 400,
+                "y": 300,
+            },
+            start={
+                "x": 100,
+                "y": 150,
+            },
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = response.parse()
+        assert_matches_type(ActionSwipeResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_swipe_overload_2(self, client: GboxClient) -> None:
+        with client.v1.boxes.actions.with_streaming_response.swipe(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            end={
+                "x": 400,
+                "y": 300,
+            },
+            start={
+                "x": 100,
+                "y": 150,
+            },
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = response.parse()
+            assert_matches_type(ActionSwipeResponse, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_swipe_overload_2(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            client.v1.boxes.actions.with_raw_response.swipe(
+                box_id="",
+                end={
+                    "x": 400,
+                    "y": 300,
+                },
+                start={
+                    "x": 100,
+                    "y": 150,
+                },
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_touch(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.touch(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            points=[
+                {
+                    "start": {
+                        "x": 100,
+                        "y": 150,
+                    }
+                }
+            ],
+        )
+        assert_matches_type(ActionTouchResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_touch_with_all_params(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.touch(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            points=[
+                {
+                    "start": {
+                        "x": 100,
+                        "y": 150,
+                    },
+                    "actions": [
+                        {
+                            "x": 400,
+                            "y": 300,
+                            "duration": "200ms",
+                        },
+                        {"duration": "500ms"},
+                    ],
+                }
+            ],
+            include_screenshot=False,
+            output_format="base64",
+            screenshot_delay="500ms",
+        )
+        assert_matches_type(ActionTouchResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_touch(self, client: GboxClient) -> None:
+        response = client.v1.boxes.actions.with_raw_response.touch(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            points=[
+                {
+                    "start": {
+                        "x": 100,
+                        "y": 150,
+                    }
+                }
+            ],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = response.parse()
+        assert_matches_type(ActionTouchResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_touch(self, client: GboxClient) -> None:
+        with client.v1.boxes.actions.with_streaming_response.touch(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            points=[
+                {
+                    "start": {
+                        "x": 100,
+                        "y": 150,
+                    }
+                }
+            ],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = response.parse()
+            assert_matches_type(ActionTouchResponse, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
     def test_path_params_touch(self, client: GboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.actions.with_raw_response.touch(
-                id="",
+                box_id="",
                 points=[
                     {
                         "start": {
-                            "x": 0,
-                            "y": 0,
+                            "x": 100,
+                            "y": 150,
                         }
                     }
                 ],
-                type={},
             )
 
     @pytest.mark.skip()
     @parametrize
     def test_method_type(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.type(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             text="Hello World",
-            type={},
         )
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionTypeResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_method_type_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.type(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             text="Hello World",
-            type={},
+            include_screenshot=False,
             output_format="base64",
+            screenshot_delay="500ms",
         )
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionTypeResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_type(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.type(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             text="Hello World",
-            type={},
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionTypeResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_type(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.type(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             text="Hello World",
-            type={},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionResult, action, path=["response"])
+            assert_matches_type(ActionTypeResponse, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
     def test_path_params_type(self, client: GboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.actions.with_raw_response.type(
-                id="",
+                box_id="",
                 text="Hello World",
-                type={},
             )
 
 
 class TestAsyncActions:
-    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
+    parametrize = pytest.mark.parametrize(
+        "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
+    )
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_click(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.click(
-            id="id",
-            type={},
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=100,
             y=100,
         )
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionClickResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_click_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.click(
-            id="id",
-            type={},
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=100,
             y=100,
             button="left",
-            double=True,
+            double=False,
+            include_screenshot=False,
             output_format="base64",
+            screenshot_delay="500ms",
         )
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionClickResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_click(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.click(
-            id="id",
-            type={},
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=100,
             y=100,
         )
@@ -656,14 +913,13 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionClickResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_click(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.click(
-            id="id",
-            type={},
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=100,
             y=100,
         ) as response:
@@ -671,17 +927,16 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionResult, action, path=["response"])
+            assert_matches_type(ActionClickResponse, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_click(self, async_client: AsyncGboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.click(
-                id="",
-                type={},
+                box_id="",
                 x=100,
                 y=100,
             )
@@ -690,7 +945,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_drag(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.drag(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path=[
                 {
                     "x": 100,
@@ -701,15 +956,14 @@ class TestAsyncActions:
                     "y": 200,
                 },
             ],
-            type={},
         )
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionDragResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_drag_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.drag(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path=[
                 {
                     "x": 100,
@@ -720,17 +974,18 @@ class TestAsyncActions:
                     "y": 200,
                 },
             ],
-            type={},
-            duration="duration",
+            duration="50ms",
+            include_screenshot=False,
             output_format="base64",
+            screenshot_delay="500ms",
         )
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionDragResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_drag(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.drag(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path=[
                 {
                     "x": 100,
@@ -741,19 +996,18 @@ class TestAsyncActions:
                     "y": 200,
                 },
             ],
-            type={},
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionDragResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_drag(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.drag(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path=[
                 {
                     "x": 100,
@@ -764,22 +1018,21 @@ class TestAsyncActions:
                     "y": 200,
                 },
             ],
-            type={},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionResult, action, path=["response"])
+            assert_matches_type(ActionDragResponse, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_drag(self, async_client: AsyncGboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.drag(
-                id="",
+                box_id="",
                 path=[
                     {
                         "x": 100,
@@ -790,38 +1043,36 @@ class TestAsyncActions:
                         "y": 200,
                     },
                 ],
-                type={},
             )
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_move(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.move(
-            id="id",
-            type={},
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=200,
             y=300,
         )
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionMoveResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_move_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.move(
-            id="id",
-            type={},
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=200,
             y=300,
+            include_screenshot=False,
             output_format="base64",
+            screenshot_delay="500ms",
         )
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionMoveResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_move(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.move(
-            id="id",
-            type={},
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=200,
             y=300,
         )
@@ -829,14 +1080,13 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionMoveResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_move(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.move(
-            id="id",
-            type={},
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             x=200,
             y=300,
         ) as response:
@@ -844,87 +1094,191 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionResult, action, path=["response"])
+            assert_matches_type(ActionMoveResponse, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_move(self, async_client: AsyncGboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.move(
-                id="",
-                type={},
+                box_id="",
                 x=200,
                 y=300,
             )
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_press(self, async_client: AsyncGboxClient) -> None:
-        action = await async_client.v1.boxes.actions.press(
-            id="id",
-            keys=["Enter"],
-            type={},
+    async def test_method_press_button(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.press_button(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            buttons=["power"],
         )
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionPressButtonResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_press_with_all_params(self, async_client: AsyncGboxClient) -> None:
-        action = await async_client.v1.boxes.actions.press(
-            id="id",
-            keys=["Enter"],
-            type={},
+    async def test_method_press_button_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.press_button(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            buttons=["power"],
+            include_screenshot=False,
             output_format="base64",
+            screenshot_delay="500ms",
         )
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionPressButtonResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_press(self, async_client: AsyncGboxClient) -> None:
-        response = await async_client.v1.boxes.actions.with_raw_response.press(
-            id="id",
-            keys=["Enter"],
-            type={},
+    async def test_raw_response_press_button(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.actions.with_raw_response.press_button(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            buttons=["power"],
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionPressButtonResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_press(self, async_client: AsyncGboxClient) -> None:
-        async with async_client.v1.boxes.actions.with_streaming_response.press(
-            id="id",
-            keys=["Enter"],
-            type={},
+    async def test_streaming_response_press_button(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.actions.with_streaming_response.press_button(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            buttons=["power"],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionResult, action, path=["response"])
+            assert_matches_type(ActionPressButtonResponse, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
-    async def test_path_params_press(self, async_client: AsyncGboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            await async_client.v1.boxes.actions.with_raw_response.press(
-                id="",
-                keys=["Enter"],
-                type={},
+    async def test_path_params_press_button(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            await async_client.v1.boxes.actions.with_raw_response.press_button(
+                box_id="",
+                buttons=["power"],
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_press_key(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.press_key(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            keys=["enter"],
+        )
+        assert_matches_type(ActionPressKeyResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_press_key_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.press_key(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            keys=["enter"],
+            include_screenshot=False,
+            output_format="base64",
+            screenshot_delay="500ms",
+        )
+        assert_matches_type(ActionPressKeyResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_press_key(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.actions.with_raw_response.press_key(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            keys=["enter"],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = await response.parse()
+        assert_matches_type(ActionPressKeyResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_press_key(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.actions.with_streaming_response.press_key(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            keys=["enter"],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = await response.parse()
+            assert_matches_type(ActionPressKeyResponse, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_press_key(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            await async_client.v1.boxes.actions.with_raw_response.press_key(
+                box_id="",
+                keys=["enter"],
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_screen_rotation(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.screen_rotation(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            angle=90,
+            direction="clockwise",
+        )
+        assert_matches_type(ActionScreenRotationResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_screen_rotation(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.actions.with_raw_response.screen_rotation(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            angle=90,
+            direction="clockwise",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = await response.parse()
+        assert_matches_type(ActionScreenRotationResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_screen_rotation(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.actions.with_streaming_response.screen_rotation(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            angle=90,
+            direction="clockwise",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = await response.parse()
+            assert_matches_type(ActionScreenRotationResponse, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_screen_rotation(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            await async_client.v1.boxes.actions.with_raw_response.screen_rotation(
+                box_id="",
+                angle=90,
+                direction="clockwise",
             )
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_screenshot(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.screenshot(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
         assert_matches_type(ActionScreenshotResponse, action, path=["response"])
 
@@ -932,15 +1286,14 @@ class TestAsyncActions:
     @parametrize
     async def test_method_screenshot_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.screenshot(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             clip={
-                "height": 0,
-                "width": 0,
-                "x": 0,
-                "y": 0,
+                "height": 600,
+                "width": 800,
+                "x": 100,
+                "y": 50,
             },
             output_format="base64",
-            type="png",
         )
         assert_matches_type(ActionScreenshotResponse, action, path=["response"])
 
@@ -948,7 +1301,7 @@ class TestAsyncActions:
     @parametrize
     async def test_raw_response_screenshot(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.screenshot(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
@@ -960,7 +1313,7 @@ class TestAsyncActions:
     @parametrize
     async def test_streaming_response_screenshot(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.screenshot(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -973,46 +1326,45 @@ class TestAsyncActions:
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_screenshot(self, async_client: AsyncGboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.screenshot(
-                id="",
+                box_id="",
             )
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_scroll(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.scroll(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             scroll_x=0,
             scroll_y=100,
-            type={},
             x=100,
             y=100,
         )
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionScrollResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_scroll_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.scroll(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             scroll_x=0,
             scroll_y=100,
-            type={},
             x=100,
             y=100,
+            include_screenshot=False,
             output_format="base64",
+            screenshot_delay="500ms",
         )
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionScrollResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_scroll(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.scroll(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             scroll_x=0,
             scroll_y=100,
-            type={},
             x=100,
             y=100,
         )
@@ -1020,16 +1372,15 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionScrollResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_scroll(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.scroll(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             scroll_x=0,
             scroll_y=100,
-            type={},
             x=100,
             y=100,
         ) as response:
@@ -1037,177 +1388,331 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionResult, action, path=["response"])
+            assert_matches_type(ActionScrollResponse, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_scroll(self, async_client: AsyncGboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.scroll(
-                id="",
+                box_id="",
                 scroll_x=0,
                 scroll_y=100,
-                type={},
                 x=100,
                 y=100,
             )
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_touch(self, async_client: AsyncGboxClient) -> None:
-        action = await async_client.v1.boxes.actions.touch(
-            id="id",
-            points=[
-                {
-                    "start": {
-                        "x": 0,
-                        "y": 0,
-                    }
-                }
-            ],
-            type={},
+    async def test_method_swipe_overload_1(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.swipe(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            direction="up",
         )
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionSwipeResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_touch_with_all_params(self, async_client: AsyncGboxClient) -> None:
-        action = await async_client.v1.boxes.actions.touch(
-            id="id",
-            points=[
-                {
-                    "start": {
-                        "x": 0,
-                        "y": 0,
-                    },
-                    "actions": [{}],
-                }
-            ],
-            type={},
+    async def test_method_swipe_with_all_params_overload_1(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.swipe(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            direction="up",
+            distance=300,
+            duration="500ms",
+            include_screenshot=False,
             output_format="base64",
+            screenshot_delay="500ms",
         )
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionSwipeResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_touch(self, async_client: AsyncGboxClient) -> None:
-        response = await async_client.v1.boxes.actions.with_raw_response.touch(
-            id="id",
-            points=[
-                {
-                    "start": {
-                        "x": 0,
-                        "y": 0,
-                    }
-                }
-            ],
-            type={},
+    async def test_raw_response_swipe_overload_1(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.actions.with_raw_response.swipe(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            direction="up",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionSwipeResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_touch(self, async_client: AsyncGboxClient) -> None:
-        async with async_client.v1.boxes.actions.with_streaming_response.touch(
-            id="id",
-            points=[
-                {
-                    "start": {
-                        "x": 0,
-                        "y": 0,
-                    }
-                }
-            ],
-            type={},
+    async def test_streaming_response_swipe_overload_1(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.actions.with_streaming_response.swipe(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            direction="up",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionResult, action, path=["response"])
+            assert_matches_type(ActionSwipeResponse, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_swipe_overload_1(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            await async_client.v1.boxes.actions.with_raw_response.swipe(
+                box_id="",
+                direction="up",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_swipe_overload_2(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.swipe(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            end={
+                "x": 400,
+                "y": 300,
+            },
+            start={
+                "x": 100,
+                "y": 150,
+            },
+        )
+        assert_matches_type(ActionSwipeResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_swipe_with_all_params_overload_2(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.swipe(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            end={
+                "x": 400,
+                "y": 300,
+            },
+            start={
+                "x": 100,
+                "y": 150,
+            },
+            duration="500ms",
+            include_screenshot=False,
+            output_format="base64",
+            screenshot_delay="500ms",
+        )
+        assert_matches_type(ActionSwipeResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_swipe_overload_2(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.actions.with_raw_response.swipe(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            end={
+                "x": 400,
+                "y": 300,
+            },
+            start={
+                "x": 100,
+                "y": 150,
+            },
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = await response.parse()
+        assert_matches_type(ActionSwipeResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_swipe_overload_2(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.actions.with_streaming_response.swipe(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            end={
+                "x": 400,
+                "y": 300,
+            },
+            start={
+                "x": 100,
+                "y": 150,
+            },
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = await response.parse()
+            assert_matches_type(ActionSwipeResponse, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_swipe_overload_2(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            await async_client.v1.boxes.actions.with_raw_response.swipe(
+                box_id="",
+                end={
+                    "x": 400,
+                    "y": 300,
+                },
+                start={
+                    "x": 100,
+                    "y": 150,
+                },
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_touch(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.touch(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            points=[
+                {
+                    "start": {
+                        "x": 100,
+                        "y": 150,
+                    }
+                }
+            ],
+        )
+        assert_matches_type(ActionTouchResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_touch_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.touch(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            points=[
+                {
+                    "start": {
+                        "x": 100,
+                        "y": 150,
+                    },
+                    "actions": [
+                        {
+                            "x": 400,
+                            "y": 300,
+                            "duration": "200ms",
+                        },
+                        {"duration": "500ms"},
+                    ],
+                }
+            ],
+            include_screenshot=False,
+            output_format="base64",
+            screenshot_delay="500ms",
+        )
+        assert_matches_type(ActionTouchResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_touch(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.actions.with_raw_response.touch(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            points=[
+                {
+                    "start": {
+                        "x": 100,
+                        "y": 150,
+                    }
+                }
+            ],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = await response.parse()
+        assert_matches_type(ActionTouchResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_touch(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.actions.with_streaming_response.touch(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            points=[
+                {
+                    "start": {
+                        "x": 100,
+                        "y": 150,
+                    }
+                }
+            ],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = await response.parse()
+            assert_matches_type(ActionTouchResponse, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_touch(self, async_client: AsyncGboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.touch(
-                id="",
+                box_id="",
                 points=[
                     {
                         "start": {
-                            "x": 0,
-                            "y": 0,
+                            "x": 100,
+                            "y": 150,
                         }
                     }
                 ],
-                type={},
             )
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_type(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.type(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             text="Hello World",
-            type={},
         )
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionTypeResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_type_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.type(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             text="Hello World",
-            type={},
+            include_screenshot=False,
             output_format="base64",
+            screenshot_delay="500ms",
         )
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionTypeResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_type(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.type(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             text="Hello World",
-            type={},
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionResult, action, path=["response"])
+        assert_matches_type(ActionTypeResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_type(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.type(
-            id="id",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             text="Hello World",
-            type={},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionResult, action, path=["response"])
+            assert_matches_type(ActionTypeResponse, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_type(self, async_client: AsyncGboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.type(
-                id="",
+                box_id="",
                 text="Hello World",
-                type={},
             )

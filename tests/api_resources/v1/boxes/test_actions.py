@@ -10,6 +10,7 @@ import pytest
 from gbox_sdk import GboxClient, AsyncGboxClient
 from tests.utils import assert_matches_type
 from gbox_sdk.types.v1.boxes import (
+    ActionAIResponse,
     ActionDragResponse,
     ActionMoveResponse,
     ActionTypeResponse,
@@ -28,6 +29,65 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 class TestActions:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_ai(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.ai(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            instruction="click the login button",
+        )
+        assert_matches_type(ActionAIResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_ai_with_all_params(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.ai(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            instruction="click the login button",
+            background="The user is on the login page",
+            include_screenshot=False,
+            output_format="base64",
+            screenshot_delay="500ms",
+        )
+        assert_matches_type(ActionAIResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_ai(self, client: GboxClient) -> None:
+        response = client.v1.boxes.actions.with_raw_response.ai(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            instruction="click the login button",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = response.parse()
+        assert_matches_type(ActionAIResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_ai(self, client: GboxClient) -> None:
+        with client.v1.boxes.actions.with_streaming_response.ai(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            instruction="click the login button",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = response.parse()
+            assert_matches_type(ActionAIResponse, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_ai(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            client.v1.boxes.actions.with_raw_response.ai(
+                box_id="",
+                instruction="click the login button",
+            )
 
     @pytest.mark.skip()
     @parametrize
@@ -875,6 +935,65 @@ class TestAsyncActions:
     parametrize = pytest.mark.parametrize(
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_ai(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.ai(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            instruction="click the login button",
+        )
+        assert_matches_type(ActionAIResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_ai_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.ai(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            instruction="click the login button",
+            background="The user is on the login page",
+            include_screenshot=False,
+            output_format="base64",
+            screenshot_delay="500ms",
+        )
+        assert_matches_type(ActionAIResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_ai(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.actions.with_raw_response.ai(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            instruction="click the login button",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = await response.parse()
+        assert_matches_type(ActionAIResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_ai(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.actions.with_streaming_response.ai(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            instruction="click the login button",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = await response.parse()
+            assert_matches_type(ActionAIResponse, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_ai(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            await async_client.v1.boxes.actions.with_raw_response.ai(
+                box_id="",
+                instruction="click the login button",
+            )
 
     @pytest.mark.skip()
     @parametrize

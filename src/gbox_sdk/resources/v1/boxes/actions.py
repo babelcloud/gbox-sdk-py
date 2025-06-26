@@ -19,6 +19,7 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.v1.boxes import (
+    action_ai_params,
     action_drag_params,
     action_move_params,
     action_type_params,
@@ -31,6 +32,7 @@ from ....types.v1.boxes import (
     action_press_button_params,
     action_screen_rotation_params,
 )
+from ....types.v1.boxes.action_ai_response import ActionAIResponse
 from ....types.v1.boxes.action_drag_response import ActionDragResponse
 from ....types.v1.boxes.action_move_response import ActionMoveResponse
 from ....types.v1.boxes.action_type_response import ActionTypeResponse
@@ -65,6 +67,89 @@ class ActionsResource(SyncAPIResource):
         For more information, see https://www.github.com/babelcloud/gbox-sdk-py#with_streaming_response
         """
         return ActionsResourceWithStreamingResponse(self)
+
+    def ai(
+        self,
+        box_id: str,
+        *,
+        instruction: str,
+        background: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionAIResponse:
+        """Use natural language instructions to perform UI operations on the box.
+
+        You can
+        describe what you want to do in plain language (e.g., 'click the login button',
+        'scroll down to find settings', 'input my email address'), and the AI will
+        automatically convert your instruction into the appropriate UI action and
+        execute it on the box.
+
+        Args:
+          instruction: Direct instruction of the UI action to perform (e.g., 'click the login button',
+              'input username in the email field', 'scroll down', 'swipe left')
+
+          background: The background of the UI action to perform. The purpose of background is to let
+              the action executor to understand the context of why the instruction is given
+              including important previous actions and observations
+
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
+          output_format: Type of the URI. default is base64.
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return cast(
+            ActionAIResponse,
+            self._post(
+                f"/boxes/{box_id}/actions/ai",
+                body=maybe_transform(
+                    {
+                        "instruction": instruction,
+                        "background": background,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "screenshot_delay": screenshot_delay,
+                    },
+                    action_ai_params.ActionAIParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(Any, ActionAIResponse),  # Union types cannot be passed in as arguments in the type system
+            ),
+        )
 
     def click(
         self,
@@ -1096,6 +1181,89 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         return AsyncActionsResourceWithStreamingResponse(self)
 
+    async def ai(
+        self,
+        box_id: str,
+        *,
+        instruction: str,
+        background: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionAIResponse:
+        """Use natural language instructions to perform UI operations on the box.
+
+        You can
+        describe what you want to do in plain language (e.g., 'click the login button',
+        'scroll down to find settings', 'input my email address'), and the AI will
+        automatically convert your instruction into the appropriate UI action and
+        execute it on the box.
+
+        Args:
+          instruction: Direct instruction of the UI action to perform (e.g., 'click the login button',
+              'input username in the email field', 'scroll down', 'swipe left')
+
+          background: The background of the UI action to perform. The purpose of background is to let
+              the action executor to understand the context of why the instruction is given
+              including important previous actions and observations
+
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
+          output_format: Type of the URI. default is base64.
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return cast(
+            ActionAIResponse,
+            await self._post(
+                f"/boxes/{box_id}/actions/ai",
+                body=await async_maybe_transform(
+                    {
+                        "instruction": instruction,
+                        "background": background,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "screenshot_delay": screenshot_delay,
+                    },
+                    action_ai_params.ActionAIParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(Any, ActionAIResponse),  # Union types cannot be passed in as arguments in the type system
+            ),
+        )
+
     async def click(
         self,
         box_id: str,
@@ -2110,6 +2278,9 @@ class ActionsResourceWithRawResponse:
     def __init__(self, actions: ActionsResource) -> None:
         self._actions = actions
 
+        self.ai = to_raw_response_wrapper(
+            actions.ai,
+        )
         self.click = to_raw_response_wrapper(
             actions.click,
         )
@@ -2149,6 +2320,9 @@ class AsyncActionsResourceWithRawResponse:
     def __init__(self, actions: AsyncActionsResource) -> None:
         self._actions = actions
 
+        self.ai = async_to_raw_response_wrapper(
+            actions.ai,
+        )
         self.click = async_to_raw_response_wrapper(
             actions.click,
         )
@@ -2188,6 +2362,9 @@ class ActionsResourceWithStreamingResponse:
     def __init__(self, actions: ActionsResource) -> None:
         self._actions = actions
 
+        self.ai = to_streamed_response_wrapper(
+            actions.ai,
+        )
         self.click = to_streamed_response_wrapper(
             actions.click,
         )
@@ -2227,6 +2404,9 @@ class AsyncActionsResourceWithStreamingResponse:
     def __init__(self, actions: AsyncActionsResource) -> None:
         self._actions = actions
 
+        self.ai = async_to_streamed_response_wrapper(
+            actions.ai,
+        )
         self.click = async_to_streamed_response_wrapper(
             actions.click,
         )

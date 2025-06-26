@@ -8,28 +8,12 @@ from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
-__all__ = ["LinuxBox", "Config", "ConfigOs", "ConfigResolution", "ConfigBrowser"]
+__all__ = ["LinuxBox", "Config", "ConfigOs"]
 
 
 class ConfigOs(BaseModel):
     version: str
     """OS version string (e.g. 'ubuntu-20.04')"""
-
-
-class ConfigResolution(BaseModel):
-    height: float
-    """Height of the box"""
-
-    width: float
-    """Width of the box"""
-
-
-class ConfigBrowser(BaseModel):
-    type: Literal["chromium", "firefox", "webkit"]
-    """Supported browser types for Linux boxes"""
-
-    version: str
-    """Browser version string (e.g. '12')"""
 
 
 class Config(BaseModel):
@@ -58,14 +42,8 @@ class Config(BaseModel):
     os: ConfigOs
     """Linux operating system configuration"""
 
-    resolution: ConfigResolution
-    """Box display resolution configuration"""
-
     storage: float
     """Storage allocated to the box in GiB."""
-
-    browser: Optional[ConfigBrowser] = None
-    """Linux browser configuration settings"""
 
     working_dir: Optional[str] = FieldInfo(alias="workingDir", default=None)
     """Working directory path for the box.

@@ -258,7 +258,7 @@ class AndroidResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AndroidApp:
         """
-        Get app
+        Get installed app info by package name
 
         Args:
           extra_headers: Send extra headers
@@ -451,7 +451,7 @@ class AndroidResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AndroidListAppResponse:
         """
-        List apps
+        List all installed apps on the launcher
 
         Args:
           extra_headers: Send extra headers
@@ -942,7 +942,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AndroidApp:
         """
-        Get app
+        Get installed app info by package name
 
         Args:
           extra_headers: Send extra headers
@@ -1135,7 +1135,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AndroidListAppResponse:
         """
-        List apps
+        List all installed apps on the launcher
 
         Args:
           extra_headers: Send extra headers

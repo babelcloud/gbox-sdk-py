@@ -324,8 +324,11 @@ class BoxesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxDisplayResponse:
-        """
-        Get box display
+        """Retrieve the current display properties for a running box.
+
+        This endpoint
+        provides details about the box's screen resolution, orientation, and other
+        visual properties
 
         Args:
           extra_headers: Send extra headers
@@ -361,12 +364,13 @@ class BoxesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxExecuteCommandsResponse:
-        """Exec command
+        """Execute a command on a running box.
+
+        This endpoint allows you to send commands to
+        the box and receive the output
 
         Args:
-          commands: The command to run.
-
-        Can be a single string or an array of strings
+          commands: The command to run. Can be a single string or an array of strings
 
           envs: The environment variables to run the command
 
@@ -419,7 +423,9 @@ class BoxesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxLiveViewURLResponse:
         """
-        Generate pre-signed live view url
+        This endpoint allows you to generate a pre-signed URL for accessing the live
+        view of a running box. The URL is valid for a limited time and can be used to
+        view the box's live stream
 
         Args:
           expires_in: The live view will be alive for the given duration
@@ -606,8 +612,9 @@ class BoxesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
-        """
-        Terminate box
+        """Terminate a running box.
+
+        This action will stop the box and release its resources
 
         Args:
           wait: Wait for the box operation to be completed, default is true
@@ -645,7 +652,9 @@ class BoxesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxWebTerminalURLResponse:
         """
-        Generate pre-signed web terminal url
+        This endpoint allows you to generate a pre-signed URL for accessing the web
+        terminal of a running box. The URL is valid for a limited time and can be used
+        to access the box's terminal interface
 
         Args:
           expires_in: The web terminal will be alive for the given duration
@@ -919,8 +928,11 @@ class AsyncBoxesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxDisplayResponse:
-        """
-        Get box display
+        """Retrieve the current display properties for a running box.
+
+        This endpoint
+        provides details about the box's screen resolution, orientation, and other
+        visual properties
 
         Args:
           extra_headers: Send extra headers
@@ -956,12 +968,13 @@ class AsyncBoxesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxExecuteCommandsResponse:
-        """Exec command
+        """Execute a command on a running box.
+
+        This endpoint allows you to send commands to
+        the box and receive the output
 
         Args:
-          commands: The command to run.
-
-        Can be a single string or an array of strings
+          commands: The command to run. Can be a single string or an array of strings
 
           envs: The environment variables to run the command
 
@@ -1014,7 +1027,9 @@ class AsyncBoxesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxLiveViewURLResponse:
         """
-        Generate pre-signed live view url
+        This endpoint allows you to generate a pre-signed URL for accessing the live
+        view of a running box. The URL is valid for a limited time and can be used to
+        view the box's live stream
 
         Args:
           expires_in: The live view will be alive for the given duration
@@ -1201,8 +1216,9 @@ class AsyncBoxesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
-        """
-        Terminate box
+        """Terminate a running box.
+
+        This action will stop the box and release its resources
 
         Args:
           wait: Wait for the box operation to be completed, default is true
@@ -1240,7 +1256,9 @@ class AsyncBoxesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxWebTerminalURLResponse:
         """
-        Generate pre-signed web terminal url
+        This endpoint allows you to generate a pre-signed URL for accessing the web
+        terminal of a running box. The URL is valid for a limited time and can be used
+        to access the box's terminal interface
 
         Args:
           expires_in: The web terminal will be alive for the given duration

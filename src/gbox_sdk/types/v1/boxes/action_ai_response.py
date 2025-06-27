@@ -637,11 +637,11 @@ AIActionScreenshotResultAIResponseAction: TypeAlias = Union[
 
 
 class AIActionScreenshotResultAIResponse(BaseModel):
-    action: AIActionScreenshotResultAIResponseAction
-    """Action to be executed by the AI with type identifier"""
+    actions: List[AIActionScreenshotResultAIResponseAction]
+    """Actions to be executed by the AI with type identifier"""
 
-    messages: List[List[object]]
-    """message"""
+    messages: List[str]
+    """messages"""
 
     model: str
     """model"""
@@ -1266,11 +1266,11 @@ AIActionResultAIResponseAction: TypeAlias = Union[
 
 
 class AIActionResultAIResponse(BaseModel):
-    action: AIActionResultAIResponseAction
-    """Action to be executed by the AI with type identifier"""
+    actions: List[AIActionResultAIResponseAction]
+    """Actions to be executed by the AI with type identifier"""
 
-    messages: List[List[object]]
-    """message"""
+    messages: List[str]
+    """messages"""
 
     model: str
     """model"""

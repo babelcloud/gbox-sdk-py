@@ -1,4 +1,4 @@
-from typing import List, Union
+from typing import List, Union, Optional
 
 from gbox_sdk._client import GboxClient
 from gbox_sdk.types.v1.linux_box import LinuxBox
@@ -10,10 +10,12 @@ from gbox_sdk.types.v1.box_stop_params import BoxStopParams
 from gbox_sdk.types.v1.box_start_params import BoxStartParams
 from gbox_sdk.types.v1.box_run_code_params import BoxRunCodeParams
 from gbox_sdk.types.v1.box_terminate_params import BoxTerminateParams
+from gbox_sdk.types.v1.box_run_code_response import BoxRunCodeResponse
 from gbox_sdk.types.v1.box_live_view_url_params import BoxLiveViewURLParams
 from gbox_sdk.types.v1.box_live_view_url_response import BoxLiveViewURLResponse
 from gbox_sdk.types.v1.box_execute_commands_params import BoxExecuteCommandsParams
 from gbox_sdk.types.v1.box_web_terminal_url_params import BoxWebTerminalURLParams
+from gbox_sdk.types.v1.box_execute_commands_response import BoxExecuteCommandsResponse
 from gbox_sdk.types.v1.box_web_terminal_url_response import BoxWebTerminalURLResponse
 
 
@@ -90,39 +92,35 @@ class BaseBox:
         self._sync_data()
         return self
 
-    def command(self, body: Union[BoxExecuteCommandsParams, str, List[str]]) -> "BaseBox":
+    def command(self, body: Union[BoxExecuteCommandsParams, str, List[str]]) -> "BoxExecuteCommandsResponse":
         """
         Execute shell commands in the box.
 
         Args:
             body (Union[BoxExecuteCommandsParams, str, List[str]]): The commands to execute or parameters object.
         Returns:
-            BaseBox: The updated box instance.
+            BoxExecuteCommandsResponse: The response containing the command execution result.
         """
         if isinstance(body, str):
             body = BoxExecuteCommandsParams(commands=[body])
         elif isinstance(body, list):
             body = BoxExecuteCommandsParams(commands=body)
-        self.client.v1.boxes.execute_commands(box_id=self.data.id, **body)
-        self._sync_data()
-        return self
+        return self.client.v1.boxes.execute_commands(box_id=self.data.id, **body)
 
-    def run_code(self, body: Union[BoxRunCodeParams, str]) -> "BaseBox":
+    def run_code(self, body: Union[BoxRunCodeParams, str]) -> "BoxRunCodeResponse":
         """
         Run code in the box.
 
         Args:
             body (Union[BoxRunCodeParams, str]): The code to run or parameters object.
         Returns:
-            BaseBox: The updated box instance.
+            BoxRunCodeResponse: The response containing the code execution result.
         """
         if isinstance(body, str):
             body = BoxRunCodeParams(code=body)
-        self.client.v1.boxes.run_code(box_id=self.data.id, **body)
-        self._sync_data()
-        return self
+        return self.client.v1.boxes.run_code(box_id=self.data.id, **body)
 
-    def live_view(self, body: BoxLiveViewURLParams) -> BoxLiveViewURLResponse:
+    def live_view(self, body: Optional[BoxLiveViewURLParams] = None) -> BoxLiveViewURLResponse:
         """
         Get the live view URL for the box.
 
@@ -131,9 +129,11 @@ class BaseBox:
         Returns:
             BoxLiveViewURLResponse: The response containing the live view URL.
         """
+        if body is None:
+            body = BoxLiveViewURLParams()
         return self.client.v1.boxes.live_view_url(box_id=self.data.id, **body)
 
-    def web_terminal(self, body: BoxWebTerminalURLParams) -> BoxWebTerminalURLResponse:
+    def web_terminal(self, body: Optional[BoxWebTerminalURLParams] = None) -> BoxWebTerminalURLResponse:
         """
         Get the web terminal URL for the box.
 
@@ -142,4 +142,6 @@ class BaseBox:
         Returns:
             BoxWebTerminalURLResponse: The response containing the web terminal URL.
         """
+        if body is None:
+            body = BoxWebTerminalURLParams()
         return self.client.v1.boxes.web_terminal_url(box_id=self.data.id, **body)

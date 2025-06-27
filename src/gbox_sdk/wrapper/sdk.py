@@ -1,4 +1,4 @@
-from typing import List, Union, Mapping, Optional
+from typing import Any, List, Union, Mapping, Optional, cast
 
 import httpx
 
@@ -204,10 +204,24 @@ class GboxSDK:
             ValueError: If the box type is invalid.
         """
         if is_android_box(data):
-            android_box: AndroidBox = AndroidBox(**data.model_dump())
+            data_dict = data.model_dump(by_alias=True)
+            if (
+                "config" in data_dict
+                and isinstance(data_dict["config"], dict)
+                and cast("dict[str, Any]", data_dict["config"]).get("labels") is None
+            ):
+                data_dict["config"]["labels"] = {}
+            android_box: AndroidBox = AndroidBox(**data_dict)
             return AndroidBoxOperator(self.client, android_box)
         elif is_linux_box(data):
-            linux_box: LinuxBox = LinuxBox(**data.model_dump())
+            data_dict = data.model_dump(by_alias=True)
+            if (
+                "config" in data_dict
+                and isinstance(data_dict["config"], dict)
+                and cast("dict[str, Any]", data_dict["config"]).get("labels") is None
+            ):
+                data_dict["config"]["labels"] = {}
+            linux_box: LinuxBox = LinuxBox(**data_dict)
             return LinuxBoxOperator(self.client, linux_box)
         else:
             raise ValueError(f"Invalid box type: {data.type}")

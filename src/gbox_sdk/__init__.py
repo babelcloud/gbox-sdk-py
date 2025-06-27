@@ -18,6 +18,20 @@ from ._client import (
     AsyncGboxClient,
 )
 from ._models import BaseModel
+from .wrapper import (
+    BaseBox,
+    GboxSDK,
+    FileOperator,
+    ActionOperator,
+    BrowserOperator,
+    ActionScreenshot,
+    LinuxBoxOperator,
+    DirectoryOperator,
+    AndroidAppOperator,
+    AndroidBoxOperator,
+    AndroidPkgOperator,
+    FileSystemOperator,
+)
 from ._version import __title__, __version__
 from ._response import APIResponse as APIResponse, AsyncAPIResponse as AsyncAPIResponse
 from ._constants import DEFAULT_TIMEOUT, DEFAULT_MAX_RETRIES, DEFAULT_CONNECTION_LIMITS
@@ -37,7 +51,6 @@ from ._exceptions import (
     UnprocessableEntityError,
     APIResponseValidationError,
 )
-from .wrapper.sdk import GboxSDK
 from ._base_client import DefaultHttpxClient, DefaultAioHttpClient, DefaultAsyncHttpxClient
 from ._utils._logs import setup_logging as _setup_logging
 
@@ -83,6 +96,17 @@ __all__ = [
     "DefaultAsyncHttpxClient",
     "DefaultAioHttpClient",
     "GboxSDK",
+    "BaseBox",
+    "ActionOperator",
+    "ActionScreenshot",
+    "BrowserOperator",
+    "FileSystemOperator",
+    "FileOperator",
+    "DirectoryOperator",
+    "LinuxBoxOperator",
+    "AndroidBoxOperator",
+    "AndroidAppOperator",
+    "AndroidPkgOperator",
 ]
 
 if not _t.TYPE_CHECKING:

@@ -48,6 +48,9 @@ jobs:
           cd docs
           make html
 
+      - name: Add .nojekyll
+        run: touch docs/_build/html/.nojekyll
+
       - name: Deploy to GitHub Pages (orphan branch)
         run: |
           git config --global user.name "github-actions[bot]"

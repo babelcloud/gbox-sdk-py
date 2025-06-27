@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.11 (2025-06-27)
+
+Full Changelog: [v0.1.0-alpha.10...v0.1.0-alpha.11](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.10...v0.1.0-alpha.11)
+
+### Bug Fixes
+
+* docs ci ([f04e244](https://github.com/babelcloud/gbox-sdk-py/commit/f04e2441e448c750758a27ddfb988343373d92cf))
+
 ## 0.1.0-alpha.10 (2025-06-27)
 
 Full Changelog: [v0.1.0-alpha.9...v0.1.0-alpha.10](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.9...v0.1.0-alpha.10)

@@ -53,7 +53,9 @@ class BrowserResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Generate pre-signed CDP url
+        This endpoint allows you to generate a pre-signed URL for accessing the Chrome
+        DevTools Protocol (CDP) of a running box. The URL is valid for a limited time
+        and can be used to interact with the box's browser environment
 
         Args:
           expires_in: The CDP url will be alive for the given duration
@@ -114,7 +116,9 @@ class AsyncBrowserResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Generate pre-signed CDP url
+        This endpoint allows you to generate a pre-signed URL for accessing the Chrome
+        DevTools Protocol (CDP) of a running box. The URL is valid for a limited time
+        and can be used to interact with the box's browser environment
 
         Args:
           expires_in: The CDP url will be alive for the given duration

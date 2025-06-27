@@ -8,28 +8,12 @@ from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
-__all__ = ["AndroidBox", "Config", "ConfigOs", "ConfigResolution", "ConfigBrowser"]
+__all__ = ["AndroidBox", "Config", "ConfigOs"]
 
 
 class ConfigOs(BaseModel):
     version: Literal["12", "13", "15"]
     """Supported Android versions"""
-
-
-class ConfigResolution(BaseModel):
-    height: float
-    """Height of the box"""
-
-    width: float
-    """Width of the box"""
-
-
-class ConfigBrowser(BaseModel):
-    type: Literal["Chrome for Android", "UC Browser for Android"]
-    """Supported browser types for Android boxes"""
-
-    version: str
-    """Browser version string (e.g. '136')"""
 
 
 class Config(BaseModel):
@@ -58,14 +42,8 @@ class Config(BaseModel):
     os: ConfigOs
     """Android operating system configuration"""
 
-    resolution: ConfigResolution
-    """Box display resolution configuration"""
-
     storage: float
     """Storage allocated to the box in GiB"""
-
-    browser: Optional[ConfigBrowser] = None
-    """Android browser configuration settings"""
 
     device_type: Optional[Literal["virtual", "physical"]] = FieldInfo(alias="deviceType", default=None)
     """Device type - virtual or physical Android device"""

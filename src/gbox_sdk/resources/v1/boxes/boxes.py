@@ -67,6 +67,7 @@ from ....types.v1.android_box import AndroidBox
 from ....types.v1.box_list_response import BoxListResponse
 from ....types.v1.box_stop_response import BoxStopResponse
 from ....types.v1.box_start_response import BoxStartResponse
+from ....types.v1.box_display_response import BoxDisplayResponse
 from ....types.v1.box_retrieve_response import BoxRetrieveResponse
 from ....types.v1.box_run_code_response import BoxRunCodeResponse
 from ....types.v1.create_box_config_param import CreateBoxConfigParam
@@ -312,6 +313,42 @@ class BoxesResource(SyncAPIResource):
             cast_to=LinuxBox,
         )
 
+    def display(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BoxDisplayResponse:
+        """Retrieve the current display properties for a running box.
+
+        This endpoint
+        provides details about the box's screen resolution, orientation, and other
+        visual properties
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return self._get(
+            f"/boxes/{box_id}/display",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BoxDisplayResponse,
+        )
+
     def execute_commands(
         self,
         box_id: str,
@@ -327,12 +364,13 @@ class BoxesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxExecuteCommandsResponse:
-        """Exec command
+        """Execute a command on a running box.
+
+        This endpoint allows you to send commands to
+        the box and receive the output
 
         Args:
-          commands: The command to run.
-
-        Can be a single string or an array of strings
+          commands: The command to run. Can be a single string or an array of strings
 
           envs: The environment variables to run the command
 
@@ -385,7 +423,9 @@ class BoxesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxLiveViewURLResponse:
         """
-        Generate pre-signed live view url
+        This endpoint allows you to generate a pre-signed URL for accessing the live
+        view of a running box. The URL is valid for a limited time and can be used to
+        view the box's live stream
 
         Args:
           expires_in: The live view will be alive for the given duration
@@ -572,8 +612,9 @@ class BoxesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
-        """
-        Terminate box
+        """Terminate a running box.
+
+        This action will stop the box and release its resources
 
         Args:
           wait: Wait for the box operation to be completed, default is true
@@ -611,7 +652,9 @@ class BoxesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxWebTerminalURLResponse:
         """
-        Generate pre-signed web terminal url
+        This endpoint allows you to generate a pre-signed URL for accessing the web
+        terminal of a running box. The URL is valid for a limited time and can be used
+        to access the box's terminal interface
 
         Args:
           expires_in: The web terminal will be alive for the given duration
@@ -874,6 +917,42 @@ class AsyncBoxesResource(AsyncAPIResource):
             cast_to=LinuxBox,
         )
 
+    async def display(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BoxDisplayResponse:
+        """Retrieve the current display properties for a running box.
+
+        This endpoint
+        provides details about the box's screen resolution, orientation, and other
+        visual properties
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return await self._get(
+            f"/boxes/{box_id}/display",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BoxDisplayResponse,
+        )
+
     async def execute_commands(
         self,
         box_id: str,
@@ -889,12 +968,13 @@ class AsyncBoxesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxExecuteCommandsResponse:
-        """Exec command
+        """Execute a command on a running box.
+
+        This endpoint allows you to send commands to
+        the box and receive the output
 
         Args:
-          commands: The command to run.
-
-        Can be a single string or an array of strings
+          commands: The command to run. Can be a single string or an array of strings
 
           envs: The environment variables to run the command
 
@@ -947,7 +1027,9 @@ class AsyncBoxesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxLiveViewURLResponse:
         """
-        Generate pre-signed live view url
+        This endpoint allows you to generate a pre-signed URL for accessing the live
+        view of a running box. The URL is valid for a limited time and can be used to
+        view the box's live stream
 
         Args:
           expires_in: The live view will be alive for the given duration
@@ -1134,8 +1216,9 @@ class AsyncBoxesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
-        """
-        Terminate box
+        """Terminate a running box.
+
+        This action will stop the box and release its resources
 
         Args:
           wait: Wait for the box operation to be completed, default is true
@@ -1173,7 +1256,9 @@ class AsyncBoxesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BoxWebTerminalURLResponse:
         """
-        Generate pre-signed web terminal url
+        This endpoint allows you to generate a pre-signed URL for accessing the web
+        terminal of a running box. The URL is valid for a limited time and can be used
+        to access the box's terminal interface
 
         Args:
           expires_in: The web terminal will be alive for the given duration
@@ -1218,6 +1303,9 @@ class BoxesResourceWithRawResponse:
         )
         self.create_linux = to_raw_response_wrapper(
             boxes.create_linux,
+        )
+        self.display = to_raw_response_wrapper(
+            boxes.display,
         )
         self.execute_commands = to_raw_response_wrapper(
             boxes.execute_commands,
@@ -1274,6 +1362,9 @@ class AsyncBoxesResourceWithRawResponse:
         self.create_linux = async_to_raw_response_wrapper(
             boxes.create_linux,
         )
+        self.display = async_to_raw_response_wrapper(
+            boxes.display,
+        )
         self.execute_commands = async_to_raw_response_wrapper(
             boxes.execute_commands,
         )
@@ -1329,6 +1420,9 @@ class BoxesResourceWithStreamingResponse:
         self.create_linux = to_streamed_response_wrapper(
             boxes.create_linux,
         )
+        self.display = to_streamed_response_wrapper(
+            boxes.display,
+        )
         self.execute_commands = to_streamed_response_wrapper(
             boxes.execute_commands,
         )
@@ -1383,6 +1477,9 @@ class AsyncBoxesResourceWithStreamingResponse:
         )
         self.create_linux = async_to_streamed_response_wrapper(
             boxes.create_linux,
+        )
+        self.display = async_to_streamed_response_wrapper(
+            boxes.display,
         )
         self.execute_commands = async_to_streamed_response_wrapper(
             boxes.execute_commands,

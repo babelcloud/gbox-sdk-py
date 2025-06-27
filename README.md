@@ -1,4 +1,4 @@
-# Gbox Client Python API library
+# Gbox Client Python API
 
 [![PyPI version](<https://img.shields.io/pypi/v/gbox_sdk.svg?label=pypi%20(stable)>)](https://pypi.org/project/gbox_sdk/)
 

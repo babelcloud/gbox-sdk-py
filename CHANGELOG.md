@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.1.0-alpha.5 (2025-06-27)
+
+Full Changelog: [v0.1.0-alpha.4...v0.1.0-alpha.5](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.4...v0.1.0-alpha.5)
+
+### Features
+
+* **api:** api update ([a1c2ae6](https://github.com/babelcloud/gbox-sdk-py/commit/a1c2ae6faa6839414c7dcac8089c9aca40312fd5))
+* **api:** api update ([89d5f2d](https://github.com/babelcloud/gbox-sdk-py/commit/89d5f2d2482d987f00b8938f3d6ce7e3da433a42))
+* **api:** api update ([bf1941e](https://github.com/babelcloud/gbox-sdk-py/commit/bf1941e1b536b3238b140bea1d2b27526a61980d))
+* **api:** api update ([385e786](https://github.com/babelcloud/gbox-sdk-py/commit/385e7860f40a3c8ac69dd8ababd0081fcaeffd67))
+* **api:** api update ([1ce1459](https://github.com/babelcloud/gbox-sdk-py/commit/1ce1459fdb30f062267b3cd03798f1aa53d4c8d1))
+* **api:** api update ([8ef3437](https://github.com/babelcloud/gbox-sdk-py/commit/8ef34373e38cbbf32ad6d00a8af6ed61dc7747d1))
+
+
+### Bug Fixes
+
+* **ci:** release-doctor — report correct token name ([268f887](https://github.com/babelcloud/gbox-sdk-py/commit/268f887ef08e1451a6cc8385581d4079d7528050))
+
 ## 0.1.0-alpha.4 (2025-06-26)
 
 Full Changelog: [v0.1.0-alpha.3...v0.1.0-alpha.4](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.3...v0.1.0-alpha.4)

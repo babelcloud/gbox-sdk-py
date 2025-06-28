@@ -32,6 +32,7 @@ from .action_scroll_params import ActionScrollParams as ActionScrollParams
 from .action_type_response import ActionTypeResponse as ActionTypeResponse
 from .android_get_response import AndroidGetResponse as AndroidGetResponse
 from .action_click_response import ActionClickResponse as ActionClickResponse
+from .action_extract_params import ActionExtractParams as ActionExtractParams
 from .action_swipe_response import ActionSwipeResponse as ActionSwipeResponse
 from .action_touch_response import ActionTouchResponse as ActionTouchResponse
 from .action_scroll_response import ActionScrollResponse as ActionScrollResponse

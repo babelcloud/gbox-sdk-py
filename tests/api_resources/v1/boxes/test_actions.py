@@ -260,6 +260,62 @@ class TestActions:
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_extract(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.extract(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            instruction="extract the product information including title, price, and availability status",
+        )
+        assert_matches_type(object, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_extract_with_all_params(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.extract(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            instruction="extract the product information including title, price, and availability status",
+            schema={},
+        )
+        assert_matches_type(object, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_extract(self, client: GboxClient) -> None:
+        response = client.v1.boxes.actions.with_raw_response.extract(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            instruction="extract the product information including title, price, and availability status",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = response.parse()
+        assert_matches_type(object, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_extract(self, client: GboxClient) -> None:
+        with client.v1.boxes.actions.with_streaming_response.extract(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            instruction="extract the product information including title, price, and availability status",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = response.parse()
+            assert_matches_type(object, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_extract(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            client.v1.boxes.actions.with_raw_response.extract(
+                box_id="",
+                instruction="extract the product information including title, price, and availability status",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
     def test_method_move(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.move(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
@@ -1162,6 +1218,62 @@ class TestAsyncActions:
                         "y": 200,
                     },
                 ],
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_extract(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.extract(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            instruction="extract the product information including title, price, and availability status",
+        )
+        assert_matches_type(object, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_extract_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.extract(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            instruction="extract the product information including title, price, and availability status",
+            schema={},
+        )
+        assert_matches_type(object, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_extract(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.actions.with_raw_response.extract(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            instruction="extract the product information including title, price, and availability status",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = await response.parse()
+        assert_matches_type(object, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_extract(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.actions.with_streaming_response.extract(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            instruction="extract the product information including title, price, and availability status",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = await response.parse()
+            assert_matches_type(object, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_extract(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            await async_client.v1.boxes.actions.with_raw_response.extract(
+                box_id="",
+                instruction="extract the product information including title, price, and availability status",
             )
 
     @pytest.mark.skip()

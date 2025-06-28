@@ -27,6 +27,7 @@ from ....types.v1.boxes import (
     action_swipe_params,
     action_touch_params,
     action_scroll_params,
+    action_extract_params,
     action_press_key_params,
     action_screenshot_params,
     action_press_button_params,
@@ -314,6 +315,61 @@ class ActionsResource(SyncAPIResource):
                     Any, ActionDragResponse
                 ),  # Union types cannot be passed in as arguments in the type system
             ),
+        )
+
+    def extract(
+        self,
+        box_id: str,
+        *,
+        instruction: str,
+        schema: object | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> object:
+        """
+        Extract data from the UI interface using a JSON schema.
+
+        Args:
+          instruction: The instruction of the action to extract data from the UI interface
+
+          schema: JSON Schema defining the structure of data to extract. Supports object, array,
+              string, number, boolean types with validation rules.
+
+              Common use cases:
+
+              - Extract text content: { "type": "string" }
+              - Extract structured data: { "type": "object", "properties": {...} }
+              - Extract lists: { "type": "array", "items": {...} }
+              - Extract with validation: Add constraints like "required", "enum", "pattern",
+                etc.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return self._post(
+            f"/boxes/{box_id}/actions/extract",
+            body=maybe_transform(
+                {
+                    "instruction": instruction,
+                    "schema": schema,
+                },
+                action_extract_params.ActionExtractParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=object,
         )
 
     def move(
@@ -1429,6 +1485,61 @@ class AsyncActionsResource(AsyncAPIResource):
             ),
         )
 
+    async def extract(
+        self,
+        box_id: str,
+        *,
+        instruction: str,
+        schema: object | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> object:
+        """
+        Extract data from the UI interface using a JSON schema.
+
+        Args:
+          instruction: The instruction of the action to extract data from the UI interface
+
+          schema: JSON Schema defining the structure of data to extract. Supports object, array,
+              string, number, boolean types with validation rules.
+
+              Common use cases:
+
+              - Extract text content: { "type": "string" }
+              - Extract structured data: { "type": "object", "properties": {...} }
+              - Extract lists: { "type": "array", "items": {...} }
+              - Extract with validation: Add constraints like "required", "enum", "pattern",
+                etc.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return await self._post(
+            f"/boxes/{box_id}/actions/extract",
+            body=await async_maybe_transform(
+                {
+                    "instruction": instruction,
+                    "schema": schema,
+                },
+                action_extract_params.ActionExtractParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=object,
+        )
+
     async def move(
         self,
         box_id: str,
@@ -2287,6 +2398,9 @@ class ActionsResourceWithRawResponse:
         self.drag = to_raw_response_wrapper(
             actions.drag,
         )
+        self.extract = to_raw_response_wrapper(
+            actions.extract,
+        )
         self.move = to_raw_response_wrapper(
             actions.move,
         )
@@ -2328,6 +2442,9 @@ class AsyncActionsResourceWithRawResponse:
         )
         self.drag = async_to_raw_response_wrapper(
             actions.drag,
+        )
+        self.extract = async_to_raw_response_wrapper(
+            actions.extract,
         )
         self.move = async_to_raw_response_wrapper(
             actions.move,
@@ -2371,6 +2488,9 @@ class ActionsResourceWithStreamingResponse:
         self.drag = to_streamed_response_wrapper(
             actions.drag,
         )
+        self.extract = to_streamed_response_wrapper(
+            actions.extract,
+        )
         self.move = to_streamed_response_wrapper(
             actions.move,
         )
@@ -2412,6 +2532,9 @@ class AsyncActionsResourceWithStreamingResponse:
         )
         self.drag = async_to_streamed_response_wrapper(
             actions.drag,
+        )
+        self.extract = async_to_streamed_response_wrapper(
+            actions.extract,
         )
         self.move = async_to_streamed_response_wrapper(
             actions.move,

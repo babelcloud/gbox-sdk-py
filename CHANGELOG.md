@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.15 (2025-06-28)
+
+Full Changelog: [v0.1.0-alpha.14...v0.1.0-alpha.15](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.14...v0.1.0-alpha.15)
+
+### Chores
+
+* **ci:** only run for pushes and fork pull requests ([0af01c9](https://github.com/babelcloud/gbox-sdk-py/commit/0af01c96dc30750c42956cc719831ed94441381a))
+
 ## 0.1.0-alpha.14 (2025-06-27)
 
 Full Changelog: [v0.1.0-alpha.13...v0.1.0-alpha.14](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.13...v0.1.0-alpha.14)

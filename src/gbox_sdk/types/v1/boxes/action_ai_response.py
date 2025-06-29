@@ -641,10 +641,10 @@ class AIActionScreenshotResultAIResponse(BaseModel):
     """Actions to be executed by the AI with type identifier"""
 
     messages: List[str]
-    """messages"""
+    """messages returned by the model"""
 
     model: str
-    """model"""
+    """The name of the model that processed this request"""
 
     reasoning: Optional[str] = None
     """reasoning"""
@@ -680,8 +680,8 @@ class AIActionScreenshotResult(BaseModel):
     ai_response: AIActionScreenshotResultAIResponse = FieldInfo(alias="aiResponse")
     """Response of AI action execution"""
 
-    message: str
-    """message"""
+    output: str
+    """output"""
 
     screenshot: AIActionScreenshotResultScreenshot
     """Complete screenshot result with operation trace, before and after images"""
@@ -1270,10 +1270,10 @@ class AIActionResultAIResponse(BaseModel):
     """Actions to be executed by the AI with type identifier"""
 
     messages: List[str]
-    """messages"""
+    """messages returned by the model"""
 
     model: str
-    """model"""
+    """The name of the model that processed this request"""
 
     reasoning: Optional[str] = None
     """reasoning"""
@@ -1283,8 +1283,8 @@ class AIActionResult(BaseModel):
     ai_response: AIActionResultAIResponse = FieldInfo(alias="aiResponse")
     """Response of AI action execution"""
 
-    message: str
-    """message"""
+    output: str
+    """output"""
 
 
 ActionAIResponse: TypeAlias = Union[AIActionScreenshotResult, AIActionResult]

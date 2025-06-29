@@ -18,6 +18,7 @@ from gbox_sdk.types.v1.boxes import (
     ActionSwipeResponse,
     ActionTouchResponse,
     ActionScrollResponse,
+    ActionExtractResponse,
     ActionPressKeyResponse,
     ActionScreenshotResponse,
     ActionPressButtonResponse,
@@ -156,17 +157,116 @@ class TestActions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_drag(self, client: GboxClient) -> None:
+    def test_method_drag_overload_1(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.drag(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            end={
+                "x": 400,
+                "y": 300,
+            },
+            start={
+                "x": 100,
+                "y": 150,
+            },
+        )
+        assert_matches_type(ActionDragResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_drag_with_all_params_overload_1(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.drag(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            end={
+                "x": 400,
+                "y": 300,
+            },
+            start={
+                "x": 100,
+                "y": 150,
+            },
+            duration="500ms",
+            include_screenshot=False,
+            output_format="base64",
+            screenshot_delay="500ms",
+            wait="500ms",
+        )
+        assert_matches_type(ActionDragResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_drag_overload_1(self, client: GboxClient) -> None:
+        response = client.v1.boxes.actions.with_raw_response.drag(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            end={
+                "x": 400,
+                "y": 300,
+            },
+            start={
+                "x": 100,
+                "y": 150,
+            },
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = response.parse()
+        assert_matches_type(ActionDragResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_drag_overload_1(self, client: GboxClient) -> None:
+        with client.v1.boxes.actions.with_streaming_response.drag(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            end={
+                "x": 400,
+                "y": 300,
+            },
+            start={
+                "x": 100,
+                "y": 150,
+            },
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = response.parse()
+            assert_matches_type(ActionDragResponse, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_drag_overload_1(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            client.v1.boxes.actions.with_raw_response.drag(
+                box_id="",
+                end={
+                    "x": 400,
+                    "y": 300,
+                },
+                start={
+                    "x": 100,
+                    "y": 150,
+                },
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_drag_overload_2(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.drag(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path=[
                 {
                     "x": 100,
-                    "y": 100,
+                    "y": 150,
                 },
                 {
                     "x": 200,
                     "y": 200,
+                },
+                {
+                    "x": 300,
+                    "y": 250,
                 },
             ],
         )
@@ -174,17 +274,21 @@ class TestActions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_drag_with_all_params(self, client: GboxClient) -> None:
+    def test_method_drag_with_all_params_overload_2(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.drag(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path=[
                 {
                     "x": 100,
-                    "y": 100,
+                    "y": 150,
                 },
                 {
                     "x": 200,
                     "y": 200,
+                },
+                {
+                    "x": 300,
+                    "y": 250,
                 },
             ],
             duration="50ms",
@@ -196,17 +300,21 @@ class TestActions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_drag(self, client: GboxClient) -> None:
+    def test_raw_response_drag_overload_2(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.drag(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path=[
                 {
                     "x": 100,
-                    "y": 100,
+                    "y": 150,
                 },
                 {
                     "x": 200,
                     "y": 200,
+                },
+                {
+                    "x": 300,
+                    "y": 250,
                 },
             ],
         )
@@ -218,17 +326,21 @@ class TestActions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_drag(self, client: GboxClient) -> None:
+    def test_streaming_response_drag_overload_2(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.drag(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path=[
                 {
                     "x": 100,
-                    "y": 100,
+                    "y": 150,
                 },
                 {
                     "x": 200,
                     "y": 200,
+                },
+                {
+                    "x": 300,
+                    "y": 250,
                 },
             ],
         ) as response:
@@ -242,18 +354,22 @@ class TestActions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_path_params_drag(self, client: GboxClient) -> None:
+    def test_path_params_drag_overload_2(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.actions.with_raw_response.drag(
                 box_id="",
                 path=[
                     {
                         "x": 100,
-                        "y": 100,
+                        "y": 150,
                     },
                     {
                         "x": 200,
                         "y": 200,
+                    },
+                    {
+                        "x": 300,
+                        "y": 250,
                     },
                 ],
             )
@@ -265,7 +381,7 @@ class TestActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             instruction="extract the product information including title, price, and availability status",
         )
-        assert_matches_type(object, action, path=["response"])
+        assert_matches_type(ActionExtractResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -275,7 +391,7 @@ class TestActions:
             instruction="extract the product information including title, price, and availability status",
             schema={},
         )
-        assert_matches_type(object, action, path=["response"])
+        assert_matches_type(ActionExtractResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -288,7 +404,7 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(object, action, path=["response"])
+        assert_matches_type(ActionExtractResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -301,7 +417,7 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(object, action, path=["response"])
+            assert_matches_type(ActionExtractResponse, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1118,17 +1234,116 @@ class TestAsyncActions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_drag(self, async_client: AsyncGboxClient) -> None:
+    async def test_method_drag_overload_1(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.drag(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            end={
+                "x": 400,
+                "y": 300,
+            },
+            start={
+                "x": 100,
+                "y": 150,
+            },
+        )
+        assert_matches_type(ActionDragResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_drag_with_all_params_overload_1(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.drag(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            end={
+                "x": 400,
+                "y": 300,
+            },
+            start={
+                "x": 100,
+                "y": 150,
+            },
+            duration="500ms",
+            include_screenshot=False,
+            output_format="base64",
+            screenshot_delay="500ms",
+            wait="500ms",
+        )
+        assert_matches_type(ActionDragResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_drag_overload_1(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.actions.with_raw_response.drag(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            end={
+                "x": 400,
+                "y": 300,
+            },
+            start={
+                "x": 100,
+                "y": 150,
+            },
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = await response.parse()
+        assert_matches_type(ActionDragResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_drag_overload_1(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.actions.with_streaming_response.drag(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            end={
+                "x": 400,
+                "y": 300,
+            },
+            start={
+                "x": 100,
+                "y": 150,
+            },
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = await response.parse()
+            assert_matches_type(ActionDragResponse, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_drag_overload_1(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            await async_client.v1.boxes.actions.with_raw_response.drag(
+                box_id="",
+                end={
+                    "x": 400,
+                    "y": 300,
+                },
+                start={
+                    "x": 100,
+                    "y": 150,
+                },
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_drag_overload_2(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.drag(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path=[
                 {
                     "x": 100,
-                    "y": 100,
+                    "y": 150,
                 },
                 {
                     "x": 200,
                     "y": 200,
+                },
+                {
+                    "x": 300,
+                    "y": 250,
                 },
             ],
         )
@@ -1136,17 +1351,21 @@ class TestAsyncActions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_drag_with_all_params(self, async_client: AsyncGboxClient) -> None:
+    async def test_method_drag_with_all_params_overload_2(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.drag(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path=[
                 {
                     "x": 100,
-                    "y": 100,
+                    "y": 150,
                 },
                 {
                     "x": 200,
                     "y": 200,
+                },
+                {
+                    "x": 300,
+                    "y": 250,
                 },
             ],
             duration="50ms",
@@ -1158,17 +1377,21 @@ class TestAsyncActions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_drag(self, async_client: AsyncGboxClient) -> None:
+    async def test_raw_response_drag_overload_2(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.drag(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path=[
                 {
                     "x": 100,
-                    "y": 100,
+                    "y": 150,
                 },
                 {
                     "x": 200,
                     "y": 200,
+                },
+                {
+                    "x": 300,
+                    "y": 250,
                 },
             ],
         )
@@ -1180,17 +1403,21 @@ class TestAsyncActions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_drag(self, async_client: AsyncGboxClient) -> None:
+    async def test_streaming_response_drag_overload_2(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.drag(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             path=[
                 {
                     "x": 100,
-                    "y": 100,
+                    "y": 150,
                 },
                 {
                     "x": 200,
                     "y": 200,
+                },
+                {
+                    "x": 300,
+                    "y": 250,
                 },
             ],
         ) as response:
@@ -1204,18 +1431,22 @@ class TestAsyncActions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_path_params_drag(self, async_client: AsyncGboxClient) -> None:
+    async def test_path_params_drag_overload_2(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.drag(
                 box_id="",
                 path=[
                     {
                         "x": 100,
-                        "y": 100,
+                        "y": 150,
                     },
                     {
                         "x": 200,
                         "y": 200,
+                    },
+                    {
+                        "x": 300,
+                        "y": 250,
                     },
                 ],
             )
@@ -1227,7 +1458,7 @@ class TestAsyncActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             instruction="extract the product information including title, price, and availability status",
         )
-        assert_matches_type(object, action, path=["response"])
+        assert_matches_type(ActionExtractResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -1237,7 +1468,7 @@ class TestAsyncActions:
             instruction="extract the product information including title, price, and availability status",
             schema={},
         )
-        assert_matches_type(object, action, path=["response"])
+        assert_matches_type(ActionExtractResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -1250,7 +1481,7 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(object, action, path=["response"])
+        assert_matches_type(ActionExtractResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -1263,7 +1494,7 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(object, action, path=["response"])
+            assert_matches_type(ActionExtractResponse, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

@@ -40,6 +40,7 @@ from .android_install_params import AndroidInstallParams as AndroidInstallParams
 from .android_restart_params import AndroidRestartParams as AndroidRestartParams
 from .android_restore_params import AndroidRestoreParams as AndroidRestoreParams
 from .browser_cdp_url_params import BrowserCdpURLParams as BrowserCdpURLParams
+from .action_extract_response import ActionExtractResponse as ActionExtractResponse
 from .action_press_key_params import ActionPressKeyParams as ActionPressKeyParams
 from .android_list_pkg_params import AndroidListPkgParams as AndroidListPkgParams
 from .action_screenshot_params import ActionScreenshotParams as ActionScreenshotParams

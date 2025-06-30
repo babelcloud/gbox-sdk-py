@@ -1,9 +1,9 @@
 import os
 import base64
-from typing import Optional
+from typing import Optional, cast
 
 from gbox_sdk._client import GboxClient
-from gbox_sdk.types.v1.boxes.action_drag_params import ActionDragParams
+from gbox_sdk.types.v1.boxes.action_drag_params import DragSimple, DragAdvanced, ActionDragParams
 from gbox_sdk.types.v1.boxes.action_move_params import ActionMoveParams
 from gbox_sdk.types.v1.boxes.action_type_params import ActionTypeParams
 from gbox_sdk.types.v1.boxes.action_click_params import ActionClickParams
@@ -67,6 +67,28 @@ class ActionOperator:
         """
         return self.client.v1.boxes.actions.click(box_id=self.box_id, **body)
 
+    def drag_simple(self, body: DragSimple) -> ActionDragResponse:
+        """
+        Perform a simple drag action on the box.
+
+        Args:
+            body (DragSimple): Parameters for the simple drag action.
+        Returns:
+            ActionDragResponse: The response from the drag action.
+        """
+        return self.client.v1.boxes.actions.drag(box_id=self.box_id, **body)
+
+    def drag_advanced(self, body: DragAdvanced) -> ActionDragResponse:
+        """
+        Perform an advanced drag action on the box.
+
+        Args:
+            body (DragAdvanced): Parameters for the advanced drag action.
+        Returns:
+            ActionDragResponse: The response from the drag action.
+        """
+        return self.client.v1.boxes.actions.drag(box_id=self.box_id, **body)
+
     def drag(self, body: ActionDragParams) -> ActionDragResponse:
         """
         Perform a drag action on the box.
@@ -76,7 +98,10 @@ class ActionOperator:
         Returns:
             ActionDragResponse: The response from the drag action.
         """
-        return self.client.v1.boxes.actions.drag(box_id=self.box_id, **body)
+        if body.get("path") is None:
+            return self.drag_simple(cast(DragSimple, body))
+        else:
+            return self.drag_advanced(cast(DragAdvanced, body))
 
     def swipe_simple(self, body: SwipeSimple) -> ActionSwipeResponse:
         """

@@ -27,6 +27,7 @@ from ....types.v1.boxes import (
     action_swipe_params,
     action_touch_params,
     action_scroll_params,
+    action_extract_params,
     action_press_key_params,
     action_screenshot_params,
     action_press_button_params,
@@ -40,6 +41,7 @@ from ....types.v1.boxes.action_click_response import ActionClickResponse
 from ....types.v1.boxes.action_swipe_response import ActionSwipeResponse
 from ....types.v1.boxes.action_touch_response import ActionTouchResponse
 from ....types.v1.boxes.action_scroll_response import ActionScrollResponse
+from ....types.v1.boxes.action_extract_response import ActionExtractResponse
 from ....types.v1.boxes.action_press_key_response import ActionPressKeyResponse
 from ....types.v1.boxes.action_screenshot_response import ActionScreenshotResponse
 from ....types.v1.boxes.action_press_button_response import ActionPressButtonResponse
@@ -236,11 +238,79 @@ class ActionsResource(SyncAPIResource):
             ),
         )
 
+    @overload
     def drag(
         self,
         box_id: str,
         *,
-        path: Iterable[action_drag_params.Path],
+        end: action_drag_params.DragSimpleEnd,
+        start: action_drag_params.DragSimpleStart,
+        duration: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        wait: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionDragResponse:
+        """
+        Drag
+
+        Args:
+          end: Single point in a drag path
+
+          start: Single point in a drag path
+
+          duration: Duration to complete the movement from start to end coordinates
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
+          output_format: Type of the URI. default is base64.
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+
+          wait: Time to wait at the start point after initial touch before beginning movement
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    def drag(
+        self,
+        box_id: str,
+        *,
+        path: Iterable[action_drag_params.DragAdvancedPath],
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
@@ -291,6 +361,28 @@ class ActionsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        ...
+
+    @required_args(["end", "start"], ["path"])
+    def drag(
+        self,
+        box_id: str,
+        *,
+        end: action_drag_params.DragSimpleEnd | NotGiven = NOT_GIVEN,
+        start: action_drag_params.DragSimpleStart | NotGiven = NOT_GIVEN,
+        duration: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        wait: str | NotGiven = NOT_GIVEN,
+        path: Iterable[action_drag_params.DragAdvancedPath] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionDragResponse:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return cast(
@@ -299,11 +391,14 @@ class ActionsResource(SyncAPIResource):
                 f"/boxes/{box_id}/actions/drag",
                 body=maybe_transform(
                     {
-                        "path": path,
+                        "end": end,
+                        "start": start,
                         "duration": duration,
                         "include_screenshot": include_screenshot,
                         "output_format": output_format,
                         "screenshot_delay": screenshot_delay,
+                        "wait": wait,
+                        "path": path,
                     },
                     action_drag_params.ActionDragParams,
                 ),
@@ -314,6 +409,61 @@ class ActionsResource(SyncAPIResource):
                     Any, ActionDragResponse
                 ),  # Union types cannot be passed in as arguments in the type system
             ),
+        )
+
+    def extract(
+        self,
+        box_id: str,
+        *,
+        instruction: str,
+        schema: object | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionExtractResponse:
+        """
+        Extract data from the UI interface using a JSON schema.
+
+        Args:
+          instruction: The instruction of the action to extract data from the UI interface
+
+          schema: JSON Schema defining the structure of data to extract. Supports object, array,
+              string, number, boolean types with validation rules.
+
+              Common use cases:
+
+              - Extract text content: { "type": "string" }
+              - Extract structured data: { "type": "object", "properties": {...} }
+              - Extract lists: { "type": "array", "items": {...} }
+              - Extract with validation: Add constraints like "required", "enum", "pattern",
+                etc.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return self._post(
+            f"/boxes/{box_id}/actions/extract",
+            body=maybe_transform(
+                {
+                    "instruction": instruction,
+                    "schema": schema,
+                },
+                action_extract_params.ActionExtractParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionExtractResponse,
         )
 
     def move(
@@ -1349,11 +1499,79 @@ class AsyncActionsResource(AsyncAPIResource):
             ),
         )
 
+    @overload
     async def drag(
         self,
         box_id: str,
         *,
-        path: Iterable[action_drag_params.Path],
+        end: action_drag_params.DragSimpleEnd,
+        start: action_drag_params.DragSimpleStart,
+        duration: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        wait: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionDragResponse:
+        """
+        Drag
+
+        Args:
+          end: Single point in a drag path
+
+          start: Single point in a drag path
+
+          duration: Duration to complete the movement from start to end coordinates
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
+          output_format: Type of the URI. default is base64.
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+
+          wait: Time to wait at the start point after initial touch before beginning movement
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    async def drag(
+        self,
+        box_id: str,
+        *,
+        path: Iterable[action_drag_params.DragAdvancedPath],
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
@@ -1404,6 +1622,28 @@ class AsyncActionsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        ...
+
+    @required_args(["end", "start"], ["path"])
+    async def drag(
+        self,
+        box_id: str,
+        *,
+        end: action_drag_params.DragSimpleEnd | NotGiven = NOT_GIVEN,
+        start: action_drag_params.DragSimpleStart | NotGiven = NOT_GIVEN,
+        duration: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        wait: str | NotGiven = NOT_GIVEN,
+        path: Iterable[action_drag_params.DragAdvancedPath] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionDragResponse:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return cast(
@@ -1412,11 +1652,14 @@ class AsyncActionsResource(AsyncAPIResource):
                 f"/boxes/{box_id}/actions/drag",
                 body=await async_maybe_transform(
                     {
-                        "path": path,
+                        "end": end,
+                        "start": start,
                         "duration": duration,
                         "include_screenshot": include_screenshot,
                         "output_format": output_format,
                         "screenshot_delay": screenshot_delay,
+                        "wait": wait,
+                        "path": path,
                     },
                     action_drag_params.ActionDragParams,
                 ),
@@ -1427,6 +1670,61 @@ class AsyncActionsResource(AsyncAPIResource):
                     Any, ActionDragResponse
                 ),  # Union types cannot be passed in as arguments in the type system
             ),
+        )
+
+    async def extract(
+        self,
+        box_id: str,
+        *,
+        instruction: str,
+        schema: object | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionExtractResponse:
+        """
+        Extract data from the UI interface using a JSON schema.
+
+        Args:
+          instruction: The instruction of the action to extract data from the UI interface
+
+          schema: JSON Schema defining the structure of data to extract. Supports object, array,
+              string, number, boolean types with validation rules.
+
+              Common use cases:
+
+              - Extract text content: { "type": "string" }
+              - Extract structured data: { "type": "object", "properties": {...} }
+              - Extract lists: { "type": "array", "items": {...} }
+              - Extract with validation: Add constraints like "required", "enum", "pattern",
+                etc.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return await self._post(
+            f"/boxes/{box_id}/actions/extract",
+            body=await async_maybe_transform(
+                {
+                    "instruction": instruction,
+                    "schema": schema,
+                },
+                action_extract_params.ActionExtractParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionExtractResponse,
         )
 
     async def move(
@@ -2287,6 +2585,9 @@ class ActionsResourceWithRawResponse:
         self.drag = to_raw_response_wrapper(
             actions.drag,
         )
+        self.extract = to_raw_response_wrapper(
+            actions.extract,
+        )
         self.move = to_raw_response_wrapper(
             actions.move,
         )
@@ -2328,6 +2629,9 @@ class AsyncActionsResourceWithRawResponse:
         )
         self.drag = async_to_raw_response_wrapper(
             actions.drag,
+        )
+        self.extract = async_to_raw_response_wrapper(
+            actions.extract,
         )
         self.move = async_to_raw_response_wrapper(
             actions.move,
@@ -2371,6 +2675,9 @@ class ActionsResourceWithStreamingResponse:
         self.drag = to_streamed_response_wrapper(
             actions.drag,
         )
+        self.extract = to_streamed_response_wrapper(
+            actions.extract,
+        )
         self.move = to_streamed_response_wrapper(
             actions.move,
         )
@@ -2412,6 +2719,9 @@ class AsyncActionsResourceWithStreamingResponse:
         )
         self.drag = async_to_streamed_response_wrapper(
             actions.drag,
+        )
+        self.extract = async_to_streamed_response_wrapper(
+            actions.extract,
         )
         self.move = async_to_streamed_response_wrapper(
             actions.move,

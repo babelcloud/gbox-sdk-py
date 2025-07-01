@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, Optional
+from typing import Dict
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -45,7 +45,7 @@ class Config(BaseModel):
     storage: float
     """Storage allocated to the box in GiB."""
 
-    working_dir: Optional[str] = FieldInfo(alias="workingDir", default=None)
+    working_dir: str = FieldInfo(alias="workingDir")
     """Working directory path for the box.
 
     This directory serves as the default starting point for all operations including

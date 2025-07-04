@@ -320,6 +320,7 @@ class AndroidResource(SyncAPIResource):
         box_id: str,
         *,
         apk: FileTypes,
+        open: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -332,6 +333,11 @@ class AndroidResource(SyncAPIResource):
 
         Args:
           apk: APK file to install (max file size: 512MB)
+
+          open: Whether to open the app after installation. Will find and launch the launcher
+              activity of the installed app. If there are multiple launcher activities, only
+              one will be opened. If the installed APK has no launcher activity, this
+              parameter will have no effect.
 
           extra_headers: Send extra headers
 
@@ -349,6 +355,7 @@ class AndroidResource(SyncAPIResource):
         box_id: str,
         *,
         apk: str,
+        open: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -361,6 +368,11 @@ class AndroidResource(SyncAPIResource):
 
         Args:
           apk: HTTP URL to download APK file (max file size: 512MB)
+
+          open: Whether to open the app after installation. Will find and launch the launcher
+              activity of the installed app. If there are multiple launcher activities, only
+              one will be opened. If the installed APK has no launcher activity, this
+              parameter will have no effect.
 
           extra_headers: Send extra headers
 
@@ -378,6 +390,7 @@ class AndroidResource(SyncAPIResource):
         box_id: str,
         *,
         apk: FileTypes | str,
+        open: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -387,7 +400,12 @@ class AndroidResource(SyncAPIResource):
     ) -> AndroidInstallResponse:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        body = deepcopy_minimal({"apk": apk})
+        body = deepcopy_minimal(
+            {
+                "apk": apk,
+                "open": open,
+            }
+        )
         files = extract_files(cast(Mapping[str, object], body), paths=[["apk"]])
         # It should be noted that the actual Content-Type header that will be
         # sent to the server will contain a `boundary` parameter, e.g.
@@ -1004,6 +1022,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         box_id: str,
         *,
         apk: FileTypes,
+        open: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1016,6 +1035,11 @@ class AsyncAndroidResource(AsyncAPIResource):
 
         Args:
           apk: APK file to install (max file size: 512MB)
+
+          open: Whether to open the app after installation. Will find and launch the launcher
+              activity of the installed app. If there are multiple launcher activities, only
+              one will be opened. If the installed APK has no launcher activity, this
+              parameter will have no effect.
 
           extra_headers: Send extra headers
 
@@ -1033,6 +1057,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         box_id: str,
         *,
         apk: str,
+        open: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1045,6 +1070,11 @@ class AsyncAndroidResource(AsyncAPIResource):
 
         Args:
           apk: HTTP URL to download APK file (max file size: 512MB)
+
+          open: Whether to open the app after installation. Will find and launch the launcher
+              activity of the installed app. If there are multiple launcher activities, only
+              one will be opened. If the installed APK has no launcher activity, this
+              parameter will have no effect.
 
           extra_headers: Send extra headers
 
@@ -1062,6 +1092,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         box_id: str,
         *,
         apk: FileTypes | str,
+        open: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1071,7 +1102,12 @@ class AsyncAndroidResource(AsyncAPIResource):
     ) -> AndroidInstallResponse:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        body = deepcopy_minimal({"apk": apk})
+        body = deepcopy_minimal(
+            {
+                "apk": apk,
+                "open": open,
+            }
+        )
         files = extract_files(cast(Mapping[str, object], body), paths=[["apk"]])
         # It should be noted that the actual Content-Type header that will be
         # sent to the server will contain a `boundary` parameter, e.g.

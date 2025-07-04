@@ -14,10 +14,26 @@ class InstallAndroidPkgByFile(TypedDict, total=False):
     apk: Required[FileTypes]
     """APK file to install (max file size: 512MB)"""
 
+    open: bool
+    """Whether to open the app after installation.
+
+    Will find and launch the launcher activity of the installed app. If there are
+    multiple launcher activities, only one will be opened. If the installed APK has
+    no launcher activity, this parameter will have no effect.
+    """
+
 
 class InstallAndroidPkgByURL(TypedDict, total=False):
     apk: Required[str]
     """HTTP URL to download APK file (max file size: 512MB)"""
+
+    open: bool
+    """Whether to open the app after installation.
+
+    Will find and launch the launcher activity of the installed app. If there are
+    multiple launcher activities, only one will be opened. If the installed APK has
+    no launcher activity, this parameter will have no effect.
+    """
 
 
 AndroidInstallParams: TypeAlias = Union[InstallAndroidPkgByFile, InstallAndroidPkgByURL]

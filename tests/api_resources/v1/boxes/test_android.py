@@ -415,6 +415,16 @@ class TestAndroid:
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_install_with_all_params_overload_1(self, client: GboxClient) -> None:
+        android = client.v1.boxes.android.install(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            apk=b"raw file contents",
+            open=False,
+        )
+        assert_matches_type(AndroidInstallResponse, android, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
     def test_raw_response_install_overload_1(self, client: GboxClient) -> None:
         response = client.v1.boxes.android.with_raw_response.install(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
@@ -456,6 +466,16 @@ class TestAndroid:
         android = client.v1.boxes.android.install(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             apk="https://example.com/app.apk",
+        )
+        assert_matches_type(AndroidInstallResponse, android, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_install_with_all_params_overload_2(self, client: GboxClient) -> None:
+        android = client.v1.boxes.android.install(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            apk="https://example.com/app.apk",
+            open=False,
         )
         assert_matches_type(AndroidInstallResponse, android, path=["response"])
 
@@ -1312,6 +1332,16 @@ class TestAsyncAndroid:
 
     @pytest.mark.skip()
     @parametrize
+    async def test_method_install_with_all_params_overload_1(self, async_client: AsyncGboxClient) -> None:
+        android = await async_client.v1.boxes.android.install(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            apk=b"raw file contents",
+            open=False,
+        )
+        assert_matches_type(AndroidInstallResponse, android, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
     async def test_raw_response_install_overload_1(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.android.with_raw_response.install(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
@@ -1353,6 +1383,16 @@ class TestAsyncAndroid:
         android = await async_client.v1.boxes.android.install(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             apk="https://example.com/app.apk",
+        )
+        assert_matches_type(AndroidInstallResponse, android, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_install_with_all_params_overload_2(self, async_client: AsyncGboxClient) -> None:
+        android = await async_client.v1.boxes.android.install(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            apk="https://example.com/app.apk",
+            open=False,
         )
         assert_matches_type(AndroidInstallResponse, android, path=["response"])
 

@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict
+from typing import Dict, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -65,9 +65,6 @@ class LinuxBox(BaseModel):
     created_at: datetime = FieldInfo(alias="createdAt")
     """Creation timestamp of the box"""
 
-    expires_at: datetime = FieldInfo(alias="expiresAt")
-    """Expiration timestamp of the box"""
-
     status: Literal["pending", "running", "error", "terminated"]
     """The current status of a box instance"""
 
@@ -76,3 +73,6 @@ class LinuxBox(BaseModel):
 
     updated_at: datetime = FieldInfo(alias="updatedAt")
     """Last update timestamp of the box"""
+
+    expires_at: Optional[datetime] = FieldInfo(alias="expiresAt", default=None)
+    """Expiration timestamp of the box"""

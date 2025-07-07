@@ -79,6 +79,7 @@ class ActionsResource(SyncAPIResource):
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
+        settings: action_ai_params.Settings | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -122,6 +123,8 @@ class ActionsResource(SyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
 
+          settings: AI action settings
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -143,6 +146,7 @@ class ActionsResource(SyncAPIResource):
                         "include_screenshot": include_screenshot,
                         "output_format": output_format,
                         "screenshot_delay": screenshot_delay,
+                        "settings": settings,
                     },
                     action_ai_params.ActionAIParams,
                 ),
@@ -1332,6 +1336,7 @@ class AsyncActionsResource(AsyncAPIResource):
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
+        settings: action_ai_params.Settings | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1375,6 +1380,8 @@ class AsyncActionsResource(AsyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
 
+          settings: AI action settings
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -1396,6 +1403,7 @@ class AsyncActionsResource(AsyncAPIResource):
                         "include_screenshot": include_screenshot,
                         "output_format": output_format,
                         "screenshot_delay": screenshot_delay,
+                        "settings": settings,
                     },
                     action_ai_params.ActionAIParams,
                 ),

@@ -687,13 +687,6 @@ class AIActionScreenshotResultAIResponseActionTypedDragSimpleAction(BaseModel):
     Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
     """
 
-    wait: Optional[str] = None
-    """Time to wait at the start point after initial touch before beginning movement
-
-    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
-    """
-
 
 class AIActionScreenshotResultAIResponseActionTypedDragAdvancedActionPath(BaseModel):
     x: float
@@ -1428,13 +1421,6 @@ class AIActionResultAIResponseActionTypedDragSimpleAction(BaseModel):
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-    """
-
-    wait: Optional[str] = None
-    """Time to wait at the start point after initial touch before beginning movement
-
-    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
     """
 
 

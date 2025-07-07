@@ -188,7 +188,6 @@ class TestActions:
             include_screenshot=False,
             output_format="base64",
             screenshot_delay="500ms",
-            wait="500ms",
         )
         assert_matches_type(ActionDragResponse, action, path=["response"])
 
@@ -1265,7 +1264,6 @@ class TestAsyncActions:
             include_screenshot=False,
             output_format="base64",
             screenshot_delay="500ms",
-            wait="500ms",
         )
         assert_matches_type(ActionDragResponse, action, path=["response"])
 

@@ -11,8 +11,9 @@ def main() -> None:
             # base_url="https://gbox.ai/api/v1",  # Add if needed
         )
         print("Initializing android box...")
-        box = gbox.create_android(
+        box = gbox.create(
             {
+                "type": "android",
                 "config": {
                     "device_type": "virtual",
                     "envs": {"GITHUB_TOKEN": "ghp_1234567890"},

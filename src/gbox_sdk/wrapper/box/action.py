@@ -1,8 +1,10 @@
 import os
 import base64
-from typing import Optional, cast
+from typing import Union, Optional, cast
 
 from gbox_sdk._client import GboxClient
+from gbox_sdk.types.v1.boxes.action_ai_params import ActionAIParams
+from gbox_sdk.types.v1.boxes.action_ai_response import ActionAIResponse
 from gbox_sdk.types.v1.boxes.action_drag_params import DragSimple, DragAdvanced, ActionDragParams
 from gbox_sdk.types.v1.boxes.action_move_params import ActionMoveParams
 from gbox_sdk.types.v1.boxes.action_type_params import ActionTypeParams
@@ -38,6 +40,14 @@ class ActionScreenshot(ActionScreenshotParams, total=False):
     path: Optional[str]
 
 
+class ActionAI(ActionAIParams, total=False):
+    """
+    Extends ActionAIParams for AI-based actions.
+    """
+
+    pass
+
+
 class ActionOperator:
     """
     Provides high-level action operations for a specific box using the GboxClient.
@@ -55,6 +65,20 @@ class ActionOperator:
         """
         self.client = client
         self.box_id = box_id
+
+    def ai(self, body: Union[str, ActionAI]) -> ActionAIResponse:
+        """
+        Perform an AI-powered action on the box.
+
+        Args:
+            body: Either a string instruction or ActionAI parameters.
+        Returns:
+            ActionAIResponse: The response from the AI action.
+        """
+        if isinstance(body, str):
+            return self.client.v1.boxes.actions.ai(box_id=self.box_id, instruction=body)
+        else:
+            return self.client.v1.boxes.actions.ai(box_id=self.box_id, **body)
 
     def click(self, body: ActionClickParams) -> ActionClickResponse:
         """

@@ -45,7 +45,7 @@ class Config(BaseModel):
     storage: float
     """Storage allocated to the box in GiB."""
 
-    working_dir: Optional[str] = FieldInfo(alias="workingDir", default=None)
+    working_dir: str = FieldInfo(alias="workingDir")
     """Working directory path for the box.
 
     This directory serves as the default starting point for all operations including
@@ -65,9 +65,6 @@ class LinuxBox(BaseModel):
     created_at: datetime = FieldInfo(alias="createdAt")
     """Creation timestamp of the box"""
 
-    expires_at: datetime = FieldInfo(alias="expiresAt")
-    """Expiration timestamp of the box"""
-
     status: Literal["pending", "running", "error", "terminated"]
     """The current status of a box instance"""
 
@@ -76,3 +73,6 @@ class LinuxBox(BaseModel):
 
     updated_at: datetime = FieldInfo(alias="updatedAt")
     """Last update timestamp of the box"""
+
+    expires_at: Optional[datetime] = FieldInfo(alias="expiresAt", default=None)
+    """Expiration timestamp of the box"""

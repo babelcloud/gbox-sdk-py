@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.1.0-alpha.17 (2025-07-08)
+
+Full Changelog: [v0.1.0-alpha.16...v0.1.0-alpha.17](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.16...v0.1.0-alpha.17)
+
+### Features
+
+* **action:** add AI action support and extend ActionAIParams ([c58eb20](https://github.com/babelcloud/gbox-sdk-py/commit/c58eb20c4ef2c1248a30cde0983426faffccf7f6))
+* **api:** api update ([b0ca803](https://github.com/babelcloud/gbox-sdk-py/commit/b0ca803ba3503f821847ac62e46b51d7a970fb37))
+* **api:** api update ([9b2b3dd](https://github.com/babelcloud/gbox-sdk-py/commit/9b2b3dd3e05f8df314126b06e32cd1db4a562f0e))
+* **api:** api update ([0c746f8](https://github.com/babelcloud/gbox-sdk-py/commit/0c746f837658b0250cccb92e9296bb09b3f2c0ed))
+* **api:** api update ([2a7a023](https://github.com/babelcloud/gbox-sdk-py/commit/2a7a023a2569903a1510ca80da4da281f46f6c5a))
+* **api:** api update ([62c5826](https://github.com/babelcloud/gbox-sdk-py/commit/62c5826c5521d045211924e405042588f1876823))
+* **api:** api update ([9d8a593](https://github.com/babelcloud/gbox-sdk-py/commit/9d8a5937b9013cceb8cd2daa30f411f6ad20d034))
+
+
+### Chores
+
+* **ci:** change upload type ([b6dc53c](https://github.com/babelcloud/gbox-sdk-py/commit/b6dc53ca9ea170752fca1c59edef45c222f4b880))
+
 ## 0.1.0-alpha.16 (2025-06-30)
 
 Full Changelog: [v0.1.0-alpha.15...v0.1.0-alpha.16](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.15...v0.1.0-alpha.16)

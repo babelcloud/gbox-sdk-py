@@ -215,18 +215,49 @@ class ActionOperator:
         """
         return self.client.v1.boxes.actions.type(box_id=self.box_id, **body)
 
-    def screenshot(self, body: ActionScreenshotParams) -> ActionScreenshotResponse:
+    def screenshot(self, body: Optional[ActionScreenshot] = None) -> ActionScreenshotResponse:
         """
         Take a screenshot of the box.
 
         Args:
-            body (ActionScreenshotParams): Parameters for the screenshot action.
+            body (Optional[ActionScreenshot]): Parameters for the screenshot action. 
+                If not provided, defaults to base64 output format.
         Returns:
             ActionScreenshotResponse: The response containing the screenshot data.
+
+        Examples:
+            Take a screenshot and return base64 data:
+            >>> response = action_operator.screenshot()
+            
+            Take a screenshot and save to file:
+            >>> response = action_operator.screenshot({"path": "/path/to/screenshot.png"})
+            
+            Take a screenshot with specific format:
+            >>> response = action_operator.screenshot({"output_format": "base64"})
         """
-        if body.get("output_format") is None:
-            body["output_format"] = "base64"
-        return self.client.v1.boxes.actions.screenshot(box_id=self.box_id, **body)
+        if body is None:
+            file_path = None
+            api_params: ActionScreenshotParams = {"output_format": "base64"}
+        else:
+            # Extract path for local file saving
+            file_path = body.get("path")
+            
+            # Create API parameters (exclude path which is not part of the API)
+            api_params = {}
+            if "clip" in body:
+                api_params["clip"] = body["clip"]
+            if "output_format" in body:
+                api_params["output_format"] = body["output_format"]
+            else:
+                api_params["output_format"] = "base64"
+        
+        response = self.client.v1.boxes.actions.screenshot(box_id=self.box_id, **api_params)
+        
+        # Save screenshot to file if path is provided
+        if file_path:
+            self._save_data_url_to_file(response.uri, file_path)
+        
+        return response
 
     def screen_rotation(self, body: ActionScreenRotationParams) -> ActionScreenRotationResponse:
         """
@@ -239,7 +270,7 @@ class ActionOperator:
         """
         return self.client.v1.boxes.actions.screen_rotation(box_id=self.box_id, **body)
 
-    def save_data_url_to_file(self, data_url: str, file_path: str) -> None:
+    def _save_data_url_to_file(self, data_url: str, file_path: str) -> None:
         """
         Save a base64-encoded data URL to a file.
 

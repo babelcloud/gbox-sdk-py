@@ -70,7 +70,6 @@ from ....types.v1.box_start_response import BoxStartResponse
 from ....types.v1.box_display_response import BoxDisplayResponse
 from ....types.v1.box_retrieve_response import BoxRetrieveResponse
 from ....types.v1.box_run_code_response import BoxRunCodeResponse
-from ....types.v1.create_box_config_param import CreateBoxConfigParam
 from ....types.v1.box_live_view_url_response import BoxLiveViewURLResponse
 from ....types.v1.box_execute_commands_response import BoxExecuteCommandsResponse
 from ....types.v1.box_web_terminal_url_response import BoxWebTerminalURLResponse
@@ -266,8 +265,7 @@ class BoxesResource(SyncAPIResource):
     def create_linux(
         self,
         *,
-        config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
-        expires_in: str | NotGiven = NOT_GIVEN,
+        config: box_create_linux_params.Config | NotGiven = NOT_GIVEN,
         wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -280,12 +278,7 @@ class BoxesResource(SyncAPIResource):
         Create linux box
 
         Args:
-          config: Configuration for a box instance
-
-          expires_in: The box will be alive for the given duration
-
-              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-              Example formats: "500ms", "30s", "5m", "1h" Default: 60m
+          config: Configuration for a Linux box instance
 
           wait: Wait for the box operation to be completed, default is true
 
@@ -302,7 +295,6 @@ class BoxesResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "config": config,
-                    "expires_in": expires_in,
                     "wait": wait,
                 },
                 box_create_linux_params.BoxCreateLinuxParams,
@@ -870,8 +862,7 @@ class AsyncBoxesResource(AsyncAPIResource):
     async def create_linux(
         self,
         *,
-        config: CreateBoxConfigParam | NotGiven = NOT_GIVEN,
-        expires_in: str | NotGiven = NOT_GIVEN,
+        config: box_create_linux_params.Config | NotGiven = NOT_GIVEN,
         wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -884,12 +875,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         Create linux box
 
         Args:
-          config: Configuration for a box instance
-
-          expires_in: The box will be alive for the given duration
-
-              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-              Example formats: "500ms", "30s", "5m", "1h" Default: 60m
+          config: Configuration for a Linux box instance
 
           wait: Wait for the box operation to be completed, default is true
 
@@ -906,7 +892,6 @@ class AsyncBoxesResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "config": config,
-                    "expires_in": expires_in,
                     "wait": wait,
                 },
                 box_create_linux_params.BoxCreateLinuxParams,

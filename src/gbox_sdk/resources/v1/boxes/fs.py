@@ -487,20 +487,30 @@ class FsResource(SyncAPIResource):
                 "working_dir": working_dir,
             }
         )
-        files = extract_files(cast(Mapping[str, object], body), paths=[["content"]])
-        # It should be noted that the actual Content-Type header that will be
-        # sent to the server will contain a `boundary` parameter, e.g.
-        # multipart/form-data; boundary=---abc--
-        extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
-        return self._post(
-            f"/boxes/{box_id}/fs/write",
-            body=maybe_transform(body, f_write_params.FWriteParams),
-            files=files,
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=FWriteResponse,
-        )
+        if isinstance(content, str):
+            return self._post(
+                f"/boxes/{box_id}/fs/write",
+                body=maybe_transform(body, f_write_params.FWriteParams),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=FWriteResponse,
+            )
+        else:
+            files = extract_files(cast(Mapping[str, object], body), paths=[["content"]])
+            # It should be noted that the actual Content-Type header that will be
+            # sent to the server will contain a `boundary` parameter, e.g.
+            # multipart/form-data; boundary=---abc--
+            extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
+            return self._post(
+                f"/boxes/{box_id}/fs/write",
+                body=maybe_transform(body, f_write_params.FWriteParams),
+                files=files,
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=FWriteResponse,
+            )
 
 
 class AsyncFsResource(AsyncAPIResource):

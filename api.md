@@ -8,7 +8,6 @@ Types:
 from gbox_sdk.types.v1 import (
     AndroidBox,
     CreateAndroidBox,
-    CreateBoxConfig,
     CreateLinuxBox,
     LinuxBox,
     BoxRetrieveResponse,

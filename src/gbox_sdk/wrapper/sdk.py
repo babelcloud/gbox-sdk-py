@@ -1,4 +1,5 @@
-from typing import Any, List, Union, Mapping, Optional, cast
+from typing import Any, List, Union, Mapping, Optional, cast, overload
+from typing_extensions import Literal, TypedDict
 
 import httpx
 
@@ -8,15 +9,58 @@ from gbox_sdk.wrapper.utils import is_linux_box, is_android_box
 from gbox_sdk.wrapper.box.linux import LinuxBoxOperator
 from gbox_sdk.types.v1.linux_box import LinuxBox
 from gbox_sdk.types.v1.android_box import AndroidBox
-from gbox_sdk.types.v1.box_list_params import BoxListParams
 from gbox_sdk.types.v1.box_list_response import BoxListResponse
 from gbox_sdk.wrapper.box.android.android import AndroidBoxOperator
-from gbox_sdk.types.v1.box_terminate_params import BoxTerminateParams
 from gbox_sdk.types.v1.box_retrieve_response import BoxRetrieveResponse
-from gbox_sdk.types.v1.box_create_linux_params import BoxCreateLinuxParams
-from gbox_sdk.types.v1.box_create_android_params import BoxCreateAndroidParams
+from gbox_sdk.types.v1.box_create_linux_params import Config as LinuxConfig, BoxCreateLinuxParams
+from gbox_sdk.types.v1.box_create_android_params import Config as AndroidConfig, BoxCreateAndroidParams
 
 BoxOperator = Union[AndroidBoxOperator, LinuxBoxOperator]
+
+
+class _CreateAndroidRequired(TypedDict):
+    """Required fields for CreateAndroid."""
+    type: Literal["android"]
+
+
+class _CreateAndroidOptional(TypedDict, total=False):
+    """Optional fields for CreateAndroid."""
+    config: AndroidConfig
+    wait: bool
+
+
+class CreateAndroid(_CreateAndroidRequired, _CreateAndroidOptional):
+    """Parameters for creating an Android box with type specification."""
+    pass
+
+
+class _CreateLinuxRequired(TypedDict):
+    """Required fields for CreateLinux."""
+    type: Literal["linux"]
+
+
+class _CreateLinuxOptional(TypedDict, total=False):
+    """Optional fields for CreateLinux."""
+    config: LinuxConfig
+    wait: bool
+
+
+class CreateLinux(_CreateLinuxRequired, _CreateLinuxOptional):
+    """Parameters for creating a Linux box with type specification."""
+    pass
+
+
+CreateParams = Union[CreateAndroid, CreateLinux]
+
+
+class BoxTerminate(TypedDict, total=False):
+    """Parameters for terminating a box."""
+    pass
+
+
+class BoxList(TypedDict, total=False):
+    """Parameters for listing boxes."""
+    pass
 
 
 class BoxListOperatorResponse:
@@ -44,12 +88,40 @@ class GboxSDK:
     Attributes:
         client (GboxClient): The underlying client used for API communication.
 
-    Example:
+    Examples:
+        Initialize the SDK:
         ```python
-        from gbox_sdk import GboxSDK
+        from gbox_sdk.wrapper import GboxSDK
 
         # Initialize the SDK
         sdk = GboxSDK(api_key="your-api-key")
+        ```
+
+        Create boxes using the unified create method:
+        ```python
+        # Create an Android box
+        android_box = sdk.create({
+            'type': 'android',
+            'config': {'labels': {'env': 'test'}}
+        })
+
+        # Create a Linux box
+        linux_box = sdk.create({
+            'type': 'linux',
+            'config': {'envs': {'PYTHON_VERSION': '3.9'}}
+        })
+        ```
+
+        List and manage boxes:
+        ```python
+        # List all boxes
+        boxes = sdk.list()
+
+        # Get a specific box
+        box = sdk.get('box_id')
+
+        # Terminate a box
+        sdk.terminate('box_id')
         ```
     """
 
@@ -91,58 +163,122 @@ class GboxSDK:
             else False,
         )
 
-    def create_android(self, body: BoxCreateAndroidParams) -> AndroidBoxOperator:
+    @overload
+    def create(self, body: CreateAndroid) -> AndroidBoxOperator:
+        """Create a new Android box and return its operator."""
+        ...
+
+    @overload
+    def create(self, body: CreateLinux) -> LinuxBoxOperator:
+        """Create a new Linux box and return its operator."""
+        ...
+
+    def create(self, body: CreateParams) -> BoxOperator:
         """
-        Create a new Android box and return its operator.
+        Create a new box and return its operator.
+
+        This method provides a unified interface for creating both Android and Linux boxes.
+        The box type is determined by the 'type' field in the body parameter.
 
         Args:
-            body (BoxCreateAndroidParams): Parameters for creating the Android box.
+            body (CreateParams): Parameters for creating the box. Must include a 'type' field
+                                specifying either 'android' or 'linux'.
 
         Returns:
-            AndroidBoxOperator: Operator for the created Android box.
+            BoxOperator: Operator for the created box (AndroidBoxOperator or LinuxBoxOperator).
+
+        Raises:
+            ValueError: If an unsupported box type is provided.
+
+        Examples:
+            Create an Android box:
+            ```python
+            android_box = sdk.create({
+                'type': 'android',
+                'config': {'labels': {'env': 'test'}}
+            })
+            ```
+
+            Create a Linux box:
+            ```python
+            linux_box = sdk.create({
+                'type': 'linux',
+                'config': {'envs': {'PYTHON_VERSION': '3.9'}}
+            })
+            ```
         """
-        res = self.client.v1.boxes.create_android(**body)
-        return AndroidBoxOperator(self.client, res)
+        box_type = body.get("type")
+        if box_type == "android":
+            # Build android params preserving types
+            android_params = BoxCreateAndroidParams()
+            if "config" in body:
+                android_params["config"] = body["config"]  # type: ignore
+            if "wait" in body:
+                android_params["wait"] = body["wait"]  # type: ignore
+            android_res = self.client.v1.boxes.create_android(**android_params)
+            return AndroidBoxOperator(self.client, android_res)
+        elif box_type == "linux":
+            # Build linux params preserving types
+            linux_params = BoxCreateLinuxParams()
+            if "config" in body:
+                linux_params["config"] = body["config"]  # type: ignore
+            if "wait" in body:
+                linux_params["wait"] = body["wait"]  # type: ignore
+            linux_res = self.client.v1.boxes.create_linux(**linux_params)
+            return LinuxBoxOperator(self.client, linux_res)
+        else:
+            raise ValueError(f"Unsupported box type: {box_type}")
 
-    def create_linux(self, body: BoxCreateLinuxParams) -> LinuxBoxOperator:
-        """
-        Create a new Linux box and return its operator.
-
-        Args:
-            body (BoxCreateLinuxParams): Parameters for creating the Linux box.
-
-        Returns:
-            LinuxBoxOperator: Operator for the created Linux box.
-        """
-        res = self.client.v1.boxes.create_linux(**body)
-        return LinuxBoxOperator(self.client, res)
-
-    def list_info(self, query: Optional[BoxListParams] = None) -> BoxListResponse:
+    def list_info(self, query: Optional[BoxList] = None) -> BoxListResponse:
         """
         List information of all boxes matching the query.
 
         Args:
-            query (Optional[BoxListParams]): Query parameters for listing boxes.
+            query (Optional[BoxList]): Query parameters for listing boxes.
 
         Returns:
             BoxListResponse: Response containing box information.
+
+        Examples:
+            ```python
+            # List all boxes
+            boxes = sdk.list_info()
+
+            # List with pagination
+            boxes = sdk.list_info({
+                'page': 1,
+                'page_size': 10
+            })
+            ```
         """
         if query is None:
-            query = BoxListParams()
+            query = BoxList()
         return self.client.v1.boxes.list(**query)
 
-    def list(self, query: Optional[BoxListParams] = None) -> BoxListOperatorResponse:
+    def list(self, query: Optional[BoxList] = None) -> BoxListOperatorResponse:
         """
         List all boxes matching the query and return their operator objects.
 
         Args:
-            query (Optional[BoxListParams]): Query parameters for listing boxes.
+            query (Optional[BoxList]): Query parameters for listing boxes.
 
         Returns:
             BoxListOperatorResponse: Response containing operator objects and pagination info.
+
+        Examples:
+            ```python
+            # List all boxes
+            boxes = sdk.list()
+
+            # List with pagination
+            boxes = sdk.list({
+                'page': 1,
+                'page_size': 10
+            })
+            ```
         """
         if query is None:
-            query = BoxListParams()
+            query = BoxList()
         res = self.client.v1.boxes.list(**query)
         data = getattr(res, "data", [])
         operators = [self.data_to_operator(item) for item in data]
@@ -162,6 +298,11 @@ class GboxSDK:
 
         Returns:
             BoxRetrieveResponse: Detailed information about the box.
+
+        Example:
+            ```python
+            box_info = sdk.get_info('975fed9f-bb28-4718-a2c5-e01f72864bd1')
+            ```
         """
         return self.client.v1.boxes.retrieve(box_id)
 
@@ -174,20 +315,30 @@ class GboxSDK:
 
         Returns:
             BoxOperator: Operator object for the specified box.
+
+        Example:
+            ```python
+            box = sdk.get('975fed9f-bb28-4718-a2c5-e01f72864bd1')
+            ```
         """
         res = self.client.v1.boxes.retrieve(box_id)
         return self.data_to_operator(res)
 
-    def terminate(self, box_id: str, body: Optional[BoxTerminateParams] = None) -> None:
+    def terminate(self, box_id: str, body: Optional[BoxTerminate] = None) -> None:
         """
         Terminate a specific box.
 
         Args:
             box_id (str): The ID of the box to terminate.
-            body (Optional[BoxTerminateParams]): Additional parameters for termination.
+            body (Optional[BoxTerminate]): Additional parameters for termination.
+
+        Example:
+            ```python
+            sdk.terminate('box_id')
+            ```
         """
         if body is None:
-            body = BoxTerminateParams()
+            body = BoxTerminate()
         self.client.v1.boxes.terminate(box_id, **body)
 
     def data_to_operator(self, data: Union[AndroidBox, LinuxBox]) -> BoxOperator:

@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.1.0-alpha.18 (2025-07-08)
+
+Full Changelog: [v0.1.0-alpha.17...v0.1.0-alpha.18](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.17...v0.1.0-alpha.18)
+
+### Features
+
+* **action:** enhance screenshot method to support optional parameters and file saving ([24b5108](https://github.com/babelcloud/gbox-sdk-py/commit/24b51082f8c77035a26f532c7b60917aeac173f9))
+* **api:** api update ([68a9fed](https://github.com/babelcloud/gbox-sdk-py/commit/68a9fede6b7d427cc5276df731c1aa67896d55d6))
+* **api:** enhance box creation and management with unified parameters for Android and Linux boxes ([12227dc](https://github.com/babelcloud/gbox-sdk-py/commit/12227dcce5a9339e8ff69b61ea6748c73f5f1ff8))
+
+
+### Bug Fixes
+
+* fs write ([eab3566](https://github.com/babelcloud/gbox-sdk-py/commit/eab35664be88f7fac40813fcef4fe0c71598bf85))
+
 ## 0.1.0-alpha.17 (2025-07-08)
 
 Full Changelog: [v0.1.0-alpha.16...v0.1.0-alpha.17](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.16...v0.1.0-alpha.17)

@@ -1,5 +1,6 @@
 from typing import List, Union, Optional
 
+from gbox_sdk._types import NOT_GIVEN
 from gbox_sdk._client import GboxClient
 from gbox_sdk.types.v1.boxes.f_info_params import FInfoParams
 from gbox_sdk.types.v1.boxes.f_list_params import FListParams
@@ -67,27 +68,27 @@ class FileSystemOperator:
         """
         return self.client.v1.boxes.fs.read(box_id=self.box_id, **body)
 
-    def write_text(self, body: WriteFile) -> FWriteResponse:
+    def write(self, body: Union[WriteFile, WriteFileByBinary]) -> FWriteResponse:
         """
-        Write text content to a file.
+        Write content to a file (text or binary).
 
         Args:
-            body (WriteFile): Parameters for writing text to the file.
+            body (Union[WriteFile, WriteFileByBinary]): Parameters for writing to the file. 
+                Can be either WriteFile (for text content) or WriteFileByBinary (for binary content).
         Returns:
             FWriteResponse: The response after writing.
         """
-        return self.client.v1.boxes.fs.write(box_id=self.box_id, **body)
+        content = body["content"]
+        path = body["path"]
+        working_dir = body.get("working_dir")
+        
+        return self.client.v1.boxes.fs.write(
+            box_id=self.box_id,
+            content=content,
+            path=path,
+            working_dir=working_dir if working_dir else NOT_GIVEN
+        )
 
-    def write_binary(self, body: WriteFileByBinary) -> FWriteResponse:
-        """
-        Write binary content to a file.
-
-        Args:
-            body (WriteFileByBinary): Parameters for writing binary data to the file.
-        Returns:
-            FWriteResponse: The response after writing.
-        """
-        return self.client.v1.boxes.fs.write(box_id=self.box_id, **body)
 
     def remove(self, body: FRemoveParams) -> None:
         """
@@ -178,33 +179,27 @@ class FileOperator:
         self.box_id = box_id
         self.data = data
 
-    def write_text(self, body: WriteFile) -> FWriteResponse:
+    def write(self, body: Union[WriteFile, WriteFileByBinary]) -> FWriteResponse:
         """
-        Write text content to this file.
+        Write content to this file (text or binary).
 
         Args:
-            body (WriteFile): Parameters for writing text to the file.
+            body (Union[WriteFile, WriteFileByBinary]): Parameters for writing to the file.
+                Can be either WriteFile (for text content) or WriteFileByBinary (for binary content).
         Returns:
             FWriteResponse: The response after writing.
         """
-        params = WriteFile(
-            path=self.data.path, content=body.get("content", ""), working_dir=body.get("working_dir") or ""
+        # Create params with the file's path and content from body
+        working_dir = body.get("working_dir")
+        content = body["content"]
+        path = body["path"]
+            
+        return self.client.v1.boxes.fs.write(
+            box_id=self.box_id,
+            content=content,
+            path=path,
+            working_dir=working_dir if working_dir else NOT_GIVEN
         )
-        return self.client.v1.boxes.fs.write(box_id=self.box_id, **params)
-
-    def write_binary(self, body: WriteFileByBinary) -> FWriteResponse:
-        """
-        Write binary content to this file.
-
-        Args:
-            body (WriteFileByBinary): Parameters for writing binary data to the file.
-        Returns:
-            FWriteResponse: The response after writing.
-        """
-        params = WriteFileByBinary(
-            path=self.data.path, content=body.get("content", b""), working_dir=body.get("working_dir") or ""
-        )
-        return self.client.v1.boxes.fs.write(box_id=self.box_id, **params)
 
     def read(self, body: Optional[FReadParams] = None) -> FReadResponse:
         """

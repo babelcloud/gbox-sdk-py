@@ -16,7 +16,6 @@ from .box_terminate_params import BoxTerminateParams as BoxTerminateParams
 from .box_retrieve_response import BoxRetrieveResponse as BoxRetrieveResponse
 from .box_run_code_response import BoxRunCodeResponse as BoxRunCodeResponse
 from .box_create_linux_params import BoxCreateLinuxParams as BoxCreateLinuxParams
-from .create_box_config_param import CreateBoxConfigParam as CreateBoxConfigParam
 from .box_live_view_url_params import BoxLiveViewURLParams as BoxLiveViewURLParams
 from .box_create_android_params import BoxCreateAndroidParams as BoxCreateAndroidParams
 from .box_live_view_url_response import BoxLiveViewURLResponse as BoxLiveViewURLResponse

@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.0-alpha.19 (2025-07-09)
+
+Full Changelog: [v0.1.0-alpha.18...v0.1.0-alpha.19](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.18...v0.1.0-alpha.19)
+
+### Features
+
+* **box:** allow optional parameters for start, stop, and terminate methods in BaseBox class ([4480c48](https://github.com/babelcloud/gbox-sdk-py/commit/4480c4858c1ef23eb72efc60f770fca3da0e2082))
+
+
+### Chores
+
+* **internal:** bump pinned h11 dep ([0ed8afa](https://github.com/babelcloud/gbox-sdk-py/commit/0ed8afabd61692c4298e79f4008eab45d161097f))
+* **package:** mark python 3.13 as supported ([79e0f21](https://github.com/babelcloud/gbox-sdk-py/commit/79e0f210d8921ee97f4de5df381ba4872a71cdd8))
+
 ## 0.1.0-alpha.18 (2025-07-08)
 
 Full Changelog: [v0.1.0-alpha.17...v0.1.0-alpha.18](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.17...v0.1.0-alpha.18)

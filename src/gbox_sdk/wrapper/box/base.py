@@ -53,41 +53,47 @@ class BaseBox:
         res = self.client.v1.boxes.retrieve(box_id=self.data.id)
         self.data = res
 
-    def start(self, body: BoxStartParams) -> "BaseBox":
+    def start(self, body: Optional[BoxStartParams] = None) -> "BaseBox":
         """
         Start the box.
 
         Args:
-            body (BoxStartParams): Parameters for starting the box.
+            body (Optional[BoxStartParams]): Parameters for starting the box.
         Returns:
             BaseBox: The updated box instance.
         """
+        if body is None:
+            body = BoxStartParams()
         self.client.v1.boxes.start(box_id=self.data.id, **body)
         self._sync_data()
         return self
 
-    def stop(self, body: BoxStopParams) -> "BaseBox":
+    def stop(self, body: Optional[BoxStopParams] = None) -> "BaseBox":
         """
         Stop the box.
 
         Args:
-            body (BoxStopParams): Parameters for stopping the box.
+            body (Optional[BoxStopParams]): Parameters for stopping the box.
         Returns:
             BaseBox: The updated box instance.
         """
+        if body is None:
+            body = BoxStopParams()
         self.client.v1.boxes.stop(box_id=self.data.id, **body)
         self._sync_data()
         return self
 
-    def terminate(self, body: BoxTerminateParams) -> "BaseBox":
+    def terminate(self, body: Optional[BoxTerminateParams] = None) -> "BaseBox":
         """
         Terminate the box.
 
         Args:
-            body (BoxTerminateParams): Parameters for terminating the box.
+            body (Optional[BoxTerminateParams]): Parameters for terminating the box.
         Returns:
             BaseBox: The updated box instance.
         """
+        if body is None:
+            body = BoxTerminateParams()
         self.client.v1.boxes.terminate(box_id=self.data.id, **body)
         self._sync_data()
         return self

@@ -1,15 +1,16 @@
 import os
 import base64
-from typing import Union, Optional, cast
+from typing import Union, Optional
 
+from gbox_sdk._types import NotGiven
 from gbox_sdk._client import GboxClient
 from gbox_sdk.types.v1.boxes.action_ai_params import ActionAIParams
 from gbox_sdk.types.v1.boxes.action_ai_response import ActionAIResponse
-from gbox_sdk.types.v1.boxes.action_drag_params import DragSimple, DragAdvanced, ActionDragParams
+from gbox_sdk.types.v1.boxes.action_drag_params import ActionDragParams
 from gbox_sdk.types.v1.boxes.action_move_params import ActionMoveParams
 from gbox_sdk.types.v1.boxes.action_type_params import ActionTypeParams
 from gbox_sdk.types.v1.boxes.action_click_params import ActionClickParams
-from gbox_sdk.types.v1.boxes.action_swipe_params import SwipeSimple, SwipeAdvanced
+from gbox_sdk.types.v1.boxes.action_swipe_params import ActionSwipeParams
 from gbox_sdk.types.v1.boxes.action_touch_params import ActionTouchParams
 from gbox_sdk.types.v1.boxes.action_drag_response import ActionDragResponse
 from gbox_sdk.types.v1.boxes.action_move_response import ActionMoveResponse
@@ -91,28 +92,6 @@ class ActionOperator:
         """
         return self.client.v1.boxes.actions.click(box_id=self.box_id, **body)
 
-    def drag_simple(self, body: DragSimple) -> ActionDragResponse:
-        """
-        Perform a simple drag action on the box.
-
-        Args:
-            body (DragSimple): Parameters for the simple drag action.
-        Returns:
-            ActionDragResponse: The response from the drag action.
-        """
-        return self.client.v1.boxes.actions.drag(box_id=self.box_id, **body)
-
-    def drag_advanced(self, body: DragAdvanced) -> ActionDragResponse:
-        """
-        Perform an advanced drag action on the box.
-
-        Args:
-            body (DragAdvanced): Parameters for the advanced drag action.
-        Returns:
-            ActionDragResponse: The response from the drag action.
-        """
-        return self.client.v1.boxes.actions.drag(box_id=self.box_id, **body)
-
     def drag(self, body: ActionDragParams) -> ActionDragResponse:
         """
         Perform a drag action on the box.
@@ -122,32 +101,61 @@ class ActionOperator:
         Returns:
             ActionDragResponse: The response from the drag action.
         """
-        if body.get("path") is None:
-            return self.drag_simple(cast(DragSimple, body))
+        # Check if it's DragAdvanced (has 'path') or DragSimple (has 'start' and 'end')
+        if "path" in body:
+            # DragAdvanced
+            return self.client.v1.boxes.actions.drag(  # type: ignore[misc]
+                box_id=self.box_id,
+                path=body["path"],  # type: ignore[typeddict-item]
+                duration=body.get("duration", NotGiven()),
+                include_screenshot=body.get("include_screenshot", NotGiven()),
+                output_format=body.get("output_format", NotGiven()),
+                screenshot_delay=body.get("screenshot_delay", NotGiven())
+            )
         else:
-            return self.drag_advanced(cast(DragAdvanced, body))
+            # DragSimple
+            return self.client.v1.boxes.actions.drag(  # type: ignore[misc]
+                box_id=self.box_id,
+                start=body["start"],
+                end=body["end"],
+                duration=body.get("duration", NotGiven()),
+                include_screenshot=body.get("include_screenshot", NotGiven()),
+                output_format=body.get("output_format", NotGiven()),
+                screenshot_delay=body.get("screenshot_delay", NotGiven())
+            )
 
-    def swipe_simple(self, body: SwipeSimple) -> ActionSwipeResponse:
+    def swipe(self, body: ActionSwipeParams) -> ActionSwipeResponse:
         """
-        Perform a simple swipe action on the box.
+        Perform a swipe action on the box.
 
         Args:
-            body (SwipeSimple): Parameters for the simple swipe action.
+            body (ActionSwipeParams): Parameters for the swipe action.
         Returns:
             ActionSwipeResponse: The response from the swipe action.
         """
-        return self.client.v1.boxes.actions.swipe(box_id=self.box_id, **body)
-
-    def swipe_advanced(self, body: SwipeAdvanced) -> ActionSwipeResponse:
-        """
-        Perform an advanced swipe action on the box.
-
-        Args:
-            body (SwipeAdvanced): Parameters for the advanced swipe action.
-        Returns:
-            ActionSwipeResponse: The response from the swipe action.
-        """
-        return self.client.v1.boxes.actions.swipe(box_id=self.box_id, **body)
+        # Check if it's SwipeSimple (has 'direction') or SwipeAdvanced (has 'start' and 'end')
+        if "direction" in body:
+            # SwipeSimple
+            return self.client.v1.boxes.actions.swipe(  # type: ignore[misc,call-overload,no-any-return]
+                box_id=self.box_id,
+                direction=body["direction"],  # type: ignore[typeddict-item]
+                distance=body.get("distance", NotGiven()),
+                duration=body.get("duration", NotGiven()),
+                include_screenshot=body.get("include_screenshot", NotGiven()),
+                output_format=body.get("output_format", NotGiven()),
+                screenshot_delay=body.get("screenshot_delay", NotGiven())
+            )
+        else:
+            # SwipeAdvanced
+            return self.client.v1.boxes.actions.swipe(  # type: ignore[misc]
+                box_id=self.box_id,
+                start=body["start"],
+                end=body["end"],
+                duration=body.get("duration", NotGiven()),
+                include_screenshot=body.get("include_screenshot", NotGiven()),
+                output_format=body.get("output_format", NotGiven()),
+                screenshot_delay=body.get("screenshot_delay", NotGiven())
+            )
 
     def press_key(self, body: ActionPressKeyParams) -> ActionPressKeyResponse:
         """

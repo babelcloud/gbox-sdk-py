@@ -1,4 +1,5 @@
 from typing import List, Union, Optional
+from typing_extensions import Self
 
 from gbox_sdk._client import GboxClient
 from gbox_sdk.types.v1.linux_box import LinuxBox
@@ -53,14 +54,14 @@ class BaseBox:
         res = self.client.v1.boxes.retrieve(box_id=self.data.id)
         self.data = res
 
-    def start(self, body: Optional[BoxStartParams] = None) -> "BaseBox":
+    def start(self, body: Optional[BoxStartParams] = None) -> Self:
         """
         Start the box.
 
         Args:
             body (Optional[BoxStartParams]): Parameters for starting the box.
         Returns:
-            BaseBox: The updated box instance.
+            Self: The updated box instance for method chaining.
         """
         if body is None:
             body = BoxStartParams()
@@ -68,14 +69,14 @@ class BaseBox:
         self._sync_data()
         return self
 
-    def stop(self, body: Optional[BoxStopParams] = None) -> "BaseBox":
+    def stop(self, body: Optional[BoxStopParams] = None) -> Self:
         """
         Stop the box.
 
         Args:
             body (Optional[BoxStopParams]): Parameters for stopping the box.
         Returns:
-            BaseBox: The updated box instance.
+            Self: The updated box instance for method chaining.
         """
         if body is None:
             body = BoxStopParams()
@@ -83,14 +84,14 @@ class BaseBox:
         self._sync_data()
         return self
 
-    def terminate(self, body: Optional[BoxTerminateParams] = None) -> "BaseBox":
+    def terminate(self, body: Optional[BoxTerminateParams] = None) -> Self:
         """
         Terminate the box.
 
         Args:
             body (Optional[BoxTerminateParams]): Parameters for terminating the box.
         Returns:
-            BaseBox: The updated box instance.
+            Self: The updated box instance for method chaining.
         """
         if body is None:
             body = BoxTerminateParams()

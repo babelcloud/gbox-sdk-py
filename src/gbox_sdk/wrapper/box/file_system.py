@@ -13,6 +13,7 @@ from gbox_sdk.types.v1.boxes.f_remove_params import FRemoveParams
 from gbox_sdk.types.v1.boxes.f_rename_params import FRenameParams
 from gbox_sdk.types.v1.boxes.f_write_response import FWriteResponse
 from gbox_sdk.types.v1.boxes.f_exists_response import FExistsResponse
+from gbox_sdk.types.v1.boxes.f_remove_response import FRemoveResponse
 from gbox_sdk.types.v1.boxes.f_rename_response import FRenameResponse
 
 
@@ -73,7 +74,7 @@ class FileSystemOperator:
         Write content to a file (text or binary).
 
         Args:
-            body (Union[WriteFile, WriteFileByBinary]): Parameters for writing to the file. 
+            body (Union[WriteFile, WriteFileByBinary]): Parameters for writing to the file.
                 Can be either WriteFile (for text content) or WriteFileByBinary (for binary content).
         Returns:
             FWriteResponse: The response after writing.
@@ -81,16 +82,12 @@ class FileSystemOperator:
         content = body["content"]
         path = body["path"]
         working_dir = body.get("working_dir")
-        
+
         return self.client.v1.boxes.fs.write(
-            box_id=self.box_id,
-            content=content,
-            path=path,
-            working_dir=working_dir if working_dir else NOT_GIVEN
+            box_id=self.box_id, content=content, path=path, working_dir=working_dir if working_dir else NOT_GIVEN
         )
 
-
-    def remove(self, body: FRemoveParams) -> None:
+    def remove(self, body: FRemoveParams) -> FRemoveResponse:
         """
         Remove a file or directory.
 
@@ -99,8 +96,7 @@ class FileSystemOperator:
         Returns:
             None
         """
-        self.client.v1.boxes.fs.remove(box_id=self.box_id, **body)
-        return
+        return self.client.v1.boxes.fs.remove(box_id=self.box_id, **body)
 
     def exists(self, body: FExistsParams) -> FExistsResponse:
         """
@@ -193,12 +189,9 @@ class FileOperator:
         working_dir = body.get("working_dir")
         content = body["content"]
         path = body["path"]
-            
+
         return self.client.v1.boxes.fs.write(
-            box_id=self.box_id,
-            content=content,
-            path=path,
-            working_dir=working_dir if working_dir else NOT_GIVEN
+            box_id=self.box_id, content=content, path=path, working_dir=working_dir if working_dir else NOT_GIVEN
         )
 
     def read(self, body: Optional[FReadParams] = None) -> FReadResponse:

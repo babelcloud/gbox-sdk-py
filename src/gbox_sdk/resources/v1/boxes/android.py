@@ -406,20 +406,30 @@ class AndroidResource(SyncAPIResource):
                 "open": open,
             }
         )
-        files = extract_files(cast(Mapping[str, object], body), paths=[["apk"]])
-        # It should be noted that the actual Content-Type header that will be
-        # sent to the server will contain a `boundary` parameter, e.g.
-        # multipart/form-data; boundary=---abc--
-        extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
-        return self._post(
-            f"/boxes/{box_id}/android/packages",
-            body=maybe_transform(body, android_install_params.AndroidInstallParams),
-            files=files,
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=AndroidInstallResponse,
-        )
+        if isinstance(apk, str):
+            return self._post(
+                f"/boxes/{box_id}/android/packages",
+                body=maybe_transform(body, android_install_params.AndroidInstallParams),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=AndroidInstallResponse,
+            )
+        else:
+            files = extract_files(cast(Mapping[str, object], body), paths=[["apk"]])
+            # It should be noted that the actual Content-Type header that will be
+            # sent to the server will contain a `boundary` parameter, e.g.
+            # multipart/form-data; boundary=---abc--
+            extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
+            return self._post(
+                f"/boxes/{box_id}/android/packages",
+                body=maybe_transform(body, android_install_params.AndroidInstallParams),
+                files=files,
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=AndroidInstallResponse,
+            )
 
     def list_activities(
         self,
@@ -1108,20 +1118,30 @@ class AsyncAndroidResource(AsyncAPIResource):
                 "open": open,
             }
         )
-        files = extract_files(cast(Mapping[str, object], body), paths=[["apk"]])
-        # It should be noted that the actual Content-Type header that will be
-        # sent to the server will contain a `boundary` parameter, e.g.
-        # multipart/form-data; boundary=---abc--
-        extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
-        return await self._post(
-            f"/boxes/{box_id}/android/packages",
-            body=await async_maybe_transform(body, android_install_params.AndroidInstallParams),
-            files=files,
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=AndroidInstallResponse,
-        )
+        if isinstance(apk, str):
+            return await self._post(
+                f"/boxes/{box_id}/android/packages",
+                body=await async_maybe_transform(body, android_install_params.AndroidInstallParams),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=AndroidInstallResponse,
+            )
+        else:
+            files = extract_files(cast(Mapping[str, object], body), paths=[["apk"]])
+            # It should be noted that the actual Content-Type header that will be
+            # sent to the server will contain a `boundary` parameter, e.g.
+            # multipart/form-data; boundary=---abc--
+            extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
+            return await self._post(
+                f"/boxes/{box_id}/android/packages",
+                body=await async_maybe_transform(body, android_install_params.AndroidInstallParams),
+                files=files,
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=AndroidInstallResponse,
+            )
 
     async def list_activities(
         self,

@@ -1,5 +1,7 @@
 import os
 from typing import List
+from urllib.parse import urlparse
+from urllib.request import url2pathname
 
 from gbox_sdk._client import GboxClient
 from gbox_sdk._response import BinaryAPIResponse
@@ -39,6 +41,12 @@ class AndroidAppManager:
         """
         Install an Android app on the box.
 
+        Supports multiple APK input formats:
+        - Local file path: "/path/to/app.apk"
+        - File URL: "file:///path/to/app.apk"  
+        - HTTP URL: "https://example.com/app.apk"
+        - File object or stream
+
         Args:
             body (AndroidInstall): Installation parameters, including APK path or URL.
 
@@ -46,16 +54,29 @@ class AndroidAppManager:
             AndroidAppOperator: Operator for the installed app.
         """
         apk = body["apk"]
-        if isinstance(apk, str) and not apk.startswith("http"):
-            if not os.path.exists(apk):
-                raise FileNotFoundError(f"File {apk} does not exist")
-            with open(apk, "rb") as apk_file:
-                res = self.client.v1.boxes.android.install(box_id=self.box.id, apk=apk_file)
+        if isinstance(apk, str):
+            if apk.startswith("file://"):
+                # Handle file:// protocol
+                parsed_url = urlparse(apk)
+                file_path = url2pathname(parsed_url.path)
+                if not os.path.exists(file_path):
+                    raise FileNotFoundError(f"File {file_path} does not exist")
+                with open(file_path, "rb") as apk_file:
+                    res = self.client.v1.boxes.android.install(box_id=self.box.id, apk=apk_file)
+                    return self._install_res_to_operator(res)
+            elif apk.startswith("http"):
+                # Handle http/https URLs
+                res = self.client.v1.boxes.android.install(box_id=self.box.id, apk=apk)
                 return self._install_res_to_operator(res)
-        elif isinstance(apk, str) and apk.startswith("http"):
-            res = self.client.v1.boxes.android.install(box_id=self.box.id, apk=apk)
-            return self._install_res_to_operator(res)
-
+            else:
+                # Handle local file paths
+                if not os.path.exists(apk):
+                    raise FileNotFoundError(f"File {apk} does not exist")
+                with open(apk, "rb") as apk_file:
+                    res = self.client.v1.boxes.android.install(box_id=self.box.id, apk=apk_file)
+                    return self._install_res_to_operator(res)
+        
+        # Handle file objects or other types
         res = self.client.v1.boxes.android.install(box_id=self.box.id, apk=apk)
         return self._install_res_to_operator(res)
 

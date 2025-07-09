@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.0-alpha.20 (2025-07-09)
+
+Full Changelog: [v0.1.0-alpha.19...v0.1.0-alpha.20](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.19...v0.1.0-alpha.20)
+
+### Features
+
+* **android, fs:** enhance APK installation handling to support multiple input formats including local paths, file URLs, and HTTP URLs ([cc0637b](https://github.com/babelcloud/gbox-sdk-py/commit/cc0637becea76d6772b8b9bb98d09881aba35b8e))
+
+
+### Bug Fixes
+
+* fs remove ([24e9ef6](https://github.com/babelcloud/gbox-sdk-py/commit/24e9ef684f5dee9080b92a4496c51cb61f187330))
+
 ## 0.1.0-alpha.19 (2025-07-09)
 
 Full Changelog: [v0.1.0-alpha.18...v0.1.0-alpha.19](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.18...v0.1.0-alpha.19)

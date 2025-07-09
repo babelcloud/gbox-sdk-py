@@ -69,7 +69,7 @@ class FileSystemOperator:
         """
         return self.client.v1.boxes.fs.read(box_id=self.box_id, **body)
 
-    def write(self, body: Union[WriteFile, WriteFileByBinary]) -> FWriteResponse:
+    def write(self, body: Union[WriteFile, WriteFileByBinary]) -> "FileOperator":
         """
         Write content to a file (text or binary).
 
@@ -77,15 +77,22 @@ class FileSystemOperator:
             body (Union[WriteFile, WriteFileByBinary]): Parameters for writing to the file.
                 Can be either WriteFile (for text content) or WriteFileByBinary (for binary content).
         Returns:
-            FWriteResponse: The response after writing.
+            FileOperator: The file operator for the written file.
         """
         content = body["content"]
         path = body["path"]
         working_dir = body.get("working_dir")
 
-        return self.client.v1.boxes.fs.write(
+        res = self.client.v1.boxes.fs.write(
             box_id=self.box_id, content=content, path=path, working_dir=working_dir if working_dir else NOT_GIVEN
         )
+
+        # Convert FWriteResponse to DataFile format for FileOperator
+        data_file = DataFile(
+            path=res.path, type="file", mode=res.mode, name=res.name, size=res.size, lastModified=res.last_modified
+        )
+
+        return FileOperator(self.client, self.box_id, data_file)
 
     def remove(self, body: FRemoveParams) -> FRemoveResponse:
         """

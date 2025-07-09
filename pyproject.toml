@@ -144,10 +144,22 @@ filterwarnings = [
 typeCheckingMode = "strict"
 pythonVersion = "3.8"
 
+# Only include our source code and tests for type checking
+include = [
+    "src",
+    "tests"
+]
+
 exclude = [
     "_dev",
     ".venv",
     ".nox",
+    "venv",
+    "env",
+    "**/site-packages",
+    "**/lib/python*/site-packages",
+    "**/__pycache__",
+    ".rye",
 ]
 
 reportImplicitOverride = true

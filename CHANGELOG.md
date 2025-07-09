@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.21 (2025-07-09)
+
+Full Changelog: [v0.1.0-alpha.20...v0.1.0-alpha.21](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.20...v0.1.0-alpha.21)
+
+### Bug Fixes
+
+* change camelCase to snake_case ([af1efbf](https://github.com/babelcloud/gbox-sdk-py/commit/af1efbf516509aec35b4e73fe8cfe2b2b6f16bfb))
+
 ## 0.1.0-alpha.20 (2025-07-09)
 
 Full Changelog: [v0.1.0-alpha.19...v0.1.0-alpha.20](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.19...v0.1.0-alpha.20)

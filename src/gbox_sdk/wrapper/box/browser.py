@@ -21,7 +21,7 @@ class BrowserOperator:
         self.client = client
         self.box_id = box_id
 
-    def cdpUrl(self) -> str:
+    def cdp_url(self) -> str:
         """
         Get the Chrome DevTools Protocol (CDP) URL for the browser in the specified box.
 

@@ -1,6 +1,6 @@
 [project]
 name = "gbox_sdk"
-version = "0.1.0-alpha.21"
+version = "0.1.0-alpha.22"
 description = "The official Python library for the gbox-client API"
 dynamic = ["readme"]
 license = "Apache-2.0"
@@ -144,10 +144,22 @@ filterwarnings = [
 typeCheckingMode = "strict"
 pythonVersion = "3.8"
 
+# Only include our source code and tests for type checking
+include = [
+    "src",
+    "tests"
+]
+
 exclude = [
     "_dev",
     ".venv",
     ".nox",
+    "venv",
+    "env",
+    "**/site-packages",
+    "**/lib/python*/site-packages",
+    "**/__pycache__",
+    ".rye",
 ]
 
 reportImplicitOverride = true

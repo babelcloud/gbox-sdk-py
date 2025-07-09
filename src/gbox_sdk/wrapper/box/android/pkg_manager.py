@@ -1,15 +1,16 @@
 import os
-from typing import List
+from typing import List, Optional
 
 from gbox_sdk._client import GboxClient
 from gbox_sdk._response import BinaryAPIResponse
 from gbox_sdk.types.v1.android_box import AndroidBox
-from gbox_sdk.wrapper.box.android.types import AndroidInstall
-from gbox_sdk.wrapper.box.android.app_operator import AndroidAppOperator
+from gbox_sdk.wrapper.box.android.types import AndroidInstall, ListAndroidPkg
+from gbox_sdk.wrapper.box.android.pkg_operator import AndroidPkgOperator
 from gbox_sdk.types.v1.boxes.android_get_response import AndroidGetResponse
+from gbox_sdk.types.v1.boxes.android_list_pkg_params import AndroidListPkgParams
 from gbox_sdk.types.v1.boxes.android_install_response import AndroidInstallResponse
 from gbox_sdk.types.v1.boxes.android_uninstall_params import AndroidUninstallParams
-from gbox_sdk.types.v1.boxes.android_list_app_response import AndroidListAppResponse
+from gbox_sdk.types.v1.boxes.android_list_pkg_response import AndroidListPkgResponse
 
 
 class AndroidPkgManager:
@@ -66,26 +67,48 @@ class AndroidPkgManager:
         keep_data = bool(params.get("keepData", False))
         return self.client.v1.boxes.android.uninstall(package_name, box_id=self.box.id, keep_data=keep_data)
 
-    def list(self) -> List[AndroidAppOperator]:
+    def list(self, params: Optional[AndroidListPkgParams] = None) -> ListAndroidPkg:
         """
         List all installed Android packages as operator objects.
 
-        Returns:
-            List[AndroidAppOperator]: List of app operator instances.
-        """
-        res = self.client.v1.boxes.android.list_app(box_id=self.box.id)
-        return [AndroidAppOperator(self.client, self.box, app) for app in res.data]
+        Args:
+            params (AndroidListPkgParams, optional): Parameters for listing packages.
 
-    def list_info(self) -> AndroidListAppResponse:
+        Returns:
+            ListAndroidPkg: Response containing package operator instances.
+        """
+        if params is None:
+            params = {}
+        res = self.client.v1.boxes.android.list_pkg(box_id=self.box.id, **params)
+        operators: List[AndroidPkgOperator] = []
+        for pkg in res.data:
+            # Create AndroidGetResponse using camelCase field names
+            android_get_response = AndroidGetResponse(
+                apkPath=pkg.apk_path,
+                isRunning=pkg.is_running,
+                name=pkg.name,
+                packageName=pkg.package_name,
+                pkgType=pkg.pkg_type,
+                version=pkg.version
+            )
+            operators.append(AndroidPkgOperator(self.client, self.box, android_get_response))
+        return ListAndroidPkg(operators=operators)
+
+    def list_info(self, params: Optional[AndroidListPkgParams] = None) -> AndroidListPkgResponse:
         """
         Get detailed information of all installed Android packages.
 
-        Returns:
-            AndroidListAppResponse: Response containing package information.
-        """
-        return self.client.v1.boxes.android.list_app(box_id=self.box.id)
+        Args:
+            params (AndroidListPkgParams, optional): Parameters for listing packages.
 
-    def get(self, package_name: str) -> AndroidAppOperator:
+        Returns:
+            AndroidListPkgResponse: Response containing package information.
+        """
+        if params is None:
+            params = {}
+        return self.client.v1.boxes.android.list_pkg(box_id=self.box.id, **params)
+
+    def get(self, package_name: str) -> AndroidPkgOperator:
         """
         Get an operator for a specific installed package.
 
@@ -93,10 +116,10 @@ class AndroidPkgManager:
             package_name (str): The package name of the app.
 
         Returns:
-            AndroidAppOperator: Operator for the specified package.
+            AndroidPkgOperator: Operator for the specified package.
         """
-        res = self.client.v1.boxes.android.get_app(package_name, box_id=self.box.id)
-        return AndroidAppOperator(self.client, self.box, res)
+        res = self.client.v1.boxes.android.get(package_name, box_id=self.box.id)
+        return AndroidPkgOperator(self.client, self.box, res)
 
     def get_info(self, package_name: str) -> AndroidGetResponse:
         """

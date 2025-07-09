@@ -1,12 +1,11 @@
 import os
-from typing import List
 from urllib.parse import urlparse
 from urllib.request import url2pathname
 
 from gbox_sdk._client import GboxClient
 from gbox_sdk._response import BinaryAPIResponse
 from gbox_sdk.types.v1.android_box import AndroidBox
-from gbox_sdk.wrapper.box.android.types import AndroidInstall
+from gbox_sdk.wrapper.box.android.types import AndroidInstall, ListAndroidApp
 from gbox_sdk.types.v1.boxes.android_app import AndroidApp
 from gbox_sdk.wrapper.box.android.app_operator import AndroidAppOperator
 from gbox_sdk.types.v1.boxes.android_get_response import AndroidGetResponse
@@ -43,7 +42,7 @@ class AndroidAppManager:
 
         Supports multiple APK input formats:
         - Local file path: "/path/to/app.apk"
-        - File URL: "file:///path/to/app.apk"  
+        - File URL: "file:///path/to/app.apk"
         - HTTP URL: "https://example.com/app.apk"
         - File object or stream
 
@@ -75,7 +74,7 @@ class AndroidAppManager:
                 with open(apk, "rb") as apk_file:
                     res = self.client.v1.boxes.android.install(box_id=self.box.id, apk=apk_file)
                     return self._install_res_to_operator(res)
-        
+
         # Handle file objects or other types
         res = self.client.v1.boxes.android.install(box_id=self.box.id, apk=apk)
         return self._install_res_to_operator(res)
@@ -91,15 +90,15 @@ class AndroidAppManager:
         keep_data = bool(params.get("keepData", False))
         return self.client.v1.boxes.android.uninstall(package_name, box_id=self.box.id, keep_data=keep_data)
 
-    def list(self) -> List[AndroidAppOperator]:
+    def list(self) -> ListAndroidApp:
         """
         List all installed Android apps as operator objects.
 
         Returns:
-            List[AndroidAppOperator]: List of app operator instances.
+            ListAndroidApp: Response containing app operator instances.
         """
         res = self.client.v1.boxes.android.list_app(box_id=self.box.id)
-        return [AndroidAppOperator(self.client, self.box, app) for app in res.data]
+        return ListAndroidApp(operators=[AndroidAppOperator(self.client, self.box, app) for app in res.data])
 
     def list_info(self) -> AndroidListAppResponse:
         """

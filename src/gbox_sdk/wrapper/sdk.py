@@ -20,33 +20,39 @@ BoxOperator = Union[AndroidBoxOperator, LinuxBoxOperator]
 
 class _CreateAndroidRequired(TypedDict):
     """Required fields for CreateAndroid."""
+
     type: Literal["android"]
 
 
 class _CreateAndroidOptional(TypedDict, total=False):
     """Optional fields for CreateAndroid."""
+
     config: AndroidConfig
     wait: bool
 
 
 class CreateAndroid(_CreateAndroidRequired, _CreateAndroidOptional):
     """Parameters for creating an Android box with type specification."""
+
     pass
 
 
 class _CreateLinuxRequired(TypedDict):
     """Required fields for CreateLinux."""
+
     type: Literal["linux"]
 
 
 class _CreateLinuxOptional(TypedDict, total=False):
     """Optional fields for CreateLinux."""
+
     config: LinuxConfig
     wait: bool
 
 
 class CreateLinux(_CreateLinuxRequired, _CreateLinuxOptional):
     """Parameters for creating a Linux box with type specification."""
+
     pass
 
 
@@ -55,11 +61,13 @@ CreateParams = Union[CreateAndroid, CreateLinux]
 
 class BoxTerminate(TypedDict, total=False):
     """Parameters for terminating a box."""
+
     pass
 
 
 class BoxList(TypedDict, total=False):
     """Parameters for listing boxes."""
+
     pass
 
 
@@ -100,16 +108,10 @@ class GboxSDK:
         Create boxes using the unified create method:
         ```python
         # Create an Android box
-        android_box = sdk.create({
-            'type': 'android',
-            'config': {'labels': {'env': 'test'}}
-        })
+        android_box = sdk.create({"type": "android", "config": {"labels": {"env": "test"}}})
 
         # Create a Linux box
-        linux_box = sdk.create({
-            'type': 'linux',
-            'config': {'envs': {'PYTHON_VERSION': '3.9'}}
-        })
+        linux_box = sdk.create({"type": "linux", "config": {"envs": {"PYTHON_VERSION": "3.9"}}})
         ```
 
         List and manage boxes:
@@ -118,10 +120,10 @@ class GboxSDK:
         boxes = sdk.list()
 
         # Get a specific box
-        box = sdk.get('box_id')
+        box = sdk.get("box_id")
 
         # Terminate a box
-        sdk.terminate('box_id')
+        sdk.terminate("box_id")
         ```
     """
 
@@ -193,18 +195,12 @@ class GboxSDK:
         Examples:
             Create an Android box:
             ```python
-            android_box = sdk.create({
-                'type': 'android',
-                'config': {'labels': {'env': 'test'}}
-            })
+            android_box = sdk.create({"type": "android", "config": {"labels": {"env": "test"}}})
             ```
 
             Create a Linux box:
             ```python
-            linux_box = sdk.create({
-                'type': 'linux',
-                'config': {'envs': {'PYTHON_VERSION': '3.9'}}
-            })
+            linux_box = sdk.create({"type": "linux", "config": {"envs": {"PYTHON_VERSION": "3.9"}}})
             ```
         """
         box_type = body.get("type")
@@ -245,10 +241,7 @@ class GboxSDK:
             boxes = sdk.list_info()
 
             # List with pagination
-            boxes = sdk.list_info({
-                'page': 1,
-                'page_size': 10
-            })
+            boxes = sdk.list_info({"page": 1, "page_size": 10})
             ```
         """
         if query is None:
@@ -271,10 +264,7 @@ class GboxSDK:
             boxes = sdk.list()
 
             # List with pagination
-            boxes = sdk.list({
-                'page': 1,
-                'page_size': 10
-            })
+            boxes = sdk.list({"page": 1, "page_size": 10})
             ```
         """
         if query is None:
@@ -301,7 +291,7 @@ class GboxSDK:
 
         Example:
             ```python
-            box_info = sdk.get_info('975fed9f-bb28-4718-a2c5-e01f72864bd1')
+            box_info = sdk.get_info("975fed9f-bb28-4718-a2c5-e01f72864bd1")
             ```
         """
         return self.client.v1.boxes.retrieve(box_id)
@@ -318,7 +308,7 @@ class GboxSDK:
 
         Example:
             ```python
-            box = sdk.get('975fed9f-bb28-4718-a2c5-e01f72864bd1')
+            box = sdk.get("975fed9f-bb28-4718-a2c5-e01f72864bd1")
             ```
         """
         res = self.client.v1.boxes.retrieve(box_id)
@@ -334,7 +324,7 @@ class GboxSDK:
 
         Example:
             ```python
-            sdk.terminate('box_id')
+            sdk.terminate("box_id")
             ```
         """
         if body is None:

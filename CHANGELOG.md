@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.22 (2025-07-09)
+
+Full Changelog: [v0.1.0-alpha.21...v0.1.0-alpha.22](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.21...v0.1.0-alpha.22)
+
+### Refactors
+
+* **box:** streamline action methods and enhance type hints for better clarity and usability ([0a06af0](https://github.com/babelcloud/gbox-sdk-py/commit/0a06af000617747c18c274ce666e53ffffcf144b))
+
 ## 0.1.0-alpha.21 (2025-07-09)
 
 Full Changelog: [v0.1.0-alpha.20...v0.1.0-alpha.21](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.20...v0.1.0-alpha.21)

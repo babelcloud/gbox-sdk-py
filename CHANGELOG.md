@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.1.0-alpha.24 (2025-07-10)
+
+Full Changelog: [v0.1.0-alpha.23...v0.1.0-alpha.24](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.23...v0.1.0-alpha.24)
+
+### Features
+
+* **api:** api update ([4943893](https://github.com/babelcloud/gbox-sdk-py/commit/4943893b2a4757156b2d1f73b967ab6523f3a3a8))
+* **api:** api update ([f2e7d4b](https://github.com/babelcloud/gbox-sdk-py/commit/f2e7d4b019e99ede81d0b5540091900e5a47754d))
+
+
+### Bug Fixes
+
+* android methods ([98e7c66](https://github.com/babelcloud/gbox-sdk-py/commit/98e7c667eff50d8ddd25ceef0dbbf435293f7e02))
+* **parsing:** correctly handle nested discriminated unions ([dee95fa](https://github.com/babelcloud/gbox-sdk-py/commit/dee95fa0b2a713d094ed01890c769c84d76dfbfa))
+
 ## 0.1.0-alpha.23 (2025-07-09)
 
 Full Changelog: [v0.1.0-alpha.22...v0.1.0-alpha.23](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.22...v0.1.0-alpha.23)

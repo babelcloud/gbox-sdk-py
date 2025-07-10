@@ -1,6 +1,7 @@
 from typing import TYPE_CHECKING, List, Union
-from typing_extensions import Required, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
+from gbox_sdk._utils._transform import PropertyInfo
 from gbox_sdk.types.v1.boxes.android_install_params import InstallAndroidPkgByURL, InstallAndroidPkgByFile
 
 # Forward references for type annotations
@@ -16,13 +17,22 @@ class InstallAndroidAppByLocalFile(TypedDict, total=False):
 AndroidInstall = Union[InstallAndroidPkgByFile, InstallAndroidPkgByURL, InstallAndroidAppByLocalFile]
 
 
-class ListAndroidApp(TypedDict):
+class ListAndroidApp:
     """Response type for listing Android apps as operators."""
 
-    operators: List["AndroidAppOperator"]
+    def __init__(self, operators: List["AndroidAppOperator"]):
+        self.operators = operators
 
 
-class ListAndroidPkg(TypedDict):
+class ListAndroidPkg:
     """Response type for listing Android packages as operators."""
 
-    operators: List["AndroidPkgOperator"]
+    def __init__(self, operators: List["AndroidPkgOperator"]):
+        self.operators = operators
+
+
+class AndroidUninstall(TypedDict, total=False):
+    """Parameters for uninstalling an Android package (without box_id)."""
+
+    keep_data: Annotated[bool, PropertyInfo(alias="keepData")]
+    """uninstalls the pkg while retaining the data/cache"""

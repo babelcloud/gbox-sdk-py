@@ -42,9 +42,6 @@ class Config(BaseModel):
     os: ConfigOs
     """Android operating system configuration"""
 
-    resolution: object
-    """Resolution of the box"""
-
     storage: float
     """Storage allocated to the box in GiB"""
 

@@ -1,16 +1,15 @@
 import os
 from urllib.parse import urlparse
 from urllib.request import url2pathname
+from typing_extensions import Optional
 
 from gbox_sdk._client import GboxClient
 from gbox_sdk._response import BinaryAPIResponse
 from gbox_sdk.types.v1.android_box import AndroidBox
-from gbox_sdk.wrapper.box.android.types import AndroidInstall, ListAndroidApp
+from gbox_sdk.wrapper.box.android.types import AndroidInstall, ListAndroidApp, AndroidUninstall
 from gbox_sdk.types.v1.boxes.android_app import AndroidApp
 from gbox_sdk.wrapper.box.android.app_operator import AndroidAppOperator
-from gbox_sdk.types.v1.boxes.android_get_response import AndroidGetResponse
 from gbox_sdk.types.v1.boxes.android_install_response import AndroidInstallResponse
-from gbox_sdk.types.v1.boxes.android_uninstall_params import AndroidUninstallParams
 from gbox_sdk.types.v1.boxes.android_list_app_response import AndroidListAppResponse
 
 
@@ -79,7 +78,7 @@ class AndroidAppManager:
         res = self.client.v1.boxes.android.install(box_id=self.box.id, apk=apk)
         return self._install_res_to_operator(res)
 
-    def uninstall(self, package_name: str, params: AndroidUninstallParams) -> None:
+    def uninstall(self, package_name: str, params: Optional[AndroidUninstall] = None) -> None:
         """
         Uninstall an Android app from the box.
 
@@ -87,7 +86,9 @@ class AndroidAppManager:
             package_name (str): The package name of the app to uninstall.
             params (AndroidUninstallParams): Uninstallation parameters.
         """
-        keep_data = bool(params.get("keepData", False))
+        keep_data = False
+        if params is not None:
+            keep_data = params.get("keep_data", False)
         return self.client.v1.boxes.android.uninstall(package_name, box_id=self.box.id, keep_data=keep_data)
 
     def list(self) -> ListAndroidApp:
@@ -122,7 +123,7 @@ class AndroidAppManager:
         res = self.client.v1.boxes.android.get_app(package_name, box_id=self.box.id)
         return AndroidAppOperator(self.client, self.box, res)
 
-    def get_info(self, package_name: str) -> AndroidGetResponse:
+    def get_info(self, package_name: str) -> AndroidApp:
         """
         Get detailed information for a specific installed app.
 
@@ -132,7 +133,7 @@ class AndroidAppManager:
         Returns:
             AndroidGetResponse: App information response.
         """
-        res = self.client.v1.boxes.android.get(package_name, box_id=self.box.id)
+        res = self.client.v1.boxes.android.get_app(package_name, box_id=self.box.id)
         return res
 
     def close_all(self) -> None:

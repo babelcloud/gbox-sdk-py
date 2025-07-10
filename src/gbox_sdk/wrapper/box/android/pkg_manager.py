@@ -4,13 +4,14 @@ from typing import List, Optional
 from gbox_sdk._client import GboxClient
 from gbox_sdk._response import BinaryAPIResponse
 from gbox_sdk.types.v1.android_box import AndroidBox
-from gbox_sdk.wrapper.box.android.types import AndroidInstall, ListAndroidPkg
+from gbox_sdk.wrapper.box.android.types import AndroidInstall, ListAndroidPkg, AndroidUninstall
 from gbox_sdk.wrapper.box.android.pkg_operator import AndroidPkgOperator
 from gbox_sdk.types.v1.boxes.android_get_response import AndroidGetResponse
 from gbox_sdk.types.v1.boxes.android_list_pkg_params import AndroidListPkgParams
 from gbox_sdk.types.v1.boxes.android_install_response import AndroidInstallResponse
-from gbox_sdk.types.v1.boxes.android_uninstall_params import AndroidUninstallParams
 from gbox_sdk.types.v1.boxes.android_list_pkg_response import AndroidListPkgResponse
+from gbox_sdk.types.v1.boxes.android_list_pkg_simple_params import AndroidListPkgSimpleParams
+from gbox_sdk.types.v1.boxes.android_list_pkg_simple_response import AndroidListPkgSimpleResponse
 
 
 class AndroidPkgManager:
@@ -56,15 +57,17 @@ class AndroidPkgManager:
 
         return self.client.v1.boxes.android.install(box_id=self.box.id, apk=apk)
 
-    def uninstall(self, package_name: str, params: AndroidUninstallParams) -> None:
+    def uninstall(self, package_name: str, params: Optional[AndroidUninstall] = None) -> None:
         """
         Uninstall an Android package from the box.
 
         Args:
             package_name (str): The package name of the app to uninstall.
-            params (AndroidUninstallParams): Uninstallation parameters.
+            params (AndroidUninstall, optional): Uninstallation parameters.
         """
-        keep_data = bool(params.get("keepData", False))
+        keep_data = False
+        if params is not None:
+            keep_data = params.get("keep_data", False)
         return self.client.v1.boxes.android.uninstall(package_name, box_id=self.box.id, keep_data=keep_data)
 
     def list(self, params: Optional[AndroidListPkgParams] = None) -> ListAndroidPkg:
@@ -89,7 +92,7 @@ class AndroidPkgManager:
                 name=pkg.name,
                 packageName=pkg.package_name,
                 pkgType=pkg.pkg_type,
-                version=pkg.version
+                version=pkg.version,
             )
             operators.append(AndroidPkgOperator(self.client, self.box, android_get_response))
         return ListAndroidPkg(operators=operators)
@@ -148,3 +151,14 @@ class AndroidPkgManager:
             BinaryAPIResponse: The backup response containing binary data.
         """
         return self.client.v1.boxes.android.backup_all(box_id=self.box.id)
+
+    def list_simple_info(self, params: Optional[AndroidListPkgSimpleParams] = None) -> AndroidListPkgSimpleResponse:
+        """
+        List all installed Android packages with simple information.
+
+        Returns:
+            ListAndroidPkgResponse: Response containing package information.
+        """
+        if params is None:
+            params = {}
+        return self.client.v1.boxes.android.list_pkg_simple(box_id=self.box.id, **params)

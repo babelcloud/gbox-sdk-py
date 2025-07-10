@@ -9,6 +9,7 @@ from gbox_sdk.wrapper.utils import is_linux_box, is_android_box
 from gbox_sdk.wrapper.box.linux import LinuxBoxOperator
 from gbox_sdk.types.v1.linux_box import LinuxBox
 from gbox_sdk.types.v1.android_box import AndroidBox
+from gbox_sdk.types.v1.box_list_params import BoxListParams
 from gbox_sdk.types.v1.box_list_response import BoxListResponse
 from gbox_sdk.wrapper.box.android.android import AndroidBoxOperator
 from gbox_sdk.types.v1.box_retrieve_response import BoxRetrieveResponse
@@ -248,7 +249,7 @@ class GboxSDK:
             query = BoxList()
         return self.client.v1.boxes.list(**query)
 
-    def list(self, query: Optional[BoxList] = None) -> BoxListOperatorResponse:
+    def list(self, query: Optional[BoxListParams] = None) -> BoxListOperatorResponse:
         """
         List all boxes matching the query and return their operator objects.
 
@@ -268,7 +269,7 @@ class GboxSDK:
             ```
         """
         if query is None:
-            query = BoxList()
+            query = BoxListParams()
         res = self.client.v1.boxes.list(**query)
         data = getattr(res, "data", [])
         operators = [self.data_to_operator(item) for item in data]

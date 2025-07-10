@@ -110,7 +110,7 @@ class ActionOperator:
                 duration=body.get("duration", NotGiven()),
                 include_screenshot=body.get("include_screenshot", NotGiven()),
                 output_format=body.get("output_format", NotGiven()),
-                screenshot_delay=body.get("screenshot_delay", NotGiven())
+                screenshot_delay=body.get("screenshot_delay", NotGiven()),
             )
         else:
             # DragSimple
@@ -121,7 +121,7 @@ class ActionOperator:
                 duration=body.get("duration", NotGiven()),
                 include_screenshot=body.get("include_screenshot", NotGiven()),
                 output_format=body.get("output_format", NotGiven()),
-                screenshot_delay=body.get("screenshot_delay", NotGiven())
+                screenshot_delay=body.get("screenshot_delay", NotGiven()),
             )
 
     def swipe(self, body: ActionSwipeParams) -> ActionSwipeResponse:
@@ -143,7 +143,7 @@ class ActionOperator:
                 duration=body.get("duration", NotGiven()),
                 include_screenshot=body.get("include_screenshot", NotGiven()),
                 output_format=body.get("output_format", NotGiven()),
-                screenshot_delay=body.get("screenshot_delay", NotGiven())
+                screenshot_delay=body.get("screenshot_delay", NotGiven()),
             )
         else:
             # SwipeAdvanced
@@ -154,7 +154,7 @@ class ActionOperator:
                 duration=body.get("duration", NotGiven()),
                 include_screenshot=body.get("include_screenshot", NotGiven()),
                 output_format=body.get("output_format", NotGiven()),
-                screenshot_delay=body.get("screenshot_delay", NotGiven())
+                screenshot_delay=body.get("screenshot_delay", NotGiven()),
             )
 
     def press_key(self, body: ActionPressKeyParams) -> ActionPressKeyResponse:

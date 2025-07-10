@@ -71,6 +71,9 @@ class AndroidBox(BaseModel):
     created_at: datetime = FieldInfo(alias="createdAt")
     """Creation timestamp of the box"""
 
+    expires_at: Optional[datetime] = FieldInfo(alias="expiresAt", default=None)
+    """Expiration timestamp of the box"""
+
     status: Literal["pending", "running", "error", "terminated"]
     """The current status of a box instance"""
 
@@ -79,6 +82,3 @@ class AndroidBox(BaseModel):
 
     updated_at: datetime = FieldInfo(alias="updatedAt")
     """Last update timestamp of the box"""
-
-    expires_at: Optional[datetime] = FieldInfo(alias="expiresAt", default=None)
-    """Expiration timestamp of the box"""

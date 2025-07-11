@@ -45,6 +45,7 @@ from ....types.v1.boxes.action_extract_response import ActionExtractResponse
 from ....types.v1.boxes.action_press_key_response import ActionPressKeyResponse
 from ....types.v1.boxes.action_screenshot_response import ActionScreenshotResponse
 from ....types.v1.boxes.action_press_button_response import ActionPressButtonResponse
+from ....types.v1.boxes.action_screen_layout_response import ActionScreenLayoutResponse
 from ....types.v1.boxes.action_screen_rotation_response import ActionScreenRotationResponse
 
 __all__ = ["ActionsResource", "AsyncActionsResource"]
@@ -801,6 +802,46 @@ class ActionsResource(SyncAPIResource):
                     Any, ActionPressKeyResponse
                 ),  # Union types cannot be passed in as arguments in the type system
             ),
+        )
+
+    def screen_layout(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionScreenLayoutResponse:
+        """Get the current structured screen layout information.
+
+        This endpoint returns
+        detailed structural information about the UI elements currently displayed on the
+        screen, which can be used for UI automation, element analysis, and accessibility
+        purposes. The format varies by box type: Android boxes return XML format with
+        detailed UI hierarchy information including element bounds, text content,
+        resource IDs, and properties, while other box types may return different
+        structured formats.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return self._get(
+            f"/boxes/{box_id}/actions/screen-layout",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionScreenLayoutResponse,
         )
 
     def screen_rotation(
@@ -2060,6 +2101,46 @@ class AsyncActionsResource(AsyncAPIResource):
             ),
         )
 
+    async def screen_layout(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionScreenLayoutResponse:
+        """Get the current structured screen layout information.
+
+        This endpoint returns
+        detailed structural information about the UI elements currently displayed on the
+        screen, which can be used for UI automation, element analysis, and accessibility
+        purposes. The format varies by box type: Android boxes return XML format with
+        detailed UI hierarchy information including element bounds, text content,
+        resource IDs, and properties, while other box types may return different
+        structured formats.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return await self._get(
+            f"/boxes/{box_id}/actions/screen-layout",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionScreenLayoutResponse,
+        )
+
     async def screen_rotation(
         self,
         box_id: str,
@@ -2589,6 +2670,9 @@ class ActionsResourceWithRawResponse:
         self.press_key = to_raw_response_wrapper(
             actions.press_key,
         )
+        self.screen_layout = to_raw_response_wrapper(
+            actions.screen_layout,
+        )
         self.screen_rotation = to_raw_response_wrapper(
             actions.screen_rotation,
         )
@@ -2633,6 +2717,9 @@ class AsyncActionsResourceWithRawResponse:
         )
         self.press_key = async_to_raw_response_wrapper(
             actions.press_key,
+        )
+        self.screen_layout = async_to_raw_response_wrapper(
+            actions.screen_layout,
         )
         self.screen_rotation = async_to_raw_response_wrapper(
             actions.screen_rotation,
@@ -2679,6 +2766,9 @@ class ActionsResourceWithStreamingResponse:
         self.press_key = to_streamed_response_wrapper(
             actions.press_key,
         )
+        self.screen_layout = to_streamed_response_wrapper(
+            actions.screen_layout,
+        )
         self.screen_rotation = to_streamed_response_wrapper(
             actions.screen_rotation,
         )
@@ -2723,6 +2813,9 @@ class AsyncActionsResourceWithStreamingResponse:
         )
         self.press_key = async_to_streamed_response_wrapper(
             actions.press_key,
+        )
+        self.screen_layout = async_to_streamed_response_wrapper(
+            actions.screen_layout,
         )
         self.screen_rotation = async_to_streamed_response_wrapper(
             actions.screen_rotation,

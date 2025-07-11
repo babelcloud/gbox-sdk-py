@@ -17,15 +17,18 @@ from gbox_sdk.types.v1.boxes.action_move_response import ActionMoveResponse
 from gbox_sdk.types.v1.boxes.action_scroll_params import ActionScrollParams
 from gbox_sdk.types.v1.boxes.action_type_response import ActionTypeResponse
 from gbox_sdk.types.v1.boxes.action_click_response import ActionClickResponse
+from gbox_sdk.types.v1.boxes.action_extract_params import ActionExtractParams
 from gbox_sdk.types.v1.boxes.action_swipe_response import ActionSwipeResponse
 from gbox_sdk.types.v1.boxes.action_touch_response import ActionTouchResponse
 from gbox_sdk.types.v1.boxes.action_scroll_response import ActionScrollResponse
+from gbox_sdk.types.v1.boxes.action_extract_response import ActionExtractResponse
 from gbox_sdk.types.v1.boxes.action_press_key_params import ActionPressKeyParams
 from gbox_sdk.types.v1.boxes.action_screenshot_params import ActionScreenshotParams
 from gbox_sdk.types.v1.boxes.action_press_key_response import ActionPressKeyResponse
 from gbox_sdk.types.v1.boxes.action_press_button_params import ActionPressButtonParams
 from gbox_sdk.types.v1.boxes.action_screenshot_response import ActionScreenshotResponse
 from gbox_sdk.types.v1.boxes.action_press_button_response import ActionPressButtonResponse
+from gbox_sdk.types.v1.boxes.action_screen_layout_response import ActionScreenLayoutResponse
 from gbox_sdk.types.v1.boxes.action_screen_rotation_params import ActionScreenRotationParams
 from gbox_sdk.types.v1.boxes.action_screen_rotation_response import ActionScreenRotationResponse
 
@@ -37,16 +40,7 @@ class ActionScreenshot(ActionScreenshotParams, total=False):
     Attributes:
         path (Optional[str]): The file path where the screenshot will be saved.
     """
-
     path: Optional[str]
-
-
-class ActionAI(ActionAIParams, total=False):
-    """
-    Extends ActionAIParams for AI-based actions.
-    """
-
-    pass
 
 
 class ActionOperator:
@@ -67,7 +61,7 @@ class ActionOperator:
         self.client = client
         self.box_id = box_id
 
-    def ai(self, body: Union[str, ActionAI]) -> ActionAIResponse:
+    def ai(self, body: Union[str, ActionAIParams]) -> ActionAIResponse:
         """
         Perform an AI-powered action on the box.
 
@@ -75,6 +69,9 @@ class ActionOperator:
             body: Either a string instruction or ActionAI parameters.
         Returns:
             ActionAIResponse: The response from the AI action.
+        
+        Example:
+            >>> response = myBox.action.ai("Click on the login button")
         """
         if isinstance(body, str):
             return self.client.v1.boxes.actions.ai(box_id=self.box_id, instruction=body)
@@ -89,6 +86,9 @@ class ActionOperator:
             body (ActionClickParams): Parameters for the click action.
         Returns:
             ActionClickResponse: The response from the click action.
+        
+        Example:
+            >>> response = myBox.action.click({"x": 100, "y": 100})
         """
         return self.client.v1.boxes.actions.click(box_id=self.box_id, **body)
 
@@ -100,6 +100,14 @@ class ActionOperator:
             body (ActionDragParams): Parameters for the drag action.
         Returns:
             ActionDragResponse: The response from the drag action.
+        
+        Example:
+            >>> response = myBox.action.drag({
+            ...     "path": [
+            ...         {"x": 100, "y": 100},
+            ...         {"x": 200, "y": 200},
+            ...     ],
+            ... })
         """
         # Check if it's DragAdvanced (has 'path') or DragSimple (has 'start' and 'end')
         if "path" in body:
@@ -132,6 +140,9 @@ class ActionOperator:
             body (ActionSwipeParams): Parameters for the swipe action.
         Returns:
             ActionSwipeResponse: The response from the swipe action.
+        
+        Example:
+            >>> response = myBox.action.swipe({"direction": "up"})
         """
         # Check if it's SwipeSimple (has 'direction') or SwipeAdvanced (has 'start' and 'end')
         if "direction" in body:
@@ -165,6 +176,9 @@ class ActionOperator:
             body (ActionPressKeyParams): Parameters for the key press action.
         Returns:
             ActionPressKeyResponse: The response from the key press action.
+        
+        Example:
+            >>> response = myBox.action.press_key({"keys": ["enter"]})
         """
         return self.client.v1.boxes.actions.press_key(box_id=self.box_id, **body)
 
@@ -176,6 +190,9 @@ class ActionOperator:
             body (ActionPressButtonParams): Parameters for the button press action.
         Returns:
             ActionPressButtonResponse: The response from the button press action.
+        
+        Example:
+            >>> response = myBox.action.press_button({"buttons": ["power"]})
         """
         return self.client.v1.boxes.actions.press_button(box_id=self.box_id, **body)
 
@@ -187,6 +204,9 @@ class ActionOperator:
             body (ActionMoveParams): Parameters for the move action.
         Returns:
             ActionMoveResponse: The response from the move action.
+        
+        Example:
+            >>> response = myBox.action.move({"x": 200, "y": 300})
         """
         return self.client.v1.boxes.actions.move(box_id=self.box_id, **body)
 
@@ -198,6 +218,9 @@ class ActionOperator:
             body (ActionScrollParams): Parameters for the scroll action.
         Returns:
             ActionScrollResponse: The response from the scroll action.
+        
+        Example:
+            >>> response = myBox.action.scroll({"scroll_x": 0, "scroll_y": 100, "x": 100, "y": 100})
         """
         return self.client.v1.boxes.actions.scroll(box_id=self.box_id, **body)
 
@@ -209,6 +232,9 @@ class ActionOperator:
             body (ActionTouchParams): Parameters for the touch action.
         Returns:
             ActionTouchResponse: The response from the touch action.
+        
+        Example:
+            >>> response = myBox.action.touch({"points": [{"start": {"x": 0, "y": 0}}]})
         """
         return self.client.v1.boxes.actions.touch(box_id=self.box_id, **body)
 
@@ -220,8 +246,28 @@ class ActionOperator:
             body (ActionTypeParams): Parameters for the type action.
         Returns:
             ActionTypeResponse: The response from the type action.
+        
+        Example:
+            >>> response = myBox.action.type({"text": "Hello, World!"})
         """
         return self.client.v1.boxes.actions.type(box_id=self.box_id, **body)
+
+    def extract(self, body: ActionExtractParams) -> ActionExtractResponse:
+        """
+        Extract data from the UI interface using a JSON schema.
+
+        Args:
+            body (ActionExtractParams): Parameters for the extract action.
+        Returns:
+            ActionExtractResponse: The response containing the extracted data.
+        
+        Example:
+            >>> response = myBox.action.extract({
+            ...     "instruction": "Extract the user name from the profile",
+            ...     "schema": {"type": "string"}
+            ... })
+        """
+        return self.client.v1.boxes.actions.extract(box_id=self.box_id, **body)
 
     def screenshot(self, body: Optional[ActionScreenshot] = None) -> ActionScreenshotResponse:
         """
@@ -267,6 +313,18 @@ class ActionOperator:
 
         return response
 
+    def screen_layout(self) -> ActionScreenLayoutResponse:
+        """
+        Get the current structured screen layout information.
+
+        Returns:
+            ActionScreenLayoutResponse: The response containing the screen layout data.
+        
+        Example:
+            >>> response = myBox.action.screen_layout()
+        """
+        return self.client.v1.boxes.actions.screen_layout(box_id=self.box_id)
+
     def screen_rotation(self, body: ActionScreenRotationParams) -> ActionScreenRotationResponse:
         """
         Rotate the screen of the box.
@@ -275,6 +333,9 @@ class ActionOperator:
             body (ActionScreenRotationParams): Parameters for the screen rotation action.
         Returns:
             ActionScreenRotationResponse: The response from the screen rotation action.
+        
+        Example:
+            >>> response = myBox.action.screen_rotation({"angle": 90, "direction": "clockwise"})
         """
         return self.client.v1.boxes.actions.screen_rotation(box_id=self.box_id, **body)
 

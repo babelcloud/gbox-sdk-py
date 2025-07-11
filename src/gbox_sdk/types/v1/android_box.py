@@ -79,3 +79,6 @@ class AndroidBox(BaseModel):
 
     updated_at: datetime = FieldInfo(alias="updatedAt")
     """Last update timestamp of the box"""
+
+    reason: Optional[object] = None
+    """The reason for the current status, if any"""

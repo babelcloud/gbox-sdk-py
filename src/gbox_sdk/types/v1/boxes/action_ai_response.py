@@ -35,6 +35,7 @@ __all__ = [
     "AIActionScreenshotResultAIResponseActionTypedDragSimpleActionStart",
     "AIActionScreenshotResultAIResponseActionTypedDragAdvancedAction",
     "AIActionScreenshotResultAIResponseActionTypedDragAdvancedActionPath",
+    "AIActionScreenshotResultAIResponseActionTypedWaitAction",
     "AIActionScreenshotResultScreenshot",
     "AIActionScreenshotResultScreenshotAfter",
     "AIActionScreenshotResultScreenshotBefore",
@@ -65,6 +66,7 @@ __all__ = [
     "AIActionResultAIResponseActionTypedDragSimpleActionStart",
     "AIActionResultAIResponseActionTypedDragAdvancedAction",
     "AIActionResultAIResponseActionTypedDragAdvancedActionPath",
+    "AIActionResultAIResponseActionTypedWaitAction",
 ]
 
 
@@ -735,6 +737,42 @@ class AIActionScreenshotResultAIResponseActionTypedDragAdvancedAction(BaseModel)
     """
 
 
+class AIActionScreenshotResultAIResponseActionTypedWaitAction(BaseModel):
+    duration: str
+    """Duration of the wait (e.g. '3s')
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 3s
+    """
+
+    include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
+    """Whether to include screenshots in the action response.
+
+    If false, the screenshot object will still be returned but with empty URIs.
+    Default is false.
+    """
+
+    output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
+    """Type of the URI. default is base64."""
+
+    screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
+    """Delay after performing the action, before taking the final screenshot.
+
+    Execution flow:
+
+    1. Take screenshot before action
+    2. Perform the action
+    3. Wait for screenshotDelay (this parameter)
+    4. Take screenshot after action
+
+    Example: '500ms' means wait 500ms after the action before capturing the final
+    screenshot.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+    """
+
+
 AIActionScreenshotResultAIResponseAction: TypeAlias = Union[
     AIActionScreenshotResultAIResponseActionTypedClickAction,
     AIActionScreenshotResultAIResponseActionTypedTouchAction,
@@ -750,6 +788,7 @@ AIActionScreenshotResultAIResponseAction: TypeAlias = Union[
     AIActionScreenshotResultAIResponseActionTypedScreenshotAction,
     AIActionScreenshotResultAIResponseActionTypedDragSimpleAction,
     AIActionScreenshotResultAIResponseActionTypedDragAdvancedAction,
+    AIActionScreenshotResultAIResponseActionTypedWaitAction,
 ]
 
 
@@ -1471,6 +1510,42 @@ class AIActionResultAIResponseActionTypedDragAdvancedAction(BaseModel):
     """
 
 
+class AIActionResultAIResponseActionTypedWaitAction(BaseModel):
+    duration: str
+    """Duration of the wait (e.g. '3s')
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 3s
+    """
+
+    include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
+    """Whether to include screenshots in the action response.
+
+    If false, the screenshot object will still be returned but with empty URIs.
+    Default is false.
+    """
+
+    output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
+    """Type of the URI. default is base64."""
+
+    screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
+    """Delay after performing the action, before taking the final screenshot.
+
+    Execution flow:
+
+    1. Take screenshot before action
+    2. Perform the action
+    3. Wait for screenshotDelay (this parameter)
+    4. Take screenshot after action
+
+    Example: '500ms' means wait 500ms after the action before capturing the final
+    screenshot.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+    """
+
+
 AIActionResultAIResponseAction: TypeAlias = Union[
     AIActionResultAIResponseActionTypedClickAction,
     AIActionResultAIResponseActionTypedTouchAction,
@@ -1486,6 +1561,7 @@ AIActionResultAIResponseAction: TypeAlias = Union[
     AIActionResultAIResponseActionTypedScreenshotAction,
     AIActionResultAIResponseActionTypedDragSimpleAction,
     AIActionResultAIResponseActionTypedDragAdvancedAction,
+    AIActionResultAIResponseActionTypedWaitAction,
 ]
 
 

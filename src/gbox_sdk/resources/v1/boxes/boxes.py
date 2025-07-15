@@ -223,6 +223,7 @@ class BoxesResource(SyncAPIResource):
         self,
         *,
         config: box_create_android_params.Config | NotGiven = NOT_GIVEN,
+        api_timeout: str | NotGiven = NOT_GIVEN,
         wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -236,6 +237,14 @@ class BoxesResource(SyncAPIResource):
 
         Args:
           config: Configuration for a Android box instance
+
+          api_timeout: Timeout for waiting the box to transition from pending to running state, default
+              is 30s. If the box doesn't reach running state within this timeout, the API will
+              return HTTP status code 408. The timed-out box will be automatically deleted and
+              will not count towards your quota.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30s Maximum allowed: 5m
 
           wait: Wait for the box operation to be completed, default is true
 
@@ -252,6 +261,7 @@ class BoxesResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "config": config,
+                    "api_timeout": api_timeout,
                     "wait": wait,
                 },
                 box_create_android_params.BoxCreateAndroidParams,
@@ -266,6 +276,7 @@ class BoxesResource(SyncAPIResource):
         self,
         *,
         config: box_create_linux_params.Config | NotGiven = NOT_GIVEN,
+        api_timeout: str | NotGiven = NOT_GIVEN,
         wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -279,6 +290,14 @@ class BoxesResource(SyncAPIResource):
 
         Args:
           config: Configuration for a Linux box instance
+
+          api_timeout: Timeout for waiting the box to transition from pending to running state, default
+              is 30s. If the box doesn't reach running state within this timeout, the API will
+              return HTTP status code 408. The timed-out box will be automatically deleted and
+              will not count towards your quota.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30s Maximum allowed: 5m
 
           wait: Wait for the box operation to be completed, default is true
 
@@ -295,6 +314,7 @@ class BoxesResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "config": config,
+                    "api_timeout": api_timeout,
                     "wait": wait,
                 },
                 box_create_linux_params.BoxCreateLinuxParams,
@@ -820,6 +840,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         self,
         *,
         config: box_create_android_params.Config | NotGiven = NOT_GIVEN,
+        api_timeout: str | NotGiven = NOT_GIVEN,
         wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -833,6 +854,14 @@ class AsyncBoxesResource(AsyncAPIResource):
 
         Args:
           config: Configuration for a Android box instance
+
+          api_timeout: Timeout for waiting the box to transition from pending to running state, default
+              is 30s. If the box doesn't reach running state within this timeout, the API will
+              return HTTP status code 408. The timed-out box will be automatically deleted and
+              will not count towards your quota.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30s Maximum allowed: 5m
 
           wait: Wait for the box operation to be completed, default is true
 
@@ -849,6 +878,7 @@ class AsyncBoxesResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "config": config,
+                    "api_timeout": api_timeout,
                     "wait": wait,
                 },
                 box_create_android_params.BoxCreateAndroidParams,
@@ -863,6 +893,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         self,
         *,
         config: box_create_linux_params.Config | NotGiven = NOT_GIVEN,
+        api_timeout: str | NotGiven = NOT_GIVEN,
         wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -876,6 +907,14 @@ class AsyncBoxesResource(AsyncAPIResource):
 
         Args:
           config: Configuration for a Linux box instance
+
+          api_timeout: Timeout for waiting the box to transition from pending to running state, default
+              is 30s. If the box doesn't reach running state within this timeout, the API will
+              return HTTP status code 408. The timed-out box will be automatically deleted and
+              will not count towards your quota.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30s Maximum allowed: 5m
 
           wait: Wait for the box operation to be completed, default is true
 
@@ -892,6 +931,7 @@ class AsyncBoxesResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "config": config,
+                    "api_timeout": api_timeout,
                     "wait": wait,
                 },
                 box_create_linux_params.BoxCreateLinuxParams,

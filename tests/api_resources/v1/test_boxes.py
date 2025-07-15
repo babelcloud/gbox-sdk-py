@@ -134,6 +134,7 @@ class TestBoxes:
                     "version": "v1.0",
                 },
             },
+            api_timeout="30s",
             wait=True,
         )
         assert_matches_type(AndroidBox, box, path=["response"])
@@ -181,6 +182,7 @@ class TestBoxes:
                     "environment": "testing",
                 },
             },
+            api_timeout="30s",
             wait=True,
         )
         assert_matches_type(LinuxBox, box, path=["response"])
@@ -739,6 +741,7 @@ class TestAsyncBoxes:
                     "version": "v1.0",
                 },
             },
+            api_timeout="30s",
             wait=True,
         )
         assert_matches_type(AndroidBox, box, path=["response"])
@@ -786,6 +789,7 @@ class TestAsyncBoxes:
                     "environment": "testing",
                 },
             },
+            api_timeout="30s",
             wait=True,
         )
         assert_matches_type(LinuxBox, box, path=["response"])

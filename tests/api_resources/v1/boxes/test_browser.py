@@ -9,6 +9,12 @@ import pytest
 
 from gbox_sdk import GboxClient, AsyncGboxClient
 from tests.utils import assert_matches_type
+from gbox_sdk.types.v1.boxes import (
+    BrowserGetTabsResponse,
+    BrowserOpenTabResponse,
+    BrowserCloseTabResponse,
+    BrowserUpdateTabResponse,
+)
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -67,6 +73,203 @@ class TestBrowser:
                 box_id="",
             )
 
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_close_tab(self, client: GboxClient) -> None:
+        browser = client.v1.boxes.browser.close_tab(
+            tab_index="tabIndex",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert_matches_type(BrowserCloseTabResponse, browser, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_close_tab(self, client: GboxClient) -> None:
+        response = client.v1.boxes.browser.with_raw_response.close_tab(
+            tab_index="tabIndex",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        browser = response.parse()
+        assert_matches_type(BrowserCloseTabResponse, browser, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_close_tab(self, client: GboxClient) -> None:
+        with client.v1.boxes.browser.with_streaming_response.close_tab(
+            tab_index="tabIndex",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            browser = response.parse()
+            assert_matches_type(BrowserCloseTabResponse, browser, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_close_tab(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            client.v1.boxes.browser.with_raw_response.close_tab(
+                tab_index="tabIndex",
+                box_id="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `tab_index` but received ''"):
+            client.v1.boxes.browser.with_raw_response.close_tab(
+                tab_index="",
+                box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_get_tabs(self, client: GboxClient) -> None:
+        browser = client.v1.boxes.browser.get_tabs(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert_matches_type(BrowserGetTabsResponse, browser, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_get_tabs(self, client: GboxClient) -> None:
+        response = client.v1.boxes.browser.with_raw_response.get_tabs(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        browser = response.parse()
+        assert_matches_type(BrowserGetTabsResponse, browser, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_get_tabs(self, client: GboxClient) -> None:
+        with client.v1.boxes.browser.with_streaming_response.get_tabs(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            browser = response.parse()
+            assert_matches_type(BrowserGetTabsResponse, browser, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_get_tabs(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            client.v1.boxes.browser.with_raw_response.get_tabs(
+                "",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_open_tab(self, client: GboxClient) -> None:
+        browser = client.v1.boxes.browser.open_tab(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            url="https://www.google.com",
+        )
+        assert_matches_type(BrowserOpenTabResponse, browser, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_open_tab(self, client: GboxClient) -> None:
+        response = client.v1.boxes.browser.with_raw_response.open_tab(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            url="https://www.google.com",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        browser = response.parse()
+        assert_matches_type(BrowserOpenTabResponse, browser, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_open_tab(self, client: GboxClient) -> None:
+        with client.v1.boxes.browser.with_streaming_response.open_tab(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            url="https://www.google.com",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            browser = response.parse()
+            assert_matches_type(BrowserOpenTabResponse, browser, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_open_tab(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            client.v1.boxes.browser.with_raw_response.open_tab(
+                box_id="",
+                url="https://www.google.com",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_update_tab(self, client: GboxClient) -> None:
+        browser = client.v1.boxes.browser.update_tab(
+            tab_index="tabIndex",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            url="https://www.google.com",
+        )
+        assert_matches_type(BrowserUpdateTabResponse, browser, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_update_tab(self, client: GboxClient) -> None:
+        response = client.v1.boxes.browser.with_raw_response.update_tab(
+            tab_index="tabIndex",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            url="https://www.google.com",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        browser = response.parse()
+        assert_matches_type(BrowserUpdateTabResponse, browser, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_update_tab(self, client: GboxClient) -> None:
+        with client.v1.boxes.browser.with_streaming_response.update_tab(
+            tab_index="tabIndex",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            url="https://www.google.com",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            browser = response.parse()
+            assert_matches_type(BrowserUpdateTabResponse, browser, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_update_tab(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            client.v1.boxes.browser.with_raw_response.update_tab(
+                tab_index="tabIndex",
+                box_id="",
+                url="https://www.google.com",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `tab_index` but received ''"):
+            client.v1.boxes.browser.with_raw_response.update_tab(
+                tab_index="",
+                box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+                url="https://www.google.com",
+            )
+
 
 class TestAsyncBrowser:
     parametrize = pytest.mark.parametrize(
@@ -122,4 +325,201 @@ class TestAsyncBrowser:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.browser.with_raw_response.cdp_url(
                 box_id="",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_close_tab(self, async_client: AsyncGboxClient) -> None:
+        browser = await async_client.v1.boxes.browser.close_tab(
+            tab_index="tabIndex",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert_matches_type(BrowserCloseTabResponse, browser, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_close_tab(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.browser.with_raw_response.close_tab(
+            tab_index="tabIndex",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        browser = await response.parse()
+        assert_matches_type(BrowserCloseTabResponse, browser, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_close_tab(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.browser.with_streaming_response.close_tab(
+            tab_index="tabIndex",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            browser = await response.parse()
+            assert_matches_type(BrowserCloseTabResponse, browser, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_close_tab(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            await async_client.v1.boxes.browser.with_raw_response.close_tab(
+                tab_index="tabIndex",
+                box_id="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `tab_index` but received ''"):
+            await async_client.v1.boxes.browser.with_raw_response.close_tab(
+                tab_index="",
+                box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_get_tabs(self, async_client: AsyncGboxClient) -> None:
+        browser = await async_client.v1.boxes.browser.get_tabs(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert_matches_type(BrowserGetTabsResponse, browser, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_get_tabs(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.browser.with_raw_response.get_tabs(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        browser = await response.parse()
+        assert_matches_type(BrowserGetTabsResponse, browser, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_get_tabs(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.browser.with_streaming_response.get_tabs(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            browser = await response.parse()
+            assert_matches_type(BrowserGetTabsResponse, browser, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_get_tabs(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            await async_client.v1.boxes.browser.with_raw_response.get_tabs(
+                "",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_open_tab(self, async_client: AsyncGboxClient) -> None:
+        browser = await async_client.v1.boxes.browser.open_tab(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            url="https://www.google.com",
+        )
+        assert_matches_type(BrowserOpenTabResponse, browser, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_open_tab(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.browser.with_raw_response.open_tab(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            url="https://www.google.com",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        browser = await response.parse()
+        assert_matches_type(BrowserOpenTabResponse, browser, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_open_tab(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.browser.with_streaming_response.open_tab(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            url="https://www.google.com",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            browser = await response.parse()
+            assert_matches_type(BrowserOpenTabResponse, browser, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_open_tab(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            await async_client.v1.boxes.browser.with_raw_response.open_tab(
+                box_id="",
+                url="https://www.google.com",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_update_tab(self, async_client: AsyncGboxClient) -> None:
+        browser = await async_client.v1.boxes.browser.update_tab(
+            tab_index="tabIndex",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            url="https://www.google.com",
+        )
+        assert_matches_type(BrowserUpdateTabResponse, browser, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_update_tab(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.browser.with_raw_response.update_tab(
+            tab_index="tabIndex",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            url="https://www.google.com",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        browser = await response.parse()
+        assert_matches_type(BrowserUpdateTabResponse, browser, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_update_tab(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.browser.with_streaming_response.update_tab(
+            tab_index="tabIndex",
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            url="https://www.google.com",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            browser = await response.parse()
+            assert_matches_type(BrowserUpdateTabResponse, browser, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_update_tab(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            await async_client.v1.boxes.browser.with_raw_response.update_tab(
+                tab_index="tabIndex",
+                box_id="",
+                url="https://www.google.com",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `tab_index` but received ''"):
+            await async_client.v1.boxes.browser.with_raw_response.update_tab(
+                tab_index="",
+                box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+                url="https://www.google.com",
             )

@@ -108,12 +108,22 @@ Methods:
 Types:
 
 ```python
-from gbox_sdk.types.v1.boxes import BrowserCdpURLResponse
+from gbox_sdk.types.v1.boxes import (
+    BrowserCdpURLResponse,
+    BrowserCloseTabResponse,
+    BrowserGetTabsResponse,
+    BrowserOpenTabResponse,
+    BrowserUpdateTabResponse,
+)
 ```
 
 Methods:
 
 - <code title="post /boxes/{boxId}/browser/connect-url/cdp">client.v1.boxes.browser.<a href="./src/gbox_sdk/resources/v1/boxes/browser.py">cdp_url</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/browser_cdp_url_params.py">params</a>) -> str</code>
+- <code title="delete /boxes/{boxId}/browser/tabs/{tabIndex}">client.v1.boxes.browser.<a href="./src/gbox_sdk/resources/v1/boxes/browser.py">close_tab</a>(tab_index, \*, box_id) -> <a href="./src/gbox_sdk/types/v1/boxes/browser_close_tab_response.py">BrowserCloseTabResponse</a></code>
+- <code title="get /boxes/{boxId}/browser/tabs">client.v1.boxes.browser.<a href="./src/gbox_sdk/resources/v1/boxes/browser.py">get_tabs</a>(box_id) -> <a href="./src/gbox_sdk/types/v1/boxes/browser_get_tabs_response.py">BrowserGetTabsResponse</a></code>
+- <code title="post /boxes/{boxId}/browser/tabs">client.v1.boxes.browser.<a href="./src/gbox_sdk/resources/v1/boxes/browser.py">open_tab</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/browser_open_tab_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/browser_open_tab_response.py">BrowserOpenTabResponse</a></code>
+- <code title="put /boxes/{boxId}/browser/tabs/{tabIndex}">client.v1.boxes.browser.<a href="./src/gbox_sdk/resources/v1/boxes/browser.py">update_tab</a>(tab_index, \*, box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/browser_update_tab_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/browser_update_tab_response.py">BrowserUpdateTabResponse</a></code>
 
 ### Android
 

@@ -15,7 +15,11 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.v1.boxes import browser_cdp_url_params
+from ....types.v1.boxes import browser_cdp_url_params, browser_open_tab_params, browser_update_tab_params
+from ....types.v1.boxes.browser_get_tabs_response import BrowserGetTabsResponse
+from ....types.v1.boxes.browser_open_tab_response import BrowserOpenTabResponse
+from ....types.v1.boxes.browser_close_tab_response import BrowserCloseTabResponse
+from ....types.v1.boxes.browser_update_tab_response import BrowserUpdateTabResponse
 
 __all__ = ["BrowserResource", "AsyncBrowserResource"]
 
@@ -82,6 +86,179 @@ class BrowserResource(SyncAPIResource):
             cast_to=str,
         )
 
+    def close_tab(
+        self,
+        tab_index: str,
+        *,
+        box_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BrowserCloseTabResponse:
+        """Close a specific browser tab identified by its index.
+
+        This endpoint will
+        permanently close the tab and free up the associated resources. The tab index
+        corresponds to the index returned when listing tabs or opening new tabs. After
+        closing a tab, the indices of subsequent tabs may shift down to fill the gap.
+        It's important to refresh the tab list after closing tabs to get the current
+        indices. You cannot close the last remaining tab - at least one tab must remain
+        open in the browser context.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        if not tab_index:
+            raise ValueError(f"Expected a non-empty value for `tab_index` but received {tab_index!r}")
+        return self._delete(
+            f"/boxes/{box_id}/browser/tabs/{tab_index}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BrowserCloseTabResponse,
+        )
+
+    def get_tabs(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BrowserGetTabsResponse:
+        """
+        Retrieve a comprehensive list of all currently open browser tabs in the
+        specified box. This endpoint returns detailed information about each tab
+        including its index, title, current URL, and favicon. The tab index can be used
+        for subsequent operations like navigation, closing, or updating tabs. This is
+        essential for managing multiple browser sessions and understanding the current
+        state of the browser environment.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return self._get(
+            f"/boxes/{box_id}/browser/tabs",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BrowserGetTabsResponse,
+        )
+
+    def open_tab(
+        self,
+        box_id: str,
+        *,
+        url: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BrowserOpenTabResponse:
+        """Create and open a new browser tab with the specified URL.
+
+        This endpoint will
+        navigate to the provided URL and return the new tab's information including its
+        assigned index, loaded title, final URL (after any redirects), and favicon. The
+        returned tab index can be used for future operations on this specific tab. The
+        browser will attempt to load the page and will wait for the DOM content to be
+        loaded before returning the response. If the URL is invalid or unreachable, an
+        error will be returned.
+
+        Args:
+          url: The tab url
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return self._post(
+            f"/boxes/{box_id}/browser/tabs",
+            body=maybe_transform({"url": url}, browser_open_tab_params.BrowserOpenTabParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BrowserOpenTabResponse,
+        )
+
+    def update_tab(
+        self,
+        tab_index: str,
+        *,
+        box_id: str,
+        url: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BrowserUpdateTabResponse:
+        """Navigate an existing browser tab to a new URL.
+
+        This endpoint updates the
+        specified tab by navigating it to the provided URL and returns the updated tab
+        information. The browser will wait for the DOM content to be loaded before
+        returning the response. This operation preserves the tab's position and index
+        while updating its content. If the navigation fails due to an invalid URL or
+        network issues, an error will be returned. The updated tab information will
+        include the new title, final URL (after any redirects), and favicon from the new
+        page.
+
+        Args:
+          url: The tab new url
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        if not tab_index:
+            raise ValueError(f"Expected a non-empty value for `tab_index` but received {tab_index!r}")
+        return self._put(
+            f"/boxes/{box_id}/browser/tabs/{tab_index}",
+            body=maybe_transform({"url": url}, browser_update_tab_params.BrowserUpdateTabParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BrowserUpdateTabResponse,
+        )
+
 
 class AsyncBrowserResource(AsyncAPIResource):
     @cached_property
@@ -145,6 +322,179 @@ class AsyncBrowserResource(AsyncAPIResource):
             cast_to=str,
         )
 
+    async def close_tab(
+        self,
+        tab_index: str,
+        *,
+        box_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BrowserCloseTabResponse:
+        """Close a specific browser tab identified by its index.
+
+        This endpoint will
+        permanently close the tab and free up the associated resources. The tab index
+        corresponds to the index returned when listing tabs or opening new tabs. After
+        closing a tab, the indices of subsequent tabs may shift down to fill the gap.
+        It's important to refresh the tab list after closing tabs to get the current
+        indices. You cannot close the last remaining tab - at least one tab must remain
+        open in the browser context.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        if not tab_index:
+            raise ValueError(f"Expected a non-empty value for `tab_index` but received {tab_index!r}")
+        return await self._delete(
+            f"/boxes/{box_id}/browser/tabs/{tab_index}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BrowserCloseTabResponse,
+        )
+
+    async def get_tabs(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BrowserGetTabsResponse:
+        """
+        Retrieve a comprehensive list of all currently open browser tabs in the
+        specified box. This endpoint returns detailed information about each tab
+        including its index, title, current URL, and favicon. The tab index can be used
+        for subsequent operations like navigation, closing, or updating tabs. This is
+        essential for managing multiple browser sessions and understanding the current
+        state of the browser environment.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return await self._get(
+            f"/boxes/{box_id}/browser/tabs",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BrowserGetTabsResponse,
+        )
+
+    async def open_tab(
+        self,
+        box_id: str,
+        *,
+        url: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BrowserOpenTabResponse:
+        """Create and open a new browser tab with the specified URL.
+
+        This endpoint will
+        navigate to the provided URL and return the new tab's information including its
+        assigned index, loaded title, final URL (after any redirects), and favicon. The
+        returned tab index can be used for future operations on this specific tab. The
+        browser will attempt to load the page and will wait for the DOM content to be
+        loaded before returning the response. If the URL is invalid or unreachable, an
+        error will be returned.
+
+        Args:
+          url: The tab url
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return await self._post(
+            f"/boxes/{box_id}/browser/tabs",
+            body=await async_maybe_transform({"url": url}, browser_open_tab_params.BrowserOpenTabParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BrowserOpenTabResponse,
+        )
+
+    async def update_tab(
+        self,
+        tab_index: str,
+        *,
+        box_id: str,
+        url: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BrowserUpdateTabResponse:
+        """Navigate an existing browser tab to a new URL.
+
+        This endpoint updates the
+        specified tab by navigating it to the provided URL and returns the updated tab
+        information. The browser will wait for the DOM content to be loaded before
+        returning the response. This operation preserves the tab's position and index
+        while updating its content. If the navigation fails due to an invalid URL or
+        network issues, an error will be returned. The updated tab information will
+        include the new title, final URL (after any redirects), and favicon from the new
+        page.
+
+        Args:
+          url: The tab new url
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        if not tab_index:
+            raise ValueError(f"Expected a non-empty value for `tab_index` but received {tab_index!r}")
+        return await self._put(
+            f"/boxes/{box_id}/browser/tabs/{tab_index}",
+            body=await async_maybe_transform({"url": url}, browser_update_tab_params.BrowserUpdateTabParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BrowserUpdateTabResponse,
+        )
+
 
 class BrowserResourceWithRawResponse:
     def __init__(self, browser: BrowserResource) -> None:
@@ -152,6 +502,18 @@ class BrowserResourceWithRawResponse:
 
         self.cdp_url = to_raw_response_wrapper(
             browser.cdp_url,
+        )
+        self.close_tab = to_raw_response_wrapper(
+            browser.close_tab,
+        )
+        self.get_tabs = to_raw_response_wrapper(
+            browser.get_tabs,
+        )
+        self.open_tab = to_raw_response_wrapper(
+            browser.open_tab,
+        )
+        self.update_tab = to_raw_response_wrapper(
+            browser.update_tab,
         )
 
 
@@ -162,6 +524,18 @@ class AsyncBrowserResourceWithRawResponse:
         self.cdp_url = async_to_raw_response_wrapper(
             browser.cdp_url,
         )
+        self.close_tab = async_to_raw_response_wrapper(
+            browser.close_tab,
+        )
+        self.get_tabs = async_to_raw_response_wrapper(
+            browser.get_tabs,
+        )
+        self.open_tab = async_to_raw_response_wrapper(
+            browser.open_tab,
+        )
+        self.update_tab = async_to_raw_response_wrapper(
+            browser.update_tab,
+        )
 
 
 class BrowserResourceWithStreamingResponse:
@@ -171,6 +545,18 @@ class BrowserResourceWithStreamingResponse:
         self.cdp_url = to_streamed_response_wrapper(
             browser.cdp_url,
         )
+        self.close_tab = to_streamed_response_wrapper(
+            browser.close_tab,
+        )
+        self.get_tabs = to_streamed_response_wrapper(
+            browser.get_tabs,
+        )
+        self.open_tab = to_streamed_response_wrapper(
+            browser.open_tab,
+        )
+        self.update_tab = to_streamed_response_wrapper(
+            browser.update_tab,
+        )
 
 
 class AsyncBrowserResourceWithStreamingResponse:
@@ -179,4 +565,16 @@ class AsyncBrowserResourceWithStreamingResponse:
 
         self.cdp_url = async_to_streamed_response_wrapper(
             browser.cdp_url,
+        )
+        self.close_tab = async_to_streamed_response_wrapper(
+            browser.close_tab,
+        )
+        self.get_tabs = async_to_streamed_response_wrapper(
+            browser.get_tabs,
+        )
+        self.open_tab = async_to_streamed_response_wrapper(
+            browser.open_tab,
+        )
+        self.update_tab = async_to_streamed_response_wrapper(
+            browser.update_tab,
         )

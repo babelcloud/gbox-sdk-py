@@ -8,11 +8,23 @@ __all__ = ["BrowserGetTabsResponse", "Tab"]
 
 
 class Tab(BaseModel):
+    id: str
+    """The tab id"""
+
+    active: bool
+    """Whether the tab is the current active (frontmost) tab"""
+
     favicon: str
     """The tab favicon"""
 
-    index: float
-    """The tab index, starting from 0"""
+    loading: bool
+    """Whether the tab is currently in a loading state.
+
+    The value is **true** while the browser is still navigating to the target URL or
+    fetching sub-resources (i.e. `document.readyState` is not "complete"). It
+    typically switches to **false** once the `load` event fires and all major
+    network activity has settled.
+    """
 
     title: str
     """The tab title"""

@@ -9,10 +9,10 @@ __all__ = ["BoxDisplayResponse", "Resolution"]
 
 class Resolution(BaseModel):
     height: float
-    """Height of the box"""
+    """Height of the screen"""
 
     width: float
-    """Width of the box"""
+    """Width of the screen"""
 
 
 class BoxDisplayResponse(BaseModel):
@@ -20,4 +20,4 @@ class BoxDisplayResponse(BaseModel):
     """Orientation of the box"""
 
     resolution: Resolution
-    """Box display resolution configuration"""
+    """Resolution configuration"""

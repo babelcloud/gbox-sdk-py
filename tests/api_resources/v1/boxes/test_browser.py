@@ -77,7 +77,7 @@ class TestBrowser:
     @parametrize
     def test_method_close_tab(self, client: GboxClient) -> None:
         browser = client.v1.boxes.browser.close_tab(
-            tab_index="tabIndex",
+            tab_id="tabId",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
         assert_matches_type(BrowserCloseTabResponse, browser, path=["response"])
@@ -86,7 +86,7 @@ class TestBrowser:
     @parametrize
     def test_raw_response_close_tab(self, client: GboxClient) -> None:
         response = client.v1.boxes.browser.with_raw_response.close_tab(
-            tab_index="tabIndex",
+            tab_id="tabId",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
@@ -99,7 +99,7 @@ class TestBrowser:
     @parametrize
     def test_streaming_response_close_tab(self, client: GboxClient) -> None:
         with client.v1.boxes.browser.with_streaming_response.close_tab(
-            tab_index="tabIndex",
+            tab_id="tabId",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
@@ -115,13 +115,13 @@ class TestBrowser:
     def test_path_params_close_tab(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.browser.with_raw_response.close_tab(
-                tab_index="tabIndex",
+                tab_id="tabId",
                 box_id="",
             )
 
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `tab_index` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `tab_id` but received ''"):
             client.v1.boxes.browser.with_raw_response.close_tab(
-                tab_index="",
+                tab_id="",
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             )
 
@@ -217,7 +217,7 @@ class TestBrowser:
     @parametrize
     def test_method_update_tab(self, client: GboxClient) -> None:
         browser = client.v1.boxes.browser.update_tab(
-            tab_index="tabIndex",
+            tab_id="tabId",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             url="https://www.google.com",
         )
@@ -227,7 +227,7 @@ class TestBrowser:
     @parametrize
     def test_raw_response_update_tab(self, client: GboxClient) -> None:
         response = client.v1.boxes.browser.with_raw_response.update_tab(
-            tab_index="tabIndex",
+            tab_id="tabId",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             url="https://www.google.com",
         )
@@ -241,7 +241,7 @@ class TestBrowser:
     @parametrize
     def test_streaming_response_update_tab(self, client: GboxClient) -> None:
         with client.v1.boxes.browser.with_streaming_response.update_tab(
-            tab_index="tabIndex",
+            tab_id="tabId",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             url="https://www.google.com",
         ) as response:
@@ -258,14 +258,14 @@ class TestBrowser:
     def test_path_params_update_tab(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.browser.with_raw_response.update_tab(
-                tab_index="tabIndex",
+                tab_id="tabId",
                 box_id="",
                 url="https://www.google.com",
             )
 
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `tab_index` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `tab_id` but received ''"):
             client.v1.boxes.browser.with_raw_response.update_tab(
-                tab_index="",
+                tab_id="",
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
                 url="https://www.google.com",
             )
@@ -331,7 +331,7 @@ class TestAsyncBrowser:
     @parametrize
     async def test_method_close_tab(self, async_client: AsyncGboxClient) -> None:
         browser = await async_client.v1.boxes.browser.close_tab(
-            tab_index="tabIndex",
+            tab_id="tabId",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
         assert_matches_type(BrowserCloseTabResponse, browser, path=["response"])
@@ -340,7 +340,7 @@ class TestAsyncBrowser:
     @parametrize
     async def test_raw_response_close_tab(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.browser.with_raw_response.close_tab(
-            tab_index="tabIndex",
+            tab_id="tabId",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
@@ -353,7 +353,7 @@ class TestAsyncBrowser:
     @parametrize
     async def test_streaming_response_close_tab(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.browser.with_streaming_response.close_tab(
-            tab_index="tabIndex",
+            tab_id="tabId",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
@@ -369,13 +369,13 @@ class TestAsyncBrowser:
     async def test_path_params_close_tab(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.browser.with_raw_response.close_tab(
-                tab_index="tabIndex",
+                tab_id="tabId",
                 box_id="",
             )
 
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `tab_index` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `tab_id` but received ''"):
             await async_client.v1.boxes.browser.with_raw_response.close_tab(
-                tab_index="",
+                tab_id="",
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             )
 
@@ -471,7 +471,7 @@ class TestAsyncBrowser:
     @parametrize
     async def test_method_update_tab(self, async_client: AsyncGboxClient) -> None:
         browser = await async_client.v1.boxes.browser.update_tab(
-            tab_index="tabIndex",
+            tab_id="tabId",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             url="https://www.google.com",
         )
@@ -481,7 +481,7 @@ class TestAsyncBrowser:
     @parametrize
     async def test_raw_response_update_tab(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.browser.with_raw_response.update_tab(
-            tab_index="tabIndex",
+            tab_id="tabId",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             url="https://www.google.com",
         )
@@ -495,7 +495,7 @@ class TestAsyncBrowser:
     @parametrize
     async def test_streaming_response_update_tab(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.browser.with_streaming_response.update_tab(
-            tab_index="tabIndex",
+            tab_id="tabId",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             url="https://www.google.com",
         ) as response:
@@ -512,14 +512,14 @@ class TestAsyncBrowser:
     async def test_path_params_update_tab(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.browser.with_raw_response.update_tab(
-                tab_index="tabIndex",
+                tab_id="tabId",
                 box_id="",
                 url="https://www.google.com",
             )
 
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `tab_index` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `tab_id` but received ''"):
             await async_client.v1.boxes.browser.with_raw_response.update_tab(
-                tab_index="",
+                tab_id="",
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
                 url="https://www.google.com",
             )

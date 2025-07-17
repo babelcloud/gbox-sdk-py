@@ -88,7 +88,7 @@ class BrowserResource(SyncAPIResource):
 
     def close_tab(
         self,
-        tab_index: str,
+        tab_id: str,
         *,
         box_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -98,15 +98,12 @@ class BrowserResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BrowserCloseTabResponse:
-        """Close a specific browser tab identified by its index.
+        """Close a specific browser tab identified by its id.
 
         This endpoint will
-        permanently close the tab and free up the associated resources. The tab index
-        corresponds to the index returned when listing tabs or opening new tabs. After
-        closing a tab, the indices of subsequent tabs may shift down to fill the gap.
-        It's important to refresh the tab list after closing tabs to get the current
-        indices. You cannot close the last remaining tab - at least one tab must remain
-        open in the browser context.
+        permanently close the tab and free up the associated resources. After closing a
+        tab, the ids of subsequent tabs may change. You cannot close the last remaining
+        tab - at least one tab must remain open in the browser context.
 
         Args:
           extra_headers: Send extra headers
@@ -119,10 +116,10 @@ class BrowserResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        if not tab_index:
-            raise ValueError(f"Expected a non-empty value for `tab_index` but received {tab_index!r}")
+        if not tab_id:
+            raise ValueError(f"Expected a non-empty value for `tab_id` but received {tab_id!r}")
         return self._delete(
-            f"/boxes/{box_id}/browser/tabs/{tab_index}",
+            f"/boxes/{box_id}/browser/tabs/{tab_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -143,7 +140,7 @@ class BrowserResource(SyncAPIResource):
         """
         Retrieve a comprehensive list of all currently open browser tabs in the
         specified box. This endpoint returns detailed information about each tab
-        including its index, title, current URL, and favicon. The tab index can be used
+        including its id, title, current URL, and favicon. The returned id can be used
         for subsequent operations like navigation, closing, or updating tabs. This is
         essential for managing multiple browser sessions and understanding the current
         state of the browser environment.
@@ -183,8 +180,8 @@ class BrowserResource(SyncAPIResource):
 
         This endpoint will
         navigate to the provided URL and return the new tab's information including its
-        assigned index, loaded title, final URL (after any redirects), and favicon. The
-        returned tab index can be used for future operations on this specific tab. The
+        assigned id, loaded title, final URL (after any redirects), and favicon. The
+        returned tab id can be used for future operations on this specific tab. The
         browser will attempt to load the page and will wait for the DOM content to be
         loaded before returning the response. If the URL is invalid or unreachable, an
         error will be returned.
@@ -213,7 +210,7 @@ class BrowserResource(SyncAPIResource):
 
     def update_tab(
         self,
-        tab_index: str,
+        tab_id: str,
         *,
         box_id: str,
         url: str,
@@ -229,11 +226,9 @@ class BrowserResource(SyncAPIResource):
         This endpoint updates the
         specified tab by navigating it to the provided URL and returns the updated tab
         information. The browser will wait for the DOM content to be loaded before
-        returning the response. This operation preserves the tab's position and index
-        while updating its content. If the navigation fails due to an invalid URL or
-        network issues, an error will be returned. The updated tab information will
-        include the new title, final URL (after any redirects), and favicon from the new
-        page.
+        returning the response. If the navigation fails due to an invalid URL or network
+        issues, an error will be returned. The updated tab information will include the
+        new title, final URL (after any redirects), and favicon from the new page.
 
         Args:
           url: The tab new url
@@ -248,10 +243,10 @@ class BrowserResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        if not tab_index:
-            raise ValueError(f"Expected a non-empty value for `tab_index` but received {tab_index!r}")
+        if not tab_id:
+            raise ValueError(f"Expected a non-empty value for `tab_id` but received {tab_id!r}")
         return self._put(
-            f"/boxes/{box_id}/browser/tabs/{tab_index}",
+            f"/boxes/{box_id}/browser/tabs/{tab_id}",
             body=maybe_transform({"url": url}, browser_update_tab_params.BrowserUpdateTabParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -324,7 +319,7 @@ class AsyncBrowserResource(AsyncAPIResource):
 
     async def close_tab(
         self,
-        tab_index: str,
+        tab_id: str,
         *,
         box_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -334,15 +329,12 @@ class AsyncBrowserResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BrowserCloseTabResponse:
-        """Close a specific browser tab identified by its index.
+        """Close a specific browser tab identified by its id.
 
         This endpoint will
-        permanently close the tab and free up the associated resources. The tab index
-        corresponds to the index returned when listing tabs or opening new tabs. After
-        closing a tab, the indices of subsequent tabs may shift down to fill the gap.
-        It's important to refresh the tab list after closing tabs to get the current
-        indices. You cannot close the last remaining tab - at least one tab must remain
-        open in the browser context.
+        permanently close the tab and free up the associated resources. After closing a
+        tab, the ids of subsequent tabs may change. You cannot close the last remaining
+        tab - at least one tab must remain open in the browser context.
 
         Args:
           extra_headers: Send extra headers
@@ -355,10 +347,10 @@ class AsyncBrowserResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        if not tab_index:
-            raise ValueError(f"Expected a non-empty value for `tab_index` but received {tab_index!r}")
+        if not tab_id:
+            raise ValueError(f"Expected a non-empty value for `tab_id` but received {tab_id!r}")
         return await self._delete(
-            f"/boxes/{box_id}/browser/tabs/{tab_index}",
+            f"/boxes/{box_id}/browser/tabs/{tab_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -379,7 +371,7 @@ class AsyncBrowserResource(AsyncAPIResource):
         """
         Retrieve a comprehensive list of all currently open browser tabs in the
         specified box. This endpoint returns detailed information about each tab
-        including its index, title, current URL, and favicon. The tab index can be used
+        including its id, title, current URL, and favicon. The returned id can be used
         for subsequent operations like navigation, closing, or updating tabs. This is
         essential for managing multiple browser sessions and understanding the current
         state of the browser environment.
@@ -419,8 +411,8 @@ class AsyncBrowserResource(AsyncAPIResource):
 
         This endpoint will
         navigate to the provided URL and return the new tab's information including its
-        assigned index, loaded title, final URL (after any redirects), and favicon. The
-        returned tab index can be used for future operations on this specific tab. The
+        assigned id, loaded title, final URL (after any redirects), and favicon. The
+        returned tab id can be used for future operations on this specific tab. The
         browser will attempt to load the page and will wait for the DOM content to be
         loaded before returning the response. If the URL is invalid or unreachable, an
         error will be returned.
@@ -449,7 +441,7 @@ class AsyncBrowserResource(AsyncAPIResource):
 
     async def update_tab(
         self,
-        tab_index: str,
+        tab_id: str,
         *,
         box_id: str,
         url: str,
@@ -465,11 +457,9 @@ class AsyncBrowserResource(AsyncAPIResource):
         This endpoint updates the
         specified tab by navigating it to the provided URL and returns the updated tab
         information. The browser will wait for the DOM content to be loaded before
-        returning the response. This operation preserves the tab's position and index
-        while updating its content. If the navigation fails due to an invalid URL or
-        network issues, an error will be returned. The updated tab information will
-        include the new title, final URL (after any redirects), and favicon from the new
-        page.
+        returning the response. If the navigation fails due to an invalid URL or network
+        issues, an error will be returned. The updated tab information will include the
+        new title, final URL (after any redirects), and favicon from the new page.
 
         Args:
           url: The tab new url
@@ -484,10 +474,10 @@ class AsyncBrowserResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        if not tab_index:
-            raise ValueError(f"Expected a non-empty value for `tab_index` but received {tab_index!r}")
+        if not tab_id:
+            raise ValueError(f"Expected a non-empty value for `tab_id` but received {tab_id!r}")
         return await self._put(
-            f"/boxes/{box_id}/browser/tabs/{tab_index}",
+            f"/boxes/{box_id}/browser/tabs/{tab_id}",
             body=await async_maybe_transform({"url": url}, browser_update_tab_params.BrowserUpdateTabParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout

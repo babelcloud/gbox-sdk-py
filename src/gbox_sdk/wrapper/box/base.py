@@ -1,22 +1,16 @@
 from typing import Dict, List, Union, Literal, Callable, Optional
 from typing_extensions import Self
 
+from gbox_sdk._types import NOT_GIVEN, NotGiven
 from gbox_sdk._client import GboxClient
 from gbox_sdk.types.v1.linux_box import LinuxBox
 from gbox_sdk.wrapper.box.action import ActionOperator
 from gbox_sdk.wrapper.box.browser import BrowserOperator
 from gbox_sdk.types.v1.android_box import AndroidBox
 from gbox_sdk.wrapper.box.file_system import FileSystemOperator
-from gbox_sdk.types.v1.box_stop_params import BoxStopParams
-from gbox_sdk.types.v1.box_start_params import BoxStartParams
-from gbox_sdk.types.v1.box_run_code_params import BoxRunCodeParams
 from gbox_sdk.wrapper.box.websocket_client import WebSocketClient, WebSocketResult
-from gbox_sdk.types.v1.box_terminate_params import BoxTerminateParams
 from gbox_sdk.types.v1.box_run_code_response import BoxRunCodeResponse
-from gbox_sdk.types.v1.box_live_view_url_params import BoxLiveViewURLParams
 from gbox_sdk.types.v1.box_live_view_url_response import BoxLiveViewURLResponse
-from gbox_sdk.types.v1.box_execute_commands_params import BoxExecuteCommandsParams
-from gbox_sdk.types.v1.box_web_terminal_url_params import BoxWebTerminalURLParams
 from gbox_sdk.types.v1.box_execute_commands_response import BoxExecuteCommandsResponse
 from gbox_sdk.types.v1.box_web_terminal_url_response import BoxWebTerminalURLResponse
 
@@ -55,48 +49,57 @@ class BaseBox:
         res = self.client.v1.boxes.retrieve(box_id=self.data.id)
         self.data = res
 
-    def start(self, body: Optional[BoxStartParams] = None) -> Self:
+    def start(self, *, wait: Union[bool, NotGiven] = NOT_GIVEN) -> Self:
         """
         Start the box.
 
         Args:
-            body (Optional[BoxStartParams]): Parameters for starting the box.
+            wait: Whether to wait for the box to start.
+
         Returns:
             Self: The updated box instance for method chaining.
+
+        Example:
+            >>> box.start()
+            >>> box.start(wait=True)
         """
-        if body is None:
-            body = BoxStartParams()
-        self.client.v1.boxes.start(box_id=self.data.id, **body)
+        self.client.v1.boxes.start(box_id=self.data.id, wait=wait)
         self._sync_data()
         return self
 
-    def stop(self, body: Optional[BoxStopParams] = None) -> Self:
+    def stop(self, *, wait: Union[bool, NotGiven] = NOT_GIVEN) -> Self:
         """
         Stop the box.
 
         Args:
-            body (Optional[BoxStopParams]): Parameters for stopping the box.
+            wait: Whether to wait for the box to stop.
+
         Returns:
             Self: The updated box instance for method chaining.
+
+        Example:
+            >>> box.stop()
+            >>> box.stop(wait=True)
         """
-        if body is None:
-            body = BoxStopParams()
-        self.client.v1.boxes.stop(box_id=self.data.id, **body)
+        self.client.v1.boxes.stop(box_id=self.data.id, wait=wait)
         self._sync_data()
         return self
 
-    def terminate(self, body: Optional[BoxTerminateParams] = None) -> Self:
+    def terminate(self, *, wait: Union[bool, NotGiven] = NOT_GIVEN) -> Self:
         """
         Terminate the box.
 
         Args:
-            body (Optional[BoxTerminateParams]): Parameters for terminating the box.
+            wait: Whether to wait for the box to terminate.
+
         Returns:
             Self: The updated box instance for method chaining.
+
+        Example:
+            >>> box.terminate()
+            >>> box.terminate(wait=True)
         """
-        if body is None:
-            body = BoxTerminateParams()
-        self.client.v1.boxes.terminate(box_id=self.data.id, **body)
+        self.client.v1.boxes.terminate(box_id=self.data.id, wait=wait)
         self._sync_data()
         return self
 
@@ -105,47 +108,56 @@ class BaseBox:
         commands: Union[List[str], str],
         onStdout: Optional[Callable[[str], None]] = None,
         onStderr: Optional[Callable[[str], None]] = None,
-        envs: Optional[Dict[str, str]] = None,
-        api_timeout: Optional[str] = None,
-        working_dir: Optional[str] = None,
+        envs: Union[Dict[str, str], NotGiven] = NOT_GIVEN,
+        api_timeout: Union[str, NotGiven] = NOT_GIVEN,
+        working_dir: Union[str, NotGiven] = NOT_GIVEN,
     ) -> Union["BoxExecuteCommandsResponse", "WebSocketResult"]:
         """
         Execute shell commands in the box.
 
         Args:
-            commands (Union[List[str], str]): The commands to execute.
-            onStdout (Optional[Callable[[str], None]]): Callback for stdout.
-            onStderr (Optional[Callable[[str], None]]): Callback for stderr.
-            envs (Optional[Dict[str, str]]): Environment variables.
-            api_timeout (Optional[str]): API timeout (e.g., "30s", "5m").
-            working_dir (Optional[str]): Working directory.
+            commands: The command to run. Can be a single string or an array of strings
+
+            envs: The environment variables to run the command
+
+            api_timeout: The timeout of the command. If the command times out, the exit code will be 124.
+                For example: 'timeout 5s sleep 10s' will result in exit code 124.
+
+                Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+                Example formats: "500ms", "30s", "5m", "1h" Default: 30s
+
+            working_dir: The working directory of the command. It not provided, the command will be run
+                in the `box.config.workingDir` directory.
+
+            onStdout: Callback for stdout.
+
+            onStderr: Callback for stderr.
+
         Returns:
             Union[BoxExecuteCommandsResponse, WebSocketResult]: The response containing the command execution result.
+
+        Example:
+            >>> box.command(commands=["ls", "-l"], onStdout=lambda x: print(x), onStderr=lambda x: print(x))
         """
         if onStdout is not None or onStderr is not None:
             return self._command_via_websocket(commands, onStdout, onStderr, envs, api_timeout, working_dir)
 
-        params = BoxExecuteCommandsParams(
+        return self.client.v1.boxes.execute_commands(
+            box_id=self.data.id,
             commands=commands,
+            envs=envs,
+            api_timeout=api_timeout,
+            working_dir=working_dir,
         )
-
-        if envs is not None:
-            params["envs"] = envs
-        if api_timeout is not None:
-            params["api_timeout"] = api_timeout
-        if working_dir is not None:
-            params["working_dir"] = working_dir
-
-        return self.client.v1.boxes.execute_commands(box_id=self.data.id, **params)
 
     def _command_via_websocket(
         self,
         commands: Union[List[str], str],
         onStdout: Optional[Callable[[str], None]] = None,
         onStderr: Optional[Callable[[str], None]] = None,
-        envs: Optional[Dict[str, str]] = None,
-        api_timeout: Optional[str] = None,
-        working_dir: Optional[str] = None,
+        envs: Union[Dict[str, str], NotGiven] = NOT_GIVEN,
+        api_timeout: Union[str, NotGiven] = NOT_GIVEN,
+        working_dir: Union[str, NotGiven] = NOT_GIVEN,
     ) -> "WebSocketResult":
         """
         Execute commands via WebSocket with streaming output.
@@ -191,11 +203,11 @@ class BaseBox:
     def run_code(
         self,
         code: str,
-        language: Optional[Literal["bash", "python", "typescript"]] = None,
-        argv: Optional[List[str]] = None,
-        envs: Optional[Dict[str, str]] = None,
-        api_timeout: Optional[str] = None,
-        working_dir: Optional[str] = None,
+        argv: Union[List[str], NotGiven] = NOT_GIVEN,
+        envs: Union[Dict[str, str], NotGiven] = NOT_GIVEN,
+        language: Union[Literal["bash", "python", "typescript"], NotGiven] = NOT_GIVEN,
+        api_timeout: Union[str, NotGiven] = NOT_GIVEN,
+        working_dir: Union[str, NotGiven] = NOT_GIVEN,
         onStdout: Optional[Callable[[str], None]] = None,
         onStderr: Optional[Callable[[str], None]] = None,
     ) -> Union["BoxRunCodeResponse", "WebSocketResult"]:
@@ -203,45 +215,69 @@ class BaseBox:
         Run code in the box.
 
         Args:
-            code (str): The code to run.
-            language (Optional[str]): The language of the code (bash, python, typescript).
-            argv (Optional[List[str]]): The arguments to run the code.
-            envs (Optional[Dict[str, str]]): The environment variables to run the code.
-            api_timeout (Optional[str]): The timeout of the code execution.
-            working_dir (Optional[str]): The working directory of the code.
-            onStdout (Optional[Callable[[str], None]]): Callback for stdout.
-            onStderr (Optional[Callable[[str], None]]): Callback for stderr.
+            code: The code to run
+
+            argv: The arguments to run the code. For example, if you want to run "python index.py
+                --help", you should pass ["--help"] as arguments.
+
+            envs: The environment variables to run the code
+
+            language: The language of the code.
+
+            api_timeout: The timeout of the code execution. If the code execution times out, the exit
+                code will be 124.
+
+                Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+                Example formats: "500ms", "30s", "5m", "1h" Default: 30s
+
+            working_dir: The working directory of the code. It not provided, the code will be run in the
+                `box.config.workingDir` directory.
+
+            onStdout: Callback for stdout.
+
+            onStderr: Callback for stderr.
         Returns:
             Union[BoxRunCodeResponse, WebSocketResult]: The response containing the code execution result.
+
+        Example:
+            >>> box.run_code(
+            ...     code="print('Hello, World!')",
+            ...     language="python",
+            ...     onStdout=lambda x: print(x),
+            ...     onStderr=lambda x: print(x),
+            ... )
         """
 
         if onStdout is not None or onStderr is not None:
             return self._run_code_via_websocket(
-                code, language, argv, envs, api_timeout, working_dir, onStdout, onStderr
+                code=code,
+                argv=argv,
+                envs=envs,
+                language=language,
+                api_timeout=api_timeout,
+                working_dir=working_dir,
+                onStdout=onStdout,
+                onStderr=onStderr,
             )
 
-        body = BoxRunCodeParams(code=code)
-        if language is not None:
-            body["language"] = language
-        if argv is not None:
-            body["argv"] = argv
-        if envs is not None:
-            body["envs"] = envs
-        if api_timeout is not None:
-            body["api_timeout"] = api_timeout
-        if working_dir is not None:
-            body["working_dir"] = working_dir
-
-        return self.client.v1.boxes.run_code(box_id=self.data.id, **body)
+        return self.client.v1.boxes.run_code(
+            box_id=self.data.id,
+            code=code,
+            argv=argv,
+            envs=envs,
+            language=language,
+            api_timeout=api_timeout,
+            working_dir=working_dir,
+        )
 
     def _run_code_via_websocket(
         self,
         code: str,
-        language: Optional[str] = None,
-        argv: Optional[List[str]] = None,
-        envs: Optional[Dict[str, str]] = None,
-        api_timeout: Optional[str] = None,
-        working_dir: Optional[str] = None,
+        argv: Union[List[str], NotGiven] = NOT_GIVEN,
+        envs: Union[Dict[str, str], NotGiven] = NOT_GIVEN,
+        language: Union[Literal["bash", "python", "typescript"], NotGiven] = NOT_GIVEN,
+        api_timeout: Union[str, NotGiven] = NOT_GIVEN,
+        working_dir: Union[str, NotGiven] = NOT_GIVEN,
         onStdout: Optional[Callable[[str], None]] = None,
         onStderr: Optional[Callable[[str], None]] = None,
     ) -> "WebSocketResult":
@@ -290,20 +326,29 @@ class BaseBox:
         except Exception as e:
             raise RuntimeError(f"Failed to run code via WebSocket: {e}") from e
 
-    def live_view(self, body: Optional[BoxLiveViewURLParams] = None) -> BoxLiveViewURLResponse:
+    def live_view(
+        self,
+        *,
+        expires_in: Union[str, NotGiven] = NOT_GIVEN,
+    ) -> BoxLiveViewURLResponse:
         """
         Get the live view URL for the box.
 
         Args:
-            body (BoxLiveViewURLParams): Parameters for live view URL.
+            expires_in: The duration for the live view URL to be valid.
         Returns:
             BoxLiveViewURLResponse: The response containing the live view URL.
         """
-        if body is None:
-            body = BoxLiveViewURLParams()
-        return self.client.v1.boxes.live_view_url(box_id=self.data.id, **body)
+        return self.client.v1.boxes.live_view_url(
+            box_id=self.data.id,
+            expires_in=expires_in,
+        )
 
-    def web_terminal(self, body: Optional[BoxWebTerminalURLParams] = None) -> BoxWebTerminalURLResponse:
+    def web_terminal(
+        self,
+        *,
+        expires_in: Union[str, NotGiven] = NOT_GIVEN,
+    ) -> BoxWebTerminalURLResponse:
         """
         Get the web terminal URL for the box.
 
@@ -312,6 +357,7 @@ class BaseBox:
         Returns:
             BoxWebTerminalURLResponse: The response containing the web terminal URL.
         """
-        if body is None:
-            body = BoxWebTerminalURLParams()
-        return self.client.v1.boxes.web_terminal_url(box_id=self.data.id, **body)
+        return self.client.v1.boxes.web_terminal_url(
+            box_id=self.data.id,
+            expires_in=expires_in,
+        )

@@ -19,6 +19,7 @@ from gbox_sdk.types.v1 import (
     BoxStartResponse,
     BoxStopResponse,
     BoxWebTerminalURLResponse,
+    BoxWebsocketURLResponse,
 )
 ```
 
@@ -36,6 +37,7 @@ Methods:
 - <code title="post /boxes/{boxId}/stop">client.v1.boxes.<a href="./src/gbox_sdk/resources/v1/boxes/boxes.py">stop</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/box_stop_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/box_stop_response.py">BoxStopResponse</a></code>
 - <code title="post /boxes/{boxId}/terminate">client.v1.boxes.<a href="./src/gbox_sdk/resources/v1/boxes/boxes.py">terminate</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/box_terminate_params.py">params</a>) -> None</code>
 - <code title="post /boxes/{boxId}/web-terminal-url">client.v1.boxes.<a href="./src/gbox_sdk/resources/v1/boxes/boxes.py">web_terminal_url</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/box_web_terminal_url_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/box_web_terminal_url_response.py">BoxWebTerminalURLResponse</a></code>
+- <code title="get /boxes/{boxId}/websocket-url">client.v1.boxes.<a href="./src/gbox_sdk/resources/v1/boxes/boxes.py">websocket_url</a>(box_id) -> <a href="./src/gbox_sdk/types/v1/box_websocket_url_response.py">BoxWebsocketURLResponse</a></code>
 
 ### Actions
 

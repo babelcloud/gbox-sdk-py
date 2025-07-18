@@ -733,6 +733,7 @@ class ActionsResource(SyncAPIResource):
                 "mediaPreviousTrack",
             ]
         ],
+        combination: bool | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -751,6 +752,10 @@ class ActionsResource(SyncAPIResource):
         Args:
           keys: This is an array of keyboard keys to press. Supports cross-platform
               compatibility.
+
+          combination: Whether to press keys as combination (simultaneously) or sequentially. When
+              true, all keys are pressed together as a shortcut (e.g., Ctrl+C). When false,
+              keys are pressed one by one in sequence.
 
           include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
               object will still be returned but with empty URIs. Default is false.
@@ -789,6 +794,7 @@ class ActionsResource(SyncAPIResource):
                 body=maybe_transform(
                     {
                         "keys": keys,
+                        "combination": combination,
                         "include_screenshot": include_screenshot,
                         "output_format": output_format,
                         "screenshot_delay": screenshot_delay,
@@ -1278,6 +1284,7 @@ class ActionsResource(SyncAPIResource):
         *,
         text: str,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        mode: Literal["append", "replace"] | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1297,6 +1304,9 @@ class ActionsResource(SyncAPIResource):
 
           include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
               object will still be returned but with empty URIs. Default is false.
+
+          mode: Text input mode: 'append' to add text to existing content, 'replace' to replace
+              all existing text
 
           output_format: Type of the URI. default is base64.
 
@@ -1333,6 +1343,7 @@ class ActionsResource(SyncAPIResource):
                     {
                         "text": text,
                         "include_screenshot": include_screenshot,
+                        "mode": mode,
                         "output_format": output_format,
                         "screenshot_delay": screenshot_delay,
                     },
@@ -2030,6 +2041,7 @@ class AsyncActionsResource(AsyncAPIResource):
                 "mediaPreviousTrack",
             ]
         ],
+        combination: bool | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -2048,6 +2060,10 @@ class AsyncActionsResource(AsyncAPIResource):
         Args:
           keys: This is an array of keyboard keys to press. Supports cross-platform
               compatibility.
+
+          combination: Whether to press keys as combination (simultaneously) or sequentially. When
+              true, all keys are pressed together as a shortcut (e.g., Ctrl+C). When false,
+              keys are pressed one by one in sequence.
 
           include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
               object will still be returned but with empty URIs. Default is false.
@@ -2086,6 +2102,7 @@ class AsyncActionsResource(AsyncAPIResource):
                 body=await async_maybe_transform(
                     {
                         "keys": keys,
+                        "combination": combination,
                         "include_screenshot": include_screenshot,
                         "output_format": output_format,
                         "screenshot_delay": screenshot_delay,
@@ -2575,6 +2592,7 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         text: str,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        mode: Literal["append", "replace"] | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -2594,6 +2612,9 @@ class AsyncActionsResource(AsyncAPIResource):
 
           include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
               object will still be returned but with empty URIs. Default is false.
+
+          mode: Text input mode: 'append' to add text to existing content, 'replace' to replace
+              all existing text
 
           output_format: Type of the URI. default is base64.
 
@@ -2630,6 +2651,7 @@ class AsyncActionsResource(AsyncAPIResource):
                     {
                         "text": text,
                         "include_screenshot": include_screenshot,
+                        "mode": mode,
                         "output_format": output_format,
                         "screenshot_delay": screenshot_delay,
                     },

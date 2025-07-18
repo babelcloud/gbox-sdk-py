@@ -20,6 +20,12 @@ class ActionTypeParams(TypedDict, total=False):
     Default is false.
     """
 
+    mode: Literal["append", "replace"]
+    """
+    Text input mode: 'append' to add text to existing content, 'replace' to replace
+    all existing text
+    """
+
     output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
     """Type of the URI. default is base64."""
 

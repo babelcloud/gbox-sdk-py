@@ -570,6 +570,7 @@ class TestActions:
         action = client.v1.boxes.actions.press_key(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             keys=["enter"],
+            combination=True,
             include_screenshot=False,
             output_format="base64",
             screenshot_delay="500ms",
@@ -1106,6 +1107,7 @@ class TestActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             text="Hello World",
             include_screenshot=False,
+            mode="append",
             output_format="base64",
             screenshot_delay="500ms",
         )
@@ -1692,6 +1694,7 @@ class TestAsyncActions:
         action = await async_client.v1.boxes.actions.press_key(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             keys=["enter"],
+            combination=True,
             include_screenshot=False,
             output_format="base64",
             screenshot_delay="500ms",
@@ -2228,6 +2231,7 @@ class TestAsyncActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             text="Hello World",
             include_screenshot=False,
+            mode="append",
             output_format="base64",
             screenshot_delay="500ms",
         )

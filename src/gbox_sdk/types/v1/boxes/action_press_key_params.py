@@ -132,6 +132,13 @@ class ActionPressKeyParams(TypedDict, total=False):
     Supports cross-platform compatibility.
     """
 
+    combination: bool
+    """Whether to press keys as combination (simultaneously) or sequentially.
+
+    When true, all keys are pressed together as a shortcut (e.g., Ctrl+C). When
+    false, keys are pressed one by one in sequence.
+    """
+
     include_screenshot: Annotated[bool, PropertyInfo(alias="includeScreenshot")]
     """Whether to include screenshots in the action response.
 

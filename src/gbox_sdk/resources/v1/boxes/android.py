@@ -320,6 +320,7 @@ class AndroidResource(SyncAPIResource):
         box_id: str,
         *,
         apk: FileTypes,
+        install_multiple: bool | NotGiven = NOT_GIVEN,
         open: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -332,7 +333,30 @@ class AndroidResource(SyncAPIResource):
         Install app
 
         Args:
-          apk: APK file to install (max file size: 512MB)
+          apk: APK file or ZIP archive to install (max file size: 512MB).
+
+              **Single APK mode (installMultiple: false):**
+
+              - Upload a single APK file (e.g., app.apk)
+
+              **Install-Multiple mode (installMultiple: true):**
+
+              - Upload a ZIP archive containing multiple APK files
+              - ZIP filename example: com.reddit.frontpage-gplay.zip
+              - ZIP contents example:
+
+              com.reddit.frontpage-gplay.zip └── com.reddit.frontpage-gplay/ (folder) ├──
+              reddit-base.apk (base APK) ├── reddit-arm64.apk (architecture-specific) ├──
+              reddit-en.apk (language pack) └── reddit-mdpi.apk (density-specific resources)
+
+              This is commonly used for split APKs where different components are separated by
+              architecture, language, or screen density.
+
+          install_multiple: Whether to use 'adb install-multiple' command for installation. When true, uses
+              install-multiple which is useful for split APKs or when installing multiple
+              related packages. When false, uses standard 'adb install' command. Split APKs
+              are commonly used for apps with different architecture variants, language packs,
+              or modular components.
 
           open: Whether to open the app after installation. Will find and launch the launcher
               activity of the installed app. If there are multiple launcher activities, only
@@ -355,6 +379,7 @@ class AndroidResource(SyncAPIResource):
         box_id: str,
         *,
         apk: str,
+        install_multiple: bool | NotGiven = NOT_GIVEN,
         open: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -367,7 +392,33 @@ class AndroidResource(SyncAPIResource):
         Install app
 
         Args:
-          apk: HTTP URL to download APK file (max file size: 512MB)
+          apk: HTTP URL to download APK file or ZIP archive (max file size: 512MB).
+
+              **Single APK mode (installMultiple: false):**
+
+              - Provide URL to a single APK file
+              - Example: https://example.com/app.apk
+
+              **Install-Multiple mode (installMultiple: true):**
+
+              - Provide URL to a ZIP archive containing multiple APK files
+              - ZIP filename example: com.reddit.frontpage-gplay.zip
+              - ZIP contents example:
+
+              com.reddit.frontpage-gplay.zip └── com.reddit.frontpage-gplay/ (folder) ├──
+              reddit-base.apk (base APK) ├── reddit-arm64.apk (architecture-specific) ├──
+              reddit-en.apk (language pack) └── reddit-mdpi.apk (density-specific resources)
+
+              - Example URL: https://example.com/com.reddit.frontpage-gplay.zip
+
+              This is commonly used for split APKs where different components are separated by
+              architecture, language, or screen density.
+
+          install_multiple: Whether to use 'adb install-multiple' command for installation. When true, uses
+              install-multiple which is useful for split APKs or when installing multiple
+              related packages. When false, uses standard 'adb install' command. Split APKs
+              are commonly used for apps with different architecture variants, language packs,
+              or modular components.
 
           open: Whether to open the app after installation. Will find and launch the launcher
               activity of the installed app. If there are multiple launcher activities, only
@@ -390,6 +441,7 @@ class AndroidResource(SyncAPIResource):
         box_id: str,
         *,
         apk: FileTypes | str,
+        install_multiple: bool | NotGiven = NOT_GIVEN,
         open: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -403,6 +455,7 @@ class AndroidResource(SyncAPIResource):
         body = deepcopy_minimal(
             {
                 "apk": apk,
+                "install_multiple": install_multiple,
                 "open": open,
             }
         )
@@ -1032,6 +1085,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         box_id: str,
         *,
         apk: FileTypes,
+        install_multiple: bool | NotGiven = NOT_GIVEN,
         open: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1044,7 +1098,30 @@ class AsyncAndroidResource(AsyncAPIResource):
         Install app
 
         Args:
-          apk: APK file to install (max file size: 512MB)
+          apk: APK file or ZIP archive to install (max file size: 512MB).
+
+              **Single APK mode (installMultiple: false):**
+
+              - Upload a single APK file (e.g., app.apk)
+
+              **Install-Multiple mode (installMultiple: true):**
+
+              - Upload a ZIP archive containing multiple APK files
+              - ZIP filename example: com.reddit.frontpage-gplay.zip
+              - ZIP contents example:
+
+              com.reddit.frontpage-gplay.zip └── com.reddit.frontpage-gplay/ (folder) ├──
+              reddit-base.apk (base APK) ├── reddit-arm64.apk (architecture-specific) ├──
+              reddit-en.apk (language pack) └── reddit-mdpi.apk (density-specific resources)
+
+              This is commonly used for split APKs where different components are separated by
+              architecture, language, or screen density.
+
+          install_multiple: Whether to use 'adb install-multiple' command for installation. When true, uses
+              install-multiple which is useful for split APKs or when installing multiple
+              related packages. When false, uses standard 'adb install' command. Split APKs
+              are commonly used for apps with different architecture variants, language packs,
+              or modular components.
 
           open: Whether to open the app after installation. Will find and launch the launcher
               activity of the installed app. If there are multiple launcher activities, only
@@ -1067,6 +1144,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         box_id: str,
         *,
         apk: str,
+        install_multiple: bool | NotGiven = NOT_GIVEN,
         open: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1079,7 +1157,33 @@ class AsyncAndroidResource(AsyncAPIResource):
         Install app
 
         Args:
-          apk: HTTP URL to download APK file (max file size: 512MB)
+          apk: HTTP URL to download APK file or ZIP archive (max file size: 512MB).
+
+              **Single APK mode (installMultiple: false):**
+
+              - Provide URL to a single APK file
+              - Example: https://example.com/app.apk
+
+              **Install-Multiple mode (installMultiple: true):**
+
+              - Provide URL to a ZIP archive containing multiple APK files
+              - ZIP filename example: com.reddit.frontpage-gplay.zip
+              - ZIP contents example:
+
+              com.reddit.frontpage-gplay.zip └── com.reddit.frontpage-gplay/ (folder) ├──
+              reddit-base.apk (base APK) ├── reddit-arm64.apk (architecture-specific) ├──
+              reddit-en.apk (language pack) └── reddit-mdpi.apk (density-specific resources)
+
+              - Example URL: https://example.com/com.reddit.frontpage-gplay.zip
+
+              This is commonly used for split APKs where different components are separated by
+              architecture, language, or screen density.
+
+          install_multiple: Whether to use 'adb install-multiple' command for installation. When true, uses
+              install-multiple which is useful for split APKs or when installing multiple
+              related packages. When false, uses standard 'adb install' command. Split APKs
+              are commonly used for apps with different architecture variants, language packs,
+              or modular components.
 
           open: Whether to open the app after installation. Will find and launch the launcher
               activity of the installed app. If there are multiple launcher activities, only
@@ -1102,6 +1206,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         box_id: str,
         *,
         apk: FileTypes | str,
+        install_multiple: bool | NotGiven = NOT_GIVEN,
         open: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1115,6 +1220,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         body = deepcopy_minimal(
             {
                 "apk": apk,
+                "install_multiple": install_multiple,
                 "open": open,
             }
         )

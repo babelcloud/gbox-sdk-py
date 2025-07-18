@@ -419,6 +419,7 @@ class TestAndroid:
         android = client.v1.boxes.android.install(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             apk=b"raw file contents",
+            install_multiple=False,
             open=False,
         )
         assert_matches_type(AndroidInstallResponse, android, path=["response"])
@@ -475,6 +476,7 @@ class TestAndroid:
         android = client.v1.boxes.android.install(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             apk="https://example.com/app.apk",
+            install_multiple=False,
             open=False,
         )
         assert_matches_type(AndroidInstallResponse, android, path=["response"])
@@ -1336,6 +1338,7 @@ class TestAsyncAndroid:
         android = await async_client.v1.boxes.android.install(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             apk=b"raw file contents",
+            install_multiple=False,
             open=False,
         )
         assert_matches_type(AndroidInstallResponse, android, path=["response"])
@@ -1392,6 +1395,7 @@ class TestAsyncAndroid:
         android = await async_client.v1.boxes.android.install(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             apk="https://example.com/app.apk",
+            install_multiple=False,
             open=False,
         )
         assert_matches_type(AndroidInstallResponse, android, path=["response"])

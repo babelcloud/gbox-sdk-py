@@ -529,6 +529,13 @@ class AIActionScreenshotResultAIResponseActionTypedPressKeyAction(BaseModel):
     Supports cross-platform compatibility.
     """
 
+    combination: Optional[bool] = None
+    """Whether to press keys as combination (simultaneously) or sequentially.
+
+    When true, all keys are pressed together as a shortcut (e.g., Ctrl+C). When
+    false, keys are pressed one by one in sequence.
+    """
+
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
     """Whether to include screenshots in the action response.
 
@@ -598,6 +605,12 @@ class AIActionScreenshotResultAIResponseActionTypedTypeAction(BaseModel):
 
     If false, the screenshot object will still be returned but with empty URIs.
     Default is false.
+    """
+
+    mode: Optional[Literal["append", "replace"]] = None
+    """
+    Text input mode: 'append' to add text to existing content, 'replace' to replace
+    all existing text
     """
 
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
@@ -1256,6 +1269,13 @@ class AIActionResultAIResponseActionTypedPressKeyAction(BaseModel):
     Supports cross-platform compatibility.
     """
 
+    combination: Optional[bool] = None
+    """Whether to press keys as combination (simultaneously) or sequentially.
+
+    When true, all keys are pressed together as a shortcut (e.g., Ctrl+C). When
+    false, keys are pressed one by one in sequence.
+    """
+
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
     """Whether to include screenshots in the action response.
 
@@ -1325,6 +1345,12 @@ class AIActionResultAIResponseActionTypedTypeAction(BaseModel):
 
     If false, the screenshot object will still be returned but with empty URIs.
     Default is false.
+    """
+
+    mode: Optional[Literal["append", "replace"]] = None
+    """
+    Text input mode: 'append' to add text to existing content, 'replace' to replace
+    all existing text
     """
 
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)

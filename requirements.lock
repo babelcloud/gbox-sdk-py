@@ -68,5 +68,7 @@ typing-extensions==4.12.2
     # via multidict
     # via pydantic
     # via pydantic-core
+websocket-client==1.8.0
+    # via gbox-sdk
 yarl==1.20.0
     # via aiohttp

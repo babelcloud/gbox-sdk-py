@@ -1,4 +1,4 @@
-from typing import List, Union, Optional
+from typing import Dict, List, Union, Literal, Callable, Optional
 from typing_extensions import Self
 
 from gbox_sdk._client import GboxClient
@@ -10,6 +10,7 @@ from gbox_sdk.wrapper.box.file_system import FileSystemOperator
 from gbox_sdk.types.v1.box_stop_params import BoxStopParams
 from gbox_sdk.types.v1.box_start_params import BoxStartParams
 from gbox_sdk.types.v1.box_run_code_params import BoxRunCodeParams
+from gbox_sdk.wrapper.box.websocket_client import WebSocketClient, WebSocketResult
 from gbox_sdk.types.v1.box_terminate_params import BoxTerminateParams
 from gbox_sdk.types.v1.box_run_code_response import BoxRunCodeResponse
 from gbox_sdk.types.v1.box_live_view_url_params import BoxLiveViewURLParams
@@ -99,33 +100,195 @@ class BaseBox:
         self._sync_data()
         return self
 
-    def command(self, body: Union[BoxExecuteCommandsParams, str, List[str]]) -> "BoxExecuteCommandsResponse":
+    def command(
+        self,
+        commands: Union[List[str], str],
+        onStdout: Optional[Callable[[str], None]] = None,
+        onStderr: Optional[Callable[[str], None]] = None,
+        envs: Optional[Dict[str, str]] = None,
+        api_timeout: Optional[str] = None,
+        working_dir: Optional[str] = None,
+    ) -> Union["BoxExecuteCommandsResponse", "WebSocketResult"]:
         """
         Execute shell commands in the box.
 
         Args:
-            body (Union[BoxExecuteCommandsParams, str, List[str]]): The commands to execute or parameters object.
+            commands (Union[List[str], str]): The commands to execute.
+            onStdout (Optional[Callable[[str], None]]): Callback for stdout.
+            onStderr (Optional[Callable[[str], None]]): Callback for stderr.
+            envs (Optional[Dict[str, str]]): Environment variables.
+            api_timeout (Optional[str]): API timeout (e.g., "30s", "5m").
+            working_dir (Optional[str]): Working directory.
         Returns:
-            BoxExecuteCommandsResponse: The response containing the command execution result.
+            Union[BoxExecuteCommandsResponse, WebSocketResult]: The response containing the command execution result.
         """
-        if isinstance(body, str):
-            body = BoxExecuteCommandsParams(commands=[body])
-        elif isinstance(body, list):
-            body = BoxExecuteCommandsParams(commands=body)
-        return self.client.v1.boxes.execute_commands(box_id=self.data.id, **body)
+        if onStdout is not None or onStderr is not None:
+            return self._command_via_websocket(commands, onStdout, onStderr, envs, api_timeout, working_dir)
 
-    def run_code(self, body: Union[BoxRunCodeParams, str]) -> "BoxRunCodeResponse":
+        params = BoxExecuteCommandsParams(
+            commands=commands,
+        )
+
+        if envs is not None:
+            params["envs"] = envs
+        if api_timeout is not None:
+            params["api_timeout"] = api_timeout
+        if working_dir is not None:
+            params["working_dir"] = working_dir
+
+        return self.client.v1.boxes.execute_commands(box_id=self.data.id, **params)
+
+    def _command_via_websocket(
+        self,
+        commands: Union[List[str], str],
+        onStdout: Optional[Callable[[str], None]] = None,
+        onStderr: Optional[Callable[[str], None]] = None,
+        envs: Optional[Dict[str, str]] = None,
+        api_timeout: Optional[str] = None,
+        working_dir: Optional[str] = None,
+    ) -> "WebSocketResult":
+        """
+        Execute commands via WebSocket with streaming output.
+
+        This method runs the WebSocket execution in a new event loop if one is not already running.
+        """
+        try:
+            websocket_response = self.client.v1.boxes.websocket_url(box_id=self.data.id)
+            websocket_url = websocket_response.command
+
+            websocket_client = WebSocketClient(websocket_url, self.client.api_key)
+
+            import asyncio
+
+            try:
+                loop = asyncio.get_running_loop()
+                return asyncio.run_coroutine_threadsafe(
+                    websocket_client.execute_command(
+                        commands=commands,
+                        on_stdout=onStdout,
+                        on_stderr=onStderr,
+                        envs=envs,
+                        api_timeout=api_timeout,
+                        working_dir=working_dir,
+                    ),
+                    loop,
+                ).result()
+            except RuntimeError:
+                return asyncio.run(
+                    websocket_client.execute_command(
+                        commands=commands,
+                        on_stdout=onStdout,
+                        on_stderr=onStderr,
+                        envs=envs,
+                        api_timeout=api_timeout,
+                        working_dir=working_dir,
+                    )
+                )
+
+        except Exception as e:
+            raise RuntimeError(f"Failed to execute command via WebSocket: {e}") from e
+
+    def run_code(
+        self,
+        code: str,
+        language: Optional[Literal["bash", "python", "typescript"]] = None,
+        argv: Optional[List[str]] = None,
+        envs: Optional[Dict[str, str]] = None,
+        api_timeout: Optional[str] = None,
+        working_dir: Optional[str] = None,
+        onStdout: Optional[Callable[[str], None]] = None,
+        onStderr: Optional[Callable[[str], None]] = None,
+    ) -> Union["BoxRunCodeResponse", "WebSocketResult"]:
         """
         Run code in the box.
 
         Args:
-            body (Union[BoxRunCodeParams, str]): The code to run or parameters object.
+            code (str): The code to run.
+            language (Optional[str]): The language of the code (bash, python, typescript).
+            argv (Optional[List[str]]): The arguments to run the code.
+            envs (Optional[Dict[str, str]]): The environment variables to run the code.
+            api_timeout (Optional[str]): The timeout of the code execution.
+            working_dir (Optional[str]): The working directory of the code.
+            onStdout (Optional[Callable[[str], None]]): Callback for stdout.
+            onStderr (Optional[Callable[[str], None]]): Callback for stderr.
         Returns:
-            BoxRunCodeResponse: The response containing the code execution result.
+            Union[BoxRunCodeResponse, WebSocketResult]: The response containing the code execution result.
         """
-        if isinstance(body, str):
-            body = BoxRunCodeParams(code=body)
+
+        if onStdout is not None or onStderr is not None:
+            return self._run_code_via_websocket(
+                code, language, argv, envs, api_timeout, working_dir, onStdout, onStderr
+            )
+
+        body = BoxRunCodeParams(code=code)
+        if language is not None:
+            body["language"] = language
+        if argv is not None:
+            body["argv"] = argv
+        if envs is not None:
+            body["envs"] = envs
+        if api_timeout is not None:
+            body["api_timeout"] = api_timeout
+        if working_dir is not None:
+            body["working_dir"] = working_dir
+
         return self.client.v1.boxes.run_code(box_id=self.data.id, **body)
+
+    def _run_code_via_websocket(
+        self,
+        code: str,
+        language: Optional[str] = None,
+        argv: Optional[List[str]] = None,
+        envs: Optional[Dict[str, str]] = None,
+        api_timeout: Optional[str] = None,
+        working_dir: Optional[str] = None,
+        onStdout: Optional[Callable[[str], None]] = None,
+        onStderr: Optional[Callable[[str], None]] = None,
+    ) -> "WebSocketResult":
+        """
+        Run code via WebSocket with streaming output.
+
+        This method runs the WebSocket execution in a new event loop if one is not already running.
+        """
+        try:
+            websocket_response = self.client.v1.boxes.websocket_url(box_id=self.data.id)
+            websocket_url = websocket_response.run_code
+
+            websocket_client = WebSocketClient(websocket_url, self.client.api_key)
+
+            import asyncio
+
+            try:
+                loop = asyncio.get_running_loop()
+                return asyncio.run_coroutine_threadsafe(
+                    websocket_client.run_code(
+                        code=code,
+                        on_stdout=onStdout,
+                        on_stderr=onStderr,
+                        argv=argv,
+                        envs=envs,
+                        language=language,
+                        api_timeout=api_timeout,
+                        working_dir=working_dir,
+                    ),
+                    loop,
+                ).result()
+            except RuntimeError:
+                return asyncio.run(
+                    websocket_client.run_code(
+                        code=code,
+                        on_stdout=onStdout,
+                        on_stderr=onStderr,
+                        argv=argv,
+                        envs=envs,
+                        language=language,
+                        api_timeout=api_timeout,
+                        working_dir=working_dir,
+                    )
+                )
+
+        except Exception as e:
+            raise RuntimeError(f"Failed to run code via WebSocket: {e}") from e
 
     def live_view(self, body: Optional[BoxLiveViewURLParams] = None) -> BoxLiveViewURLResponse:
         """

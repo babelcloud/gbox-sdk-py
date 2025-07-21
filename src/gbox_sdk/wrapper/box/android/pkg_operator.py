@@ -44,13 +44,15 @@ class AndroidPkgOperator:
         params = AndroidOpenParams(box_id=self.box.id)
         if activity_name is not None:
             params["activity_name"] = activity_name
-        return self.client.v1.boxes.android.open(self.data.package_name, **params)
+        self.client.v1.boxes.android.open(self.data.package_name, **params)
+        self._sync_data()
 
     def close(self) -> None:
         """
         Close the package.
         """
-        return self.client.v1.boxes.android.close(self.data.package_name, box_id=self.box.id)
+        self.client.v1.boxes.android.close(self.data.package_name, box_id=self.box.id)
+        self._sync_data()
 
     def restart(self, activity_name: Union[str, None] = None) -> None:
         """
@@ -62,7 +64,8 @@ class AndroidPkgOperator:
         params = AndroidRestartParams(box_id=self.box.id)
         if activity_name is not None:
             params["activity_name"] = activity_name
-        return self.client.v1.boxes.android.restart(self.data.package_name, **params)
+        self.client.v1.boxes.android.restart(self.data.package_name, **params)
+        self._sync_data()
 
     def list_activities(self) -> AndroidListActivitiesResponse:
         """
@@ -81,3 +84,10 @@ class AndroidPkgOperator:
             BinaryAPIResponse: The backup response containing binary data.
         """
         return self.client.v1.boxes.android.backup(self.data.package_name, box_id=self.box.id)
+
+    def _sync_data(self) -> None:
+        """
+        Sync the data of the package.
+        """
+        res = self.client.v1.boxes.android.get(self.data.package_name, box_id=self.box.id)
+        self.data = res

@@ -40,6 +40,7 @@ class ActionScreenshot(ActionScreenshotParams, total=False):
     Attributes:
         path (Optional[str]): The file path where the screenshot will be saved.
     """
+
     path: Optional[str]
 
 
@@ -69,7 +70,7 @@ class ActionOperator:
             body: Either a string instruction or ActionAI parameters.
         Returns:
             ActionAIResponse: The response from the AI action.
-        
+
         Example:
             >>> response = myBox.action.ai("Click on the login button")
         """
@@ -86,7 +87,7 @@ class ActionOperator:
             body (ActionClickParams): Parameters for the click action.
         Returns:
             ActionClickResponse: The response from the click action.
-        
+
         Example:
             >>> response = myBox.action.click({"x": 100, "y": 100})
         """
@@ -100,14 +101,16 @@ class ActionOperator:
             body (ActionDragParams): Parameters for the drag action.
         Returns:
             ActionDragResponse: The response from the drag action.
-        
+
         Example:
-            >>> response = myBox.action.drag({
-            ...     "path": [
-            ...         {"x": 100, "y": 100},
-            ...         {"x": 200, "y": 200},
-            ...     ],
-            ... })
+            >>> response = myBox.action.drag(
+            ...     {
+            ...         "path": [
+            ...             {"x": 100, "y": 100},
+            ...             {"x": 200, "y": 200},
+            ...         ],
+            ...     }
+            ... )
         """
         # Check if it's DragAdvanced (has 'path') or DragSimple (has 'start' and 'end')
         if "path" in body:
@@ -140,7 +143,7 @@ class ActionOperator:
             body (ActionSwipeParams): Parameters for the swipe action.
         Returns:
             ActionSwipeResponse: The response from the swipe action.
-        
+
         Example:
             >>> response = myBox.action.swipe({"direction": "up"})
         """
@@ -176,7 +179,7 @@ class ActionOperator:
             body (ActionPressKeyParams): Parameters for the key press action.
         Returns:
             ActionPressKeyResponse: The response from the key press action.
-        
+
         Example:
             >>> response = myBox.action.press_key({"keys": ["enter"]})
         """
@@ -190,7 +193,7 @@ class ActionOperator:
             body (ActionPressButtonParams): Parameters for the button press action.
         Returns:
             ActionPressButtonResponse: The response from the button press action.
-        
+
         Example:
             >>> response = myBox.action.press_button({"buttons": ["power"]})
         """
@@ -204,7 +207,7 @@ class ActionOperator:
             body (ActionMoveParams): Parameters for the move action.
         Returns:
             ActionMoveResponse: The response from the move action.
-        
+
         Example:
             >>> response = myBox.action.move({"x": 200, "y": 300})
         """
@@ -218,7 +221,7 @@ class ActionOperator:
             body (ActionScrollParams): Parameters for the scroll action.
         Returns:
             ActionScrollResponse: The response from the scroll action.
-        
+
         Example:
             >>> response = myBox.action.scroll({"scroll_x": 0, "scroll_y": 100, "x": 100, "y": 100})
         """
@@ -232,7 +235,7 @@ class ActionOperator:
             body (ActionTouchParams): Parameters for the touch action.
         Returns:
             ActionTouchResponse: The response from the touch action.
-        
+
         Example:
             >>> response = myBox.action.touch({"points": [{"start": {"x": 0, "y": 0}}]})
         """
@@ -246,7 +249,7 @@ class ActionOperator:
             body (ActionTypeParams): Parameters for the type action.
         Returns:
             ActionTypeResponse: The response from the type action.
-        
+
         Example:
             >>> response = myBox.action.type({"text": "Hello, World!"})
         """
@@ -260,12 +263,11 @@ class ActionOperator:
             body (ActionExtractParams): Parameters for the extract action.
         Returns:
             ActionExtractResponse: The response containing the extracted data.
-        
+
         Example:
-            >>> response = myBox.action.extract({
-            ...     "instruction": "Extract the user name from the profile",
-            ...     "schema": {"type": "string"}
-            ... })
+            >>> response = myBox.action.extract(
+            ...     {"instruction": "Extract the user name from the profile", "schema": {"type": "string"}}
+            ... )
         """
         return self.client.v1.boxes.actions.extract(box_id=self.box_id, **body)
 
@@ -319,7 +321,7 @@ class ActionOperator:
 
         Returns:
             ActionScreenLayoutResponse: The response containing the screen layout data.
-        
+
         Example:
             >>> response = myBox.action.screen_layout()
         """
@@ -333,7 +335,7 @@ class ActionOperator:
             body (ActionScreenRotationParams): Parameters for the screen rotation action.
         Returns:
             ActionScreenRotationResponse: The response from the screen rotation action.
-        
+
         Example:
             >>> response = myBox.action.screen_rotation({"angle": 90, "direction": "clockwise"})
         """

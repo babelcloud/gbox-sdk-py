@@ -129,6 +129,8 @@ typing-extensions==4.12.2
     # via pyright
 virtualenv==20.24.5
     # via nox
+websocket-client==1.8.0
+    # via gbox-sdk
 yarl==1.20.0
     # via aiohttp
 zipp==3.17.0

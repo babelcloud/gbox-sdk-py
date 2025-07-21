@@ -4,10 +4,10 @@ from typing import List
 
 from ...._models import BaseModel
 
-__all__ = ["BrowserGetTabsResponse", "Tab"]
+__all__ = ["BrowserGetTabsResponse", "Data"]
 
 
-class Tab(BaseModel):
+class Data(BaseModel):
     id: str
     """The tab id"""
 
@@ -34,5 +34,5 @@ class Tab(BaseModel):
 
 
 class BrowserGetTabsResponse(BaseModel):
-    tabs: List[Tab]
+    data: List[Data]
     """The tabs"""

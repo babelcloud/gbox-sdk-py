@@ -15,10 +15,16 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.v1.boxes import browser_cdp_url_params, browser_open_tab_params, browser_update_tab_params
+from ....types.v1.boxes import (
+    browser_cdp_url_params,
+    browser_open_tab_params,
+    browser_switch_tab_params,
+    browser_update_tab_params,
+)
 from ....types.v1.boxes.browser_get_tabs_response import BrowserGetTabsResponse
 from ....types.v1.boxes.browser_open_tab_response import BrowserOpenTabResponse
 from ....types.v1.boxes.browser_close_tab_response import BrowserCloseTabResponse
+from ....types.v1.boxes.browser_switch_tab_response import BrowserSwitchTabResponse
 from ....types.v1.boxes.browser_update_tab_response import BrowserUpdateTabResponse
 
 __all__ = ["BrowserResource", "AsyncBrowserResource"]
@@ -102,8 +108,7 @@ class BrowserResource(SyncAPIResource):
 
         This endpoint will
         permanently close the tab and free up the associated resources. After closing a
-        tab, the ids of subsequent tabs may change. You cannot close the last remaining
-        tab - at least one tab must remain open in the browser context.
+        tab, the ids of subsequent tabs may change.
 
         Args:
           extra_headers: Send extra headers
@@ -206,6 +211,50 @@ class BrowserResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=BrowserOpenTabResponse,
+        )
+
+    def switch_tab(
+        self,
+        tab_id: str,
+        *,
+        box_id: str,
+        id: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BrowserSwitchTabResponse:
+        """
+        Switch to a specific browser tab by bringing it to the foreground (making it the
+        active/frontmost tab). This operation sets the specified tab as the currently
+        active tab without changing its URL or content. The tab will receive focus and
+        become visible to the user. This is useful for managing multiple browser
+        sessions and controlling which tab is currently in focus.
+
+        Args:
+          id: The tab id
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        if not tab_id:
+            raise ValueError(f"Expected a non-empty value for `tab_id` but received {tab_id!r}")
+        return self._post(
+            f"/boxes/{box_id}/browser/tabs/{tab_id}/switch",
+            body=maybe_transform({"id": id}, browser_switch_tab_params.BrowserSwitchTabParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BrowserSwitchTabResponse,
         )
 
     def update_tab(
@@ -333,8 +382,7 @@ class AsyncBrowserResource(AsyncAPIResource):
 
         This endpoint will
         permanently close the tab and free up the associated resources. After closing a
-        tab, the ids of subsequent tabs may change. You cannot close the last remaining
-        tab - at least one tab must remain open in the browser context.
+        tab, the ids of subsequent tabs may change.
 
         Args:
           extra_headers: Send extra headers
@@ -439,6 +487,50 @@ class AsyncBrowserResource(AsyncAPIResource):
             cast_to=BrowserOpenTabResponse,
         )
 
+    async def switch_tab(
+        self,
+        tab_id: str,
+        *,
+        box_id: str,
+        id: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BrowserSwitchTabResponse:
+        """
+        Switch to a specific browser tab by bringing it to the foreground (making it the
+        active/frontmost tab). This operation sets the specified tab as the currently
+        active tab without changing its URL or content. The tab will receive focus and
+        become visible to the user. This is useful for managing multiple browser
+        sessions and controlling which tab is currently in focus.
+
+        Args:
+          id: The tab id
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        if not tab_id:
+            raise ValueError(f"Expected a non-empty value for `tab_id` but received {tab_id!r}")
+        return await self._post(
+            f"/boxes/{box_id}/browser/tabs/{tab_id}/switch",
+            body=await async_maybe_transform({"id": id}, browser_switch_tab_params.BrowserSwitchTabParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BrowserSwitchTabResponse,
+        )
+
     async def update_tab(
         self,
         tab_id: str,
@@ -502,6 +594,9 @@ class BrowserResourceWithRawResponse:
         self.open_tab = to_raw_response_wrapper(
             browser.open_tab,
         )
+        self.switch_tab = to_raw_response_wrapper(
+            browser.switch_tab,
+        )
         self.update_tab = to_raw_response_wrapper(
             browser.update_tab,
         )
@@ -522,6 +617,9 @@ class AsyncBrowserResourceWithRawResponse:
         )
         self.open_tab = async_to_raw_response_wrapper(
             browser.open_tab,
+        )
+        self.switch_tab = async_to_raw_response_wrapper(
+            browser.switch_tab,
         )
         self.update_tab = async_to_raw_response_wrapper(
             browser.update_tab,
@@ -544,6 +642,9 @@ class BrowserResourceWithStreamingResponse:
         self.open_tab = to_streamed_response_wrapper(
             browser.open_tab,
         )
+        self.switch_tab = to_streamed_response_wrapper(
+            browser.switch_tab,
+        )
         self.update_tab = to_streamed_response_wrapper(
             browser.update_tab,
         )
@@ -564,6 +665,9 @@ class AsyncBrowserResourceWithStreamingResponse:
         )
         self.open_tab = async_to_streamed_response_wrapper(
             browser.open_tab,
+        )
+        self.switch_tab = async_to_streamed_response_wrapper(
+            browser.switch_tab,
         )
         self.update_tab = async_to_streamed_response_wrapper(
             browser.update_tab,

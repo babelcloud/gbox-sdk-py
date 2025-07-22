@@ -12,4 +12,4 @@ __all__ = ["AndroidListPkgSimpleParams"]
 
 class AndroidListPkgSimpleParams(TypedDict, total=False):
     pkg_type: Annotated[List[Literal["system", "thirdParty"]], PropertyInfo(alias="pkgType")]
-    """Package type: system or thirdParty, default is thirdParty"""
+    """system or thirdParty, default is thirdParty"""

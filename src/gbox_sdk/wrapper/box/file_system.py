@@ -141,7 +141,7 @@ class FileSystemOperator:
 
         return FileOperator(self.client, self.box_id, data_file)
 
-    def remove(self, *, path: str, working_dir: Union[str, NotGiven] = NOT_GIVEN) -> FRemoveResponse:
+    def remove(self, path: str, *, working_dir: Union[str, NotGiven] = NOT_GIVEN) -> FRemoveResponse:
         """
         Remove a file or directory.
 
@@ -161,7 +161,7 @@ class FileSystemOperator:
         """
         return self.client.v1.boxes.fs.remove(box_id=self.box_id, path=path, working_dir=working_dir)
 
-    def exists(self, *, path: str, working_dir: Union[str, NotGiven] = NOT_GIVEN) -> FExistsResponse:
+    def exists(self, path: str, *, working_dir: Union[str, NotGiven] = NOT_GIVEN) -> FExistsResponse:
         """
         Check if a file or directory exists.
 
@@ -204,14 +204,13 @@ class FileSystemOperator:
             >>> box.file_system.rename(
             ...     old_path="/path/to/old/file", new_path="/path/to/new/file", working_dir="/path/to/working_dir"
             ... )
-            >>> box.file_system.rename("/path/to/old/file", "/path/to/new/file")
         """
         return self.client.v1.boxes.fs.rename(
             box_id=self.box_id, old_path=old_path, new_path=new_path, working_dir=working_dir
         )
 
     def get(
-        self, *, path: str, working_dir: Union[str, NotGiven] = NOT_GIVEN
+        self, path: str, *, working_dir: Union[str, NotGiven] = NOT_GIVEN
     ) -> Union["FileOperator", "DirectoryOperator"]:
         """
         Get an operator for a file or directory by its information.
@@ -276,7 +275,7 @@ class FileOperator:
         self.box_id = box_id
         self.data = data
 
-    def write(self, *, content: Union[str, FileTypes], working_dir: Union[str, NotGiven] = NOT_GIVEN) -> FWriteResponse:
+    def write(self, content: Union[str, FileTypes], *, working_dir: Union[str, NotGiven] = NOT_GIVEN) -> FWriteResponse:
         """
         Write content to this file (text or binary).
 
@@ -289,7 +288,7 @@ class FileOperator:
 
         Example:
             >>> box.file_system.write(content="Hello, World!", path="/path/to/file", working_dir="/path/to/working_dir")
-            >>> box.file_system.write(content="Hello, World!", path="/path/to/file")
+            >>> box.file_system.write("Hello, World!")
         """
         return self.client.v1.boxes.fs.write(
             box_id=self.box_id,
@@ -309,12 +308,12 @@ class FileOperator:
             FReadResponse: The response containing file content.
 
         Example:
-            >>> box.file_system.read(path="/path/to/file", working_dir="/path/to/working_dir")
-            >>> box.file_system.read("/path/to/file")
+            >>> box.file_system.read(working_dir="/path/to/working_dir")
+            >>> box.file_system.read()
         """
         return self.client.v1.boxes.fs.read(box_id=self.box_id, path=self.data.path, working_dir=working_dir)
 
-    def rename(self, *, new_path: str, working_dir: Union[str, NotGiven] = NOT_GIVEN) -> FRenameResponse:
+    def rename(self, new_path: str, *, working_dir: Union[str, NotGiven] = NOT_GIVEN) -> FRenameResponse:
         """
         Rename this file.
 
@@ -324,6 +323,9 @@ class FileOperator:
 
         Returns:
             FRenameResponse: The response after renaming.
+
+        Example:
+            >>> box.file_system.rename(new_path="/path/to/new/file", working_dir="/path/to/working_dir")
         """
         return self.client.v1.boxes.fs.rename(
             box_id=self.box_id, old_path=self.data.path, new_path=new_path, working_dir=working_dir

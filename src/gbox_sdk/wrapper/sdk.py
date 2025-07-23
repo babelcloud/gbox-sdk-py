@@ -321,7 +321,7 @@ class GboxSDK:
             total=getattr(res, "total", None),
         )
 
-    def get_info(self, *, box_id: str) -> BoxRetrieveResponse:
+    def get_info(self, box_id: str) -> BoxRetrieveResponse:
         """
         Retrieve detailed information for a specific box.
 
@@ -333,12 +333,13 @@ class GboxSDK:
 
         Example:
             ```python
+            box_info = sdk.get("975fed9f-bb28-4718-a2c5-e01f72864bd1")
             box_info = sdk.get_info(box_id="975fed9f-bb28-4718-a2c5-e01f72864bd1")
             ```
         """
         return self.client.v1.boxes.retrieve(box_id)
 
-    def get(self, *, box_id: str) -> BoxOperator:
+    def get(self, box_id: str) -> BoxOperator:
         """
         Retrieve a specific box and return its operator object.
 
@@ -350,13 +351,14 @@ class GboxSDK:
 
         Example:
             ```python
+            box = sdk.get("975fed9f-bb28-4718-a2c5-e01f72864bd1")
             box = sdk.get(box_id="975fed9f-bb28-4718-a2c5-e01f72864bd1")
             ```
         """
         res = self.client.v1.boxes.retrieve(box_id)
         return self._data_to_operator(res)
 
-    def terminate(self, *, box_id: str, wait: Union[bool, NotGiven] = NOT_GIVEN) -> None:
+    def terminate(self, box_id: str, *, wait: Union[bool, NotGiven] = NOT_GIVEN) -> None:
         """
         Terminate a specific box.
 
@@ -366,6 +368,7 @@ class GboxSDK:
 
         Example:
             ```python
+            sdk.terminate("975fed9f-bb28-4718-a2c5-e01f72864bd1")
             sdk.terminate(box_id="975fed9f-bb28-4718-a2c5-e01f72864bd1")
             ```
         """

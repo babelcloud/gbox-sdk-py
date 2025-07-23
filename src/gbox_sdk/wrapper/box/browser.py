@@ -27,5 +27,8 @@ class BrowserOperator:
 
         Returns:
             str: The CDP URL for the browser.
+
+        Example:
+            >>> box.browser.cdp_url()
         """
         return self.client.v1.boxes.browser.cdp_url(box_id=self.box_id)

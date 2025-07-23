@@ -39,7 +39,11 @@ class AndroidPkgOperator:
         Open the package, optionally specifying an activity name.
 
         Args:
-            activity_name (str, optional): The activity name to open. Defaults to None.
+            activity_name: Activity name, default is the main activity.
+
+        Examples:
+            >>> box.pkg.open()
+            >>> box.pkg.open("com.example.app.MainActivity")
         """
         params = AndroidOpenParams(box_id=self.box.id)
         if activity_name is not None:
@@ -59,7 +63,11 @@ class AndroidPkgOperator:
         Restart the package, optionally specifying an activity name.
 
         Args:
-            activity_name (str, optional): The activity name to restart. Defaults to None.
+            activity_name: Activity name, default is the main activity.
+
+        Examples:
+            >>> box.pkg.restart()
+            >>> box.pkg.restart("com.example.app.MainActivity")
         """
         params = AndroidRestartParams(box_id=self.box.id)
         if activity_name is not None:
@@ -73,6 +81,9 @@ class AndroidPkgOperator:
 
         Returns:
             AndroidListActivitiesResponse: The response containing the list of activities.
+
+        Examples:
+            >>> box.pkg.list_activities()
         """
         return self.client.v1.boxes.android.list_activities(self.data.package_name, box_id=self.box.id)
 
@@ -82,6 +93,9 @@ class AndroidPkgOperator:
 
         Returns:
             BinaryAPIResponse: The backup response containing binary data.
+
+        Examples:
+            >>> box.pkg.backup()
         """
         return self.client.v1.boxes.android.backup(self.data.package_name, box_id=self.box.id)
 

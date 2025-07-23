@@ -71,6 +71,7 @@ from ....types.v1.box_display_response import BoxDisplayResponse
 from ....types.v1.box_retrieve_response import BoxRetrieveResponse
 from ....types.v1.box_run_code_response import BoxRunCodeResponse
 from ....types.v1.box_live_view_url_response import BoxLiveViewURLResponse
+from ....types.v1.box_websocket_url_response import BoxWebsocketURLResponse
 from ....types.v1.box_execute_commands_response import BoxExecuteCommandsResponse
 from ....types.v1.box_web_terminal_url_response import BoxWebTerminalURLResponse
 
@@ -223,6 +224,7 @@ class BoxesResource(SyncAPIResource):
         self,
         *,
         config: box_create_android_params.Config | NotGiven = NOT_GIVEN,
+        api_timeout: str | NotGiven = NOT_GIVEN,
         wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -236,6 +238,14 @@ class BoxesResource(SyncAPIResource):
 
         Args:
           config: Configuration for a Android box instance
+
+          api_timeout: Timeout for waiting the box to transition from pending to running state, default
+              is 30s. If the box doesn't reach running state within this timeout, the API will
+              return HTTP status code 408. The timed-out box will be automatically deleted and
+              will not count towards your quota.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30s Maximum allowed: 5m
 
           wait: Wait for the box operation to be completed, default is true
 
@@ -252,6 +262,7 @@ class BoxesResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "config": config,
+                    "api_timeout": api_timeout,
                     "wait": wait,
                 },
                 box_create_android_params.BoxCreateAndroidParams,
@@ -266,6 +277,7 @@ class BoxesResource(SyncAPIResource):
         self,
         *,
         config: box_create_linux_params.Config | NotGiven = NOT_GIVEN,
+        api_timeout: str | NotGiven = NOT_GIVEN,
         wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -279,6 +291,14 @@ class BoxesResource(SyncAPIResource):
 
         Args:
           config: Configuration for a Linux box instance
+
+          api_timeout: Timeout for waiting the box to transition from pending to running state, default
+              is 30s. If the box doesn't reach running state within this timeout, the API will
+              return HTTP status code 408. The timed-out box will be automatically deleted and
+              will not count towards your quota.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30s Maximum allowed: 5m
 
           wait: Wait for the box operation to be completed, default is true
 
@@ -295,6 +315,7 @@ class BoxesResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "config": config,
+                    "api_timeout": api_timeout,
                     "wait": wait,
                 },
                 box_create_linux_params.BoxCreateLinuxParams,
@@ -673,6 +694,43 @@ class BoxesResource(SyncAPIResource):
             cast_to=BoxWebTerminalURLResponse,
         )
 
+    def websocket_url(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BoxWebsocketURLResponse:
+        """Get the websocket url for the box.
+
+        This endpoint provides the WebSocket URLs for
+        executing shell commands and running code snippets in the box environment. These
+        URLs allow real-time communication and data exchange with the box, enabling
+        interactive terminal sessions and code execution.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return self._get(
+            f"/boxes/{box_id}/websocket-url",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BoxWebsocketURLResponse,
+        )
+
 
 class AsyncBoxesResource(AsyncAPIResource):
     @cached_property
@@ -820,6 +878,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         self,
         *,
         config: box_create_android_params.Config | NotGiven = NOT_GIVEN,
+        api_timeout: str | NotGiven = NOT_GIVEN,
         wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -833,6 +892,14 @@ class AsyncBoxesResource(AsyncAPIResource):
 
         Args:
           config: Configuration for a Android box instance
+
+          api_timeout: Timeout for waiting the box to transition from pending to running state, default
+              is 30s. If the box doesn't reach running state within this timeout, the API will
+              return HTTP status code 408. The timed-out box will be automatically deleted and
+              will not count towards your quota.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30s Maximum allowed: 5m
 
           wait: Wait for the box operation to be completed, default is true
 
@@ -849,6 +916,7 @@ class AsyncBoxesResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "config": config,
+                    "api_timeout": api_timeout,
                     "wait": wait,
                 },
                 box_create_android_params.BoxCreateAndroidParams,
@@ -863,6 +931,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         self,
         *,
         config: box_create_linux_params.Config | NotGiven = NOT_GIVEN,
+        api_timeout: str | NotGiven = NOT_GIVEN,
         wait: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -876,6 +945,14 @@ class AsyncBoxesResource(AsyncAPIResource):
 
         Args:
           config: Configuration for a Linux box instance
+
+          api_timeout: Timeout for waiting the box to transition from pending to running state, default
+              is 30s. If the box doesn't reach running state within this timeout, the API will
+              return HTTP status code 408. The timed-out box will be automatically deleted and
+              will not count towards your quota.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30s Maximum allowed: 5m
 
           wait: Wait for the box operation to be completed, default is true
 
@@ -892,6 +969,7 @@ class AsyncBoxesResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "config": config,
+                    "api_timeout": api_timeout,
                     "wait": wait,
                 },
                 box_create_linux_params.BoxCreateLinuxParams,
@@ -1272,6 +1350,43 @@ class AsyncBoxesResource(AsyncAPIResource):
             cast_to=BoxWebTerminalURLResponse,
         )
 
+    async def websocket_url(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BoxWebsocketURLResponse:
+        """Get the websocket url for the box.
+
+        This endpoint provides the WebSocket URLs for
+        executing shell commands and running code snippets in the box environment. These
+        URLs allow real-time communication and data exchange with the box, enabling
+        interactive terminal sessions and code execution.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return await self._get(
+            f"/boxes/{box_id}/websocket-url",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BoxWebsocketURLResponse,
+        )
+
 
 class BoxesResourceWithRawResponse:
     def __init__(self, boxes: BoxesResource) -> None:
@@ -1312,6 +1427,9 @@ class BoxesResourceWithRawResponse:
         )
         self.web_terminal_url = to_raw_response_wrapper(
             boxes.web_terminal_url,
+        )
+        self.websocket_url = to_raw_response_wrapper(
+            boxes.websocket_url,
         )
 
     @cached_property
@@ -1371,6 +1489,9 @@ class AsyncBoxesResourceWithRawResponse:
         self.web_terminal_url = async_to_raw_response_wrapper(
             boxes.web_terminal_url,
         )
+        self.websocket_url = async_to_raw_response_wrapper(
+            boxes.websocket_url,
+        )
 
     @cached_property
     def actions(self) -> AsyncActionsResourceWithRawResponse:
@@ -1429,6 +1550,9 @@ class BoxesResourceWithStreamingResponse:
         self.web_terminal_url = to_streamed_response_wrapper(
             boxes.web_terminal_url,
         )
+        self.websocket_url = to_streamed_response_wrapper(
+            boxes.websocket_url,
+        )
 
     @cached_property
     def actions(self) -> ActionsResourceWithStreamingResponse:
@@ -1486,6 +1610,9 @@ class AsyncBoxesResourceWithStreamingResponse:
         )
         self.web_terminal_url = async_to_streamed_response_wrapper(
             boxes.web_terminal_url,
+        )
+        self.websocket_url = async_to_streamed_response_wrapper(
+            boxes.websocket_url,
         )
 
     @cached_property

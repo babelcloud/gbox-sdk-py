@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import List
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from ...._utils import PropertyInfo
@@ -56,6 +57,9 @@ class ActionAIParams(TypedDict, total=False):
 
 
 class Settings(TypedDict, total=False):
+    disable_actions: Annotated[List[str], PropertyInfo(alias="disableActions")]
+    """Whether disable actions"""
+
     system_prompt: Annotated[str, PropertyInfo(alias="systemPrompt")]
     """
     System prompt that defines the AI's behavior and capabilities when executing UI

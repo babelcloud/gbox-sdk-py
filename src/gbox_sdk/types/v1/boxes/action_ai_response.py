@@ -16,8 +16,11 @@ __all__ = [
     "AIActionScreenshotResultAIResponseActionTypedTouchAction",
     "AIActionScreenshotResultAIResponseActionTypedTouchActionPoint",
     "AIActionScreenshotResultAIResponseActionTypedTouchActionPointStart",
-    "AIActionScreenshotResultAIResponseActionTypedDragAction",
-    "AIActionScreenshotResultAIResponseActionTypedDragActionPath",
+    "AIActionScreenshotResultAIResponseActionTypedDragAdvancedAction",
+    "AIActionScreenshotResultAIResponseActionTypedDragAdvancedActionPath",
+    "AIActionScreenshotResultAIResponseActionTypedDragSimpleAction",
+    "AIActionScreenshotResultAIResponseActionTypedDragSimpleActionEnd",
+    "AIActionScreenshotResultAIResponseActionTypedDragSimpleActionStart",
     "AIActionScreenshotResultAIResponseActionTypedScrollAction",
     "AIActionScreenshotResultAIResponseActionTypedSwipeSimpleAction",
     "AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedAction",
@@ -30,11 +33,7 @@ __all__ = [
     "AIActionScreenshotResultAIResponseActionTypedScreenRotationAction",
     "AIActionScreenshotResultAIResponseActionTypedScreenshotAction",
     "AIActionScreenshotResultAIResponseActionTypedScreenshotActionClip",
-    "AIActionScreenshotResultAIResponseActionTypedDragSimpleAction",
-    "AIActionScreenshotResultAIResponseActionTypedDragSimpleActionEnd",
-    "AIActionScreenshotResultAIResponseActionTypedDragSimpleActionStart",
-    "AIActionScreenshotResultAIResponseActionTypedDragAdvancedAction",
-    "AIActionScreenshotResultAIResponseActionTypedDragAdvancedActionPath",
+    "AIActionScreenshotResultAIResponseActionTypedWaitAction",
     "AIActionScreenshotResultScreenshot",
     "AIActionScreenshotResultScreenshotAfter",
     "AIActionScreenshotResultScreenshotBefore",
@@ -46,8 +45,11 @@ __all__ = [
     "AIActionResultAIResponseActionTypedTouchAction",
     "AIActionResultAIResponseActionTypedTouchActionPoint",
     "AIActionResultAIResponseActionTypedTouchActionPointStart",
-    "AIActionResultAIResponseActionTypedDragAction",
-    "AIActionResultAIResponseActionTypedDragActionPath",
+    "AIActionResultAIResponseActionTypedDragAdvancedAction",
+    "AIActionResultAIResponseActionTypedDragAdvancedActionPath",
+    "AIActionResultAIResponseActionTypedDragSimpleAction",
+    "AIActionResultAIResponseActionTypedDragSimpleActionEnd",
+    "AIActionResultAIResponseActionTypedDragSimpleActionStart",
     "AIActionResultAIResponseActionTypedScrollAction",
     "AIActionResultAIResponseActionTypedSwipeSimpleAction",
     "AIActionResultAIResponseActionTypedSwipeAdvancedAction",
@@ -60,11 +62,7 @@ __all__ = [
     "AIActionResultAIResponseActionTypedScreenRotationAction",
     "AIActionResultAIResponseActionTypedScreenshotAction",
     "AIActionResultAIResponseActionTypedScreenshotActionClip",
-    "AIActionResultAIResponseActionTypedDragSimpleAction",
-    "AIActionResultAIResponseActionTypedDragSimpleActionEnd",
-    "AIActionResultAIResponseActionTypedDragSimpleActionStart",
-    "AIActionResultAIResponseActionTypedDragAdvancedAction",
-    "AIActionResultAIResponseActionTypedDragAdvancedActionPath",
+    "AIActionResultAIResponseActionTypedWaitAction",
 ]
 
 
@@ -157,7 +155,7 @@ class AIActionScreenshotResultAIResponseActionTypedTouchAction(BaseModel):
     """
 
 
-class AIActionScreenshotResultAIResponseActionTypedDragActionPath(BaseModel):
+class AIActionScreenshotResultAIResponseActionTypedDragAdvancedActionPath(BaseModel):
     x: float
     """X coordinate of a point in the drag path"""
 
@@ -165,8 +163,8 @@ class AIActionScreenshotResultAIResponseActionTypedDragActionPath(BaseModel):
     """Y coordinate of a point in the drag path"""
 
 
-class AIActionScreenshotResultAIResponseActionTypedDragAction(BaseModel):
-    path: List[AIActionScreenshotResultAIResponseActionTypedDragActionPath]
+class AIActionScreenshotResultAIResponseActionTypedDragAdvancedAction(BaseModel):
+    path: List[AIActionScreenshotResultAIResponseActionTypedDragAdvancedActionPath]
     """Path of the drag action as a series of coordinates"""
 
     duration: Optional[str] = None
@@ -174,6 +172,64 @@ class AIActionScreenshotResultAIResponseActionTypedDragAction(BaseModel):
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 50ms
+    """
+
+    include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
+    """Whether to include screenshots in the action response.
+
+    If false, the screenshot object will still be returned but with empty URIs.
+    Default is false.
+    """
+
+    output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
+    """Type of the URI. default is base64."""
+
+    screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
+    """Delay after performing the action, before taking the final screenshot.
+
+    Execution flow:
+
+    1. Take screenshot before action
+    2. Perform the action
+    3. Wait for screenshotDelay (this parameter)
+    4. Take screenshot after action
+
+    Example: '500ms' means wait 500ms after the action before capturing the final
+    screenshot.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+    """
+
+
+class AIActionScreenshotResultAIResponseActionTypedDragSimpleActionEnd(BaseModel):
+    x: float
+    """X coordinate of a point in the drag path"""
+
+    y: float
+    """Y coordinate of a point in the drag path"""
+
+
+class AIActionScreenshotResultAIResponseActionTypedDragSimpleActionStart(BaseModel):
+    x: float
+    """X coordinate of a point in the drag path"""
+
+    y: float
+    """Y coordinate of a point in the drag path"""
+
+
+class AIActionScreenshotResultAIResponseActionTypedDragSimpleAction(BaseModel):
+    end: AIActionScreenshotResultAIResponseActionTypedDragSimpleActionEnd
+    """Single point in a drag path"""
+
+    start: AIActionScreenshotResultAIResponseActionTypedDragSimpleActionStart
+    """Single point in a drag path"""
+
+    duration: Optional[str] = None
+    """Duration to complete the movement from start to end coordinates
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
@@ -473,6 +529,13 @@ class AIActionScreenshotResultAIResponseActionTypedPressKeyAction(BaseModel):
     Supports cross-platform compatibility.
     """
 
+    combination: Optional[bool] = None
+    """Whether to press keys as combination (simultaneously) or sequentially.
+
+    When true, all keys are pressed together as a shortcut (e.g., Ctrl+C). When
+    false, keys are pressed one by one in sequence.
+    """
+
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
     """Whether to include screenshots in the action response.
 
@@ -542,6 +605,12 @@ class AIActionScreenshotResultAIResponseActionTypedTypeAction(BaseModel):
 
     If false, the screenshot object will still be returned but with empty URIs.
     Default is false.
+    """
+
+    mode: Optional[Literal["append", "replace"]] = None
+    """
+    Text input mode: 'append' to add text to existing content, 'replace' to replace
+    all existing text
     """
 
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
@@ -630,81 +699,12 @@ class AIActionScreenshotResultAIResponseActionTypedScreenshotAction(BaseModel):
     """Type of the URI. default is base64."""
 
 
-class AIActionScreenshotResultAIResponseActionTypedDragSimpleActionEnd(BaseModel):
-    x: float
-    """X coordinate of a point in the drag path"""
-
-    y: float
-    """Y coordinate of a point in the drag path"""
-
-
-class AIActionScreenshotResultAIResponseActionTypedDragSimpleActionStart(BaseModel):
-    x: float
-    """X coordinate of a point in the drag path"""
-
-    y: float
-    """Y coordinate of a point in the drag path"""
-
-
-class AIActionScreenshotResultAIResponseActionTypedDragSimpleAction(BaseModel):
-    end: AIActionScreenshotResultAIResponseActionTypedDragSimpleActionEnd
-    """Single point in a drag path"""
-
-    start: AIActionScreenshotResultAIResponseActionTypedDragSimpleActionStart
-    """Single point in a drag path"""
-
-    duration: Optional[str] = None
-    """Duration to complete the movement from start to end coordinates
+class AIActionScreenshotResultAIResponseActionTypedWaitAction(BaseModel):
+    duration: str
+    """Duration of the wait (e.g. '3s')
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
-    """
-
-    include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
-
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
-    """
-
-    output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
-
-    screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
-
-    Execution flow:
-
-    1. Take screenshot before action
-    2. Perform the action
-    3. Wait for screenshotDelay (this parameter)
-    4. Take screenshot after action
-
-    Example: '500ms' means wait 500ms after the action before capturing the final
-    screenshot.
-
-    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-    """
-
-
-class AIActionScreenshotResultAIResponseActionTypedDragAdvancedActionPath(BaseModel):
-    x: float
-    """X coordinate of a point in the drag path"""
-
-    y: float
-    """Y coordinate of a point in the drag path"""
-
-
-class AIActionScreenshotResultAIResponseActionTypedDragAdvancedAction(BaseModel):
-    path: List[AIActionScreenshotResultAIResponseActionTypedDragAdvancedActionPath]
-    """Path of the drag action as a series of coordinates"""
-
-    duration: Optional[str] = None
-    """Time interval between points (e.g. "50ms")
-
-    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-    Example formats: "500ms", "30s", "5m", "1h" Default: 50ms
+    Example formats: "500ms", "30s", "5m", "1h" Default: 3s
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
@@ -738,7 +738,8 @@ class AIActionScreenshotResultAIResponseActionTypedDragAdvancedAction(BaseModel)
 AIActionScreenshotResultAIResponseAction: TypeAlias = Union[
     AIActionScreenshotResultAIResponseActionTypedClickAction,
     AIActionScreenshotResultAIResponseActionTypedTouchAction,
-    AIActionScreenshotResultAIResponseActionTypedDragAction,
+    AIActionScreenshotResultAIResponseActionTypedDragAdvancedAction,
+    AIActionScreenshotResultAIResponseActionTypedDragSimpleAction,
     AIActionScreenshotResultAIResponseActionTypedScrollAction,
     AIActionScreenshotResultAIResponseActionTypedSwipeSimpleAction,
     AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedAction,
@@ -750,6 +751,7 @@ AIActionScreenshotResultAIResponseAction: TypeAlias = Union[
     AIActionScreenshotResultAIResponseActionTypedScreenshotAction,
     AIActionScreenshotResultAIResponseActionTypedDragSimpleAction,
     AIActionScreenshotResultAIResponseActionTypedDragAdvancedAction,
+    AIActionScreenshotResultAIResponseActionTypedWaitAction,
 ]
 
 
@@ -893,7 +895,7 @@ class AIActionResultAIResponseActionTypedTouchAction(BaseModel):
     """
 
 
-class AIActionResultAIResponseActionTypedDragActionPath(BaseModel):
+class AIActionResultAIResponseActionTypedDragAdvancedActionPath(BaseModel):
     x: float
     """X coordinate of a point in the drag path"""
 
@@ -901,8 +903,8 @@ class AIActionResultAIResponseActionTypedDragActionPath(BaseModel):
     """Y coordinate of a point in the drag path"""
 
 
-class AIActionResultAIResponseActionTypedDragAction(BaseModel):
-    path: List[AIActionResultAIResponseActionTypedDragActionPath]
+class AIActionResultAIResponseActionTypedDragAdvancedAction(BaseModel):
+    path: List[AIActionResultAIResponseActionTypedDragAdvancedActionPath]
     """Path of the drag action as a series of coordinates"""
 
     duration: Optional[str] = None
@@ -910,6 +912,64 @@ class AIActionResultAIResponseActionTypedDragAction(BaseModel):
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 50ms
+    """
+
+    include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
+    """Whether to include screenshots in the action response.
+
+    If false, the screenshot object will still be returned but with empty URIs.
+    Default is false.
+    """
+
+    output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
+    """Type of the URI. default is base64."""
+
+    screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
+    """Delay after performing the action, before taking the final screenshot.
+
+    Execution flow:
+
+    1. Take screenshot before action
+    2. Perform the action
+    3. Wait for screenshotDelay (this parameter)
+    4. Take screenshot after action
+
+    Example: '500ms' means wait 500ms after the action before capturing the final
+    screenshot.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+    """
+
+
+class AIActionResultAIResponseActionTypedDragSimpleActionEnd(BaseModel):
+    x: float
+    """X coordinate of a point in the drag path"""
+
+    y: float
+    """Y coordinate of a point in the drag path"""
+
+
+class AIActionResultAIResponseActionTypedDragSimpleActionStart(BaseModel):
+    x: float
+    """X coordinate of a point in the drag path"""
+
+    y: float
+    """Y coordinate of a point in the drag path"""
+
+
+class AIActionResultAIResponseActionTypedDragSimpleAction(BaseModel):
+    end: AIActionResultAIResponseActionTypedDragSimpleActionEnd
+    """Single point in a drag path"""
+
+    start: AIActionResultAIResponseActionTypedDragSimpleActionStart
+    """Single point in a drag path"""
+
+    duration: Optional[str] = None
+    """Duration to complete the movement from start to end coordinates
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
@@ -1209,6 +1269,13 @@ class AIActionResultAIResponseActionTypedPressKeyAction(BaseModel):
     Supports cross-platform compatibility.
     """
 
+    combination: Optional[bool] = None
+    """Whether to press keys as combination (simultaneously) or sequentially.
+
+    When true, all keys are pressed together as a shortcut (e.g., Ctrl+C). When
+    false, keys are pressed one by one in sequence.
+    """
+
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
     """Whether to include screenshots in the action response.
 
@@ -1278,6 +1345,12 @@ class AIActionResultAIResponseActionTypedTypeAction(BaseModel):
 
     If false, the screenshot object will still be returned but with empty URIs.
     Default is false.
+    """
+
+    mode: Optional[Literal["append", "replace"]] = None
+    """
+    Text input mode: 'append' to add text to existing content, 'replace' to replace
+    all existing text
     """
 
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
@@ -1366,81 +1439,12 @@ class AIActionResultAIResponseActionTypedScreenshotAction(BaseModel):
     """Type of the URI. default is base64."""
 
 
-class AIActionResultAIResponseActionTypedDragSimpleActionEnd(BaseModel):
-    x: float
-    """X coordinate of a point in the drag path"""
-
-    y: float
-    """Y coordinate of a point in the drag path"""
-
-
-class AIActionResultAIResponseActionTypedDragSimpleActionStart(BaseModel):
-    x: float
-    """X coordinate of a point in the drag path"""
-
-    y: float
-    """Y coordinate of a point in the drag path"""
-
-
-class AIActionResultAIResponseActionTypedDragSimpleAction(BaseModel):
-    end: AIActionResultAIResponseActionTypedDragSimpleActionEnd
-    """Single point in a drag path"""
-
-    start: AIActionResultAIResponseActionTypedDragSimpleActionStart
-    """Single point in a drag path"""
-
-    duration: Optional[str] = None
-    """Duration to complete the movement from start to end coordinates
+class AIActionResultAIResponseActionTypedWaitAction(BaseModel):
+    duration: str
+    """Duration of the wait (e.g. '3s')
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
-    """
-
-    include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
-
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
-    """
-
-    output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
-
-    screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
-
-    Execution flow:
-
-    1. Take screenshot before action
-    2. Perform the action
-    3. Wait for screenshotDelay (this parameter)
-    4. Take screenshot after action
-
-    Example: '500ms' means wait 500ms after the action before capturing the final
-    screenshot.
-
-    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-    """
-
-
-class AIActionResultAIResponseActionTypedDragAdvancedActionPath(BaseModel):
-    x: float
-    """X coordinate of a point in the drag path"""
-
-    y: float
-    """Y coordinate of a point in the drag path"""
-
-
-class AIActionResultAIResponseActionTypedDragAdvancedAction(BaseModel):
-    path: List[AIActionResultAIResponseActionTypedDragAdvancedActionPath]
-    """Path of the drag action as a series of coordinates"""
-
-    duration: Optional[str] = None
-    """Time interval between points (e.g. "50ms")
-
-    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-    Example formats: "500ms", "30s", "5m", "1h" Default: 50ms
+    Example formats: "500ms", "30s", "5m", "1h" Default: 3s
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
@@ -1474,7 +1478,8 @@ class AIActionResultAIResponseActionTypedDragAdvancedAction(BaseModel):
 AIActionResultAIResponseAction: TypeAlias = Union[
     AIActionResultAIResponseActionTypedClickAction,
     AIActionResultAIResponseActionTypedTouchAction,
-    AIActionResultAIResponseActionTypedDragAction,
+    AIActionResultAIResponseActionTypedDragAdvancedAction,
+    AIActionResultAIResponseActionTypedDragSimpleAction,
     AIActionResultAIResponseActionTypedScrollAction,
     AIActionResultAIResponseActionTypedSwipeSimpleAction,
     AIActionResultAIResponseActionTypedSwipeAdvancedAction,
@@ -1486,6 +1491,7 @@ AIActionResultAIResponseAction: TypeAlias = Union[
     AIActionResultAIResponseActionTypedScreenshotAction,
     AIActionResultAIResponseActionTypedDragSimpleAction,
     AIActionResultAIResponseActionTypedDragAdvancedAction,
+    AIActionResultAIResponseActionTypedWaitAction,
 ]
 
 

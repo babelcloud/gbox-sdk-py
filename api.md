@@ -19,6 +19,7 @@ from gbox_sdk.types.v1 import (
     BoxStartResponse,
     BoxStopResponse,
     BoxWebTerminalURLResponse,
+    BoxWebsocketURLResponse,
 )
 ```
 
@@ -36,6 +37,7 @@ Methods:
 - <code title="post /boxes/{boxId}/stop">client.v1.boxes.<a href="./src/gbox_sdk/resources/v1/boxes/boxes.py">stop</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/box_stop_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/box_stop_response.py">BoxStopResponse</a></code>
 - <code title="post /boxes/{boxId}/terminate">client.v1.boxes.<a href="./src/gbox_sdk/resources/v1/boxes/boxes.py">terminate</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/box_terminate_params.py">params</a>) -> None</code>
 - <code title="post /boxes/{boxId}/web-terminal-url">client.v1.boxes.<a href="./src/gbox_sdk/resources/v1/boxes/boxes.py">web_terminal_url</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/box_web_terminal_url_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/box_web_terminal_url_response.py">BoxWebTerminalURLResponse</a></code>
+- <code title="get /boxes/{boxId}/websocket-url">client.v1.boxes.<a href="./src/gbox_sdk/resources/v1/boxes/boxes.py">websocket_url</a>(box_id) -> <a href="./src/gbox_sdk/types/v1/box_websocket_url_response.py">BoxWebsocketURLResponse</a></code>
 
 ### Actions
 
@@ -50,6 +52,7 @@ from gbox_sdk.types.v1.boxes import (
     ActionMoveResponse,
     ActionPressButtonResponse,
     ActionPressKeyResponse,
+    ActionScreenLayoutResponse,
     ActionScreenRotationResponse,
     ActionScreenshotResponse,
     ActionScrollResponse,
@@ -68,6 +71,7 @@ Methods:
 - <code title="post /boxes/{boxId}/actions/move">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">move</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_move_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_move_response.py">ActionMoveResponse</a></code>
 - <code title="post /boxes/{boxId}/actions/press-button">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">press_button</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_press_button_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_press_button_response.py">ActionPressButtonResponse</a></code>
 - <code title="post /boxes/{boxId}/actions/press-key">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">press_key</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_press_key_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_press_key_response.py">ActionPressKeyResponse</a></code>
+- <code title="get /boxes/{boxId}/actions/screen-layout">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">screen_layout</a>(box_id) -> <a href="./src/gbox_sdk/types/v1/boxes/action_screen_layout_response.py">ActionScreenLayoutResponse</a></code>
 - <code title="post /boxes/{boxId}/actions/screen-rotation">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">screen_rotation</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_screen_rotation_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_screen_rotation_response.py">ActionScreenRotationResponse</a></code>
 - <code title="post /boxes/{boxId}/actions/screenshot">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">screenshot</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_screenshot_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_screenshot_response.py">ActionScreenshotResponse</a></code>
 - <code title="post /boxes/{boxId}/actions/scroll">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">scroll</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_scroll_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_scroll_response.py">ActionScrollResponse</a></code>
@@ -106,12 +110,24 @@ Methods:
 Types:
 
 ```python
-from gbox_sdk.types.v1.boxes import BrowserCdpURLResponse
+from gbox_sdk.types.v1.boxes import (
+    BrowserCdpURLResponse,
+    BrowserCloseTabResponse,
+    BrowserGetTabsResponse,
+    BrowserOpenTabResponse,
+    BrowserSwitchTabResponse,
+    BrowserUpdateTabResponse,
+)
 ```
 
 Methods:
 
 - <code title="post /boxes/{boxId}/browser/connect-url/cdp">client.v1.boxes.browser.<a href="./src/gbox_sdk/resources/v1/boxes/browser.py">cdp_url</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/browser_cdp_url_params.py">params</a>) -> str</code>
+- <code title="delete /boxes/{boxId}/browser/tabs/{tabId}">client.v1.boxes.browser.<a href="./src/gbox_sdk/resources/v1/boxes/browser.py">close_tab</a>(tab_id, \*, box_id) -> <a href="./src/gbox_sdk/types/v1/boxes/browser_close_tab_response.py">BrowserCloseTabResponse</a></code>
+- <code title="get /boxes/{boxId}/browser/tabs">client.v1.boxes.browser.<a href="./src/gbox_sdk/resources/v1/boxes/browser.py">get_tabs</a>(box_id) -> <a href="./src/gbox_sdk/types/v1/boxes/browser_get_tabs_response.py">BrowserGetTabsResponse</a></code>
+- <code title="post /boxes/{boxId}/browser/tabs">client.v1.boxes.browser.<a href="./src/gbox_sdk/resources/v1/boxes/browser.py">open_tab</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/browser_open_tab_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/browser_open_tab_response.py">BrowserOpenTabResponse</a></code>
+- <code title="post /boxes/{boxId}/browser/tabs/{tabId}/switch">client.v1.boxes.browser.<a href="./src/gbox_sdk/resources/v1/boxes/browser.py">switch_tab</a>(tab_id, \*, box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/browser_switch_tab_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/browser_switch_tab_response.py">BrowserSwitchTabResponse</a></code>
+- <code title="put /boxes/{boxId}/browser/tabs/{tabId}">client.v1.boxes.browser.<a href="./src/gbox_sdk/resources/v1/boxes/browser.py">update_tab</a>(tab_id, \*, box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/browser_update_tab_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/browser_update_tab_response.py">BrowserUpdateTabResponse</a></code>
 
 ### Android
 

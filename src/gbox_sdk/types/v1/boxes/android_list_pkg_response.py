@@ -24,7 +24,7 @@ class Data(BaseModel):
     """Android package name"""
 
     pkg_type: Literal["system", "thirdParty"] = FieldInfo(alias="pkgType")
-    """Package type: system or thirdParty"""
+    """system or thirdParty"""
 
     version: str
     """Android pkg version"""

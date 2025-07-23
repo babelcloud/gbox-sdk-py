@@ -19,6 +19,7 @@ from gbox_sdk.types.v1 import (
     BoxRunCodeResponse,
     BoxRetrieveResponse,
     BoxLiveViewURLResponse,
+    BoxWebsocketURLResponse,
     BoxWebTerminalURLResponse,
     BoxExecuteCommandsResponse,
 )
@@ -134,6 +135,7 @@ class TestBoxes:
                     "version": "v1.0",
                 },
             },
+            api_timeout="30s",
             wait=True,
         )
         assert_matches_type(AndroidBox, box, path=["response"])
@@ -181,6 +183,7 @@ class TestBoxes:
                     "environment": "testing",
                 },
             },
+            api_timeout="30s",
             wait=True,
         )
         assert_matches_type(LinuxBox, box, path=["response"])
@@ -628,6 +631,48 @@ class TestBoxes:
                 box_id="",
             )
 
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_websocket_url(self, client: GboxClient) -> None:
+        box = client.v1.boxes.websocket_url(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert_matches_type(BoxWebsocketURLResponse, box, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_websocket_url(self, client: GboxClient) -> None:
+        response = client.v1.boxes.with_raw_response.websocket_url(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        box = response.parse()
+        assert_matches_type(BoxWebsocketURLResponse, box, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_websocket_url(self, client: GboxClient) -> None:
+        with client.v1.boxes.with_streaming_response.websocket_url(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            box = response.parse()
+            assert_matches_type(BoxWebsocketURLResponse, box, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_websocket_url(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            client.v1.boxes.with_raw_response.websocket_url(
+                "",
+            )
+
 
 class TestAsyncBoxes:
     parametrize = pytest.mark.parametrize(
@@ -739,6 +784,7 @@ class TestAsyncBoxes:
                     "version": "v1.0",
                 },
             },
+            api_timeout="30s",
             wait=True,
         )
         assert_matches_type(AndroidBox, box, path=["response"])
@@ -786,6 +832,7 @@ class TestAsyncBoxes:
                     "environment": "testing",
                 },
             },
+            api_timeout="30s",
             wait=True,
         )
         assert_matches_type(LinuxBox, box, path=["response"])
@@ -1231,4 +1278,46 @@ class TestAsyncBoxes:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.with_raw_response.web_terminal_url(
                 box_id="",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_websocket_url(self, async_client: AsyncGboxClient) -> None:
+        box = await async_client.v1.boxes.websocket_url(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert_matches_type(BoxWebsocketURLResponse, box, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_websocket_url(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.with_raw_response.websocket_url(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        box = await response.parse()
+        assert_matches_type(BoxWebsocketURLResponse, box, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_websocket_url(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.with_streaming_response.websocket_url(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            box = await response.parse()
+            assert_matches_type(BoxWebsocketURLResponse, box, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_websocket_url(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            await async_client.v1.boxes.with_raw_response.websocket_url(
+                "",
             )

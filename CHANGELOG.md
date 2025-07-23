@@ -1,5 +1,45 @@
 # Changelog
 
+## 0.1.0-alpha.26 (2025-07-23)
+
+Full Changelog: [v0.1.0-alpha.25...v0.1.0-alpha.26](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.25...v0.1.0-alpha.26)
+
+### Features
+
+* **api:** api update ([ebed5cb](https://github.com/babelcloud/gbox-sdk-py/commit/ebed5cbb9ce812b8b0962cc191ef7378d816b6b1))
+* **api:** api update ([6a2f7f7](https://github.com/babelcloud/gbox-sdk-py/commit/6a2f7f78c33124bf159e964565d8edf6e29fa28a))
+* **api:** api update ([46430f5](https://github.com/babelcloud/gbox-sdk-py/commit/46430f5ae0f3c875229aabcfa86800d613950b34))
+* **api:** api update ([c5233d6](https://github.com/babelcloud/gbox-sdk-py/commit/c5233d6e518ddaf53d3fba5fe38d0fd8da31adac))
+* **api:** api update ([4345abf](https://github.com/babelcloud/gbox-sdk-py/commit/4345abff14aacacc38378ebd73228aa4e4796970))
+* **api:** api update ([a807c16](https://github.com/babelcloud/gbox-sdk-py/commit/a807c16b49eefbfffae5a87cdb8c99edc1b4aafb))
+* **api:** api update ([69191d1](https://github.com/babelcloud/gbox-sdk-py/commit/69191d151b664997e8127535dae5cb830d2afbf5))
+* **api:** api update ([2bd8500](https://github.com/babelcloud/gbox-sdk-py/commit/2bd85009b580b72e77b6ae2c4414a98b5622e8a3))
+* **api:** api update ([ec90c7f](https://github.com/babelcloud/gbox-sdk-py/commit/ec90c7f8b17889354bf15b17226056a98a529c86))
+* **api:** api update ([66a984a](https://github.com/babelcloud/gbox-sdk-py/commit/66a984acffe850119f4ac3c96ff85453499debf2))
+* **api:** api update ([07af56a](https://github.com/babelcloud/gbox-sdk-py/commit/07af56aec489067c8541f6d5a60894a17abb7d77))
+* **api:** api update ([eda3b98](https://github.com/babelcloud/gbox-sdk-py/commit/eda3b9841969a246268f200acb75cdebaf44497c))
+* **api:** api update ([f1ee014](https://github.com/babelcloud/gbox-sdk-py/commit/f1ee01412154a6d431eace480f63062ca40c173d))
+* **api:** api update ([5233d66](https://github.com/babelcloud/gbox-sdk-py/commit/5233d6665a06fd60afb86f195180fe19e077e33f))
+* **api:** api update ([1afac7b](https://github.com/babelcloud/gbox-sdk-py/commit/1afac7bafd20b6c522d5270c8d932ce036ae23ec))
+* **api:** api update ([916adf3](https://github.com/babelcloud/gbox-sdk-py/commit/916adf312dc1f75b102e732342e5875c5102099c))
+* **api:** extend action classes to include screenshot delay and add extract and screen layout methods ([7ae0806](https://github.com/babelcloud/gbox-sdk-py/commit/7ae080646445a61cbc219ed801c8c74f6b2b2c14))
+* clean up environment call outs ([0111f73](https://github.com/babelcloud/gbox-sdk-py/commit/0111f738a21bad17d5fc6ea98757e4f07213e24a))
+* command and run code support streaming output ([e9e7bbd](https://github.com/babelcloud/gbox-sdk-py/commit/e9e7bbd85f0bb7d2553b0d8e721049341c1900ef))
+* sync data after android pkg open, close or restart ([3780890](https://github.com/babelcloud/gbox-sdk-py/commit/37808902f5aa33707666605fe8c6e76d2bf79b7e))
+
+
+### Bug Fixes
+
+* **client:** don't send Content-Type header on GET requests ([e697be7](https://github.com/babelcloud/gbox-sdk-py/commit/e697be739e861dad822411b2370f0dcd773308dd))
+* **parsing:** ignore empty metadata ([90e7621](https://github.com/babelcloud/gbox-sdk-py/commit/90e76216b7c30296fed4541c068680098bebd0ec))
+* **parsing:** parse extra field types ([daef950](https://github.com/babelcloud/gbox-sdk-py/commit/daef9503102a8a1a3773c53b12004f68274c91f6))
+
+
+### Chores
+
+* **internal:** codegen related update ([69963ef](https://github.com/babelcloud/gbox-sdk-py/commit/69963efa0c5d80238a12bbcf697bb61ef54a8ee2))
+* **readme:** fix version rendering on pypi ([69ee15a](https://github.com/babelcloud/gbox-sdk-py/commit/69ee15a83ac7638d7d5004ea6fe2d2273aba60af))
+
 ## 0.1.0-alpha.25 (2025-07-10)
 
 Full Changelog: [v0.1.0-alpha.24...v0.1.0-alpha.25](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.24...v0.1.0-alpha.25)

@@ -22,6 +22,7 @@ from gbox_sdk.types.v1.boxes import (
     ActionPressKeyResponse,
     ActionScreenshotResponse,
     ActionPressButtonResponse,
+    ActionScreenLayoutResponse,
     ActionScreenRotationResponse,
 )
 
@@ -51,7 +52,8 @@ class TestActions:
             output_format="base64",
             screenshot_delay="500ms",
             settings={
-                "system_prompt": "You are a helpful assistant specialized in UI automation. When given a screenshot and instruction, analyze the visual elements carefully and execute the most appropriate action. Always prioritize user safety and avoid destructive actions unless explicitly requested."
+                "disable_actions": ["swipe"],
+                "system_prompt": "You are a helpful assistant specialized in UI automation. When given a screenshot and instruction, analyze the visual elements carefully and execute the most appropriate action. Always prioritize user safety and avoid destructive actions unless explicitly requested.",
             },
         )
         assert_matches_type(ActionAIResponse, action, path=["response"])
@@ -568,6 +570,7 @@ class TestActions:
         action = client.v1.boxes.actions.press_key(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             keys=["enter"],
+            combination=True,
             include_screenshot=False,
             output_format="base64",
             screenshot_delay="500ms",
@@ -609,6 +612,48 @@ class TestActions:
             client.v1.boxes.actions.with_raw_response.press_key(
                 box_id="",
                 keys=["enter"],
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_screen_layout(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.screen_layout(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert_matches_type(ActionScreenLayoutResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_screen_layout(self, client: GboxClient) -> None:
+        response = client.v1.boxes.actions.with_raw_response.screen_layout(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = response.parse()
+        assert_matches_type(ActionScreenLayoutResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_screen_layout(self, client: GboxClient) -> None:
+        with client.v1.boxes.actions.with_streaming_response.screen_layout(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = response.parse()
+            assert_matches_type(ActionScreenLayoutResponse, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_screen_layout(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            client.v1.boxes.actions.with_raw_response.screen_layout(
+                "",
             )
 
     @pytest.mark.skip()
@@ -1062,6 +1107,7 @@ class TestActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             text="Hello World",
             include_screenshot=False,
+            mode="append",
             output_format="base64",
             screenshot_delay="500ms",
         )
@@ -1130,7 +1176,8 @@ class TestAsyncActions:
             output_format="base64",
             screenshot_delay="500ms",
             settings={
-                "system_prompt": "You are a helpful assistant specialized in UI automation. When given a screenshot and instruction, analyze the visual elements carefully and execute the most appropriate action. Always prioritize user safety and avoid destructive actions unless explicitly requested."
+                "disable_actions": ["swipe"],
+                "system_prompt": "You are a helpful assistant specialized in UI automation. When given a screenshot and instruction, analyze the visual elements carefully and execute the most appropriate action. Always prioritize user safety and avoid destructive actions unless explicitly requested.",
             },
         )
         assert_matches_type(ActionAIResponse, action, path=["response"])
@@ -1647,6 +1694,7 @@ class TestAsyncActions:
         action = await async_client.v1.boxes.actions.press_key(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             keys=["enter"],
+            combination=True,
             include_screenshot=False,
             output_format="base64",
             screenshot_delay="500ms",
@@ -1688,6 +1736,48 @@ class TestAsyncActions:
             await async_client.v1.boxes.actions.with_raw_response.press_key(
                 box_id="",
                 keys=["enter"],
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_screen_layout(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.screen_layout(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert_matches_type(ActionScreenLayoutResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_screen_layout(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.actions.with_raw_response.screen_layout(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = await response.parse()
+        assert_matches_type(ActionScreenLayoutResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_screen_layout(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.actions.with_streaming_response.screen_layout(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = await response.parse()
+            assert_matches_type(ActionScreenLayoutResponse, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_screen_layout(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            await async_client.v1.boxes.actions.with_raw_response.screen_layout(
+                "",
             )
 
     @pytest.mark.skip()
@@ -2141,6 +2231,7 @@ class TestAsyncActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             text="Hello World",
             include_screenshot=False,
+            mode="append",
             output_format="base64",
             screenshot_delay="500ms",
         )

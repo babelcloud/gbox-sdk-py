@@ -1,6 +1,6 @@
 [project]
 name = "gbox_sdk"
-version = "0.1.0-alpha.25"
+version = "0.1.0-alpha.26"
 description = "The official Python library for the gbox-client API"
 dynamic = ["readme"]
 license = "Apache-2.0"
@@ -14,6 +14,7 @@ dependencies = [
     "anyio>=3.5.0, <5",
     "distro>=1.7.0, <2",
     "sniffio",
+    "websocket-client>=1.0.0, <2",
 ]
 requires-python = ">= 3.8"
 classifiers = [
@@ -39,7 +40,8 @@ Homepage = "https://github.com/babelcloud/gbox-sdk-py"
 Repository = "https://github.com/babelcloud/gbox-sdk-py"
 
 [project.optional-dependencies]
-aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.6"]
+aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.8"]
+websocket-client = ["websocket-client>=1.0.0, <2"]
 
 [tool.rye]
 managed = true

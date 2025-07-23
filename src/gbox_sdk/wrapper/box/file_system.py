@@ -1,16 +1,10 @@
 from typing import List, Union, Optional
 
-from gbox_sdk._types import NOT_GIVEN
+from gbox_sdk._types import NOT_GIVEN, NotGiven
 from gbox_sdk._client import GboxClient
-from gbox_sdk.types.v1.boxes.f_info_params import FInfoParams
-from gbox_sdk.types.v1.boxes.f_list_params import FListParams
-from gbox_sdk.types.v1.boxes.f_read_params import FReadParams
-from gbox_sdk.types.v1.boxes.f_write_params import WriteFile, WriteFileByBinary
-from gbox_sdk.types.v1.boxes.f_exists_params import FExistsParams
+from gbox_sdk.types.v1.boxes.f_write_params import FileTypes
 from gbox_sdk.types.v1.boxes.f_list_response import Data, DataDir, DataFile, FListResponse
 from gbox_sdk.types.v1.boxes.f_read_response import FReadResponse
-from gbox_sdk.types.v1.boxes.f_remove_params import FRemoveParams
-from gbox_sdk.types.v1.boxes.f_rename_params import FRenameParams
 from gbox_sdk.types.v1.boxes.f_write_response import FWriteResponse
 from gbox_sdk.types.v1.boxes.f_exists_response import FExistsResponse
 from gbox_sdk.types.v1.boxes.f_remove_response import FRemoveResponse
@@ -32,57 +26,110 @@ class FileSystemOperator:
         self.client = client
         self.box_id = box_id
 
-    def list_info(self, body: Union[FListParams, str]) -> FListResponse:
+    def list_info(
+        self,
+        path: str,
+        *,
+        depth: Union[float, NotGiven] = NOT_GIVEN,
+        working_dir: Union[str, NotGiven] = NOT_GIVEN,
+    ) -> FListResponse:
         """
         Get detailed information about files and directories at a given path or with given parameters.
 
         Args:
-            body (Union[FListParams, str]): Path as a string or FListParams object.
+            path: Target directory path in the box
+
+            depth: Depth of the directory
+
+            working_dir: Working directory. If not provided, the file will be read from the
+                `box.config.workingDir` directory.
+
         Returns:
             FListResponse: The response containing file/directory information.
-        """
-        if isinstance(body, str):
-            return self.client.v1.boxes.fs.list(box_id=self.box_id, path=body)
-        else:
-            return self.client.v1.boxes.fs.list(box_id=self.box_id, **body)
 
-    def list(self, body: Union[FListParams, str]) -> List[Union["FileOperator", "DirectoryOperator"]]:
+        Example:
+            >>> box.file_system.list_info(path="/path/to/directory", depth=1, working_dir="/path/to/working_dir")
+            >>> box.file_system.list_info("/path/to/directory")
+        """
+        return self.client.v1.boxes.fs.list(box_id=self.box_id, path=path, depth=depth, working_dir=working_dir)
+
+    def list(
+        self,
+        path: str,
+        *,
+        depth: Union[float, NotGiven] = NOT_GIVEN,
+        working_dir: Union[str, NotGiven] = NOT_GIVEN,
+    ) -> List[Union["FileOperator", "DirectoryOperator"]]:
         """
         List files and directories at a given path or with given parameters, returning operator objects.
 
         Args:
-            body (Union[FListParams, str]): Path as a string or FListParams object.
+            path: Target directory path in the box
+
+            depth: Depth of the directory
+
+            working_dir: Working directory. If not provided, the file will be read from the
+                `box.config.workingDir` directory.
+
         Returns:
             List[Union[FileOperator, DirectoryOperator]]: List of file or directory operator objects.
-        """
-        res = self.list_info(body)
-        return [self.data_to_operator(r) for r in res.data]
 
-    def read(self, body: FReadParams) -> FReadResponse:
+        Example:
+            >>> box.file_system.list(path="/path/to/directory", depth=1, working_dir="/path/to/working_dir")
+            >>> box.file_system.list("/path/to/directory")
+        """
+        res = self.list_info(path, depth=depth, working_dir=working_dir)
+        return [self._data_to_operator(r) for r in res.data]
+
+    def read(
+        self,
+        path: str,
+        *,
+        working_dir: Union[str, NotGiven] = NOT_GIVEN,
+    ) -> FReadResponse:
         """
         Read the content of a file.
 
         Args:
-            body (FReadParams): Parameters for reading the file.
+            path: Target path in the box. If the path does not start with '/', the file will be
+                read from the working directory.
+
+            working_dir: Working directory. If not provided, the file will be read from the
+                `box.config.workingDir` directory.
+
         Returns:
             FReadResponse: The response containing file content.
-        """
-        return self.client.v1.boxes.fs.read(box_id=self.box_id, **body)
 
-    def write(self, body: Union[WriteFile, WriteFileByBinary]) -> "FileOperator":
+        Example:
+            >>> box.file_system.read(path="/path/to/file", working_dir="/path/to/working_dir")
+            >>> box.file_system.read("/path/to/file")
+        """
+        return self.client.v1.boxes.fs.read(box_id=self.box_id, path=path, working_dir=working_dir)
+
+    def write(
+        self, *, content: Union[str, FileTypes], path: str, working_dir: Union[str, NotGiven] = NOT_GIVEN
+    ) -> "FileOperator":
         """
         Write content to a file (text or binary).
 
         Args:
-            body (Union[WriteFile, WriteFileByBinary]): Parameters for writing to the file.
-                Can be either WriteFile (for text content) or WriteFileByBinary (for binary content).
+            content: Content of the file (Max size: 512MB)
+
+            path: Target path in the box. If the path does not start with '/', the file will be
+                written relative to the working directory. Creates necessary directories in the
+                path if they don't exist. If the target path already exists, the write will
+                fail.
+
+            working_dir: Working directory. If not provided, the file will be read from the
+                `box.config.workingDir` directory.
+
         Returns:
             FileOperator: The file operator for the written file.
-        """
-        content = body["content"]
-        path = body["path"]
-        working_dir = body.get("working_dir")
 
+        Example:
+            >>> box.file_system.write(content="Hello, World!", path="/path/to/file", working_dir="/path/to/working_dir")
+            >>> box.file_system.write(content="Hello, World!", path="/path/to/file")
+        """
         res = self.client.v1.boxes.fs.write(
             box_id=self.box_id, content=content, path=path, working_dir=working_dir if working_dir else NOT_GIVEN
         )
@@ -94,49 +141,96 @@ class FileSystemOperator:
 
         return FileOperator(self.client, self.box_id, data_file)
 
-    def remove(self, body: FRemoveParams) -> FRemoveResponse:
+    def remove(self, *, path: str, working_dir: Union[str, NotGiven] = NOT_GIVEN) -> FRemoveResponse:
         """
         Remove a file or directory.
 
         Args:
-            body (FRemoveParams): Parameters for removing the file or directory.
-        Returns:
-            None
-        """
-        return self.client.v1.boxes.fs.remove(box_id=self.box_id, **body)
+            path: Target path in the box. If the path does not start with '/', the file/directory
+                will be checked relative to the working directory
 
-    def exists(self, body: FExistsParams) -> FExistsResponse:
+            working_dir: Working directory. If not provided, the file will be read from the
+                `box.config.workingDir` directory.
+
+        Returns:
+            FRemoveResponse: The response after removing the file or directory.
+
+        Example:
+            >>> box.file_system.remove(path="/path/to/file", working_dir="/path/to/working_dir")
+            >>> box.file_system.remove("/path/to/file")
+        """
+        return self.client.v1.boxes.fs.remove(box_id=self.box_id, path=path, working_dir=working_dir)
+
+    def exists(self, *, path: str, working_dir: Union[str, NotGiven] = NOT_GIVEN) -> FExistsResponse:
         """
         Check if a file or directory exists.
 
         Args:
-            body (FExistsParams): Parameters for checking existence.
+            path: Target path in the box. If the path does not start with '/', the file/directory
+                will be checked relative to the working directory
+
+            working_dir: Working directory. If not provided, the file will be read from the
+                `box.config.workingDir` directory.
+
         Returns:
             FExistsResponse: The response indicating existence.
-        """
-        return self.client.v1.boxes.fs.exists(box_id=self.box_id, **body)
 
-    def rename(self, body: FRenameParams) -> FRenameResponse:
+        Example:
+            >>> box.file_system.exists(path="/path/to/file", working_dir="/path/to/working_dir")
+            >>> box.file_system.exists("/path/to/file")
+        """
+        return self.client.v1.boxes.fs.exists(box_id=self.box_id, path=path, working_dir=working_dir)
+
+    def rename(self, *, old_path: str, new_path: str, working_dir: Union[str, NotGiven] = NOT_GIVEN) -> FRenameResponse:
         """
         Rename a file or directory.
 
         Args:
-            body (FRenameParams): Parameters for renaming.
+          new_path: New path in the box. If the path does not start with '/', the file/directory
+              will be renamed relative to the working directory. If the newPath already
+              exists, the rename will fail.
+
+          old_path: Old path in the box. If the path does not start with '/', the file/directory
+              will be renamed relative to the working directory. If the oldPath does not
+              exist, the rename will fail.
+
+          working_dir: Working directory. If not provided, the file will be read from the
+              `box.config.workingDir` directory.
+
         Returns:
             FRenameResponse: The response after renaming.
-        """
-        return self.client.v1.boxes.fs.rename(box_id=self.box_id, **body)
 
-    def get(self, body: FInfoParams) -> Union["FileOperator", "DirectoryOperator"]:
+        Example:
+            >>> box.file_system.rename(
+            ...     old_path="/path/to/old/file", new_path="/path/to/new/file", working_dir="/path/to/working_dir"
+            ... )
+            >>> box.file_system.rename("/path/to/old/file", "/path/to/new/file")
+        """
+        return self.client.v1.boxes.fs.rename(
+            box_id=self.box_id, old_path=old_path, new_path=new_path, working_dir=working_dir
+        )
+
+    def get(
+        self, *, path: str, working_dir: Union[str, NotGiven] = NOT_GIVEN
+    ) -> Union["FileOperator", "DirectoryOperator"]:
         """
         Get an operator for a file or directory by its information.
 
         Args:
-            body (FInfoParams): Parameters for retrieving file or directory info.
+            path: Target path in the box. If the path does not start with '/', the file/directory
+                will be checked relative to the working directory
+
+            working_dir: Working directory. If not provided, the file will be read from the
+                `box.config.workingDir` directory.
+
         Returns:
             Union[FileOperator, DirectoryOperator]: The corresponding operator object.
+
+        Example:
+            >>> box.file_system.get(path="/path/to/file", working_dir="/path/to/working_dir")
+            >>> box.file_system.get("/path/to/file")
         """
-        res = self.client.v1.boxes.fs.info(box_id=self.box_id, **body)
+        res = self.client.v1.boxes.fs.info(box_id=self.box_id, path=path, working_dir=working_dir)
         if res.type == "file":
             data_file = DataFile(
                 path=res.path, type="file", mode=res.mode, name=res.name, size=res.size, lastModified=res.last_modified
@@ -146,7 +240,7 @@ class FileSystemOperator:
             data_dir = DataDir(path=res.path, type="dir", mode=res.mode, name=res.name, lastModified=res.last_modified)
             return DirectoryOperator(self.client, self.box_id, data_dir)
 
-    def data_to_operator(self, data: Optional[Data]) -> Union["FileOperator", "DirectoryOperator"]:
+    def _data_to_operator(self, data: Optional[Data]) -> Union["FileOperator", "DirectoryOperator"]:
         """
         Convert a Data object to the corresponding operator.
 
@@ -182,51 +276,58 @@ class FileOperator:
         self.box_id = box_id
         self.data = data
 
-    def write(self, body: Union[WriteFile, WriteFileByBinary]) -> FWriteResponse:
+    def write(self, *, content: Union[str, FileTypes], working_dir: Union[str, NotGiven] = NOT_GIVEN) -> FWriteResponse:
         """
         Write content to this file (text or binary).
 
         Args:
-            body (Union[WriteFile, WriteFileByBinary]): Parameters for writing to the file.
-                Can be either WriteFile (for text content) or WriteFileByBinary (for binary content).
+            content: The content to write to the file.
+            working_dir: The working directory to write the file to.
+
         Returns:
             FWriteResponse: The response after writing.
-        """
-        # Create params with the file's path and content from body
-        working_dir = body.get("working_dir")
-        content = body["content"]
-        path = body["path"]
 
+        Example:
+            >>> box.file_system.write(content="Hello, World!", path="/path/to/file", working_dir="/path/to/working_dir")
+            >>> box.file_system.write(content="Hello, World!", path="/path/to/file")
+        """
         return self.client.v1.boxes.fs.write(
-            box_id=self.box_id, content=content, path=path, working_dir=working_dir if working_dir else NOT_GIVEN
+            box_id=self.box_id,
+            content=content,
+            path=self.data.path,
+            working_dir=working_dir if working_dir else NOT_GIVEN,
         )
 
-    def read(self, body: Optional[FReadParams] = None) -> FReadResponse:
+    def read(self, *, working_dir: Union[str, NotGiven] = NOT_GIVEN) -> FReadResponse:
         """
         Read the content of this file.
 
         Args:
-            body (Optional[FReadParams]): Parameters for reading the file. If None, uses the file's path.
+            working_dir: The working directory to read the file from.
+
         Returns:
             FReadResponse: The response containing file content.
-        """
-        if body is None:
-            body = FReadParams(path=self.data.path, working_dir="")
-        return self.client.v1.boxes.fs.read(box_id=self.box_id, **body)
 
-    def rename(self, body: FRenameParams) -> FRenameResponse:
+        Example:
+            >>> box.file_system.read(path="/path/to/file", working_dir="/path/to/working_dir")
+            >>> box.file_system.read("/path/to/file")
+        """
+        return self.client.v1.boxes.fs.read(box_id=self.box_id, path=self.data.path, working_dir=working_dir)
+
+    def rename(self, *, new_path: str, working_dir: Union[str, NotGiven] = NOT_GIVEN) -> FRenameResponse:
         """
         Rename this file.
 
         Args:
-            body (FRenameParams): Parameters for renaming the file.
+            new_path: The new path of the file.
+            working_dir: The working directory to rename the file in.
+
         Returns:
             FRenameResponse: The response after renaming.
         """
-        params = FRenameParams(
-            old_path=self.data.path, new_path=body.get("new_path", ""), working_dir=body.get("working_dir") or ""
+        return self.client.v1.boxes.fs.rename(
+            box_id=self.box_id, old_path=self.data.path, new_path=new_path, working_dir=working_dir
         )
-        return self.client.v1.boxes.fs.rename(box_id=self.box_id, **params)
 
 
 class DirectoryOperator:
@@ -246,29 +347,53 @@ class DirectoryOperator:
         self.box_id = box_id
         self.data = data
 
-    def list_info(self, body: Optional[FListParams] = None) -> FListResponse:
+    def list_info(
+        self, *, depth: Union[float, NotGiven] = NOT_GIVEN, working_dir: Union[str, NotGiven] = NOT_GIVEN
+    ) -> FListResponse:
         """
         Get detailed information about files and directories in this directory.
 
         Args:
-            body (Optional[FListParams]): Parameters for listing. If None, uses the directory's path.
+            path: Target directory path in the box
+
+            depth: Depth of the directory
+
+            working_dir: Working directory. If not provided, the file will be read from the
+                `box.config.workingDir` directory.
+
         Returns:
             FListResponse: The response containing file/directory information.
-        """
-        if body is None:
-            body = FListParams(path=self.data.path)
-        return self.client.v1.boxes.fs.list(box_id=self.box_id, **body)
 
-    def list(self, body: Optional[FListParams] = None) -> List[Union["FileOperator", "DirectoryOperator"]]:
+        Example:
+            >>> box.file_system.list_info(path="/path/to/directory", depth=1, working_dir="/path/to/working_dir")
+            >>> box.file_system.list_info("/path/to/directory")
+        """
+        return self.client.v1.boxes.fs.list(
+            box_id=self.box_id, path=self.data.path, depth=depth, working_dir=working_dir
+        )
+
+    def list(
+        self, *, depth: Union[float, NotGiven] = NOT_GIVEN, working_dir: Union[str, NotGiven] = NOT_GIVEN
+    ) -> List[Union["FileOperator", "DirectoryOperator"]]:
         """
         List files and directories in this directory, returning operator objects.
 
         Args:
-            body (Optional[FListParams]): Parameters for listing. If None, uses the directory's path.
+            path: Target directory path in the box
+
+            depth: Depth of the directory
+
+            working_dir: Working directory. If not provided, the file will be read from the
+                `box.config.workingDir` directory.
+
         Returns:
             List[Union[FileOperator, DirectoryOperator]]: List of file or directory operator objects.
+
+        Example:
+            >>> box.file_system.list(path="/path/to/directory", depth=1, working_dir="/path/to/working_dir")
+            >>> box.file_system.list("/path/to/directory")
         """
-        res = self.list_info(body)
+        res = self.list_info(depth=depth, working_dir=working_dir)
         result: List[Union["FileOperator", "DirectoryOperator"]] = []
         for r in res.data:
             if r.type == "file":
@@ -281,16 +406,27 @@ class DirectoryOperator:
                 result.append(DirectoryOperator(self.client, self.box_id, dir))
         return result
 
-    def rename(self, body: FRenameParams) -> FRenameResponse:
+    def rename(self, *, new_path: str, working_dir: Union[str, NotGiven] = NOT_GIVEN) -> FRenameResponse:
         """
         Rename this directory.
 
         Args:
-            body (FRenameParams): Parameters for renaming the directory.
+          new_path: New path in the box. If the path does not start with '/', the file/directory
+              will be renamed relative to the working directory. If the newPath already
+              exists, the rename will fail.
+
+          working_dir: Working directory. If not provided, the file will be read from the
+              `box.config.workingDir` directory.
+
         Returns:
             FRenameResponse: The response after renaming.
+
+        Example:
+            >>> box.file_system.rename(
+            ...     old_path="/path/to/old/file", new_path="/path/to/new/file", working_dir="/path/to/working_dir"
+            ... )
+            >>> box.file_system.rename("/path/to/old/file", "/path/to/new/file")
         """
-        params = FRenameParams(
-            old_path=self.data.path, new_path=body.get("new_path", ""), working_dir=body.get("working_dir") or ""
+        return self.client.v1.boxes.fs.rename(
+            box_id=self.box_id, old_path=self.data.path, new_path=new_path, working_dir=working_dir
         )
-        return self.client.v1.boxes.fs.rename(box_id=self.box_id, **params)

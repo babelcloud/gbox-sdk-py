@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.0-alpha.27 (2025-07-23)
+
+Full Changelog: [v0.1.0-alpha.26...v0.1.0-alpha.27](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.26...v0.1.0-alpha.27)
+
 ## 0.1.0-alpha.26 (2025-07-23)
 
 Full Changelog: [v0.1.0-alpha.25...v0.1.0-alpha.26](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.25...v0.1.0-alpha.26)

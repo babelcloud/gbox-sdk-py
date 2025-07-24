@@ -2,12 +2,19 @@
 
 from __future__ import annotations
 
-from typing import Iterable
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing import Union, Iterable
+from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from ...._utils import PropertyInfo
 
-__all__ = ["ActionTouchParams", "Point", "PointStart"]
+__all__ = [
+    "ActionTouchParams",
+    "Point",
+    "PointStart",
+    "PointAction",
+    "PointActionTouchPointMoveAction",
+    "PointActionTouchPointWaitActionDto",
+]
 
 
 class ActionTouchParams(TypedDict, total=False):
@@ -50,9 +57,42 @@ class PointStart(TypedDict, total=False):
     """Starting Y coordinate"""
 
 
+class PointActionTouchPointMoveAction(TypedDict, total=False):
+    duration: Required[str]
+    """Duration of the movement (e.g. "200ms")
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 200ms
+    """
+
+    type: Required[str]
+    """Type of the action"""
+
+    x: Required[float]
+    """Target X coordinate"""
+
+    y: Required[float]
+    """Target Y coordinate"""
+
+
+class PointActionTouchPointWaitActionDto(TypedDict, total=False):
+    duration: Required[str]
+    """Duration to wait (e.g. "500ms")
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+    """
+
+    type: Required[str]
+    """Type of the action"""
+
+
+PointAction: TypeAlias = Union[PointActionTouchPointMoveAction, PointActionTouchPointWaitActionDto]
+
+
 class Point(TypedDict, total=False):
     start: Required[PointStart]
     """Initial touch point position"""
 
-    actions: Iterable[object]
+    actions: Iterable[PointAction]
     """Sequence of actions to perform after initial touch"""

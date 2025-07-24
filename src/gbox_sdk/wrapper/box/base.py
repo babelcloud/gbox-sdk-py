@@ -9,6 +9,7 @@ from gbox_sdk.wrapper.box.browser import BrowserOperator
 from gbox_sdk.types.v1.android_box import AndroidBox
 from gbox_sdk.wrapper.box.file_system import FileSystemOperator
 from gbox_sdk.wrapper.box.websocket_client import WebSocketClient, WebSocketResult
+from gbox_sdk.types.v1.box_display_response import BoxDisplayResponse
 from gbox_sdk.types.v1.box_run_code_response import BoxRunCodeResponse
 from gbox_sdk.types.v1.box_live_view_url_response import BoxLiveViewURLResponse
 from gbox_sdk.types.v1.box_execute_commands_response import BoxExecuteCommandsResponse
@@ -102,6 +103,22 @@ class BaseBox:
         self.client.v1.boxes.terminate(box_id=self.data.id, wait=wait)
         self._sync_data()
         return self
+
+    def display(self) -> BoxDisplayResponse:
+        """
+        Retrieve the current display properties for a running box.
+
+        This endpoint
+        provides details about the box's screen resolution, orientation, and other
+        visual properties
+
+        Returns:
+            BoxDisplayResponse: The response containing the display properties.
+
+        Example:
+            >>> box.display()
+        """
+        return self.client.v1.boxes.display(box_id=self.data.id)
 
     def command(
         self,

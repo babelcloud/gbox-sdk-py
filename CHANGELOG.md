@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.0-alpha.28 (2025-07-25)
+
+Full Changelog: [v0.1.0-alpha.27...v0.1.0-alpha.28](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.27...v0.1.0-alpha.28)
+
+### Features
+
+* add browser tab methods ([31a8a81](https://github.com/babelcloud/gbox-sdk-py/commit/31a8a813091bb2f3fa40a2855c4642a180ee2899))
+* **api:** api update ([ac9ed57](https://github.com/babelcloud/gbox-sdk-py/commit/ac9ed57207dd9a86c1c1c46ad064b1b9c01ed41b))
+* **api:** api update ([954e23b](https://github.com/babelcloud/gbox-sdk-py/commit/954e23bbc3f1025ae2fb86648e05526ffa281705))
+
 ## 0.1.0-alpha.27 (2025-07-23)
 
 Full Changelog: [v0.1.0-alpha.26...v0.1.0-alpha.27](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.26...v0.1.0-alpha.27)

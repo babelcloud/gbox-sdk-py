@@ -1019,10 +1019,10 @@ class TestActions:
                     },
                     "actions": [
                         {
+                            "duration": "200ms",
                             "type": "move",
                             "x": 400,
                             "y": 300,
-                            "duration": "200ms",
                         }
                     ],
                 }
@@ -2143,10 +2143,10 @@ class TestAsyncActions:
                     },
                     "actions": [
                         {
+                            "duration": "200ms",
                             "type": "move",
                             "x": 400,
                             "y": 300,
-                            "duration": "200ms",
                         }
                     ],
                 }

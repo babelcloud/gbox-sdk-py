@@ -16,6 +16,9 @@ __all__ = [
     "AIActionScreenshotResultAIResponseActionTypedTouchAction",
     "AIActionScreenshotResultAIResponseActionTypedTouchActionPoint",
     "AIActionScreenshotResultAIResponseActionTypedTouchActionPointStart",
+    "AIActionScreenshotResultAIResponseActionTypedTouchActionPointAction",
+    "AIActionScreenshotResultAIResponseActionTypedTouchActionPointActionTouchPointMoveAction",
+    "AIActionScreenshotResultAIResponseActionTypedTouchActionPointActionTouchPointWaitActionDto",
     "AIActionScreenshotResultAIResponseActionTypedDragAdvancedAction",
     "AIActionScreenshotResultAIResponseActionTypedDragAdvancedActionPath",
     "AIActionScreenshotResultAIResponseActionTypedDragSimpleAction",
@@ -45,6 +48,9 @@ __all__ = [
     "AIActionResultAIResponseActionTypedTouchAction",
     "AIActionResultAIResponseActionTypedTouchActionPoint",
     "AIActionResultAIResponseActionTypedTouchActionPointStart",
+    "AIActionResultAIResponseActionTypedTouchActionPointAction",
+    "AIActionResultAIResponseActionTypedTouchActionPointActionTouchPointMoveAction",
+    "AIActionResultAIResponseActionTypedTouchActionPointActionTouchPointWaitActionDto",
     "AIActionResultAIResponseActionTypedDragAdvancedAction",
     "AIActionResultAIResponseActionTypedDragAdvancedActionPath",
     "AIActionResultAIResponseActionTypedDragSimpleAction",
@@ -115,11 +121,47 @@ class AIActionScreenshotResultAIResponseActionTypedTouchActionPointStart(BaseMod
     """Starting Y coordinate"""
 
 
+class AIActionScreenshotResultAIResponseActionTypedTouchActionPointActionTouchPointMoveAction(BaseModel):
+    duration: str
+    """Duration of the movement (e.g. "200ms")
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 200ms
+    """
+
+    type: str
+    """Type of the action"""
+
+    x: float
+    """Target X coordinate"""
+
+    y: float
+    """Target Y coordinate"""
+
+
+class AIActionScreenshotResultAIResponseActionTypedTouchActionPointActionTouchPointWaitActionDto(BaseModel):
+    duration: str
+    """Duration to wait (e.g. "500ms")
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+    """
+
+    type: str
+    """Type of the action"""
+
+
+AIActionScreenshotResultAIResponseActionTypedTouchActionPointAction: TypeAlias = Union[
+    AIActionScreenshotResultAIResponseActionTypedTouchActionPointActionTouchPointMoveAction,
+    AIActionScreenshotResultAIResponseActionTypedTouchActionPointActionTouchPointWaitActionDto,
+]
+
+
 class AIActionScreenshotResultAIResponseActionTypedTouchActionPoint(BaseModel):
     start: AIActionScreenshotResultAIResponseActionTypedTouchActionPointStart
     """Initial touch point position"""
 
-    actions: Optional[List[object]] = None
+    actions: Optional[List[AIActionScreenshotResultAIResponseActionTypedTouchActionPointAction]] = None
     """Sequence of actions to perform after initial touch"""
 
 
@@ -855,11 +897,47 @@ class AIActionResultAIResponseActionTypedTouchActionPointStart(BaseModel):
     """Starting Y coordinate"""
 
 
+class AIActionResultAIResponseActionTypedTouchActionPointActionTouchPointMoveAction(BaseModel):
+    duration: str
+    """Duration of the movement (e.g. "200ms")
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 200ms
+    """
+
+    type: str
+    """Type of the action"""
+
+    x: float
+    """Target X coordinate"""
+
+    y: float
+    """Target Y coordinate"""
+
+
+class AIActionResultAIResponseActionTypedTouchActionPointActionTouchPointWaitActionDto(BaseModel):
+    duration: str
+    """Duration to wait (e.g. "500ms")
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+    """
+
+    type: str
+    """Type of the action"""
+
+
+AIActionResultAIResponseActionTypedTouchActionPointAction: TypeAlias = Union[
+    AIActionResultAIResponseActionTypedTouchActionPointActionTouchPointMoveAction,
+    AIActionResultAIResponseActionTypedTouchActionPointActionTouchPointWaitActionDto,
+]
+
+
 class AIActionResultAIResponseActionTypedTouchActionPoint(BaseModel):
     start: AIActionResultAIResponseActionTypedTouchActionPointStart
     """Initial touch point position"""
 
-    actions: Optional[List[object]] = None
+    actions: Optional[List[AIActionResultAIResponseActionTypedTouchActionPointAction]] = None
     """Sequence of actions to perform after initial touch"""
 
 

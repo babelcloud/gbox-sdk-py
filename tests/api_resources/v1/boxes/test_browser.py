@@ -225,16 +225,6 @@ class TestBrowser:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_switch_tab_with_all_params(self, client: GboxClient) -> None:
-        browser = client.v1.boxes.browser.switch_tab(
-            tab_id="tabId",
-            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            id="1",
-        )
-        assert_matches_type(BrowserSwitchTabResponse, browser, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
     def test_raw_response_switch_tab(self, client: GboxClient) -> None:
         response = client.v1.boxes.browser.with_raw_response.switch_tab(
             tab_id="tabId",
@@ -536,16 +526,6 @@ class TestAsyncBrowser:
         browser = await async_client.v1.boxes.browser.switch_tab(
             tab_id="tabId",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-        )
-        assert_matches_type(BrowserSwitchTabResponse, browser, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_switch_tab_with_all_params(self, async_client: AsyncGboxClient) -> None:
-        browser = await async_client.v1.boxes.browser.switch_tab(
-            tab_id="tabId",
-            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            id="1",
         )
         assert_matches_type(BrowserSwitchTabResponse, browser, path=["response"])
 

@@ -53,7 +53,6 @@ from .android_list_app_response import AndroidListAppResponse as AndroidListAppR
 from .android_list_pkg_response import AndroidListPkgResponse as AndroidListPkgResponse
 from .browser_get_tabs_response import BrowserGetTabsResponse as BrowserGetTabsResponse
 from .browser_open_tab_response import BrowserOpenTabResponse as BrowserOpenTabResponse
-from .browser_switch_tab_params import BrowserSwitchTabParams as BrowserSwitchTabParams
 from .browser_update_tab_params import BrowserUpdateTabParams as BrowserUpdateTabParams
 from .action_press_button_params import ActionPressButtonParams as ActionPressButtonParams
 from .action_screenshot_response import ActionScreenshotResponse as ActionScreenshotResponse

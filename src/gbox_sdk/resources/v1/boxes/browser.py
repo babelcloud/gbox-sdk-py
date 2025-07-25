@@ -15,12 +15,7 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.v1.boxes import (
-    browser_cdp_url_params,
-    browser_open_tab_params,
-    browser_switch_tab_params,
-    browser_update_tab_params,
-)
+from ....types.v1.boxes import browser_cdp_url_params, browser_open_tab_params, browser_update_tab_params
 from ....types.v1.boxes.browser_get_tabs_response import BrowserGetTabsResponse
 from ....types.v1.boxes.browser_open_tab_response import BrowserOpenTabResponse
 from ....types.v1.boxes.browser_close_tab_response import BrowserCloseTabResponse
@@ -218,7 +213,6 @@ class BrowserResource(SyncAPIResource):
         tab_id: str,
         *,
         box_id: str,
-        id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -234,8 +228,6 @@ class BrowserResource(SyncAPIResource):
         sessions and controlling which tab is currently in focus.
 
         Args:
-          id: The tab id
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -250,7 +242,6 @@ class BrowserResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `tab_id` but received {tab_id!r}")
         return self._post(
             f"/boxes/{box_id}/browser/tabs/{tab_id}/switch",
-            body=maybe_transform({"id": id}, browser_switch_tab_params.BrowserSwitchTabParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -492,7 +483,6 @@ class AsyncBrowserResource(AsyncAPIResource):
         tab_id: str,
         *,
         box_id: str,
-        id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -508,8 +498,6 @@ class AsyncBrowserResource(AsyncAPIResource):
         sessions and controlling which tab is currently in focus.
 
         Args:
-          id: The tab id
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -524,7 +512,6 @@ class AsyncBrowserResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `tab_id` but received {tab_id!r}")
         return await self._post(
             f"/boxes/{box_id}/browser/tabs/{tab_id}/switch",
-            body=await async_maybe_transform({"id": id}, browser_switch_tab_params.BrowserSwitchTabParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

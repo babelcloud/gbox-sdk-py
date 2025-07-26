@@ -613,6 +613,37 @@ class BoxesResource(SyncAPIResource):
             ),
         )
 
+    def storage_key(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return self._post(
+            f"/boxes/{box_id}/storage-key",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+        )
+
     def terminate(
         self,
         box_id: str,
@@ -1267,6 +1298,37 @@ class AsyncBoxesResource(AsyncAPIResource):
             ),
         )
 
+    async def storage_key(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return await self._post(
+            f"/boxes/{box_id}/storage-key",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+        )
+
     async def terminate(
         self,
         box_id: str,
@@ -1422,6 +1484,9 @@ class BoxesResourceWithRawResponse:
         self.stop = to_raw_response_wrapper(
             boxes.stop,
         )
+        self.storage_key = to_raw_response_wrapper(
+            boxes.storage_key,
+        )
         self.terminate = to_raw_response_wrapper(
             boxes.terminate,
         )
@@ -1482,6 +1547,9 @@ class AsyncBoxesResourceWithRawResponse:
         )
         self.stop = async_to_raw_response_wrapper(
             boxes.stop,
+        )
+        self.storage_key = async_to_raw_response_wrapper(
+            boxes.storage_key,
         )
         self.terminate = async_to_raw_response_wrapper(
             boxes.terminate,
@@ -1544,6 +1612,9 @@ class BoxesResourceWithStreamingResponse:
         self.stop = to_streamed_response_wrapper(
             boxes.stop,
         )
+        self.storage_key = to_streamed_response_wrapper(
+            boxes.storage_key,
+        )
         self.terminate = to_streamed_response_wrapper(
             boxes.terminate,
         )
@@ -1604,6 +1675,9 @@ class AsyncBoxesResourceWithStreamingResponse:
         )
         self.stop = async_to_streamed_response_wrapper(
             boxes.stop,
+        )
+        self.storage_key = async_to_streamed_response_wrapper(
+            boxes.storage_key,
         )
         self.terminate = async_to_streamed_response_wrapper(
             boxes.terminate,

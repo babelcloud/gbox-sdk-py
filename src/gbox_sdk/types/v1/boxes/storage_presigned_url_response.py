@@ -2,6 +2,6 @@
 
 from typing_extensions import TypeAlias
 
-__all__ = ["BoxStorageKeyResponse"]
+__all__ = ["StoragePresignedURLResponse"]
 
-BoxStorageKeyResponse: TypeAlias = str
+StoragePresignedURLResponse: TypeAlias = str

@@ -50,6 +50,7 @@ class TestActions:
             background="The user is on the login page",
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
             settings={
                 "disable_actions": ["swipe"],
@@ -116,6 +117,7 @@ class TestActions:
             double=False,
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionClickResponse, action, path=["response"])
@@ -192,6 +194,7 @@ class TestActions:
             duration="500ms",
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionDragResponse, action, path=["response"])
@@ -298,6 +301,7 @@ class TestActions:
             duration="50ms",
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionDragResponse, action, path=["response"])
@@ -453,6 +457,7 @@ class TestActions:
             y=300,
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionMoveResponse, action, path=["response"])
@@ -514,6 +519,7 @@ class TestActions:
             buttons=["power"],
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionPressButtonResponse, action, path=["response"])
@@ -573,6 +579,7 @@ class TestActions:
             combination=True,
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionPressKeyResponse, action, path=["response"])
@@ -786,6 +793,7 @@ class TestActions:
             y=100,
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionScrollResponse, action, path=["response"])
@@ -855,6 +863,7 @@ class TestActions:
             duration="500ms",
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionSwipeResponse, action, path=["response"])
@@ -928,6 +937,7 @@ class TestActions:
             duration="500ms",
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionSwipeResponse, action, path=["response"])
@@ -1029,6 +1039,7 @@ class TestActions:
             ],
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionTouchResponse, action, path=["response"])
@@ -1109,6 +1120,7 @@ class TestActions:
             include_screenshot=False,
             mode="append",
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionTypeResponse, action, path=["response"])
@@ -1174,6 +1186,7 @@ class TestAsyncActions:
             background="The user is on the login page",
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
             settings={
                 "disable_actions": ["swipe"],
@@ -1240,6 +1253,7 @@ class TestAsyncActions:
             double=False,
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionClickResponse, action, path=["response"])
@@ -1316,6 +1330,7 @@ class TestAsyncActions:
             duration="500ms",
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionDragResponse, action, path=["response"])
@@ -1422,6 +1437,7 @@ class TestAsyncActions:
             duration="50ms",
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionDragResponse, action, path=["response"])
@@ -1577,6 +1593,7 @@ class TestAsyncActions:
             y=300,
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionMoveResponse, action, path=["response"])
@@ -1638,6 +1655,7 @@ class TestAsyncActions:
             buttons=["power"],
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionPressButtonResponse, action, path=["response"])
@@ -1697,6 +1715,7 @@ class TestAsyncActions:
             combination=True,
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionPressKeyResponse, action, path=["response"])
@@ -1910,6 +1929,7 @@ class TestAsyncActions:
             y=100,
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionScrollResponse, action, path=["response"])
@@ -1979,6 +1999,7 @@ class TestAsyncActions:
             duration="500ms",
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionSwipeResponse, action, path=["response"])
@@ -2052,6 +2073,7 @@ class TestAsyncActions:
             duration="500ms",
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionSwipeResponse, action, path=["response"])
@@ -2153,6 +2175,7 @@ class TestAsyncActions:
             ],
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionTouchResponse, action, path=["response"])
@@ -2233,6 +2256,7 @@ class TestAsyncActions:
             include_screenshot=False,
             mode="append",
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionTypeResponse, action, path=["response"])

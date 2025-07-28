@@ -79,6 +79,7 @@ class ActionsResource(SyncAPIResource):
         background: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         settings: action_ai_params.Settings | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -108,6 +109,11 @@ class ActionsResource(SyncAPIResource):
               object will still be returned but with empty URIs. Default is false.
 
           output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
 
@@ -146,6 +152,7 @@ class ActionsResource(SyncAPIResource):
                         "background": background,
                         "include_screenshot": include_screenshot,
                         "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
                         "screenshot_delay": screenshot_delay,
                         "settings": settings,
                     },
@@ -168,6 +175,7 @@ class ActionsResource(SyncAPIResource):
         double: bool | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -192,6 +200,11 @@ class ActionsResource(SyncAPIResource):
               object will still be returned but with empty URIs. Default is false.
 
           output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
 
@@ -230,6 +243,7 @@ class ActionsResource(SyncAPIResource):
                         "double": double,
                         "include_screenshot": include_screenshot,
                         "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
                         "screenshot_delay": screenshot_delay,
                     },
                     action_click_params.ActionClickParams,
@@ -253,6 +267,7 @@ class ActionsResource(SyncAPIResource):
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -278,6 +293,11 @@ class ActionsResource(SyncAPIResource):
               object will still be returned but with empty URIs. Default is false.
 
           output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
 
@@ -313,6 +333,7 @@ class ActionsResource(SyncAPIResource):
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -336,6 +357,11 @@ class ActionsResource(SyncAPIResource):
               object will still be returned but with empty URIs. Default is false.
 
           output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
 
@@ -372,6 +398,7 @@ class ActionsResource(SyncAPIResource):
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         path: Iterable[action_drag_params.DragAdvancedPath] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -394,6 +421,7 @@ class ActionsResource(SyncAPIResource):
                         "duration": duration,
                         "include_screenshot": include_screenshot,
                         "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
                         "screenshot_delay": screenshot_delay,
                         "path": path,
                     },
@@ -471,6 +499,7 @@ class ActionsResource(SyncAPIResource):
         y: float,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -491,6 +520,11 @@ class ActionsResource(SyncAPIResource):
               object will still be returned but with empty URIs. Default is false.
 
           output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
 
@@ -527,6 +561,7 @@ class ActionsResource(SyncAPIResource):
                         "y": y,
                         "include_screenshot": include_screenshot,
                         "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
                         "screenshot_delay": screenshot_delay,
                     },
                     action_move_params.ActionMoveParams,
@@ -547,6 +582,7 @@ class ActionsResource(SyncAPIResource):
         buttons: List[Literal["power", "volumeUp", "volumeDown", "volumeMute", "home", "back", "menu", "appSwitch"]],
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -567,6 +603,11 @@ class ActionsResource(SyncAPIResource):
               object will still be returned but with empty URIs. Default is false.
 
           output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
 
@@ -602,6 +643,7 @@ class ActionsResource(SyncAPIResource):
                         "buttons": buttons,
                         "include_screenshot": include_screenshot,
                         "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
                         "screenshot_delay": screenshot_delay,
                     },
                     action_press_button_params.ActionPressButtonParams,
@@ -736,6 +778,7 @@ class ActionsResource(SyncAPIResource):
         combination: bool | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -761,6 +804,11 @@ class ActionsResource(SyncAPIResource):
               object will still be returned but with empty URIs. Default is false.
 
           output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
 
@@ -797,6 +845,7 @@ class ActionsResource(SyncAPIResource):
                         "combination": combination,
                         "include_screenshot": include_screenshot,
                         "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
                         "screenshot_delay": screenshot_delay,
                     },
                     action_press_key_params.ActionPressKeyParams,
@@ -957,6 +1006,7 @@ class ActionsResource(SyncAPIResource):
         y: float,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -981,6 +1031,11 @@ class ActionsResource(SyncAPIResource):
               object will still be returned but with empty URIs. Default is false.
 
           output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
 
@@ -1019,6 +1074,7 @@ class ActionsResource(SyncAPIResource):
                         "y": y,
                         "include_screenshot": include_screenshot,
                         "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
                         "screenshot_delay": screenshot_delay,
                     },
                     action_scroll_params.ActionScrollParams,
@@ -1042,6 +1098,7 @@ class ActionsResource(SyncAPIResource):
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1069,6 +1126,11 @@ class ActionsResource(SyncAPIResource):
               object will still be returned but with empty URIs. Default is false.
 
           output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
 
@@ -1105,6 +1167,7 @@ class ActionsResource(SyncAPIResource):
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1130,6 +1193,11 @@ class ActionsResource(SyncAPIResource):
               object will still be returned but with empty URIs. Default is false.
 
           output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
 
@@ -1167,6 +1235,7 @@ class ActionsResource(SyncAPIResource):
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         end: action_swipe_params.SwipeAdvancedEnd | NotGiven = NOT_GIVEN,
         start: action_swipe_params.SwipeAdvancedStart | NotGiven = NOT_GIVEN,
@@ -1190,6 +1259,7 @@ class ActionsResource(SyncAPIResource):
                         "duration": duration,
                         "include_screenshot": include_screenshot,
                         "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
                         "screenshot_delay": screenshot_delay,
                         "end": end,
                         "start": start,
@@ -1212,6 +1282,7 @@ class ActionsResource(SyncAPIResource):
         points: Iterable[action_touch_params.Point],
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1230,6 +1301,11 @@ class ActionsResource(SyncAPIResource):
               object will still be returned but with empty URIs. Default is false.
 
           output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
 
@@ -1265,6 +1341,7 @@ class ActionsResource(SyncAPIResource):
                         "points": points,
                         "include_screenshot": include_screenshot,
                         "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
                         "screenshot_delay": screenshot_delay,
                     },
                     action_touch_params.ActionTouchParams,
@@ -1286,6 +1363,7 @@ class ActionsResource(SyncAPIResource):
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         mode: Literal["append", "replace"] | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1309,6 +1387,11 @@ class ActionsResource(SyncAPIResource):
               all existing text
 
           output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
 
@@ -1345,6 +1428,7 @@ class ActionsResource(SyncAPIResource):
                         "include_screenshot": include_screenshot,
                         "mode": mode,
                         "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
                         "screenshot_delay": screenshot_delay,
                     },
                     action_type_params.ActionTypeParams,
@@ -1387,6 +1471,7 @@ class AsyncActionsResource(AsyncAPIResource):
         background: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         settings: action_ai_params.Settings | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1416,6 +1501,11 @@ class AsyncActionsResource(AsyncAPIResource):
               object will still be returned but with empty URIs. Default is false.
 
           output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
 
@@ -1454,6 +1544,7 @@ class AsyncActionsResource(AsyncAPIResource):
                         "background": background,
                         "include_screenshot": include_screenshot,
                         "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
                         "screenshot_delay": screenshot_delay,
                         "settings": settings,
                     },
@@ -1476,6 +1567,7 @@ class AsyncActionsResource(AsyncAPIResource):
         double: bool | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1500,6 +1592,11 @@ class AsyncActionsResource(AsyncAPIResource):
               object will still be returned but with empty URIs. Default is false.
 
           output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
 
@@ -1538,6 +1635,7 @@ class AsyncActionsResource(AsyncAPIResource):
                         "double": double,
                         "include_screenshot": include_screenshot,
                         "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
                         "screenshot_delay": screenshot_delay,
                     },
                     action_click_params.ActionClickParams,
@@ -1561,6 +1659,7 @@ class AsyncActionsResource(AsyncAPIResource):
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1586,6 +1685,11 @@ class AsyncActionsResource(AsyncAPIResource):
               object will still be returned but with empty URIs. Default is false.
 
           output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
 
@@ -1621,6 +1725,7 @@ class AsyncActionsResource(AsyncAPIResource):
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1644,6 +1749,11 @@ class AsyncActionsResource(AsyncAPIResource):
               object will still be returned but with empty URIs. Default is false.
 
           output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
 
@@ -1680,6 +1790,7 @@ class AsyncActionsResource(AsyncAPIResource):
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         path: Iterable[action_drag_params.DragAdvancedPath] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1702,6 +1813,7 @@ class AsyncActionsResource(AsyncAPIResource):
                         "duration": duration,
                         "include_screenshot": include_screenshot,
                         "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
                         "screenshot_delay": screenshot_delay,
                         "path": path,
                     },
@@ -1779,6 +1891,7 @@ class AsyncActionsResource(AsyncAPIResource):
         y: float,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1799,6 +1912,11 @@ class AsyncActionsResource(AsyncAPIResource):
               object will still be returned but with empty URIs. Default is false.
 
           output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
 
@@ -1835,6 +1953,7 @@ class AsyncActionsResource(AsyncAPIResource):
                         "y": y,
                         "include_screenshot": include_screenshot,
                         "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
                         "screenshot_delay": screenshot_delay,
                     },
                     action_move_params.ActionMoveParams,
@@ -1855,6 +1974,7 @@ class AsyncActionsResource(AsyncAPIResource):
         buttons: List[Literal["power", "volumeUp", "volumeDown", "volumeMute", "home", "back", "menu", "appSwitch"]],
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1875,6 +1995,11 @@ class AsyncActionsResource(AsyncAPIResource):
               object will still be returned but with empty URIs. Default is false.
 
           output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
 
@@ -1910,6 +2035,7 @@ class AsyncActionsResource(AsyncAPIResource):
                         "buttons": buttons,
                         "include_screenshot": include_screenshot,
                         "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
                         "screenshot_delay": screenshot_delay,
                     },
                     action_press_button_params.ActionPressButtonParams,
@@ -2044,6 +2170,7 @@ class AsyncActionsResource(AsyncAPIResource):
         combination: bool | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -2069,6 +2196,11 @@ class AsyncActionsResource(AsyncAPIResource):
               object will still be returned but with empty URIs. Default is false.
 
           output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
 
@@ -2105,6 +2237,7 @@ class AsyncActionsResource(AsyncAPIResource):
                         "combination": combination,
                         "include_screenshot": include_screenshot,
                         "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
                         "screenshot_delay": screenshot_delay,
                     },
                     action_press_key_params.ActionPressKeyParams,
@@ -2265,6 +2398,7 @@ class AsyncActionsResource(AsyncAPIResource):
         y: float,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -2289,6 +2423,11 @@ class AsyncActionsResource(AsyncAPIResource):
               object will still be returned but with empty URIs. Default is false.
 
           output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
 
@@ -2327,6 +2466,7 @@ class AsyncActionsResource(AsyncAPIResource):
                         "y": y,
                         "include_screenshot": include_screenshot,
                         "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
                         "screenshot_delay": screenshot_delay,
                     },
                     action_scroll_params.ActionScrollParams,
@@ -2350,6 +2490,7 @@ class AsyncActionsResource(AsyncAPIResource):
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -2377,6 +2518,11 @@ class AsyncActionsResource(AsyncAPIResource):
               object will still be returned but with empty URIs. Default is false.
 
           output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
 
@@ -2413,6 +2559,7 @@ class AsyncActionsResource(AsyncAPIResource):
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -2438,6 +2585,11 @@ class AsyncActionsResource(AsyncAPIResource):
               object will still be returned but with empty URIs. Default is false.
 
           output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
 
@@ -2475,6 +2627,7 @@ class AsyncActionsResource(AsyncAPIResource):
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         end: action_swipe_params.SwipeAdvancedEnd | NotGiven = NOT_GIVEN,
         start: action_swipe_params.SwipeAdvancedStart | NotGiven = NOT_GIVEN,
@@ -2498,6 +2651,7 @@ class AsyncActionsResource(AsyncAPIResource):
                         "duration": duration,
                         "include_screenshot": include_screenshot,
                         "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
                         "screenshot_delay": screenshot_delay,
                         "end": end,
                         "start": start,
@@ -2520,6 +2674,7 @@ class AsyncActionsResource(AsyncAPIResource):
         points: Iterable[action_touch_params.Point],
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -2538,6 +2693,11 @@ class AsyncActionsResource(AsyncAPIResource):
               object will still be returned but with empty URIs. Default is false.
 
           output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
 
@@ -2573,6 +2733,7 @@ class AsyncActionsResource(AsyncAPIResource):
                         "points": points,
                         "include_screenshot": include_screenshot,
                         "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
                         "screenshot_delay": screenshot_delay,
                     },
                     action_touch_params.ActionTouchParams,
@@ -2594,6 +2755,7 @@ class AsyncActionsResource(AsyncAPIResource):
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         mode: Literal["append", "replace"] | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -2617,6 +2779,11 @@ class AsyncActionsResource(AsyncAPIResource):
               all existing text
 
           output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
 
@@ -2653,6 +2820,7 @@ class AsyncActionsResource(AsyncAPIResource):
                         "include_screenshot": include_screenshot,
                         "mode": mode,
                         "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
                         "screenshot_delay": screenshot_delay,
                     },
                     action_type_params.ActionTypeParams,

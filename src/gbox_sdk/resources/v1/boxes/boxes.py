@@ -39,6 +39,14 @@ from .browser import (
     BrowserResourceWithStreamingResponse,
     AsyncBrowserResourceWithStreamingResponse,
 )
+from .storage import (
+    StorageResource,
+    AsyncStorageResource,
+    StorageResourceWithRawResponse,
+    AsyncStorageResourceWithRawResponse,
+    StorageResourceWithStreamingResponse,
+    AsyncStorageResourceWithStreamingResponse,
+)
 from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
@@ -79,6 +87,10 @@ __all__ = ["BoxesResource", "AsyncBoxesResource"]
 
 
 class BoxesResource(SyncAPIResource):
+    @cached_property
+    def storage(self) -> StorageResource:
+        return StorageResource(self._client)
+
     @cached_property
     def actions(self) -> ActionsResource:
         return ActionsResource(self._client)
@@ -613,37 +625,6 @@ class BoxesResource(SyncAPIResource):
             ),
         )
 
-    def storage_key(
-        self,
-        box_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> str:
-        """
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not box_id:
-            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return self._post(
-            f"/boxes/{box_id}/storage-key",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=str,
-        )
-
     def terminate(
         self,
         box_id: str,
@@ -764,6 +745,10 @@ class BoxesResource(SyncAPIResource):
 
 
 class AsyncBoxesResource(AsyncAPIResource):
+    @cached_property
+    def storage(self) -> AsyncStorageResource:
+        return AsyncStorageResource(self._client)
+
     @cached_property
     def actions(self) -> AsyncActionsResource:
         return AsyncActionsResource(self._client)
@@ -1298,37 +1283,6 @@ class AsyncBoxesResource(AsyncAPIResource):
             ),
         )
 
-    async def storage_key(
-        self,
-        box_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> str:
-        """
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not box_id:
-            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return await self._post(
-            f"/boxes/{box_id}/storage-key",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=str,
-        )
-
     async def terminate(
         self,
         box_id: str,
@@ -1484,9 +1438,6 @@ class BoxesResourceWithRawResponse:
         self.stop = to_raw_response_wrapper(
             boxes.stop,
         )
-        self.storage_key = to_raw_response_wrapper(
-            boxes.storage_key,
-        )
         self.terminate = to_raw_response_wrapper(
             boxes.terminate,
         )
@@ -1496,6 +1447,10 @@ class BoxesResourceWithRawResponse:
         self.websocket_url = to_raw_response_wrapper(
             boxes.websocket_url,
         )
+
+    @cached_property
+    def storage(self) -> StorageResourceWithRawResponse:
+        return StorageResourceWithRawResponse(self._boxes.storage)
 
     @cached_property
     def actions(self) -> ActionsResourceWithRawResponse:
@@ -1548,9 +1503,6 @@ class AsyncBoxesResourceWithRawResponse:
         self.stop = async_to_raw_response_wrapper(
             boxes.stop,
         )
-        self.storage_key = async_to_raw_response_wrapper(
-            boxes.storage_key,
-        )
         self.terminate = async_to_raw_response_wrapper(
             boxes.terminate,
         )
@@ -1560,6 +1512,10 @@ class AsyncBoxesResourceWithRawResponse:
         self.websocket_url = async_to_raw_response_wrapper(
             boxes.websocket_url,
         )
+
+    @cached_property
+    def storage(self) -> AsyncStorageResourceWithRawResponse:
+        return AsyncStorageResourceWithRawResponse(self._boxes.storage)
 
     @cached_property
     def actions(self) -> AsyncActionsResourceWithRawResponse:
@@ -1612,9 +1568,6 @@ class BoxesResourceWithStreamingResponse:
         self.stop = to_streamed_response_wrapper(
             boxes.stop,
         )
-        self.storage_key = to_streamed_response_wrapper(
-            boxes.storage_key,
-        )
         self.terminate = to_streamed_response_wrapper(
             boxes.terminate,
         )
@@ -1624,6 +1577,10 @@ class BoxesResourceWithStreamingResponse:
         self.websocket_url = to_streamed_response_wrapper(
             boxes.websocket_url,
         )
+
+    @cached_property
+    def storage(self) -> StorageResourceWithStreamingResponse:
+        return StorageResourceWithStreamingResponse(self._boxes.storage)
 
     @cached_property
     def actions(self) -> ActionsResourceWithStreamingResponse:
@@ -1676,9 +1633,6 @@ class AsyncBoxesResourceWithStreamingResponse:
         self.stop = async_to_streamed_response_wrapper(
             boxes.stop,
         )
-        self.storage_key = async_to_streamed_response_wrapper(
-            boxes.storage_key,
-        )
         self.terminate = async_to_streamed_response_wrapper(
             boxes.terminate,
         )
@@ -1688,6 +1642,10 @@ class AsyncBoxesResourceWithStreamingResponse:
         self.websocket_url = async_to_streamed_response_wrapper(
             boxes.websocket_url,
         )
+
+    @cached_property
+    def storage(self) -> AsyncStorageResourceWithStreamingResponse:
+        return AsyncStorageResourceWithStreamingResponse(self._boxes.storage)
 
     @cached_property
     def actions(self) -> AsyncActionsResourceWithStreamingResponse:

@@ -95,6 +95,13 @@ class AIActionScreenshotResultAIResponseActionTypedClickAction(BaseModel):
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
     """Type of the URI. default is base64."""
 
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
+
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
     """Delay after performing the action, before taking the final screenshot.
 
@@ -179,6 +186,13 @@ class AIActionScreenshotResultAIResponseActionTypedTouchAction(BaseModel):
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
     """Type of the URI. default is base64."""
 
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
+
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
     """Delay after performing the action, before taking the final screenshot.
 
@@ -225,6 +239,13 @@ class AIActionScreenshotResultAIResponseActionTypedDragAdvancedAction(BaseModel)
 
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
     """Type of the URI. default is base64."""
+
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
     """Delay after performing the action, before taking the final screenshot.
@@ -284,6 +305,13 @@ class AIActionScreenshotResultAIResponseActionTypedDragSimpleAction(BaseModel):
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
     """Type of the URI. default is base64."""
 
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
+
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
     """Delay after performing the action, before taking the final screenshot.
 
@@ -324,6 +352,13 @@ class AIActionScreenshotResultAIResponseActionTypedScrollAction(BaseModel):
 
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
     """Type of the URI. default is base64."""
+
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
     """Delay after performing the action, before taking the final screenshot.
@@ -374,6 +409,13 @@ class AIActionScreenshotResultAIResponseActionTypedSwipeSimpleAction(BaseModel):
 
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
     """Type of the URI. default is base64."""
+
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
     """Delay after performing the action, before taking the final screenshot.
@@ -432,6 +474,13 @@ class AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedAction(BaseModel
 
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
     """Type of the URI. default is base64."""
+
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
     """Delay after performing the action, before taking the final screenshot.
@@ -588,6 +637,13 @@ class AIActionScreenshotResultAIResponseActionTypedPressKeyAction(BaseModel):
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
     """Type of the URI. default is base64."""
 
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
+
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
     """Delay after performing the action, before taking the final screenshot.
 
@@ -619,6 +675,13 @@ class AIActionScreenshotResultAIResponseActionTypedPressButtonAction(BaseModel):
 
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
     """Type of the URI. default is base64."""
+
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
     """Delay after performing the action, before taking the final screenshot.
@@ -658,6 +721,13 @@ class AIActionScreenshotResultAIResponseActionTypedTypeAction(BaseModel):
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
     """Type of the URI. default is base64."""
 
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
+
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
     """Delay after performing the action, before taking the final screenshot.
 
@@ -692,6 +762,13 @@ class AIActionScreenshotResultAIResponseActionTypedMoveAction(BaseModel):
 
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
     """Type of the URI. default is base64."""
+
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
     """Delay after performing the action, before taking the final screenshot.
@@ -759,6 +836,13 @@ class AIActionScreenshotResultAIResponseActionTypedWaitAction(BaseModel):
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
     """Type of the URI. default is base64."""
 
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
+
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
     """Delay after performing the action, before taking the final screenshot.
 
@@ -812,11 +896,17 @@ class AIActionScreenshotResultAIResponse(BaseModel):
 
 
 class AIActionScreenshotResultScreenshotAfter(BaseModel):
+    presigned_url: str = FieldInfo(alias="presignedUrl")
+    """Presigned url of the screenshot before the action"""
+
     uri: str
     """URI of the screenshot after the action"""
 
 
 class AIActionScreenshotResultScreenshotBefore(BaseModel):
+    presigned_url: str = FieldInfo(alias="presignedUrl")
+    """Presigned url of the screenshot before the action"""
+
     uri: str
     """URI of the screenshot before the action"""
 
@@ -870,6 +960,13 @@ class AIActionResultAIResponseActionTypedClickAction(BaseModel):
 
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
     """Type of the URI. default is base64."""
+
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
     """Delay after performing the action, before taking the final screenshot.
@@ -955,6 +1052,13 @@ class AIActionResultAIResponseActionTypedTouchAction(BaseModel):
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
     """Type of the URI. default is base64."""
 
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
+
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
     """Delay after performing the action, before taking the final screenshot.
 
@@ -1001,6 +1105,13 @@ class AIActionResultAIResponseActionTypedDragAdvancedAction(BaseModel):
 
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
     """Type of the URI. default is base64."""
+
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
     """Delay after performing the action, before taking the final screenshot.
@@ -1060,6 +1171,13 @@ class AIActionResultAIResponseActionTypedDragSimpleAction(BaseModel):
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
     """Type of the URI. default is base64."""
 
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
+
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
     """Delay after performing the action, before taking the final screenshot.
 
@@ -1100,6 +1218,13 @@ class AIActionResultAIResponseActionTypedScrollAction(BaseModel):
 
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
     """Type of the URI. default is base64."""
+
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
     """Delay after performing the action, before taking the final screenshot.
@@ -1150,6 +1275,13 @@ class AIActionResultAIResponseActionTypedSwipeSimpleAction(BaseModel):
 
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
     """Type of the URI. default is base64."""
+
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
     """Delay after performing the action, before taking the final screenshot.
@@ -1208,6 +1340,13 @@ class AIActionResultAIResponseActionTypedSwipeAdvancedAction(BaseModel):
 
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
     """Type of the URI. default is base64."""
+
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
     """Delay after performing the action, before taking the final screenshot.
@@ -1364,6 +1503,13 @@ class AIActionResultAIResponseActionTypedPressKeyAction(BaseModel):
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
     """Type of the URI. default is base64."""
 
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
+
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
     """Delay after performing the action, before taking the final screenshot.
 
@@ -1395,6 +1541,13 @@ class AIActionResultAIResponseActionTypedPressButtonAction(BaseModel):
 
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
     """Type of the URI. default is base64."""
+
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
     """Delay after performing the action, before taking the final screenshot.
@@ -1434,6 +1587,13 @@ class AIActionResultAIResponseActionTypedTypeAction(BaseModel):
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
     """Type of the URI. default is base64."""
 
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
+
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
     """Delay after performing the action, before taking the final screenshot.
 
@@ -1468,6 +1628,13 @@ class AIActionResultAIResponseActionTypedMoveAction(BaseModel):
 
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
     """Type of the URI. default is base64."""
+
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
     """Delay after performing the action, before taking the final screenshot.
@@ -1534,6 +1701,13 @@ class AIActionResultAIResponseActionTypedWaitAction(BaseModel):
 
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
     """Type of the URI. default is base64."""
+
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
     """Delay after performing the action, before taking the final screenshot.

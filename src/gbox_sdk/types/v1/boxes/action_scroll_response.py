@@ -3,6 +3,8 @@
 from typing import Union
 from typing_extensions import TypeAlias
 
+from pydantic import Field as FieldInfo
+
 from ...._models import BaseModel
 
 __all__ = [
@@ -17,11 +19,17 @@ __all__ = [
 
 
 class ActionIncludeScreenshotResultScreenshotAfter(BaseModel):
+    presigned_url: str = FieldInfo(alias="presignedUrl")
+    """Presigned url of the screenshot before the action"""
+
     uri: str
     """URI of the screenshot after the action"""
 
 
 class ActionIncludeScreenshotResultScreenshotBefore(BaseModel):
+    presigned_url: str = FieldInfo(alias="presignedUrl")
+    """Presigned url of the screenshot before the action"""
+
     uri: str
     """URI of the screenshot before the action"""
 

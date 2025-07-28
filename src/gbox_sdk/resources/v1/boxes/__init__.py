@@ -40,8 +40,22 @@ from .browser import (
     BrowserResourceWithStreamingResponse,
     AsyncBrowserResourceWithStreamingResponse,
 )
+from .storage import (
+    StorageResource,
+    AsyncStorageResource,
+    StorageResourceWithRawResponse,
+    AsyncStorageResourceWithRawResponse,
+    StorageResourceWithStreamingResponse,
+    AsyncStorageResourceWithStreamingResponse,
+)
 
 __all__ = [
+    "StorageResource",
+    "AsyncStorageResource",
+    "StorageResourceWithRawResponse",
+    "AsyncStorageResourceWithRawResponse",
+    "StorageResourceWithStreamingResponse",
+    "AsyncStorageResourceWithStreamingResponse",
     "ActionsResource",
     "AsyncActionsResource",
     "ActionsResourceWithRawResponse",

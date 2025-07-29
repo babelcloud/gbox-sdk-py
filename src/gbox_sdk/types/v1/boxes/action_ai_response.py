@@ -789,11 +789,42 @@ class AIActionScreenshotResultAIResponseActionTypedMoveAction(BaseModel):
 
 
 class AIActionScreenshotResultAIResponseActionTypedScreenRotationAction(BaseModel):
-    angle: Literal[90, 180, 270]
-    """Rotation angle in degrees"""
+    orientation: Literal["portrait", "landscapeLeft", "portraitUpsideDown", "landscapeRight"]
+    """Target screen orientation"""
 
-    direction: Literal["clockwise", "counter-clockwise"]
-    """Rotation direction"""
+    include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
+    """Whether to include screenshots in the action response.
+
+    If false, the screenshot object will still be returned but with empty URIs.
+    Default is false.
+    """
+
+    output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
+    """Type of the URI. default is base64."""
+
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
+
+    screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
+    """Delay after performing the action, before taking the final screenshot.
+
+    Execution flow:
+
+    1. Take screenshot before action
+    2. Perform the action
+    3. Wait for screenshotDelay (this parameter)
+    4. Take screenshot after action
+
+    Example: '500ms' means wait 500ms after the action before capturing the final
+    screenshot.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+    """
 
 
 class AIActionScreenshotResultAIResponseActionTypedScreenshotActionClip(BaseModel):
@@ -1655,11 +1686,42 @@ class AIActionResultAIResponseActionTypedMoveAction(BaseModel):
 
 
 class AIActionResultAIResponseActionTypedScreenRotationAction(BaseModel):
-    angle: Literal[90, 180, 270]
-    """Rotation angle in degrees"""
+    orientation: Literal["portrait", "landscapeLeft", "portraitUpsideDown", "landscapeRight"]
+    """Target screen orientation"""
 
-    direction: Literal["clockwise", "counter-clockwise"]
-    """Rotation direction"""
+    include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
+    """Whether to include screenshots in the action response.
+
+    If false, the screenshot object will still be returned but with empty URIs.
+    Default is false.
+    """
+
+    output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
+    """Type of the URI. default is base64."""
+
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
+
+    screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
+    """Delay after performing the action, before taking the final screenshot.
+
+    Execution flow:
+
+    1. Take screenshot before action
+    2. Perform the action
+    3. Wait for screenshotDelay (this parameter)
+    4. Take screenshot after action
+
+    Example: '500ms' means wait 500ms after the action before capturing the final
+    screenshot.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+    """
 
 
 class AIActionResultAIResponseActionTypedScreenshotActionClip(BaseModel):

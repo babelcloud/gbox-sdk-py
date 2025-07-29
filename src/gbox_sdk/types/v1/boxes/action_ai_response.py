@@ -927,19 +927,19 @@ class AIActionScreenshotResultAIResponse(BaseModel):
 
 
 class AIActionScreenshotResultScreenshotAfter(BaseModel):
-    presigned_url: str = FieldInfo(alias="presignedUrl")
-    """Presigned url of the screenshot before the action"""
-
     uri: str
     """URI of the screenshot after the action"""
 
-
-class AIActionScreenshotResultScreenshotBefore(BaseModel):
-    presigned_url: str = FieldInfo(alias="presignedUrl")
+    presigned_url: Optional[str] = FieldInfo(alias="presignedUrl", default=None)
     """Presigned url of the screenshot before the action"""
 
+
+class AIActionScreenshotResultScreenshotBefore(BaseModel):
     uri: str
     """URI of the screenshot before the action"""
+
+    presigned_url: Optional[str] = FieldInfo(alias="presignedUrl", default=None)
+    """Presigned url of the screenshot before the action"""
 
 
 class AIActionScreenshotResultScreenshotTrace(BaseModel):

@@ -320,7 +320,6 @@ class AndroidResource(SyncAPIResource):
         box_id: str,
         *,
         apk: FileTypes,
-        install_multiple: bool | NotGiven = NOT_GIVEN,
         open: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -335,11 +334,11 @@ class AndroidResource(SyncAPIResource):
         Args:
           apk: APK file or ZIP archive to install (max file size: 512MB).
 
-              **Single APK mode (installMultiple: false):**
+              **Single APK mode:**
 
               - Upload a single APK file (e.g., app.apk)
 
-              **Install-Multiple mode (installMultiple: true):**
+              **Install-Multiple mode:**
 
               - Upload a ZIP archive containing multiple APK files
               - ZIP filename example: com.reddit.frontpage-gplay.zip
@@ -351,12 +350,6 @@ class AndroidResource(SyncAPIResource):
 
               This is commonly used for split APKs where different components are separated by
               architecture, language, or screen density.
-
-          install_multiple: Whether to use 'adb install-multiple' command for installation. When true, uses
-              install-multiple which is useful for split APKs or when installing multiple
-              related packages. When false, uses standard 'adb install' command. Split APKs
-              are commonly used for apps with different architecture variants, language packs,
-              or modular components.
 
           open: Whether to open the app after installation. Will find and launch the launcher
               activity of the installed app. If there are multiple launcher activities, only
@@ -379,7 +372,6 @@ class AndroidResource(SyncAPIResource):
         box_id: str,
         *,
         apk: str,
-        install_multiple: bool | NotGiven = NOT_GIVEN,
         open: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -414,12 +406,6 @@ class AndroidResource(SyncAPIResource):
               This is commonly used for split APKs where different components are separated by
               architecture, language, or screen density.
 
-          install_multiple: Whether to use 'adb install-multiple' command for installation. When true, uses
-              install-multiple which is useful for split APKs or when installing multiple
-              related packages. When false, uses standard 'adb install' command. Split APKs
-              are commonly used for apps with different architecture variants, language packs,
-              or modular components.
-
           open: Whether to open the app after installation. Will find and launch the launcher
               activity of the installed app. If there are multiple launcher activities, only
               one will be opened. If the installed APK has no launcher activity, this
@@ -441,7 +427,6 @@ class AndroidResource(SyncAPIResource):
         box_id: str,
         *,
         apk: FileTypes | str,
-        install_multiple: bool | NotGiven = NOT_GIVEN,
         open: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -455,7 +440,6 @@ class AndroidResource(SyncAPIResource):
         body = deepcopy_minimal(
             {
                 "apk": apk,
-                "install_multiple": install_multiple,
                 "open": open,
             }
         )
@@ -1085,7 +1069,6 @@ class AsyncAndroidResource(AsyncAPIResource):
         box_id: str,
         *,
         apk: FileTypes,
-        install_multiple: bool | NotGiven = NOT_GIVEN,
         open: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1100,11 +1083,11 @@ class AsyncAndroidResource(AsyncAPIResource):
         Args:
           apk: APK file or ZIP archive to install (max file size: 512MB).
 
-              **Single APK mode (installMultiple: false):**
+              **Single APK mode:**
 
               - Upload a single APK file (e.g., app.apk)
 
-              **Install-Multiple mode (installMultiple: true):**
+              **Install-Multiple mode:**
 
               - Upload a ZIP archive containing multiple APK files
               - ZIP filename example: com.reddit.frontpage-gplay.zip
@@ -1116,12 +1099,6 @@ class AsyncAndroidResource(AsyncAPIResource):
 
               This is commonly used for split APKs where different components are separated by
               architecture, language, or screen density.
-
-          install_multiple: Whether to use 'adb install-multiple' command for installation. When true, uses
-              install-multiple which is useful for split APKs or when installing multiple
-              related packages. When false, uses standard 'adb install' command. Split APKs
-              are commonly used for apps with different architecture variants, language packs,
-              or modular components.
 
           open: Whether to open the app after installation. Will find and launch the launcher
               activity of the installed app. If there are multiple launcher activities, only
@@ -1144,7 +1121,6 @@ class AsyncAndroidResource(AsyncAPIResource):
         box_id: str,
         *,
         apk: str,
-        install_multiple: bool | NotGiven = NOT_GIVEN,
         open: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1179,12 +1155,6 @@ class AsyncAndroidResource(AsyncAPIResource):
               This is commonly used for split APKs where different components are separated by
               architecture, language, or screen density.
 
-          install_multiple: Whether to use 'adb install-multiple' command for installation. When true, uses
-              install-multiple which is useful for split APKs or when installing multiple
-              related packages. When false, uses standard 'adb install' command. Split APKs
-              are commonly used for apps with different architecture variants, language packs,
-              or modular components.
-
           open: Whether to open the app after installation. Will find and launch the launcher
               activity of the installed app. If there are multiple launcher activities, only
               one will be opened. If the installed APK has no launcher activity, this
@@ -1206,7 +1176,6 @@ class AsyncAndroidResource(AsyncAPIResource):
         box_id: str,
         *,
         apk: FileTypes | str,
-        install_multiple: bool | NotGiven = NOT_GIVEN,
         open: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1220,7 +1189,6 @@ class AsyncAndroidResource(AsyncAPIResource):
         body = deepcopy_minimal(
             {
                 "apk": apk,
-                "install_multiple": install_multiple,
                 "open": open,
             }
         )

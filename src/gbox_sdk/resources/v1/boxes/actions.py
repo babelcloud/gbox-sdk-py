@@ -903,8 +903,11 @@ class ActionsResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        angle: Literal[90, 180, 270],
-        direction: Literal["clockwise", "counter-clockwise"],
+        orientation: Literal["portrait", "landscapeLeft", "portraitUpsideDown", "landscapeRight"],
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -912,13 +915,39 @@ class ActionsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionScreenRotationResponse:
-        """
-        Rotate screen
+        """Rotate the screen orientation.
+
+        Note that even after rotating the screen,
+        applications or system layouts may not automatically adapt to the gravity sensor
+        changes, so visual changes may not always occur.
 
         Args:
-          angle: Rotation angle in degrees
+          orientation: Target screen orientation
 
-          direction: Rotation direction
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
+          output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
 
           extra_headers: Send extra headers
 
@@ -936,8 +965,11 @@ class ActionsResource(SyncAPIResource):
                 f"/boxes/{box_id}/actions/screen-rotation",
                 body=maybe_transform(
                     {
-                        "angle": angle,
-                        "direction": direction,
+                        "orientation": orientation,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
+                        "screenshot_delay": screenshot_delay,
                     },
                     action_screen_rotation_params.ActionScreenRotationParams,
                 ),
@@ -2295,8 +2327,11 @@ class AsyncActionsResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        angle: Literal[90, 180, 270],
-        direction: Literal["clockwise", "counter-clockwise"],
+        orientation: Literal["portrait", "landscapeLeft", "portraitUpsideDown", "landscapeRight"],
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2304,13 +2339,39 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionScreenRotationResponse:
-        """
-        Rotate screen
+        """Rotate the screen orientation.
+
+        Note that even after rotating the screen,
+        applications or system layouts may not automatically adapt to the gravity sensor
+        changes, so visual changes may not always occur.
 
         Args:
-          angle: Rotation angle in degrees
+          orientation: Target screen orientation
 
-          direction: Rotation direction
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
+          output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
 
           extra_headers: Send extra headers
 
@@ -2328,8 +2389,11 @@ class AsyncActionsResource(AsyncAPIResource):
                 f"/boxes/{box_id}/actions/screen-rotation",
                 body=await async_maybe_transform(
                     {
-                        "angle": angle,
-                        "direction": direction,
+                        "orientation": orientation,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
+                        "screenshot_delay": screenshot_delay,
                     },
                     action_screen_rotation_params.ActionScreenRotationParams,
                 ),

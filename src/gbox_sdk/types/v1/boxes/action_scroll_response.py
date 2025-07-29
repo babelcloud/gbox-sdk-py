@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Union
+from typing import Union, Optional
 from typing_extensions import TypeAlias
 
 from pydantic import Field as FieldInfo
@@ -19,19 +19,19 @@ __all__ = [
 
 
 class ActionIncludeScreenshotResultScreenshotAfter(BaseModel):
-    presigned_url: str = FieldInfo(alias="presignedUrl")
-    """Presigned url of the screenshot before the action"""
-
     uri: str
     """URI of the screenshot after the action"""
 
-
-class ActionIncludeScreenshotResultScreenshotBefore(BaseModel):
-    presigned_url: str = FieldInfo(alias="presignedUrl")
+    presigned_url: Optional[str] = FieldInfo(alias="presignedUrl", default=None)
     """Presigned url of the screenshot before the action"""
 
+
+class ActionIncludeScreenshotResultScreenshotBefore(BaseModel):
     uri: str
     """URI of the screenshot before the action"""
+
+    presigned_url: Optional[str] = FieldInfo(alias="presignedUrl", default=None)
+    """Presigned url of the screenshot before the action"""
 
 
 class ActionIncludeScreenshotResultScreenshotTrace(BaseModel):

@@ -10,7 +10,6 @@ import pytest
 from gbox_sdk import GboxClient, AsyncGboxClient
 from tests.utils import assert_matches_type
 from gbox_sdk.types.v1.boxes import (
-    ActionAIResponse,
     ActionDragResponse,
     ActionMoveResponse,
     ActionTypeResponse,
@@ -39,7 +38,7 @@ class TestActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             instruction="click the login button",
         )
-        assert_matches_type(ActionAIResponse, action, path=["response"])
+        assert action is None
 
     @pytest.mark.skip()
     @parametrize
@@ -56,8 +55,9 @@ class TestActions:
                 "disable_actions": ["swipe"],
                 "system_prompt": "You are a helpful assistant specialized in UI automation. When given a screenshot and instruction, analyze the visual elements carefully and execute the most appropriate action. Always prioritize user safety and avoid destructive actions unless explicitly requested.",
             },
+            stream=False,
         )
-        assert_matches_type(ActionAIResponse, action, path=["response"])
+        assert action is None
 
     @pytest.mark.skip()
     @parametrize
@@ -70,7 +70,7 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionAIResponse, action, path=["response"])
+        assert action is None
 
     @pytest.mark.skip()
     @parametrize
@@ -83,7 +83,7 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionAIResponse, action, path=["response"])
+            assert action is None
 
         assert cast(Any, response.is_closed) is True
 
@@ -1184,7 +1184,7 @@ class TestAsyncActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             instruction="click the login button",
         )
-        assert_matches_type(ActionAIResponse, action, path=["response"])
+        assert action is None
 
     @pytest.mark.skip()
     @parametrize
@@ -1201,8 +1201,9 @@ class TestAsyncActions:
                 "disable_actions": ["swipe"],
                 "system_prompt": "You are a helpful assistant specialized in UI automation. When given a screenshot and instruction, analyze the visual elements carefully and execute the most appropriate action. Always prioritize user safety and avoid destructive actions unless explicitly requested.",
             },
+            stream=False,
         )
-        assert_matches_type(ActionAIResponse, action, path=["response"])
+        assert action is None
 
     @pytest.mark.skip()
     @parametrize
@@ -1215,7 +1216,7 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionAIResponse, action, path=["response"])
+        assert action is None
 
     @pytest.mark.skip()
     @parametrize
@@ -1228,7 +1229,7 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionAIResponse, action, path=["response"])
+            assert action is None
 
         assert cast(Any, response.is_closed) is True
 

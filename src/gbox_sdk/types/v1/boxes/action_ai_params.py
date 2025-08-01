@@ -62,6 +62,13 @@ class ActionAIParams(TypedDict, total=False):
     settings: Settings
     """AI action settings"""
 
+    stream: bool
+    """Whether to stream progress events using Server-Sent Events (SSE).
+
+    When true, the API returns an event stream. When false or omitted, the API
+    returns a normal JSON response.
+    """
+
 
 class Settings(TypedDict, total=False):
     disable_actions: Annotated[List[str], PropertyInfo(alias="disableActions")]

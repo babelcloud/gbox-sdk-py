@@ -41,7 +41,6 @@ class AndroidPkgManager:
         self,
         *,
         apk: Union[str, FileTypes],
-        install_multiple: Union[bool, NotGiven] = NOT_GIVEN,
         open: Union[bool, NotGiven] = NOT_GIVEN,
     ) -> AndroidInstallResponse:
         """
@@ -70,12 +69,6 @@ class AndroidPkgManager:
               This is commonly used for split APKs where different components are separated by
               architecture, language, or screen density.
 
-            install_multiple: Whether to use 'adb install-multiple' command for installation. When true, uses
-                install-multiple which is useful for split APKs or when installing multiple
-                related packages. When false, uses standard 'adb install' command. Split APKs
-                are commonly used for apps with different architecture variants, language packs,
-                or modular components.
-
             open: Whether to open the app after installation. Will find and launch the launcher
                 activity of the installed app. If there are multiple launcher activities, only
                 one will be opened. If the installed APK has no launcher activity, this
@@ -93,15 +86,15 @@ class AndroidPkgManager:
                 raise FileNotFoundError(f"File {apk} does not exist")
             with _open(apk, "rb") as apk_file:
                 return self.client.v1.boxes.android.install(
-                    box_id=self.box.id, apk=apk_file, install_multiple=install_multiple, open=open
+                    box_id=self.box.id, apk=apk_file, open=open
                 )
         elif isinstance(apk, str) and apk.startswith("http"):
             return self.client.v1.boxes.android.install(
-                box_id=self.box.id, apk=apk, install_multiple=install_multiple, open=open
+                box_id=self.box.id, apk=apk, open=open
             )
 
         return self.client.v1.boxes.android.install(
-            box_id=self.box.id, apk=apk, install_multiple=install_multiple, open=open
+            box_id=self.box.id, apk=apk, open=open
         )
 
     def uninstall(self, package_name: str, *, keep_data: Union[bool, NotGiven] = NOT_GIVEN) -> None:

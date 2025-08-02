@@ -41,7 +41,6 @@ class AndroidAppManager:
         self,
         *,
         apk: Union[str, FileTypes],
-        install_multiple: Union[bool, NotGiven] = NOT_GIVEN,
         open: Union[bool, NotGiven] = NOT_GIVEN,
     ) -> AndroidAppOperator:
         """
@@ -103,13 +102,13 @@ class AndroidAppManager:
                     raise FileNotFoundError(f"File {file_path} does not exist")
                 with _open(file_path, "rb") as apk_file:
                     res = self.client.v1.boxes.android.install(
-                        box_id=self.box.id, apk=apk_file, install_multiple=install_multiple, open=open
+                        box_id=self.box.id, apk=apk_file, open=open
                     )
                     return self._install_res_to_operator(res)
             elif apk.startswith("http"):
                 # Handle http/https URLs
                 res = self.client.v1.boxes.android.install(
-                    box_id=self.box.id, apk=apk, install_multiple=install_multiple, open=open
+                    box_id=self.box.id, apk=apk, open=open
                 )
                 return self._install_res_to_operator(res)
             else:
@@ -118,13 +117,13 @@ class AndroidAppManager:
                     raise FileNotFoundError(f"File {apk} does not exist")
                 with _open(apk, "rb") as apk_file:
                     res = self.client.v1.boxes.android.install(
-                        box_id=self.box.id, apk=apk_file, install_multiple=install_multiple, open=open
+                        box_id=self.box.id, apk=apk_file, open=open
                     )
                     return self._install_res_to_operator(res)
 
         # Handle file objects or other types
         res = self.client.v1.boxes.android.install(
-            box_id=self.box.id, apk=apk, install_multiple=install_multiple, open=open
+            box_id=self.box.id, apk=apk, open=open
         )
         return self._install_res_to_operator(res)
 

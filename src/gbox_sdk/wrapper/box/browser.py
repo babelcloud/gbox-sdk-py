@@ -3,6 +3,7 @@ from typing_extensions import List
 from gbox_sdk._client import GboxClient
 from gbox_sdk.types.v1.boxes.browser_get_tabs_response import Data, BrowserGetTabsResponse
 from gbox_sdk.types.v1.boxes.browser_close_tab_response import BrowserCloseTabResponse
+from gbox_sdk.types.v1.boxes.browser_switch_tab_response import BrowserSwitchTabResponse
 from gbox_sdk.types.v1.boxes.browser_update_tab_response import BrowserUpdateTabResponse
 
 
@@ -108,6 +109,22 @@ class BrowserOperator:
             >>> box.browser.close_tab("1")
         """
         return self.client.v1.boxes.browser.close_tab(tab_id=tab_id, box_id=self.box_id)
+
+    def switch_tab(self, tab_id: str) -> BrowserSwitchTabResponse:
+        """
+        Switch to a specific browser tab by bringing it to the foreground (making it the
+        active/frontmost tab). This operation sets the specified tab as the currently
+        active tab without changing its URL or content. The tab will receive focus and
+        become visible to the user. This is useful for managing multiple browser
+        sessions and controlling which tab is currently in focus.
+
+        Args:
+            tab_id: The tab id
+
+        Example:
+            >>> box.browser.switch_tab("1")
+        """
+        return self.client.v1.boxes.browser.switch_tab(tab_id=tab_id, box_id=self.box_id)
 
 
 class BrowserTabOperator:

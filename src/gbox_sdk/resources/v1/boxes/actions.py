@@ -7,7 +7,7 @@ from typing_extensions import Literal, overload
 
 import httpx
 
-from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
+from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ...._utils import required_args, maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -33,6 +33,7 @@ from ....types.v1.boxes import (
     action_press_button_params,
     action_screen_rotation_params,
 )
+from ....types.v1.boxes.action_ai_response import ActionAIResponse
 from ....types.v1.boxes.action_drag_response import ActionDragResponse
 from ....types.v1.boxes.action_move_response import ActionMoveResponse
 from ....types.v1.boxes.action_type_response import ActionTypeResponse
@@ -88,11 +89,12 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
+    ) -> ActionAIResponse:
         """Use natural language instructions to perform UI operations on the box.
 
         The
-        endpoint will stream progress events before and after the action is executed.
+        endpoint will stream progress events before and after the action is executed. If
+        you don't need intermediate events, set stream to false.
 
         Args:
           instruction: Direct instruction of the UI action to perform (e.g., 'click the login button',
@@ -143,26 +145,28 @@ class ActionsResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        return self._post(
-            f"/boxes/{box_id}/actions/ai",
-            body=maybe_transform(
-                {
-                    "instruction": instruction,
-                    "background": background,
-                    "include_screenshot": include_screenshot,
-                    "output_format": output_format,
-                    "presigned_expires_in": presigned_expires_in,
-                    "screenshot_delay": screenshot_delay,
-                    "settings": settings,
-                    "stream": stream,
-                },
-                action_ai_params.ActionAIParams,
+        return cast(
+            ActionAIResponse,
+            self._post(
+                f"/boxes/{box_id}/actions/ai",
+                body=maybe_transform(
+                    {
+                        "instruction": instruction,
+                        "background": background,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
+                        "screenshot_delay": screenshot_delay,
+                        "settings": settings,
+                        "stream": stream,
+                    },
+                    action_ai_params.ActionAIParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(Any, ActionAIResponse),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=NoneType,
         )
 
     def click(
@@ -1513,11 +1517,12 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
+    ) -> ActionAIResponse:
         """Use natural language instructions to perform UI operations on the box.
 
         The
-        endpoint will stream progress events before and after the action is executed.
+        endpoint will stream progress events before and after the action is executed. If
+        you don't need intermediate events, set stream to false.
 
         Args:
           instruction: Direct instruction of the UI action to perform (e.g., 'click the login button',
@@ -1568,26 +1573,28 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        return await self._post(
-            f"/boxes/{box_id}/actions/ai",
-            body=await async_maybe_transform(
-                {
-                    "instruction": instruction,
-                    "background": background,
-                    "include_screenshot": include_screenshot,
-                    "output_format": output_format,
-                    "presigned_expires_in": presigned_expires_in,
-                    "screenshot_delay": screenshot_delay,
-                    "settings": settings,
-                    "stream": stream,
-                },
-                action_ai_params.ActionAIParams,
+        return cast(
+            ActionAIResponse,
+            await self._post(
+                f"/boxes/{box_id}/actions/ai",
+                body=await async_maybe_transform(
+                    {
+                        "instruction": instruction,
+                        "background": background,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
+                        "screenshot_delay": screenshot_delay,
+                        "settings": settings,
+                        "stream": stream,
+                    },
+                    action_ai_params.ActionAIParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(Any, ActionAIResponse),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=NoneType,
         )
 
     async def click(

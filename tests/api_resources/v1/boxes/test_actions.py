@@ -10,6 +10,7 @@ import pytest
 from gbox_sdk import GboxClient, AsyncGboxClient
 from tests.utils import assert_matches_type
 from gbox_sdk.types.v1.boxes import (
+    ActionAIResponse,
     ActionDragResponse,
     ActionMoveResponse,
     ActionTypeResponse,
@@ -38,7 +39,7 @@ class TestActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             instruction="click the login button",
         )
-        assert action is None
+        assert_matches_type(ActionAIResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -57,7 +58,7 @@ class TestActions:
             },
             stream=False,
         )
-        assert action is None
+        assert_matches_type(ActionAIResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -70,7 +71,7 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert action is None
+        assert_matches_type(ActionAIResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -83,7 +84,7 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert action is None
+            assert_matches_type(ActionAIResponse, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1184,7 +1185,7 @@ class TestAsyncActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             instruction="click the login button",
         )
-        assert action is None
+        assert_matches_type(ActionAIResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -1203,7 +1204,7 @@ class TestAsyncActions:
             },
             stream=False,
         )
-        assert action is None
+        assert_matches_type(ActionAIResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -1216,7 +1217,7 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert action is None
+        assert_matches_type(ActionAIResponse, action, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -1229,7 +1230,7 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert action is None
+            assert_matches_type(ActionAIResponse, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

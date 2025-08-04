@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.1.0-alpha.29 (2025-08-04)
+
+Full Changelog: [v0.1.0-alpha.28...v0.1.0-alpha.29](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.28...v0.1.0-alpha.29)
+
+### Features
+
+* add switch tab method to BrowserOperator class ([05554d2](https://github.com/babelcloud/gbox-sdk-py/commit/05554d266a077969fcfca1d8db618cd33a6bbf8a))
+* **api:** api update ([8972c42](https://github.com/babelcloud/gbox-sdk-py/commit/8972c42a3bd729ea87874d808fe7f0aee1dd8e20))
+* **api:** api update ([0bd65ca](https://github.com/babelcloud/gbox-sdk-py/commit/0bd65ca87eaf2e3afab9b85efde747e08c10b91d))
+* **api:** api update ([8ab961a](https://github.com/babelcloud/gbox-sdk-py/commit/8ab961a2a3625d5116ec8f7fda071f291fe9b387))
+* **api:** api update ([1e18a83](https://github.com/babelcloud/gbox-sdk-py/commit/1e18a835ed793e5c5c06bf1f8f262b7e35f6b210))
+* **api:** api update ([f8f4c69](https://github.com/babelcloud/gbox-sdk-py/commit/f8f4c69937720a15af620f10fda2320a6527723c))
+* **api:** api update ([0e25380](https://github.com/babelcloud/gbox-sdk-py/commit/0e2538084c1bfc08ea7989acc200df39dae97df4))
+* **api:** api update ([fb78fcf](https://github.com/babelcloud/gbox-sdk-py/commit/fb78fcfc55ed7d1c30de72bf946d6591b814b7ad))
+* **client:** support file upload requests ([0593ba6](https://github.com/babelcloud/gbox-sdk-py/commit/0593ba6b2dc353e5548e6a6bb4f5418e420fd686))
+
+
+### Bug Fixes
+
+* lint ([ad692d6](https://github.com/babelcloud/gbox-sdk-py/commit/ad692d63e828a858e6fdbd34c31128bf32c2e7d9))
+
+
+### Chores
+
+* **project:** add settings file for vscode ([786613e](https://github.com/babelcloud/gbox-sdk-py/commit/786613e3756536f52ad4750cf7ab92db4670af0b))
+
 ## 0.1.0-alpha.28 (2025-07-25)
 
 Full Changelog: [v0.1.0-alpha.27...v0.1.0-alpha.28](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.27...v0.1.0-alpha.28)

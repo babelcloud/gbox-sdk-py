@@ -6,7 +6,6 @@ from typing_extensions import Literal, Iterable, cast
 from gbox_sdk._types import NOT_GIVEN, NotGiven
 from gbox_sdk._client import GboxClient
 from gbox_sdk.types.v1.boxes.action_ai_params import Settings
-from gbox_sdk.types.v1.boxes.action_ai_response import ActionAIResponse
 from gbox_sdk.types.v1.boxes.action_drag_params import DragSimpleEnd, DragSimpleStart, DragAdvancedPath
 from gbox_sdk.types.v1.boxes.action_swipe_params import SwipeAdvancedEnd, SwipeAdvancedStart
 from gbox_sdk.types.v1.boxes.action_touch_params import Point
@@ -65,7 +64,7 @@ class ActionOperator:
         output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
         screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
         settings: Union[Settings, NotGiven] = NOT_GIVEN,
-    ) -> ActionAIResponse:
+    ) -> None:
         """
         Perform an AI-powered action on the box.
 
@@ -765,8 +764,8 @@ class ActionOperator:
 
     def screen_rotation(
         self,
-        *,
         orientation: Literal["portrait", "landscapeLeft", "portraitUpsideDown", "landscapeRight"],
+        *,
         include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
         output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
         presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
@@ -812,8 +811,8 @@ class ActionOperator:
             ActionScreenRotationResponse: The response from the screen rotation action.
 
         Example:
-            >>> response = myBox.action.screen_rotation()
-            >>> response = myBox.action.screen_rotation(orientation="landscapeLeft")
+            >>> response = myBox.action.screen_rotation("landscapeLeft")
+            >>> response = myBox.action.screen_rotation(orientation="landscapeLeft", include_screenshot=True, output_format="storageKey", presigned_expires_in="30m", screenshot_delay="500ms")
         """
         return self.client.v1.boxes.actions.screen_rotation(
             box_id=self.box_id,

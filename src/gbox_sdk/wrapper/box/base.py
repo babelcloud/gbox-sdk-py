@@ -6,13 +6,16 @@ from gbox_sdk._client import GboxClient
 from gbox_sdk.types.v1.linux_box import LinuxBox
 from gbox_sdk.wrapper.box.action import ActionOperator
 from gbox_sdk.wrapper.box.browser import BrowserOperator
+from gbox_sdk.wrapper.box.storage import StorageOperator
 from gbox_sdk.types.v1.android_box import AndroidBox
 from gbox_sdk.wrapper.box.file_system import FileSystemOperator
 from gbox_sdk.wrapper.box.websocket_client import WebSocketClient, WebSocketResult
 from gbox_sdk.types.v1.box_display_response import BoxDisplayResponse
 from gbox_sdk.types.v1.box_run_code_response import BoxRunCodeResponse
 from gbox_sdk.types.v1.box_live_view_url_response import BoxLiveViewURLResponse
-from gbox_sdk.types.v1.box_execute_commands_response import BoxExecuteCommandsResponse
+from gbox_sdk.types.v1.box_execute_commands_response import (
+    BoxExecuteCommandsResponse,
+)
 from gbox_sdk.types.v1.box_web_terminal_url_response import BoxWebTerminalURLResponse
 
 
@@ -42,6 +45,7 @@ class BaseBox:
         self.action = ActionOperator(self.client, self.data.id)
         self.fs = FileSystemOperator(self.client, self.data.id)
         self.browser = BrowserOperator(self.client, self.data.id)
+        self.storage = StorageOperator(self.client, self.data.id)
 
     def _sync_data(self) -> None:
         """

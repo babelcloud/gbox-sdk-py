@@ -6,7 +6,6 @@ from typing_extensions import Literal, Iterable, cast
 from gbox_sdk._types import NOT_GIVEN, NotGiven
 from gbox_sdk._client import GboxClient
 from gbox_sdk.types.v1.boxes.action_ai_params import Settings
-from gbox_sdk.types.v1.boxes.action_ai_response import ActionAIResponse
 from gbox_sdk.types.v1.boxes.action_drag_params import DragSimpleEnd, DragSimpleStart, DragAdvancedPath
 from gbox_sdk.types.v1.boxes.action_swipe_params import SwipeAdvancedEnd, SwipeAdvancedStart
 from gbox_sdk.types.v1.boxes.action_touch_params import Point
@@ -65,7 +64,7 @@ class ActionOperator:
         output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
         screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
         settings: Union[Settings, NotGiven] = NOT_GIVEN,
-    ) -> ActionAIResponse:
+    ) -> None:
         """
         Perform an AI-powered action on the box.
 
@@ -765,28 +764,63 @@ class ActionOperator:
 
     def screen_rotation(
         self,
+        orientation: Literal["portrait", "landscapeLeft", "portraitUpsideDown", "landscapeRight"],
         *,
-        angle: Literal[90, 180, 270],
-        direction: Literal["clockwise", "counter-clockwise"],
+        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
+        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
+        presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
+        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
     ) -> ActionScreenRotationResponse:
         """
-        Rotate the screen of the box.
+        Rotate the screen orientation.
+
+        Note that even after rotating the screen,
+        applications or system layouts may not automatically adapt to the gravity sensor
+        changes, so visual changes may not always occur.
 
         Args:
-            angle: Rotation angle in degrees
+            orientation: Target screen orientation
 
-            direction: Rotation direction
+            include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+                object will still be returned but with empty URIs. Default is false.
+
+            output_format: Type of the URI. default is base64.
+
+            presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+                Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+                Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+            screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+                Execution flow:
+
+                1. Take screenshot before action
+                2. Perform the action
+                3. Wait for screenshotDelay (this parameter)
+                4. Take screenshot after action
+
+                Example: '500ms' means wait 500ms after the action before capturing the final
+                screenshot.
+
+                Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+                Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+
 
         Returns:
             ActionScreenRotationResponse: The response from the screen rotation action.
 
         Example:
-            >>> response = myBox.action.screen_rotation(angle=90, direction="clockwise")
+            >>> response = myBox.action.screen_rotation("landscapeLeft")
+            >>> response = myBox.action.screen_rotation(orientation="landscapeLeft", include_screenshot=True, output_format="storageKey", presigned_expires_in="30m", screenshot_delay="500ms")
         """
         return self.client.v1.boxes.actions.screen_rotation(
             box_id=self.box_id,
-            angle=angle,
-            direction=direction,
+            orientation=orientation,
+            include_screenshot=include_screenshot,
+            output_format=output_format,
+            presigned_expires_in=presigned_expires_in,
+            screenshot_delay=screenshot_delay,
         )
 
     def _save_data_url_to_file(self, data_url: str, file_path: str) -> None:

@@ -39,6 +39,14 @@ from .browser import (
     BrowserResourceWithStreamingResponse,
     AsyncBrowserResourceWithStreamingResponse,
 )
+from .storage import (
+    StorageResource,
+    AsyncStorageResource,
+    StorageResourceWithRawResponse,
+    AsyncStorageResourceWithRawResponse,
+    StorageResourceWithStreamingResponse,
+    AsyncStorageResourceWithStreamingResponse,
+)
 from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
@@ -79,6 +87,10 @@ __all__ = ["BoxesResource", "AsyncBoxesResource"]
 
 
 class BoxesResource(SyncAPIResource):
+    @cached_property
+    def storage(self) -> StorageResource:
+        return StorageResource(self._client)
+
     @cached_property
     def actions(self) -> ActionsResource:
         return ActionsResource(self._client)
@@ -733,6 +745,10 @@ class BoxesResource(SyncAPIResource):
 
 
 class AsyncBoxesResource(AsyncAPIResource):
+    @cached_property
+    def storage(self) -> AsyncStorageResource:
+        return AsyncStorageResource(self._client)
+
     @cached_property
     def actions(self) -> AsyncActionsResource:
         return AsyncActionsResource(self._client)
@@ -1433,6 +1449,10 @@ class BoxesResourceWithRawResponse:
         )
 
     @cached_property
+    def storage(self) -> StorageResourceWithRawResponse:
+        return StorageResourceWithRawResponse(self._boxes.storage)
+
+    @cached_property
     def actions(self) -> ActionsResourceWithRawResponse:
         return ActionsResourceWithRawResponse(self._boxes.actions)
 
@@ -1492,6 +1512,10 @@ class AsyncBoxesResourceWithRawResponse:
         self.websocket_url = async_to_raw_response_wrapper(
             boxes.websocket_url,
         )
+
+    @cached_property
+    def storage(self) -> AsyncStorageResourceWithRawResponse:
+        return AsyncStorageResourceWithRawResponse(self._boxes.storage)
 
     @cached_property
     def actions(self) -> AsyncActionsResourceWithRawResponse:
@@ -1555,6 +1579,10 @@ class BoxesResourceWithStreamingResponse:
         )
 
     @cached_property
+    def storage(self) -> StorageResourceWithStreamingResponse:
+        return StorageResourceWithStreamingResponse(self._boxes.storage)
+
+    @cached_property
     def actions(self) -> ActionsResourceWithStreamingResponse:
         return ActionsResourceWithStreamingResponse(self._boxes.actions)
 
@@ -1614,6 +1642,10 @@ class AsyncBoxesResourceWithStreamingResponse:
         self.websocket_url = async_to_streamed_response_wrapper(
             boxes.websocket_url,
         )
+
+    @cached_property
+    def storage(self) -> AsyncStorageResourceWithStreamingResponse:
+        return AsyncStorageResourceWithStreamingResponse(self._boxes.storage)
 
     @cached_property
     def actions(self) -> AsyncActionsResourceWithStreamingResponse:

@@ -16,7 +16,7 @@ class Resolution(BaseModel):
 
 
 class BoxDisplayResponse(BaseModel):
-    orientation: Literal["portrait", "landscape", "landscape-reverse", "portrait-reverse"]
+    orientation: Literal["portrait", "landscapeLeft", "portraitUpsideDown", "landscapeRight"]
     """Orientation of the box"""
 
     resolution: Resolution

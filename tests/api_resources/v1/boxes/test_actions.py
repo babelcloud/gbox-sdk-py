@@ -10,7 +10,6 @@ import pytest
 from gbox_sdk import GboxClient, AsyncGboxClient
 from tests.utils import assert_matches_type
 from gbox_sdk.types.v1.boxes import (
-    ActionAIResponse,
     ActionDragResponse,
     ActionMoveResponse,
     ActionTypeResponse,
@@ -39,7 +38,7 @@ class TestActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             instruction="click the login button",
         )
-        assert_matches_type(ActionAIResponse, action, path=["response"])
+        assert action is None
 
     @pytest.mark.skip()
     @parametrize
@@ -50,13 +49,15 @@ class TestActions:
             background="The user is on the login page",
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
             settings={
                 "disable_actions": ["swipe"],
                 "system_prompt": "You are a helpful assistant specialized in UI automation. When given a screenshot and instruction, analyze the visual elements carefully and execute the most appropriate action. Always prioritize user safety and avoid destructive actions unless explicitly requested.",
             },
+            stream=False,
         )
-        assert_matches_type(ActionAIResponse, action, path=["response"])
+        assert action is None
 
     @pytest.mark.skip()
     @parametrize
@@ -69,7 +70,7 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionAIResponse, action, path=["response"])
+        assert action is None
 
     @pytest.mark.skip()
     @parametrize
@@ -82,7 +83,7 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionAIResponse, action, path=["response"])
+            assert action is None
 
         assert cast(Any, response.is_closed) is True
 
@@ -116,6 +117,7 @@ class TestActions:
             double=False,
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionClickResponse, action, path=["response"])
@@ -192,6 +194,7 @@ class TestActions:
             duration="500ms",
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionDragResponse, action, path=["response"])
@@ -298,6 +301,7 @@ class TestActions:
             duration="50ms",
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionDragResponse, action, path=["response"])
@@ -453,6 +457,7 @@ class TestActions:
             y=300,
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionMoveResponse, action, path=["response"])
@@ -514,6 +519,7 @@ class TestActions:
             buttons=["power"],
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionPressButtonResponse, action, path=["response"])
@@ -573,6 +579,7 @@ class TestActions:
             combination=True,
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionPressKeyResponse, action, path=["response"])
@@ -661,8 +668,20 @@ class TestActions:
     def test_method_screen_rotation(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.screen_rotation(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            angle=90,
-            direction="clockwise",
+            orientation="landscapeLeft",
+        )
+        assert_matches_type(ActionScreenRotationResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_screen_rotation_with_all_params(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.screen_rotation(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            orientation="landscapeLeft",
+            include_screenshot=False,
+            output_format="base64",
+            presigned_expires_in="30m",
+            screenshot_delay="500ms",
         )
         assert_matches_type(ActionScreenRotationResponse, action, path=["response"])
 
@@ -671,8 +690,7 @@ class TestActions:
     def test_raw_response_screen_rotation(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.screen_rotation(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            angle=90,
-            direction="clockwise",
+            orientation="landscapeLeft",
         )
 
         assert response.is_closed is True
@@ -685,8 +703,7 @@ class TestActions:
     def test_streaming_response_screen_rotation(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.screen_rotation(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            angle=90,
-            direction="clockwise",
+            orientation="landscapeLeft",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -702,8 +719,7 @@ class TestActions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.actions.with_raw_response.screen_rotation(
                 box_id="",
-                angle=90,
-                direction="clockwise",
+                orientation="landscapeLeft",
             )
 
     @pytest.mark.skip()
@@ -786,6 +802,7 @@ class TestActions:
             y=100,
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionScrollResponse, action, path=["response"])
@@ -855,6 +872,7 @@ class TestActions:
             duration="500ms",
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionSwipeResponse, action, path=["response"])
@@ -928,6 +946,7 @@ class TestActions:
             duration="500ms",
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionSwipeResponse, action, path=["response"])
@@ -1029,6 +1048,7 @@ class TestActions:
             ],
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionTouchResponse, action, path=["response"])
@@ -1109,6 +1129,7 @@ class TestActions:
             include_screenshot=False,
             mode="append",
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionTypeResponse, action, path=["response"])
@@ -1163,7 +1184,7 @@ class TestAsyncActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             instruction="click the login button",
         )
-        assert_matches_type(ActionAIResponse, action, path=["response"])
+        assert action is None
 
     @pytest.mark.skip()
     @parametrize
@@ -1174,13 +1195,15 @@ class TestAsyncActions:
             background="The user is on the login page",
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
             settings={
                 "disable_actions": ["swipe"],
                 "system_prompt": "You are a helpful assistant specialized in UI automation. When given a screenshot and instruction, analyze the visual elements carefully and execute the most appropriate action. Always prioritize user safety and avoid destructive actions unless explicitly requested.",
             },
+            stream=False,
         )
-        assert_matches_type(ActionAIResponse, action, path=["response"])
+        assert action is None
 
     @pytest.mark.skip()
     @parametrize
@@ -1193,7 +1216,7 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionAIResponse, action, path=["response"])
+        assert action is None
 
     @pytest.mark.skip()
     @parametrize
@@ -1206,7 +1229,7 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionAIResponse, action, path=["response"])
+            assert action is None
 
         assert cast(Any, response.is_closed) is True
 
@@ -1240,6 +1263,7 @@ class TestAsyncActions:
             double=False,
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionClickResponse, action, path=["response"])
@@ -1316,6 +1340,7 @@ class TestAsyncActions:
             duration="500ms",
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionDragResponse, action, path=["response"])
@@ -1422,6 +1447,7 @@ class TestAsyncActions:
             duration="50ms",
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionDragResponse, action, path=["response"])
@@ -1577,6 +1603,7 @@ class TestAsyncActions:
             y=300,
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionMoveResponse, action, path=["response"])
@@ -1638,6 +1665,7 @@ class TestAsyncActions:
             buttons=["power"],
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionPressButtonResponse, action, path=["response"])
@@ -1697,6 +1725,7 @@ class TestAsyncActions:
             combination=True,
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionPressKeyResponse, action, path=["response"])
@@ -1785,8 +1814,20 @@ class TestAsyncActions:
     async def test_method_screen_rotation(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.screen_rotation(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            angle=90,
-            direction="clockwise",
+            orientation="landscapeLeft",
+        )
+        assert_matches_type(ActionScreenRotationResponse, action, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_screen_rotation_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.screen_rotation(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            orientation="landscapeLeft",
+            include_screenshot=False,
+            output_format="base64",
+            presigned_expires_in="30m",
+            screenshot_delay="500ms",
         )
         assert_matches_type(ActionScreenRotationResponse, action, path=["response"])
 
@@ -1795,8 +1836,7 @@ class TestAsyncActions:
     async def test_raw_response_screen_rotation(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.screen_rotation(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            angle=90,
-            direction="clockwise",
+            orientation="landscapeLeft",
         )
 
         assert response.is_closed is True
@@ -1809,8 +1849,7 @@ class TestAsyncActions:
     async def test_streaming_response_screen_rotation(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.screen_rotation(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            angle=90,
-            direction="clockwise",
+            orientation="landscapeLeft",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1826,8 +1865,7 @@ class TestAsyncActions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.screen_rotation(
                 box_id="",
-                angle=90,
-                direction="clockwise",
+                orientation="landscapeLeft",
             )
 
     @pytest.mark.skip()
@@ -1910,6 +1948,7 @@ class TestAsyncActions:
             y=100,
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionScrollResponse, action, path=["response"])
@@ -1979,6 +2018,7 @@ class TestAsyncActions:
             duration="500ms",
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionSwipeResponse, action, path=["response"])
@@ -2052,6 +2092,7 @@ class TestAsyncActions:
             duration="500ms",
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionSwipeResponse, action, path=["response"])
@@ -2153,6 +2194,7 @@ class TestAsyncActions:
             ],
             include_screenshot=False,
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionTouchResponse, action, path=["response"])
@@ -2233,6 +2275,7 @@ class TestAsyncActions:
             include_screenshot=False,
             mode="append",
             output_format="base64",
+            presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionTypeResponse, action, path=["response"])

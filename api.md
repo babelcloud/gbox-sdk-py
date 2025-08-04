@@ -39,13 +39,24 @@ Methods:
 - <code title="post /boxes/{boxId}/web-terminal-url">client.v1.boxes.<a href="./src/gbox_sdk/resources/v1/boxes/boxes.py">web_terminal_url</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/box_web_terminal_url_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/box_web_terminal_url_response.py">BoxWebTerminalURLResponse</a></code>
 - <code title="get /boxes/{boxId}/websocket-url">client.v1.boxes.<a href="./src/gbox_sdk/resources/v1/boxes/boxes.py">websocket_url</a>(box_id) -> <a href="./src/gbox_sdk/types/v1/box_websocket_url_response.py">BoxWebsocketURLResponse</a></code>
 
+### Storage
+
+Types:
+
+```python
+from gbox_sdk.types.v1.boxes import StoragePresignedURLResponse
+```
+
+Methods:
+
+- <code title="post /boxes/{boxId}/storage/presigned-url">client.v1.boxes.storage.<a href="./src/gbox_sdk/resources/v1/boxes/storage.py">presigned_url</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/storage_presigned_url_params.py">params</a>) -> str</code>
+
 ### Actions
 
 Types:
 
 ```python
 from gbox_sdk.types.v1.boxes import (
-    ActionAIResponse,
     ActionClickResponse,
     ActionDragResponse,
     ActionExtractResponse,
@@ -64,7 +75,7 @@ from gbox_sdk.types.v1.boxes import (
 
 Methods:
 
-- <code title="post /boxes/{boxId}/actions/ai">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">ai</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_ai_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_ai_response.py">ActionAIResponse</a></code>
+- <code title="post /boxes/{boxId}/actions/ai">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">ai</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_ai_params.py">params</a>) -> None</code>
 - <code title="post /boxes/{boxId}/actions/click">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">click</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_click_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_click_response.py">ActionClickResponse</a></code>
 - <code title="post /boxes/{boxId}/actions/drag">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">drag</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_drag_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_drag_response.py">ActionDragResponse</a></code>
 - <code title="post /boxes/{boxId}/actions/extract">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">extract</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_extract_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_extract_response.py">ActionExtractResponse</a></code>

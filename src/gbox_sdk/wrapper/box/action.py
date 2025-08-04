@@ -6,6 +6,7 @@ from typing_extensions import Literal, Iterable, cast
 from gbox_sdk._types import NOT_GIVEN, NotGiven
 from gbox_sdk._client import GboxClient
 from gbox_sdk.types.v1.boxes.action_ai_params import Settings
+from gbox_sdk.types.v1.boxes.action_ai_response import ActionAIResponse
 from gbox_sdk.types.v1.boxes.action_drag_params import DragSimpleEnd, DragSimpleStart, DragAdvancedPath
 from gbox_sdk.types.v1.boxes.action_swipe_params import SwipeAdvancedEnd, SwipeAdvancedStart
 from gbox_sdk.types.v1.boxes.action_touch_params import Point
@@ -64,7 +65,7 @@ class ActionOperator:
         output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
         screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
         settings: Union[Settings, NotGiven] = NOT_GIVEN,
-    ) -> None:
+    ) -> ActionAIResponse:
         """
         Perform an AI-powered action on the box.
 

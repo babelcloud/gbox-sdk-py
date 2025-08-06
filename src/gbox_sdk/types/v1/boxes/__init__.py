@@ -49,6 +49,7 @@ from .action_screenshot_params import ActionScreenshotParams as ActionScreenshot
 from .android_install_response import AndroidInstallResponse as AndroidInstallResponse
 from .android_uninstall_params import AndroidUninstallParams as AndroidUninstallParams
 from .browser_cdp_url_response import BrowserCdpURLResponse as BrowserCdpURLResponse
+from .media_get_media_response import MediaGetMediaResponse as MediaGetMediaResponse
 from .action_press_key_response import ActionPressKeyResponse as ActionPressKeyResponse
 from .android_list_app_response import AndroidListAppResponse as AndroidListAppResponse
 from .android_list_pkg_response import AndroidListPkgResponse as AndroidListPkgResponse

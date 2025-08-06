@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Mapping, cast
+from typing import Any, List, Mapping, cast
 
 import httpx
 
@@ -26,6 +26,7 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.v1.boxes import media_create_album_params, media_update_album_params
+from ....types.v1.boxes.media_get_media_response import MediaGetMediaResponse
 from ....types.v1.boxes.media_list_media_response import MediaListMediaResponse
 from ....types.v1.boxes.media_list_albums_response import MediaListAlbumsResponse
 from ....types.v1.boxes.media_create_album_response import MediaCreateAlbumResponse
@@ -217,7 +218,7 @@ class MediaResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `media_name` but received {media_name!r}")
         extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
         return self._get(
-            f"/boxes/{box_id}/media/albums/{album_name}/media/{media_name}",
+            f"/boxes/{box_id}/media/albums/{album_name}/media/{media_name}/download",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -258,6 +259,50 @@ class MediaResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=MediaGetAlbumDetailResponse,
+        )
+
+    def get_media(
+        self,
+        media_name: str,
+        *,
+        box_id: str,
+        album_name: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> MediaGetMediaResponse:
+        """
+        Get detailed information about a specific media file
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        if not album_name:
+            raise ValueError(f"Expected a non-empty value for `album_name` but received {album_name!r}")
+        if not media_name:
+            raise ValueError(f"Expected a non-empty value for `media_name` but received {media_name!r}")
+        return cast(
+            MediaGetMediaResponse,
+            self._get(
+                f"/boxes/{box_id}/media/albums/{album_name}/media/{media_name}",
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, MediaGetMediaResponse
+                ),  # Union types cannot be passed in as arguments in the type system
+            ),
         )
 
     def list_albums(
@@ -559,7 +604,7 @@ class AsyncMediaResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `media_name` but received {media_name!r}")
         extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
         return await self._get(
-            f"/boxes/{box_id}/media/albums/{album_name}/media/{media_name}",
+            f"/boxes/{box_id}/media/albums/{album_name}/media/{media_name}/download",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -600,6 +645,50 @@ class AsyncMediaResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=MediaGetAlbumDetailResponse,
+        )
+
+    async def get_media(
+        self,
+        media_name: str,
+        *,
+        box_id: str,
+        album_name: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> MediaGetMediaResponse:
+        """
+        Get detailed information about a specific media file
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        if not album_name:
+            raise ValueError(f"Expected a non-empty value for `album_name` but received {album_name!r}")
+        if not media_name:
+            raise ValueError(f"Expected a non-empty value for `media_name` but received {media_name!r}")
+        return cast(
+            MediaGetMediaResponse,
+            await self._get(
+                f"/boxes/{box_id}/media/albums/{album_name}/media/{media_name}",
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, MediaGetMediaResponse
+                ),  # Union types cannot be passed in as arguments in the type system
+            ),
         )
 
     async def list_albums(
@@ -739,6 +828,9 @@ class MediaResourceWithRawResponse:
         self.get_album_detail = to_raw_response_wrapper(
             media.get_album_detail,
         )
+        self.get_media = to_raw_response_wrapper(
+            media.get_media,
+        )
         self.list_albums = to_raw_response_wrapper(
             media.list_albums,
         )
@@ -769,6 +861,9 @@ class AsyncMediaResourceWithRawResponse:
         )
         self.get_album_detail = async_to_raw_response_wrapper(
             media.get_album_detail,
+        )
+        self.get_media = async_to_raw_response_wrapper(
+            media.get_media,
         )
         self.list_albums = async_to_raw_response_wrapper(
             media.list_albums,
@@ -801,6 +896,9 @@ class MediaResourceWithStreamingResponse:
         self.get_album_detail = to_streamed_response_wrapper(
             media.get_album_detail,
         )
+        self.get_media = to_streamed_response_wrapper(
+            media.get_media,
+        )
         self.list_albums = to_streamed_response_wrapper(
             media.list_albums,
         )
@@ -831,6 +929,9 @@ class AsyncMediaResourceWithStreamingResponse:
         )
         self.get_album_detail = async_to_streamed_response_wrapper(
             media.get_album_detail,
+        )
+        self.get_media = async_to_streamed_response_wrapper(
+            media.get_media,
         )
         self.list_albums = async_to_streamed_response_wrapper(
             media.list_albums,

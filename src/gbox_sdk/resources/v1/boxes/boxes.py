@@ -15,6 +15,14 @@ from .fs import (
     FsResourceWithStreamingResponse,
     AsyncFsResourceWithStreamingResponse,
 )
+from .media import (
+    MediaResource,
+    AsyncMediaResource,
+    MediaResourceWithRawResponse,
+    AsyncMediaResourceWithRawResponse,
+    MediaResourceWithStreamingResponse,
+    AsyncMediaResourceWithStreamingResponse,
+)
 from .actions import (
     ActionsResource,
     AsyncActionsResource,
@@ -94,6 +102,10 @@ class BoxesResource(SyncAPIResource):
     @cached_property
     def actions(self) -> ActionsResource:
         return ActionsResource(self._client)
+
+    @cached_property
+    def media(self) -> MediaResource:
+        return MediaResource(self._client)
 
     @cached_property
     def fs(self) -> FsResource:
@@ -752,6 +764,10 @@ class AsyncBoxesResource(AsyncAPIResource):
     @cached_property
     def actions(self) -> AsyncActionsResource:
         return AsyncActionsResource(self._client)
+
+    @cached_property
+    def media(self) -> AsyncMediaResource:
+        return AsyncMediaResource(self._client)
 
     @cached_property
     def fs(self) -> AsyncFsResource:
@@ -1457,6 +1473,10 @@ class BoxesResourceWithRawResponse:
         return ActionsResourceWithRawResponse(self._boxes.actions)
 
     @cached_property
+    def media(self) -> MediaResourceWithRawResponse:
+        return MediaResourceWithRawResponse(self._boxes.media)
+
+    @cached_property
     def fs(self) -> FsResourceWithRawResponse:
         return FsResourceWithRawResponse(self._boxes.fs)
 
@@ -1520,6 +1540,10 @@ class AsyncBoxesResourceWithRawResponse:
     @cached_property
     def actions(self) -> AsyncActionsResourceWithRawResponse:
         return AsyncActionsResourceWithRawResponse(self._boxes.actions)
+
+    @cached_property
+    def media(self) -> AsyncMediaResourceWithRawResponse:
+        return AsyncMediaResourceWithRawResponse(self._boxes.media)
 
     @cached_property
     def fs(self) -> AsyncFsResourceWithRawResponse:
@@ -1587,6 +1611,10 @@ class BoxesResourceWithStreamingResponse:
         return ActionsResourceWithStreamingResponse(self._boxes.actions)
 
     @cached_property
+    def media(self) -> MediaResourceWithStreamingResponse:
+        return MediaResourceWithStreamingResponse(self._boxes.media)
+
+    @cached_property
     def fs(self) -> FsResourceWithStreamingResponse:
         return FsResourceWithStreamingResponse(self._boxes.fs)
 
@@ -1650,6 +1678,10 @@ class AsyncBoxesResourceWithStreamingResponse:
     @cached_property
     def actions(self) -> AsyncActionsResourceWithStreamingResponse:
         return AsyncActionsResourceWithStreamingResponse(self._boxes.actions)
+
+    @cached_property
+    def media(self) -> AsyncMediaResourceWithStreamingResponse:
+        return AsyncMediaResourceWithStreamingResponse(self._boxes.media)
 
     @cached_property
     def fs(self) -> AsyncFsResourceWithStreamingResponse:

@@ -5,14 +5,22 @@ from __future__ import annotations
 import os
 from typing import Any, cast
 
+import httpx
 import pytest
+from respx import MockRouter
 
 from gbox_sdk import GboxClient, AsyncGboxClient
 from tests.utils import assert_matches_type
+from gbox_sdk._response import (
+    BinaryAPIResponse,
+    AsyncBinaryAPIResponse,
+    StreamedBinaryAPIResponse,
+    AsyncStreamedBinaryAPIResponse,
+)
 from gbox_sdk.types.v1.boxes import (
+    MediaListAlbumsResponse,
     MediaCreateAlbumResponse,
     MediaUpdateAlbumResponse,
-    MediaDownloadMediaResponse,
     MediaGetAlbumDetailResponse,
 )
 
@@ -190,46 +198,64 @@ class TestMedia:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_download_media(self, client: GboxClient) -> None:
+    @pytest.mark.respx(base_url=base_url)
+    def test_method_download_media(self, client: GboxClient, respx_mock: MockRouter) -> None:
+        respx_mock.get("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d/media/albums/albumName/mediaName").mock(
+            return_value=httpx.Response(200, json={"foo": "bar"})
+        )
         media = client.v1.boxes.media.download_media(
             media_name="mediaName",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             album_name="albumName",
         )
-        assert_matches_type(MediaDownloadMediaResponse, media, path=["response"])
+        assert media.is_closed
+        assert media.json() == {"foo": "bar"}
+        assert cast(Any, media.is_closed) is True
+        assert isinstance(media, BinaryAPIResponse)
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_download_media(self, client: GboxClient) -> None:
-        response = client.v1.boxes.media.with_raw_response.download_media(
+    @pytest.mark.respx(base_url=base_url)
+    def test_raw_response_download_media(self, client: GboxClient, respx_mock: MockRouter) -> None:
+        respx_mock.get("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d/media/albums/albumName/mediaName").mock(
+            return_value=httpx.Response(200, json={"foo": "bar"})
+        )
+
+        media = client.v1.boxes.media.with_raw_response.download_media(
             media_name="mediaName",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             album_name="albumName",
         )
 
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        media = response.parse()
-        assert_matches_type(MediaDownloadMediaResponse, media, path=["response"])
+        assert media.is_closed is True
+        assert media.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert media.json() == {"foo": "bar"}
+        assert isinstance(media, BinaryAPIResponse)
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_download_media(self, client: GboxClient) -> None:
+    @pytest.mark.respx(base_url=base_url)
+    def test_streaming_response_download_media(self, client: GboxClient, respx_mock: MockRouter) -> None:
+        respx_mock.get("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d/media/albums/albumName/mediaName").mock(
+            return_value=httpx.Response(200, json={"foo": "bar"})
+        )
         with client.v1.boxes.media.with_streaming_response.download_media(
             media_name="mediaName",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             album_name="albumName",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        ) as media:
+            assert not media.is_closed
+            assert media.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            media = response.parse()
-            assert_matches_type(MediaDownloadMediaResponse, media, path=["response"])
+            assert media.json() == {"foo": "bar"}
+            assert cast(Any, media.is_closed) is True
+            assert isinstance(media, StreamedBinaryAPIResponse)
 
-        assert cast(Any, response.is_closed) is True
+        assert cast(Any, media.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
+    @pytest.mark.respx(base_url=base_url)
     def test_path_params_download_media(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.media.with_raw_response.download_media(
@@ -310,7 +336,7 @@ class TestMedia:
         media = client.v1.boxes.media.list_albums(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
-        assert_matches_type(object, media, path=["response"])
+        assert_matches_type(MediaListAlbumsResponse, media, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -322,7 +348,7 @@ class TestMedia:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         media = response.parse()
-        assert_matches_type(object, media, path=["response"])
+        assert_matches_type(MediaListAlbumsResponse, media, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -334,7 +360,7 @@ class TestMedia:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             media = response.parse()
-            assert_matches_type(object, media, path=["response"])
+            assert_matches_type(MediaListAlbumsResponse, media, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -577,46 +603,66 @@ class TestAsyncMedia:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_download_media(self, async_client: AsyncGboxClient) -> None:
+    @pytest.mark.respx(base_url=base_url)
+    async def test_method_download_media(self, async_client: AsyncGboxClient, respx_mock: MockRouter) -> None:
+        respx_mock.get("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d/media/albums/albumName/mediaName").mock(
+            return_value=httpx.Response(200, json={"foo": "bar"})
+        )
         media = await async_client.v1.boxes.media.download_media(
             media_name="mediaName",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             album_name="albumName",
         )
-        assert_matches_type(MediaDownloadMediaResponse, media, path=["response"])
+        assert media.is_closed
+        assert await media.json() == {"foo": "bar"}
+        assert cast(Any, media.is_closed) is True
+        assert isinstance(media, AsyncBinaryAPIResponse)
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_download_media(self, async_client: AsyncGboxClient) -> None:
-        response = await async_client.v1.boxes.media.with_raw_response.download_media(
+    @pytest.mark.respx(base_url=base_url)
+    async def test_raw_response_download_media(self, async_client: AsyncGboxClient, respx_mock: MockRouter) -> None:
+        respx_mock.get("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d/media/albums/albumName/mediaName").mock(
+            return_value=httpx.Response(200, json={"foo": "bar"})
+        )
+
+        media = await async_client.v1.boxes.media.with_raw_response.download_media(
             media_name="mediaName",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             album_name="albumName",
         )
 
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        media = await response.parse()
-        assert_matches_type(MediaDownloadMediaResponse, media, path=["response"])
+        assert media.is_closed is True
+        assert media.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert await media.json() == {"foo": "bar"}
+        assert isinstance(media, AsyncBinaryAPIResponse)
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_download_media(self, async_client: AsyncGboxClient) -> None:
+    @pytest.mark.respx(base_url=base_url)
+    async def test_streaming_response_download_media(
+        self, async_client: AsyncGboxClient, respx_mock: MockRouter
+    ) -> None:
+        respx_mock.get("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d/media/albums/albumName/mediaName").mock(
+            return_value=httpx.Response(200, json={"foo": "bar"})
+        )
         async with async_client.v1.boxes.media.with_streaming_response.download_media(
             media_name="mediaName",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             album_name="albumName",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        ) as media:
+            assert not media.is_closed
+            assert media.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            media = await response.parse()
-            assert_matches_type(MediaDownloadMediaResponse, media, path=["response"])
+            assert await media.json() == {"foo": "bar"}
+            assert cast(Any, media.is_closed) is True
+            assert isinstance(media, AsyncStreamedBinaryAPIResponse)
 
-        assert cast(Any, response.is_closed) is True
+        assert cast(Any, media.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
+    @pytest.mark.respx(base_url=base_url)
     async def test_path_params_download_media(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.media.with_raw_response.download_media(
@@ -697,7 +743,7 @@ class TestAsyncMedia:
         media = await async_client.v1.boxes.media.list_albums(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
-        assert_matches_type(object, media, path=["response"])
+        assert_matches_type(MediaListAlbumsResponse, media, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -709,7 +755,7 @@ class TestAsyncMedia:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         media = await response.parse()
-        assert_matches_type(object, media, path=["response"])
+        assert_matches_type(MediaListAlbumsResponse, media, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -721,7 +767,7 @@ class TestAsyncMedia:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             media = await response.parse()
-            assert_matches_type(object, media, path=["response"])
+            assert_matches_type(MediaListAlbumsResponse, media, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

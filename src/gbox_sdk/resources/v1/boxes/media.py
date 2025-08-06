@@ -11,16 +11,24 @@ from ...._utils import extract_files, maybe_transform, deepcopy_minimal, async_m
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import (
+    BinaryAPIResponse,
+    AsyncBinaryAPIResponse,
+    StreamedBinaryAPIResponse,
+    AsyncStreamedBinaryAPIResponse,
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
+    to_custom_raw_response_wrapper,
     async_to_streamed_response_wrapper,
+    to_custom_streamed_response_wrapper,
+    async_to_custom_raw_response_wrapper,
+    async_to_custom_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
 from ....types.v1.boxes import media_create_album_params, media_update_album_params
+from ....types.v1.boxes.media_list_albums_response import MediaListAlbumsResponse
 from ....types.v1.boxes.media_create_album_response import MediaCreateAlbumResponse
 from ....types.v1.boxes.media_update_album_response import MediaUpdateAlbumResponse
-from ....types.v1.boxes.media_download_media_response import MediaDownloadMediaResponse
 from ....types.v1.boxes.media_get_album_detail_response import MediaGetAlbumDetailResponse
 
 __all__ = ["MediaResource", "AsyncMediaResource"]
@@ -187,7 +195,7 @@ class MediaResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> MediaDownloadMediaResponse:
+    ) -> BinaryAPIResponse:
         """
         Download a specific media file from an album
 
@@ -206,12 +214,13 @@ class MediaResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `album_name` but received {album_name!r}")
         if not media_name:
             raise ValueError(f"Expected a non-empty value for `media_name` but received {media_name!r}")
+        extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
         return self._get(
             f"/boxes/{box_id}/media/albums/{album_name}/{media_name}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=MediaDownloadMediaResponse,
+            cast_to=BinaryAPIResponse,
         )
 
     def get_album_detail(
@@ -260,7 +269,7 @@ class MediaResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> MediaListAlbumsResponse:
         """
         Get a list of albums in the box
 
@@ -280,7 +289,7 @@ class MediaResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=MediaListAlbumsResponse,
         )
 
     def update_album(
@@ -492,7 +501,7 @@ class AsyncMediaResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> MediaDownloadMediaResponse:
+    ) -> AsyncBinaryAPIResponse:
         """
         Download a specific media file from an album
 
@@ -511,12 +520,13 @@ class AsyncMediaResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `album_name` but received {album_name!r}")
         if not media_name:
             raise ValueError(f"Expected a non-empty value for `media_name` but received {media_name!r}")
+        extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
         return await self._get(
             f"/boxes/{box_id}/media/albums/{album_name}/{media_name}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=MediaDownloadMediaResponse,
+            cast_to=AsyncBinaryAPIResponse,
         )
 
     async def get_album_detail(
@@ -565,7 +575,7 @@ class AsyncMediaResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> MediaListAlbumsResponse:
         """
         Get a list of albums in the box
 
@@ -585,7 +595,7 @@ class AsyncMediaResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=MediaListAlbumsResponse,
         )
 
     async def update_album(
@@ -649,8 +659,9 @@ class MediaResourceWithRawResponse:
         self.delete_media = to_raw_response_wrapper(
             media.delete_media,
         )
-        self.download_media = to_raw_response_wrapper(
+        self.download_media = to_custom_raw_response_wrapper(
             media.download_media,
+            BinaryAPIResponse,
         )
         self.get_album_detail = to_raw_response_wrapper(
             media.get_album_detail,
@@ -676,8 +687,9 @@ class AsyncMediaResourceWithRawResponse:
         self.delete_media = async_to_raw_response_wrapper(
             media.delete_media,
         )
-        self.download_media = async_to_raw_response_wrapper(
+        self.download_media = async_to_custom_raw_response_wrapper(
             media.download_media,
+            AsyncBinaryAPIResponse,
         )
         self.get_album_detail = async_to_raw_response_wrapper(
             media.get_album_detail,
@@ -703,8 +715,9 @@ class MediaResourceWithStreamingResponse:
         self.delete_media = to_streamed_response_wrapper(
             media.delete_media,
         )
-        self.download_media = to_streamed_response_wrapper(
+        self.download_media = to_custom_streamed_response_wrapper(
             media.download_media,
+            StreamedBinaryAPIResponse,
         )
         self.get_album_detail = to_streamed_response_wrapper(
             media.get_album_detail,
@@ -730,8 +743,9 @@ class AsyncMediaResourceWithStreamingResponse:
         self.delete_media = async_to_streamed_response_wrapper(
             media.delete_media,
         )
-        self.download_media = async_to_streamed_response_wrapper(
+        self.download_media = async_to_custom_streamed_response_wrapper(
             media.download_media,
+            AsyncStreamedBinaryAPIResponse,
         )
         self.get_album_detail = async_to_streamed_response_wrapper(
             media.get_album_detail,

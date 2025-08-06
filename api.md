@@ -91,6 +91,14 @@ Methods:
 - <code title="post /boxes/{boxId}/actions/touch">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">touch</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_touch_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_touch_response.py">ActionTouchResponse</a></code>
 - <code title="post /boxes/{boxId}/actions/type">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">type</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_type_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_type_response.py">ActionTypeResponse</a></code>
 
+### Proxy
+
+Methods:
+
+- <code title="delete /boxes/{boxId}/proxy">client.v1.boxes.proxy.<a href="./src/gbox_sdk/resources/v1/boxes/proxy.py">clear</a>(box_id) -> None</code>
+- <code title="get /boxes/{boxId}/proxy">client.v1.boxes.proxy.<a href="./src/gbox_sdk/resources/v1/boxes/proxy.py">get</a>(box_id) -> None</code>
+- <code title="post /boxes/{boxId}/proxy">client.v1.boxes.proxy.<a href="./src/gbox_sdk/resources/v1/boxes/proxy.py">set</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/proxy_set_params.py">params</a>) -> None</code>
+
 ### Media
 
 Types:

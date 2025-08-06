@@ -15,6 +15,7 @@ from .f_remove_params import FRemoveParams as FRemoveParams
 from .f_rename_params import FRenameParams as FRenameParams
 from .action_ai_params import ActionAIParams as ActionAIParams
 from .f_write_response import FWriteResponse as FWriteResponse
+from .proxy_set_params import ProxySetParams as ProxySetParams
 from .f_exists_response import FExistsResponse as FExistsResponse
 from .f_remove_response import FRemoveResponse as FRemoveResponse
 from .f_rename_response import FRenameResponse as FRenameResponse

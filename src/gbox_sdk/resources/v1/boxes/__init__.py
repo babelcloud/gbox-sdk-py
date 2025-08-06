@@ -24,6 +24,14 @@ from .media import (
     MediaResourceWithStreamingResponse,
     AsyncMediaResourceWithStreamingResponse,
 )
+from .proxy import (
+    ProxyResource,
+    AsyncProxyResource,
+    ProxyResourceWithRawResponse,
+    AsyncProxyResourceWithRawResponse,
+    ProxyResourceWithStreamingResponse,
+    AsyncProxyResourceWithStreamingResponse,
+)
 from .actions import (
     ActionsResource,
     AsyncActionsResource,
@@ -70,6 +78,12 @@ __all__ = [
     "AsyncActionsResourceWithRawResponse",
     "ActionsResourceWithStreamingResponse",
     "AsyncActionsResourceWithStreamingResponse",
+    "ProxyResource",
+    "AsyncProxyResource",
+    "ProxyResourceWithRawResponse",
+    "AsyncProxyResourceWithRawResponse",
+    "ProxyResourceWithStreamingResponse",
+    "AsyncProxyResourceWithStreamingResponse",
     "MediaResource",
     "AsyncMediaResource",
     "MediaResourceWithRawResponse",

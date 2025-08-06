@@ -10,7 +10,6 @@ import pytest
 from gbox_sdk import GboxClient, AsyncGboxClient
 from tests.utils import assert_matches_type
 from gbox_sdk.types.v1.boxes import (
-    MediaListAlbumsResponse,
     MediaCreateAlbumResponse,
     MediaUpdateAlbumResponse,
     MediaDownloadMediaResponse,
@@ -311,7 +310,7 @@ class TestMedia:
         media = client.v1.boxes.media.list_albums(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
-        assert_matches_type(MediaListAlbumsResponse, media, path=["response"])
+        assert_matches_type(object, media, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -323,7 +322,7 @@ class TestMedia:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         media = response.parse()
-        assert_matches_type(MediaListAlbumsResponse, media, path=["response"])
+        assert_matches_type(object, media, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -335,7 +334,7 @@ class TestMedia:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             media = response.parse()
-            assert_matches_type(MediaListAlbumsResponse, media, path=["response"])
+            assert_matches_type(object, media, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -698,7 +697,7 @@ class TestAsyncMedia:
         media = await async_client.v1.boxes.media.list_albums(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
-        assert_matches_type(MediaListAlbumsResponse, media, path=["response"])
+        assert_matches_type(object, media, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -710,7 +709,7 @@ class TestAsyncMedia:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         media = await response.parse()
-        assert_matches_type(MediaListAlbumsResponse, media, path=["response"])
+        assert_matches_type(object, media, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -722,7 +721,7 @@ class TestAsyncMedia:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             media = await response.parse()
-            assert_matches_type(MediaListAlbumsResponse, media, path=["response"])
+            assert_matches_type(object, media, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

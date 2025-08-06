@@ -110,7 +110,6 @@ from gbox_sdk.types.v1.boxes import (
     MediaCreateAlbumResponse,
     MediaDownloadMediaResponse,
     MediaGetAlbumDetailResponse,
-    MediaListAlbumsResponse,
     MediaUpdateAlbumResponse,
 )
 ```
@@ -122,7 +121,7 @@ Methods:
 - <code title="delete /boxes/{boxId}/media/albums/{albumName}/{mediaName}">client.v1.boxes.media.<a href="./src/gbox_sdk/resources/v1/boxes/media.py">delete_media</a>(media_name, \*, box_id, album_name) -> None</code>
 - <code title="get /boxes/{boxId}/media/albums/{albumName}/{mediaName}">client.v1.boxes.media.<a href="./src/gbox_sdk/resources/v1/boxes/media.py">download_media</a>(media_name, \*, box_id, album_name) -> <a href="./src/gbox_sdk/types/v1/boxes/media_download_media_response.py">MediaDownloadMediaResponse</a></code>
 - <code title="get /boxes/{boxId}/media/albums/{albumName}">client.v1.boxes.media.<a href="./src/gbox_sdk/resources/v1/boxes/media.py">get_album_detail</a>(album_name, \*, box_id) -> <a href="./src/gbox_sdk/types/v1/boxes/media_get_album_detail_response.py">MediaGetAlbumDetailResponse</a></code>
-- <code title="get /boxes/{boxId}/media/albums">client.v1.boxes.media.<a href="./src/gbox_sdk/resources/v1/boxes/media.py">list_albums</a>(box_id) -> <a href="./src/gbox_sdk/types/v1/boxes/media_list_albums_response.py">MediaListAlbumsResponse</a></code>
+- <code title="get /boxes/{boxId}/media/albums">client.v1.boxes.media.<a href="./src/gbox_sdk/resources/v1/boxes/media.py">list_albums</a>(box_id) -> object</code>
 - <code title="patch /boxes/{boxId}/media/albums/{albumName}">client.v1.boxes.media.<a href="./src/gbox_sdk/resources/v1/boxes/media.py">update_album</a>(album_name, \*, box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/media_update_album_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/media_update_album_response.py">MediaUpdateAlbumResponse</a></code>
 
 ### Fs

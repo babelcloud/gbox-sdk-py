@@ -18,7 +18,6 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.v1.boxes import media_create_album_params, media_update_album_params
-from ....types.v1.boxes.media_list_albums_response import MediaListAlbumsResponse
 from ....types.v1.boxes.media_create_album_response import MediaCreateAlbumResponse
 from ....types.v1.boxes.media_update_album_response import MediaUpdateAlbumResponse
 from ....types.v1.boxes.media_download_media_response import MediaDownloadMediaResponse
@@ -261,7 +260,7 @@ class MediaResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> MediaListAlbumsResponse:
+    ) -> object:
         """
         Get a list of albums in the box
 
@@ -281,7 +280,7 @@ class MediaResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=MediaListAlbumsResponse,
+            cast_to=object,
         )
 
     def update_album(
@@ -566,7 +565,7 @@ class AsyncMediaResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> MediaListAlbumsResponse:
+    ) -> object:
         """
         Get a list of albums in the box
 
@@ -586,7 +585,7 @@ class AsyncMediaResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=MediaListAlbumsResponse,
+            cast_to=object,
         )
 
     async def update_album(

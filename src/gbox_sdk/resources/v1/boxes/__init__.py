@@ -16,6 +16,14 @@ from .boxes import (
     BoxesResourceWithStreamingResponse,
     AsyncBoxesResourceWithStreamingResponse,
 )
+from .media import (
+    MediaResource,
+    AsyncMediaResource,
+    MediaResourceWithRawResponse,
+    AsyncMediaResourceWithRawResponse,
+    MediaResourceWithStreamingResponse,
+    AsyncMediaResourceWithStreamingResponse,
+)
 from .actions import (
     ActionsResource,
     AsyncActionsResource,
@@ -62,6 +70,12 @@ __all__ = [
     "AsyncActionsResourceWithRawResponse",
     "ActionsResourceWithStreamingResponse",
     "AsyncActionsResourceWithStreamingResponse",
+    "MediaResource",
+    "AsyncMediaResource",
+    "MediaResourceWithRawResponse",
+    "AsyncMediaResourceWithRawResponse",
+    "MediaResourceWithStreamingResponse",
+    "AsyncMediaResourceWithStreamingResponse",
     "FsResource",
     "AsyncFsResource",
     "FsResourceWithRawResponse",

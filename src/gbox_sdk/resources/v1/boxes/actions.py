@@ -7,7 +7,7 @@ from typing_extensions import Literal, overload
 
 import httpx
 
-from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from ...._utils import required_args, maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -861,6 +861,77 @@ class ActionsResource(SyncAPIResource):
                     Any, ActionPressKeyResponse
                 ),  # Union types cannot be passed in as arguments in the type system
             ),
+        )
+
+    def recording_start(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """Start recording the box screen.
+
+        Only one recording can be active at a time. If a
+        recording is already in progress, starting a new recording will stop the
+        previous one and keep only the latest recording.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._post(
+            f"/boxes/{box_id}/actions/recording/start",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    def recording_stop(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Stop recording the box screen
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._post(
+            f"/boxes/{box_id}/actions/recording/stop",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
         )
 
     def screen_layout(
@@ -2291,6 +2362,77 @@ class AsyncActionsResource(AsyncAPIResource):
             ),
         )
 
+    async def recording_start(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """Start recording the box screen.
+
+        Only one recording can be active at a time. If a
+        recording is already in progress, starting a new recording will stop the
+        previous one and keep only the latest recording.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._post(
+            f"/boxes/{box_id}/actions/recording/start",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    async def recording_stop(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Stop recording the box screen
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._post(
+            f"/boxes/{box_id}/actions/recording/stop",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
     async def screen_layout(
         self,
         box_id: str,
@@ -2932,6 +3074,12 @@ class ActionsResourceWithRawResponse:
         self.press_key = to_raw_response_wrapper(
             actions.press_key,
         )
+        self.recording_start = to_raw_response_wrapper(
+            actions.recording_start,
+        )
+        self.recording_stop = to_raw_response_wrapper(
+            actions.recording_stop,
+        )
         self.screen_layout = to_raw_response_wrapper(
             actions.screen_layout,
         )
@@ -2979,6 +3127,12 @@ class AsyncActionsResourceWithRawResponse:
         )
         self.press_key = async_to_raw_response_wrapper(
             actions.press_key,
+        )
+        self.recording_start = async_to_raw_response_wrapper(
+            actions.recording_start,
+        )
+        self.recording_stop = async_to_raw_response_wrapper(
+            actions.recording_stop,
         )
         self.screen_layout = async_to_raw_response_wrapper(
             actions.screen_layout,
@@ -3028,6 +3182,12 @@ class ActionsResourceWithStreamingResponse:
         self.press_key = to_streamed_response_wrapper(
             actions.press_key,
         )
+        self.recording_start = to_streamed_response_wrapper(
+            actions.recording_start,
+        )
+        self.recording_stop = to_streamed_response_wrapper(
+            actions.recording_stop,
+        )
         self.screen_layout = to_streamed_response_wrapper(
             actions.screen_layout,
         )
@@ -3075,6 +3235,12 @@ class AsyncActionsResourceWithStreamingResponse:
         )
         self.press_key = async_to_streamed_response_wrapper(
             actions.press_key,
+        )
+        self.recording_start = async_to_streamed_response_wrapper(
+            actions.recording_start,
+        )
+        self.recording_stop = async_to_streamed_response_wrapper(
+            actions.recording_stop,
         )
         self.screen_layout = async_to_streamed_response_wrapper(
             actions.screen_layout,

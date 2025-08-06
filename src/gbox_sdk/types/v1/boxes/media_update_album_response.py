@@ -18,6 +18,3 @@ class MediaUpdateAlbumResponse(BaseModel):
 
     path: str
     """Full path to the album in the box"""
-
-    size: str
-    """Size of the album"""

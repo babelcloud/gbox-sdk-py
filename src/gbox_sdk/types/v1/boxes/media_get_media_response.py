@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Union
+from typing import Union
 from datetime import datetime
 from typing_extensions import Literal, TypeAlias
 
@@ -8,10 +8,10 @@ from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
 
-__all__ = ["MediaListMediaResponse", "Data", "DataPhoto", "DataVideo"]
+__all__ = ["MediaGetMediaResponse", "Photo", "Video"]
 
 
-class DataPhoto(BaseModel):
+class Photo(BaseModel):
     last_modified: datetime = FieldInfo(alias="lastModified")
     """Last modified time of the photo"""
 
@@ -31,7 +31,7 @@ class DataPhoto(BaseModel):
     """Photo type indicator"""
 
 
-class DataVideo(BaseModel):
+class Video(BaseModel):
     last_modified: datetime = FieldInfo(alias="lastModified")
     """Last modified time of the video"""
 
@@ -51,9 +51,4 @@ class DataVideo(BaseModel):
     """Video type indicator"""
 
 
-Data: TypeAlias = Union[DataPhoto, DataVideo]
-
-
-class MediaListMediaResponse(BaseModel):
-    data: List[Data]
-    """List of media files (photos and videos) in the album"""
+MediaGetMediaResponse: TypeAlias = Union[Photo, Video]

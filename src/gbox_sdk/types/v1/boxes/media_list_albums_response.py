@@ -20,9 +20,6 @@ class Data(BaseModel):
     path: str
     """Full path to the album in the box"""
 
-    size: str
-    """Size of the album"""
-
 
 class MediaListAlbumsResponse(BaseModel):
     data: List[Data]

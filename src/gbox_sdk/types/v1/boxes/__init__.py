@@ -56,6 +56,7 @@ from .browser_get_tabs_response import BrowserGetTabsResponse as BrowserGetTabsR
 from .browser_open_tab_response import BrowserOpenTabResponse as BrowserOpenTabResponse
 from .browser_update_tab_params import BrowserUpdateTabParams as BrowserUpdateTabParams
 from .media_create_album_params import MediaCreateAlbumParams as MediaCreateAlbumParams
+from .media_list_media_response import MediaListMediaResponse as MediaListMediaResponse
 from .media_update_album_params import MediaUpdateAlbumParams as MediaUpdateAlbumParams
 from .action_press_button_params import ActionPressButtonParams as ActionPressButtonParams
 from .action_screenshot_response import ActionScreenshotResponse as ActionScreenshotResponse

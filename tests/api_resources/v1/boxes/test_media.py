@@ -84,7 +84,7 @@ class TestMedia:
     @parametrize
     def test_method_delete_album(self, client: GboxClient) -> None:
         media = client.v1.boxes.media.delete_album(
-            album_name="albumName",
+            album_name="Pictures",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
         assert media is None
@@ -93,7 +93,7 @@ class TestMedia:
     @parametrize
     def test_raw_response_delete_album(self, client: GboxClient) -> None:
         response = client.v1.boxes.media.with_raw_response.delete_album(
-            album_name="albumName",
+            album_name="Pictures",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
@@ -106,7 +106,7 @@ class TestMedia:
     @parametrize
     def test_streaming_response_delete_album(self, client: GboxClient) -> None:
         with client.v1.boxes.media.with_streaming_response.delete_album(
-            album_name="albumName",
+            album_name="Pictures",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
@@ -122,7 +122,7 @@ class TestMedia:
     def test_path_params_delete_album(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.media.with_raw_response.delete_album(
-                album_name="albumName",
+                album_name="Pictures",
                 box_id="",
             )
 
@@ -136,9 +136,9 @@ class TestMedia:
     @parametrize
     def test_method_delete_media(self, client: GboxClient) -> None:
         media = client.v1.boxes.media.delete_media(
-            media_name="mediaName",
+            media_name="IMG_001.jpg",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            album_name="albumName",
+            album_name="Pictures",
         )
         assert media is None
 
@@ -146,9 +146,9 @@ class TestMedia:
     @parametrize
     def test_raw_response_delete_media(self, client: GboxClient) -> None:
         response = client.v1.boxes.media.with_raw_response.delete_media(
-            media_name="mediaName",
+            media_name="IMG_001.jpg",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            album_name="albumName",
+            album_name="Pictures",
         )
 
         assert response.is_closed is True
@@ -160,9 +160,9 @@ class TestMedia:
     @parametrize
     def test_streaming_response_delete_media(self, client: GboxClient) -> None:
         with client.v1.boxes.media.with_streaming_response.delete_media(
-            media_name="mediaName",
+            media_name="IMG_001.jpg",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            album_name="albumName",
+            album_name="Pictures",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -177,14 +177,14 @@ class TestMedia:
     def test_path_params_delete_media(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.media.with_raw_response.delete_media(
-                media_name="mediaName",
+                media_name="IMG_001.jpg",
                 box_id="",
-                album_name="albumName",
+                album_name="Pictures",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `album_name` but received ''"):
             client.v1.boxes.media.with_raw_response.delete_media(
-                media_name="mediaName",
+                media_name="IMG_001.jpg",
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
                 album_name="",
             )
@@ -193,20 +193,20 @@ class TestMedia:
             client.v1.boxes.media.with_raw_response.delete_media(
                 media_name="",
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-                album_name="albumName",
+                album_name="Pictures",
             )
 
     @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     def test_method_download_media(self, client: GboxClient, respx_mock: MockRouter) -> None:
-        respx_mock.get("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d/media/albums/albumName/mediaName").mock(
+        respx_mock.get("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d/media/albums/Pictures/IMG_001.jpg").mock(
             return_value=httpx.Response(200, json={"foo": "bar"})
         )
         media = client.v1.boxes.media.download_media(
-            media_name="mediaName",
+            media_name="IMG_001.jpg",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            album_name="albumName",
+            album_name="Pictures",
         )
         assert media.is_closed
         assert media.json() == {"foo": "bar"}
@@ -217,14 +217,14 @@ class TestMedia:
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     def test_raw_response_download_media(self, client: GboxClient, respx_mock: MockRouter) -> None:
-        respx_mock.get("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d/media/albums/albumName/mediaName").mock(
+        respx_mock.get("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d/media/albums/Pictures/IMG_001.jpg").mock(
             return_value=httpx.Response(200, json={"foo": "bar"})
         )
 
         media = client.v1.boxes.media.with_raw_response.download_media(
-            media_name="mediaName",
+            media_name="IMG_001.jpg",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            album_name="albumName",
+            album_name="Pictures",
         )
 
         assert media.is_closed is True
@@ -236,13 +236,13 @@ class TestMedia:
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     def test_streaming_response_download_media(self, client: GboxClient, respx_mock: MockRouter) -> None:
-        respx_mock.get("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d/media/albums/albumName/mediaName").mock(
+        respx_mock.get("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d/media/albums/Pictures/IMG_001.jpg").mock(
             return_value=httpx.Response(200, json={"foo": "bar"})
         )
         with client.v1.boxes.media.with_streaming_response.download_media(
-            media_name="mediaName",
+            media_name="IMG_001.jpg",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            album_name="albumName",
+            album_name="Pictures",
         ) as media:
             assert not media.is_closed
             assert media.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -259,14 +259,14 @@ class TestMedia:
     def test_path_params_download_media(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.media.with_raw_response.download_media(
-                media_name="mediaName",
+                media_name="IMG_001.jpg",
                 box_id="",
-                album_name="albumName",
+                album_name="Pictures",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `album_name` but received ''"):
             client.v1.boxes.media.with_raw_response.download_media(
-                media_name="mediaName",
+                media_name="IMG_001.jpg",
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
                 album_name="",
             )
@@ -275,14 +275,14 @@ class TestMedia:
             client.v1.boxes.media.with_raw_response.download_media(
                 media_name="",
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-                album_name="albumName",
+                album_name="Pictures",
             )
 
     @pytest.mark.skip()
     @parametrize
     def test_method_get_album_detail(self, client: GboxClient) -> None:
         media = client.v1.boxes.media.get_album_detail(
-            album_name="albumName",
+            album_name="Pictures",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
         assert_matches_type(MediaGetAlbumDetailResponse, media, path=["response"])
@@ -291,7 +291,7 @@ class TestMedia:
     @parametrize
     def test_raw_response_get_album_detail(self, client: GboxClient) -> None:
         response = client.v1.boxes.media.with_raw_response.get_album_detail(
-            album_name="albumName",
+            album_name="Pictures",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
@@ -304,7 +304,7 @@ class TestMedia:
     @parametrize
     def test_streaming_response_get_album_detail(self, client: GboxClient) -> None:
         with client.v1.boxes.media.with_streaming_response.get_album_detail(
-            album_name="albumName",
+            album_name="Pictures",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
@@ -320,7 +320,7 @@ class TestMedia:
     def test_path_params_get_album_detail(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.media.with_raw_response.get_album_detail(
-                album_name="albumName",
+                album_name="Pictures",
                 box_id="",
             )
 
@@ -376,7 +376,7 @@ class TestMedia:
     @parametrize
     def test_method_update_album(self, client: GboxClient) -> None:
         media = client.v1.boxes.media.update_album(
-            album_name="albumName",
+            album_name="Pictures",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             media=[b"raw file contents"],
         )
@@ -386,7 +386,7 @@ class TestMedia:
     @parametrize
     def test_raw_response_update_album(self, client: GboxClient) -> None:
         response = client.v1.boxes.media.with_raw_response.update_album(
-            album_name="albumName",
+            album_name="Pictures",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             media=[b"raw file contents"],
         )
@@ -400,7 +400,7 @@ class TestMedia:
     @parametrize
     def test_streaming_response_update_album(self, client: GboxClient) -> None:
         with client.v1.boxes.media.with_streaming_response.update_album(
-            album_name="albumName",
+            album_name="Pictures",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             media=[b"raw file contents"],
         ) as response:
@@ -417,7 +417,7 @@ class TestMedia:
     def test_path_params_update_album(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.media.with_raw_response.update_album(
-                album_name="albumName",
+                album_name="Pictures",
                 box_id="",
                 media=[b"raw file contents"],
             )
@@ -489,7 +489,7 @@ class TestAsyncMedia:
     @parametrize
     async def test_method_delete_album(self, async_client: AsyncGboxClient) -> None:
         media = await async_client.v1.boxes.media.delete_album(
-            album_name="albumName",
+            album_name="Pictures",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
         assert media is None
@@ -498,7 +498,7 @@ class TestAsyncMedia:
     @parametrize
     async def test_raw_response_delete_album(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.media.with_raw_response.delete_album(
-            album_name="albumName",
+            album_name="Pictures",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
@@ -511,7 +511,7 @@ class TestAsyncMedia:
     @parametrize
     async def test_streaming_response_delete_album(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.media.with_streaming_response.delete_album(
-            album_name="albumName",
+            album_name="Pictures",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
@@ -527,7 +527,7 @@ class TestAsyncMedia:
     async def test_path_params_delete_album(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.media.with_raw_response.delete_album(
-                album_name="albumName",
+                album_name="Pictures",
                 box_id="",
             )
 
@@ -541,9 +541,9 @@ class TestAsyncMedia:
     @parametrize
     async def test_method_delete_media(self, async_client: AsyncGboxClient) -> None:
         media = await async_client.v1.boxes.media.delete_media(
-            media_name="mediaName",
+            media_name="IMG_001.jpg",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            album_name="albumName",
+            album_name="Pictures",
         )
         assert media is None
 
@@ -551,9 +551,9 @@ class TestAsyncMedia:
     @parametrize
     async def test_raw_response_delete_media(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.media.with_raw_response.delete_media(
-            media_name="mediaName",
+            media_name="IMG_001.jpg",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            album_name="albumName",
+            album_name="Pictures",
         )
 
         assert response.is_closed is True
@@ -565,9 +565,9 @@ class TestAsyncMedia:
     @parametrize
     async def test_streaming_response_delete_media(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.media.with_streaming_response.delete_media(
-            media_name="mediaName",
+            media_name="IMG_001.jpg",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            album_name="albumName",
+            album_name="Pictures",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -582,14 +582,14 @@ class TestAsyncMedia:
     async def test_path_params_delete_media(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.media.with_raw_response.delete_media(
-                media_name="mediaName",
+                media_name="IMG_001.jpg",
                 box_id="",
-                album_name="albumName",
+                album_name="Pictures",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `album_name` but received ''"):
             await async_client.v1.boxes.media.with_raw_response.delete_media(
-                media_name="mediaName",
+                media_name="IMG_001.jpg",
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
                 album_name="",
             )
@@ -598,20 +598,20 @@ class TestAsyncMedia:
             await async_client.v1.boxes.media.with_raw_response.delete_media(
                 media_name="",
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-                album_name="albumName",
+                album_name="Pictures",
             )
 
     @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     async def test_method_download_media(self, async_client: AsyncGboxClient, respx_mock: MockRouter) -> None:
-        respx_mock.get("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d/media/albums/albumName/mediaName").mock(
+        respx_mock.get("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d/media/albums/Pictures/IMG_001.jpg").mock(
             return_value=httpx.Response(200, json={"foo": "bar"})
         )
         media = await async_client.v1.boxes.media.download_media(
-            media_name="mediaName",
+            media_name="IMG_001.jpg",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            album_name="albumName",
+            album_name="Pictures",
         )
         assert media.is_closed
         assert await media.json() == {"foo": "bar"}
@@ -622,14 +622,14 @@ class TestAsyncMedia:
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     async def test_raw_response_download_media(self, async_client: AsyncGboxClient, respx_mock: MockRouter) -> None:
-        respx_mock.get("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d/media/albums/albumName/mediaName").mock(
+        respx_mock.get("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d/media/albums/Pictures/IMG_001.jpg").mock(
             return_value=httpx.Response(200, json={"foo": "bar"})
         )
 
         media = await async_client.v1.boxes.media.with_raw_response.download_media(
-            media_name="mediaName",
+            media_name="IMG_001.jpg",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            album_name="albumName",
+            album_name="Pictures",
         )
 
         assert media.is_closed is True
@@ -643,13 +643,13 @@ class TestAsyncMedia:
     async def test_streaming_response_download_media(
         self, async_client: AsyncGboxClient, respx_mock: MockRouter
     ) -> None:
-        respx_mock.get("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d/media/albums/albumName/mediaName").mock(
+        respx_mock.get("/boxes/c9bdc193-b54b-4ddb-a035-5ac0c598d32d/media/albums/Pictures/IMG_001.jpg").mock(
             return_value=httpx.Response(200, json={"foo": "bar"})
         )
         async with async_client.v1.boxes.media.with_streaming_response.download_media(
-            media_name="mediaName",
+            media_name="IMG_001.jpg",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            album_name="albumName",
+            album_name="Pictures",
         ) as media:
             assert not media.is_closed
             assert media.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -666,14 +666,14 @@ class TestAsyncMedia:
     async def test_path_params_download_media(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.media.with_raw_response.download_media(
-                media_name="mediaName",
+                media_name="IMG_001.jpg",
                 box_id="",
-                album_name="albumName",
+                album_name="Pictures",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `album_name` but received ''"):
             await async_client.v1.boxes.media.with_raw_response.download_media(
-                media_name="mediaName",
+                media_name="IMG_001.jpg",
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
                 album_name="",
             )
@@ -682,14 +682,14 @@ class TestAsyncMedia:
             await async_client.v1.boxes.media.with_raw_response.download_media(
                 media_name="",
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-                album_name="albumName",
+                album_name="Pictures",
             )
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_get_album_detail(self, async_client: AsyncGboxClient) -> None:
         media = await async_client.v1.boxes.media.get_album_detail(
-            album_name="albumName",
+            album_name="Pictures",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
         assert_matches_type(MediaGetAlbumDetailResponse, media, path=["response"])
@@ -698,7 +698,7 @@ class TestAsyncMedia:
     @parametrize
     async def test_raw_response_get_album_detail(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.media.with_raw_response.get_album_detail(
-            album_name="albumName",
+            album_name="Pictures",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
@@ -711,7 +711,7 @@ class TestAsyncMedia:
     @parametrize
     async def test_streaming_response_get_album_detail(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.media.with_streaming_response.get_album_detail(
-            album_name="albumName",
+            album_name="Pictures",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
@@ -727,7 +727,7 @@ class TestAsyncMedia:
     async def test_path_params_get_album_detail(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.media.with_raw_response.get_album_detail(
-                album_name="albumName",
+                album_name="Pictures",
                 box_id="",
             )
 
@@ -783,7 +783,7 @@ class TestAsyncMedia:
     @parametrize
     async def test_method_update_album(self, async_client: AsyncGboxClient) -> None:
         media = await async_client.v1.boxes.media.update_album(
-            album_name="albumName",
+            album_name="Pictures",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             media=[b"raw file contents"],
         )
@@ -793,7 +793,7 @@ class TestAsyncMedia:
     @parametrize
     async def test_raw_response_update_album(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.media.with_raw_response.update_album(
-            album_name="albumName",
+            album_name="Pictures",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             media=[b"raw file contents"],
         )
@@ -807,7 +807,7 @@ class TestAsyncMedia:
     @parametrize
     async def test_streaming_response_update_album(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.media.with_streaming_response.update_album(
-            album_name="albumName",
+            album_name="Pictures",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             media=[b"raw file contents"],
         ) as response:
@@ -824,7 +824,7 @@ class TestAsyncMedia:
     async def test_path_params_update_album(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.media.with_raw_response.update_album(
-                album_name="albumName",
+                album_name="Pictures",
                 box_id="",
                 media=[b"raw file contents"],
             )

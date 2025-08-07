@@ -32,6 +32,7 @@ from ....types.v1.boxes.media_list_albums_response import MediaListAlbumsRespons
 from ....types.v1.boxes.media_create_album_response import MediaCreateAlbumResponse
 from ....types.v1.boxes.media_update_album_response import MediaUpdateAlbumResponse
 from ....types.v1.boxes.media_get_album_detail_response import MediaGetAlbumDetailResponse
+from ....types.v1.boxes.media_get_media_support_response import MediaGetMediaSupportResponse
 
 __all__ = ["MediaResource", "AsyncMediaResource"]
 
@@ -303,6 +304,39 @@ class MediaResource(SyncAPIResource):
                     Any, MediaGetMediaResponse
                 ),  # Union types cannot be passed in as arguments in the type system
             ),
+        )
+
+    def get_media_support(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> MediaGetMediaSupportResponse:
+        """
+        Get supported media file extensions for photos and videos
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return self._get(
+            f"/boxes/{box_id}/media/support",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MediaGetMediaSupportResponse,
         )
 
     def list_albums(
@@ -691,6 +725,39 @@ class AsyncMediaResource(AsyncAPIResource):
             ),
         )
 
+    async def get_media_support(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> MediaGetMediaSupportResponse:
+        """
+        Get supported media file extensions for photos and videos
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return await self._get(
+            f"/boxes/{box_id}/media/support",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MediaGetMediaSupportResponse,
+        )
+
     async def list_albums(
         self,
         box_id: str,
@@ -831,6 +898,9 @@ class MediaResourceWithRawResponse:
         self.get_media = to_raw_response_wrapper(
             media.get_media,
         )
+        self.get_media_support = to_raw_response_wrapper(
+            media.get_media_support,
+        )
         self.list_albums = to_raw_response_wrapper(
             media.list_albums,
         )
@@ -864,6 +934,9 @@ class AsyncMediaResourceWithRawResponse:
         )
         self.get_media = async_to_raw_response_wrapper(
             media.get_media,
+        )
+        self.get_media_support = async_to_raw_response_wrapper(
+            media.get_media_support,
         )
         self.list_albums = async_to_raw_response_wrapper(
             media.list_albums,
@@ -899,6 +972,9 @@ class MediaResourceWithStreamingResponse:
         self.get_media = to_streamed_response_wrapper(
             media.get_media,
         )
+        self.get_media_support = to_streamed_response_wrapper(
+            media.get_media_support,
+        )
         self.list_albums = to_streamed_response_wrapper(
             media.list_albums,
         )
@@ -932,6 +1008,9 @@ class AsyncMediaResourceWithStreamingResponse:
         )
         self.get_media = async_to_streamed_response_wrapper(
             media.get_media,
+        )
+        self.get_media_support = async_to_streamed_response_wrapper(
+            media.get_media_support,
         )
         self.list_albums = async_to_streamed_response_wrapper(
             media.list_albums,

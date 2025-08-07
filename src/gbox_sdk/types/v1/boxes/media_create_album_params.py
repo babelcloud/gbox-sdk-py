@@ -11,8 +11,8 @@ __all__ = ["MediaCreateAlbumParams"]
 
 
 class MediaCreateAlbumParams(TypedDict, total=False):
-    media: Required[List[FileTypes]]
-    """Media files to include in the album (max size: 512MB per file)"""
-
     name: Required[str]
     """Name of the album to create"""
+
+    media: List[FileTypes]
+    """Media files to include in the album (max size: 512MB per file)"""

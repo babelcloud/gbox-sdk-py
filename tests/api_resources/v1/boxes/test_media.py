@@ -38,8 +38,17 @@ class TestMedia:
     def test_method_create_album(self, client: GboxClient) -> None:
         media = client.v1.boxes.media.create_album(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            media=[b"raw file contents"],
             name="Vacation Photos",
+        )
+        assert_matches_type(MediaCreateAlbumResponse, media, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_create_album_with_all_params(self, client: GboxClient) -> None:
+        media = client.v1.boxes.media.create_album(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            name="Vacation Photos",
+            media=[b"raw file contents"],
         )
         assert_matches_type(MediaCreateAlbumResponse, media, path=["response"])
 
@@ -48,7 +57,6 @@ class TestMedia:
     def test_raw_response_create_album(self, client: GboxClient) -> None:
         response = client.v1.boxes.media.with_raw_response.create_album(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            media=[b"raw file contents"],
             name="Vacation Photos",
         )
 
@@ -62,7 +70,6 @@ class TestMedia:
     def test_streaming_response_create_album(self, client: GboxClient) -> None:
         with client.v1.boxes.media.with_streaming_response.create_album(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            media=[b"raw file contents"],
             name="Vacation Photos",
         ) as response:
             assert not response.is_closed
@@ -79,7 +86,6 @@ class TestMedia:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.media.with_raw_response.create_album(
                 box_id="",
-                media=[b"raw file contents"],
                 name="Vacation Photos",
             )
 
@@ -601,8 +607,17 @@ class TestAsyncMedia:
     async def test_method_create_album(self, async_client: AsyncGboxClient) -> None:
         media = await async_client.v1.boxes.media.create_album(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            media=[b"raw file contents"],
             name="Vacation Photos",
+        )
+        assert_matches_type(MediaCreateAlbumResponse, media, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_create_album_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        media = await async_client.v1.boxes.media.create_album(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            name="Vacation Photos",
+            media=[b"raw file contents"],
         )
         assert_matches_type(MediaCreateAlbumResponse, media, path=["response"])
 
@@ -611,7 +626,6 @@ class TestAsyncMedia:
     async def test_raw_response_create_album(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.media.with_raw_response.create_album(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            media=[b"raw file contents"],
             name="Vacation Photos",
         )
 
@@ -625,7 +639,6 @@ class TestAsyncMedia:
     async def test_streaming_response_create_album(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.media.with_streaming_response.create_album(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            media=[b"raw file contents"],
             name="Vacation Photos",
         ) as response:
             assert not response.is_closed
@@ -642,7 +655,6 @@ class TestAsyncMedia:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.media.with_raw_response.create_album(
                 box_id="",
-                media=[b"raw file contents"],
                 name="Vacation Photos",
             )
 

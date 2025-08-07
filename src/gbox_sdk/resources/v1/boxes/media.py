@@ -61,8 +61,8 @@ class MediaResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        media: List[FileTypes],
         name: str,
+        media: List[FileTypes] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -74,9 +74,9 @@ class MediaResource(SyncAPIResource):
         Create a new album with media files
 
         Args:
-          media: Media files to include in the album (max size: 512MB per file)
-
           name: Name of the album to create
+
+          media: Media files to include in the album (max size: 512MB per file)
 
           extra_headers: Send extra headers
 
@@ -90,8 +90,8 @@ class MediaResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         body = deepcopy_minimal(
             {
-                "media": media,
                 "name": name,
+                "media": media,
             }
         )
         files = extract_files(cast(Mapping[str, object], body), paths=[["media", "<array>"]])
@@ -480,8 +480,8 @@ class AsyncMediaResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        media: List[FileTypes],
         name: str,
+        media: List[FileTypes] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -493,9 +493,9 @@ class AsyncMediaResource(AsyncAPIResource):
         Create a new album with media files
 
         Args:
-          media: Media files to include in the album (max size: 512MB per file)
-
           name: Name of the album to create
+
+          media: Media files to include in the album (max size: 512MB per file)
 
           extra_headers: Send extra headers
 
@@ -509,8 +509,8 @@ class AsyncMediaResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         body = deepcopy_minimal(
             {
-                "media": media,
                 "name": name,
+                "media": media,
             }
         )
         files = extract_files(cast(Mapping[str, object], body), paths=[["media", "<array>"]])

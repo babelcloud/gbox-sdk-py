@@ -13,6 +13,9 @@ class MediaGetAlbumDetailResponse(BaseModel):
     last_modified: datetime = FieldInfo(alias="lastModified")
     """Last modified time of the album"""
 
+    media_count: float = FieldInfo(alias="mediaCount")
+    """Number of media files in the album"""
+
     name: str
     """Name of the album"""
 

@@ -1225,6 +1225,7 @@ class TestActions:
             mode="append",
             output_format="base64",
             presigned_expires_in="30m",
+            press_enter=False,
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionTypeResponse, action, path=["response"])
@@ -2464,6 +2465,7 @@ class TestAsyncActions:
             mode="append",
             output_format="base64",
             presigned_expires_in="30m",
+            press_enter=False,
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionTypeResponse, action, path=["response"])

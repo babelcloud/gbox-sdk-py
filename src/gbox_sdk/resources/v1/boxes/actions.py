@@ -1480,6 +1480,7 @@ class ActionsResource(SyncAPIResource):
         mode: Literal["append", "replace"] | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
+        press_enter: bool | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1508,6 +1509,8 @@ class ActionsResource(SyncAPIResource):
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+          press_enter: Whether to press Enter after typing the text
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
 
@@ -1545,6 +1548,7 @@ class ActionsResource(SyncAPIResource):
                         "mode": mode,
                         "output_format": output_format,
                         "presigned_expires_in": presigned_expires_in,
+                        "press_enter": press_enter,
                         "screenshot_delay": screenshot_delay,
                     },
                     action_type_params.ActionTypeParams,
@@ -2988,6 +2992,7 @@ class AsyncActionsResource(AsyncAPIResource):
         mode: Literal["append", "replace"] | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
+        press_enter: bool | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -3016,6 +3021,8 @@ class AsyncActionsResource(AsyncAPIResource):
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+          press_enter: Whether to press Enter after typing the text
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
 
@@ -3053,6 +3060,7 @@ class AsyncActionsResource(AsyncAPIResource):
                         "mode": mode,
                         "output_format": output_format,
                         "presigned_expires_in": presigned_expires_in,
+                        "press_enter": press_enter,
                         "screenshot_delay": screenshot_delay,
                     },
                     action_type_params.ActionTypeParams,

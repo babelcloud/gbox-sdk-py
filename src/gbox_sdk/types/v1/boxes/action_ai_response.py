@@ -728,6 +728,9 @@ class AIActionScreenshotResultAIResponseActionTypedTypeAction(BaseModel):
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
+    press_enter: Optional[bool] = FieldInfo(alias="pressEnter", default=None)
+    """Whether to press Enter after typing the text"""
+
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
     """Delay after performing the action, before taking the final screenshot.
 
@@ -1624,6 +1627,9 @@ class AIActionResultAIResponseActionTypedTypeAction(BaseModel):
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
+
+    press_enter: Optional[bool] = FieldInfo(alias="pressEnter", default=None)
+    """Whether to press Enter after typing the text"""
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
     """Delay after performing the action, before taking the final screenshot.

@@ -23,7 +23,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestBrowser:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_cdp_url(self, client: GboxClient) -> None:
         browser = client.v1.boxes.browser.cdp_url(
@@ -31,7 +31,7 @@ class TestBrowser:
         )
         assert_matches_type(str, browser, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_cdp_url_with_all_params(self, client: GboxClient) -> None:
         browser = client.v1.boxes.browser.cdp_url(
@@ -40,7 +40,7 @@ class TestBrowser:
         )
         assert_matches_type(str, browser, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_cdp_url(self, client: GboxClient) -> None:
         response = client.v1.boxes.browser.with_raw_response.cdp_url(
@@ -52,7 +52,7 @@ class TestBrowser:
         browser = response.parse()
         assert_matches_type(str, browser, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_cdp_url(self, client: GboxClient) -> None:
         with client.v1.boxes.browser.with_streaming_response.cdp_url(
@@ -66,7 +66,7 @@ class TestBrowser:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_cdp_url(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -74,7 +74,7 @@ class TestBrowser:
                 box_id="",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_close_tab(self, client: GboxClient) -> None:
         browser = client.v1.boxes.browser.close_tab(
@@ -83,7 +83,7 @@ class TestBrowser:
         )
         assert_matches_type(BrowserCloseTabResponse, browser, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_close_tab(self, client: GboxClient) -> None:
         response = client.v1.boxes.browser.with_raw_response.close_tab(
@@ -96,7 +96,7 @@ class TestBrowser:
         browser = response.parse()
         assert_matches_type(BrowserCloseTabResponse, browser, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_close_tab(self, client: GboxClient) -> None:
         with client.v1.boxes.browser.with_streaming_response.close_tab(
@@ -111,7 +111,7 @@ class TestBrowser:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_close_tab(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -126,7 +126,7 @@ class TestBrowser:
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_get_tabs(self, client: GboxClient) -> None:
         browser = client.v1.boxes.browser.get_tabs(
@@ -134,7 +134,7 @@ class TestBrowser:
         )
         assert_matches_type(BrowserGetTabsResponse, browser, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_get_tabs(self, client: GboxClient) -> None:
         response = client.v1.boxes.browser.with_raw_response.get_tabs(
@@ -146,7 +146,7 @@ class TestBrowser:
         browser = response.parse()
         assert_matches_type(BrowserGetTabsResponse, browser, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_get_tabs(self, client: GboxClient) -> None:
         with client.v1.boxes.browser.with_streaming_response.get_tabs(
@@ -160,7 +160,7 @@ class TestBrowser:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_get_tabs(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -168,7 +168,7 @@ class TestBrowser:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_open_tab(self, client: GboxClient) -> None:
         browser = client.v1.boxes.browser.open_tab(
@@ -177,7 +177,7 @@ class TestBrowser:
         )
         assert_matches_type(BrowserOpenTabResponse, browser, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_open_tab(self, client: GboxClient) -> None:
         response = client.v1.boxes.browser.with_raw_response.open_tab(
@@ -190,7 +190,7 @@ class TestBrowser:
         browser = response.parse()
         assert_matches_type(BrowserOpenTabResponse, browser, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_open_tab(self, client: GboxClient) -> None:
         with client.v1.boxes.browser.with_streaming_response.open_tab(
@@ -205,7 +205,7 @@ class TestBrowser:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_open_tab(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -214,7 +214,7 @@ class TestBrowser:
                 url="https://www.google.com",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_switch_tab(self, client: GboxClient) -> None:
         browser = client.v1.boxes.browser.switch_tab(
@@ -223,7 +223,7 @@ class TestBrowser:
         )
         assert_matches_type(BrowserSwitchTabResponse, browser, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_switch_tab(self, client: GboxClient) -> None:
         response = client.v1.boxes.browser.with_raw_response.switch_tab(
@@ -236,7 +236,7 @@ class TestBrowser:
         browser = response.parse()
         assert_matches_type(BrowserSwitchTabResponse, browser, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_switch_tab(self, client: GboxClient) -> None:
         with client.v1.boxes.browser.with_streaming_response.switch_tab(
@@ -251,7 +251,7 @@ class TestBrowser:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_switch_tab(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -266,7 +266,7 @@ class TestBrowser:
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_update_tab(self, client: GboxClient) -> None:
         browser = client.v1.boxes.browser.update_tab(
@@ -276,7 +276,7 @@ class TestBrowser:
         )
         assert_matches_type(BrowserUpdateTabResponse, browser, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_update_tab(self, client: GboxClient) -> None:
         response = client.v1.boxes.browser.with_raw_response.update_tab(
@@ -290,7 +290,7 @@ class TestBrowser:
         browser = response.parse()
         assert_matches_type(BrowserUpdateTabResponse, browser, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_update_tab(self, client: GboxClient) -> None:
         with client.v1.boxes.browser.with_streaming_response.update_tab(
@@ -306,7 +306,7 @@ class TestBrowser:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_update_tab(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -329,7 +329,7 @@ class TestAsyncBrowser:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_cdp_url(self, async_client: AsyncGboxClient) -> None:
         browser = await async_client.v1.boxes.browser.cdp_url(
@@ -337,7 +337,7 @@ class TestAsyncBrowser:
         )
         assert_matches_type(str, browser, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_cdp_url_with_all_params(self, async_client: AsyncGboxClient) -> None:
         browser = await async_client.v1.boxes.browser.cdp_url(
@@ -346,7 +346,7 @@ class TestAsyncBrowser:
         )
         assert_matches_type(str, browser, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_cdp_url(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.browser.with_raw_response.cdp_url(
@@ -358,7 +358,7 @@ class TestAsyncBrowser:
         browser = await response.parse()
         assert_matches_type(str, browser, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_cdp_url(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.browser.with_streaming_response.cdp_url(
@@ -372,7 +372,7 @@ class TestAsyncBrowser:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_cdp_url(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -380,7 +380,7 @@ class TestAsyncBrowser:
                 box_id="",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_close_tab(self, async_client: AsyncGboxClient) -> None:
         browser = await async_client.v1.boxes.browser.close_tab(
@@ -389,7 +389,7 @@ class TestAsyncBrowser:
         )
         assert_matches_type(BrowserCloseTabResponse, browser, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_close_tab(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.browser.with_raw_response.close_tab(
@@ -402,7 +402,7 @@ class TestAsyncBrowser:
         browser = await response.parse()
         assert_matches_type(BrowserCloseTabResponse, browser, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_close_tab(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.browser.with_streaming_response.close_tab(
@@ -417,7 +417,7 @@ class TestAsyncBrowser:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_close_tab(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -432,7 +432,7 @@ class TestAsyncBrowser:
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_get_tabs(self, async_client: AsyncGboxClient) -> None:
         browser = await async_client.v1.boxes.browser.get_tabs(
@@ -440,7 +440,7 @@ class TestAsyncBrowser:
         )
         assert_matches_type(BrowserGetTabsResponse, browser, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_get_tabs(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.browser.with_raw_response.get_tabs(
@@ -452,7 +452,7 @@ class TestAsyncBrowser:
         browser = await response.parse()
         assert_matches_type(BrowserGetTabsResponse, browser, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_get_tabs(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.browser.with_streaming_response.get_tabs(
@@ -466,7 +466,7 @@ class TestAsyncBrowser:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_get_tabs(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -474,7 +474,7 @@ class TestAsyncBrowser:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_open_tab(self, async_client: AsyncGboxClient) -> None:
         browser = await async_client.v1.boxes.browser.open_tab(
@@ -483,7 +483,7 @@ class TestAsyncBrowser:
         )
         assert_matches_type(BrowserOpenTabResponse, browser, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_open_tab(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.browser.with_raw_response.open_tab(
@@ -496,7 +496,7 @@ class TestAsyncBrowser:
         browser = await response.parse()
         assert_matches_type(BrowserOpenTabResponse, browser, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_open_tab(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.browser.with_streaming_response.open_tab(
@@ -511,7 +511,7 @@ class TestAsyncBrowser:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_open_tab(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -520,7 +520,7 @@ class TestAsyncBrowser:
                 url="https://www.google.com",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_switch_tab(self, async_client: AsyncGboxClient) -> None:
         browser = await async_client.v1.boxes.browser.switch_tab(
@@ -529,7 +529,7 @@ class TestAsyncBrowser:
         )
         assert_matches_type(BrowserSwitchTabResponse, browser, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_switch_tab(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.browser.with_raw_response.switch_tab(
@@ -542,7 +542,7 @@ class TestAsyncBrowser:
         browser = await response.parse()
         assert_matches_type(BrowserSwitchTabResponse, browser, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_switch_tab(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.browser.with_streaming_response.switch_tab(
@@ -557,7 +557,7 @@ class TestAsyncBrowser:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_switch_tab(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -572,7 +572,7 @@ class TestAsyncBrowser:
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_update_tab(self, async_client: AsyncGboxClient) -> None:
         browser = await async_client.v1.boxes.browser.update_tab(
@@ -582,7 +582,7 @@ class TestAsyncBrowser:
         )
         assert_matches_type(BrowserUpdateTabResponse, browser, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_update_tab(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.browser.with_raw_response.update_tab(
@@ -596,7 +596,7 @@ class TestAsyncBrowser:
         browser = await response.parse()
         assert_matches_type(BrowserUpdateTabResponse, browser, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_update_tab(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.browser.with_streaming_response.update_tab(
@@ -612,7 +612,7 @@ class TestAsyncBrowser:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_update_tab(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):

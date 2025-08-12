@@ -34,7 +34,6 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestAndroid:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     def test_method_backup(self, client: GboxClient, respx_mock: MockRouter) -> None:
@@ -50,7 +49,6 @@ class TestAndroid:
         assert cast(Any, android.is_closed) is True
         assert isinstance(android, BinaryAPIResponse)
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     def test_raw_response_backup(self, client: GboxClient, respx_mock: MockRouter) -> None:
@@ -68,7 +66,6 @@ class TestAndroid:
         assert android.json() == {"foo": "bar"}
         assert isinstance(android, BinaryAPIResponse)
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     def test_streaming_response_backup(self, client: GboxClient, respx_mock: MockRouter) -> None:
@@ -88,7 +85,6 @@ class TestAndroid:
 
         assert cast(Any, android.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     def test_path_params_backup(self, client: GboxClient) -> None:
@@ -104,7 +100,6 @@ class TestAndroid:
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             )
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     def test_method_backup_all(self, client: GboxClient, respx_mock: MockRouter) -> None:
@@ -119,7 +114,6 @@ class TestAndroid:
         assert cast(Any, android.is_closed) is True
         assert isinstance(android, BinaryAPIResponse)
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     def test_raw_response_backup_all(self, client: GboxClient, respx_mock: MockRouter) -> None:
@@ -136,7 +130,6 @@ class TestAndroid:
         assert android.json() == {"foo": "bar"}
         assert isinstance(android, BinaryAPIResponse)
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     def test_streaming_response_backup_all(self, client: GboxClient, respx_mock: MockRouter) -> None:
@@ -155,7 +148,6 @@ class TestAndroid:
 
         assert cast(Any, android.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     def test_path_params_backup_all(self, client: GboxClient) -> None:
@@ -164,7 +156,7 @@ class TestAndroid:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_close(self, client: GboxClient) -> None:
         android = client.v1.boxes.android.close(
@@ -173,7 +165,7 @@ class TestAndroid:
         )
         assert android is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_close(self, client: GboxClient) -> None:
         response = client.v1.boxes.android.with_raw_response.close(
@@ -186,7 +178,7 @@ class TestAndroid:
         android = response.parse()
         assert android is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_close(self, client: GboxClient) -> None:
         with client.v1.boxes.android.with_streaming_response.close(
@@ -201,7 +193,7 @@ class TestAndroid:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_close(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -216,7 +208,7 @@ class TestAndroid:
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_close_all(self, client: GboxClient) -> None:
         android = client.v1.boxes.android.close_all(
@@ -224,7 +216,7 @@ class TestAndroid:
         )
         assert android is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_close_all(self, client: GboxClient) -> None:
         response = client.v1.boxes.android.with_raw_response.close_all(
@@ -236,7 +228,7 @@ class TestAndroid:
         android = response.parse()
         assert android is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_close_all(self, client: GboxClient) -> None:
         with client.v1.boxes.android.with_streaming_response.close_all(
@@ -250,7 +242,7 @@ class TestAndroid:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_close_all(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -258,7 +250,7 @@ class TestAndroid:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_get(self, client: GboxClient) -> None:
         android = client.v1.boxes.android.get(
@@ -267,7 +259,7 @@ class TestAndroid:
         )
         assert_matches_type(AndroidGetResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_get(self, client: GboxClient) -> None:
         response = client.v1.boxes.android.with_raw_response.get(
@@ -280,7 +272,7 @@ class TestAndroid:
         android = response.parse()
         assert_matches_type(AndroidGetResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_get(self, client: GboxClient) -> None:
         with client.v1.boxes.android.with_streaming_response.get(
@@ -295,7 +287,7 @@ class TestAndroid:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_get(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -310,7 +302,7 @@ class TestAndroid:
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_get_app(self, client: GboxClient) -> None:
         android = client.v1.boxes.android.get_app(
@@ -319,7 +311,7 @@ class TestAndroid:
         )
         assert_matches_type(AndroidApp, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_get_app(self, client: GboxClient) -> None:
         response = client.v1.boxes.android.with_raw_response.get_app(
@@ -332,7 +324,7 @@ class TestAndroid:
         android = response.parse()
         assert_matches_type(AndroidApp, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_get_app(self, client: GboxClient) -> None:
         with client.v1.boxes.android.with_streaming_response.get_app(
@@ -347,7 +339,7 @@ class TestAndroid:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_get_app(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -362,7 +354,7 @@ class TestAndroid:
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_get_connect_address(self, client: GboxClient) -> None:
         android = client.v1.boxes.android.get_connect_address(
@@ -370,7 +362,7 @@ class TestAndroid:
         )
         assert_matches_type(AndroidGetConnectAddressResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_get_connect_address(self, client: GboxClient) -> None:
         response = client.v1.boxes.android.with_raw_response.get_connect_address(
@@ -382,7 +374,7 @@ class TestAndroid:
         android = response.parse()
         assert_matches_type(AndroidGetConnectAddressResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_get_connect_address(self, client: GboxClient) -> None:
         with client.v1.boxes.android.with_streaming_response.get_connect_address(
@@ -396,7 +388,7 @@ class TestAndroid:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_get_connect_address(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -404,7 +396,7 @@ class TestAndroid:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_install_overload_1(self, client: GboxClient) -> None:
         android = client.v1.boxes.android.install(
@@ -413,7 +405,7 @@ class TestAndroid:
         )
         assert_matches_type(AndroidInstallResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_install_with_all_params_overload_1(self, client: GboxClient) -> None:
         android = client.v1.boxes.android.install(
@@ -423,7 +415,7 @@ class TestAndroid:
         )
         assert_matches_type(AndroidInstallResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_install_overload_1(self, client: GboxClient) -> None:
         response = client.v1.boxes.android.with_raw_response.install(
@@ -436,7 +428,7 @@ class TestAndroid:
         android = response.parse()
         assert_matches_type(AndroidInstallResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_install_overload_1(self, client: GboxClient) -> None:
         with client.v1.boxes.android.with_streaming_response.install(
@@ -451,7 +443,7 @@ class TestAndroid:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_install_overload_1(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -460,7 +452,7 @@ class TestAndroid:
                 apk=b"raw file contents",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_install_overload_2(self, client: GboxClient) -> None:
         android = client.v1.boxes.android.install(
@@ -469,7 +461,7 @@ class TestAndroid:
         )
         assert_matches_type(AndroidInstallResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_install_with_all_params_overload_2(self, client: GboxClient) -> None:
         android = client.v1.boxes.android.install(
@@ -479,7 +471,7 @@ class TestAndroid:
         )
         assert_matches_type(AndroidInstallResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_install_overload_2(self, client: GboxClient) -> None:
         response = client.v1.boxes.android.with_raw_response.install(
@@ -492,7 +484,7 @@ class TestAndroid:
         android = response.parse()
         assert_matches_type(AndroidInstallResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_install_overload_2(self, client: GboxClient) -> None:
         with client.v1.boxes.android.with_streaming_response.install(
@@ -507,7 +499,7 @@ class TestAndroid:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_install_overload_2(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -516,7 +508,7 @@ class TestAndroid:
                 apk="https://example.com/app.apk",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list_activities(self, client: GboxClient) -> None:
         android = client.v1.boxes.android.list_activities(
@@ -525,7 +517,7 @@ class TestAndroid:
         )
         assert_matches_type(AndroidListActivitiesResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list_activities(self, client: GboxClient) -> None:
         response = client.v1.boxes.android.with_raw_response.list_activities(
@@ -538,7 +530,7 @@ class TestAndroid:
         android = response.parse()
         assert_matches_type(AndroidListActivitiesResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list_activities(self, client: GboxClient) -> None:
         with client.v1.boxes.android.with_streaming_response.list_activities(
@@ -553,7 +545,7 @@ class TestAndroid:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_list_activities(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -568,7 +560,7 @@ class TestAndroid:
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list_app(self, client: GboxClient) -> None:
         android = client.v1.boxes.android.list_app(
@@ -576,7 +568,7 @@ class TestAndroid:
         )
         assert_matches_type(AndroidListAppResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list_app(self, client: GboxClient) -> None:
         response = client.v1.boxes.android.with_raw_response.list_app(
@@ -588,7 +580,7 @@ class TestAndroid:
         android = response.parse()
         assert_matches_type(AndroidListAppResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list_app(self, client: GboxClient) -> None:
         with client.v1.boxes.android.with_streaming_response.list_app(
@@ -602,7 +594,7 @@ class TestAndroid:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_list_app(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -610,7 +602,7 @@ class TestAndroid:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list_pkg(self, client: GboxClient) -> None:
         android = client.v1.boxes.android.list_pkg(
@@ -618,7 +610,7 @@ class TestAndroid:
         )
         assert_matches_type(AndroidListPkgResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list_pkg_with_all_params(self, client: GboxClient) -> None:
         android = client.v1.boxes.android.list_pkg(
@@ -628,7 +620,7 @@ class TestAndroid:
         )
         assert_matches_type(AndroidListPkgResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list_pkg(self, client: GboxClient) -> None:
         response = client.v1.boxes.android.with_raw_response.list_pkg(
@@ -640,7 +632,7 @@ class TestAndroid:
         android = response.parse()
         assert_matches_type(AndroidListPkgResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list_pkg(self, client: GboxClient) -> None:
         with client.v1.boxes.android.with_streaming_response.list_pkg(
@@ -654,7 +646,7 @@ class TestAndroid:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_list_pkg(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -662,7 +654,7 @@ class TestAndroid:
                 box_id="",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list_pkg_simple(self, client: GboxClient) -> None:
         android = client.v1.boxes.android.list_pkg_simple(
@@ -670,7 +662,7 @@ class TestAndroid:
         )
         assert_matches_type(AndroidListPkgSimpleResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list_pkg_simple_with_all_params(self, client: GboxClient) -> None:
         android = client.v1.boxes.android.list_pkg_simple(
@@ -679,7 +671,7 @@ class TestAndroid:
         )
         assert_matches_type(AndroidListPkgSimpleResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list_pkg_simple(self, client: GboxClient) -> None:
         response = client.v1.boxes.android.with_raw_response.list_pkg_simple(
@@ -691,7 +683,7 @@ class TestAndroid:
         android = response.parse()
         assert_matches_type(AndroidListPkgSimpleResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list_pkg_simple(self, client: GboxClient) -> None:
         with client.v1.boxes.android.with_streaming_response.list_pkg_simple(
@@ -705,7 +697,7 @@ class TestAndroid:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_list_pkg_simple(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -713,7 +705,7 @@ class TestAndroid:
                 box_id="",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_open(self, client: GboxClient) -> None:
         android = client.v1.boxes.android.open(
@@ -722,7 +714,7 @@ class TestAndroid:
         )
         assert android is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_open_with_all_params(self, client: GboxClient) -> None:
         android = client.v1.boxes.android.open(
@@ -732,7 +724,7 @@ class TestAndroid:
         )
         assert android is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_open(self, client: GboxClient) -> None:
         response = client.v1.boxes.android.with_raw_response.open(
@@ -745,7 +737,7 @@ class TestAndroid:
         android = response.parse()
         assert android is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_open(self, client: GboxClient) -> None:
         with client.v1.boxes.android.with_streaming_response.open(
@@ -760,7 +752,7 @@ class TestAndroid:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_open(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -775,7 +767,7 @@ class TestAndroid:
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_restart(self, client: GboxClient) -> None:
         android = client.v1.boxes.android.restart(
@@ -784,7 +776,7 @@ class TestAndroid:
         )
         assert android is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_restart_with_all_params(self, client: GboxClient) -> None:
         android = client.v1.boxes.android.restart(
@@ -794,7 +786,7 @@ class TestAndroid:
         )
         assert android is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_restart(self, client: GboxClient) -> None:
         response = client.v1.boxes.android.with_raw_response.restart(
@@ -807,7 +799,7 @@ class TestAndroid:
         android = response.parse()
         assert android is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_restart(self, client: GboxClient) -> None:
         with client.v1.boxes.android.with_streaming_response.restart(
@@ -822,7 +814,7 @@ class TestAndroid:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_restart(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -837,7 +829,7 @@ class TestAndroid:
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_restore(self, client: GboxClient) -> None:
         android = client.v1.boxes.android.restore(
@@ -846,7 +838,7 @@ class TestAndroid:
         )
         assert android is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_restore(self, client: GboxClient) -> None:
         response = client.v1.boxes.android.with_raw_response.restore(
@@ -859,7 +851,7 @@ class TestAndroid:
         android = response.parse()
         assert android is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_restore(self, client: GboxClient) -> None:
         with client.v1.boxes.android.with_streaming_response.restore(
@@ -874,7 +866,7 @@ class TestAndroid:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_restore(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -883,7 +875,7 @@ class TestAndroid:
                 backup=b"raw file contents",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_uninstall(self, client: GboxClient) -> None:
         android = client.v1.boxes.android.uninstall(
@@ -892,7 +884,7 @@ class TestAndroid:
         )
         assert android is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_uninstall_with_all_params(self, client: GboxClient) -> None:
         android = client.v1.boxes.android.uninstall(
@@ -902,7 +894,7 @@ class TestAndroid:
         )
         assert android is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_uninstall(self, client: GboxClient) -> None:
         response = client.v1.boxes.android.with_raw_response.uninstall(
@@ -915,7 +907,7 @@ class TestAndroid:
         android = response.parse()
         assert android is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_uninstall(self, client: GboxClient) -> None:
         with client.v1.boxes.android.with_streaming_response.uninstall(
@@ -930,7 +922,7 @@ class TestAndroid:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_uninstall(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -951,7 +943,6 @@ class TestAsyncAndroid:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     async def test_method_backup(self, async_client: AsyncGboxClient, respx_mock: MockRouter) -> None:
@@ -967,7 +958,6 @@ class TestAsyncAndroid:
         assert cast(Any, android.is_closed) is True
         assert isinstance(android, AsyncBinaryAPIResponse)
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     async def test_raw_response_backup(self, async_client: AsyncGboxClient, respx_mock: MockRouter) -> None:
@@ -985,7 +975,6 @@ class TestAsyncAndroid:
         assert await android.json() == {"foo": "bar"}
         assert isinstance(android, AsyncBinaryAPIResponse)
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     async def test_streaming_response_backup(self, async_client: AsyncGboxClient, respx_mock: MockRouter) -> None:
@@ -1005,7 +994,6 @@ class TestAsyncAndroid:
 
         assert cast(Any, android.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     async def test_path_params_backup(self, async_client: AsyncGboxClient) -> None:
@@ -1021,7 +1009,6 @@ class TestAsyncAndroid:
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             )
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     async def test_method_backup_all(self, async_client: AsyncGboxClient, respx_mock: MockRouter) -> None:
@@ -1036,7 +1023,6 @@ class TestAsyncAndroid:
         assert cast(Any, android.is_closed) is True
         assert isinstance(android, AsyncBinaryAPIResponse)
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     async def test_raw_response_backup_all(self, async_client: AsyncGboxClient, respx_mock: MockRouter) -> None:
@@ -1053,7 +1039,6 @@ class TestAsyncAndroid:
         assert await android.json() == {"foo": "bar"}
         assert isinstance(android, AsyncBinaryAPIResponse)
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     async def test_streaming_response_backup_all(self, async_client: AsyncGboxClient, respx_mock: MockRouter) -> None:
@@ -1072,7 +1057,6 @@ class TestAsyncAndroid:
 
         assert cast(Any, android.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     async def test_path_params_backup_all(self, async_client: AsyncGboxClient) -> None:
@@ -1081,7 +1065,7 @@ class TestAsyncAndroid:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_close(self, async_client: AsyncGboxClient) -> None:
         android = await async_client.v1.boxes.android.close(
@@ -1090,7 +1074,7 @@ class TestAsyncAndroid:
         )
         assert android is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_close(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.android.with_raw_response.close(
@@ -1103,7 +1087,7 @@ class TestAsyncAndroid:
         android = await response.parse()
         assert android is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_close(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.android.with_streaming_response.close(
@@ -1118,7 +1102,7 @@ class TestAsyncAndroid:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_close(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1133,7 +1117,7 @@ class TestAsyncAndroid:
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_close_all(self, async_client: AsyncGboxClient) -> None:
         android = await async_client.v1.boxes.android.close_all(
@@ -1141,7 +1125,7 @@ class TestAsyncAndroid:
         )
         assert android is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_close_all(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.android.with_raw_response.close_all(
@@ -1153,7 +1137,7 @@ class TestAsyncAndroid:
         android = await response.parse()
         assert android is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_close_all(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.android.with_streaming_response.close_all(
@@ -1167,7 +1151,7 @@ class TestAsyncAndroid:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_close_all(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1175,7 +1159,7 @@ class TestAsyncAndroid:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_get(self, async_client: AsyncGboxClient) -> None:
         android = await async_client.v1.boxes.android.get(
@@ -1184,7 +1168,7 @@ class TestAsyncAndroid:
         )
         assert_matches_type(AndroidGetResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_get(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.android.with_raw_response.get(
@@ -1197,7 +1181,7 @@ class TestAsyncAndroid:
         android = await response.parse()
         assert_matches_type(AndroidGetResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_get(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.android.with_streaming_response.get(
@@ -1212,7 +1196,7 @@ class TestAsyncAndroid:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_get(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1227,7 +1211,7 @@ class TestAsyncAndroid:
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_get_app(self, async_client: AsyncGboxClient) -> None:
         android = await async_client.v1.boxes.android.get_app(
@@ -1236,7 +1220,7 @@ class TestAsyncAndroid:
         )
         assert_matches_type(AndroidApp, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_get_app(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.android.with_raw_response.get_app(
@@ -1249,7 +1233,7 @@ class TestAsyncAndroid:
         android = await response.parse()
         assert_matches_type(AndroidApp, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_get_app(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.android.with_streaming_response.get_app(
@@ -1264,7 +1248,7 @@ class TestAsyncAndroid:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_get_app(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1279,7 +1263,7 @@ class TestAsyncAndroid:
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_get_connect_address(self, async_client: AsyncGboxClient) -> None:
         android = await async_client.v1.boxes.android.get_connect_address(
@@ -1287,7 +1271,7 @@ class TestAsyncAndroid:
         )
         assert_matches_type(AndroidGetConnectAddressResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_get_connect_address(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.android.with_raw_response.get_connect_address(
@@ -1299,7 +1283,7 @@ class TestAsyncAndroid:
         android = await response.parse()
         assert_matches_type(AndroidGetConnectAddressResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_get_connect_address(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.android.with_streaming_response.get_connect_address(
@@ -1313,7 +1297,7 @@ class TestAsyncAndroid:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_get_connect_address(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1321,7 +1305,7 @@ class TestAsyncAndroid:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_install_overload_1(self, async_client: AsyncGboxClient) -> None:
         android = await async_client.v1.boxes.android.install(
@@ -1330,7 +1314,7 @@ class TestAsyncAndroid:
         )
         assert_matches_type(AndroidInstallResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_install_with_all_params_overload_1(self, async_client: AsyncGboxClient) -> None:
         android = await async_client.v1.boxes.android.install(
@@ -1340,7 +1324,7 @@ class TestAsyncAndroid:
         )
         assert_matches_type(AndroidInstallResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_install_overload_1(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.android.with_raw_response.install(
@@ -1353,7 +1337,7 @@ class TestAsyncAndroid:
         android = await response.parse()
         assert_matches_type(AndroidInstallResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_install_overload_1(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.android.with_streaming_response.install(
@@ -1368,7 +1352,7 @@ class TestAsyncAndroid:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_install_overload_1(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1377,7 +1361,7 @@ class TestAsyncAndroid:
                 apk=b"raw file contents",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_install_overload_2(self, async_client: AsyncGboxClient) -> None:
         android = await async_client.v1.boxes.android.install(
@@ -1386,7 +1370,7 @@ class TestAsyncAndroid:
         )
         assert_matches_type(AndroidInstallResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_install_with_all_params_overload_2(self, async_client: AsyncGboxClient) -> None:
         android = await async_client.v1.boxes.android.install(
@@ -1396,7 +1380,7 @@ class TestAsyncAndroid:
         )
         assert_matches_type(AndroidInstallResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_install_overload_2(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.android.with_raw_response.install(
@@ -1409,7 +1393,7 @@ class TestAsyncAndroid:
         android = await response.parse()
         assert_matches_type(AndroidInstallResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_install_overload_2(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.android.with_streaming_response.install(
@@ -1424,7 +1408,7 @@ class TestAsyncAndroid:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_install_overload_2(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1433,7 +1417,7 @@ class TestAsyncAndroid:
                 apk="https://example.com/app.apk",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list_activities(self, async_client: AsyncGboxClient) -> None:
         android = await async_client.v1.boxes.android.list_activities(
@@ -1442,7 +1426,7 @@ class TestAsyncAndroid:
         )
         assert_matches_type(AndroidListActivitiesResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list_activities(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.android.with_raw_response.list_activities(
@@ -1455,7 +1439,7 @@ class TestAsyncAndroid:
         android = await response.parse()
         assert_matches_type(AndroidListActivitiesResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list_activities(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.android.with_streaming_response.list_activities(
@@ -1470,7 +1454,7 @@ class TestAsyncAndroid:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_list_activities(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1485,7 +1469,7 @@ class TestAsyncAndroid:
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list_app(self, async_client: AsyncGboxClient) -> None:
         android = await async_client.v1.boxes.android.list_app(
@@ -1493,7 +1477,7 @@ class TestAsyncAndroid:
         )
         assert_matches_type(AndroidListAppResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list_app(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.android.with_raw_response.list_app(
@@ -1505,7 +1489,7 @@ class TestAsyncAndroid:
         android = await response.parse()
         assert_matches_type(AndroidListAppResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list_app(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.android.with_streaming_response.list_app(
@@ -1519,7 +1503,7 @@ class TestAsyncAndroid:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_list_app(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1527,7 +1511,7 @@ class TestAsyncAndroid:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list_pkg(self, async_client: AsyncGboxClient) -> None:
         android = await async_client.v1.boxes.android.list_pkg(
@@ -1535,7 +1519,7 @@ class TestAsyncAndroid:
         )
         assert_matches_type(AndroidListPkgResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list_pkg_with_all_params(self, async_client: AsyncGboxClient) -> None:
         android = await async_client.v1.boxes.android.list_pkg(
@@ -1545,7 +1529,7 @@ class TestAsyncAndroid:
         )
         assert_matches_type(AndroidListPkgResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list_pkg(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.android.with_raw_response.list_pkg(
@@ -1557,7 +1541,7 @@ class TestAsyncAndroid:
         android = await response.parse()
         assert_matches_type(AndroidListPkgResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list_pkg(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.android.with_streaming_response.list_pkg(
@@ -1571,7 +1555,7 @@ class TestAsyncAndroid:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_list_pkg(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1579,7 +1563,7 @@ class TestAsyncAndroid:
                 box_id="",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list_pkg_simple(self, async_client: AsyncGboxClient) -> None:
         android = await async_client.v1.boxes.android.list_pkg_simple(
@@ -1587,7 +1571,7 @@ class TestAsyncAndroid:
         )
         assert_matches_type(AndroidListPkgSimpleResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list_pkg_simple_with_all_params(self, async_client: AsyncGboxClient) -> None:
         android = await async_client.v1.boxes.android.list_pkg_simple(
@@ -1596,7 +1580,7 @@ class TestAsyncAndroid:
         )
         assert_matches_type(AndroidListPkgSimpleResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list_pkg_simple(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.android.with_raw_response.list_pkg_simple(
@@ -1608,7 +1592,7 @@ class TestAsyncAndroid:
         android = await response.parse()
         assert_matches_type(AndroidListPkgSimpleResponse, android, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list_pkg_simple(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.android.with_streaming_response.list_pkg_simple(
@@ -1622,7 +1606,7 @@ class TestAsyncAndroid:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_list_pkg_simple(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1630,7 +1614,7 @@ class TestAsyncAndroid:
                 box_id="",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_open(self, async_client: AsyncGboxClient) -> None:
         android = await async_client.v1.boxes.android.open(
@@ -1639,7 +1623,7 @@ class TestAsyncAndroid:
         )
         assert android is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_open_with_all_params(self, async_client: AsyncGboxClient) -> None:
         android = await async_client.v1.boxes.android.open(
@@ -1649,7 +1633,7 @@ class TestAsyncAndroid:
         )
         assert android is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_open(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.android.with_raw_response.open(
@@ -1662,7 +1646,7 @@ class TestAsyncAndroid:
         android = await response.parse()
         assert android is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_open(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.android.with_streaming_response.open(
@@ -1677,7 +1661,7 @@ class TestAsyncAndroid:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_open(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1692,7 +1676,7 @@ class TestAsyncAndroid:
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_restart(self, async_client: AsyncGboxClient) -> None:
         android = await async_client.v1.boxes.android.restart(
@@ -1701,7 +1685,7 @@ class TestAsyncAndroid:
         )
         assert android is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_restart_with_all_params(self, async_client: AsyncGboxClient) -> None:
         android = await async_client.v1.boxes.android.restart(
@@ -1711,7 +1695,7 @@ class TestAsyncAndroid:
         )
         assert android is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_restart(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.android.with_raw_response.restart(
@@ -1724,7 +1708,7 @@ class TestAsyncAndroid:
         android = await response.parse()
         assert android is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_restart(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.android.with_streaming_response.restart(
@@ -1739,7 +1723,7 @@ class TestAsyncAndroid:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_restart(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1754,7 +1738,7 @@ class TestAsyncAndroid:
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_restore(self, async_client: AsyncGboxClient) -> None:
         android = await async_client.v1.boxes.android.restore(
@@ -1763,7 +1747,7 @@ class TestAsyncAndroid:
         )
         assert android is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_restore(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.android.with_raw_response.restore(
@@ -1776,7 +1760,7 @@ class TestAsyncAndroid:
         android = await response.parse()
         assert android is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_restore(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.android.with_streaming_response.restore(
@@ -1791,7 +1775,7 @@ class TestAsyncAndroid:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_restore(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1800,7 +1784,7 @@ class TestAsyncAndroid:
                 backup=b"raw file contents",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_uninstall(self, async_client: AsyncGboxClient) -> None:
         android = await async_client.v1.boxes.android.uninstall(
@@ -1809,7 +1793,7 @@ class TestAsyncAndroid:
         )
         assert android is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_uninstall_with_all_params(self, async_client: AsyncGboxClient) -> None:
         android = await async_client.v1.boxes.android.uninstall(
@@ -1819,7 +1803,7 @@ class TestAsyncAndroid:
         )
         assert android is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_uninstall(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.android.with_raw_response.uninstall(
@@ -1832,7 +1816,7 @@ class TestAsyncAndroid:
         android = await response.parse()
         assert android is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_uninstall(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.android.with_streaming_response.uninstall(
@@ -1847,7 +1831,7 @@ class TestAsyncAndroid:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_uninstall(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):

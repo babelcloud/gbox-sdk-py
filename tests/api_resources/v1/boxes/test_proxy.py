@@ -15,7 +15,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestProxy:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_clear(self, client: GboxClient) -> None:
         proxy = client.v1.boxes.proxy.clear(
@@ -23,7 +23,7 @@ class TestProxy:
         )
         assert proxy is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_clear(self, client: GboxClient) -> None:
         response = client.v1.boxes.proxy.with_raw_response.clear(
@@ -35,7 +35,7 @@ class TestProxy:
         proxy = response.parse()
         assert proxy is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_clear(self, client: GboxClient) -> None:
         with client.v1.boxes.proxy.with_streaming_response.clear(
@@ -49,7 +49,7 @@ class TestProxy:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_clear(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -57,7 +57,7 @@ class TestProxy:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_get(self, client: GboxClient) -> None:
         proxy = client.v1.boxes.proxy.get(
@@ -65,7 +65,7 @@ class TestProxy:
         )
         assert proxy is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_get(self, client: GboxClient) -> None:
         response = client.v1.boxes.proxy.with_raw_response.get(
@@ -77,7 +77,7 @@ class TestProxy:
         proxy = response.parse()
         assert proxy is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_get(self, client: GboxClient) -> None:
         with client.v1.boxes.proxy.with_streaming_response.get(
@@ -91,7 +91,7 @@ class TestProxy:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_get(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -99,7 +99,7 @@ class TestProxy:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_set(self, client: GboxClient) -> None:
         proxy = client.v1.boxes.proxy.set(
@@ -113,7 +113,7 @@ class TestProxy:
         )
         assert proxy is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_set(self, client: GboxClient) -> None:
         response = client.v1.boxes.proxy.with_raw_response.set(
@@ -131,7 +131,7 @@ class TestProxy:
         proxy = response.parse()
         assert proxy is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_set(self, client: GboxClient) -> None:
         with client.v1.boxes.proxy.with_streaming_response.set(
@@ -151,7 +151,7 @@ class TestProxy:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_set(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -171,7 +171,7 @@ class TestAsyncProxy:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_clear(self, async_client: AsyncGboxClient) -> None:
         proxy = await async_client.v1.boxes.proxy.clear(
@@ -179,7 +179,7 @@ class TestAsyncProxy:
         )
         assert proxy is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_clear(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.proxy.with_raw_response.clear(
@@ -191,7 +191,7 @@ class TestAsyncProxy:
         proxy = await response.parse()
         assert proxy is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_clear(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.proxy.with_streaming_response.clear(
@@ -205,7 +205,7 @@ class TestAsyncProxy:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_clear(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -213,7 +213,7 @@ class TestAsyncProxy:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_get(self, async_client: AsyncGboxClient) -> None:
         proxy = await async_client.v1.boxes.proxy.get(
@@ -221,7 +221,7 @@ class TestAsyncProxy:
         )
         assert proxy is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_get(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.proxy.with_raw_response.get(
@@ -233,7 +233,7 @@ class TestAsyncProxy:
         proxy = await response.parse()
         assert proxy is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_get(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.proxy.with_streaming_response.get(
@@ -247,7 +247,7 @@ class TestAsyncProxy:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_get(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -255,7 +255,7 @@ class TestAsyncProxy:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_set(self, async_client: AsyncGboxClient) -> None:
         proxy = await async_client.v1.boxes.proxy.set(
@@ -269,7 +269,7 @@ class TestAsyncProxy:
         )
         assert proxy is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_set(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.proxy.with_raw_response.set(
@@ -287,7 +287,7 @@ class TestAsyncProxy:
         proxy = await response.parse()
         assert proxy is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_set(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.proxy.with_streaming_response.set(
@@ -307,7 +307,7 @@ class TestAsyncProxy:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_set(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):

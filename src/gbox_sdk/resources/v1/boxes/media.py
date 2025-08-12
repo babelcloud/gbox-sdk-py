@@ -104,7 +104,10 @@ class MediaResource(SyncAPIResource):
             body=maybe_transform(body, media_create_album_params.MediaCreateAlbumParams),
             files=files,
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=MediaCreateAlbumResponse,
         )
@@ -141,7 +144,10 @@ class MediaResource(SyncAPIResource):
         return self._delete(
             f"/boxes/{box_id}/media/albums/{album_name}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=NoneType,
         )
@@ -181,7 +187,10 @@ class MediaResource(SyncAPIResource):
         return self._delete(
             f"/boxes/{box_id}/media/albums/{album_name}/media/{media_name}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=NoneType,
         )
@@ -221,7 +230,10 @@ class MediaResource(SyncAPIResource):
         return self._get(
             f"/boxes/{box_id}/media/albums/{album_name}/media/{media_name}/download",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BinaryAPIResponse,
         )
@@ -257,7 +269,10 @@ class MediaResource(SyncAPIResource):
         return self._get(
             f"/boxes/{box_id}/media/albums/{album_name}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=MediaGetAlbumDetailResponse,
         )
@@ -298,7 +313,10 @@ class MediaResource(SyncAPIResource):
             self._get(
                 f"/boxes/{box_id}/media/albums/{album_name}/media/{media_name}",
                 options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
                 ),
                 cast_to=cast(
                     Any, MediaGetMediaResponse
@@ -334,7 +352,10 @@ class MediaResource(SyncAPIResource):
         return self._get(
             f"/boxes/{box_id}/media/support",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=MediaGetMediaSupportResponse,
         )
@@ -367,7 +388,10 @@ class MediaResource(SyncAPIResource):
         return self._get(
             f"/boxes/{box_id}/media/albums",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=MediaListAlbumsResponse,
         )
@@ -403,7 +427,10 @@ class MediaResource(SyncAPIResource):
         return self._get(
             f"/boxes/{box_id}/media/albums/{album_name}/media",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=MediaListMediaResponse,
         )
@@ -450,7 +477,10 @@ class MediaResource(SyncAPIResource):
             body=maybe_transform(body, media_update_album_params.MediaUpdateAlbumParams),
             files=files,
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=MediaUpdateAlbumResponse,
         )
@@ -523,7 +553,10 @@ class AsyncMediaResource(AsyncAPIResource):
             body=await async_maybe_transform(body, media_create_album_params.MediaCreateAlbumParams),
             files=files,
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=MediaCreateAlbumResponse,
         )
@@ -560,7 +593,10 @@ class AsyncMediaResource(AsyncAPIResource):
         return await self._delete(
             f"/boxes/{box_id}/media/albums/{album_name}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=NoneType,
         )
@@ -600,7 +636,10 @@ class AsyncMediaResource(AsyncAPIResource):
         return await self._delete(
             f"/boxes/{box_id}/media/albums/{album_name}/media/{media_name}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=NoneType,
         )
@@ -640,7 +679,10 @@ class AsyncMediaResource(AsyncAPIResource):
         return await self._get(
             f"/boxes/{box_id}/media/albums/{album_name}/media/{media_name}/download",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=AsyncBinaryAPIResponse,
         )
@@ -676,7 +718,10 @@ class AsyncMediaResource(AsyncAPIResource):
         return await self._get(
             f"/boxes/{box_id}/media/albums/{album_name}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=MediaGetAlbumDetailResponse,
         )
@@ -717,7 +762,10 @@ class AsyncMediaResource(AsyncAPIResource):
             await self._get(
                 f"/boxes/{box_id}/media/albums/{album_name}/media/{media_name}",
                 options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
                 ),
                 cast_to=cast(
                     Any, MediaGetMediaResponse
@@ -753,7 +801,10 @@ class AsyncMediaResource(AsyncAPIResource):
         return await self._get(
             f"/boxes/{box_id}/media/support",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=MediaGetMediaSupportResponse,
         )
@@ -786,7 +837,10 @@ class AsyncMediaResource(AsyncAPIResource):
         return await self._get(
             f"/boxes/{box_id}/media/albums",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=MediaListAlbumsResponse,
         )
@@ -822,7 +876,10 @@ class AsyncMediaResource(AsyncAPIResource):
         return await self._get(
             f"/boxes/{box_id}/media/albums/{album_name}/media",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=MediaListMediaResponse,
         )
@@ -869,7 +926,10 @@ class AsyncMediaResource(AsyncAPIResource):
             body=await async_maybe_transform(body, media_update_album_params.MediaUpdateAlbumParams),
             files=files,
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=MediaUpdateAlbumResponse,
         )

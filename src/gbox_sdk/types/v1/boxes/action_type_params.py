@@ -36,6 +36,9 @@ class ActionTypeParams(TypedDict, total=False):
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
+    press_enter: Annotated[bool, PropertyInfo(alias="pressEnter")]
+    """Whether to press Enter after typing the text"""
+
     screenshot_delay: Annotated[str, PropertyInfo(alias="screenshotDelay")]
     """Delay after performing the action, before taking the final screenshot.
 

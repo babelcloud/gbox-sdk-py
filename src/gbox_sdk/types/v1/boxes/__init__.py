@@ -45,6 +45,7 @@ from .action_extract_response import ActionExtractResponse as ActionExtractRespo
 from .action_press_key_params import ActionPressKeyParams as ActionPressKeyParams
 from .android_list_pkg_params import AndroidListPkgParams as AndroidListPkgParams
 from .browser_open_tab_params import BrowserOpenTabParams as BrowserOpenTabParams
+from .action_long_press_params import ActionLongPressParams as ActionLongPressParams
 from .action_screenshot_params import ActionScreenshotParams as ActionScreenshotParams
 from .android_install_response import AndroidInstallResponse as AndroidInstallResponse
 from .android_uninstall_params import AndroidUninstallParams as AndroidUninstallParams
@@ -59,6 +60,7 @@ from .browser_update_tab_params import BrowserUpdateTabParams as BrowserUpdateTa
 from .media_create_album_params import MediaCreateAlbumParams as MediaCreateAlbumParams
 from .media_list_media_response import MediaListMediaResponse as MediaListMediaResponse
 from .media_update_album_params import MediaUpdateAlbumParams as MediaUpdateAlbumParams
+from .action_long_press_response import ActionLongPressResponse as ActionLongPressResponse
 from .action_press_button_params import ActionPressButtonParams as ActionPressButtonParams
 from .action_screenshot_response import ActionScreenshotResponse as ActionScreenshotResponse
 from .browser_close_tab_response import BrowserCloseTabResponse as BrowserCloseTabResponse

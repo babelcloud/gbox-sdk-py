@@ -29,6 +29,7 @@ from ....types.v1.boxes import (
     action_scroll_params,
     action_extract_params,
     action_press_key_params,
+    action_long_press_params,
     action_screenshot_params,
     action_press_button_params,
     action_recording_start_params,
@@ -44,6 +45,7 @@ from ....types.v1.boxes.action_touch_response import ActionTouchResponse
 from ....types.v1.boxes.action_scroll_response import ActionScrollResponse
 from ....types.v1.boxes.action_extract_response import ActionExtractResponse
 from ....types.v1.boxes.action_press_key_response import ActionPressKeyResponse
+from ....types.v1.boxes.action_long_press_response import ActionLongPressResponse
 from ....types.v1.boxes.action_screenshot_response import ActionScreenshotResponse
 from ....types.v1.boxes.action_press_button_response import ActionPressButtonResponse
 from ....types.v1.boxes.action_screen_layout_response import ActionScreenLayoutResponse
@@ -497,6 +499,99 @@ class ActionsResource(SyncAPIResource):
             cast_to=ActionExtractResponse,
         )
 
+    def long_press(
+        self,
+        box_id: str,
+        *,
+        x: float,
+        y: float,
+        duration: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionLongPressResponse:
+        """
+        Perform a long press action at specified coordinates for a specified duration.
+        Useful for triggering context menus, drag operations, or other long-press
+        interactions.
+
+        Args:
+          x: X coordinate of the long press
+
+          y: Y coordinate of the long press
+
+          duration: Duration to hold the press (e.g. '1s', '500ms')
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 1s
+
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
+          output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return cast(
+            ActionLongPressResponse,
+            self._post(
+                f"/boxes/{box_id}/actions/long-press",
+                body=maybe_transform(
+                    {
+                        "x": x,
+                        "y": y,
+                        "duration": duration,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
+                        "screenshot_delay": screenshot_delay,
+                    },
+                    action_long_press_params.ActionLongPressParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, ActionLongPressResponse
+                ),  # Union types cannot be passed in as arguments in the type system
+            ),
+        )
+
     def move(
         self,
         box_id: str,
@@ -597,10 +692,8 @@ class ActionsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionPressButtonResponse:
-        """Press button on the device.
-
-        like power button, volume up button, volume down
-        button, etc.
+        """
+        Press device buttons like power, volume, home, back, etc.
 
         Args:
           buttons: Button to press
@@ -2007,6 +2100,99 @@ class AsyncActionsResource(AsyncAPIResource):
             cast_to=ActionExtractResponse,
         )
 
+    async def long_press(
+        self,
+        box_id: str,
+        *,
+        x: float,
+        y: float,
+        duration: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionLongPressResponse:
+        """
+        Perform a long press action at specified coordinates for a specified duration.
+        Useful for triggering context menus, drag operations, or other long-press
+        interactions.
+
+        Args:
+          x: X coordinate of the long press
+
+          y: Y coordinate of the long press
+
+          duration: Duration to hold the press (e.g. '1s', '500ms')
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 1s
+
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
+          output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return cast(
+            ActionLongPressResponse,
+            await self._post(
+                f"/boxes/{box_id}/actions/long-press",
+                body=await async_maybe_transform(
+                    {
+                        "x": x,
+                        "y": y,
+                        "duration": duration,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
+                        "screenshot_delay": screenshot_delay,
+                    },
+                    action_long_press_params.ActionLongPressParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, ActionLongPressResponse
+                ),  # Union types cannot be passed in as arguments in the type system
+            ),
+        )
+
     async def move(
         self,
         box_id: str,
@@ -2107,10 +2293,8 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionPressButtonResponse:
-        """Press button on the device.
-
-        like power button, volume up button, volume down
-        button, etc.
+        """
+        Press device buttons like power, volume, home, back, etc.
 
         Args:
           buttons: Button to press
@@ -3091,6 +3275,9 @@ class ActionsResourceWithRawResponse:
         self.extract = to_raw_response_wrapper(
             actions.extract,
         )
+        self.long_press = to_raw_response_wrapper(
+            actions.long_press,
+        )
         self.move = to_raw_response_wrapper(
             actions.move,
         )
@@ -3144,6 +3331,9 @@ class AsyncActionsResourceWithRawResponse:
         )
         self.extract = async_to_raw_response_wrapper(
             actions.extract,
+        )
+        self.long_press = async_to_raw_response_wrapper(
+            actions.long_press,
         )
         self.move = async_to_raw_response_wrapper(
             actions.move,
@@ -3199,6 +3389,9 @@ class ActionsResourceWithStreamingResponse:
         self.extract = to_streamed_response_wrapper(
             actions.extract,
         )
+        self.long_press = to_streamed_response_wrapper(
+            actions.long_press,
+        )
         self.move = to_streamed_response_wrapper(
             actions.move,
         )
@@ -3252,6 +3445,9 @@ class AsyncActionsResourceWithStreamingResponse:
         )
         self.extract = async_to_streamed_response_wrapper(
             actions.extract,
+        )
+        self.long_press = async_to_streamed_response_wrapper(
+            actions.long_press,
         )
         self.move = async_to_streamed_response_wrapper(
             actions.move,

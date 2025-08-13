@@ -31,6 +31,7 @@ __all__ = [
     "AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedActionStart",
     "AIActionScreenshotResultAIResponseActionTypedPressKeyAction",
     "AIActionScreenshotResultAIResponseActionTypedPressButtonAction",
+    "AIActionScreenshotResultAIResponseActionTypedLongPressAction",
     "AIActionScreenshotResultAIResponseActionTypedTypeAction",
     "AIActionScreenshotResultAIResponseActionTypedMoveAction",
     "AIActionScreenshotResultAIResponseActionTypedScreenRotationAction",
@@ -63,6 +64,7 @@ __all__ = [
     "AIActionResultAIResponseActionTypedSwipeAdvancedActionStart",
     "AIActionResultAIResponseActionTypedPressKeyAction",
     "AIActionResultAIResponseActionTypedPressButtonAction",
+    "AIActionResultAIResponseActionTypedLongPressAction",
     "AIActionResultAIResponseActionTypedTypeAction",
     "AIActionResultAIResponseActionTypedMoveAction",
     "AIActionResultAIResponseActionTypedScreenRotationAction",
@@ -701,6 +703,55 @@ class AIActionScreenshotResultAIResponseActionTypedPressButtonAction(BaseModel):
     """
 
 
+class AIActionScreenshotResultAIResponseActionTypedLongPressAction(BaseModel):
+    x: float
+    """X coordinate of the long press"""
+
+    y: float
+    """Y coordinate of the long press"""
+
+    duration: Optional[str] = None
+    """Duration to hold the press (e.g. '1s', '500ms')
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 1s
+    """
+
+    include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
+    """Whether to include screenshots in the action response.
+
+    If false, the screenshot object will still be returned but with empty URIs.
+    Default is false.
+    """
+
+    output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
+    """Type of the URI. default is base64."""
+
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
+
+    screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
+    """Delay after performing the action, before taking the final screenshot.
+
+    Execution flow:
+
+    1. Take screenshot before action
+    2. Perform the action
+    3. Wait for screenshotDelay (this parameter)
+    4. Take screenshot after action
+
+    Example: '500ms' means wait 500ms after the action before capturing the final
+    screenshot.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+    """
+
+
 class AIActionScreenshotResultAIResponseActionTypedTypeAction(BaseModel):
     text: str
     """Text to type"""
@@ -905,6 +956,7 @@ AIActionScreenshotResultAIResponseAction: TypeAlias = Union[
     AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedAction,
     AIActionScreenshotResultAIResponseActionTypedPressKeyAction,
     AIActionScreenshotResultAIResponseActionTypedPressButtonAction,
+    AIActionScreenshotResultAIResponseActionTypedLongPressAction,
     AIActionScreenshotResultAIResponseActionTypedTypeAction,
     AIActionScreenshotResultAIResponseActionTypedMoveAction,
     AIActionScreenshotResultAIResponseActionTypedScreenRotationAction,
@@ -1601,6 +1653,55 @@ class AIActionResultAIResponseActionTypedPressButtonAction(BaseModel):
     """
 
 
+class AIActionResultAIResponseActionTypedLongPressAction(BaseModel):
+    x: float
+    """X coordinate of the long press"""
+
+    y: float
+    """Y coordinate of the long press"""
+
+    duration: Optional[str] = None
+    """Duration to hold the press (e.g. '1s', '500ms')
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 1s
+    """
+
+    include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
+    """Whether to include screenshots in the action response.
+
+    If false, the screenshot object will still be returned but with empty URIs.
+    Default is false.
+    """
+
+    output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
+    """Type of the URI. default is base64."""
+
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
+
+    screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
+    """Delay after performing the action, before taking the final screenshot.
+
+    Execution flow:
+
+    1. Take screenshot before action
+    2. Perform the action
+    3. Wait for screenshotDelay (this parameter)
+    4. Take screenshot after action
+
+    Example: '500ms' means wait 500ms after the action before capturing the final
+    screenshot.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+    """
+
+
 class AIActionResultAIResponseActionTypedTypeAction(BaseModel):
     text: str
     """Text to type"""
@@ -1805,6 +1906,7 @@ AIActionResultAIResponseAction: TypeAlias = Union[
     AIActionResultAIResponseActionTypedSwipeAdvancedAction,
     AIActionResultAIResponseActionTypedPressKeyAction,
     AIActionResultAIResponseActionTypedPressButtonAction,
+    AIActionResultAIResponseActionTypedLongPressAction,
     AIActionResultAIResponseActionTypedTypeAction,
     AIActionResultAIResponseActionTypedMoveAction,
     AIActionResultAIResponseActionTypedScreenRotationAction,

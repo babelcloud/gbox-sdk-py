@@ -388,11 +388,12 @@ class AIActionScreenshotResultAIResponseActionTypedSwipeSimpleAction(BaseModel):
     direction.
     """
 
-    distance: Optional[float] = None
-    """Distance of the swipe in pixels.
+    distance: Union[float, Literal["tiny", "short", "medium", "long"], None] = None
+    """Distance of the swipe.
 
-    If not provided, the swipe will be performed from the center of the screen to
-    the screen edge
+    Can be either a number (in pixels) or a predefined enum value (tiny, short,
+    medium, long). If not provided, the swipe will be performed from the center of
+    the screen to the screen edge
     """
 
     duration: Optional[str] = None
@@ -1338,11 +1339,12 @@ class AIActionResultAIResponseActionTypedSwipeSimpleAction(BaseModel):
     direction.
     """
 
-    distance: Optional[float] = None
-    """Distance of the swipe in pixels.
+    distance: Union[float, Literal["tiny", "short", "medium", "long"], None] = None
+    """Distance of the swipe.
 
-    If not provided, the swipe will be performed from the center of the screen to
-    the screen edge
+    Can be either a number (in pixels) or a predefined enum value (tiny, short,
+    medium, long). If not provided, the swipe will be performed from the center of
+    the screen to the screen edge
     """
 
     duration: Optional[str] = None

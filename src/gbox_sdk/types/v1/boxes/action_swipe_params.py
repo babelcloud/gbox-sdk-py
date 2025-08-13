@@ -18,11 +18,12 @@ class SwipeSimple(TypedDict, total=False):
     direction.
     """
 
-    distance: float
-    """Distance of the swipe in pixels.
+    distance: Union[float, Literal["tiny", "short", "medium", "long"]]
+    """Distance of the swipe.
 
-    If not provided, the swipe will be performed from the center of the screen to
-    the screen edge
+    Can be either a number (in pixels) or a predefined enum value (tiny, short,
+    medium, long). If not provided, the swipe will be performed from the center of
+    the screen to the screen edge
     """
 
     duration: str

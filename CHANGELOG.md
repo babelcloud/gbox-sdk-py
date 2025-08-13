@@ -1,5 +1,42 @@
 # Changelog
 
+## 0.1.0-alpha.30 (2025-08-13)
+
+Full Changelog: [v0.1.0-alpha.29...v0.1.0-alpha.30](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.29...v0.1.0-alpha.30)
+
+### Features
+
+* api update ([eb766c2](https://github.com/babelcloud/gbox-sdk-py/commit/eb766c2da8352939360c6517d0a77e4b5f73ea4f))
+* **api:** api update ([5e0f5c9](https://github.com/babelcloud/gbox-sdk-py/commit/5e0f5c955fb3d382c43b584b46042d75b7bcf8fa))
+* **api:** api update ([98a8027](https://github.com/babelcloud/gbox-sdk-py/commit/98a8027c351127f13373340303931a8134087de7))
+* **api:** api update ([7723824](https://github.com/babelcloud/gbox-sdk-py/commit/772382463edf274e7f5179869e450711d4e6c6c2))
+* **api:** api update ([71f87a2](https://github.com/babelcloud/gbox-sdk-py/commit/71f87a26764264ac1de6d852785ca7a86b2cb562))
+* **api:** api update ([1b54801](https://github.com/babelcloud/gbox-sdk-py/commit/1b548014584df164ac8b615c204faf355b3e32dc))
+* **api:** api update ([afb1c49](https://github.com/babelcloud/gbox-sdk-py/commit/afb1c4941fc4c4c1170e34ab1edf3326b9381118))
+* **api:** api update ([54b0703](https://github.com/babelcloud/gbox-sdk-py/commit/54b0703c780c018cab139cd59d6a82aa84723de0))
+* **api:** api update ([5f88b45](https://github.com/babelcloud/gbox-sdk-py/commit/5f88b45bc27e75909008e9cabf5d0aee23255b36))
+* **api:** api update ([da96920](https://github.com/babelcloud/gbox-sdk-py/commit/da96920d78f21908e8709ed7d78abd5fa5d72ad1))
+* **api:** api update ([22c5ee9](https://github.com/babelcloud/gbox-sdk-py/commit/22c5ee9f90f40b4b208d01fb0efcf2e18350cceb))
+* **api:** api update ([b61220b](https://github.com/babelcloud/gbox-sdk-py/commit/b61220ba9cb0eca256daf12202dcbd372cfea285))
+* **api:** api update ([ff82b46](https://github.com/babelcloud/gbox-sdk-py/commit/ff82b462f6f4408355249d53307a1d4f6d765068))
+* **api:** api update ([f1fd2e1](https://github.com/babelcloud/gbox-sdk-py/commit/f1fd2e1b5b98d4f7501c13bc6591d1057d55e11a))
+* **api:** api update ([1c1dc28](https://github.com/babelcloud/gbox-sdk-py/commit/1c1dc284b7ee2251afa44a19d085c8a2016dc764))
+* **api:** api update ([1753a4e](https://github.com/babelcloud/gbox-sdk-py/commit/1753a4e30597f570c585b15ef9e898655039cb2e))
+* **api:** api update ([ecae143](https://github.com/babelcloud/gbox-sdk-py/commit/ecae14384a5a4837fda4eff10836a7cd3a7721b3))
+
+
+### Bug Fixes
+
+* lint ([b739698](https://github.com/babelcloud/gbox-sdk-py/commit/b7396981acd8d3b74ee8809b09ec1ef512c59c79))
+
+
+### Chores
+
+* **internal:** codegen related update ([302b7ab](https://github.com/babelcloud/gbox-sdk-py/commit/302b7ab125506f4583c9e64ce5b0926a44b60863))
+* **internal:** fix ruff target version ([318195e](https://github.com/babelcloud/gbox-sdk-py/commit/318195e0b4d50a843d7c333ab1734ee3324afdbc))
+* **internal:** update comment in script ([540a35d](https://github.com/babelcloud/gbox-sdk-py/commit/540a35d14be28be19ca9e9e35e54d50bb36b1428))
+* update @stainless-api/prism-cli to v5.15.0 ([68c4951](https://github.com/babelcloud/gbox-sdk-py/commit/68c49512d4981f3ba9a103cb4d40e426c04f5355))
+
 ## 0.1.0-alpha.29 (2025-08-04)
 
 Full Changelog: [v0.1.0-alpha.28...v0.1.0-alpha.29](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.28...v0.1.0-alpha.29)

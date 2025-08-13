@@ -16,6 +16,7 @@ from .f_rename_params import FRenameParams as FRenameParams
 from .action_ai_params import ActionAIParams as ActionAIParams
 from .f_write_response import FWriteResponse as FWriteResponse
 from .proxy_set_params import ProxySetParams as ProxySetParams
+from .action_tap_params import ActionTapParams as ActionTapParams
 from .f_exists_response import FExistsResponse as FExistsResponse
 from .f_remove_response import FRemoveResponse as FRemoveResponse
 from .f_rename_response import FRenameResponse as FRenameResponse
@@ -25,6 +26,7 @@ from .action_move_params import ActionMoveParams as ActionMoveParams
 from .action_type_params import ActionTypeParams as ActionTypeParams
 from .action_click_params import ActionClickParams as ActionClickParams
 from .action_swipe_params import ActionSwipeParams as ActionSwipeParams
+from .action_tap_response import ActionTapResponse as ActionTapResponse
 from .action_touch_params import ActionTouchParams as ActionTouchParams
 from .android_open_params import AndroidOpenParams as AndroidOpenParams
 from .action_drag_response import ActionDragResponse as ActionDragResponse

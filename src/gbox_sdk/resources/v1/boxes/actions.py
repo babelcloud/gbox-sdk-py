@@ -20,6 +20,7 @@ from ...._response import (
 from ...._base_client import make_request_options
 from ....types.v1.boxes import (
     action_ai_params,
+    action_tap_params,
     action_drag_params,
     action_move_params,
     action_type_params,
@@ -36,6 +37,7 @@ from ....types.v1.boxes import (
     action_screen_rotation_params,
 )
 from ....types.v1.boxes.action_ai_response import ActionAIResponse
+from ....types.v1.boxes.action_tap_response import ActionTapResponse
 from ....types.v1.boxes.action_drag_response import ActionDragResponse
 from ....types.v1.boxes.action_move_response import ActionMoveResponse
 from ....types.v1.boxes.action_type_response import ActionTypeResponse
@@ -1482,6 +1484,88 @@ class ActionsResource(SyncAPIResource):
                 cast_to=cast(
                     Any, ActionSwipeResponse
                 ),  # Union types cannot be passed in as arguments in the type system
+            ),
+        )
+
+    def tap(
+        self,
+        box_id: str,
+        *,
+        x: float,
+        y: float,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionTapResponse:
+        """
+        Tap action for Android devices using ADB input tap command
+
+        Args:
+          x: X coordinate of the tap
+
+          y: Y coordinate of the tap
+
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
+          output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return cast(
+            ActionTapResponse,
+            self._post(
+                f"/boxes/{box_id}/actions/tap",
+                body=maybe_transform(
+                    {
+                        "x": x,
+                        "y": y,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
+                        "screenshot_delay": screenshot_delay,
+                    },
+                    action_tap_params.ActionTapParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(Any, ActionTapResponse),  # Union types cannot be passed in as arguments in the type system
             ),
         )
 
@@ -3089,6 +3173,88 @@ class AsyncActionsResource(AsyncAPIResource):
             ),
         )
 
+    async def tap(
+        self,
+        box_id: str,
+        *,
+        x: float,
+        y: float,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionTapResponse:
+        """
+        Tap action for Android devices using ADB input tap command
+
+        Args:
+          x: X coordinate of the tap
+
+          y: Y coordinate of the tap
+
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
+          output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return cast(
+            ActionTapResponse,
+            await self._post(
+                f"/boxes/{box_id}/actions/tap",
+                body=await async_maybe_transform(
+                    {
+                        "x": x,
+                        "y": y,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
+                        "screenshot_delay": screenshot_delay,
+                    },
+                    action_tap_params.ActionTapParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(Any, ActionTapResponse),  # Union types cannot be passed in as arguments in the type system
+            ),
+        )
+
     async def touch(
         self,
         box_id: str,
@@ -3310,6 +3476,9 @@ class ActionsResourceWithRawResponse:
         self.swipe = to_raw_response_wrapper(
             actions.swipe,
         )
+        self.tap = to_raw_response_wrapper(
+            actions.tap,
+        )
         self.touch = to_raw_response_wrapper(
             actions.touch,
         )
@@ -3366,6 +3535,9 @@ class AsyncActionsResourceWithRawResponse:
         )
         self.swipe = async_to_raw_response_wrapper(
             actions.swipe,
+        )
+        self.tap = async_to_raw_response_wrapper(
+            actions.tap,
         )
         self.touch = async_to_raw_response_wrapper(
             actions.touch,
@@ -3424,6 +3596,9 @@ class ActionsResourceWithStreamingResponse:
         self.swipe = to_streamed_response_wrapper(
             actions.swipe,
         )
+        self.tap = to_streamed_response_wrapper(
+            actions.tap,
+        )
         self.touch = to_streamed_response_wrapper(
             actions.touch,
         )
@@ -3480,6 +3655,9 @@ class AsyncActionsResourceWithStreamingResponse:
         )
         self.swipe = async_to_streamed_response_wrapper(
             actions.swipe,
+        )
+        self.tap = async_to_streamed_response_wrapper(
+            actions.tap,
         )
         self.touch = async_to_streamed_response_wrapper(
             actions.touch,

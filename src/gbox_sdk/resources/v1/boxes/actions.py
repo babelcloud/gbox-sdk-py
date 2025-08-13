@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Iterable, cast
+from typing import Any, List, Union, Iterable, cast
 from typing_extensions import Literal, overload
 
 import httpx
@@ -1303,7 +1303,7 @@ class ActionsResource(SyncAPIResource):
         box_id: str,
         *,
         direction: Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"],
-        distance: float | NotGiven = NOT_GIVEN,
+        distance: Union[float, Literal["tiny", "short", "medium", "long"]] | NotGiven = NOT_GIVEN,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
@@ -1323,7 +1323,8 @@ class ActionsResource(SyncAPIResource):
           direction: Direction to swipe. The gesture will be performed from the center of the screen
               towards this direction.
 
-          distance: Distance of the swipe in pixels. If not provided, the swipe will be performed
+          distance: Distance of the swipe. Can be either a number (in pixels) or a predefined enum
+              value (tiny, short, medium, long). If not provided, the swipe will be performed
               from the center of the screen to the screen edge
 
           duration: Duration of the swipe
@@ -1440,7 +1441,7 @@ class ActionsResource(SyncAPIResource):
         *,
         direction: Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"]
         | NotGiven = NOT_GIVEN,
-        distance: float | NotGiven = NOT_GIVEN,
+        distance: Union[float, Literal["tiny", "short", "medium", "long"]] | NotGiven = NOT_GIVEN,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
@@ -2906,7 +2907,7 @@ class AsyncActionsResource(AsyncAPIResource):
         box_id: str,
         *,
         direction: Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"],
-        distance: float | NotGiven = NOT_GIVEN,
+        distance: Union[float, Literal["tiny", "short", "medium", "long"]] | NotGiven = NOT_GIVEN,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
@@ -2926,7 +2927,8 @@ class AsyncActionsResource(AsyncAPIResource):
           direction: Direction to swipe. The gesture will be performed from the center of the screen
               towards this direction.
 
-          distance: Distance of the swipe in pixels. If not provided, the swipe will be performed
+          distance: Distance of the swipe. Can be either a number (in pixels) or a predefined enum
+              value (tiny, short, medium, long). If not provided, the swipe will be performed
               from the center of the screen to the screen edge
 
           duration: Duration of the swipe
@@ -3043,7 +3045,7 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         direction: Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"]
         | NotGiven = NOT_GIVEN,
-        distance: float | NotGiven = NOT_GIVEN,
+        distance: Union[float, Literal["tiny", "short", "medium", "long"]] | NotGiven = NOT_GIVEN,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,

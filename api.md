@@ -71,6 +71,7 @@ from gbox_sdk.types.v1.boxes import (
     ActionScreenshotResponse,
     ActionScrollResponse,
     ActionSwipeResponse,
+    ActionTapResponse,
     ActionTouchResponse,
     ActionTypeResponse,
 )
@@ -93,6 +94,7 @@ Methods:
 - <code title="post /boxes/{boxId}/actions/screenshot">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">screenshot</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_screenshot_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_screenshot_response.py">ActionScreenshotResponse</a></code>
 - <code title="post /boxes/{boxId}/actions/scroll">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">scroll</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_scroll_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_scroll_response.py">ActionScrollResponse</a></code>
 - <code title="post /boxes/{boxId}/actions/swipe">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">swipe</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_swipe_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_swipe_response.py">ActionSwipeResponse</a></code>
+- <code title="post /boxes/{boxId}/actions/tap">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">tap</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_tap_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_tap_response.py">ActionTapResponse</a></code>
 - <code title="post /boxes/{boxId}/actions/touch">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">touch</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_touch_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_touch_response.py">ActionTouchResponse</a></code>
 - <code title="post /boxes/{boxId}/actions/type">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">type</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_type_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_type_response.py">ActionTypeResponse</a></code>
 

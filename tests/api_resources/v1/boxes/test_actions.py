@@ -946,26 +946,12 @@ class TestActions:
     def test_method_scroll(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.scroll(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            scroll_x=0,
-            scroll_y=100,
-            x=100,
-            y=100,
-        )
-        assert_matches_type(ActionScrollResponse, action, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_method_scroll_with_all_params(self, client: GboxClient) -> None:
-        action = client.v1.boxes.actions.scroll(
-            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            scroll_x=0,
-            scroll_y=100,
-            x=100,
-            y=100,
-            include_screenshot=False,
-            output_format="base64",
-            presigned_expires_in="30m",
-            screenshot_delay="500ms",
+            body={
+                "x": 100,
+                "y": 100,
+                "scrollX": 0,
+                "scrollY": 100,
+            },
         )
         assert_matches_type(ActionScrollResponse, action, path=["response"])
 
@@ -974,10 +960,12 @@ class TestActions:
     def test_raw_response_scroll(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.scroll(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            scroll_x=0,
-            scroll_y=100,
-            x=100,
-            y=100,
+            body={
+                "x": 100,
+                "y": 100,
+                "scrollX": 0,
+                "scrollY": 100,
+            },
         )
 
         assert response.is_closed is True
@@ -990,10 +978,12 @@ class TestActions:
     def test_streaming_response_scroll(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.scroll(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            scroll_x=0,
-            scroll_y=100,
-            x=100,
-            y=100,
+            body={
+                "x": 100,
+                "y": 100,
+                "scrollX": 0,
+                "scrollY": 100,
+            },
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1009,10 +999,12 @@ class TestActions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.actions.with_raw_response.scroll(
                 box_id="",
-                scroll_x=0,
-                scroll_y=100,
-                x=100,
-                y=100,
+                body={
+                    "x": 100,
+                    "y": 100,
+                    "scrollX": 0,
+                    "scrollY": 100,
+                },
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -2315,26 +2307,12 @@ class TestAsyncActions:
     async def test_method_scroll(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.scroll(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            scroll_x=0,
-            scroll_y=100,
-            x=100,
-            y=100,
-        )
-        assert_matches_type(ActionScrollResponse, action, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_method_scroll_with_all_params(self, async_client: AsyncGboxClient) -> None:
-        action = await async_client.v1.boxes.actions.scroll(
-            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            scroll_x=0,
-            scroll_y=100,
-            x=100,
-            y=100,
-            include_screenshot=False,
-            output_format="base64",
-            presigned_expires_in="30m",
-            screenshot_delay="500ms",
+            body={
+                "x": 100,
+                "y": 100,
+                "scrollX": 0,
+                "scrollY": 100,
+            },
         )
         assert_matches_type(ActionScrollResponse, action, path=["response"])
 
@@ -2343,10 +2321,12 @@ class TestAsyncActions:
     async def test_raw_response_scroll(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.scroll(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            scroll_x=0,
-            scroll_y=100,
-            x=100,
-            y=100,
+            body={
+                "x": 100,
+                "y": 100,
+                "scrollX": 0,
+                "scrollY": 100,
+            },
         )
 
         assert response.is_closed is True
@@ -2359,10 +2339,12 @@ class TestAsyncActions:
     async def test_streaming_response_scroll(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.scroll(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            scroll_x=0,
-            scroll_y=100,
-            x=100,
-            y=100,
+            body={
+                "x": 100,
+                "y": 100,
+                "scrollX": 0,
+                "scrollY": 100,
+            },
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -2378,10 +2360,12 @@ class TestAsyncActions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.scroll(
                 box_id="",
-                scroll_x=0,
-                scroll_y=100,
-                x=100,
-                y=100,
+                body={
+                    "x": 100,
+                    "y": 100,
+                    "scrollX": 0,
+                    "scrollY": 100,
+                },
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")

@@ -25,6 +25,7 @@ __all__ = [
     "AIActionScreenshotResultAIResponseActionTypedDragSimpleActionEnd",
     "AIActionScreenshotResultAIResponseActionTypedDragSimpleActionStart",
     "AIActionScreenshotResultAIResponseActionTypedScrollAction",
+    "AIActionScreenshotResultAIResponseActionTypedScrollSimpleAction",
     "AIActionScreenshotResultAIResponseActionTypedSwipeSimpleAction",
     "AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedAction",
     "AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedActionEnd",
@@ -58,6 +59,7 @@ __all__ = [
     "AIActionResultAIResponseActionTypedDragSimpleActionEnd",
     "AIActionResultAIResponseActionTypedDragSimpleActionStart",
     "AIActionResultAIResponseActionTypedScrollAction",
+    "AIActionResultAIResponseActionTypedScrollSimpleAction",
     "AIActionResultAIResponseActionTypedSwipeSimpleAction",
     "AIActionResultAIResponseActionTypedSwipeAdvancedAction",
     "AIActionResultAIResponseActionTypedSwipeAdvancedActionEnd",
@@ -334,16 +336,85 @@ class AIActionScreenshotResultAIResponseActionTypedDragSimpleAction(BaseModel):
 
 class AIActionScreenshotResultAIResponseActionTypedScrollAction(BaseModel):
     scroll_x: float = FieldInfo(alias="scrollX")
-    """Horizontal scroll amount"""
+    """Horizontal scroll amount.
+
+    Positive values scroll content rightward (reveals content on the left), negative
+    values scroll content leftward (reveals content on the right).
+    """
 
     scroll_y: float = FieldInfo(alias="scrollY")
-    """Vertical scroll amount"""
+    """Vertical scroll amount.
+
+    Positive values scroll content downward (reveals content above), negative values
+    scroll content upward (reveals content below).
+    """
 
     x: float
     """X coordinate of the scroll position"""
 
     y: float
     """Y coordinate of the scroll position"""
+
+    include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
+    """Whether to include screenshots in the action response.
+
+    If false, the screenshot object will still be returned but with empty URIs.
+    Default is false.
+    """
+
+    output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
+    """Type of the URI. default is base64."""
+
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
+
+    screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
+    """Delay after performing the action, before taking the final screenshot.
+
+    Execution flow:
+
+    1. Take screenshot before action
+    2. Perform the action
+    3. Wait for screenshotDelay (this parameter)
+    4. Take screenshot after action
+
+    Example: '500ms' means wait 500ms after the action before capturing the final
+    screenshot.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+    """
+
+
+class AIActionScreenshotResultAIResponseActionTypedScrollSimpleAction(BaseModel):
+    direction: Literal["up", "down", "left", "right"]
+    """Direction to scroll.
+
+    The scroll will be performed from the center of the screen towards this
+    direction. 'up' scrolls content upward (reveals content below), 'down' scrolls
+    content downward (reveals content above), 'left' scrolls content leftward
+    (reveals content on the right), 'right' scrolls content rightward (reveals
+    content on the left).
+    """
+
+    distance: Union[float, Literal["tiny", "short", "medium", "long"], None] = None
+    """Distance of the scroll.
+
+    Can be either a number (in pixels) or a predefined enum value (tiny, short,
+    medium, long). If not provided, the scroll will be performed from the center of
+    the screen to the screen edge
+    """
+
+    duration: Optional[str] = None
+    """Duration of the scroll
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+    """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
     """Whether to include screenshots in the action response.
@@ -953,6 +1024,7 @@ AIActionScreenshotResultAIResponseAction: TypeAlias = Union[
     AIActionScreenshotResultAIResponseActionTypedDragAdvancedAction,
     AIActionScreenshotResultAIResponseActionTypedDragSimpleAction,
     AIActionScreenshotResultAIResponseActionTypedScrollAction,
+    AIActionScreenshotResultAIResponseActionTypedScrollSimpleAction,
     AIActionScreenshotResultAIResponseActionTypedSwipeSimpleAction,
     AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedAction,
     AIActionScreenshotResultAIResponseActionTypedPressKeyAction,
@@ -1285,16 +1357,85 @@ class AIActionResultAIResponseActionTypedDragSimpleAction(BaseModel):
 
 class AIActionResultAIResponseActionTypedScrollAction(BaseModel):
     scroll_x: float = FieldInfo(alias="scrollX")
-    """Horizontal scroll amount"""
+    """Horizontal scroll amount.
+
+    Positive values scroll content rightward (reveals content on the left), negative
+    values scroll content leftward (reveals content on the right).
+    """
 
     scroll_y: float = FieldInfo(alias="scrollY")
-    """Vertical scroll amount"""
+    """Vertical scroll amount.
+
+    Positive values scroll content downward (reveals content above), negative values
+    scroll content upward (reveals content below).
+    """
 
     x: float
     """X coordinate of the scroll position"""
 
     y: float
     """Y coordinate of the scroll position"""
+
+    include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
+    """Whether to include screenshots in the action response.
+
+    If false, the screenshot object will still be returned but with empty URIs.
+    Default is false.
+    """
+
+    output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
+    """Type of the URI. default is base64."""
+
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
+
+    screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
+    """Delay after performing the action, before taking the final screenshot.
+
+    Execution flow:
+
+    1. Take screenshot before action
+    2. Perform the action
+    3. Wait for screenshotDelay (this parameter)
+    4. Take screenshot after action
+
+    Example: '500ms' means wait 500ms after the action before capturing the final
+    screenshot.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+    """
+
+
+class AIActionResultAIResponseActionTypedScrollSimpleAction(BaseModel):
+    direction: Literal["up", "down", "left", "right"]
+    """Direction to scroll.
+
+    The scroll will be performed from the center of the screen towards this
+    direction. 'up' scrolls content upward (reveals content below), 'down' scrolls
+    content downward (reveals content above), 'left' scrolls content leftward
+    (reveals content on the right), 'right' scrolls content rightward (reveals
+    content on the left).
+    """
+
+    distance: Union[float, Literal["tiny", "short", "medium", "long"], None] = None
+    """Distance of the scroll.
+
+    Can be either a number (in pixels) or a predefined enum value (tiny, short,
+    medium, long). If not provided, the scroll will be performed from the center of
+    the screen to the screen edge
+    """
+
+    duration: Optional[str] = None
+    """Duration of the scroll
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+    """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
     """Whether to include screenshots in the action response.
@@ -1904,6 +2045,7 @@ AIActionResultAIResponseAction: TypeAlias = Union[
     AIActionResultAIResponseActionTypedDragAdvancedAction,
     AIActionResultAIResponseActionTypedDragSimpleAction,
     AIActionResultAIResponseActionTypedScrollAction,
+    AIActionResultAIResponseActionTypedScrollSimpleAction,
     AIActionResultAIResponseActionTypedSwipeSimpleAction,
     AIActionResultAIResponseActionTypedSwipeAdvancedAction,
     AIActionResultAIResponseActionTypedPressKeyAction,

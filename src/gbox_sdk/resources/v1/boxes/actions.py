@@ -1211,14 +1211,7 @@ class ActionsResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        scroll_x: float,
-        scroll_y: float,
-        x: float,
-        y: float,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        body: object,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1226,43 +1219,12 @@ class ActionsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionScrollResponse:
-        """
-        Scroll
+        """Performs a scroll action.
+
+        Supports both advanced scroll with coordinates and
+        simple scroll with direction.
 
         Args:
-          scroll_x: Horizontal scroll amount
-
-          scroll_y: Vertical scroll amount
-
-          x: X coordinate of the scroll position
-
-          y: Y coordinate of the scroll position
-
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
-
-          output_format: Type of the URI. default is base64.
-
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
-
-              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
-
-              Execution flow:
-
-              1. Take screenshot before action
-              2. Perform the action
-              3. Wait for screenshotDelay (this parameter)
-              4. Take screenshot after action
-
-              Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot.
-
-              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -1277,19 +1239,7 @@ class ActionsResource(SyncAPIResource):
             ActionScrollResponse,
             self._post(
                 f"/boxes/{box_id}/actions/scroll",
-                body=maybe_transform(
-                    {
-                        "scroll_x": scroll_x,
-                        "scroll_y": scroll_y,
-                        "x": x,
-                        "y": y,
-                        "include_screenshot": include_screenshot,
-                        "output_format": output_format,
-                        "presigned_expires_in": presigned_expires_in,
-                        "screenshot_delay": screenshot_delay,
-                    },
-                    action_scroll_params.ActionScrollParams,
-                ),
+                body=maybe_transform(body, action_scroll_params.ActionScrollParams),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
@@ -2897,14 +2847,7 @@ class AsyncActionsResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        scroll_x: float,
-        scroll_y: float,
-        x: float,
-        y: float,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        body: object,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2912,43 +2855,12 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionScrollResponse:
-        """
-        Scroll
+        """Performs a scroll action.
+
+        Supports both advanced scroll with coordinates and
+        simple scroll with direction.
 
         Args:
-          scroll_x: Horizontal scroll amount
-
-          scroll_y: Vertical scroll amount
-
-          x: X coordinate of the scroll position
-
-          y: Y coordinate of the scroll position
-
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
-
-          output_format: Type of the URI. default is base64.
-
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
-
-              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
-
-              Execution flow:
-
-              1. Take screenshot before action
-              2. Perform the action
-              3. Wait for screenshotDelay (this parameter)
-              4. Take screenshot after action
-
-              Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot.
-
-              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -2963,19 +2875,7 @@ class AsyncActionsResource(AsyncAPIResource):
             ActionScrollResponse,
             await self._post(
                 f"/boxes/{box_id}/actions/scroll",
-                body=await async_maybe_transform(
-                    {
-                        "scroll_x": scroll_x,
-                        "scroll_y": scroll_y,
-                        "x": x,
-                        "y": y,
-                        "include_screenshot": include_screenshot,
-                        "output_format": output_format,
-                        "presigned_expires_in": presigned_expires_in,
-                        "screenshot_delay": screenshot_delay,
-                    },
-                    action_scroll_params.ActionScrollParams,
-                ),
+                body=await async_maybe_transform(body, action_scroll_params.ActionScrollParams),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),

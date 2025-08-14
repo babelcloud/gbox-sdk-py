@@ -10,6 +10,8 @@ import pytest
 from gbox_sdk import GboxClient, AsyncGboxClient
 from tests.utils import assert_matches_type
 from gbox_sdk.types.v1.boxes import (
+    ActionAIResponse,
+    ActionTapResponse,
     ActionDragResponse,
     ActionMoveResponse,
     ActionTypeResponse,
@@ -19,9 +21,11 @@ from gbox_sdk.types.v1.boxes import (
     ActionScrollResponse,
     ActionExtractResponse,
     ActionPressKeyResponse,
+    ActionLongPressResponse,
     ActionScreenshotResponse,
     ActionPressButtonResponse,
     ActionScreenLayoutResponse,
+    ActionRecordingStopResponse,
     ActionScreenRotationResponse,
 )
 
@@ -31,16 +35,16 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestActions:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_ai(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.ai(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             instruction="click the login button",
         )
-        assert action is None
+        assert_matches_type(ActionAIResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_ai_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.ai(
@@ -57,9 +61,9 @@ class TestActions:
             },
             stream=False,
         )
-        assert action is None
+        assert_matches_type(ActionAIResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_ai(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.ai(
@@ -70,9 +74,9 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert action is None
+        assert_matches_type(ActionAIResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_ai(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.ai(
@@ -83,11 +87,11 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert action is None
+            assert_matches_type(ActionAIResponse, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_ai(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -96,7 +100,7 @@ class TestActions:
                 instruction="click the login button",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_click(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.click(
@@ -106,7 +110,7 @@ class TestActions:
         )
         assert_matches_type(ActionClickResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_click_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.click(
@@ -122,7 +126,7 @@ class TestActions:
         )
         assert_matches_type(ActionClickResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_click(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.click(
@@ -136,7 +140,7 @@ class TestActions:
         action = response.parse()
         assert_matches_type(ActionClickResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_click(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.click(
@@ -152,7 +156,7 @@ class TestActions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_click(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -162,7 +166,7 @@ class TestActions:
                 y=100,
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_drag_overload_1(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.drag(
@@ -178,7 +182,7 @@ class TestActions:
         )
         assert_matches_type(ActionDragResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_drag_with_all_params_overload_1(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.drag(
@@ -199,7 +203,7 @@ class TestActions:
         )
         assert_matches_type(ActionDragResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_drag_overload_1(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.drag(
@@ -219,7 +223,7 @@ class TestActions:
         action = response.parse()
         assert_matches_type(ActionDragResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_drag_overload_1(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.drag(
@@ -241,7 +245,7 @@ class TestActions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_drag_overload_1(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -257,7 +261,7 @@ class TestActions:
                 },
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_drag_overload_2(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.drag(
@@ -279,7 +283,7 @@ class TestActions:
         )
         assert_matches_type(ActionDragResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_drag_with_all_params_overload_2(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.drag(
@@ -306,7 +310,7 @@ class TestActions:
         )
         assert_matches_type(ActionDragResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_drag_overload_2(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.drag(
@@ -332,7 +336,7 @@ class TestActions:
         action = response.parse()
         assert_matches_type(ActionDragResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_drag_overload_2(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.drag(
@@ -360,7 +364,7 @@ class TestActions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_drag_overload_2(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -382,7 +386,7 @@ class TestActions:
                 ],
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_extract(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.extract(
@@ -391,7 +395,7 @@ class TestActions:
         )
         assert_matches_type(ActionExtractResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_extract_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.extract(
@@ -401,7 +405,7 @@ class TestActions:
         )
         assert_matches_type(ActionExtractResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_extract(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.extract(
@@ -414,7 +418,7 @@ class TestActions:
         action = response.parse()
         assert_matches_type(ActionExtractResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_extract(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.extract(
@@ -429,7 +433,7 @@ class TestActions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_extract(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -438,7 +442,72 @@ class TestActions:
                 instruction="Extract the email address from the UI interface",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_long_press(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.long_press(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            x=350,
+            y=250,
+        )
+        assert_matches_type(ActionLongPressResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_long_press_with_all_params(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.long_press(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            x=350,
+            y=250,
+            duration="1s",
+            include_screenshot=False,
+            output_format="base64",
+            presigned_expires_in="30m",
+            screenshot_delay="500ms",
+        )
+        assert_matches_type(ActionLongPressResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_long_press(self, client: GboxClient) -> None:
+        response = client.v1.boxes.actions.with_raw_response.long_press(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            x=350,
+            y=250,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = response.parse()
+        assert_matches_type(ActionLongPressResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_long_press(self, client: GboxClient) -> None:
+        with client.v1.boxes.actions.with_streaming_response.long_press(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            x=350,
+            y=250,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = response.parse()
+            assert_matches_type(ActionLongPressResponse, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_path_params_long_press(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            client.v1.boxes.actions.with_raw_response.long_press(
+                box_id="",
+                x=350,
+                y=250,
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_move(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.move(
@@ -448,7 +517,7 @@ class TestActions:
         )
         assert_matches_type(ActionMoveResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_move_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.move(
@@ -462,7 +531,7 @@ class TestActions:
         )
         assert_matches_type(ActionMoveResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_move(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.move(
@@ -476,7 +545,7 @@ class TestActions:
         action = response.parse()
         assert_matches_type(ActionMoveResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_move(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.move(
@@ -492,7 +561,7 @@ class TestActions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_move(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -502,7 +571,7 @@ class TestActions:
                 y=300,
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_press_button(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.press_button(
@@ -511,7 +580,7 @@ class TestActions:
         )
         assert_matches_type(ActionPressButtonResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_press_button_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.press_button(
@@ -524,7 +593,7 @@ class TestActions:
         )
         assert_matches_type(ActionPressButtonResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_press_button(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.press_button(
@@ -537,7 +606,7 @@ class TestActions:
         action = response.parse()
         assert_matches_type(ActionPressButtonResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_press_button(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.press_button(
@@ -552,7 +621,7 @@ class TestActions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_press_button(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -561,7 +630,7 @@ class TestActions:
                 buttons=["power"],
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_press_key(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.press_key(
@@ -570,7 +639,7 @@ class TestActions:
         )
         assert_matches_type(ActionPressKeyResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_press_key_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.press_key(
@@ -584,7 +653,7 @@ class TestActions:
         )
         assert_matches_type(ActionPressKeyResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_press_key(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.press_key(
@@ -597,7 +666,7 @@ class TestActions:
         action = response.parse()
         assert_matches_type(ActionPressKeyResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_press_key(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.press_key(
@@ -612,7 +681,7 @@ class TestActions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_press_key(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -621,7 +690,100 @@ class TestActions:
                 keys=["enter"],
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_recording_start(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.recording_start(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert action is None
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_recording_start_with_all_params(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.recording_start(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            duration="10s",
+        )
+        assert action is None
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_recording_start(self, client: GboxClient) -> None:
+        response = client.v1.boxes.actions.with_raw_response.recording_start(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = response.parse()
+        assert action is None
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_recording_start(self, client: GboxClient) -> None:
+        with client.v1.boxes.actions.with_streaming_response.recording_start(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = response.parse()
+            assert action is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_path_params_recording_start(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            client.v1.boxes.actions.with_raw_response.recording_start(
+                box_id="",
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_recording_stop(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.recording_stop(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert_matches_type(ActionRecordingStopResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_recording_stop(self, client: GboxClient) -> None:
+        response = client.v1.boxes.actions.with_raw_response.recording_stop(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = response.parse()
+        assert_matches_type(ActionRecordingStopResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_recording_stop(self, client: GboxClient) -> None:
+        with client.v1.boxes.actions.with_streaming_response.recording_stop(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = response.parse()
+            assert_matches_type(ActionRecordingStopResponse, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_path_params_recording_stop(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            client.v1.boxes.actions.with_raw_response.recording_stop(
+                "",
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_screen_layout(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.screen_layout(
@@ -629,7 +791,7 @@ class TestActions:
         )
         assert_matches_type(ActionScreenLayoutResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_screen_layout(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.screen_layout(
@@ -641,7 +803,7 @@ class TestActions:
         action = response.parse()
         assert_matches_type(ActionScreenLayoutResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_screen_layout(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.screen_layout(
@@ -655,7 +817,7 @@ class TestActions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_screen_layout(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -663,7 +825,7 @@ class TestActions:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_screen_rotation(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.screen_rotation(
@@ -672,7 +834,7 @@ class TestActions:
         )
         assert_matches_type(ActionScreenRotationResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_screen_rotation_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.screen_rotation(
@@ -685,7 +847,7 @@ class TestActions:
         )
         assert_matches_type(ActionScreenRotationResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_screen_rotation(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.screen_rotation(
@@ -698,7 +860,7 @@ class TestActions:
         action = response.parse()
         assert_matches_type(ActionScreenRotationResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_screen_rotation(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.screen_rotation(
@@ -713,7 +875,7 @@ class TestActions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_screen_rotation(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -722,7 +884,7 @@ class TestActions:
                 orientation="landscapeLeft",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_screenshot(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.screenshot(
@@ -730,7 +892,7 @@ class TestActions:
         )
         assert_matches_type(ActionScreenshotResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_screenshot_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.screenshot(
@@ -745,7 +907,7 @@ class TestActions:
         )
         assert_matches_type(ActionScreenshotResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_screenshot(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.screenshot(
@@ -757,7 +919,7 @@ class TestActions:
         action = response.parse()
         assert_matches_type(ActionScreenshotResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_screenshot(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.screenshot(
@@ -771,7 +933,7 @@ class TestActions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_screenshot(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -779,7 +941,7 @@ class TestActions:
                 box_id="",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_scroll(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.scroll(
@@ -791,7 +953,7 @@ class TestActions:
         )
         assert_matches_type(ActionScrollResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_scroll_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.scroll(
@@ -807,7 +969,7 @@ class TestActions:
         )
         assert_matches_type(ActionScrollResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_scroll(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.scroll(
@@ -823,7 +985,7 @@ class TestActions:
         action = response.parse()
         assert_matches_type(ActionScrollResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_scroll(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.scroll(
@@ -841,7 +1003,7 @@ class TestActions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_scroll(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -853,7 +1015,7 @@ class TestActions:
                 y=100,
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_swipe_overload_1(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.swipe(
@@ -862,7 +1024,7 @@ class TestActions:
         )
         assert_matches_type(ActionSwipeResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_swipe_with_all_params_overload_1(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.swipe(
@@ -877,7 +1039,7 @@ class TestActions:
         )
         assert_matches_type(ActionSwipeResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_swipe_overload_1(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.swipe(
@@ -890,7 +1052,7 @@ class TestActions:
         action = response.parse()
         assert_matches_type(ActionSwipeResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_swipe_overload_1(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.swipe(
@@ -905,7 +1067,7 @@ class TestActions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_swipe_overload_1(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -914,7 +1076,7 @@ class TestActions:
                 direction="up",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_swipe_overload_2(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.swipe(
@@ -930,7 +1092,7 @@ class TestActions:
         )
         assert_matches_type(ActionSwipeResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_swipe_with_all_params_overload_2(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.swipe(
@@ -951,7 +1113,7 @@ class TestActions:
         )
         assert_matches_type(ActionSwipeResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_swipe_overload_2(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.swipe(
@@ -971,7 +1133,7 @@ class TestActions:
         action = response.parse()
         assert_matches_type(ActionSwipeResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_swipe_overload_2(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.swipe(
@@ -993,7 +1155,7 @@ class TestActions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_swipe_overload_2(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1009,7 +1171,71 @@ class TestActions:
                 },
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_tap(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.tap(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            x=100,
+            y=100,
+        )
+        assert_matches_type(ActionTapResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_tap_with_all_params(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.tap(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            x=100,
+            y=100,
+            include_screenshot=False,
+            output_format="base64",
+            presigned_expires_in="30m",
+            screenshot_delay="500ms",
+        )
+        assert_matches_type(ActionTapResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_tap(self, client: GboxClient) -> None:
+        response = client.v1.boxes.actions.with_raw_response.tap(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            x=100,
+            y=100,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = response.parse()
+        assert_matches_type(ActionTapResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_tap(self, client: GboxClient) -> None:
+        with client.v1.boxes.actions.with_streaming_response.tap(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            x=100,
+            y=100,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = response.parse()
+            assert_matches_type(ActionTapResponse, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_path_params_tap(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            client.v1.boxes.actions.with_raw_response.tap(
+                box_id="",
+                x=100,
+                y=100,
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_touch(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.touch(
@@ -1025,7 +1251,7 @@ class TestActions:
         )
         assert_matches_type(ActionTouchResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_touch_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.touch(
@@ -1053,7 +1279,7 @@ class TestActions:
         )
         assert_matches_type(ActionTouchResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_touch(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.touch(
@@ -1073,7 +1299,7 @@ class TestActions:
         action = response.parse()
         assert_matches_type(ActionTouchResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_touch(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.touch(
@@ -1095,7 +1321,7 @@ class TestActions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_touch(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1111,7 +1337,7 @@ class TestActions:
                 ],
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_type(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.type(
@@ -1120,7 +1346,7 @@ class TestActions:
         )
         assert_matches_type(ActionTypeResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_type_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.type(
@@ -1130,11 +1356,12 @@ class TestActions:
             mode="append",
             output_format="base64",
             presigned_expires_in="30m",
+            press_enter=False,
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionTypeResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_type(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.type(
@@ -1147,7 +1374,7 @@ class TestActions:
         action = response.parse()
         assert_matches_type(ActionTypeResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_type(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.type(
@@ -1162,7 +1389,7 @@ class TestActions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_type(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1177,16 +1404,16 @@ class TestAsyncActions:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_ai(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.ai(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             instruction="click the login button",
         )
-        assert action is None
+        assert_matches_type(ActionAIResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_ai_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.ai(
@@ -1203,9 +1430,9 @@ class TestAsyncActions:
             },
             stream=False,
         )
-        assert action is None
+        assert_matches_type(ActionAIResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_ai(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.ai(
@@ -1216,9 +1443,9 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert action is None
+        assert_matches_type(ActionAIResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_ai(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.ai(
@@ -1229,11 +1456,11 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert action is None
+            assert_matches_type(ActionAIResponse, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_ai(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1242,7 +1469,7 @@ class TestAsyncActions:
                 instruction="click the login button",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_click(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.click(
@@ -1252,7 +1479,7 @@ class TestAsyncActions:
         )
         assert_matches_type(ActionClickResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_click_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.click(
@@ -1268,7 +1495,7 @@ class TestAsyncActions:
         )
         assert_matches_type(ActionClickResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_click(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.click(
@@ -1282,7 +1509,7 @@ class TestAsyncActions:
         action = await response.parse()
         assert_matches_type(ActionClickResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_click(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.click(
@@ -1298,7 +1525,7 @@ class TestAsyncActions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_click(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1308,7 +1535,7 @@ class TestAsyncActions:
                 y=100,
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_drag_overload_1(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.drag(
@@ -1324,7 +1551,7 @@ class TestAsyncActions:
         )
         assert_matches_type(ActionDragResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_drag_with_all_params_overload_1(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.drag(
@@ -1345,7 +1572,7 @@ class TestAsyncActions:
         )
         assert_matches_type(ActionDragResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_drag_overload_1(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.drag(
@@ -1365,7 +1592,7 @@ class TestAsyncActions:
         action = await response.parse()
         assert_matches_type(ActionDragResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_drag_overload_1(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.drag(
@@ -1387,7 +1614,7 @@ class TestAsyncActions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_drag_overload_1(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1403,7 +1630,7 @@ class TestAsyncActions:
                 },
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_drag_overload_2(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.drag(
@@ -1425,7 +1652,7 @@ class TestAsyncActions:
         )
         assert_matches_type(ActionDragResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_drag_with_all_params_overload_2(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.drag(
@@ -1452,7 +1679,7 @@ class TestAsyncActions:
         )
         assert_matches_type(ActionDragResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_drag_overload_2(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.drag(
@@ -1478,7 +1705,7 @@ class TestAsyncActions:
         action = await response.parse()
         assert_matches_type(ActionDragResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_drag_overload_2(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.drag(
@@ -1506,7 +1733,7 @@ class TestAsyncActions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_drag_overload_2(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1528,7 +1755,7 @@ class TestAsyncActions:
                 ],
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_extract(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.extract(
@@ -1537,7 +1764,7 @@ class TestAsyncActions:
         )
         assert_matches_type(ActionExtractResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_extract_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.extract(
@@ -1547,7 +1774,7 @@ class TestAsyncActions:
         )
         assert_matches_type(ActionExtractResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_extract(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.extract(
@@ -1560,7 +1787,7 @@ class TestAsyncActions:
         action = await response.parse()
         assert_matches_type(ActionExtractResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_extract(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.extract(
@@ -1575,7 +1802,7 @@ class TestAsyncActions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_extract(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1584,7 +1811,72 @@ class TestAsyncActions:
                 instruction="Extract the email address from the UI interface",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_long_press(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.long_press(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            x=350,
+            y=250,
+        )
+        assert_matches_type(ActionLongPressResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_long_press_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.long_press(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            x=350,
+            y=250,
+            duration="1s",
+            include_screenshot=False,
+            output_format="base64",
+            presigned_expires_in="30m",
+            screenshot_delay="500ms",
+        )
+        assert_matches_type(ActionLongPressResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_long_press(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.actions.with_raw_response.long_press(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            x=350,
+            y=250,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = await response.parse()
+        assert_matches_type(ActionLongPressResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_long_press(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.actions.with_streaming_response.long_press(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            x=350,
+            y=250,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = await response.parse()
+            assert_matches_type(ActionLongPressResponse, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_path_params_long_press(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            await async_client.v1.boxes.actions.with_raw_response.long_press(
+                box_id="",
+                x=350,
+                y=250,
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_move(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.move(
@@ -1594,7 +1886,7 @@ class TestAsyncActions:
         )
         assert_matches_type(ActionMoveResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_move_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.move(
@@ -1608,7 +1900,7 @@ class TestAsyncActions:
         )
         assert_matches_type(ActionMoveResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_move(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.move(
@@ -1622,7 +1914,7 @@ class TestAsyncActions:
         action = await response.parse()
         assert_matches_type(ActionMoveResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_move(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.move(
@@ -1638,7 +1930,7 @@ class TestAsyncActions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_move(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1648,7 +1940,7 @@ class TestAsyncActions:
                 y=300,
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_press_button(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.press_button(
@@ -1657,7 +1949,7 @@ class TestAsyncActions:
         )
         assert_matches_type(ActionPressButtonResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_press_button_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.press_button(
@@ -1670,7 +1962,7 @@ class TestAsyncActions:
         )
         assert_matches_type(ActionPressButtonResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_press_button(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.press_button(
@@ -1683,7 +1975,7 @@ class TestAsyncActions:
         action = await response.parse()
         assert_matches_type(ActionPressButtonResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_press_button(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.press_button(
@@ -1698,7 +1990,7 @@ class TestAsyncActions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_press_button(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1707,7 +1999,7 @@ class TestAsyncActions:
                 buttons=["power"],
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_press_key(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.press_key(
@@ -1716,7 +2008,7 @@ class TestAsyncActions:
         )
         assert_matches_type(ActionPressKeyResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_press_key_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.press_key(
@@ -1730,7 +2022,7 @@ class TestAsyncActions:
         )
         assert_matches_type(ActionPressKeyResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_press_key(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.press_key(
@@ -1743,7 +2035,7 @@ class TestAsyncActions:
         action = await response.parse()
         assert_matches_type(ActionPressKeyResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_press_key(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.press_key(
@@ -1758,7 +2050,7 @@ class TestAsyncActions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_press_key(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1767,7 +2059,100 @@ class TestAsyncActions:
                 keys=["enter"],
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_recording_start(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.recording_start(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert action is None
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_recording_start_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.recording_start(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            duration="10s",
+        )
+        assert action is None
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_recording_start(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.actions.with_raw_response.recording_start(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = await response.parse()
+        assert action is None
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_recording_start(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.actions.with_streaming_response.recording_start(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = await response.parse()
+            assert action is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_path_params_recording_start(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            await async_client.v1.boxes.actions.with_raw_response.recording_start(
+                box_id="",
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_recording_stop(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.recording_stop(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert_matches_type(ActionRecordingStopResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_recording_stop(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.actions.with_raw_response.recording_stop(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = await response.parse()
+        assert_matches_type(ActionRecordingStopResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_recording_stop(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.actions.with_streaming_response.recording_stop(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = await response.parse()
+            assert_matches_type(ActionRecordingStopResponse, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_path_params_recording_stop(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            await async_client.v1.boxes.actions.with_raw_response.recording_stop(
+                "",
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_screen_layout(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.screen_layout(
@@ -1775,7 +2160,7 @@ class TestAsyncActions:
         )
         assert_matches_type(ActionScreenLayoutResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_screen_layout(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.screen_layout(
@@ -1787,7 +2172,7 @@ class TestAsyncActions:
         action = await response.parse()
         assert_matches_type(ActionScreenLayoutResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_screen_layout(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.screen_layout(
@@ -1801,7 +2186,7 @@ class TestAsyncActions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_screen_layout(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1809,7 +2194,7 @@ class TestAsyncActions:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_screen_rotation(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.screen_rotation(
@@ -1818,7 +2203,7 @@ class TestAsyncActions:
         )
         assert_matches_type(ActionScreenRotationResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_screen_rotation_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.screen_rotation(
@@ -1831,7 +2216,7 @@ class TestAsyncActions:
         )
         assert_matches_type(ActionScreenRotationResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_screen_rotation(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.screen_rotation(
@@ -1844,7 +2229,7 @@ class TestAsyncActions:
         action = await response.parse()
         assert_matches_type(ActionScreenRotationResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_screen_rotation(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.screen_rotation(
@@ -1859,7 +2244,7 @@ class TestAsyncActions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_screen_rotation(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1868,7 +2253,7 @@ class TestAsyncActions:
                 orientation="landscapeLeft",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_screenshot(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.screenshot(
@@ -1876,7 +2261,7 @@ class TestAsyncActions:
         )
         assert_matches_type(ActionScreenshotResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_screenshot_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.screenshot(
@@ -1891,7 +2276,7 @@ class TestAsyncActions:
         )
         assert_matches_type(ActionScreenshotResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_screenshot(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.screenshot(
@@ -1903,7 +2288,7 @@ class TestAsyncActions:
         action = await response.parse()
         assert_matches_type(ActionScreenshotResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_screenshot(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.screenshot(
@@ -1917,7 +2302,7 @@ class TestAsyncActions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_screenshot(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1925,7 +2310,7 @@ class TestAsyncActions:
                 box_id="",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_scroll(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.scroll(
@@ -1937,7 +2322,7 @@ class TestAsyncActions:
         )
         assert_matches_type(ActionScrollResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_scroll_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.scroll(
@@ -1953,7 +2338,7 @@ class TestAsyncActions:
         )
         assert_matches_type(ActionScrollResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_scroll(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.scroll(
@@ -1969,7 +2354,7 @@ class TestAsyncActions:
         action = await response.parse()
         assert_matches_type(ActionScrollResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_scroll(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.scroll(
@@ -1987,7 +2372,7 @@ class TestAsyncActions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_scroll(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1999,7 +2384,7 @@ class TestAsyncActions:
                 y=100,
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_swipe_overload_1(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.swipe(
@@ -2008,7 +2393,7 @@ class TestAsyncActions:
         )
         assert_matches_type(ActionSwipeResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_swipe_with_all_params_overload_1(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.swipe(
@@ -2023,7 +2408,7 @@ class TestAsyncActions:
         )
         assert_matches_type(ActionSwipeResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_swipe_overload_1(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.swipe(
@@ -2036,7 +2421,7 @@ class TestAsyncActions:
         action = await response.parse()
         assert_matches_type(ActionSwipeResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_swipe_overload_1(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.swipe(
@@ -2051,7 +2436,7 @@ class TestAsyncActions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_swipe_overload_1(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -2060,7 +2445,7 @@ class TestAsyncActions:
                 direction="up",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_swipe_overload_2(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.swipe(
@@ -2076,7 +2461,7 @@ class TestAsyncActions:
         )
         assert_matches_type(ActionSwipeResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_swipe_with_all_params_overload_2(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.swipe(
@@ -2097,7 +2482,7 @@ class TestAsyncActions:
         )
         assert_matches_type(ActionSwipeResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_swipe_overload_2(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.swipe(
@@ -2117,7 +2502,7 @@ class TestAsyncActions:
         action = await response.parse()
         assert_matches_type(ActionSwipeResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_swipe_overload_2(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.swipe(
@@ -2139,7 +2524,7 @@ class TestAsyncActions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_swipe_overload_2(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -2155,7 +2540,71 @@ class TestAsyncActions:
                 },
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_tap(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.tap(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            x=100,
+            y=100,
+        )
+        assert_matches_type(ActionTapResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_tap_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.tap(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            x=100,
+            y=100,
+            include_screenshot=False,
+            output_format="base64",
+            presigned_expires_in="30m",
+            screenshot_delay="500ms",
+        )
+        assert_matches_type(ActionTapResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_tap(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.actions.with_raw_response.tap(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            x=100,
+            y=100,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = await response.parse()
+        assert_matches_type(ActionTapResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_tap(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.actions.with_streaming_response.tap(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            x=100,
+            y=100,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = await response.parse()
+            assert_matches_type(ActionTapResponse, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_path_params_tap(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            await async_client.v1.boxes.actions.with_raw_response.tap(
+                box_id="",
+                x=100,
+                y=100,
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_touch(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.touch(
@@ -2171,7 +2620,7 @@ class TestAsyncActions:
         )
         assert_matches_type(ActionTouchResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_touch_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.touch(
@@ -2199,7 +2648,7 @@ class TestAsyncActions:
         )
         assert_matches_type(ActionTouchResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_touch(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.touch(
@@ -2219,7 +2668,7 @@ class TestAsyncActions:
         action = await response.parse()
         assert_matches_type(ActionTouchResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_touch(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.touch(
@@ -2241,7 +2690,7 @@ class TestAsyncActions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_touch(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -2257,7 +2706,7 @@ class TestAsyncActions:
                 ],
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_type(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.type(
@@ -2266,7 +2715,7 @@ class TestAsyncActions:
         )
         assert_matches_type(ActionTypeResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_type_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.type(
@@ -2276,11 +2725,12 @@ class TestAsyncActions:
             mode="append",
             output_format="base64",
             presigned_expires_in="30m",
+            press_enter=False,
             screenshot_delay="500ms",
         )
         assert_matches_type(ActionTypeResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_type(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.type(
@@ -2293,7 +2743,7 @@ class TestAsyncActions:
         action = await response.parse()
         assert_matches_type(ActionTypeResponse, action, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_type(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.type(
@@ -2308,7 +2758,7 @@ class TestAsyncActions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_type(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):

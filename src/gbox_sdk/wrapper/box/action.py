@@ -1,11 +1,13 @@
 import os
+import json
 import base64
-from typing import List, Union, Optional
+from typing import Any, Dict, List, Union, Callable, Optional
 from typing_extensions import Literal, Iterable, cast
 
 from gbox_sdk._types import NOT_GIVEN, NotGiven
 from gbox_sdk._client import GboxClient
 from gbox_sdk.types.v1.boxes.action_ai_params import Settings
+from gbox_sdk.types.v1.boxes.action_ai_response import ActionAIResponse
 from gbox_sdk.types.v1.boxes.action_drag_params import DragSimpleEnd, DragSimpleStart, DragAdvancedPath
 from gbox_sdk.types.v1.boxes.action_swipe_params import SwipeAdvancedEnd, SwipeAdvancedStart
 from gbox_sdk.types.v1.boxes.action_touch_params import Point
@@ -23,6 +25,7 @@ from gbox_sdk.types.v1.boxes.action_press_key_response import ActionPressKeyResp
 from gbox_sdk.types.v1.boxes.action_screenshot_response import ActionScreenshotResponse
 from gbox_sdk.types.v1.boxes.action_press_button_response import ActionPressButtonResponse
 from gbox_sdk.types.v1.boxes.action_screen_layout_response import ActionScreenLayoutResponse
+from gbox_sdk.types.v1.boxes.action_recording_stop_response import ActionRecordingStopResponse
 from gbox_sdk.types.v1.boxes.action_screen_rotation_response import ActionScreenRotationResponse
 
 
@@ -64,7 +67,9 @@ class ActionOperator:
         output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
         screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
         settings: Union[Settings, NotGiven] = NOT_GIVEN,
-    ) -> None:
+        on_action_start: Optional[Callable[[], None]] = None,
+        on_action_end: Optional[Callable[[], None]] = None,
+    ) -> ActionAIResponse:
         """
         Perform an AI-powered action on the box.
 
@@ -98,6 +103,9 @@ class ActionOperator:
 
             settings: AI action settings
 
+            on_action_start: Callback function called when action starts
+            on_action_end: Callback function called when action ends
+
         Returns:
             ActionAIResponse: The response from the AI action.
 
@@ -112,6 +120,18 @@ class ActionOperator:
             ...     settings={"disableActions": ["click"], "systemPrompt": "You are a helpful assistant"},
             ... )
         """
+        if on_action_start is not None or on_action_end is not None:
+            return self.ai_stream(
+                instruction=instruction,
+                background=background,
+                include_screenshot=include_screenshot,
+                output_format=output_format,
+                screenshot_delay=screenshot_delay,
+                settings=settings,
+                on_action_start=on_action_start,
+                on_action_end=on_action_end,
+            )
+
         return self.client.v1.boxes.actions.ai(
             box_id=self.box_id,
             instruction=instruction,
@@ -121,6 +141,168 @@ class ActionOperator:
             screenshot_delay=screenshot_delay,
             settings=settings,
         )
+
+    def ai_stream(
+        self,
+        instruction: str,
+        *,
+        background: Union[str, NotGiven] = NOT_GIVEN,
+        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
+        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
+        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
+        settings: Union[Settings, NotGiven] = NOT_GIVEN,
+        on_action_start: Optional[Callable[[], None]] = None,
+        on_action_end: Optional[Callable[[], None]] = None,
+    ) -> ActionAIResponse:
+        """
+        Perform an AI-powered action on the box with streaming support.
+
+        Args:
+            instruction: Direct instruction of the UI action to perform (e.g., 'click the login button',
+                'input username in the email field', 'scroll down', 'swipe left')
+
+            background: The background of the UI action to perform. The purpose of background is to let
+                the action executor to understand the context of why the instruction is given
+                including important previous actions and observations
+
+            include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+                object will still be returned but with empty URIs. Default is false.
+
+            output_format: Type of the URI. default is base64.
+
+            screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+                Execution flow:
+
+                1. Take screenshot before action
+                2. Perform the action
+                3. Wait for screenshotDelay (this parameter)
+                4. Take screenshot after action
+
+                Example: '500ms' means wait 500ms after the action before capturing the final
+                screenshot.
+
+                Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+                Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+
+            settings: AI action settings
+
+            on_action_start: Callback function called when action starts
+            on_action_end: Callback function called when action ends
+
+        Returns:
+            ActionAIResponse: The response from the AI action.
+
+        Example:
+            >>> response = myBox.action.ai_stream(
+            ...     instruction="Click on the login button",
+            ...     on_action_start=lambda: print("Action started"),
+            ...     on_action_end=lambda: print("Action ended"),
+            ... )
+        """
+        try:
+            return self._ai_stream(
+                instruction=instruction,
+                background=background,
+                include_screenshot=include_screenshot,
+                output_format=output_format,
+                screenshot_delay=screenshot_delay,
+                settings=settings,
+                on_action_start=on_action_start,
+                on_action_end=on_action_end,
+            )
+        except Exception as e:
+            raise RuntimeError(f"Failed to execute AI action via stream: {e}") from e
+
+    def _ai_stream(
+        self,
+        instruction: str,
+        *,
+        background: Union[str, NotGiven] = NOT_GIVEN,
+        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
+        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
+        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
+        settings: Union[Settings, NotGiven] = NOT_GIVEN,
+        on_action_start: Optional[Callable[[], None]] = None,
+        on_action_end: Optional[Callable[[], None]] = None,
+    ) -> ActionAIResponse:
+        """
+        Synchronous method to handle AI action streaming via HTTP streaming.
+        """
+        # Prepare the request parameters (snake_case to match API schema)
+        params: Dict[str, Any] = {
+            "instruction": instruction,
+            "stream": True,
+        }
+
+        if background is not NOT_GIVEN:
+            params["background"] = background
+        if include_screenshot is not NOT_GIVEN:
+            params["include_screenshot"] = include_screenshot
+        if output_format is not NOT_GIVEN:
+            params["output_format"] = output_format
+        if screenshot_delay is not NOT_GIVEN:
+            params["screenshot_delay"] = screenshot_delay
+        if settings is not NOT_GIVEN:
+            params["settings"] = settings
+
+        # Use SDK streaming response wrapper to get SSE stream
+        resp_ctx = self.client.v1.boxes.actions.with_streaming_response.ai(
+            box_id=self.box_id,
+            instruction=instruction,
+            background=background,
+            include_screenshot=include_screenshot,
+            output_format=output_format,
+            screenshot_delay=screenshot_delay,
+            settings=settings,
+            stream=True,
+            timeout=None,
+        )
+        result: Optional[ActionAIResponse] = None
+        buffer: str = ""
+
+        # Enter the response context to get APIResponse and iterate
+        with resp_ctx as api_response:
+            for chunk in api_response.iter_bytes():
+                chunk_text: str = chunk.decode("utf-8")
+                buffer += chunk_text
+
+                while "\n\n" in buffer:
+                    event_end: int = buffer.find("\n\n")
+                    raw_event: str = buffer[:event_end].strip()
+                    buffer = buffer[event_end + 2 :]
+
+                    if not raw_event:
+                        continue
+
+                    event_name: str = ""
+                    data_lines: List[str] = []
+
+                    for line in raw_event.split("\n"):
+                        if line.startswith("event:"):
+                            event_name = line[6:].strip()
+                        elif line.startswith("data:"):
+                            data_lines.append(line[5:].strip())
+
+                    data_str: str = "\n".join(data_lines)
+
+                    if event_name == "before":
+                        if on_action_start:
+                            on_action_start()
+                    elif event_name == "after":
+                        if on_action_end:
+                            on_action_end()
+                    elif event_name == "result":
+                        parsed: ActionAIResponse = json.loads(data_str)
+                        result = parsed
+                    elif event_name == "error":
+                        error_data = json.loads(data_str)
+                        raise RuntimeError(f"AI action error: {error_data.get('message', 'Unknown error')}")
+
+        if result is None:
+            raise RuntimeError("No result event received from stream")
+
+        return result
 
     def click(
         self,
@@ -812,7 +994,13 @@ class ActionOperator:
 
         Example:
             >>> response = myBox.action.screen_rotation("landscapeLeft")
-            >>> response = myBox.action.screen_rotation(orientation="landscapeLeft", include_screenshot=True, output_format="storageKey", presigned_expires_in="30m", screenshot_delay="500ms")
+            >>> response = myBox.action.screen_rotation(
+            ...     orientation="landscapeLeft",
+            ...     include_screenshot=True,
+            ...     output_format="storageKey",
+            ...     presigned_expires_in="30m",
+            ...     screenshot_delay="500ms",
+            ... )
         """
         return self.client.v1.boxes.actions.screen_rotation(
             box_id=self.box_id,
@@ -822,6 +1010,38 @@ class ActionOperator:
             presigned_expires_in=presigned_expires_in,
             screenshot_delay=screenshot_delay,
         )
+
+    def screen_recording_start(self, duration: str) -> None:
+        """
+        Start recording the box screen.
+
+        Only one recording can be active at a time. If a
+        recording is already in progress, starting a new recording will stop the
+        previous one and keep only the latest recording.
+
+        Args:
+          duration: Duration of the recording. Default is 30m, max is 30m. The recording will
+              automatically stop when the duration time is reached.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Maximum allowed: 30m
+
+        Example:
+            >>> response = myBox.action.screen_recording_start(duration="30m")
+        """
+        return self.client.v1.boxes.actions.recording_start(box_id=self.box_id, duration=duration)
+
+    def screen_recording_stop(self) -> ActionRecordingStopResponse:
+        """
+        Stop recording the screen.
+
+        Returns:
+            ActionRecordingStopResponse: The response from the screen recording stop action.
+
+        Example:
+            >>> response = myBox.action.screen_recording_stop()
+        """
+        return self.client.v1.boxes.actions.recording_stop(box_id=self.box_id)
 
     def _save_data_url_to_file(self, data_url: str, file_path: str) -> None:
         """

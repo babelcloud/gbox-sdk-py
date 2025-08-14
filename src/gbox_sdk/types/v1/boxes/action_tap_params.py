@@ -6,24 +6,21 @@ from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from ...._utils import PropertyInfo
 
-__all__ = ["ActionTypeParams"]
+__all__ = ["ActionTapParams"]
 
 
-class ActionTypeParams(TypedDict, total=False):
-    text: Required[str]
-    """Text to type"""
+class ActionTapParams(TypedDict, total=False):
+    x: Required[float]
+    """X coordinate of the tap"""
+
+    y: Required[float]
+    """Y coordinate of the tap"""
 
     include_screenshot: Annotated[bool, PropertyInfo(alias="includeScreenshot")]
     """Whether to include screenshots in the action response.
 
     If false, the screenshot object will still be returned but with empty URIs.
     Default is false.
-    """
-
-    mode: Literal["append", "replace"]
-    """
-    Text input mode: 'append' to add text to existing content, 'replace' to replace
-    all existing text
     """
 
     output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
@@ -35,9 +32,6 @@ class ActionTypeParams(TypedDict, total=False):
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
-
-    press_enter: Annotated[bool, PropertyInfo(alias="pressEnter")]
-    """Whether to press Enter after typing the text"""
 
     screenshot_delay: Annotated[str, PropertyInfo(alias="screenshotDelay")]
     """Delay after performing the action, before taking the final screenshot.

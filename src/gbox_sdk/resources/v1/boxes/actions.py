@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Iterable, cast
+from typing import Any, List, Union, Iterable, cast
 from typing_extensions import Literal, overload
 
 import httpx
@@ -20,6 +20,7 @@ from ...._response import (
 from ...._base_client import make_request_options
 from ....types.v1.boxes import (
     action_ai_params,
+    action_tap_params,
     action_drag_params,
     action_move_params,
     action_type_params,
@@ -29,10 +30,14 @@ from ....types.v1.boxes import (
     action_scroll_params,
     action_extract_params,
     action_press_key_params,
+    action_long_press_params,
     action_screenshot_params,
     action_press_button_params,
+    action_recording_start_params,
     action_screen_rotation_params,
 )
+from ....types.v1.boxes.action_ai_response import ActionAIResponse
+from ....types.v1.boxes.action_tap_response import ActionTapResponse
 from ....types.v1.boxes.action_drag_response import ActionDragResponse
 from ....types.v1.boxes.action_move_response import ActionMoveResponse
 from ....types.v1.boxes.action_type_response import ActionTypeResponse
@@ -42,9 +47,11 @@ from ....types.v1.boxes.action_touch_response import ActionTouchResponse
 from ....types.v1.boxes.action_scroll_response import ActionScrollResponse
 from ....types.v1.boxes.action_extract_response import ActionExtractResponse
 from ....types.v1.boxes.action_press_key_response import ActionPressKeyResponse
+from ....types.v1.boxes.action_long_press_response import ActionLongPressResponse
 from ....types.v1.boxes.action_screenshot_response import ActionScreenshotResponse
 from ....types.v1.boxes.action_press_button_response import ActionPressButtonResponse
 from ....types.v1.boxes.action_screen_layout_response import ActionScreenLayoutResponse
+from ....types.v1.boxes.action_recording_stop_response import ActionRecordingStopResponse
 from ....types.v1.boxes.action_screen_rotation_response import ActionScreenRotationResponse
 
 __all__ = ["ActionsResource", "AsyncActionsResource"]
@@ -88,11 +95,12 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
+    ) -> ActionAIResponse:
         """Use natural language instructions to perform UI operations on the box.
 
         The
-        endpoint will stream progress events before and after the action is executed.
+        endpoint will stream progress events before and after the action is executed. If
+        you don't need intermediate events, set stream to false.
 
         Args:
           instruction: Direct instruction of the UI action to perform (e.g., 'click the login button',
@@ -143,26 +151,28 @@ class ActionsResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        return self._post(
-            f"/boxes/{box_id}/actions/ai",
-            body=maybe_transform(
-                {
-                    "instruction": instruction,
-                    "background": background,
-                    "include_screenshot": include_screenshot,
-                    "output_format": output_format,
-                    "presigned_expires_in": presigned_expires_in,
-                    "screenshot_delay": screenshot_delay,
-                    "settings": settings,
-                    "stream": stream,
-                },
-                action_ai_params.ActionAIParams,
+        return cast(
+            ActionAIResponse,
+            self._post(
+                f"/boxes/{box_id}/actions/ai",
+                body=maybe_transform(
+                    {
+                        "instruction": instruction,
+                        "background": background,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
+                        "screenshot_delay": screenshot_delay,
+                        "settings": settings,
+                        "stream": stream,
+                    },
+                    action_ai_params.ActionAIParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(Any, ActionAIResponse),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=NoneType,
         )
 
     def click(
@@ -491,6 +501,99 @@ class ActionsResource(SyncAPIResource):
             cast_to=ActionExtractResponse,
         )
 
+    def long_press(
+        self,
+        box_id: str,
+        *,
+        x: float,
+        y: float,
+        duration: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionLongPressResponse:
+        """
+        Perform a long press action at specified coordinates for a specified duration.
+        Useful for triggering context menus, drag operations, or other long-press
+        interactions.
+
+        Args:
+          x: X coordinate of the long press
+
+          y: Y coordinate of the long press
+
+          duration: Duration to hold the press (e.g. '1s', '500ms')
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 1s
+
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
+          output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return cast(
+            ActionLongPressResponse,
+            self._post(
+                f"/boxes/{box_id}/actions/long-press",
+                body=maybe_transform(
+                    {
+                        "x": x,
+                        "y": y,
+                        "duration": duration,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
+                        "screenshot_delay": screenshot_delay,
+                    },
+                    action_long_press_params.ActionLongPressParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, ActionLongPressResponse
+                ),  # Union types cannot be passed in as arguments in the type system
+            ),
+        )
+
     def move(
         self,
         box_id: str,
@@ -591,10 +694,8 @@ class ActionsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionPressButtonResponse:
-        """Press button on the device.
-
-        like power button, volume up button, volume down
-        button, etc.
+        """
+        Press device buttons like power, volume, home, back, etc.
 
         Args:
           buttons: Button to press
@@ -857,6 +958,84 @@ class ActionsResource(SyncAPIResource):
                     Any, ActionPressKeyResponse
                 ),  # Union types cannot be passed in as arguments in the type system
             ),
+        )
+
+    def recording_start(
+        self,
+        box_id: str,
+        *,
+        duration: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """Start recording the box screen.
+
+        Only one recording can be active at a time. If a
+        recording is already in progress, starting a new recording will stop the
+        previous one and keep only the latest recording.
+
+        Args:
+          duration: Duration of the recording. Default is 30m, max is 30m. The recording will
+              automatically stop when the duration time is reached.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Maximum allowed: 30m
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._post(
+            f"/boxes/{box_id}/actions/recording/start",
+            body=maybe_transform({"duration": duration}, action_recording_start_params.ActionRecordingStartParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    def recording_stop(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionRecordingStopResponse:
+        """
+        Stop recording the box screen
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return self._post(
+            f"/boxes/{box_id}/actions/recording/stop",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionRecordingStopResponse,
         )
 
     def screen_layout(
@@ -1126,7 +1305,7 @@ class ActionsResource(SyncAPIResource):
         box_id: str,
         *,
         direction: Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"],
-        distance: float | NotGiven = NOT_GIVEN,
+        distance: Union[float, Literal["tiny", "short", "medium", "long"]] | NotGiven = NOT_GIVEN,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
@@ -1146,7 +1325,8 @@ class ActionsResource(SyncAPIResource):
           direction: Direction to swipe. The gesture will be performed from the center of the screen
               towards this direction.
 
-          distance: Distance of the swipe in pixels. If not provided, the swipe will be performed
+          distance: Distance of the swipe. Can be either a number (in pixels) or a predefined enum
+              value (tiny, short, medium, long). If not provided, the swipe will be performed
               from the center of the screen to the screen edge
 
           duration: Duration of the swipe
@@ -1263,7 +1443,7 @@ class ActionsResource(SyncAPIResource):
         *,
         direction: Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"]
         | NotGiven = NOT_GIVEN,
-        distance: float | NotGiven = NOT_GIVEN,
+        distance: Union[float, Literal["tiny", "short", "medium", "long"]] | NotGiven = NOT_GIVEN,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
@@ -1304,6 +1484,88 @@ class ActionsResource(SyncAPIResource):
                 cast_to=cast(
                     Any, ActionSwipeResponse
                 ),  # Union types cannot be passed in as arguments in the type system
+            ),
+        )
+
+    def tap(
+        self,
+        box_id: str,
+        *,
+        x: float,
+        y: float,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionTapResponse:
+        """
+        Tap action for Android devices using ADB input tap command
+
+        Args:
+          x: X coordinate of the tap
+
+          y: Y coordinate of the tap
+
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
+          output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return cast(
+            ActionTapResponse,
+            self._post(
+                f"/boxes/{box_id}/actions/tap",
+                body=maybe_transform(
+                    {
+                        "x": x,
+                        "y": y,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
+                        "screenshot_delay": screenshot_delay,
+                    },
+                    action_tap_params.ActionTapParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(Any, ActionTapResponse),  # Union types cannot be passed in as arguments in the type system
             ),
         )
 
@@ -1396,6 +1658,7 @@ class ActionsResource(SyncAPIResource):
         mode: Literal["append", "replace"] | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
+        press_enter: bool | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1424,6 +1687,8 @@ class ActionsResource(SyncAPIResource):
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+          press_enter: Whether to press Enter after typing the text
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
 
@@ -1461,6 +1726,7 @@ class ActionsResource(SyncAPIResource):
                         "mode": mode,
                         "output_format": output_format,
                         "presigned_expires_in": presigned_expires_in,
+                        "press_enter": press_enter,
                         "screenshot_delay": screenshot_delay,
                     },
                     action_type_params.ActionTypeParams,
@@ -1513,11 +1779,12 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
+    ) -> ActionAIResponse:
         """Use natural language instructions to perform UI operations on the box.
 
         The
-        endpoint will stream progress events before and after the action is executed.
+        endpoint will stream progress events before and after the action is executed. If
+        you don't need intermediate events, set stream to false.
 
         Args:
           instruction: Direct instruction of the UI action to perform (e.g., 'click the login button',
@@ -1568,26 +1835,28 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        return await self._post(
-            f"/boxes/{box_id}/actions/ai",
-            body=await async_maybe_transform(
-                {
-                    "instruction": instruction,
-                    "background": background,
-                    "include_screenshot": include_screenshot,
-                    "output_format": output_format,
-                    "presigned_expires_in": presigned_expires_in,
-                    "screenshot_delay": screenshot_delay,
-                    "settings": settings,
-                    "stream": stream,
-                },
-                action_ai_params.ActionAIParams,
+        return cast(
+            ActionAIResponse,
+            await self._post(
+                f"/boxes/{box_id}/actions/ai",
+                body=await async_maybe_transform(
+                    {
+                        "instruction": instruction,
+                        "background": background,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
+                        "screenshot_delay": screenshot_delay,
+                        "settings": settings,
+                        "stream": stream,
+                    },
+                    action_ai_params.ActionAIParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(Any, ActionAIResponse),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=NoneType,
         )
 
     async def click(
@@ -1916,6 +2185,99 @@ class AsyncActionsResource(AsyncAPIResource):
             cast_to=ActionExtractResponse,
         )
 
+    async def long_press(
+        self,
+        box_id: str,
+        *,
+        x: float,
+        y: float,
+        duration: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionLongPressResponse:
+        """
+        Perform a long press action at specified coordinates for a specified duration.
+        Useful for triggering context menus, drag operations, or other long-press
+        interactions.
+
+        Args:
+          x: X coordinate of the long press
+
+          y: Y coordinate of the long press
+
+          duration: Duration to hold the press (e.g. '1s', '500ms')
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 1s
+
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
+          output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return cast(
+            ActionLongPressResponse,
+            await self._post(
+                f"/boxes/{box_id}/actions/long-press",
+                body=await async_maybe_transform(
+                    {
+                        "x": x,
+                        "y": y,
+                        "duration": duration,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
+                        "screenshot_delay": screenshot_delay,
+                    },
+                    action_long_press_params.ActionLongPressParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, ActionLongPressResponse
+                ),  # Union types cannot be passed in as arguments in the type system
+            ),
+        )
+
     async def move(
         self,
         box_id: str,
@@ -2016,10 +2378,8 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionPressButtonResponse:
-        """Press button on the device.
-
-        like power button, volume up button, volume down
-        button, etc.
+        """
+        Press device buttons like power, volume, home, back, etc.
 
         Args:
           buttons: Button to press
@@ -2282,6 +2642,86 @@ class AsyncActionsResource(AsyncAPIResource):
                     Any, ActionPressKeyResponse
                 ),  # Union types cannot be passed in as arguments in the type system
             ),
+        )
+
+    async def recording_start(
+        self,
+        box_id: str,
+        *,
+        duration: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """Start recording the box screen.
+
+        Only one recording can be active at a time. If a
+        recording is already in progress, starting a new recording will stop the
+        previous one and keep only the latest recording.
+
+        Args:
+          duration: Duration of the recording. Default is 30m, max is 30m. The recording will
+              automatically stop when the duration time is reached.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Maximum allowed: 30m
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._post(
+            f"/boxes/{box_id}/actions/recording/start",
+            body=await async_maybe_transform(
+                {"duration": duration}, action_recording_start_params.ActionRecordingStartParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    async def recording_stop(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionRecordingStopResponse:
+        """
+        Stop recording the box screen
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return await self._post(
+            f"/boxes/{box_id}/actions/recording/stop",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionRecordingStopResponse,
         )
 
     async def screen_layout(
@@ -2551,7 +2991,7 @@ class AsyncActionsResource(AsyncAPIResource):
         box_id: str,
         *,
         direction: Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"],
-        distance: float | NotGiven = NOT_GIVEN,
+        distance: Union[float, Literal["tiny", "short", "medium", "long"]] | NotGiven = NOT_GIVEN,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
@@ -2571,7 +3011,8 @@ class AsyncActionsResource(AsyncAPIResource):
           direction: Direction to swipe. The gesture will be performed from the center of the screen
               towards this direction.
 
-          distance: Distance of the swipe in pixels. If not provided, the swipe will be performed
+          distance: Distance of the swipe. Can be either a number (in pixels) or a predefined enum
+              value (tiny, short, medium, long). If not provided, the swipe will be performed
               from the center of the screen to the screen edge
 
           duration: Duration of the swipe
@@ -2688,7 +3129,7 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         direction: Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"]
         | NotGiven = NOT_GIVEN,
-        distance: float | NotGiven = NOT_GIVEN,
+        distance: Union[float, Literal["tiny", "short", "medium", "long"]] | NotGiven = NOT_GIVEN,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
@@ -2729,6 +3170,88 @@ class AsyncActionsResource(AsyncAPIResource):
                 cast_to=cast(
                     Any, ActionSwipeResponse
                 ),  # Union types cannot be passed in as arguments in the type system
+            ),
+        )
+
+    async def tap(
+        self,
+        box_id: str,
+        *,
+        x: float,
+        y: float,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionTapResponse:
+        """
+        Tap action for Android devices using ADB input tap command
+
+        Args:
+          x: X coordinate of the tap
+
+          y: Y coordinate of the tap
+
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
+          output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return cast(
+            ActionTapResponse,
+            await self._post(
+                f"/boxes/{box_id}/actions/tap",
+                body=await async_maybe_transform(
+                    {
+                        "x": x,
+                        "y": y,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
+                        "screenshot_delay": screenshot_delay,
+                    },
+                    action_tap_params.ActionTapParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(Any, ActionTapResponse),  # Union types cannot be passed in as arguments in the type system
             ),
         )
 
@@ -2821,6 +3344,7 @@ class AsyncActionsResource(AsyncAPIResource):
         mode: Literal["append", "replace"] | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
+        press_enter: bool | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -2849,6 +3373,8 @@ class AsyncActionsResource(AsyncAPIResource):
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+          press_enter: Whether to press Enter after typing the text
 
           screenshot_delay: Delay after performing the action, before taking the final screenshot.
 
@@ -2886,6 +3412,7 @@ class AsyncActionsResource(AsyncAPIResource):
                         "mode": mode,
                         "output_format": output_format,
                         "presigned_expires_in": presigned_expires_in,
+                        "press_enter": press_enter,
                         "screenshot_delay": screenshot_delay,
                     },
                     action_type_params.ActionTypeParams,
@@ -2916,6 +3443,9 @@ class ActionsResourceWithRawResponse:
         self.extract = to_raw_response_wrapper(
             actions.extract,
         )
+        self.long_press = to_raw_response_wrapper(
+            actions.long_press,
+        )
         self.move = to_raw_response_wrapper(
             actions.move,
         )
@@ -2924,6 +3454,12 @@ class ActionsResourceWithRawResponse:
         )
         self.press_key = to_raw_response_wrapper(
             actions.press_key,
+        )
+        self.recording_start = to_raw_response_wrapper(
+            actions.recording_start,
+        )
+        self.recording_stop = to_raw_response_wrapper(
+            actions.recording_stop,
         )
         self.screen_layout = to_raw_response_wrapper(
             actions.screen_layout,
@@ -2939,6 +3475,9 @@ class ActionsResourceWithRawResponse:
         )
         self.swipe = to_raw_response_wrapper(
             actions.swipe,
+        )
+        self.tap = to_raw_response_wrapper(
+            actions.tap,
         )
         self.touch = to_raw_response_wrapper(
             actions.touch,
@@ -2964,6 +3503,9 @@ class AsyncActionsResourceWithRawResponse:
         self.extract = async_to_raw_response_wrapper(
             actions.extract,
         )
+        self.long_press = async_to_raw_response_wrapper(
+            actions.long_press,
+        )
         self.move = async_to_raw_response_wrapper(
             actions.move,
         )
@@ -2972,6 +3514,12 @@ class AsyncActionsResourceWithRawResponse:
         )
         self.press_key = async_to_raw_response_wrapper(
             actions.press_key,
+        )
+        self.recording_start = async_to_raw_response_wrapper(
+            actions.recording_start,
+        )
+        self.recording_stop = async_to_raw_response_wrapper(
+            actions.recording_stop,
         )
         self.screen_layout = async_to_raw_response_wrapper(
             actions.screen_layout,
@@ -2987,6 +3535,9 @@ class AsyncActionsResourceWithRawResponse:
         )
         self.swipe = async_to_raw_response_wrapper(
             actions.swipe,
+        )
+        self.tap = async_to_raw_response_wrapper(
+            actions.tap,
         )
         self.touch = async_to_raw_response_wrapper(
             actions.touch,
@@ -3012,6 +3563,9 @@ class ActionsResourceWithStreamingResponse:
         self.extract = to_streamed_response_wrapper(
             actions.extract,
         )
+        self.long_press = to_streamed_response_wrapper(
+            actions.long_press,
+        )
         self.move = to_streamed_response_wrapper(
             actions.move,
         )
@@ -3020,6 +3574,12 @@ class ActionsResourceWithStreamingResponse:
         )
         self.press_key = to_streamed_response_wrapper(
             actions.press_key,
+        )
+        self.recording_start = to_streamed_response_wrapper(
+            actions.recording_start,
+        )
+        self.recording_stop = to_streamed_response_wrapper(
+            actions.recording_stop,
         )
         self.screen_layout = to_streamed_response_wrapper(
             actions.screen_layout,
@@ -3035,6 +3595,9 @@ class ActionsResourceWithStreamingResponse:
         )
         self.swipe = to_streamed_response_wrapper(
             actions.swipe,
+        )
+        self.tap = to_streamed_response_wrapper(
+            actions.tap,
         )
         self.touch = to_streamed_response_wrapper(
             actions.touch,
@@ -3060,6 +3623,9 @@ class AsyncActionsResourceWithStreamingResponse:
         self.extract = async_to_streamed_response_wrapper(
             actions.extract,
         )
+        self.long_press = async_to_streamed_response_wrapper(
+            actions.long_press,
+        )
         self.move = async_to_streamed_response_wrapper(
             actions.move,
         )
@@ -3068,6 +3634,12 @@ class AsyncActionsResourceWithStreamingResponse:
         )
         self.press_key = async_to_streamed_response_wrapper(
             actions.press_key,
+        )
+        self.recording_start = async_to_streamed_response_wrapper(
+            actions.recording_start,
+        )
+        self.recording_stop = async_to_streamed_response_wrapper(
+            actions.recording_stop,
         )
         self.screen_layout = async_to_streamed_response_wrapper(
             actions.screen_layout,
@@ -3083,6 +3655,9 @@ class AsyncActionsResourceWithStreamingResponse:
         )
         self.swipe = async_to_streamed_response_wrapper(
             actions.swipe,
+        )
+        self.tap = async_to_streamed_response_wrapper(
+            actions.tap,
         )
         self.touch = async_to_streamed_response_wrapper(
             actions.touch,

@@ -25,7 +25,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestFs:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.list(
@@ -34,7 +34,7 @@ class TestFs:
         )
         assert_matches_type(FListResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.list(
@@ -45,7 +45,7 @@ class TestFs:
         )
         assert_matches_type(FListResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: GboxClient) -> None:
         response = client.v1.boxes.fs.with_raw_response.list(
@@ -58,7 +58,7 @@ class TestFs:
         f = response.parse()
         assert_matches_type(FListResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: GboxClient) -> None:
         with client.v1.boxes.fs.with_streaming_response.list(
@@ -73,7 +73,7 @@ class TestFs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_list(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -82,7 +82,7 @@ class TestFs:
                 path="/home/user/documents",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_exists(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.exists(
@@ -91,7 +91,7 @@ class TestFs:
         )
         assert_matches_type(FExistsResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_exists_with_all_params(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.exists(
@@ -101,7 +101,7 @@ class TestFs:
         )
         assert_matches_type(FExistsResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_exists(self, client: GboxClient) -> None:
         response = client.v1.boxes.fs.with_raw_response.exists(
@@ -114,7 +114,7 @@ class TestFs:
         f = response.parse()
         assert_matches_type(FExistsResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_exists(self, client: GboxClient) -> None:
         with client.v1.boxes.fs.with_streaming_response.exists(
@@ -129,7 +129,7 @@ class TestFs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_exists(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -138,7 +138,7 @@ class TestFs:
                 path="/home/user/documents/output.txt",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_info(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.info(
@@ -147,7 +147,7 @@ class TestFs:
         )
         assert_matches_type(FInfoResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_info_with_all_params(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.info(
@@ -157,7 +157,7 @@ class TestFs:
         )
         assert_matches_type(FInfoResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_info(self, client: GboxClient) -> None:
         response = client.v1.boxes.fs.with_raw_response.info(
@@ -170,7 +170,7 @@ class TestFs:
         f = response.parse()
         assert_matches_type(FInfoResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_info(self, client: GboxClient) -> None:
         with client.v1.boxes.fs.with_streaming_response.info(
@@ -185,7 +185,7 @@ class TestFs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_info(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -194,7 +194,7 @@ class TestFs:
                 path="/home/user/documents/output.txt",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_read(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.read(
@@ -203,7 +203,7 @@ class TestFs:
         )
         assert_matches_type(FReadResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_read_with_all_params(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.read(
@@ -213,7 +213,7 @@ class TestFs:
         )
         assert_matches_type(FReadResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_read(self, client: GboxClient) -> None:
         response = client.v1.boxes.fs.with_raw_response.read(
@@ -226,7 +226,7 @@ class TestFs:
         f = response.parse()
         assert_matches_type(FReadResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_read(self, client: GboxClient) -> None:
         with client.v1.boxes.fs.with_streaming_response.read(
@@ -241,7 +241,7 @@ class TestFs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_read(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -250,7 +250,7 @@ class TestFs:
                 path="/home/user/documents/config.json",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_remove(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.remove(
@@ -259,7 +259,7 @@ class TestFs:
         )
         assert_matches_type(FRemoveResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_remove_with_all_params(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.remove(
@@ -269,7 +269,7 @@ class TestFs:
         )
         assert_matches_type(FRemoveResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_remove(self, client: GboxClient) -> None:
         response = client.v1.boxes.fs.with_raw_response.remove(
@@ -282,7 +282,7 @@ class TestFs:
         f = response.parse()
         assert_matches_type(FRemoveResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_remove(self, client: GboxClient) -> None:
         with client.v1.boxes.fs.with_streaming_response.remove(
@@ -297,7 +297,7 @@ class TestFs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_remove(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -306,7 +306,7 @@ class TestFs:
                 path="/home/user/documents/output.txt",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_rename(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.rename(
@@ -316,7 +316,7 @@ class TestFs:
         )
         assert_matches_type(FRenameResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_rename_with_all_params(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.rename(
@@ -327,7 +327,7 @@ class TestFs:
         )
         assert_matches_type(FRenameResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_rename(self, client: GboxClient) -> None:
         response = client.v1.boxes.fs.with_raw_response.rename(
@@ -341,7 +341,7 @@ class TestFs:
         f = response.parse()
         assert_matches_type(FRenameResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_rename(self, client: GboxClient) -> None:
         with client.v1.boxes.fs.with_streaming_response.rename(
@@ -357,7 +357,7 @@ class TestFs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_rename(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -367,7 +367,7 @@ class TestFs:
                 old_path="/home/user/documents/output.txt",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_write_overload_1(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.write(
@@ -377,7 +377,7 @@ class TestFs:
         )
         assert_matches_type(FWriteResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_write_with_all_params_overload_1(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.write(
@@ -388,7 +388,7 @@ class TestFs:
         )
         assert_matches_type(FWriteResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_write_overload_1(self, client: GboxClient) -> None:
         response = client.v1.boxes.fs.with_raw_response.write(
@@ -402,7 +402,7 @@ class TestFs:
         f = response.parse()
         assert_matches_type(FWriteResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_write_overload_1(self, client: GboxClient) -> None:
         with client.v1.boxes.fs.with_streaming_response.write(
@@ -418,7 +418,7 @@ class TestFs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_write_overload_1(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -428,7 +428,7 @@ class TestFs:
                 path="/home/user/documents/output.txt",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_write_overload_2(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.write(
@@ -438,7 +438,7 @@ class TestFs:
         )
         assert_matches_type(FWriteResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_write_with_all_params_overload_2(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.write(
@@ -449,7 +449,7 @@ class TestFs:
         )
         assert_matches_type(FWriteResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_write_overload_2(self, client: GboxClient) -> None:
         response = client.v1.boxes.fs.with_raw_response.write(
@@ -463,7 +463,7 @@ class TestFs:
         f = response.parse()
         assert_matches_type(FWriteResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_write_overload_2(self, client: GboxClient) -> None:
         with client.v1.boxes.fs.with_streaming_response.write(
@@ -479,7 +479,7 @@ class TestFs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_write_overload_2(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -495,7 +495,7 @@ class TestAsyncFs:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.list(
@@ -504,7 +504,7 @@ class TestAsyncFs:
         )
         assert_matches_type(FListResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.list(
@@ -515,7 +515,7 @@ class TestAsyncFs:
         )
         assert_matches_type(FListResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.fs.with_raw_response.list(
@@ -528,7 +528,7 @@ class TestAsyncFs:
         f = await response.parse()
         assert_matches_type(FListResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.fs.with_streaming_response.list(
@@ -543,7 +543,7 @@ class TestAsyncFs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_list(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -552,7 +552,7 @@ class TestAsyncFs:
                 path="/home/user/documents",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_exists(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.exists(
@@ -561,7 +561,7 @@ class TestAsyncFs:
         )
         assert_matches_type(FExistsResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_exists_with_all_params(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.exists(
@@ -571,7 +571,7 @@ class TestAsyncFs:
         )
         assert_matches_type(FExistsResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_exists(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.fs.with_raw_response.exists(
@@ -584,7 +584,7 @@ class TestAsyncFs:
         f = await response.parse()
         assert_matches_type(FExistsResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_exists(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.fs.with_streaming_response.exists(
@@ -599,7 +599,7 @@ class TestAsyncFs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_exists(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -608,7 +608,7 @@ class TestAsyncFs:
                 path="/home/user/documents/output.txt",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_info(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.info(
@@ -617,7 +617,7 @@ class TestAsyncFs:
         )
         assert_matches_type(FInfoResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_info_with_all_params(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.info(
@@ -627,7 +627,7 @@ class TestAsyncFs:
         )
         assert_matches_type(FInfoResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_info(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.fs.with_raw_response.info(
@@ -640,7 +640,7 @@ class TestAsyncFs:
         f = await response.parse()
         assert_matches_type(FInfoResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_info(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.fs.with_streaming_response.info(
@@ -655,7 +655,7 @@ class TestAsyncFs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_info(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -664,7 +664,7 @@ class TestAsyncFs:
                 path="/home/user/documents/output.txt",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_read(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.read(
@@ -673,7 +673,7 @@ class TestAsyncFs:
         )
         assert_matches_type(FReadResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_read_with_all_params(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.read(
@@ -683,7 +683,7 @@ class TestAsyncFs:
         )
         assert_matches_type(FReadResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_read(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.fs.with_raw_response.read(
@@ -696,7 +696,7 @@ class TestAsyncFs:
         f = await response.parse()
         assert_matches_type(FReadResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_read(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.fs.with_streaming_response.read(
@@ -711,7 +711,7 @@ class TestAsyncFs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_read(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -720,7 +720,7 @@ class TestAsyncFs:
                 path="/home/user/documents/config.json",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_remove(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.remove(
@@ -729,7 +729,7 @@ class TestAsyncFs:
         )
         assert_matches_type(FRemoveResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_remove_with_all_params(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.remove(
@@ -739,7 +739,7 @@ class TestAsyncFs:
         )
         assert_matches_type(FRemoveResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_remove(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.fs.with_raw_response.remove(
@@ -752,7 +752,7 @@ class TestAsyncFs:
         f = await response.parse()
         assert_matches_type(FRemoveResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_remove(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.fs.with_streaming_response.remove(
@@ -767,7 +767,7 @@ class TestAsyncFs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_remove(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -776,7 +776,7 @@ class TestAsyncFs:
                 path="/home/user/documents/output.txt",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_rename(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.rename(
@@ -786,7 +786,7 @@ class TestAsyncFs:
         )
         assert_matches_type(FRenameResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_rename_with_all_params(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.rename(
@@ -797,7 +797,7 @@ class TestAsyncFs:
         )
         assert_matches_type(FRenameResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_rename(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.fs.with_raw_response.rename(
@@ -811,7 +811,7 @@ class TestAsyncFs:
         f = await response.parse()
         assert_matches_type(FRenameResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_rename(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.fs.with_streaming_response.rename(
@@ -827,7 +827,7 @@ class TestAsyncFs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_rename(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -837,7 +837,7 @@ class TestAsyncFs:
                 old_path="/home/user/documents/output.txt",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_write_overload_1(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.write(
@@ -847,7 +847,7 @@ class TestAsyncFs:
         )
         assert_matches_type(FWriteResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_write_with_all_params_overload_1(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.write(
@@ -858,7 +858,7 @@ class TestAsyncFs:
         )
         assert_matches_type(FWriteResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_write_overload_1(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.fs.with_raw_response.write(
@@ -872,7 +872,7 @@ class TestAsyncFs:
         f = await response.parse()
         assert_matches_type(FWriteResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_write_overload_1(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.fs.with_streaming_response.write(
@@ -888,7 +888,7 @@ class TestAsyncFs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_write_overload_1(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -898,7 +898,7 @@ class TestAsyncFs:
                 path="/home/user/documents/output.txt",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_write_overload_2(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.write(
@@ -908,7 +908,7 @@ class TestAsyncFs:
         )
         assert_matches_type(FWriteResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_write_with_all_params_overload_2(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.write(
@@ -919,7 +919,7 @@ class TestAsyncFs:
         )
         assert_matches_type(FWriteResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_write_overload_2(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.fs.with_raw_response.write(
@@ -933,7 +933,7 @@ class TestAsyncFs:
         f = await response.parse()
         assert_matches_type(FWriteResponse, f, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_write_overload_2(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.fs.with_streaming_response.write(
@@ -949,7 +949,7 @@ class TestAsyncFs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_write_overload_2(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):

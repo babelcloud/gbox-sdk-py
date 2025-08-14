@@ -15,3 +15,5 @@ codegen.log
 Brewfile.lock.json
 
 docs/_build/
+
+.flake8

@@ -85,17 +85,11 @@ class AndroidPkgManager:
             if not os.path.exists(apk):
                 raise FileNotFoundError(f"File {apk} does not exist")
             with _open(apk, "rb") as apk_file:
-                return self.client.v1.boxes.android.install(
-                    box_id=self.box.id, apk=apk_file, open=open
-                )
+                return self.client.v1.boxes.android.install(box_id=self.box.id, apk=apk_file, open=open)
         elif isinstance(apk, str) and apk.startswith("http"):
-            return self.client.v1.boxes.android.install(
-                box_id=self.box.id, apk=apk, open=open
-            )
+            return self.client.v1.boxes.android.install(box_id=self.box.id, apk=apk, open=open)
 
-        return self.client.v1.boxes.android.install(
-            box_id=self.box.id, apk=apk, open=open
-        )
+        return self.client.v1.boxes.android.install(box_id=self.box.id, apk=apk, open=open)
 
     def uninstall(self, package_name: str, *, keep_data: Union[bool, NotGiven] = NOT_GIVEN) -> None:
         """

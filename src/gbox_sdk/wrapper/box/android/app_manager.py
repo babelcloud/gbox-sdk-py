@@ -101,30 +101,22 @@ class AndroidAppManager:
                 if not os.path.exists(file_path):
                     raise FileNotFoundError(f"File {file_path} does not exist")
                 with _open(file_path, "rb") as apk_file:
-                    res = self.client.v1.boxes.android.install(
-                        box_id=self.box.id, apk=apk_file, open=open
-                    )
+                    res = self.client.v1.boxes.android.install(box_id=self.box.id, apk=apk_file, open=open)
                     return self._install_res_to_operator(res)
             elif apk.startswith("http"):
                 # Handle http/https URLs
-                res = self.client.v1.boxes.android.install(
-                    box_id=self.box.id, apk=apk, open=open
-                )
+                res = self.client.v1.boxes.android.install(box_id=self.box.id, apk=apk, open=open)
                 return self._install_res_to_operator(res)
             else:
                 # Handle local file paths
                 if not os.path.exists(apk):
                     raise FileNotFoundError(f"File {apk} does not exist")
                 with _open(apk, "rb") as apk_file:
-                    res = self.client.v1.boxes.android.install(
-                        box_id=self.box.id, apk=apk_file, open=open
-                    )
+                    res = self.client.v1.boxes.android.install(box_id=self.box.id, apk=apk_file, open=open)
                     return self._install_res_to_operator(res)
 
         # Handle file objects or other types
-        res = self.client.v1.boxes.android.install(
-            box_id=self.box.id, apk=apk, open=open
-        )
+        res = self.client.v1.boxes.android.install(box_id=self.box.id, apk=apk, open=open)
         return self._install_res_to_operator(res)
 
     def uninstall(self, package_name: str, *, keep_data: Union[bool, NotGiven] = NOT_GIVEN) -> None:

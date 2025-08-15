@@ -127,8 +127,8 @@ class BaseBox:
     def command(
         self,
         commands: Union[List[str], str],
-        onStdout: Optional[Callable[[str], None]] = None,
-        onStderr: Optional[Callable[[str], None]] = None,
+        on_stdout: Optional[Callable[[str], None]] = None,
+        on_stderr: Optional[Callable[[str], None]] = None,
         envs: Union[Dict[str, str], NotGiven] = NOT_GIVEN,
         api_timeout: Union[str, NotGiven] = NOT_GIVEN,
         working_dir: Union[str, NotGiven] = NOT_GIVEN,
@@ -150,18 +150,18 @@ class BaseBox:
             working_dir: The working directory of the command. It not provided, the command will be run
                 in the `box.config.workingDir` directory.
 
-            onStdout: Callback for stdout.
+            on_stdout: Callback for stdout.
 
-            onStderr: Callback for stderr.
+            on_stderr: Callback for stderr.
 
         Returns:
             Union[BoxExecuteCommandsResponse, WebSocketResult]: The response containing the command execution result.
 
         Example:
-            >>> box.command(commands=["ls", "-l"], onStdout=lambda x: print(x), onStderr=lambda x: print(x))
+            >>> box.command(commands=["ls", "-l"], on_stdout=lambda x: print(x), on_stderr=lambda x: print(x))
         """
-        if onStdout is not None or onStderr is not None:
-            return self._command_via_websocket(commands, onStdout, onStderr, envs, api_timeout, working_dir)
+        if on_stdout is not None or on_stderr is not None:
+            return self._command_via_websocket(commands, on_stdout, on_stderr, envs, api_timeout, working_dir)
 
         return self.client.v1.boxes.execute_commands(
             box_id=self.data.id,
@@ -174,8 +174,8 @@ class BaseBox:
     def _command_via_websocket(
         self,
         commands: Union[List[str], str],
-        onStdout: Optional[Callable[[str], None]] = None,
-        onStderr: Optional[Callable[[str], None]] = None,
+        on_stdout: Optional[Callable[[str], None]] = None,
+        on_stderr: Optional[Callable[[str], None]] = None,
         envs: Union[Dict[str, str], NotGiven] = NOT_GIVEN,
         api_timeout: Union[str, NotGiven] = NOT_GIVEN,
         working_dir: Union[str, NotGiven] = NOT_GIVEN,
@@ -198,8 +198,8 @@ class BaseBox:
                 return asyncio.run_coroutine_threadsafe(
                     websocket_client.execute_command(
                         commands=commands,
-                        on_stdout=onStdout,
-                        on_stderr=onStderr,
+                        on_stdout=on_stdout,
+                        on_stderr=on_stderr,
                         envs=envs,
                         api_timeout=api_timeout,
                         working_dir=working_dir,
@@ -210,8 +210,8 @@ class BaseBox:
                 return asyncio.run(
                     websocket_client.execute_command(
                         commands=commands,
-                        on_stdout=onStdout,
-                        on_stderr=onStderr,
+                        on_stdout=on_stdout,
+                        on_stderr=on_stderr,
                         envs=envs,
                         api_timeout=api_timeout,
                         working_dir=working_dir,
@@ -229,8 +229,8 @@ class BaseBox:
         language: Union[Literal["bash", "python", "typescript"], NotGiven] = NOT_GIVEN,
         api_timeout: Union[str, NotGiven] = NOT_GIVEN,
         working_dir: Union[str, NotGiven] = NOT_GIVEN,
-        onStdout: Optional[Callable[[str], None]] = None,
-        onStderr: Optional[Callable[[str], None]] = None,
+        on_stdout: Optional[Callable[[str], None]] = None,
+        on_stderr: Optional[Callable[[str], None]] = None,
     ) -> Union["BoxRunCodeResponse", "WebSocketResult"]:
         """
         Run code in the box.
@@ -254,9 +254,9 @@ class BaseBox:
             working_dir: The working directory of the code. It not provided, the code will be run in the
                 `box.config.workingDir` directory.
 
-            onStdout: Callback for stdout.
+            on_stdout: Callback for stdout.
 
-            onStderr: Callback for stderr.
+            on_stderr: Callback for stderr.
         Returns:
             Union[BoxRunCodeResponse, WebSocketResult]: The response containing the code execution result.
 
@@ -264,12 +264,12 @@ class BaseBox:
             >>> box.run_code(
             ...     code="print('Hello, World!')",
             ...     language="python",
-            ...     onStdout=lambda x: print(x),
-            ...     onStderr=lambda x: print(x),
+            ...     on_stdout=lambda x: print(x),
+            ...     on_stderr=lambda x: print(x),
             ... )
         """
 
-        if onStdout is not None or onStderr is not None:
+        if on_stdout is not None or on_stderr is not None:
             return self._run_code_via_websocket(
                 code=code,
                 argv=argv,
@@ -277,8 +277,8 @@ class BaseBox:
                 language=language,
                 api_timeout=api_timeout,
                 working_dir=working_dir,
-                onStdout=onStdout,
-                onStderr=onStderr,
+                on_stdout=on_stdout,
+                on_stderr=on_stderr,
             )
 
         return self.client.v1.boxes.run_code(
@@ -299,8 +299,8 @@ class BaseBox:
         language: Union[Literal["bash", "python", "typescript"], NotGiven] = NOT_GIVEN,
         api_timeout: Union[str, NotGiven] = NOT_GIVEN,
         working_dir: Union[str, NotGiven] = NOT_GIVEN,
-        onStdout: Optional[Callable[[str], None]] = None,
-        onStderr: Optional[Callable[[str], None]] = None,
+        on_stdout: Optional[Callable[[str], None]] = None,
+        on_stderr: Optional[Callable[[str], None]] = None,
     ) -> "WebSocketResult":
         """
         Run code via WebSocket with streaming output.
@@ -320,8 +320,8 @@ class BaseBox:
                 return asyncio.run_coroutine_threadsafe(
                     websocket_client.run_code(
                         code=code,
-                        on_stdout=onStdout,
-                        on_stderr=onStderr,
+                        on_stdout=on_stdout,
+                        on_stderr=on_stderr,
                         argv=argv,
                         envs=envs,
                         language=language,
@@ -334,8 +334,8 @@ class BaseBox:
                 return asyncio.run(
                     websocket_client.run_code(
                         code=code,
-                        on_stdout=onStdout,
-                        on_stderr=onStderr,
+                        on_stdout=on_stdout,
+                        on_stderr=on_stderr,
                         argv=argv,
                         envs=envs,
                         language=language,

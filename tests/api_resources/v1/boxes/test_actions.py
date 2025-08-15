@@ -943,29 +943,41 @@ class TestActions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_scroll(self, client: GboxClient) -> None:
+    def test_method_scroll_overload_1(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.scroll(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            body={
-                "x": 100,
-                "y": 100,
-                "scrollX": 0,
-                "scrollY": 100,
-            },
+            scroll_x=0,
+            scroll_y=-100,
+            x=400,
+            y=300,
         )
         assert_matches_type(ActionScrollResponse, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_scroll(self, client: GboxClient) -> None:
+    def test_method_scroll_with_all_params_overload_1(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.scroll(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            scroll_x=0,
+            scroll_y=-100,
+            x=400,
+            y=300,
+            include_screenshot=False,
+            output_format="base64",
+            presigned_expires_in="30m",
+            screenshot_delay="500ms",
+        )
+        assert_matches_type(ActionScrollResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_scroll_overload_1(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.scroll(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            body={
-                "x": 100,
-                "y": 100,
-                "scrollX": 0,
-                "scrollY": 100,
-            },
+            scroll_x=0,
+            scroll_y=-100,
+            x=400,
+            y=300,
         )
 
         assert response.is_closed is True
@@ -975,15 +987,13 @@ class TestActions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_scroll(self, client: GboxClient) -> None:
+    def test_streaming_response_scroll_overload_1(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.scroll(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            body={
-                "x": 100,
-                "y": 100,
-                "scrollX": 0,
-                "scrollY": 100,
-            },
+            scroll_x=0,
+            scroll_y=-100,
+            x=400,
+            y=300,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -995,16 +1005,75 @@ class TestActions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_scroll(self, client: GboxClient) -> None:
+    def test_path_params_scroll_overload_1(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.actions.with_raw_response.scroll(
                 box_id="",
-                body={
-                    "x": 100,
-                    "y": 100,
-                    "scrollX": 0,
-                    "scrollY": 100,
-                },
+                scroll_x=0,
+                scroll_y=-100,
+                x=400,
+                y=300,
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_scroll_overload_2(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.scroll(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            direction="up",
+        )
+        assert_matches_type(ActionScrollResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_scroll_with_all_params_overload_2(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.scroll(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            direction="up",
+            distance=300,
+            duration="500ms",
+            include_screenshot=False,
+            output_format="base64",
+            presigned_expires_in="30m",
+            screenshot_delay="500ms",
+        )
+        assert_matches_type(ActionScrollResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_scroll_overload_2(self, client: GboxClient) -> None:
+        response = client.v1.boxes.actions.with_raw_response.scroll(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            direction="up",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = response.parse()
+        assert_matches_type(ActionScrollResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_scroll_overload_2(self, client: GboxClient) -> None:
+        with client.v1.boxes.actions.with_streaming_response.scroll(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            direction="up",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = response.parse()
+            assert_matches_type(ActionScrollResponse, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_path_params_scroll_overload_2(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            client.v1.boxes.actions.with_raw_response.scroll(
+                box_id="",
+                direction="up",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -2304,29 +2373,41 @@ class TestAsyncActions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_scroll(self, async_client: AsyncGboxClient) -> None:
+    async def test_method_scroll_overload_1(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.scroll(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            body={
-                "x": 100,
-                "y": 100,
-                "scrollX": 0,
-                "scrollY": 100,
-            },
+            scroll_x=0,
+            scroll_y=-100,
+            x=400,
+            y=300,
         )
         assert_matches_type(ActionScrollResponse, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_scroll(self, async_client: AsyncGboxClient) -> None:
+    async def test_method_scroll_with_all_params_overload_1(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.scroll(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            scroll_x=0,
+            scroll_y=-100,
+            x=400,
+            y=300,
+            include_screenshot=False,
+            output_format="base64",
+            presigned_expires_in="30m",
+            screenshot_delay="500ms",
+        )
+        assert_matches_type(ActionScrollResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_scroll_overload_1(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.scroll(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            body={
-                "x": 100,
-                "y": 100,
-                "scrollX": 0,
-                "scrollY": 100,
-            },
+            scroll_x=0,
+            scroll_y=-100,
+            x=400,
+            y=300,
         )
 
         assert response.is_closed is True
@@ -2336,15 +2417,13 @@ class TestAsyncActions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_scroll(self, async_client: AsyncGboxClient) -> None:
+    async def test_streaming_response_scroll_overload_1(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.scroll(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            body={
-                "x": 100,
-                "y": 100,
-                "scrollX": 0,
-                "scrollY": 100,
-            },
+            scroll_x=0,
+            scroll_y=-100,
+            x=400,
+            y=300,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -2356,16 +2435,75 @@ class TestAsyncActions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_scroll(self, async_client: AsyncGboxClient) -> None:
+    async def test_path_params_scroll_overload_1(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.scroll(
                 box_id="",
-                body={
-                    "x": 100,
-                    "y": 100,
-                    "scrollX": 0,
-                    "scrollY": 100,
-                },
+                scroll_x=0,
+                scroll_y=-100,
+                x=400,
+                y=300,
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_scroll_overload_2(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.scroll(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            direction="up",
+        )
+        assert_matches_type(ActionScrollResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_scroll_with_all_params_overload_2(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.scroll(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            direction="up",
+            distance=300,
+            duration="500ms",
+            include_screenshot=False,
+            output_format="base64",
+            presigned_expires_in="30m",
+            screenshot_delay="500ms",
+        )
+        assert_matches_type(ActionScrollResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_scroll_overload_2(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.actions.with_raw_response.scroll(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            direction="up",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = await response.parse()
+        assert_matches_type(ActionScrollResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_scroll_overload_2(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.actions.with_streaming_response.scroll(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            direction="up",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = await response.parse()
+            assert_matches_type(ActionScrollResponse, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_path_params_scroll_overload_2(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            await async_client.v1.boxes.actions.with_raw_response.scroll(
+                box_id="",
+                direction="up",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")

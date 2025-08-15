@@ -1207,11 +1207,19 @@ class ActionsResource(SyncAPIResource):
             cast_to=ActionScreenshotResponse,
         )
 
+    @overload
     def scroll(
         self,
         box_id: str,
         *,
-        body: object,
+        scroll_x: float,
+        scroll_y: float,
+        x: float,
+        y: float,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1225,6 +1233,42 @@ class ActionsResource(SyncAPIResource):
         simple scroll with direction.
 
         Args:
+          scroll_x: Horizontal scroll amount. Positive values scroll content rightward (reveals
+              content on the left), negative values scroll content leftward (reveals content
+              on the right).
+
+          scroll_y: Vertical scroll amount. Positive values scroll content downward (reveals content
+              above), negative values scroll content upward (reveals content below).
+
+          x: X coordinate of the scroll position
+
+          y: Y coordinate of the scroll position
+
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
+          output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -1233,13 +1277,128 @@ class ActionsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        ...
+
+    @overload
+    def scroll(
+        self,
+        box_id: str,
+        *,
+        direction: Literal["up", "down", "left", "right"],
+        distance: Union[float, Literal["tiny", "short", "medium", "long"]] | NotGiven = NOT_GIVEN,
+        duration: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionScrollResponse:
+        """Performs a scroll action.
+
+        Supports both advanced scroll with coordinates and
+        simple scroll with direction.
+
+        Args:
+          direction: Direction to scroll. The scroll will be performed from the center of the screen
+              towards this direction. 'up' scrolls content upward (reveals content below),
+              'down' scrolls content downward (reveals content above), 'left' scrolls content
+              leftward (reveals content on the right), 'right' scrolls content rightward
+              (reveals content on the left).
+
+          distance: Distance of the scroll. Can be either a number (in pixels) or a predefined enum
+              value (tiny, short, medium, long). If not provided, the scroll will be performed
+              from the center of the screen to the screen edge
+
+          duration: Duration of the scroll
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
+          output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @required_args(["scroll_x", "scroll_y", "x", "y"], ["direction"])
+    def scroll(
+        self,
+        box_id: str,
+        *,
+        scroll_x: float | NotGiven = NOT_GIVEN,
+        scroll_y: float | NotGiven = NOT_GIVEN,
+        x: float | NotGiven = NOT_GIVEN,
+        y: float | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        direction: Literal["up", "down", "left", "right"] | NotGiven = NOT_GIVEN,
+        distance: Union[float, Literal["tiny", "short", "medium", "long"]] | NotGiven = NOT_GIVEN,
+        duration: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionScrollResponse:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return cast(
             ActionScrollResponse,
             self._post(
                 f"/boxes/{box_id}/actions/scroll",
-                body=maybe_transform(body, action_scroll_params.ActionScrollParams),
+                body=maybe_transform(
+                    {
+                        "scroll_x": scroll_x,
+                        "scroll_y": scroll_y,
+                        "x": x,
+                        "y": y,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
+                        "screenshot_delay": screenshot_delay,
+                        "direction": direction,
+                        "distance": distance,
+                        "duration": duration,
+                    },
+                    action_scroll_params.ActionScrollParams,
+                ),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
@@ -2843,11 +3002,19 @@ class AsyncActionsResource(AsyncAPIResource):
             cast_to=ActionScreenshotResponse,
         )
 
+    @overload
     async def scroll(
         self,
         box_id: str,
         *,
-        body: object,
+        scroll_x: float,
+        scroll_y: float,
+        x: float,
+        y: float,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2861,6 +3028,42 @@ class AsyncActionsResource(AsyncAPIResource):
         simple scroll with direction.
 
         Args:
+          scroll_x: Horizontal scroll amount. Positive values scroll content rightward (reveals
+              content on the left), negative values scroll content leftward (reveals content
+              on the right).
+
+          scroll_y: Vertical scroll amount. Positive values scroll content downward (reveals content
+              above), negative values scroll content upward (reveals content below).
+
+          x: X coordinate of the scroll position
+
+          y: Y coordinate of the scroll position
+
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
+          output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -2869,13 +3072,128 @@ class AsyncActionsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        ...
+
+    @overload
+    async def scroll(
+        self,
+        box_id: str,
+        *,
+        direction: Literal["up", "down", "left", "right"],
+        distance: Union[float, Literal["tiny", "short", "medium", "long"]] | NotGiven = NOT_GIVEN,
+        duration: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionScrollResponse:
+        """Performs a scroll action.
+
+        Supports both advanced scroll with coordinates and
+        simple scroll with direction.
+
+        Args:
+          direction: Direction to scroll. The scroll will be performed from the center of the screen
+              towards this direction. 'up' scrolls content upward (reveals content below),
+              'down' scrolls content downward (reveals content above), 'left' scrolls content
+              leftward (reveals content on the right), 'right' scrolls content rightward
+              (reveals content on the left).
+
+          distance: Distance of the scroll. Can be either a number (in pixels) or a predefined enum
+              value (tiny, short, medium, long). If not provided, the scroll will be performed
+              from the center of the screen to the screen edge
+
+          duration: Duration of the scroll
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
+
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
+          output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @required_args(["scroll_x", "scroll_y", "x", "y"], ["direction"])
+    async def scroll(
+        self,
+        box_id: str,
+        *,
+        scroll_x: float | NotGiven = NOT_GIVEN,
+        scroll_y: float | NotGiven = NOT_GIVEN,
+        x: float | NotGiven = NOT_GIVEN,
+        y: float | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | NotGiven = NOT_GIVEN,
+        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
+        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        direction: Literal["up", "down", "left", "right"] | NotGiven = NOT_GIVEN,
+        distance: Union[float, Literal["tiny", "short", "medium", "long"]] | NotGiven = NOT_GIVEN,
+        duration: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionScrollResponse:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return cast(
             ActionScrollResponse,
             await self._post(
                 f"/boxes/{box_id}/actions/scroll",
-                body=await async_maybe_transform(body, action_scroll_params.ActionScrollParams),
+                body=await async_maybe_transform(
+                    {
+                        "scroll_x": scroll_x,
+                        "scroll_y": scroll_y,
+                        "x": x,
+                        "y": y,
+                        "include_screenshot": include_screenshot,
+                        "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
+                        "screenshot_delay": screenshot_delay,
+                        "direction": direction,
+                        "distance": distance,
+                        "duration": duration,
+                    },
+                    action_scroll_params.ActionScrollParams,
+                ),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),

@@ -2,6 +2,7 @@ from typing_extensions import List
 
 from gbox_sdk._client import GboxClient
 from gbox_sdk.types.v1.boxes.browser_get_tabs_response import Data, BrowserGetTabsResponse
+from gbox_sdk.types.v1.boxes.browser_open_tab_response import BrowserOpenTabResponse
 from gbox_sdk.types.v1.boxes.browser_close_tab_response import BrowserCloseTabResponse
 from gbox_sdk.types.v1.boxes.browser_switch_tab_response import BrowserSwitchTabResponse
 from gbox_sdk.types.v1.boxes.browser_update_tab_response import BrowserUpdateTabResponse
@@ -125,6 +126,26 @@ class BrowserOperator:
             >>> box.browser.switch_tab("1")
         """
         return self.client.v1.boxes.browser.switch_tab(tab_id=tab_id, box_id=self.box_id)
+
+    def open_tab(self, url: str) -> BrowserOpenTabResponse:
+        """
+        Create and open a new browser tab with the specified URL.
+
+        This endpoint will
+        navigate to the provided URL and return the new tab's information including its
+        assigned id, loaded title, final URL (after any redirects), and favicon. The
+        returned tab id can be used for future operations on this specific tab. The
+        browser will attempt to load the page and will wait for the DOM content to be
+        loaded before returning the response. If the URL is invalid or unreachable, an
+        error will be returned.
+
+        Args:
+          url: The tab url
+
+        Example:
+            >>> box.browser.open_tab("https://www.google.com")
+        """
+        return self.client.v1.boxes.browser.open_tab(url=url, box_id=self.box_id)
 
 
 class BrowserTabOperator:

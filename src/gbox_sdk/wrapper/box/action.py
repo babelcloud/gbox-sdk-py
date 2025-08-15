@@ -1,7 +1,7 @@
 import os
 import json
 import base64
-from typing import Any, Dict, List, Union, Callable, Optional
+from typing import List, Union, Callable, Optional
 from typing_extensions import Literal, Iterable, cast
 
 from gbox_sdk._types import NOT_GIVEN, NotGiven
@@ -201,108 +201,65 @@ class ActionOperator:
             ... )
         """
         try:
-            return self._ai_stream(
+            # Use SDK streaming response wrapper to get SSE stream
+            resp_ctx = self.client.v1.boxes.actions.with_streaming_response.ai(
+                box_id=self.box_id,
                 instruction=instruction,
                 background=background,
                 include_screenshot=include_screenshot,
                 output_format=output_format,
                 screenshot_delay=screenshot_delay,
                 settings=settings,
-                on_action_start=on_action_start,
-                on_action_end=on_action_end,
+                stream=True,
+                timeout=None,
             )
+            result: Optional[ActionAIResponse] = None
+            buffer: str = ""
+
+            # Enter the response context to get APIResponse and iterate
+            with resp_ctx as api_response:
+                for chunk in api_response.iter_bytes():
+                    chunk_text: str = chunk.decode("utf-8")
+                    buffer += chunk_text
+
+                    while "\n\n" in buffer:
+                        event_end: int = buffer.find("\n\n")
+                        raw_event: str = buffer[:event_end].strip()
+                        buffer = buffer[event_end + 2 :]
+
+                        if not raw_event:
+                            continue
+
+                        event_name: str = ""
+                        data_lines: List[str] = []
+
+                        for line in raw_event.split("\n"):
+                            if line.startswith("event:"):
+                                event_name = line[6:].strip()
+                            elif line.startswith("data:"):
+                                data_lines.append(line[5:].strip())
+
+                        data_str: str = "\n".join(data_lines)
+
+                        if event_name == "before":
+                            if on_action_start:
+                                on_action_start()
+                        elif event_name == "after":
+                            if on_action_end:
+                                on_action_end()
+                        elif event_name == "result":
+                            parsed: ActionAIResponse = json.loads(data_str)
+                            result = parsed
+                        elif event_name == "error":
+                            error_data = json.loads(data_str)
+                            raise RuntimeError(f"AI action error: {error_data.get('message', 'Unknown error')}")
+
+            if result is None:
+                raise RuntimeError("No result event received from stream")
+
+            return result
         except Exception as e:
             raise RuntimeError(f"Failed to execute AI action via stream: {e}") from e
-
-    def _ai_stream(
-        self,
-        instruction: str,
-        *,
-        background: Union[str, NotGiven] = NOT_GIVEN,
-        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
-        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
-        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
-        settings: Union[Settings, NotGiven] = NOT_GIVEN,
-        on_action_start: Optional[Callable[[], None]] = None,
-        on_action_end: Optional[Callable[[], None]] = None,
-    ) -> ActionAIResponse:
-        """
-        Synchronous method to handle AI action streaming via HTTP streaming.
-        """
-        # Prepare the request parameters (snake_case to match API schema)
-        params: Dict[str, Any] = {
-            "instruction": instruction,
-            "stream": True,
-        }
-
-        if background is not NOT_GIVEN:
-            params["background"] = background
-        if include_screenshot is not NOT_GIVEN:
-            params["include_screenshot"] = include_screenshot
-        if output_format is not NOT_GIVEN:
-            params["output_format"] = output_format
-        if screenshot_delay is not NOT_GIVEN:
-            params["screenshot_delay"] = screenshot_delay
-        if settings is not NOT_GIVEN:
-            params["settings"] = settings
-
-        # Use SDK streaming response wrapper to get SSE stream
-        resp_ctx = self.client.v1.boxes.actions.with_streaming_response.ai(
-            box_id=self.box_id,
-            instruction=instruction,
-            background=background,
-            include_screenshot=include_screenshot,
-            output_format=output_format,
-            screenshot_delay=screenshot_delay,
-            settings=settings,
-            stream=True,
-            timeout=None,
-        )
-        result: Optional[ActionAIResponse] = None
-        buffer: str = ""
-
-        # Enter the response context to get APIResponse and iterate
-        with resp_ctx as api_response:
-            for chunk in api_response.iter_bytes():
-                chunk_text: str = chunk.decode("utf-8")
-                buffer += chunk_text
-
-                while "\n\n" in buffer:
-                    event_end: int = buffer.find("\n\n")
-                    raw_event: str = buffer[:event_end].strip()
-                    buffer = buffer[event_end + 2 :]
-
-                    if not raw_event:
-                        continue
-
-                    event_name: str = ""
-                    data_lines: List[str] = []
-
-                    for line in raw_event.split("\n"):
-                        if line.startswith("event:"):
-                            event_name = line[6:].strip()
-                        elif line.startswith("data:"):
-                            data_lines.append(line[5:].strip())
-
-                    data_str: str = "\n".join(data_lines)
-
-                    if event_name == "before":
-                        if on_action_start:
-                            on_action_start()
-                    elif event_name == "after":
-                        if on_action_end:
-                            on_action_end()
-                    elif event_name == "result":
-                        parsed: ActionAIResponse = json.loads(data_str)
-                        result = parsed
-                    elif event_name == "error":
-                        error_data = json.loads(data_str)
-                        raise RuntimeError(f"AI action error: {error_data.get('message', 'Unknown error')}")
-
-        if result is None:
-            raise RuntimeError("No result event received from stream")
-
-        return result
 
     def click(
         self,

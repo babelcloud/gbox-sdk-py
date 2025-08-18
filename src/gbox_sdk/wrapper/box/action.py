@@ -10,6 +10,7 @@ from gbox_sdk.types.v1.boxes.action_ai_params import Settings
 from gbox_sdk.types.v1.boxes.action_ai_response import ActionAIResponse
 from gbox_sdk.types.v1.boxes.action_drag_params import DragSimpleEnd, DragSimpleStart, DragAdvancedPath
 from gbox_sdk.types.v1.boxes.action_swipe_params import SwipeAdvancedEnd, SwipeAdvancedStart
+from gbox_sdk.types.v1.boxes.action_tap_response import ActionTapResponse
 from gbox_sdk.types.v1.boxes.action_touch_params import Point
 from gbox_sdk.types.v1.boxes.action_drag_response import ActionDragResponse
 from gbox_sdk.types.v1.boxes.action_move_response import ActionMoveResponse
@@ -22,6 +23,7 @@ from gbox_sdk.types.v1.boxes.action_extract_response import ActionExtractRespons
 from gbox_sdk.types.v1.boxes.action_press_key_params import KeysType
 from gbox_sdk.types.v1.boxes.action_screenshot_params import Clip, ActionScreenshotParams
 from gbox_sdk.types.v1.boxes.action_press_key_response import ActionPressKeyResponse
+from gbox_sdk.types.v1.boxes.action_long_press_response import ActionLongPressResponse
 from gbox_sdk.types.v1.boxes.action_screenshot_response import ActionScreenshotResponse
 from gbox_sdk.types.v1.boxes.action_press_button_response import ActionPressButtonResponse
 from gbox_sdk.types.v1.boxes.action_screen_layout_response import ActionScreenLayoutResponse
@@ -641,6 +643,123 @@ class ActionOperator:
             y=y,
             include_screenshot=include_screenshot,
             output_format=output_format,
+            screenshot_delay=screenshot_delay,
+        )
+
+    def tap(
+        self,
+        *,
+        x: float,
+        y: float,
+        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
+        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
+        presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
+        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
+    ) -> ActionTapResponse:
+        """
+        Tap action for Android devices using ADB input tap command
+
+        Args:
+          x: X coordinate of the tap
+
+          y: Y coordinate of the tap
+
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
+          output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+
+        """
+        return self.client.v1.boxes.actions.tap(
+            box_id=self.box_id,
+            x=x,
+            y=y,
+            include_screenshot=include_screenshot,
+            output_format=output_format,
+            presigned_expires_in=presigned_expires_in,
+            screenshot_delay=screenshot_delay,
+        )
+
+    def long_press(
+        self,
+        *,
+        x: float,
+        y: float,
+        duration: Union[str, NotGiven] = NOT_GIVEN,
+        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
+        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
+        presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
+        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
+    ) -> ActionLongPressResponse:
+        """
+        Perform a long press action at specified coordinates for a specified duration.
+        Useful for triggering context menus, drag operations, or other long-press
+        interactions.
+
+        Args:
+          x: X coordinate of the long press
+
+          y: Y coordinate of the long press
+
+          duration: Duration to hold the press (e.g. '1s', '500ms')
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 1s
+
+          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
+              object will still be returned but with empty URIs. Default is false.
+
+          output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+
+        """
+        return self.client.v1.boxes.actions.long_press(
+            box_id=self.box_id,
+            x=x,
+            y=y,
+            duration=duration,
+            include_screenshot=include_screenshot,
+            output_format=output_format,
+            presigned_expires_in=presigned_expires_in,
             screenshot_delay=screenshot_delay,
         )
 

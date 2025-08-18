@@ -30,6 +30,10 @@ __all__ = [
     "AIActionScreenshotResultAIResponseActionTypedScrollSimpleAction",
     "AIActionScreenshotResultAIResponseActionTypedSwipeSimpleAction",
     "AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedAction",
+    "AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedActionEnd",
+    "AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedActionEndSwipePath",
+    "AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedActionStart",
+    "AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedActionStartSwipePath",
     "AIActionScreenshotResultAIResponseActionTypedPressKeyAction",
     "AIActionScreenshotResultAIResponseActionTypedPressButtonAction",
     "AIActionScreenshotResultAIResponseActionTypedLongPressAction",
@@ -64,6 +68,10 @@ __all__ = [
     "AIActionResultAIResponseActionTypedScrollSimpleAction",
     "AIActionResultAIResponseActionTypedSwipeSimpleAction",
     "AIActionResultAIResponseActionTypedSwipeAdvancedAction",
+    "AIActionResultAIResponseActionTypedSwipeAdvancedActionEnd",
+    "AIActionResultAIResponseActionTypedSwipeAdvancedActionEndSwipePath",
+    "AIActionResultAIResponseActionTypedSwipeAdvancedActionStart",
+    "AIActionResultAIResponseActionTypedSwipeAdvancedActionStartSwipePath",
     "AIActionResultAIResponseActionTypedPressKeyAction",
     "AIActionResultAIResponseActionTypedPressButtonAction",
     "AIActionResultAIResponseActionTypedLongPressAction",
@@ -525,11 +533,37 @@ class AIActionScreenshotResultAIResponseActionTypedSwipeSimpleAction(BaseModel):
     """
 
 
+class AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedActionEndSwipePath(BaseModel):
+    x: float
+    """Start/end x coordinate of the swipe path"""
+
+    y: float
+    """Start/end y coordinate of the swipe path"""
+
+
+AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedActionEnd: TypeAlias = Union[
+    AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedActionEndSwipePath, str
+]
+
+
+class AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedActionStartSwipePath(BaseModel):
+    x: float
+    """Start/end x coordinate of the swipe path"""
+
+    y: float
+    """Start/end y coordinate of the swipe path"""
+
+
+AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedActionStart: TypeAlias = Union[
+    AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedActionStartSwipePath, str
+]
+
+
 class AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedAction(BaseModel):
-    end: Union[str, object]
+    end: AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedActionEnd
     """End point of the swipe path (coordinates or natural language)"""
 
-    start: Union[str, object]
+    start: AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedActionStart
     """Start point of the swipe path (coordinates or natural language)"""
 
     duration: Optional[str] = None
@@ -1546,11 +1580,37 @@ class AIActionResultAIResponseActionTypedSwipeSimpleAction(BaseModel):
     """
 
 
+class AIActionResultAIResponseActionTypedSwipeAdvancedActionEndSwipePath(BaseModel):
+    x: float
+    """Start/end x coordinate of the swipe path"""
+
+    y: float
+    """Start/end y coordinate of the swipe path"""
+
+
+AIActionResultAIResponseActionTypedSwipeAdvancedActionEnd: TypeAlias = Union[
+    AIActionResultAIResponseActionTypedSwipeAdvancedActionEndSwipePath, str
+]
+
+
+class AIActionResultAIResponseActionTypedSwipeAdvancedActionStartSwipePath(BaseModel):
+    x: float
+    """Start/end x coordinate of the swipe path"""
+
+    y: float
+    """Start/end y coordinate of the swipe path"""
+
+
+AIActionResultAIResponseActionTypedSwipeAdvancedActionStart: TypeAlias = Union[
+    AIActionResultAIResponseActionTypedSwipeAdvancedActionStartSwipePath, str
+]
+
+
 class AIActionResultAIResponseActionTypedSwipeAdvancedAction(BaseModel):
-    end: Union[str, object]
+    end: AIActionResultAIResponseActionTypedSwipeAdvancedActionEnd
     """End point of the swipe path (coordinates or natural language)"""
 
-    start: Union[str, object]
+    start: AIActionResultAIResponseActionTypedSwipeAdvancedActionStart
     """Start point of the swipe path (coordinates or natural language)"""
 
     duration: Optional[str] = None

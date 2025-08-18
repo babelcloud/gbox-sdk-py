@@ -7,7 +7,15 @@ from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from ...._utils import PropertyInfo
 
-__all__ = ["ActionSwipeParams", "SwipeSimple", "SwipeAdvanced"]
+__all__ = [
+    "ActionSwipeParams",
+    "SwipeSimple",
+    "SwipeAdvanced",
+    "SwipeAdvancedEnd",
+    "SwipeAdvancedEndSwipePath",
+    "SwipeAdvancedStart",
+    "SwipeAdvancedStartSwipePath",
+]
 
 
 class SwipeSimple(TypedDict, total=False):
@@ -75,10 +83,10 @@ class SwipeSimple(TypedDict, total=False):
 
 
 class SwipeAdvanced(TypedDict, total=False):
-    end: Required[Union[str, object]]
+    end: Required[SwipeAdvancedEnd]
     """End point of the swipe path (coordinates or natural language)"""
 
-    start: Required[Union[str, object]]
+    start: Required[SwipeAdvancedStart]
     """Start point of the swipe path (coordinates or natural language)"""
 
     duration: str
@@ -122,5 +130,26 @@ class SwipeAdvanced(TypedDict, total=False):
     Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
     """
 
+
+class SwipeAdvancedEndSwipePath(TypedDict, total=False):
+    x: Required[float]
+    """Start/end x coordinate of the swipe path"""
+
+    y: Required[float]
+    """Start/end y coordinate of the swipe path"""
+
+
+SwipeAdvancedEnd: TypeAlias = Union[SwipeAdvancedEndSwipePath, str]
+
+
+class SwipeAdvancedStartSwipePath(TypedDict, total=False):
+    x: Required[float]
+    """Start/end x coordinate of the swipe path"""
+
+    y: Required[float]
+    """Start/end y coordinate of the swipe path"""
+
+
+SwipeAdvancedStart: TypeAlias = Union[SwipeAdvancedStartSwipePath, str]
 
 ActionSwipeParams: TypeAlias = Union[SwipeSimple, SwipeAdvanced]

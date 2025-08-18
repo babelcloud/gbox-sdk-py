@@ -23,13 +23,13 @@ __all__ = [
     "AIActionScreenshotResultAIResponseActionTypedDragAdvancedActionPath",
     "AIActionScreenshotResultAIResponseActionTypedDragSimpleAction",
     "AIActionScreenshotResultAIResponseActionTypedDragSimpleActionEnd",
+    "AIActionScreenshotResultAIResponseActionTypedDragSimpleActionEndDragPathPoint",
     "AIActionScreenshotResultAIResponseActionTypedDragSimpleActionStart",
+    "AIActionScreenshotResultAIResponseActionTypedDragSimpleActionStartDragPathPoint",
     "AIActionScreenshotResultAIResponseActionTypedScrollAction",
     "AIActionScreenshotResultAIResponseActionTypedScrollSimpleAction",
     "AIActionScreenshotResultAIResponseActionTypedSwipeSimpleAction",
     "AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedAction",
-    "AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedActionEnd",
-    "AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedActionStart",
     "AIActionScreenshotResultAIResponseActionTypedPressKeyAction",
     "AIActionScreenshotResultAIResponseActionTypedPressButtonAction",
     "AIActionScreenshotResultAIResponseActionTypedLongPressAction",
@@ -57,13 +57,13 @@ __all__ = [
     "AIActionResultAIResponseActionTypedDragAdvancedActionPath",
     "AIActionResultAIResponseActionTypedDragSimpleAction",
     "AIActionResultAIResponseActionTypedDragSimpleActionEnd",
+    "AIActionResultAIResponseActionTypedDragSimpleActionEndDragPathPoint",
     "AIActionResultAIResponseActionTypedDragSimpleActionStart",
+    "AIActionResultAIResponseActionTypedDragSimpleActionStartDragPathPoint",
     "AIActionResultAIResponseActionTypedScrollAction",
     "AIActionResultAIResponseActionTypedScrollSimpleAction",
     "AIActionResultAIResponseActionTypedSwipeSimpleAction",
     "AIActionResultAIResponseActionTypedSwipeAdvancedAction",
-    "AIActionResultAIResponseActionTypedSwipeAdvancedActionEnd",
-    "AIActionResultAIResponseActionTypedSwipeAdvancedActionStart",
     "AIActionResultAIResponseActionTypedPressKeyAction",
     "AIActionResultAIResponseActionTypedPressButtonAction",
     "AIActionResultAIResponseActionTypedLongPressAction",
@@ -269,7 +269,7 @@ class AIActionScreenshotResultAIResponseActionTypedDragAdvancedAction(BaseModel)
     """
 
 
-class AIActionScreenshotResultAIResponseActionTypedDragSimpleActionEnd(BaseModel):
+class AIActionScreenshotResultAIResponseActionTypedDragSimpleActionEndDragPathPoint(BaseModel):
     x: float
     """X coordinate of a point in the drag path"""
 
@@ -277,20 +277,30 @@ class AIActionScreenshotResultAIResponseActionTypedDragSimpleActionEnd(BaseModel
     """Y coordinate of a point in the drag path"""
 
 
-class AIActionScreenshotResultAIResponseActionTypedDragSimpleActionStart(BaseModel):
+AIActionScreenshotResultAIResponseActionTypedDragSimpleActionEnd: TypeAlias = Union[
+    AIActionScreenshotResultAIResponseActionTypedDragSimpleActionEndDragPathPoint, str
+]
+
+
+class AIActionScreenshotResultAIResponseActionTypedDragSimpleActionStartDragPathPoint(BaseModel):
     x: float
     """X coordinate of a point in the drag path"""
 
     y: float
     """Y coordinate of a point in the drag path"""
+
+
+AIActionScreenshotResultAIResponseActionTypedDragSimpleActionStart: TypeAlias = Union[
+    AIActionScreenshotResultAIResponseActionTypedDragSimpleActionStartDragPathPoint, str
+]
 
 
 class AIActionScreenshotResultAIResponseActionTypedDragSimpleAction(BaseModel):
     end: AIActionScreenshotResultAIResponseActionTypedDragSimpleActionEnd
-    """Single point in a drag path"""
+    """End point of the drag path (coordinates or natural language)"""
 
     start: AIActionScreenshotResultAIResponseActionTypedDragSimpleActionStart
-    """Single point in a drag path"""
+    """Start point of the drag path (coordinates or natural language)"""
 
     duration: Optional[str] = None
     """Duration to complete the movement from start to end coordinates
@@ -481,6 +491,12 @@ class AIActionScreenshotResultAIResponseActionTypedSwipeSimpleAction(BaseModel):
     Default is false.
     """
 
+    location: Optional[str] = None
+    """Natural language description of the location where the swipe should originate.
+
+    If not provided, the swipe will be performed from the center of the screen.
+    """
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
     """Type of the URI. default is base64."""
 
@@ -509,28 +525,12 @@ class AIActionScreenshotResultAIResponseActionTypedSwipeSimpleAction(BaseModel):
     """
 
 
-class AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedActionEnd(BaseModel):
-    x: float
-    """Start/end x coordinate of the swipe path"""
-
-    y: float
-    """Start/end y coordinate of the swipe path"""
-
-
-class AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedActionStart(BaseModel):
-    x: float
-    """Start/end x coordinate of the swipe path"""
-
-    y: float
-    """Start/end y coordinate of the swipe path"""
-
-
 class AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedAction(BaseModel):
-    end: AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedActionEnd
-    """Swipe path"""
+    end: Union[str, object]
+    """End point of the swipe path (coordinates or natural language)"""
 
-    start: AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedActionStart
-    """Swipe path"""
+    start: Union[str, object]
+    """Start point of the swipe path (coordinates or natural language)"""
 
     duration: Optional[str] = None
     """Duration of the swipe
@@ -1290,7 +1290,7 @@ class AIActionResultAIResponseActionTypedDragAdvancedAction(BaseModel):
     """
 
 
-class AIActionResultAIResponseActionTypedDragSimpleActionEnd(BaseModel):
+class AIActionResultAIResponseActionTypedDragSimpleActionEndDragPathPoint(BaseModel):
     x: float
     """X coordinate of a point in the drag path"""
 
@@ -1298,20 +1298,30 @@ class AIActionResultAIResponseActionTypedDragSimpleActionEnd(BaseModel):
     """Y coordinate of a point in the drag path"""
 
 
-class AIActionResultAIResponseActionTypedDragSimpleActionStart(BaseModel):
+AIActionResultAIResponseActionTypedDragSimpleActionEnd: TypeAlias = Union[
+    AIActionResultAIResponseActionTypedDragSimpleActionEndDragPathPoint, str
+]
+
+
+class AIActionResultAIResponseActionTypedDragSimpleActionStartDragPathPoint(BaseModel):
     x: float
     """X coordinate of a point in the drag path"""
 
     y: float
     """Y coordinate of a point in the drag path"""
+
+
+AIActionResultAIResponseActionTypedDragSimpleActionStart: TypeAlias = Union[
+    AIActionResultAIResponseActionTypedDragSimpleActionStartDragPathPoint, str
+]
 
 
 class AIActionResultAIResponseActionTypedDragSimpleAction(BaseModel):
     end: AIActionResultAIResponseActionTypedDragSimpleActionEnd
-    """Single point in a drag path"""
+    """End point of the drag path (coordinates or natural language)"""
 
     start: AIActionResultAIResponseActionTypedDragSimpleActionStart
-    """Single point in a drag path"""
+    """Start point of the drag path (coordinates or natural language)"""
 
     duration: Optional[str] = None
     """Duration to complete the movement from start to end coordinates
@@ -1502,6 +1512,12 @@ class AIActionResultAIResponseActionTypedSwipeSimpleAction(BaseModel):
     Default is false.
     """
 
+    location: Optional[str] = None
+    """Natural language description of the location where the swipe should originate.
+
+    If not provided, the swipe will be performed from the center of the screen.
+    """
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
     """Type of the URI. default is base64."""
 
@@ -1530,28 +1546,12 @@ class AIActionResultAIResponseActionTypedSwipeSimpleAction(BaseModel):
     """
 
 
-class AIActionResultAIResponseActionTypedSwipeAdvancedActionEnd(BaseModel):
-    x: float
-    """Start/end x coordinate of the swipe path"""
-
-    y: float
-    """Start/end y coordinate of the swipe path"""
-
-
-class AIActionResultAIResponseActionTypedSwipeAdvancedActionStart(BaseModel):
-    x: float
-    """Start/end x coordinate of the swipe path"""
-
-    y: float
-    """Start/end y coordinate of the swipe path"""
-
-
 class AIActionResultAIResponseActionTypedSwipeAdvancedAction(BaseModel):
-    end: AIActionResultAIResponseActionTypedSwipeAdvancedActionEnd
-    """Swipe path"""
+    end: Union[str, object]
+    """End point of the swipe path (coordinates or natural language)"""
 
-    start: AIActionResultAIResponseActionTypedSwipeAdvancedActionStart
-    """Swipe path"""
+    start: Union[str, object]
+    """Start point of the swipe path (coordinates or natural language)"""
 
     duration: Optional[str] = None
     """Duration of the swipe

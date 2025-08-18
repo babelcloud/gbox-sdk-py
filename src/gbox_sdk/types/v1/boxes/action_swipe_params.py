@@ -7,7 +7,7 @@ from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from ...._utils import PropertyInfo
 
-__all__ = ["ActionSwipeParams", "SwipeSimple", "SwipeAdvanced", "SwipeAdvancedEnd", "SwipeAdvancedStart"]
+__all__ = ["ActionSwipeParams", "SwipeSimple", "SwipeAdvanced"]
 
 
 class SwipeSimple(TypedDict, total=False):
@@ -40,6 +40,12 @@ class SwipeSimple(TypedDict, total=False):
     Default is false.
     """
 
+    location: str
+    """Natural language description of the location where the swipe should originate.
+
+    If not provided, the swipe will be performed from the center of the screen.
+    """
+
     output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
     """Type of the URI. default is base64."""
 
@@ -69,11 +75,11 @@ class SwipeSimple(TypedDict, total=False):
 
 
 class SwipeAdvanced(TypedDict, total=False):
-    end: Required[SwipeAdvancedEnd]
-    """Swipe path"""
+    end: Required[Union[str, object]]
+    """End point of the swipe path (coordinates or natural language)"""
 
-    start: Required[SwipeAdvancedStart]
-    """Swipe path"""
+    start: Required[Union[str, object]]
+    """Start point of the swipe path (coordinates or natural language)"""
 
     duration: str
     """Duration of the swipe
@@ -115,22 +121,6 @@ class SwipeAdvanced(TypedDict, total=False):
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
     """
-
-
-class SwipeAdvancedEnd(TypedDict, total=False):
-    x: Required[float]
-    """Start/end x coordinate of the swipe path"""
-
-    y: Required[float]
-    """Start/end y coordinate of the swipe path"""
-
-
-class SwipeAdvancedStart(TypedDict, total=False):
-    x: Required[float]
-    """Start/end x coordinate of the swipe path"""
-
-    y: Required[float]
-    """Start/end y coordinate of the swipe path"""
 
 
 ActionSwipeParams: TypeAlias = Union[SwipeSimple, SwipeAdvanced]

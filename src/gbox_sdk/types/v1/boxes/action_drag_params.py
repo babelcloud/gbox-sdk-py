@@ -7,15 +7,24 @@ from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from ...._utils import PropertyInfo
 
-__all__ = ["ActionDragParams", "DragSimple", "DragSimpleEnd", "DragSimpleStart", "DragAdvanced", "DragAdvancedPath"]
+__all__ = [
+    "ActionDragParams",
+    "DragSimple",
+    "DragSimpleEnd",
+    "DragSimpleEndDragPathPoint",
+    "DragSimpleStart",
+    "DragSimpleStartDragPathPoint",
+    "DragAdvanced",
+    "DragAdvancedPath",
+]
 
 
 class DragSimple(TypedDict, total=False):
     end: Required[DragSimpleEnd]
-    """Single point in a drag path"""
+    """End point of the drag path (coordinates or natural language)"""
 
     start: Required[DragSimpleStart]
-    """Single point in a drag path"""
+    """Start point of the drag path (coordinates or natural language)"""
 
     duration: str
     """Duration to complete the movement from start to end coordinates
@@ -59,7 +68,7 @@ class DragSimple(TypedDict, total=False):
     """
 
 
-class DragSimpleEnd(TypedDict, total=False):
+class DragSimpleEndDragPathPoint(TypedDict, total=False):
     x: Required[float]
     """X coordinate of a point in the drag path"""
 
@@ -67,12 +76,18 @@ class DragSimpleEnd(TypedDict, total=False):
     """Y coordinate of a point in the drag path"""
 
 
-class DragSimpleStart(TypedDict, total=False):
+DragSimpleEnd: TypeAlias = Union[DragSimpleEndDragPathPoint, str]
+
+
+class DragSimpleStartDragPathPoint(TypedDict, total=False):
     x: Required[float]
     """X coordinate of a point in the drag path"""
 
     y: Required[float]
     """Y coordinate of a point in the drag path"""
+
+
+DragSimpleStart: TypeAlias = Union[DragSimpleStartDragPathPoint, str]
 
 
 class DragAdvanced(TypedDict, total=False):

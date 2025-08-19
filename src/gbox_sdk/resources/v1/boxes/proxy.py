@@ -130,9 +130,9 @@ class ProxyResource(SyncAPIResource):
         Args:
           auth: Box Proxy Auth
 
-          excludes: Exclude IPs from the proxy. Default is ['127.0.0.1', 'localhost']
+          excludes: Exclude IPs and domains from the proxy. Default is ['127.0.0.1', 'localhost']
 
-          url: Proxy URL
+          url: The URL of the proxy server
 
           extra_headers: Send extra headers
 
@@ -270,9 +270,9 @@ class AsyncProxyResource(AsyncAPIResource):
         Args:
           auth: Box Proxy Auth
 
-          excludes: Exclude IPs from the proxy. Default is ['127.0.0.1', 'localhost']
+          excludes: Exclude IPs and domains from the proxy. Default is ['127.0.0.1', 'localhost']
 
-          url: Proxy URL
+          url: The URL of the proxy server
 
           extra_headers: Send extra headers
 

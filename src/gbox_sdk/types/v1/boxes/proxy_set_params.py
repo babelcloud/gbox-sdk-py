@@ -13,10 +13,10 @@ class ProxySetParams(TypedDict, total=False):
     """Box Proxy Auth"""
 
     excludes: Required[List[str]]
-    """Exclude IPs from the proxy. Default is ['127.0.0.1', 'localhost']"""
+    """Exclude IPs and domains from the proxy. Default is ['127.0.0.1', 'localhost']"""
 
     url: Required[str]
-    """Proxy URL"""
+    """The URL of the proxy server"""
 
 
 class Auth(TypedDict, total=False):

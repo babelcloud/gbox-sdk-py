@@ -33,6 +33,7 @@ from ....types.v1.boxes import (
     action_long_press_params,
     action_screenshot_params,
     action_press_button_params,
+    action_setting_update_params,
     action_recording_start_params,
     action_screen_rotation_params,
 )
@@ -46,12 +47,15 @@ from ....types.v1.boxes.action_swipe_response import ActionSwipeResponse
 from ....types.v1.boxes.action_touch_response import ActionTouchResponse
 from ....types.v1.boxes.action_scroll_response import ActionScrollResponse
 from ....types.v1.boxes.action_extract_response import ActionExtractResponse
+from ....types.v1.boxes.action_setting_response import ActionSettingResponse
 from ....types.v1.boxes.action_press_key_response import ActionPressKeyResponse
 from ....types.v1.boxes.action_long_press_response import ActionLongPressResponse
 from ....types.v1.boxes.action_screenshot_response import ActionScreenshotResponse
 from ....types.v1.boxes.action_press_button_response import ActionPressButtonResponse
 from ....types.v1.boxes.action_screen_layout_response import ActionScreenLayoutResponse
+from ....types.v1.boxes.action_setting_reset_response import ActionSettingResetResponse
 from ....types.v1.boxes.action_recording_stop_response import ActionRecordingStopResponse
+from ....types.v1.boxes.action_setting_update_response import ActionSettingUpdateResponse
 from ....types.v1.boxes.action_screen_rotation_response import ActionScreenRotationResponse
 
 __all__ = ["ActionsResource", "AsyncActionsResource"]
@@ -1346,6 +1350,7 @@ class ActionsResource(SyncAPIResource):
         self,
         box_id: str,
         *,
+        scale: float,
         clip: action_screenshot_params.Clip | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1355,10 +1360,22 @@ class ActionsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionScreenshotResponse:
-        """
-        Take screenshot
+        """Take screenshot
 
         Args:
+          scale: The scale of the action to be performed.
+
+        Must be greater than 0.1 and less than
+              or equal to 1.
+
+              Notes:
+
+              - Scale does not change the box's actual screen resolution.
+              - It affects the size of the output screenshot and the coordinates/distances of
+                actions. Coordinates and distances are scaled by this factor. Example: when
+                scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
+                Click({x:50, y:50}).
+
           clip: Clipping region for screenshot capture
 
           output_format: Type of the URI. default is base64.
@@ -1377,6 +1394,7 @@ class ActionsResource(SyncAPIResource):
             f"/boxes/{box_id}/actions/screenshot",
             body=maybe_transform(
                 {
+                    "scale": scale,
                     "clip": clip,
                     "output_format": output_format,
                 },
@@ -1587,6 +1605,118 @@ class ActionsResource(SyncAPIResource):
                     Any, ActionScrollResponse
                 ),  # Union types cannot be passed in as arguments in the type system
             ),
+        )
+
+    def setting(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionSettingResponse:
+        """
+        Get the box action setting
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return self._get(
+            f"/boxes/{box_id}/actions/setting",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionSettingResponse,
+        )
+
+    def setting_reset(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionSettingResetResponse:
+        """
+        Reset the box setting
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return self._post(
+            f"/boxes/{box_id}/actions/setting/reset",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionSettingResetResponse,
+        )
+
+    def setting_update(
+        self,
+        box_id: str,
+        *,
+        scale: float,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionSettingUpdateResponse:
+        """
+        Setting the box action setting
+
+        Args:
+          scale: The scale of the action to be performed. Must be greater than 0.1 and less than
+              or equal to 1.
+
+              Notes:
+
+              - Scale does not change the box's actual screen resolution.
+              - It affects the size of the output screenshot and the coordinates/distances of
+                actions. Coordinates and distances are scaled by this factor. Example: when
+                scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
+                Click({x:50, y:50}).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return self._put(
+            f"/boxes/{box_id}/actions/setting",
+            body=maybe_transform({"scale": scale}, action_setting_update_params.ActionSettingUpdateParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionSettingUpdateResponse,
         )
 
     @overload
@@ -3410,6 +3540,7 @@ class AsyncActionsResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
+        scale: float,
         clip: action_screenshot_params.Clip | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -3419,10 +3550,22 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionScreenshotResponse:
-        """
-        Take screenshot
+        """Take screenshot
 
         Args:
+          scale: The scale of the action to be performed.
+
+        Must be greater than 0.1 and less than
+              or equal to 1.
+
+              Notes:
+
+              - Scale does not change the box's actual screen resolution.
+              - It affects the size of the output screenshot and the coordinates/distances of
+                actions. Coordinates and distances are scaled by this factor. Example: when
+                scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
+                Click({x:50, y:50}).
+
           clip: Clipping region for screenshot capture
 
           output_format: Type of the URI. default is base64.
@@ -3441,6 +3584,7 @@ class AsyncActionsResource(AsyncAPIResource):
             f"/boxes/{box_id}/actions/screenshot",
             body=await async_maybe_transform(
                 {
+                    "scale": scale,
                     "clip": clip,
                     "output_format": output_format,
                 },
@@ -3651,6 +3795,118 @@ class AsyncActionsResource(AsyncAPIResource):
                     Any, ActionScrollResponse
                 ),  # Union types cannot be passed in as arguments in the type system
             ),
+        )
+
+    async def setting(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionSettingResponse:
+        """
+        Get the box action setting
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return await self._get(
+            f"/boxes/{box_id}/actions/setting",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionSettingResponse,
+        )
+
+    async def setting_reset(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionSettingResetResponse:
+        """
+        Reset the box setting
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return await self._post(
+            f"/boxes/{box_id}/actions/setting/reset",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionSettingResetResponse,
+        )
+
+    async def setting_update(
+        self,
+        box_id: str,
+        *,
+        scale: float,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionSettingUpdateResponse:
+        """
+        Setting the box action setting
+
+        Args:
+          scale: The scale of the action to be performed. Must be greater than 0.1 and less than
+              or equal to 1.
+
+              Notes:
+
+              - Scale does not change the box's actual screen resolution.
+              - It affects the size of the output screenshot and the coordinates/distances of
+                actions. Coordinates and distances are scaled by this factor. Example: when
+                scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
+                Click({x:50, y:50}).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return await self._put(
+            f"/boxes/{box_id}/actions/setting",
+            body=await async_maybe_transform({"scale": scale}, action_setting_update_params.ActionSettingUpdateParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionSettingUpdateResponse,
         )
 
     @overload
@@ -4229,6 +4485,15 @@ class ActionsResourceWithRawResponse:
         self.scroll = to_raw_response_wrapper(
             actions.scroll,
         )
+        self.setting = to_raw_response_wrapper(
+            actions.setting,
+        )
+        self.setting_reset = to_raw_response_wrapper(
+            actions.setting_reset,
+        )
+        self.setting_update = to_raw_response_wrapper(
+            actions.setting_update,
+        )
         self.swipe = to_raw_response_wrapper(
             actions.swipe,
         )
@@ -4288,6 +4553,15 @@ class AsyncActionsResourceWithRawResponse:
         )
         self.scroll = async_to_raw_response_wrapper(
             actions.scroll,
+        )
+        self.setting = async_to_raw_response_wrapper(
+            actions.setting,
+        )
+        self.setting_reset = async_to_raw_response_wrapper(
+            actions.setting_reset,
+        )
+        self.setting_update = async_to_raw_response_wrapper(
+            actions.setting_update,
         )
         self.swipe = async_to_raw_response_wrapper(
             actions.swipe,
@@ -4349,6 +4623,15 @@ class ActionsResourceWithStreamingResponse:
         self.scroll = to_streamed_response_wrapper(
             actions.scroll,
         )
+        self.setting = to_streamed_response_wrapper(
+            actions.setting,
+        )
+        self.setting_reset = to_streamed_response_wrapper(
+            actions.setting_reset,
+        )
+        self.setting_update = to_streamed_response_wrapper(
+            actions.setting_update,
+        )
         self.swipe = to_streamed_response_wrapper(
             actions.swipe,
         )
@@ -4408,6 +4691,15 @@ class AsyncActionsResourceWithStreamingResponse:
         )
         self.scroll = async_to_streamed_response_wrapper(
             actions.scroll,
+        )
+        self.setting = async_to_streamed_response_wrapper(
+            actions.setting,
+        )
+        self.setting_reset = async_to_streamed_response_wrapper(
+            actions.setting_reset,
+        )
+        self.setting_update = async_to_streamed_response_wrapper(
+            actions.setting_update,
         )
         self.swipe = async_to_streamed_response_wrapper(
             actions.swipe,

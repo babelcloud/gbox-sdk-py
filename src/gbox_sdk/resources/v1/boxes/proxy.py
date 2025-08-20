@@ -114,9 +114,11 @@ class ProxyResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        auth: proxy_set_params.Auth,
-        excludes: List[str],
-        url: str,
+        host: str,
+        port: float,
+        auth: proxy_set_params.Auth | NotGiven = NOT_GIVEN,
+        excludes: List[str] | NotGiven = NOT_GIVEN,
+        pac_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -128,11 +130,18 @@ class ProxyResource(SyncAPIResource):
         Set the proxy for the box
 
         Args:
+          host: The host address of the proxy server
+
+          port: The port number of the proxy server
+
           auth: Box Proxy Auth
 
-          excludes: Exclude IPs and domains from the proxy. Default is ['127.0.0.1', 'localhost']
+          excludes: List of IP addresses and domains that should bypass the proxy. These addresses
+              will be accessed directly without going through the proxy server. Default is
+              ['127.0.0.1', 'localhost']
 
-          url: The URL of the proxy server
+          pac_url: PAC (Proxy Auto-Configuration) URL. Either this or url should be provided, but
+              not both.
 
           extra_headers: Send extra headers
 
@@ -149,9 +158,11 @@ class ProxyResource(SyncAPIResource):
             f"/boxes/{box_id}/proxy",
             body=maybe_transform(
                 {
+                    "host": host,
+                    "port": port,
                     "auth": auth,
                     "excludes": excludes,
-                    "url": url,
+                    "pac_url": pac_url,
                 },
                 proxy_set_params.ProxySetParams,
             ),
@@ -254,9 +265,11 @@ class AsyncProxyResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        auth: proxy_set_params.Auth,
-        excludes: List[str],
-        url: str,
+        host: str,
+        port: float,
+        auth: proxy_set_params.Auth | NotGiven = NOT_GIVEN,
+        excludes: List[str] | NotGiven = NOT_GIVEN,
+        pac_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -268,11 +281,18 @@ class AsyncProxyResource(AsyncAPIResource):
         Set the proxy for the box
 
         Args:
+          host: The host address of the proxy server
+
+          port: The port number of the proxy server
+
           auth: Box Proxy Auth
 
-          excludes: Exclude IPs and domains from the proxy. Default is ['127.0.0.1', 'localhost']
+          excludes: List of IP addresses and domains that should bypass the proxy. These addresses
+              will be accessed directly without going through the proxy server. Default is
+              ['127.0.0.1', 'localhost']
 
-          url: The URL of the proxy server
+          pac_url: PAC (Proxy Auto-Configuration) URL. Either this or url should be provided, but
+              not both.
 
           extra_headers: Send extra headers
 
@@ -289,9 +309,11 @@ class AsyncProxyResource(AsyncAPIResource):
             f"/boxes/{box_id}/proxy",
             body=await async_maybe_transform(
                 {
+                    "host": host,
+                    "port": port,
                     "auth": auth,
                     "excludes": excludes,
-                    "url": url,
+                    "pac_url": pac_url,
                 },
                 proxy_set_params.ProxySetParams,
             ),

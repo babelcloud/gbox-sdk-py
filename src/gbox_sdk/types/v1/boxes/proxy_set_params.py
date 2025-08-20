@@ -28,10 +28,7 @@ class ProxySetParams(TypedDict, total=False):
     """
 
     pac_url: Annotated[str, PropertyInfo(alias="pacUrl")]
-    """PAC (Proxy Auto-Configuration) URL.
-
-    Either this or url should be provided, but not both.
-    """
+    """PAC (Proxy Auto-Configuration) URL."""
 
 
 class Auth(TypedDict, total=False):

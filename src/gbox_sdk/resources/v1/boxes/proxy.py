@@ -140,8 +140,7 @@ class ProxyResource(SyncAPIResource):
               will be accessed directly without going through the proxy server. Default is
               ['127.0.0.1', 'localhost']
 
-          pac_url: PAC (Proxy Auto-Configuration) URL. Either this or url should be provided, but
-              not both.
+          pac_url: PAC (Proxy Auto-Configuration) URL.
 
           extra_headers: Send extra headers
 
@@ -291,8 +290,7 @@ class AsyncProxyResource(AsyncAPIResource):
               will be accessed directly without going through the proxy server. Default is
               ['127.0.0.1', 'localhost']
 
-          pac_url: PAC (Proxy Auto-Configuration) URL. Either this or url should be provided, but
-              not both.
+          pac_url: PAC (Proxy Auto-Configuration) URL.
 
           extra_headers: Send extra headers
 

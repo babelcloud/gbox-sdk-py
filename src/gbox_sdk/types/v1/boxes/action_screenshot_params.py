@@ -10,7 +10,13 @@ __all__ = ["ActionScreenshotParams", "Clip"]
 
 
 class ActionScreenshotParams(TypedDict, total=False):
-    scale: Required[float]
+    clip: Clip
+    """Clipping region for screenshot capture"""
+
+    output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
+    """Type of the URI. default is base64."""
+
+    scale: float
     """The scale of the action to be performed.
 
     Must be greater than 0.1 and less than or equal to 1.
@@ -23,12 +29,6 @@ class ActionScreenshotParams(TypedDict, total=False):
       scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
       Click({x:50, y:50}).
     """
-
-    clip: Clip
-    """Clipping region for screenshot capture"""
-
-    output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
-    """Type of the URI. default is base64."""
 
 
 class Clip(TypedDict, total=False):

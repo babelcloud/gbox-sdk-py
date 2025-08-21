@@ -1,12 +1,14 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from typing import Optional
+
 from ...._models import BaseModel
 
 __all__ = ["ActionSettingResetResponse"]
 
 
 class ActionSettingResetResponse(BaseModel):
-    scale: float
+    scale: Optional[float] = None
     """The scale of the action to be performed.
 
     Must be greater than 0.1 and less than or equal to 1.

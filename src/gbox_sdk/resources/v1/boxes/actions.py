@@ -1350,9 +1350,9 @@ class ActionsResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        scale: float,
         clip: action_screenshot_params.Clip | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        scale: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1360,12 +1360,15 @@ class ActionsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionScreenshotResponse:
-        """Take screenshot
+        """
+        Take screenshot
 
         Args:
-          scale: The scale of the action to be performed.
+          clip: Clipping region for screenshot capture
 
-        Must be greater than 0.1 and less than
+          output_format: Type of the URI. default is base64.
+
+          scale: The scale of the action to be performed. Must be greater than 0.1 and less than
               or equal to 1.
 
               Notes:
@@ -1375,10 +1378,6 @@ class ActionsResource(SyncAPIResource):
                 actions. Coordinates and distances are scaled by this factor. Example: when
                 scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
                 Click({x:50, y:50}).
-
-          clip: Clipping region for screenshot capture
-
-          output_format: Type of the URI. default is base64.
 
           extra_headers: Send extra headers
 
@@ -1394,9 +1393,9 @@ class ActionsResource(SyncAPIResource):
             f"/boxes/{box_id}/actions/screenshot",
             body=maybe_transform(
                 {
-                    "scale": scale,
                     "clip": clip,
                     "output_format": output_format,
+                    "scale": scale,
                 },
                 action_screenshot_params.ActionScreenshotParams,
             ),
@@ -1677,7 +1676,7 @@ class ActionsResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        scale: float,
+        scale: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -3540,9 +3539,9 @@ class AsyncActionsResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        scale: float,
         clip: action_screenshot_params.Clip | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        scale: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -3550,12 +3549,15 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ActionScreenshotResponse:
-        """Take screenshot
+        """
+        Take screenshot
 
         Args:
-          scale: The scale of the action to be performed.
+          clip: Clipping region for screenshot capture
 
-        Must be greater than 0.1 and less than
+          output_format: Type of the URI. default is base64.
+
+          scale: The scale of the action to be performed. Must be greater than 0.1 and less than
               or equal to 1.
 
               Notes:
@@ -3565,10 +3567,6 @@ class AsyncActionsResource(AsyncAPIResource):
                 actions. Coordinates and distances are scaled by this factor. Example: when
                 scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
                 Click({x:50, y:50}).
-
-          clip: Clipping region for screenshot capture
-
-          output_format: Type of the URI. default is base64.
 
           extra_headers: Send extra headers
 
@@ -3584,9 +3582,9 @@ class AsyncActionsResource(AsyncAPIResource):
             f"/boxes/{box_id}/actions/screenshot",
             body=await async_maybe_transform(
                 {
-                    "scale": scale,
                     "clip": clip,
                     "output_format": output_format,
+                    "scale": scale,
                 },
                 action_screenshot_params.ActionScreenshotParams,
             ),
@@ -3867,7 +3865,7 @@ class AsyncActionsResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        scale: float,
+        scale: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

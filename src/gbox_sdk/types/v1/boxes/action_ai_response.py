@@ -1002,7 +1002,13 @@ class AIActionScreenshotResultAIResponseActionTypedScreenshotActionClip(BaseMode
 
 
 class AIActionScreenshotResultAIResponseActionTypedScreenshotAction(BaseModel):
-    scale: float
+    clip: Optional[AIActionScreenshotResultAIResponseActionTypedScreenshotActionClip] = None
+    """Clipping region for screenshot capture"""
+
+    output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
+    """Type of the URI. default is base64."""
+
+    scale: Optional[float] = None
     """The scale of the action to be performed.
 
     Must be greater than 0.1 and less than or equal to 1.
@@ -1015,12 +1021,6 @@ class AIActionScreenshotResultAIResponseActionTypedScreenshotAction(BaseModel):
       scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
       Click({x:50, y:50}).
     """
-
-    clip: Optional[AIActionScreenshotResultAIResponseActionTypedScreenshotActionClip] = None
-    """Clipping region for screenshot capture"""
-
-    output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
 
 
 class AIActionScreenshotResultAIResponseActionTypedWaitAction(BaseModel):
@@ -2063,7 +2063,13 @@ class AIActionResultAIResponseActionTypedScreenshotActionClip(BaseModel):
 
 
 class AIActionResultAIResponseActionTypedScreenshotAction(BaseModel):
-    scale: float
+    clip: Optional[AIActionResultAIResponseActionTypedScreenshotActionClip] = None
+    """Clipping region for screenshot capture"""
+
+    output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
+    """Type of the URI. default is base64."""
+
+    scale: Optional[float] = None
     """The scale of the action to be performed.
 
     Must be greater than 0.1 and less than or equal to 1.
@@ -2076,12 +2082,6 @@ class AIActionResultAIResponseActionTypedScreenshotAction(BaseModel):
       scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
       Click({x:50, y:50}).
     """
-
-    clip: Optional[AIActionResultAIResponseActionTypedScreenshotActionClip] = None
-    """Clipping region for screenshot capture"""
-
-    output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
 
 
 class AIActionResultAIResponseActionTypedWaitAction(BaseModel):

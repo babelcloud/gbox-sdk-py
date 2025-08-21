@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, TypedDict
+from typing_extensions import TypedDict
 
 __all__ = ["ActionSettingUpdateParams"]
 
 
 class ActionSettingUpdateParams(TypedDict, total=False):
-    scale: Required[float]
+    scale: float
     """The scale of the action to be performed.
 
     Must be greater than 0.1 and less than or equal to 1.

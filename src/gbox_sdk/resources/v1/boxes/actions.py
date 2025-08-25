@@ -1535,11 +1535,11 @@ class ActionsResource(SyncAPIResource):
 
         Args:
           scroll_x: Horizontal scroll amount. Positive values scroll content rightward (reveals
-              content on the left), negative values scroll content leftward (reveals content
-              on the right).
+              content on the right), negative values scroll content leftward (reveals content
+              on the left).
 
           scroll_y: Vertical scroll amount. Positive values scroll content downward (reveals content
-              above), negative values scroll content upward (reveals content below).
+              below), negative values scroll content upward (reveals content above).
 
           x: X coordinate of the scroll position
 
@@ -3826,11 +3826,11 @@ class AsyncActionsResource(AsyncAPIResource):
 
         Args:
           scroll_x: Horizontal scroll amount. Positive values scroll content rightward (reveals
-              content on the left), negative values scroll content leftward (reveals content
-              on the right).
+              content on the right), negative values scroll content leftward (reveals content
+              on the left).
 
           scroll_y: Vertical scroll amount. Positive values scroll content downward (reveals content
-              above), negative values scroll content upward (reveals content below).
+              below), negative values scroll content upward (reveals content above).
 
           x: X coordinate of the scroll position
 

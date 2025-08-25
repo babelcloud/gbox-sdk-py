@@ -1020,6 +1020,8 @@ class AIActionScreenshotResultAIResponseActionTypedScreenshotAction(BaseModel):
       actions. Coordinates and distances are scaled by this factor. Example: when
       scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
       Click({x:50, y:50}).
+    - If not provided, uses the scale value from UI action settings; otherwise uses
+      the passed value.
     """
 
 
@@ -2081,6 +2083,8 @@ class AIActionResultAIResponseActionTypedScreenshotAction(BaseModel):
       actions. Coordinates and distances are scaled by this factor. Example: when
       scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
       Click({x:50, y:50}).
+    - If not provided, uses the scale value from UI action settings; otherwise uses
+      the passed value.
     """
 
 

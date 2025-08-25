@@ -14,15 +14,15 @@ class Scroll(TypedDict, total=False):
     scroll_x: Required[Annotated[float, PropertyInfo(alias="scrollX")]]
     """Horizontal scroll amount.
 
-    Positive values scroll content rightward (reveals content on the left), negative
-    values scroll content leftward (reveals content on the right).
+    Positive values scroll content rightward (reveals content on the right),
+    negative values scroll content leftward (reveals content on the left).
     """
 
     scroll_y: Required[Annotated[float, PropertyInfo(alias="scrollY")]]
     """Vertical scroll amount.
 
-    Positive values scroll content downward (reveals content above), negative values
-    scroll content upward (reveals content below).
+    Positive values scroll content downward (reveals content below), negative values
+    scroll content upward (reveals content above).
     """
 
     x: Required[float]

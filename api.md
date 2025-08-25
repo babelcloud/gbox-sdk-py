@@ -112,11 +112,17 @@ Methods:
 
 ### Proxy
 
+Types:
+
+```python
+from gbox_sdk.types.v1.boxes import ProxyGetResponse, ProxySetResponse
+```
+
 Methods:
 
 - <code title="delete /boxes/{boxId}/proxy">client.v1.boxes.proxy.<a href="./src/gbox_sdk/resources/v1/boxes/proxy.py">clear</a>(box_id) -> None</code>
-- <code title="get /boxes/{boxId}/proxy">client.v1.boxes.proxy.<a href="./src/gbox_sdk/resources/v1/boxes/proxy.py">get</a>(box_id) -> None</code>
-- <code title="post /boxes/{boxId}/proxy">client.v1.boxes.proxy.<a href="./src/gbox_sdk/resources/v1/boxes/proxy.py">set</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/proxy_set_params.py">params</a>) -> None</code>
+- <code title="get /boxes/{boxId}/proxy">client.v1.boxes.proxy.<a href="./src/gbox_sdk/resources/v1/boxes/proxy.py">get</a>(box_id) -> <a href="./src/gbox_sdk/types/v1/boxes/proxy_get_response.py">ProxyGetResponse</a></code>
+- <code title="post /boxes/{boxId}/proxy">client.v1.boxes.proxy.<a href="./src/gbox_sdk/resources/v1/boxes/proxy.py">set</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/proxy_set_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/proxy_set_response.py">ProxySetResponse</a></code>
 
 ### Media
 

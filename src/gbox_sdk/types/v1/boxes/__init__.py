@@ -24,6 +24,8 @@ from .action_ai_response import ActionAIResponse as ActionAIResponse
 from .action_drag_params import ActionDragParams as ActionDragParams
 from .action_move_params import ActionMoveParams as ActionMoveParams
 from .action_type_params import ActionTypeParams as ActionTypeParams
+from .proxy_get_response import ProxyGetResponse as ProxyGetResponse
+from .proxy_set_response import ProxySetResponse as ProxySetResponse
 from .action_click_params import ActionClickParams as ActionClickParams
 from .action_swipe_params import ActionSwipeParams as ActionSwipeParams
 from .action_tap_response import ActionTapResponse as ActionTapResponse

@@ -18,6 +18,8 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.v1.boxes import proxy_set_params
+from ....types.v1.boxes.proxy_get_response import ProxyGetResponse
+from ....types.v1.boxes.proxy_set_response import ProxySetResponse
 
 __all__ = ["ProxyResource", "AsyncProxyResource"]
 
@@ -86,7 +88,7 @@ class ProxyResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
+    ) -> ProxyGetResponse:
         """
         Get the proxy for the box
 
@@ -101,13 +103,12 @@ class ProxyResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._get(
             f"/boxes/{box_id}/proxy",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=ProxyGetResponse,
         )
 
     def set(
@@ -125,7 +126,7 @@ class ProxyResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
+    ) -> ProxySetResponse:
         """
         Set the proxy for the box
 
@@ -152,7 +153,6 @@ class ProxyResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
             f"/boxes/{box_id}/proxy",
             body=maybe_transform(
@@ -168,7 +168,7 @@ class ProxyResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=ProxySetResponse,
         )
 
 
@@ -236,7 +236,7 @@ class AsyncProxyResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
+    ) -> ProxyGetResponse:
         """
         Get the proxy for the box
 
@@ -251,13 +251,12 @@ class AsyncProxyResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._get(
             f"/boxes/{box_id}/proxy",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=ProxyGetResponse,
         )
 
     async def set(
@@ -275,7 +274,7 @@ class AsyncProxyResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
+    ) -> ProxySetResponse:
         """
         Set the proxy for the box
 
@@ -302,7 +301,6 @@ class AsyncProxyResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
             f"/boxes/{box_id}/proxy",
             body=await async_maybe_transform(
@@ -318,7 +316,7 @@ class AsyncProxyResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=ProxySetResponse,
         )
 
 

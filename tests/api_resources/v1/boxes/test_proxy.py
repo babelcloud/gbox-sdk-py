@@ -8,6 +8,8 @@ from typing import Any, cast
 import pytest
 
 from gbox_sdk import GboxClient, AsyncGboxClient
+from tests.utils import assert_matches_type
+from gbox_sdk.types.v1.boxes import ProxyGetResponse, ProxySetResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -63,7 +65,7 @@ class TestProxy:
         proxy = client.v1.boxes.proxy.get(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
-        assert proxy is None
+        assert_matches_type(ProxyGetResponse, proxy, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -75,7 +77,7 @@ class TestProxy:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         proxy = response.parse()
-        assert proxy is None
+        assert_matches_type(ProxyGetResponse, proxy, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -87,7 +89,7 @@ class TestProxy:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             proxy = response.parse()
-            assert proxy is None
+            assert_matches_type(ProxyGetResponse, proxy, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -107,7 +109,7 @@ class TestProxy:
             host="127.0.0.1",
             port=8080,
         )
-        assert proxy is None
+        assert_matches_type(ProxySetResponse, proxy, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -123,7 +125,7 @@ class TestProxy:
             excludes=["127.0.0.1", "localhost"],
             pac_url="http://proxy.company.com/proxy.pac",
         )
-        assert proxy is None
+        assert_matches_type(ProxySetResponse, proxy, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -137,7 +139,7 @@ class TestProxy:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         proxy = response.parse()
-        assert proxy is None
+        assert_matches_type(ProxySetResponse, proxy, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -151,7 +153,7 @@ class TestProxy:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             proxy = response.parse()
-            assert proxy is None
+            assert_matches_type(ProxySetResponse, proxy, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -219,7 +221,7 @@ class TestAsyncProxy:
         proxy = await async_client.v1.boxes.proxy.get(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
-        assert proxy is None
+        assert_matches_type(ProxyGetResponse, proxy, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -231,7 +233,7 @@ class TestAsyncProxy:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         proxy = await response.parse()
-        assert proxy is None
+        assert_matches_type(ProxyGetResponse, proxy, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -243,7 +245,7 @@ class TestAsyncProxy:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             proxy = await response.parse()
-            assert proxy is None
+            assert_matches_type(ProxyGetResponse, proxy, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -263,7 +265,7 @@ class TestAsyncProxy:
             host="127.0.0.1",
             port=8080,
         )
-        assert proxy is None
+        assert_matches_type(ProxySetResponse, proxy, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -279,7 +281,7 @@ class TestAsyncProxy:
             excludes=["127.0.0.1", "localhost"],
             pac_url="http://proxy.company.com/proxy.pac",
         )
-        assert proxy is None
+        assert_matches_type(ProxySetResponse, proxy, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -293,7 +295,7 @@ class TestAsyncProxy:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         proxy = await response.parse()
-        assert proxy is None
+        assert_matches_type(ProxySetResponse, proxy, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -307,7 +309,7 @@ class TestAsyncProxy:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             proxy = await response.parse()
-            assert proxy is None
+            assert_matches_type(ProxySetResponse, proxy, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

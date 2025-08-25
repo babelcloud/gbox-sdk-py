@@ -1479,6 +1479,8 @@ class ActionsResource(SyncAPIResource):
                 actions. Coordinates and distances are scaled by this factor. Example: when
                 scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
                 Click({x:50, y:50}).
+              - If not provided, uses the scale value from UI action settings; otherwise uses
+                the passed value.
 
           extra_headers: Send extra headers
 
@@ -1777,7 +1779,7 @@ class ActionsResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        scale: float | NotGiven = NOT_GIVEN,
+        scale: float,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -3768,6 +3770,8 @@ class AsyncActionsResource(AsyncAPIResource):
                 actions. Coordinates and distances are scaled by this factor. Example: when
                 scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
                 Click({x:50, y:50}).
+              - If not provided, uses the scale value from UI action settings; otherwise uses
+                the passed value.
 
           extra_headers: Send extra headers
 
@@ -4066,7 +4070,7 @@ class AsyncActionsResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        scale: float | NotGiven = NOT_GIVEN,
+        scale: float,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

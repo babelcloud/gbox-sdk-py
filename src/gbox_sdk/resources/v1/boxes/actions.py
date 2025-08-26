@@ -33,6 +33,7 @@ from ....types.v1.boxes import (
     action_long_press_params,
     action_screenshot_params,
     action_press_button_params,
+    action_rewind_extract_params,
     action_recording_start_params,
     action_screen_rotation_params,
     action_settings_update_params,
@@ -54,6 +55,7 @@ from ....types.v1.boxes.action_screenshot_response import ActionScreenshotRespon
 from ....types.v1.boxes.action_press_button_response import ActionPressButtonResponse
 from ....types.v1.boxes.action_screen_layout_response import ActionScreenLayoutResponse
 from ....types.v1.boxes.action_recording_stop_response import ActionRecordingStopResponse
+from ....types.v1.boxes.action_rewind_extract_response import ActionRewindExtractResponse
 from ....types.v1.boxes.action_settings_reset_response import ActionSettingsResetResponse
 from ....types.v1.boxes.action_screen_rotation_response import ActionScreenRotationResponse
 from ....types.v1.boxes.action_settings_update_response import ActionSettingsUpdateResponse
@@ -1223,7 +1225,7 @@ class ActionsResource(SyncAPIResource):
             cast_to=ActionRecordingStopResponse,
         )
 
-    def replay_recording_disable(
+    def rewind_disable(
         self,
         box_id: str,
         *,
@@ -1233,8 +1235,10 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> str:
+    ) -> None:
         """
+        Stop the device's background screen rewind recording.
+
         Args:
           extra_headers: Send extra headers
 
@@ -1246,15 +1250,16 @@ class ActionsResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/boxes/{box_id}/actions/recording/replay",
+            f"/boxes/{box_id}/actions/recording/rewind",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=str,
+            cast_to=NoneType,
         )
 
-    def replay_recording_enable(
+    def rewind_enable(
         self,
         box_id: str,
         *,
@@ -1264,8 +1269,10 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> str:
+    ) -> None:
         """
+        Start the device's background screen rewind recording.
+
         Args:
           extra_headers: Send extra headers
 
@@ -1277,27 +1284,39 @@ class ActionsResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{box_id}/actions/recording/replay",
+            f"/boxes/{box_id}/actions/recording/rewind",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=str,
+            cast_to=NoneType,
         )
 
-    def replay_recording_get(
+    def rewind_extract(
         self,
         box_id: str,
         *,
+        duration: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> str:
+    ) -> ActionRewindExtractResponse:
         """
+        Rewind and capture the device's background screen recording from a specified
+        time period.
+
         Args:
+          duration: How far back in time to rewind for extracting recorded video. This specifies the
+              duration to go back from the current moment (e.g., '30s' rewinds 30 seconds to
+              get recent recorded activity). Default is 30s, max is 5m.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Maximum allowed: 5m
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -1309,11 +1328,12 @@ class ActionsResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{box_id}/actions/recording/replay/clip",
+            f"/boxes/{box_id}/actions/recording/rewind/extract",
+            body=maybe_transform({"duration": duration}, action_rewind_extract_params.ActionRewindExtractParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=str,
+            cast_to=ActionRewindExtractResponse,
         )
 
     def screen_layout(
@@ -1759,8 +1779,8 @@ class ActionsResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return self._post(
-            f"/boxes/{box_id}/actions/settings/reset",
+        return self._delete(
+            f"/boxes/{box_id}/actions/settings",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -3507,7 +3527,7 @@ class AsyncActionsResource(AsyncAPIResource):
             cast_to=ActionRecordingStopResponse,
         )
 
-    async def replay_recording_disable(
+    async def rewind_disable(
         self,
         box_id: str,
         *,
@@ -3517,8 +3537,10 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> str:
+    ) -> None:
         """
+        Stop the device's background screen rewind recording.
+
         Args:
           extra_headers: Send extra headers
 
@@ -3530,15 +3552,16 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/boxes/{box_id}/actions/recording/replay",
+            f"/boxes/{box_id}/actions/recording/rewind",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=str,
+            cast_to=NoneType,
         )
 
-    async def replay_recording_enable(
+    async def rewind_enable(
         self,
         box_id: str,
         *,
@@ -3548,8 +3571,10 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> str:
+    ) -> None:
         """
+        Start the device's background screen rewind recording.
+
         Args:
           extra_headers: Send extra headers
 
@@ -3561,27 +3586,39 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{box_id}/actions/recording/replay",
+            f"/boxes/{box_id}/actions/recording/rewind",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=str,
+            cast_to=NoneType,
         )
 
-    async def replay_recording_get(
+    async def rewind_extract(
         self,
         box_id: str,
         *,
+        duration: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> str:
+    ) -> ActionRewindExtractResponse:
         """
+        Rewind and capture the device's background screen recording from a specified
+        time period.
+
         Args:
+          duration: How far back in time to rewind for extracting recorded video. This specifies the
+              duration to go back from the current moment (e.g., '30s' rewinds 30 seconds to
+              get recent recorded activity). Default is 30s, max is 5m.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Maximum allowed: 5m
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -3593,11 +3630,14 @@ class AsyncActionsResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{box_id}/actions/recording/replay/clip",
+            f"/boxes/{box_id}/actions/recording/rewind/extract",
+            body=await async_maybe_transform(
+                {"duration": duration}, action_rewind_extract_params.ActionRewindExtractParams
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=str,
+            cast_to=ActionRewindExtractResponse,
         )
 
     async def screen_layout(
@@ -4043,8 +4083,8 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return await self._post(
-            f"/boxes/{box_id}/actions/settings/reset",
+        return await self._delete(
+            f"/boxes/{box_id}/actions/settings",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -4663,14 +4703,14 @@ class ActionsResourceWithRawResponse:
         self.recording_stop = to_raw_response_wrapper(
             actions.recording_stop,
         )
-        self.replay_recording_disable = to_raw_response_wrapper(
-            actions.replay_recording_disable,
+        self.rewind_disable = to_raw_response_wrapper(
+            actions.rewind_disable,
         )
-        self.replay_recording_enable = to_raw_response_wrapper(
-            actions.replay_recording_enable,
+        self.rewind_enable = to_raw_response_wrapper(
+            actions.rewind_enable,
         )
-        self.replay_recording_get = to_raw_response_wrapper(
-            actions.replay_recording_get,
+        self.rewind_extract = to_raw_response_wrapper(
+            actions.rewind_extract,
         )
         self.screen_layout = to_raw_response_wrapper(
             actions.screen_layout,
@@ -4741,14 +4781,14 @@ class AsyncActionsResourceWithRawResponse:
         self.recording_stop = async_to_raw_response_wrapper(
             actions.recording_stop,
         )
-        self.replay_recording_disable = async_to_raw_response_wrapper(
-            actions.replay_recording_disable,
+        self.rewind_disable = async_to_raw_response_wrapper(
+            actions.rewind_disable,
         )
-        self.replay_recording_enable = async_to_raw_response_wrapper(
-            actions.replay_recording_enable,
+        self.rewind_enable = async_to_raw_response_wrapper(
+            actions.rewind_enable,
         )
-        self.replay_recording_get = async_to_raw_response_wrapper(
-            actions.replay_recording_get,
+        self.rewind_extract = async_to_raw_response_wrapper(
+            actions.rewind_extract,
         )
         self.screen_layout = async_to_raw_response_wrapper(
             actions.screen_layout,
@@ -4819,14 +4859,14 @@ class ActionsResourceWithStreamingResponse:
         self.recording_stop = to_streamed_response_wrapper(
             actions.recording_stop,
         )
-        self.replay_recording_disable = to_streamed_response_wrapper(
-            actions.replay_recording_disable,
+        self.rewind_disable = to_streamed_response_wrapper(
+            actions.rewind_disable,
         )
-        self.replay_recording_enable = to_streamed_response_wrapper(
-            actions.replay_recording_enable,
+        self.rewind_enable = to_streamed_response_wrapper(
+            actions.rewind_enable,
         )
-        self.replay_recording_get = to_streamed_response_wrapper(
-            actions.replay_recording_get,
+        self.rewind_extract = to_streamed_response_wrapper(
+            actions.rewind_extract,
         )
         self.screen_layout = to_streamed_response_wrapper(
             actions.screen_layout,
@@ -4897,14 +4937,14 @@ class AsyncActionsResourceWithStreamingResponse:
         self.recording_stop = async_to_streamed_response_wrapper(
             actions.recording_stop,
         )
-        self.replay_recording_disable = async_to_streamed_response_wrapper(
-            actions.replay_recording_disable,
+        self.rewind_disable = async_to_streamed_response_wrapper(
+            actions.rewind_disable,
         )
-        self.replay_recording_enable = async_to_streamed_response_wrapper(
-            actions.replay_recording_enable,
+        self.rewind_enable = async_to_streamed_response_wrapper(
+            actions.rewind_enable,
         )
-        self.replay_recording_get = async_to_streamed_response_wrapper(
-            actions.replay_recording_get,
+        self.rewind_extract = async_to_streamed_response_wrapper(
+            actions.rewind_extract,
         )
         self.screen_layout = async_to_streamed_response_wrapper(
             actions.screen_layout,

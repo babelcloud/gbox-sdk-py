@@ -66,9 +66,7 @@ from gbox_sdk.types.v1.boxes import (
     ActionPressButtonResponse,
     ActionPressKeyResponse,
     ActionRecordingStopResponse,
-    ActionReplayRecordingDisableResponse,
-    ActionReplayRecordingEnableResponse,
-    ActionReplayRecordingGetResponse,
+    ActionRewindExtractResponse,
     ActionScreenLayoutResponse,
     ActionScreenRotationResponse,
     ActionScreenshotResponse,
@@ -95,15 +93,15 @@ Methods:
 - <code title="post /boxes/{boxId}/actions/press-key">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">press_key</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_press_key_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_press_key_response.py">ActionPressKeyResponse</a></code>
 - <code title="post /boxes/{boxId}/actions/recording/start">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">recording_start</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_recording_start_params.py">params</a>) -> None</code>
 - <code title="post /boxes/{boxId}/actions/recording/stop">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">recording_stop</a>(box_id) -> <a href="./src/gbox_sdk/types/v1/boxes/action_recording_stop_response.py">ActionRecordingStopResponse</a></code>
-- <code title="delete /boxes/{boxId}/actions/recording/replay">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">replay_recording_disable</a>(box_id) -> str</code>
-- <code title="post /boxes/{boxId}/actions/recording/replay">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">replay_recording_enable</a>(box_id) -> str</code>
-- <code title="post /boxes/{boxId}/actions/recording/replay/clip">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">replay_recording_get</a>(box_id) -> str</code>
+- <code title="delete /boxes/{boxId}/actions/recording/rewind">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">rewind_disable</a>(box_id) -> None</code>
+- <code title="post /boxes/{boxId}/actions/recording/rewind">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">rewind_enable</a>(box_id) -> None</code>
+- <code title="post /boxes/{boxId}/actions/recording/rewind/extract">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">rewind_extract</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_rewind_extract_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_rewind_extract_response.py">ActionRewindExtractResponse</a></code>
 - <code title="get /boxes/{boxId}/actions/screen-layout">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">screen_layout</a>(box_id) -> <a href="./src/gbox_sdk/types/v1/boxes/action_screen_layout_response.py">ActionScreenLayoutResponse</a></code>
 - <code title="post /boxes/{boxId}/actions/screen-rotation">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">screen_rotation</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_screen_rotation_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_screen_rotation_response.py">ActionScreenRotationResponse</a></code>
 - <code title="post /boxes/{boxId}/actions/screenshot">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">screenshot</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_screenshot_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_screenshot_response.py">ActionScreenshotResponse</a></code>
 - <code title="post /boxes/{boxId}/actions/scroll">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">scroll</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_scroll_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_scroll_response.py">ActionScrollResponse</a></code>
 - <code title="get /boxes/{boxId}/actions/settings">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">settings</a>(box_id) -> <a href="./src/gbox_sdk/types/v1/boxes/action_settings_response.py">ActionSettingsResponse</a></code>
-- <code title="post /boxes/{boxId}/actions/settings/reset">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">settings_reset</a>(box_id) -> <a href="./src/gbox_sdk/types/v1/boxes/action_settings_reset_response.py">ActionSettingsResetResponse</a></code>
+- <code title="delete /boxes/{boxId}/actions/settings">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">settings_reset</a>(box_id) -> <a href="./src/gbox_sdk/types/v1/boxes/action_settings_reset_response.py">ActionSettingsResetResponse</a></code>
 - <code title="put /boxes/{boxId}/actions/settings">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">settings_update</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_settings_update_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_settings_update_response.py">ActionSettingsUpdateResponse</a></code>
 - <code title="post /boxes/{boxId}/actions/swipe">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">swipe</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_swipe_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_swipe_response.py">ActionSwipeResponse</a></code>
 - <code title="post /boxes/{boxId}/actions/tap">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">tap</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_tap_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_tap_response.py">ActionTapResponse</a></code>

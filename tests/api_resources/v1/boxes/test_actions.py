@@ -27,6 +27,7 @@ from gbox_sdk.types.v1.boxes import (
     ActionPressButtonResponse,
     ActionScreenLayoutResponse,
     ActionRecordingStopResponse,
+    ActionRewindExtractResponse,
     ActionSettingsResetResponse,
     ActionScreenRotationResponse,
     ActionSettingsUpdateResponse,
@@ -909,128 +910,137 @@ class TestActions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_replay_recording_disable(self, client: GboxClient) -> None:
-        action = client.v1.boxes.actions.replay_recording_disable(
+    def test_method_rewind_disable(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.rewind_disable(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
-        assert_matches_type(str, action, path=["response"])
+        assert action is None
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_replay_recording_disable(self, client: GboxClient) -> None:
-        response = client.v1.boxes.actions.with_raw_response.replay_recording_disable(
+    def test_raw_response_rewind_disable(self, client: GboxClient) -> None:
+        response = client.v1.boxes.actions.with_raw_response.rewind_disable(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(str, action, path=["response"])
+        assert action is None
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_replay_recording_disable(self, client: GboxClient) -> None:
-        with client.v1.boxes.actions.with_streaming_response.replay_recording_disable(
+    def test_streaming_response_rewind_disable(self, client: GboxClient) -> None:
+        with client.v1.boxes.actions.with_streaming_response.rewind_disable(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(str, action, path=["response"])
+            assert action is None
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_replay_recording_disable(self, client: GboxClient) -> None:
+    def test_path_params_rewind_disable(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
-            client.v1.boxes.actions.with_raw_response.replay_recording_disable(
+            client.v1.boxes.actions.with_raw_response.rewind_disable(
                 "",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_replay_recording_enable(self, client: GboxClient) -> None:
-        action = client.v1.boxes.actions.replay_recording_enable(
+    def test_method_rewind_enable(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.rewind_enable(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
-        assert_matches_type(str, action, path=["response"])
+        assert action is None
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_replay_recording_enable(self, client: GboxClient) -> None:
-        response = client.v1.boxes.actions.with_raw_response.replay_recording_enable(
+    def test_raw_response_rewind_enable(self, client: GboxClient) -> None:
+        response = client.v1.boxes.actions.with_raw_response.rewind_enable(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(str, action, path=["response"])
+        assert action is None
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_replay_recording_enable(self, client: GboxClient) -> None:
-        with client.v1.boxes.actions.with_streaming_response.replay_recording_enable(
+    def test_streaming_response_rewind_enable(self, client: GboxClient) -> None:
+        with client.v1.boxes.actions.with_streaming_response.rewind_enable(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(str, action, path=["response"])
+            assert action is None
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_replay_recording_enable(self, client: GboxClient) -> None:
+    def test_path_params_rewind_enable(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
-            client.v1.boxes.actions.with_raw_response.replay_recording_enable(
+            client.v1.boxes.actions.with_raw_response.rewind_enable(
                 "",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_replay_recording_get(self, client: GboxClient) -> None:
-        action = client.v1.boxes.actions.replay_recording_get(
-            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+    def test_method_rewind_extract(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.rewind_extract(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
-        assert_matches_type(str, action, path=["response"])
+        assert_matches_type(ActionRewindExtractResponse, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_replay_recording_get(self, client: GboxClient) -> None:
-        response = client.v1.boxes.actions.with_raw_response.replay_recording_get(
-            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+    def test_method_rewind_extract_with_all_params(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.rewind_extract(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            duration="10s",
+        )
+        assert_matches_type(ActionRewindExtractResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_rewind_extract(self, client: GboxClient) -> None:
+        response = client.v1.boxes.actions.with_raw_response.rewind_extract(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(str, action, path=["response"])
+        assert_matches_type(ActionRewindExtractResponse, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_replay_recording_get(self, client: GboxClient) -> None:
-        with client.v1.boxes.actions.with_streaming_response.replay_recording_get(
-            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+    def test_streaming_response_rewind_extract(self, client: GboxClient) -> None:
+        with client.v1.boxes.actions.with_streaming_response.rewind_extract(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(str, action, path=["response"])
+            assert_matches_type(ActionRewindExtractResponse, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_replay_recording_get(self, client: GboxClient) -> None:
+    def test_path_params_rewind_extract(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
-            client.v1.boxes.actions.with_raw_response.replay_recording_get(
-                "",
+            client.v1.boxes.actions.with_raw_response.rewind_extract(
+                box_id="",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -2777,128 +2787,137 @@ class TestAsyncActions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_replay_recording_disable(self, async_client: AsyncGboxClient) -> None:
-        action = await async_client.v1.boxes.actions.replay_recording_disable(
+    async def test_method_rewind_disable(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.rewind_disable(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
-        assert_matches_type(str, action, path=["response"])
+        assert action is None
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_replay_recording_disable(self, async_client: AsyncGboxClient) -> None:
-        response = await async_client.v1.boxes.actions.with_raw_response.replay_recording_disable(
+    async def test_raw_response_rewind_disable(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.actions.with_raw_response.rewind_disable(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(str, action, path=["response"])
+        assert action is None
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_replay_recording_disable(self, async_client: AsyncGboxClient) -> None:
-        async with async_client.v1.boxes.actions.with_streaming_response.replay_recording_disable(
+    async def test_streaming_response_rewind_disable(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.actions.with_streaming_response.rewind_disable(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(str, action, path=["response"])
+            assert action is None
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_replay_recording_disable(self, async_client: AsyncGboxClient) -> None:
+    async def test_path_params_rewind_disable(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
-            await async_client.v1.boxes.actions.with_raw_response.replay_recording_disable(
+            await async_client.v1.boxes.actions.with_raw_response.rewind_disable(
                 "",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_replay_recording_enable(self, async_client: AsyncGboxClient) -> None:
-        action = await async_client.v1.boxes.actions.replay_recording_enable(
+    async def test_method_rewind_enable(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.rewind_enable(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
-        assert_matches_type(str, action, path=["response"])
+        assert action is None
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_replay_recording_enable(self, async_client: AsyncGboxClient) -> None:
-        response = await async_client.v1.boxes.actions.with_raw_response.replay_recording_enable(
+    async def test_raw_response_rewind_enable(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.actions.with_raw_response.rewind_enable(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(str, action, path=["response"])
+        assert action is None
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_replay_recording_enable(self, async_client: AsyncGboxClient) -> None:
-        async with async_client.v1.boxes.actions.with_streaming_response.replay_recording_enable(
+    async def test_streaming_response_rewind_enable(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.actions.with_streaming_response.rewind_enable(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(str, action, path=["response"])
+            assert action is None
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_replay_recording_enable(self, async_client: AsyncGboxClient) -> None:
+    async def test_path_params_rewind_enable(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
-            await async_client.v1.boxes.actions.with_raw_response.replay_recording_enable(
+            await async_client.v1.boxes.actions.with_raw_response.rewind_enable(
                 "",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_replay_recording_get(self, async_client: AsyncGboxClient) -> None:
-        action = await async_client.v1.boxes.actions.replay_recording_get(
-            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+    async def test_method_rewind_extract(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.rewind_extract(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
-        assert_matches_type(str, action, path=["response"])
+        assert_matches_type(ActionRewindExtractResponse, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_replay_recording_get(self, async_client: AsyncGboxClient) -> None:
-        response = await async_client.v1.boxes.actions.with_raw_response.replay_recording_get(
-            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+    async def test_method_rewind_extract_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.rewind_extract(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            duration="10s",
+        )
+        assert_matches_type(ActionRewindExtractResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_rewind_extract(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.actions.with_raw_response.rewind_extract(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(str, action, path=["response"])
+        assert_matches_type(ActionRewindExtractResponse, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_replay_recording_get(self, async_client: AsyncGboxClient) -> None:
-        async with async_client.v1.boxes.actions.with_streaming_response.replay_recording_get(
-            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+    async def test_streaming_response_rewind_extract(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.actions.with_streaming_response.rewind_extract(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(str, action, path=["response"])
+            assert_matches_type(ActionRewindExtractResponse, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_replay_recording_get(self, async_client: AsyncGboxClient) -> None:
+    async def test_path_params_rewind_extract(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
-            await async_client.v1.boxes.actions.with_raw_response.replay_recording_get(
-                "",
+            await async_client.v1.boxes.actions.with_raw_response.rewind_extract(
+                box_id="",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")

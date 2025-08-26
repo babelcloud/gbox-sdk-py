@@ -20,16 +20,16 @@ from gbox_sdk.types.v1.boxes import (
     ActionTouchResponse,
     ActionScrollResponse,
     ActionExtractResponse,
-    ActionSettingResponse,
     ActionPressKeyResponse,
+    ActionSettingsResponse,
     ActionLongPressResponse,
     ActionScreenshotResponse,
     ActionPressButtonResponse,
     ActionScreenLayoutResponse,
-    ActionSettingResetResponse,
     ActionRecordingStopResponse,
-    ActionSettingUpdateResponse,
+    ActionSettingsResetResponse,
     ActionScreenRotationResponse,
+    ActionSettingsUpdateResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -1329,101 +1329,101 @@ class TestActions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_setting(self, client: GboxClient) -> None:
-        action = client.v1.boxes.actions.setting(
+    def test_method_settings(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.settings(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
-        assert_matches_type(ActionSettingResponse, action, path=["response"])
+        assert_matches_type(ActionSettingsResponse, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_setting(self, client: GboxClient) -> None:
-        response = client.v1.boxes.actions.with_raw_response.setting(
+    def test_raw_response_settings(self, client: GboxClient) -> None:
+        response = client.v1.boxes.actions.with_raw_response.settings(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionSettingResponse, action, path=["response"])
+        assert_matches_type(ActionSettingsResponse, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_setting(self, client: GboxClient) -> None:
-        with client.v1.boxes.actions.with_streaming_response.setting(
+    def test_streaming_response_settings(self, client: GboxClient) -> None:
+        with client.v1.boxes.actions.with_streaming_response.settings(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionSettingResponse, action, path=["response"])
+            assert_matches_type(ActionSettingsResponse, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_setting(self, client: GboxClient) -> None:
+    def test_path_params_settings(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
-            client.v1.boxes.actions.with_raw_response.setting(
+            client.v1.boxes.actions.with_raw_response.settings(
                 "",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_setting_reset(self, client: GboxClient) -> None:
-        action = client.v1.boxes.actions.setting_reset(
+    def test_method_settings_reset(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.settings_reset(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
-        assert_matches_type(ActionSettingResetResponse, action, path=["response"])
+        assert_matches_type(ActionSettingsResetResponse, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_setting_reset(self, client: GboxClient) -> None:
-        response = client.v1.boxes.actions.with_raw_response.setting_reset(
+    def test_raw_response_settings_reset(self, client: GboxClient) -> None:
+        response = client.v1.boxes.actions.with_raw_response.settings_reset(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionSettingResetResponse, action, path=["response"])
+        assert_matches_type(ActionSettingsResetResponse, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_setting_reset(self, client: GboxClient) -> None:
-        with client.v1.boxes.actions.with_streaming_response.setting_reset(
+    def test_streaming_response_settings_reset(self, client: GboxClient) -> None:
+        with client.v1.boxes.actions.with_streaming_response.settings_reset(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionSettingResetResponse, action, path=["response"])
+            assert_matches_type(ActionSettingsResetResponse, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_setting_reset(self, client: GboxClient) -> None:
+    def test_path_params_settings_reset(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
-            client.v1.boxes.actions.with_raw_response.setting_reset(
+            client.v1.boxes.actions.with_raw_response.settings_reset(
                 "",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_setting_update(self, client: GboxClient) -> None:
-        action = client.v1.boxes.actions.setting_update(
+    def test_method_settings_update(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.settings_update(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             scale=1,
         )
-        assert_matches_type(ActionSettingUpdateResponse, action, path=["response"])
+        assert_matches_type(ActionSettingsUpdateResponse, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_setting_update(self, client: GboxClient) -> None:
-        response = client.v1.boxes.actions.with_raw_response.setting_update(
+    def test_raw_response_settings_update(self, client: GboxClient) -> None:
+        response = client.v1.boxes.actions.with_raw_response.settings_update(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             scale=1,
         )
@@ -1431,12 +1431,12 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionSettingUpdateResponse, action, path=["response"])
+        assert_matches_type(ActionSettingsUpdateResponse, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_setting_update(self, client: GboxClient) -> None:
-        with client.v1.boxes.actions.with_streaming_response.setting_update(
+    def test_streaming_response_settings_update(self, client: GboxClient) -> None:
+        with client.v1.boxes.actions.with_streaming_response.settings_update(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             scale=1,
         ) as response:
@@ -1444,15 +1444,15 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionSettingUpdateResponse, action, path=["response"])
+            assert_matches_type(ActionSettingsUpdateResponse, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_setting_update(self, client: GboxClient) -> None:
+    def test_path_params_settings_update(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
-            client.v1.boxes.actions.with_raw_response.setting_update(
+            client.v1.boxes.actions.with_raw_response.settings_update(
                 box_id="",
                 scale=1,
             )
@@ -3197,101 +3197,101 @@ class TestAsyncActions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_setting(self, async_client: AsyncGboxClient) -> None:
-        action = await async_client.v1.boxes.actions.setting(
+    async def test_method_settings(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.settings(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
-        assert_matches_type(ActionSettingResponse, action, path=["response"])
+        assert_matches_type(ActionSettingsResponse, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_setting(self, async_client: AsyncGboxClient) -> None:
-        response = await async_client.v1.boxes.actions.with_raw_response.setting(
+    async def test_raw_response_settings(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.actions.with_raw_response.settings(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionSettingResponse, action, path=["response"])
+        assert_matches_type(ActionSettingsResponse, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_setting(self, async_client: AsyncGboxClient) -> None:
-        async with async_client.v1.boxes.actions.with_streaming_response.setting(
+    async def test_streaming_response_settings(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.actions.with_streaming_response.settings(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionSettingResponse, action, path=["response"])
+            assert_matches_type(ActionSettingsResponse, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_setting(self, async_client: AsyncGboxClient) -> None:
+    async def test_path_params_settings(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
-            await async_client.v1.boxes.actions.with_raw_response.setting(
+            await async_client.v1.boxes.actions.with_raw_response.settings(
                 "",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_setting_reset(self, async_client: AsyncGboxClient) -> None:
-        action = await async_client.v1.boxes.actions.setting_reset(
+    async def test_method_settings_reset(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.settings_reset(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
-        assert_matches_type(ActionSettingResetResponse, action, path=["response"])
+        assert_matches_type(ActionSettingsResetResponse, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_setting_reset(self, async_client: AsyncGboxClient) -> None:
-        response = await async_client.v1.boxes.actions.with_raw_response.setting_reset(
+    async def test_raw_response_settings_reset(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.actions.with_raw_response.settings_reset(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionSettingResetResponse, action, path=["response"])
+        assert_matches_type(ActionSettingsResetResponse, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_setting_reset(self, async_client: AsyncGboxClient) -> None:
-        async with async_client.v1.boxes.actions.with_streaming_response.setting_reset(
+    async def test_streaming_response_settings_reset(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.actions.with_streaming_response.settings_reset(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionSettingResetResponse, action, path=["response"])
+            assert_matches_type(ActionSettingsResetResponse, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_setting_reset(self, async_client: AsyncGboxClient) -> None:
+    async def test_path_params_settings_reset(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
-            await async_client.v1.boxes.actions.with_raw_response.setting_reset(
+            await async_client.v1.boxes.actions.with_raw_response.settings_reset(
                 "",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_setting_update(self, async_client: AsyncGboxClient) -> None:
-        action = await async_client.v1.boxes.actions.setting_update(
+    async def test_method_settings_update(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.settings_update(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             scale=1,
         )
-        assert_matches_type(ActionSettingUpdateResponse, action, path=["response"])
+        assert_matches_type(ActionSettingsUpdateResponse, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_setting_update(self, async_client: AsyncGboxClient) -> None:
-        response = await async_client.v1.boxes.actions.with_raw_response.setting_update(
+    async def test_raw_response_settings_update(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.actions.with_raw_response.settings_update(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             scale=1,
         )
@@ -3299,12 +3299,12 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionSettingUpdateResponse, action, path=["response"])
+        assert_matches_type(ActionSettingsUpdateResponse, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_setting_update(self, async_client: AsyncGboxClient) -> None:
-        async with async_client.v1.boxes.actions.with_streaming_response.setting_update(
+    async def test_streaming_response_settings_update(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.actions.with_streaming_response.settings_update(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             scale=1,
         ) as response:
@@ -3312,15 +3312,15 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionSettingUpdateResponse, action, path=["response"])
+            assert_matches_type(ActionSettingsUpdateResponse, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_setting_update(self, async_client: AsyncGboxClient) -> None:
+    async def test_path_params_settings_update(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
-            await async_client.v1.boxes.actions.with_raw_response.setting_update(
+            await async_client.v1.boxes.actions.with_raw_response.settings_update(
                 box_id="",
                 scale=1,
             )

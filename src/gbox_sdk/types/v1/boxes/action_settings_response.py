@@ -2,10 +2,10 @@
 
 from ...._models import BaseModel
 
-__all__ = ["ActionSettingResponse"]
+__all__ = ["ActionSettingsResponse"]
 
 
-class ActionSettingResponse(BaseModel):
+class ActionSettingsResponse(BaseModel):
     scale: float
     """The scale of the action to be performed.
 

@@ -7,10 +7,10 @@ from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from ...._utils import PropertyInfo
 
-__all__ = ["ActionScrollParams", "Scroll", "ScrollSimple"]
+__all__ = ["ActionScrollParams", "ScrollAdvanced", "ScrollSimple"]
 
 
-class Scroll(TypedDict, total=False):
+class ScrollAdvanced(TypedDict, total=False):
     scroll_x: Required[Annotated[float, PropertyInfo(alias="scrollX")]]
     """Horizontal scroll amount.
 
@@ -127,4 +127,4 @@ class ScrollSimple(TypedDict, total=False):
     """
 
 
-ActionScrollParams: TypeAlias = Union[Scroll, ScrollSimple]
+ActionScrollParams: TypeAlias = Union[ScrollAdvanced, ScrollSimple]

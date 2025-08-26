@@ -2,6 +2,6 @@
 
 from typing_extensions import TypeAlias
 
-__all__ = ["ActionReplayRecordingStopResponse"]
+__all__ = ["ActionReplayRecordingDisableResponse"]
 
-ActionReplayRecordingStopResponse: TypeAlias = str
+ActionReplayRecordingDisableResponse: TypeAlias = str

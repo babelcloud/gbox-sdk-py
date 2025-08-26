@@ -36,7 +36,6 @@ from ....types.v1.boxes import (
     action_setting_update_params,
     action_recording_start_params,
     action_screen_rotation_params,
-    action_replay_recording_get_params,
 )
 from ....types.v1.boxes.action_ai_response import ActionAIResponse
 from ....types.v1.boxes.action_tap_response import ActionTapResponse
@@ -1224,11 +1223,10 @@ class ActionsResource(SyncAPIResource):
             cast_to=ActionRecordingStopResponse,
         )
 
-    def replay_recording_get(
+    def replay_recording_disable(
         self,
         box_id: str,
         *,
-        seconds: float,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1248,21 +1246,15 @@ class ActionsResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return self._get(
+        return self._delete(
             f"/boxes/{box_id}/actions/recording/replay",
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {"seconds": seconds}, action_replay_recording_get_params.ActionReplayRecordingGetParams
-                ),
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=str,
         )
 
-    def replay_recording_start(
+    def replay_recording_enable(
         self,
         box_id: str,
         *,
@@ -1293,7 +1285,7 @@ class ActionsResource(SyncAPIResource):
             cast_to=str,
         )
 
-    def replay_recording_stop(
+    def replay_recording_get(
         self,
         box_id: str,
         *,
@@ -1316,8 +1308,8 @@ class ActionsResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return self._delete(
-            f"/boxes/{box_id}/actions/recording/replay",
+        return self._post(
+            f"/boxes/{box_id}/actions/recording/replay/clip",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -3515,11 +3507,10 @@ class AsyncActionsResource(AsyncAPIResource):
             cast_to=ActionRecordingStopResponse,
         )
 
-    async def replay_recording_get(
+    async def replay_recording_disable(
         self,
         box_id: str,
         *,
-        seconds: float,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -3539,21 +3530,15 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return await self._get(
+        return await self._delete(
             f"/boxes/{box_id}/actions/recording/replay",
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {"seconds": seconds}, action_replay_recording_get_params.ActionReplayRecordingGetParams
-                ),
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=str,
         )
 
-    async def replay_recording_start(
+    async def replay_recording_enable(
         self,
         box_id: str,
         *,
@@ -3584,7 +3569,7 @@ class AsyncActionsResource(AsyncAPIResource):
             cast_to=str,
         )
 
-    async def replay_recording_stop(
+    async def replay_recording_get(
         self,
         box_id: str,
         *,
@@ -3607,8 +3592,8 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return await self._delete(
-            f"/boxes/{box_id}/actions/recording/replay",
+        return await self._post(
+            f"/boxes/{box_id}/actions/recording/replay/clip",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -4676,14 +4661,14 @@ class ActionsResourceWithRawResponse:
         self.recording_stop = to_raw_response_wrapper(
             actions.recording_stop,
         )
+        self.replay_recording_disable = to_raw_response_wrapper(
+            actions.replay_recording_disable,
+        )
+        self.replay_recording_enable = to_raw_response_wrapper(
+            actions.replay_recording_enable,
+        )
         self.replay_recording_get = to_raw_response_wrapper(
             actions.replay_recording_get,
-        )
-        self.replay_recording_start = to_raw_response_wrapper(
-            actions.replay_recording_start,
-        )
-        self.replay_recording_stop = to_raw_response_wrapper(
-            actions.replay_recording_stop,
         )
         self.screen_layout = to_raw_response_wrapper(
             actions.screen_layout,
@@ -4754,14 +4739,14 @@ class AsyncActionsResourceWithRawResponse:
         self.recording_stop = async_to_raw_response_wrapper(
             actions.recording_stop,
         )
+        self.replay_recording_disable = async_to_raw_response_wrapper(
+            actions.replay_recording_disable,
+        )
+        self.replay_recording_enable = async_to_raw_response_wrapper(
+            actions.replay_recording_enable,
+        )
         self.replay_recording_get = async_to_raw_response_wrapper(
             actions.replay_recording_get,
-        )
-        self.replay_recording_start = async_to_raw_response_wrapper(
-            actions.replay_recording_start,
-        )
-        self.replay_recording_stop = async_to_raw_response_wrapper(
-            actions.replay_recording_stop,
         )
         self.screen_layout = async_to_raw_response_wrapper(
             actions.screen_layout,
@@ -4832,14 +4817,14 @@ class ActionsResourceWithStreamingResponse:
         self.recording_stop = to_streamed_response_wrapper(
             actions.recording_stop,
         )
+        self.replay_recording_disable = to_streamed_response_wrapper(
+            actions.replay_recording_disable,
+        )
+        self.replay_recording_enable = to_streamed_response_wrapper(
+            actions.replay_recording_enable,
+        )
         self.replay_recording_get = to_streamed_response_wrapper(
             actions.replay_recording_get,
-        )
-        self.replay_recording_start = to_streamed_response_wrapper(
-            actions.replay_recording_start,
-        )
-        self.replay_recording_stop = to_streamed_response_wrapper(
-            actions.replay_recording_stop,
         )
         self.screen_layout = to_streamed_response_wrapper(
             actions.screen_layout,
@@ -4910,14 +4895,14 @@ class AsyncActionsResourceWithStreamingResponse:
         self.recording_stop = async_to_streamed_response_wrapper(
             actions.recording_stop,
         )
+        self.replay_recording_disable = async_to_streamed_response_wrapper(
+            actions.replay_recording_disable,
+        )
+        self.replay_recording_enable = async_to_streamed_response_wrapper(
+            actions.replay_recording_enable,
+        )
         self.replay_recording_get = async_to_streamed_response_wrapper(
             actions.replay_recording_get,
-        )
-        self.replay_recording_start = async_to_streamed_response_wrapper(
-            actions.replay_recording_start,
-        )
-        self.replay_recording_stop = async_to_streamed_response_wrapper(
-            actions.replay_recording_stop,
         )
         self.screen_layout = async_to_streamed_response_wrapper(
             actions.screen_layout,

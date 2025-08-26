@@ -1,14 +1,12 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from __future__ import annotations
+from ...._models import BaseModel
 
-from typing_extensions import Required, TypedDict
-
-__all__ = ["ActionSettingUpdateParams"]
+__all__ = ["ActionSettingsResetResponse"]
 
 
-class ActionSettingUpdateParams(TypedDict, total=False):
-    scale: Required[float]
+class ActionSettingsResetResponse(BaseModel):
+    scale: float
     """The scale of the action to be performed.
 
     Must be greater than 0.1 and less than or equal to 1.

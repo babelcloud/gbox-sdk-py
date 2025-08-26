@@ -33,9 +33,9 @@ from ....types.v1.boxes import (
     action_long_press_params,
     action_screenshot_params,
     action_press_button_params,
-    action_setting_update_params,
     action_recording_start_params,
     action_screen_rotation_params,
+    action_settings_update_params,
 )
 from ....types.v1.boxes.action_ai_response import ActionAIResponse
 from ....types.v1.boxes.action_tap_response import ActionTapResponse
@@ -47,16 +47,16 @@ from ....types.v1.boxes.action_swipe_response import ActionSwipeResponse
 from ....types.v1.boxes.action_touch_response import ActionTouchResponse
 from ....types.v1.boxes.action_scroll_response import ActionScrollResponse
 from ....types.v1.boxes.action_extract_response import ActionExtractResponse
-from ....types.v1.boxes.action_setting_response import ActionSettingResponse
+from ....types.v1.boxes.action_settings_response import ActionSettingsResponse
 from ....types.v1.boxes.action_press_key_response import ActionPressKeyResponse
 from ....types.v1.boxes.action_long_press_response import ActionLongPressResponse
 from ....types.v1.boxes.action_screenshot_response import ActionScreenshotResponse
 from ....types.v1.boxes.action_press_button_response import ActionPressButtonResponse
 from ....types.v1.boxes.action_screen_layout_response import ActionScreenLayoutResponse
-from ....types.v1.boxes.action_setting_reset_response import ActionSettingResetResponse
 from ....types.v1.boxes.action_recording_stop_response import ActionRecordingStopResponse
-from ....types.v1.boxes.action_setting_update_response import ActionSettingUpdateResponse
+from ....types.v1.boxes.action_settings_reset_response import ActionSettingsResetResponse
 from ....types.v1.boxes.action_screen_rotation_response import ActionScreenRotationResponse
+from ....types.v1.boxes.action_settings_update_response import ActionSettingsUpdateResponse
 
 __all__ = ["ActionsResource", "AsyncActionsResource"]
 
@@ -1701,7 +1701,7 @@ class ActionsResource(SyncAPIResource):
             ),
         )
 
-    def setting(
+    def settings(
         self,
         box_id: str,
         *,
@@ -1711,9 +1711,9 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionSettingResponse:
+    ) -> ActionSettingsResponse:
         """
-        Get the box action setting
+        Get the box action settings
 
         Args:
           extra_headers: Send extra headers
@@ -1727,14 +1727,14 @@ class ActionsResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._get(
-            f"/boxes/{box_id}/actions/setting",
+            f"/boxes/{box_id}/actions/settings",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionSettingResponse,
+            cast_to=ActionSettingsResponse,
         )
 
-    def setting_reset(
+    def settings_reset(
         self,
         box_id: str,
         *,
@@ -1744,9 +1744,9 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionSettingResetResponse:
+    ) -> ActionSettingsResetResponse:
         """
-        Reset the box setting
+        Reset the box settings to default
 
         Args:
           extra_headers: Send extra headers
@@ -1760,14 +1760,14 @@ class ActionsResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{box_id}/actions/setting/reset",
+            f"/boxes/{box_id}/actions/settings/reset",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionSettingResetResponse,
+            cast_to=ActionSettingsResetResponse,
         )
 
-    def setting_update(
+    def settings_update(
         self,
         box_id: str,
         *,
@@ -1778,9 +1778,9 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionSettingUpdateResponse:
+    ) -> ActionSettingsUpdateResponse:
         """
-        Setting the box action setting
+        Update the box action settings
 
         Args:
           scale: The scale of the action to be performed. Must be greater than 0.1 and less than
@@ -1805,12 +1805,12 @@ class ActionsResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._put(
-            f"/boxes/{box_id}/actions/setting",
-            body=maybe_transform({"scale": scale}, action_setting_update_params.ActionSettingUpdateParams),
+            f"/boxes/{box_id}/actions/settings",
+            body=maybe_transform({"scale": scale}, action_settings_update_params.ActionSettingsUpdateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionSettingUpdateResponse,
+            cast_to=ActionSettingsUpdateResponse,
         )
 
     @overload
@@ -3985,7 +3985,7 @@ class AsyncActionsResource(AsyncAPIResource):
             ),
         )
 
-    async def setting(
+    async def settings(
         self,
         box_id: str,
         *,
@@ -3995,9 +3995,9 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionSettingResponse:
+    ) -> ActionSettingsResponse:
         """
-        Get the box action setting
+        Get the box action settings
 
         Args:
           extra_headers: Send extra headers
@@ -4011,14 +4011,14 @@ class AsyncActionsResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._get(
-            f"/boxes/{box_id}/actions/setting",
+            f"/boxes/{box_id}/actions/settings",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionSettingResponse,
+            cast_to=ActionSettingsResponse,
         )
 
-    async def setting_reset(
+    async def settings_reset(
         self,
         box_id: str,
         *,
@@ -4028,9 +4028,9 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionSettingResetResponse:
+    ) -> ActionSettingsResetResponse:
         """
-        Reset the box setting
+        Reset the box settings to default
 
         Args:
           extra_headers: Send extra headers
@@ -4044,14 +4044,14 @@ class AsyncActionsResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{box_id}/actions/setting/reset",
+            f"/boxes/{box_id}/actions/settings/reset",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionSettingResetResponse,
+            cast_to=ActionSettingsResetResponse,
         )
 
-    async def setting_update(
+    async def settings_update(
         self,
         box_id: str,
         *,
@@ -4062,9 +4062,9 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionSettingUpdateResponse:
+    ) -> ActionSettingsUpdateResponse:
         """
-        Setting the box action setting
+        Update the box action settings
 
         Args:
           scale: The scale of the action to be performed. Must be greater than 0.1 and less than
@@ -4089,12 +4089,14 @@ class AsyncActionsResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._put(
-            f"/boxes/{box_id}/actions/setting",
-            body=await async_maybe_transform({"scale": scale}, action_setting_update_params.ActionSettingUpdateParams),
+            f"/boxes/{box_id}/actions/settings",
+            body=await async_maybe_transform(
+                {"scale": scale}, action_settings_update_params.ActionSettingsUpdateParams
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionSettingUpdateResponse,
+            cast_to=ActionSettingsUpdateResponse,
         )
 
     @overload
@@ -4682,14 +4684,14 @@ class ActionsResourceWithRawResponse:
         self.scroll = to_raw_response_wrapper(
             actions.scroll,
         )
-        self.setting = to_raw_response_wrapper(
-            actions.setting,
+        self.settings = to_raw_response_wrapper(
+            actions.settings,
         )
-        self.setting_reset = to_raw_response_wrapper(
-            actions.setting_reset,
+        self.settings_reset = to_raw_response_wrapper(
+            actions.settings_reset,
         )
-        self.setting_update = to_raw_response_wrapper(
-            actions.setting_update,
+        self.settings_update = to_raw_response_wrapper(
+            actions.settings_update,
         )
         self.swipe = to_raw_response_wrapper(
             actions.swipe,
@@ -4760,14 +4762,14 @@ class AsyncActionsResourceWithRawResponse:
         self.scroll = async_to_raw_response_wrapper(
             actions.scroll,
         )
-        self.setting = async_to_raw_response_wrapper(
-            actions.setting,
+        self.settings = async_to_raw_response_wrapper(
+            actions.settings,
         )
-        self.setting_reset = async_to_raw_response_wrapper(
-            actions.setting_reset,
+        self.settings_reset = async_to_raw_response_wrapper(
+            actions.settings_reset,
         )
-        self.setting_update = async_to_raw_response_wrapper(
-            actions.setting_update,
+        self.settings_update = async_to_raw_response_wrapper(
+            actions.settings_update,
         )
         self.swipe = async_to_raw_response_wrapper(
             actions.swipe,
@@ -4838,14 +4840,14 @@ class ActionsResourceWithStreamingResponse:
         self.scroll = to_streamed_response_wrapper(
             actions.scroll,
         )
-        self.setting = to_streamed_response_wrapper(
-            actions.setting,
+        self.settings = to_streamed_response_wrapper(
+            actions.settings,
         )
-        self.setting_reset = to_streamed_response_wrapper(
-            actions.setting_reset,
+        self.settings_reset = to_streamed_response_wrapper(
+            actions.settings_reset,
         )
-        self.setting_update = to_streamed_response_wrapper(
-            actions.setting_update,
+        self.settings_update = to_streamed_response_wrapper(
+            actions.settings_update,
         )
         self.swipe = to_streamed_response_wrapper(
             actions.swipe,
@@ -4916,14 +4918,14 @@ class AsyncActionsResourceWithStreamingResponse:
         self.scroll = async_to_streamed_response_wrapper(
             actions.scroll,
         )
-        self.setting = async_to_streamed_response_wrapper(
-            actions.setting,
+        self.settings = async_to_streamed_response_wrapper(
+            actions.settings,
         )
-        self.setting_reset = async_to_streamed_response_wrapper(
-            actions.setting_reset,
+        self.settings_reset = async_to_streamed_response_wrapper(
+            actions.settings_reset,
         )
-        self.setting_update = async_to_streamed_response_wrapper(
-            actions.setting_update,
+        self.settings_update = async_to_streamed_response_wrapper(
+            actions.settings_update,
         )
         self.swipe = async_to_streamed_response_wrapper(
             actions.swipe,

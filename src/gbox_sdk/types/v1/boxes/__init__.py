@@ -90,12 +90,11 @@ from .media_get_album_detail_response import MediaGetAlbumDetailResponse as Medi
 from .android_list_activities_response import AndroidListActivitiesResponse as AndroidListActivitiesResponse
 from .android_list_pkg_simple_response import AndroidListPkgSimpleResponse as AndroidListPkgSimpleResponse
 from .media_get_media_support_response import MediaGetMediaSupportResponse as MediaGetMediaSupportResponse
-from .action_replay_recording_get_params import ActionReplayRecordingGetParams as ActionReplayRecordingGetParams
 from .action_replay_recording_get_response import ActionReplayRecordingGetResponse as ActionReplayRecordingGetResponse
 from .android_get_connect_address_response import AndroidGetConnectAddressResponse as AndroidGetConnectAddressResponse
-from .action_replay_recording_stop_response import (
-    ActionReplayRecordingStopResponse as ActionReplayRecordingStopResponse,
+from .action_replay_recording_enable_response import (
+    ActionReplayRecordingEnableResponse as ActionReplayRecordingEnableResponse,
 )
-from .action_replay_recording_start_response import (
-    ActionReplayRecordingStartResponse as ActionReplayRecordingStartResponse,
+from .action_replay_recording_disable_response import (
+    ActionReplayRecordingDisableResponse as ActionReplayRecordingDisableResponse,
 )

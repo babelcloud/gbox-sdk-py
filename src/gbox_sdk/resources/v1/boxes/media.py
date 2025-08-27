@@ -26,12 +26,10 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.v1.boxes import media_create_album_params, media_update_album_params
+from ....types.v1.boxes.media_album import MediaAlbum
 from ....types.v1.boxes.media_get_media_response import MediaGetMediaResponse
 from ....types.v1.boxes.media_list_media_response import MediaListMediaResponse
 from ....types.v1.boxes.media_list_albums_response import MediaListAlbumsResponse
-from ....types.v1.boxes.media_create_album_response import MediaCreateAlbumResponse
-from ....types.v1.boxes.media_update_album_response import MediaUpdateAlbumResponse
-from ....types.v1.boxes.media_get_album_detail_response import MediaGetAlbumDetailResponse
 from ....types.v1.boxes.media_get_media_support_response import MediaGetMediaSupportResponse
 
 __all__ = ["MediaResource", "AsyncMediaResource"]
@@ -69,7 +67,7 @@ class MediaResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> MediaCreateAlbumResponse:
+    ) -> MediaAlbum:
         """
         Create a new album with media files
 
@@ -106,7 +104,7 @@ class MediaResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=MediaCreateAlbumResponse,
+            cast_to=MediaAlbum,
         )
 
     def delete_album(
@@ -237,7 +235,7 @@ class MediaResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> MediaGetAlbumDetailResponse:
+    ) -> MediaAlbum:
         """
         Get detailed information about a specific album including its media files
 
@@ -259,7 +257,7 @@ class MediaResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=MediaGetAlbumDetailResponse,
+            cast_to=MediaAlbum,
         )
 
     def get_media(
@@ -420,7 +418,7 @@ class MediaResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> MediaUpdateAlbumResponse:
+    ) -> MediaAlbum:
         """
         Add media files to an existing album
 
@@ -452,7 +450,7 @@ class MediaResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=MediaUpdateAlbumResponse,
+            cast_to=MediaAlbum,
         )
 
 
@@ -488,7 +486,7 @@ class AsyncMediaResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> MediaCreateAlbumResponse:
+    ) -> MediaAlbum:
         """
         Create a new album with media files
 
@@ -525,7 +523,7 @@ class AsyncMediaResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=MediaCreateAlbumResponse,
+            cast_to=MediaAlbum,
         )
 
     async def delete_album(
@@ -656,7 +654,7 @@ class AsyncMediaResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> MediaGetAlbumDetailResponse:
+    ) -> MediaAlbum:
         """
         Get detailed information about a specific album including its media files
 
@@ -678,7 +676,7 @@ class AsyncMediaResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=MediaGetAlbumDetailResponse,
+            cast_to=MediaAlbum,
         )
 
     async def get_media(
@@ -839,7 +837,7 @@ class AsyncMediaResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> MediaUpdateAlbumResponse:
+    ) -> MediaAlbum:
         """
         Add media files to an existing album
 
@@ -871,7 +869,7 @@ class AsyncMediaResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=MediaUpdateAlbumResponse,
+            cast_to=MediaAlbum,
         )
 
 

@@ -2,22 +2,13 @@
 
 from __future__ import annotations
 
-from typing import List, Union
+from typing import Union
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from ...._utils import PropertyInfo
+from .action_common_options_param import ActionCommonOptionsParam
 
-__all__ = [
-    "ActionClickParams",
-    "Click",
-    "ClickOptions",
-    "ClickOptionsScreenshot",
-    "ClickOptionsScreenshotActionScreenshotOption",
-    "ClickByNaturalLanguage",
-    "ClickByNaturalLanguageOptions",
-    "ClickByNaturalLanguageOptionsScreenshot",
-    "ClickByNaturalLanguageOptionsScreenshotActionScreenshotOption",
-]
+__all__ = ["ActionClickParams", "Click", "ClickByNaturalLanguage"]
 
 
 class Click(TypedDict, total=False):
@@ -41,8 +32,8 @@ class Click(TypedDict, total=False):
     still be returned but with empty URIs. Default is false.
     """
 
-    options: ClickOptions
-    """Action common option"""
+    options: ActionCommonOptionsParam
+    """Action common options"""
 
     output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
     """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
@@ -80,59 +71,6 @@ class Click(TypedDict, total=False):
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-    """
-
-
-class ClickOptionsScreenshotActionScreenshotOption(TypedDict, total=False):
-    delay: str
-    """Delay after performing the action, before taking the final screenshot.
-
-    Execution flow:
-
-    1. Take screenshot before action
-    2. Perform the action
-    3. Wait for screenshotDelay (this parameter)
-    4. Take screenshot after action
-
-    Example: '500ms' means wait 500ms after the action before capturing the final
-    screenshot.
-
-    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-    """
-
-    output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
-    """Type of the URI. default is base64."""
-
-    presigned_expires_in: Annotated[str, PropertyInfo(alias="presignedExpiresIn")]
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
-
-    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-    """
-
-    range: List[Literal["before", "after", "trace"]]
-    """Specify which screenshots to capture.
-
-    Available options:
-
-    - before: Screenshot before the action
-    - after: Screenshot after the action
-    - trace: Screenshot with operation trace
-
-    Default captures all three types. Can specify one or multiple in an array.
-    """
-
-
-ClickOptionsScreenshot: TypeAlias = Union[bool, ClickOptionsScreenshotActionScreenshotOption]
-
-
-class ClickOptions(TypedDict, total=False):
-    screenshot: ClickOptionsScreenshot
-    """Screenshot options.
-
-    Can be a boolean to enable/disable screenshots, or an object to configure
-    screenshot options.
     """
 
 
@@ -157,8 +95,8 @@ class ClickByNaturalLanguage(TypedDict, total=False):
     still be returned but with empty URIs. Default is false.
     """
 
-    options: ClickByNaturalLanguageOptions
-    """Action common option"""
+    options: ActionCommonOptionsParam
+    """Action common options"""
 
     output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
     """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
@@ -196,61 +134,6 @@ class ClickByNaturalLanguage(TypedDict, total=False):
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-    """
-
-
-class ClickByNaturalLanguageOptionsScreenshotActionScreenshotOption(TypedDict, total=False):
-    delay: str
-    """Delay after performing the action, before taking the final screenshot.
-
-    Execution flow:
-
-    1. Take screenshot before action
-    2. Perform the action
-    3. Wait for screenshotDelay (this parameter)
-    4. Take screenshot after action
-
-    Example: '500ms' means wait 500ms after the action before capturing the final
-    screenshot.
-
-    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-    """
-
-    output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
-    """Type of the URI. default is base64."""
-
-    presigned_expires_in: Annotated[str, PropertyInfo(alias="presignedExpiresIn")]
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
-
-    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-    """
-
-    range: List[Literal["before", "after", "trace"]]
-    """Specify which screenshots to capture.
-
-    Available options:
-
-    - before: Screenshot before the action
-    - after: Screenshot after the action
-    - trace: Screenshot with operation trace
-
-    Default captures all three types. Can specify one or multiple in an array.
-    """
-
-
-ClickByNaturalLanguageOptionsScreenshot: TypeAlias = Union[
-    bool, ClickByNaturalLanguageOptionsScreenshotActionScreenshotOption
-]
-
-
-class ClickByNaturalLanguageOptions(TypedDict, total=False):
-    screenshot: ClickByNaturalLanguageOptionsScreenshot
-    """Screenshot options.
-
-    Can be a boolean to enable/disable screenshots, or an object to configure
-    screenshot options.
     """
 
 

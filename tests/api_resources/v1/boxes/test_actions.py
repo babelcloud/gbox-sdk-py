@@ -10,26 +10,14 @@ import pytest
 from gbox_sdk import GboxClient, AsyncGboxClient
 from tests.utils import assert_matches_type
 from gbox_sdk.types.v1.boxes import (
-    ActionAIResponse,
-    ActionTapResponse,
-    ActionDragResponse,
-    ActionMoveResponse,
-    ActionTypeResponse,
-    ActionClickResponse,
-    ActionSwipeResponse,
-    ActionTouchResponse,
-    ActionScrollResponse,
+    ActionResult,
     ActionExtractResponse,
-    ActionPressKeyResponse,
     ActionSettingsResponse,
-    ActionLongPressResponse,
     ActionScreenshotResponse,
-    ActionPressButtonResponse,
     ActionScreenLayoutResponse,
     ActionRecordingStopResponse,
     ActionRewindExtractResponse,
     ActionSettingsResetResponse,
-    ActionScreenRotationResponse,
     ActionSettingsUpdateResponse,
 )
 
@@ -46,7 +34,7 @@ class TestActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             instruction="click the login button",
         )
-        assert_matches_type(ActionAIResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -73,7 +61,7 @@ class TestActions:
             },
             stream=False,
         )
-        assert_matches_type(ActionAIResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -86,7 +74,7 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionAIResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -99,7 +87,7 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionAIResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -120,7 +108,7 @@ class TestActions:
             x=350,
             y=250,
         )
-        assert_matches_type(ActionClickResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -144,7 +132,7 @@ class TestActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionClickResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -158,7 +146,7 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionClickResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -172,7 +160,7 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionClickResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -193,7 +181,7 @@ class TestActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             target="login button",
         )
-        assert_matches_type(ActionClickResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -216,7 +204,7 @@ class TestActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionClickResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -229,7 +217,7 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionClickResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -242,7 +230,7 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionClickResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -269,7 +257,7 @@ class TestActions:
                 "y": 150,
             },
         )
-        assert_matches_type(ActionDragResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -298,7 +286,7 @@ class TestActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionDragResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -318,7 +306,7 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionDragResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -338,7 +326,7 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionDragResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -378,7 +366,7 @@ class TestActions:
                 },
             ],
         )
-        assert_matches_type(ActionDragResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -413,7 +401,7 @@ class TestActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionDragResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -439,7 +427,7 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionDragResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -465,7 +453,7 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionDragResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -555,7 +543,7 @@ class TestActions:
             x=350,
             y=250,
         )
-        assert_matches_type(ActionLongPressResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -578,7 +566,7 @@ class TestActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionLongPressResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -592,7 +580,7 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionLongPressResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -606,7 +594,7 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionLongPressResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -627,7 +615,7 @@ class TestActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             target="Chrome icon",
         )
-        assert_matches_type(ActionLongPressResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -649,7 +637,7 @@ class TestActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionLongPressResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -662,7 +650,7 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionLongPressResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -675,7 +663,7 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionLongPressResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -696,7 +684,7 @@ class TestActions:
             x=200,
             y=300,
         )
-        assert_matches_type(ActionMoveResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -718,7 +706,7 @@ class TestActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionMoveResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -732,7 +720,7 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionMoveResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -746,7 +734,7 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionMoveResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -767,7 +755,7 @@ class TestActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             buttons=["power"],
         )
-        assert_matches_type(ActionPressButtonResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -788,7 +776,7 @@ class TestActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionPressButtonResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -801,7 +789,7 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionPressButtonResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -814,7 +802,7 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionPressButtonResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -834,7 +822,7 @@ class TestActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             keys=["enter"],
         )
-        assert_matches_type(ActionPressKeyResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -856,7 +844,7 @@ class TestActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionPressKeyResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -869,7 +857,7 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionPressKeyResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -882,7 +870,7 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionPressKeyResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1172,7 +1160,7 @@ class TestActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             orientation="landscapeLeft",
         )
-        assert_matches_type(ActionScreenRotationResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -1193,7 +1181,7 @@ class TestActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionScreenRotationResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -1206,7 +1194,7 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionScreenRotationResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -1219,7 +1207,7 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionScreenRotationResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1301,7 +1289,7 @@ class TestActions:
             x=400,
             y=300,
         )
-        assert_matches_type(ActionScrollResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -1325,7 +1313,7 @@ class TestActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionScrollResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -1341,7 +1329,7 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionScrollResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -1357,7 +1345,7 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionScrollResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1380,7 +1368,7 @@ class TestActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             direction="up",
         )
-        assert_matches_type(ActionScrollResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -1403,7 +1391,7 @@ class TestActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionScrollResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -1416,7 +1404,7 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionScrollResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -1429,7 +1417,7 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionScrollResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1579,7 +1567,7 @@ class TestActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             direction="up",
         )
-        assert_matches_type(ActionSwipeResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -1603,7 +1591,7 @@ class TestActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionSwipeResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -1616,7 +1604,7 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionSwipeResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -1629,7 +1617,7 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionSwipeResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1656,7 +1644,7 @@ class TestActions:
                 "y": 150,
             },
         )
-        assert_matches_type(ActionSwipeResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -1685,7 +1673,7 @@ class TestActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionSwipeResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -1705,7 +1693,7 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionSwipeResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -1725,7 +1713,7 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionSwipeResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1753,7 +1741,7 @@ class TestActions:
             x=350,
             y=250,
         )
-        assert_matches_type(ActionTapResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -1775,7 +1763,7 @@ class TestActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionTapResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -1789,7 +1777,7 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionTapResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -1803,7 +1791,7 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionTapResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1824,7 +1812,7 @@ class TestActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             target="login button",
         )
-        assert_matches_type(ActionTapResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -1845,7 +1833,7 @@ class TestActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionTapResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -1858,7 +1846,7 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionTapResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -1871,7 +1859,7 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionTapResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1898,7 +1886,7 @@ class TestActions:
                 }
             ],
         )
-        assert_matches_type(ActionTouchResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -1934,7 +1922,7 @@ class TestActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionTouchResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -1954,7 +1942,7 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionTouchResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -1974,7 +1962,7 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionTouchResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -2001,7 +1989,7 @@ class TestActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             text="Hello World",
         )
-        assert_matches_type(ActionTypeResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2024,7 +2012,7 @@ class TestActions:
             press_enter=False,
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionTypeResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2037,7 +2025,7 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionTypeResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2050,7 +2038,7 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionTypeResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -2076,7 +2064,7 @@ class TestAsyncActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             instruction="click the login button",
         )
-        assert_matches_type(ActionAIResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2103,7 +2091,7 @@ class TestAsyncActions:
             },
             stream=False,
         )
-        assert_matches_type(ActionAIResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2116,7 +2104,7 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionAIResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2129,7 +2117,7 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionAIResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -2150,7 +2138,7 @@ class TestAsyncActions:
             x=350,
             y=250,
         )
-        assert_matches_type(ActionClickResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2174,7 +2162,7 @@ class TestAsyncActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionClickResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2188,7 +2176,7 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionClickResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2202,7 +2190,7 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionClickResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -2223,7 +2211,7 @@ class TestAsyncActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             target="login button",
         )
-        assert_matches_type(ActionClickResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2246,7 +2234,7 @@ class TestAsyncActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionClickResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2259,7 +2247,7 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionClickResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2272,7 +2260,7 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionClickResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -2299,7 +2287,7 @@ class TestAsyncActions:
                 "y": 150,
             },
         )
-        assert_matches_type(ActionDragResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2328,7 +2316,7 @@ class TestAsyncActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionDragResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2348,7 +2336,7 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionDragResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2368,7 +2356,7 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionDragResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -2408,7 +2396,7 @@ class TestAsyncActions:
                 },
             ],
         )
-        assert_matches_type(ActionDragResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2443,7 +2431,7 @@ class TestAsyncActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionDragResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2469,7 +2457,7 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionDragResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2495,7 +2483,7 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionDragResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -2585,7 +2573,7 @@ class TestAsyncActions:
             x=350,
             y=250,
         )
-        assert_matches_type(ActionLongPressResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2608,7 +2596,7 @@ class TestAsyncActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionLongPressResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2622,7 +2610,7 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionLongPressResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2636,7 +2624,7 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionLongPressResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -2657,7 +2645,7 @@ class TestAsyncActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             target="Chrome icon",
         )
-        assert_matches_type(ActionLongPressResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2679,7 +2667,7 @@ class TestAsyncActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionLongPressResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2692,7 +2680,7 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionLongPressResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2705,7 +2693,7 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionLongPressResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -2726,7 +2714,7 @@ class TestAsyncActions:
             x=200,
             y=300,
         )
-        assert_matches_type(ActionMoveResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2748,7 +2736,7 @@ class TestAsyncActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionMoveResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2762,7 +2750,7 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionMoveResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2776,7 +2764,7 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionMoveResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -2797,7 +2785,7 @@ class TestAsyncActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             buttons=["power"],
         )
-        assert_matches_type(ActionPressButtonResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2818,7 +2806,7 @@ class TestAsyncActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionPressButtonResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2831,7 +2819,7 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionPressButtonResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2844,7 +2832,7 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionPressButtonResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -2864,7 +2852,7 @@ class TestAsyncActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             keys=["enter"],
         )
-        assert_matches_type(ActionPressKeyResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2886,7 +2874,7 @@ class TestAsyncActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionPressKeyResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2899,7 +2887,7 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionPressKeyResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2912,7 +2900,7 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionPressKeyResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -3202,7 +3190,7 @@ class TestAsyncActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             orientation="landscapeLeft",
         )
-        assert_matches_type(ActionScreenRotationResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -3223,7 +3211,7 @@ class TestAsyncActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionScreenRotationResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -3236,7 +3224,7 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionScreenRotationResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -3249,7 +3237,7 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionScreenRotationResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -3331,7 +3319,7 @@ class TestAsyncActions:
             x=400,
             y=300,
         )
-        assert_matches_type(ActionScrollResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -3355,7 +3343,7 @@ class TestAsyncActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionScrollResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -3371,7 +3359,7 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionScrollResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -3387,7 +3375,7 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionScrollResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -3410,7 +3398,7 @@ class TestAsyncActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             direction="up",
         )
-        assert_matches_type(ActionScrollResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -3433,7 +3421,7 @@ class TestAsyncActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionScrollResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -3446,7 +3434,7 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionScrollResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -3459,7 +3447,7 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionScrollResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -3609,7 +3597,7 @@ class TestAsyncActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             direction="up",
         )
-        assert_matches_type(ActionSwipeResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -3633,7 +3621,7 @@ class TestAsyncActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionSwipeResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -3646,7 +3634,7 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionSwipeResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -3659,7 +3647,7 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionSwipeResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -3686,7 +3674,7 @@ class TestAsyncActions:
                 "y": 150,
             },
         )
-        assert_matches_type(ActionSwipeResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -3715,7 +3703,7 @@ class TestAsyncActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionSwipeResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -3735,7 +3723,7 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionSwipeResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -3755,7 +3743,7 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionSwipeResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -3783,7 +3771,7 @@ class TestAsyncActions:
             x=350,
             y=250,
         )
-        assert_matches_type(ActionTapResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -3805,7 +3793,7 @@ class TestAsyncActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionTapResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -3819,7 +3807,7 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionTapResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -3833,7 +3821,7 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionTapResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -3854,7 +3842,7 @@ class TestAsyncActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             target="login button",
         )
-        assert_matches_type(ActionTapResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -3875,7 +3863,7 @@ class TestAsyncActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionTapResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -3888,7 +3876,7 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionTapResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -3901,7 +3889,7 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionTapResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -3928,7 +3916,7 @@ class TestAsyncActions:
                 }
             ],
         )
-        assert_matches_type(ActionTouchResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -3964,7 +3952,7 @@ class TestAsyncActions:
             presigned_expires_in="30m",
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionTouchResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -3984,7 +3972,7 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionTouchResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -4004,7 +3992,7 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionTouchResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -4031,7 +4019,7 @@ class TestAsyncActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             text="Hello World",
         )
-        assert_matches_type(ActionTypeResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -4054,7 +4042,7 @@ class TestAsyncActions:
             press_enter=False,
             screenshot_delay="500ms",
         )
-        assert_matches_type(ActionTypeResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -4067,7 +4055,7 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionTypeResponse, action, path=["response"])
+        assert_matches_type(ActionResult, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -4080,7 +4068,7 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionTypeResponse, action, path=["response"])
+            assert_matches_type(ActionResult, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

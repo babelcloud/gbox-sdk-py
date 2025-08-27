@@ -7,24 +7,24 @@ from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
 
-__all__ = ["FWriteResponse"]
+__all__ = ["MediaPhoto"]
 
 
-class FWriteResponse(BaseModel):
+class MediaPhoto(BaseModel):
     last_modified: datetime = FieldInfo(alias="lastModified")
-    """Last modified time of the file"""
+    """Last modified time of the photo"""
 
-    mode: str
-    """File metadata"""
+    mime_type: str = FieldInfo(alias="mimeType")
+    """MIME type of the photo"""
 
     name: str
-    """Name of the file"""
+    """Name of the photo"""
 
     path: str
-    """Full path to the file in the box"""
+    """Full path to the photo in the box"""
 
     size: str
-    """Size of the file"""
+    """Size of the photo"""
 
-    type: Literal["file"]
-    """File type indicator"""
+    type: Literal["photo"]
+    """Photo type indicator"""

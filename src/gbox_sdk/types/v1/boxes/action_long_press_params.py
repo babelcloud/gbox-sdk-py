@@ -12,13 +12,11 @@ __all__ = [
     "LongPress",
     "LongPressOptions",
     "LongPressOptionsScreenshot",
-    "LongPressOptionsScreenshotUnionMember0",
-    "LongPressOptionsScreenshotActionScreenshotOptionDto",
+    "LongPressOptionsScreenshotActionScreenshotOption",
     "LongPressByNaturalLanguage",
     "LongPressByNaturalLanguageOptions",
     "LongPressByNaturalLanguageOptionsScreenshot",
-    "LongPressByNaturalLanguageOptionsScreenshotUnionMember0",
-    "LongPressByNaturalLanguageOptionsScreenshotActionScreenshotOptionDto",
+    "LongPressByNaturalLanguageOptionsScreenshotActionScreenshotOption",
 ]
 
 
@@ -86,7 +84,7 @@ class LongPress(TypedDict, total=False):
     """
 
 
-class LongPressOptionsScreenshotUnionMember0(TypedDict, total=False):
+class LongPressOptionsScreenshotActionScreenshotOption(TypedDict, total=False):
     delay: str
     """Delay after performing the action, before taking the final screenshot.
 
@@ -127,50 +125,7 @@ class LongPressOptionsScreenshotUnionMember0(TypedDict, total=False):
     """
 
 
-class LongPressOptionsScreenshotActionScreenshotOptionDto(TypedDict, total=False):
-    delay: str
-    """Delay after performing the action, before taking the final screenshot.
-
-    Execution flow:
-
-    1. Take screenshot before action
-    2. Perform the action
-    3. Wait for screenshotDelay (this parameter)
-    4. Take screenshot after action
-
-    Example: '500ms' means wait 500ms after the action before capturing the final
-    screenshot.
-
-    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-    """
-
-    output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
-    """Type of the URI. default is base64."""
-
-    presigned_expires_in: Annotated[str, PropertyInfo(alias="presignedExpiresIn")]
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
-
-    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-    """
-
-    range: List[Literal["before", "after", "trace"]]
-    """Specify which screenshots to capture.
-
-    Available options:
-
-    - before: Screenshot before the action
-    - after: Screenshot after the action
-    - trace: Screenshot with operation trace
-
-    Default captures all three types. Can specify one or multiple in an array.
-    """
-
-
-LongPressOptionsScreenshot: TypeAlias = Union[
-    LongPressOptionsScreenshotUnionMember0, LongPressOptionsScreenshotActionScreenshotOptionDto
-]
+LongPressOptionsScreenshot: TypeAlias = Union[bool, LongPressOptionsScreenshotActionScreenshotOption]
 
 
 class LongPressOptions(TypedDict, total=False):
@@ -246,48 +201,7 @@ class LongPressByNaturalLanguage(TypedDict, total=False):
     """
 
 
-class LongPressByNaturalLanguageOptionsScreenshotUnionMember0(TypedDict, total=False):
-    delay: str
-    """Delay after performing the action, before taking the final screenshot.
-
-    Execution flow:
-
-    1. Take screenshot before action
-    2. Perform the action
-    3. Wait for screenshotDelay (this parameter)
-    4. Take screenshot after action
-
-    Example: '500ms' means wait 500ms after the action before capturing the final
-    screenshot.
-
-    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-    """
-
-    output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
-    """Type of the URI. default is base64."""
-
-    presigned_expires_in: Annotated[str, PropertyInfo(alias="presignedExpiresIn")]
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
-
-    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-    """
-
-    range: List[Literal["before", "after", "trace"]]
-    """Specify which screenshots to capture.
-
-    Available options:
-
-    - before: Screenshot before the action
-    - after: Screenshot after the action
-    - trace: Screenshot with operation trace
-
-    Default captures all three types. Can specify one or multiple in an array.
-    """
-
-
-class LongPressByNaturalLanguageOptionsScreenshotActionScreenshotOptionDto(TypedDict, total=False):
+class LongPressByNaturalLanguageOptionsScreenshotActionScreenshotOption(TypedDict, total=False):
     delay: str
     """Delay after performing the action, before taking the final screenshot.
 
@@ -329,8 +243,7 @@ class LongPressByNaturalLanguageOptionsScreenshotActionScreenshotOptionDto(Typed
 
 
 LongPressByNaturalLanguageOptionsScreenshot: TypeAlias = Union[
-    LongPressByNaturalLanguageOptionsScreenshotUnionMember0,
-    LongPressByNaturalLanguageOptionsScreenshotActionScreenshotOptionDto,
+    bool, LongPressByNaturalLanguageOptionsScreenshotActionScreenshotOption
 ]
 
 

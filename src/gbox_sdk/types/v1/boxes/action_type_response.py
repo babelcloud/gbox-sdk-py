@@ -1,24 +1,15 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Union, Optional
-from typing_extensions import TypeAlias
+from typing import Optional
 
 from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
 
-__all__ = [
-    "ActionTypeResponse",
-    "ActionIncludeScreenshotResult",
-    "ActionIncludeScreenshotResultScreenshot",
-    "ActionIncludeScreenshotResultScreenshotAfter",
-    "ActionIncludeScreenshotResultScreenshotBefore",
-    "ActionIncludeScreenshotResultScreenshotTrace",
-    "ActionCommonResult",
-]
+__all__ = ["ActionTypeResponse", "Screenshot", "ScreenshotAfter", "ScreenshotBefore", "ScreenshotTrace"]
 
 
-class ActionIncludeScreenshotResultScreenshotAfter(BaseModel):
+class ScreenshotAfter(BaseModel):
     uri: str
     """URI of the screenshot after the action"""
 
@@ -26,7 +17,7 @@ class ActionIncludeScreenshotResultScreenshotAfter(BaseModel):
     """Presigned url of the screenshot before the action"""
 
 
-class ActionIncludeScreenshotResultScreenshotBefore(BaseModel):
+class ScreenshotBefore(BaseModel):
     uri: str
     """URI of the screenshot before the action"""
 
@@ -34,30 +25,25 @@ class ActionIncludeScreenshotResultScreenshotBefore(BaseModel):
     """Presigned url of the screenshot before the action"""
 
 
-class ActionIncludeScreenshotResultScreenshotTrace(BaseModel):
+class ScreenshotTrace(BaseModel):
     uri: str
     """URI of the screenshot with operation trace"""
 
 
-class ActionIncludeScreenshotResultScreenshot(BaseModel):
-    after: ActionIncludeScreenshotResultScreenshotAfter
+class Screenshot(BaseModel):
+    after: Optional[ScreenshotAfter] = None
     """Screenshot taken after action execution"""
 
-    before: ActionIncludeScreenshotResultScreenshotBefore
+    before: Optional[ScreenshotBefore] = None
     """Screenshot taken before action execution"""
 
-    trace: ActionIncludeScreenshotResultScreenshotTrace
+    trace: Optional[ScreenshotTrace] = None
     """Screenshot with action operation trace"""
 
 
-class ActionIncludeScreenshotResult(BaseModel):
-    screenshot: ActionIncludeScreenshotResultScreenshot
-    """Complete screenshot result with operation trace, before and after images"""
-
-
-class ActionCommonResult(BaseModel):
+class ActionTypeResponse(BaseModel):
     message: str
     """message"""
 
-
-ActionTypeResponse: TypeAlias = Union[ActionIncludeScreenshotResult, ActionCommonResult]
+    screenshot: Optional[Screenshot] = None
+    """Complete screenshot result with operation trace, before and after images"""

@@ -56,6 +56,14 @@ class TestActions:
             instruction="click the login button",
             background="The user is on the login page",
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -124,6 +132,14 @@ class TestActions:
             button="left",
             double=False,
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -188,6 +204,14 @@ class TestActions:
             button="left",
             double=False,
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -262,6 +286,14 @@ class TestActions:
             },
             duration="500ms",
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -369,6 +401,14 @@ class TestActions:
             ],
             duration="50ms",
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -526,6 +566,14 @@ class TestActions:
             y=250,
             duration="1s",
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -589,6 +637,14 @@ class TestActions:
             target="Chrome icon",
             duration="1s",
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -650,6 +706,14 @@ class TestActions:
             x=200,
             y=300,
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -712,6 +776,14 @@ class TestActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             buttons=["power"],
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -772,6 +844,14 @@ class TestActions:
             keys=["enter"],
             combination=True,
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -1101,6 +1181,14 @@ class TestActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             orientation="landscapeLeft",
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -1164,6 +1252,7 @@ class TestActions:
                 "y": 50,
             },
             output_format="base64",
+            presigned_expires_in="30m",
             scale=1,
         )
         assert_matches_type(ActionScreenshotResponse, action, path=["response"])
@@ -1224,6 +1313,14 @@ class TestActions:
             x=400,
             y=300,
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -1294,6 +1391,14 @@ class TestActions:
             distance=300,
             duration="500ms",
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -1486,6 +1591,14 @@ class TestActions:
             duration="500ms",
             include_screenshot=False,
             location="Chrome App",
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -1560,6 +1673,14 @@ class TestActions:
             },
             duration="500ms",
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -1642,6 +1763,14 @@ class TestActions:
             x=350,
             y=250,
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -1704,6 +1833,14 @@ class TestActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             target="login button",
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -1785,6 +1922,14 @@ class TestActions:
                 }
             ],
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -1866,6 +2011,14 @@ class TestActions:
             text="Hello World",
             include_screenshot=False,
             mode="append",
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             press_enter=False,
@@ -1933,6 +2086,14 @@ class TestAsyncActions:
             instruction="click the login button",
             background="The user is on the login page",
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -2001,6 +2162,14 @@ class TestAsyncActions:
             button="left",
             double=False,
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -2065,6 +2234,14 @@ class TestAsyncActions:
             button="left",
             double=False,
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -2139,6 +2316,14 @@ class TestAsyncActions:
             },
             duration="500ms",
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -2246,6 +2431,14 @@ class TestAsyncActions:
             ],
             duration="50ms",
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -2403,6 +2596,14 @@ class TestAsyncActions:
             y=250,
             duration="1s",
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -2466,6 +2667,14 @@ class TestAsyncActions:
             target="Chrome icon",
             duration="1s",
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -2527,6 +2736,14 @@ class TestAsyncActions:
             x=200,
             y=300,
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -2589,6 +2806,14 @@ class TestAsyncActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             buttons=["power"],
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -2649,6 +2874,14 @@ class TestAsyncActions:
             keys=["enter"],
             combination=True,
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -2978,6 +3211,14 @@ class TestAsyncActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             orientation="landscapeLeft",
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -3041,6 +3282,7 @@ class TestAsyncActions:
                 "y": 50,
             },
             output_format="base64",
+            presigned_expires_in="30m",
             scale=1,
         )
         assert_matches_type(ActionScreenshotResponse, action, path=["response"])
@@ -3101,6 +3343,14 @@ class TestAsyncActions:
             x=400,
             y=300,
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -3171,6 +3421,14 @@ class TestAsyncActions:
             distance=300,
             duration="500ms",
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -3363,6 +3621,14 @@ class TestAsyncActions:
             duration="500ms",
             include_screenshot=False,
             location="Chrome App",
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -3437,6 +3703,14 @@ class TestAsyncActions:
             },
             duration="500ms",
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -3519,6 +3793,14 @@ class TestAsyncActions:
             x=350,
             y=250,
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -3581,6 +3863,14 @@ class TestAsyncActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             target="login button",
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -3662,6 +3952,14 @@ class TestAsyncActions:
                 }
             ],
             include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             screenshot_delay="500ms",
@@ -3743,6 +4041,14 @@ class TestAsyncActions:
             text="Hello World",
             include_screenshot=False,
             mode="append",
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "presigned_expires_in": "30m",
+                    "range": ["before", "after"],
+                }
+            },
             output_format="base64",
             presigned_expires_in="30m",
             press_enter=False,

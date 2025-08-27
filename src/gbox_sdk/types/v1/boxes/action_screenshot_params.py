@@ -16,6 +16,13 @@ class ActionScreenshotParams(TypedDict, total=False):
     output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
     """Type of the URI. default is base64."""
 
+    presigned_expires_in: Annotated[str, PropertyInfo(alias="presignedExpiresIn")]
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
+
     scale: float
     """The scale of the action to be performed.
 

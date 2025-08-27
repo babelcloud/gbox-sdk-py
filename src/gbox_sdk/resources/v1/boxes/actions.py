@@ -122,9 +122,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -231,9 +229,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -310,9 +306,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -438,9 +432,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -516,9 +508,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -699,9 +689,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -780,9 +768,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -899,9 +885,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -990,9 +974,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -1201,9 +1183,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -1524,9 +1504,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -1697,9 +1675,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -1786,9 +1762,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -2037,9 +2011,7 @@ class ActionsResource(SyncAPIResource):
           location: Natural language description of the location where the swipe should originate.
               If not provided, the swipe will be performed from the center of the screen.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -2118,9 +2090,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -2243,9 +2213,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -2316,9 +2284,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -2430,9 +2396,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -2527,9 +2491,7 @@ class ActionsResource(SyncAPIResource):
           mode: Text input mode: 'append' to add text to existing content, 'replace' to replace
               all existing text
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -2653,9 +2615,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -2762,9 +2722,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -2841,9 +2799,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -2969,9 +2925,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -3047,9 +3001,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -3230,9 +3182,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -3311,9 +3261,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -3430,9 +3378,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -3521,9 +3467,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -3732,9 +3676,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -4059,9 +4001,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -4232,9 +4172,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -4321,9 +4259,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -4574,9 +4510,7 @@ class AsyncActionsResource(AsyncAPIResource):
           location: Natural language description of the location where the swipe should originate.
               If not provided, the swipe will be performed from the center of the screen.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -4655,9 +4589,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -4780,9 +4712,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -4853,9 +4783,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -4967,9 +4895,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -5064,9 +4990,7 @@ class AsyncActionsResource(AsyncAPIResource):
           mode: Text input mode: 'append' to add text to existing content, 'replace' to replace
               all existing text
 
-          options: Action options. When `options.screenshot` is provided, ALL deprecated screenshot
-              fields (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-              includeScreenshot) will be completely ignored.
+          options: Action common option
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is

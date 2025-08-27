@@ -52,12 +52,7 @@ class ScrollAdvanced(TypedDict, total=False):
     """
 
     options: ScrollAdvancedOptions
-    """Action options.
-
-    When `options.screenshot` is provided, ALL deprecated screenshot fields
-    (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-    includeScreenshot) will be completely ignored.
-    """
+    """Action common option"""
 
     output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
     """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
@@ -229,12 +224,7 @@ class ScrollSimple(TypedDict, total=False):
     """
 
     options: ScrollSimpleOptions
-    """Action options.
-
-    When `options.screenshot` is provided, ALL deprecated screenshot fields
-    (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-    includeScreenshot) will be completely ignored.
-    """
+    """Action common option"""
 
     output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
     """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.

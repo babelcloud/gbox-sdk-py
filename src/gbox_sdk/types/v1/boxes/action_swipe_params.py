@@ -64,12 +64,7 @@ class SwipeSimple(TypedDict, total=False):
     """
 
     options: SwipeSimpleOptions
-    """Action options.
-
-    When `options.screenshot` is provided, ALL deprecated screenshot fields
-    (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-    includeScreenshot) will be completely ignored.
-    """
+    """Action common option"""
 
     output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
     """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
@@ -229,12 +224,7 @@ class SwipeAdvanced(TypedDict, total=False):
     """
 
     options: SwipeAdvancedOptions
-    """Action options.
-
-    When `options.screenshot` is provided, ALL deprecated screenshot fields
-    (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-    includeScreenshot) will be completely ignored.
-    """
+    """Action common option"""
 
     output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
     """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.

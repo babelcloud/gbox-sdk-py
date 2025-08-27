@@ -44,12 +44,7 @@ class Click(TypedDict, total=False):
     """
 
     options: ClickOptions
-    """Action options.
-
-    When `options.screenshot` is provided, ALL deprecated screenshot fields
-    (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-    includeScreenshot) will be completely ignored.
-    """
+    """Action common option"""
 
     output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
     """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
@@ -208,12 +203,7 @@ class ClickByNaturalLanguage(TypedDict, total=False):
     """
 
     options: ClickByNaturalLanguageOptions
-    """Action options.
-
-    When `options.screenshot` is provided, ALL deprecated screenshot fields
-    (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-    includeScreenshot) will be completely ignored.
-    """
+    """Action common option"""
 
     output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
     """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.

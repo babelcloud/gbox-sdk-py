@@ -34,12 +34,7 @@ class ActionTouchParams(TypedDict, total=False):
     """
 
     options: Options
-    """Action options.
-
-    When `options.screenshot` is provided, ALL deprecated screenshot fields
-    (outputFormat, presignedExpiresIn, screenshotDelay, screenshotRange,
-    includeScreenshot) will be completely ignored.
-    """
+    """Action common option"""
 
     output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
     """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.

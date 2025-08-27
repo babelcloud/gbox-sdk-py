@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Iterable
+from typing import Any, List, Union, Iterable, cast
 from typing_extensions import Literal, overload
 
 import httpx
@@ -39,6 +39,7 @@ from ....types.v1.boxes import (
     action_settings_update_params,
 )
 from ....types.v1.boxes.action_result import ActionResult
+from ....types.v1.boxes.action_ai_response import ActionAIResponse
 from ....types.v1.boxes.action_extract_response import ActionExtractResponse
 from ....types.v1.boxes.action_settings_response import ActionSettingsResponse
 from ....types.v1.boxes.action_screenshot_response import ActionScreenshotResponse
@@ -91,7 +92,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionResult:
+    ) -> ActionAIResponse:
         """Use natural language instructions to perform UI operations on the box.
 
         The
@@ -158,26 +159,29 @@ class ActionsResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return self._post(
-            f"/boxes/{box_id}/actions/ai",
-            body=maybe_transform(
-                {
-                    "instruction": instruction,
-                    "background": background,
-                    "include_screenshot": include_screenshot,
-                    "options": options,
-                    "output_format": output_format,
-                    "presigned_expires_in": presigned_expires_in,
-                    "screenshot_delay": screenshot_delay,
-                    "settings": settings,
-                    "stream": stream,
-                },
-                action_ai_params.ActionAIParams,
+        return cast(
+            ActionAIResponse,
+            self._post(
+                f"/boxes/{box_id}/actions/ai",
+                body=maybe_transform(
+                    {
+                        "instruction": instruction,
+                        "background": background,
+                        "include_screenshot": include_screenshot,
+                        "options": options,
+                        "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
+                        "screenshot_delay": screenshot_delay,
+                        "settings": settings,
+                        "stream": stream,
+                    },
+                    action_ai_params.ActionAIParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(Any, ActionAIResponse),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ActionResult,
         )
 
     @overload
@@ -2584,7 +2588,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionResult:
+    ) -> ActionAIResponse:
         """Use natural language instructions to perform UI operations on the box.
 
         The
@@ -2651,26 +2655,29 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return await self._post(
-            f"/boxes/{box_id}/actions/ai",
-            body=await async_maybe_transform(
-                {
-                    "instruction": instruction,
-                    "background": background,
-                    "include_screenshot": include_screenshot,
-                    "options": options,
-                    "output_format": output_format,
-                    "presigned_expires_in": presigned_expires_in,
-                    "screenshot_delay": screenshot_delay,
-                    "settings": settings,
-                    "stream": stream,
-                },
-                action_ai_params.ActionAIParams,
+        return cast(
+            ActionAIResponse,
+            await self._post(
+                f"/boxes/{box_id}/actions/ai",
+                body=await async_maybe_transform(
+                    {
+                        "instruction": instruction,
+                        "background": background,
+                        "include_screenshot": include_screenshot,
+                        "options": options,
+                        "output_format": output_format,
+                        "presigned_expires_in": presigned_expires_in,
+                        "screenshot_delay": screenshot_delay,
+                        "settings": settings,
+                        "stream": stream,
+                    },
+                    action_ai_params.ActionAIParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(Any, ActionAIResponse),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ActionResult,
         )
 
     @overload

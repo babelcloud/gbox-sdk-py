@@ -49,8 +49,8 @@ class TestActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -125,8 +125,8 @@ class TestActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -197,8 +197,8 @@ class TestActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -279,8 +279,8 @@ class TestActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -394,8 +394,8 @@ class TestActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -559,8 +559,8 @@ class TestActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -630,8 +630,8 @@ class TestActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -699,8 +699,8 @@ class TestActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -769,8 +769,8 @@ class TestActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -837,8 +837,8 @@ class TestActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -1174,8 +1174,8 @@ class TestActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -1306,8 +1306,8 @@ class TestActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -1384,8 +1384,8 @@ class TestActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -1584,8 +1584,8 @@ class TestActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -1666,8 +1666,8 @@ class TestActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -1756,8 +1756,8 @@ class TestActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -1826,8 +1826,8 @@ class TestActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -1915,8 +1915,8 @@ class TestActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -2004,8 +2004,8 @@ class TestActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -2079,8 +2079,8 @@ class TestAsyncActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -2155,8 +2155,8 @@ class TestAsyncActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -2227,8 +2227,8 @@ class TestAsyncActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -2309,8 +2309,8 @@ class TestAsyncActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -2424,8 +2424,8 @@ class TestAsyncActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -2589,8 +2589,8 @@ class TestAsyncActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -2660,8 +2660,8 @@ class TestAsyncActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -2729,8 +2729,8 @@ class TestAsyncActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -2799,8 +2799,8 @@ class TestAsyncActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -2867,8 +2867,8 @@ class TestAsyncActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -3204,8 +3204,8 @@ class TestAsyncActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -3336,8 +3336,8 @@ class TestAsyncActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -3414,8 +3414,8 @@ class TestAsyncActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -3614,8 +3614,8 @@ class TestAsyncActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -3696,8 +3696,8 @@ class TestAsyncActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -3786,8 +3786,8 @@ class TestAsyncActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -3856,8 +3856,8 @@ class TestAsyncActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -3945,8 +3945,8 @@ class TestAsyncActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",
@@ -4034,8 +4034,8 @@ class TestAsyncActions:
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
+                    "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                    "range": ["before", "after"],
                 }
             },
             output_format="base64",

@@ -16,8 +16,22 @@ from .boxes import (
     BoxesResourceWithStreamingResponse,
     AsyncBoxesResourceWithStreamingResponse,
 )
+from .devices import (
+    DevicesResource,
+    AsyncDevicesResource,
+    DevicesResourceWithRawResponse,
+    AsyncDevicesResourceWithRawResponse,
+    DevicesResourceWithStreamingResponse,
+    AsyncDevicesResourceWithStreamingResponse,
+)
 
 __all__ = [
+    "DevicesResource",
+    "AsyncDevicesResource",
+    "DevicesResourceWithRawResponse",
+    "AsyncDevicesResourceWithRawResponse",
+    "DevicesResourceWithStreamingResponse",
+    "AsyncDevicesResourceWithStreamingResponse",
     "BoxesResource",
     "AsyncBoxesResource",
     "BoxesResourceWithRawResponse",

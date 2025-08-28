@@ -1,5 +1,17 @@
 # V1
 
+## Devices
+
+Types:
+
+```python
+from gbox_sdk.types.v1 import DeviceInfo, GetDeviceListResponse
+```
+
+Methods:
+
+- <code title="get /devices">client.v1.devices.<a href="./src/gbox_sdk/resources/v1/devices.py">list</a>() -> <a href="./src/gbox_sdk/types/v1/get_device_list_response.py">GetDeviceListResponse</a></code>
+
 ## Boxes
 
 Types:

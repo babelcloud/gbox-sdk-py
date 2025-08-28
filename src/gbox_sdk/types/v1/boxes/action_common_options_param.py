@@ -9,7 +9,7 @@ from .action_screenshot_options_param import ActionScreenshotOptionsParam
 
 __all__ = ["ActionCommonOptionsParam", "Screenshot"]
 
-Screenshot: TypeAlias = Union[bool, ActionScreenshotOptionsParam]
+Screenshot: TypeAlias = Union[ActionScreenshotOptionsParam, bool]
 
 
 class ActionCommonOptionsParam(TypedDict, total=False):

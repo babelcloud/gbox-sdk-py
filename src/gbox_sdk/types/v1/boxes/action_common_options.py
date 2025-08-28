@@ -8,7 +8,7 @@ from .action_screenshot_options import ActionScreenshotOptions
 
 __all__ = ["ActionCommonOptions", "Screenshot"]
 
-Screenshot: TypeAlias = Union[bool, ActionScreenshotOptions]
+Screenshot: TypeAlias = Union[ActionScreenshotOptions, bool]
 
 
 class ActionCommonOptions(BaseModel):

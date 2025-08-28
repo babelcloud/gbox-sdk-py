@@ -1327,7 +1327,7 @@ class ActionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Stop the device's background screen rewind recording.
+        Disable the device's background screen rewind recording.
 
         Args:
           extra_headers: Send extra headers
@@ -1361,7 +1361,7 @@ class ActionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Start the device's background screen rewind recording.
+        Enable the device's background screen rewind recording.
 
         Args:
           extra_headers: Send extra headers
@@ -3825,7 +3825,7 @@ class AsyncActionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Stop the device's background screen rewind recording.
+        Disable the device's background screen rewind recording.
 
         Args:
           extra_headers: Send extra headers
@@ -3859,7 +3859,7 @@ class AsyncActionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Start the device's background screen rewind recording.
+        Enable the device's background screen rewind recording.
 
         Args:
           extra_headers: Send extra headers

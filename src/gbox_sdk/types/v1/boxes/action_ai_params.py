@@ -27,7 +27,7 @@ class ActionAIParams(TypedDict, total=False):
     """
 
     include_screenshot: Annotated[bool, PropertyInfo(alias="includeScreenshot")]
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will

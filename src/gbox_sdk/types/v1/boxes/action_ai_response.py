@@ -99,7 +99,7 @@ class AIActionScreenshotResultAIResponseActionTypedClickAction(BaseModel):
     """Whether to perform a double click"""
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will
@@ -205,7 +205,7 @@ class AIActionScreenshotResultAIResponseActionTypedTouchAction(BaseModel):
     """Array of touch points and their actions"""
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will
@@ -274,7 +274,7 @@ class AIActionScreenshotResultAIResponseActionTypedDragAdvancedAction(BaseModel)
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will
@@ -364,7 +364,7 @@ class AIActionScreenshotResultAIResponseActionTypedDragSimpleAction(BaseModel):
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will
@@ -435,7 +435,7 @@ class AIActionScreenshotResultAIResponseActionTypedScrollAction(BaseModel):
     """Y coordinate of the scroll position"""
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will
@@ -511,7 +511,7 @@ class AIActionScreenshotResultAIResponseActionTypedScrollSimpleAction(BaseModel)
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will
@@ -584,7 +584,7 @@ class AIActionScreenshotResultAIResponseActionTypedSwipeSimpleAction(BaseModel):
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will
@@ -680,7 +680,7 @@ class AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedAction(BaseModel
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will
@@ -857,7 +857,7 @@ class AIActionScreenshotResultAIResponseActionTypedPressKeyAction(BaseModel):
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will
@@ -911,7 +911,7 @@ class AIActionScreenshotResultAIResponseActionTypedPressButtonAction(BaseModel):
     """Button to press"""
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will
@@ -975,7 +975,7 @@ class AIActionScreenshotResultAIResponseActionTypedLongPressAction(BaseModel):
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will
@@ -1029,7 +1029,7 @@ class AIActionScreenshotResultAIResponseActionTypedTypeAction(BaseModel):
     """Text to type"""
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will
@@ -1095,7 +1095,7 @@ class AIActionScreenshotResultAIResponseActionTypedMoveAction(BaseModel):
     """Y coordinate to move to"""
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will
@@ -1149,7 +1149,7 @@ class AIActionScreenshotResultAIResponseActionTypedScreenRotationAction(BaseMode
     """Target screen orientation"""
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will
@@ -1252,7 +1252,7 @@ class AIActionScreenshotResultAIResponseActionTypedWaitAction(BaseModel):
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will
@@ -1397,7 +1397,7 @@ class AIActionResultAIResponseActionTypedClickAction(BaseModel):
     """Whether to perform a double click"""
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will
@@ -1503,7 +1503,7 @@ class AIActionResultAIResponseActionTypedTouchAction(BaseModel):
     """Array of touch points and their actions"""
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will
@@ -1572,7 +1572,7 @@ class AIActionResultAIResponseActionTypedDragAdvancedAction(BaseModel):
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will
@@ -1662,7 +1662,7 @@ class AIActionResultAIResponseActionTypedDragSimpleAction(BaseModel):
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will
@@ -1733,7 +1733,7 @@ class AIActionResultAIResponseActionTypedScrollAction(BaseModel):
     """Y coordinate of the scroll position"""
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will
@@ -1809,7 +1809,7 @@ class AIActionResultAIResponseActionTypedScrollSimpleAction(BaseModel):
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will
@@ -1882,7 +1882,7 @@ class AIActionResultAIResponseActionTypedSwipeSimpleAction(BaseModel):
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will
@@ -1978,7 +1978,7 @@ class AIActionResultAIResponseActionTypedSwipeAdvancedAction(BaseModel):
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will
@@ -2155,7 +2155,7 @@ class AIActionResultAIResponseActionTypedPressKeyAction(BaseModel):
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will
@@ -2209,7 +2209,7 @@ class AIActionResultAIResponseActionTypedPressButtonAction(BaseModel):
     """Button to press"""
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will
@@ -2273,7 +2273,7 @@ class AIActionResultAIResponseActionTypedLongPressAction(BaseModel):
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will
@@ -2327,7 +2327,7 @@ class AIActionResultAIResponseActionTypedTypeAction(BaseModel):
     """Text to type"""
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will
@@ -2393,7 +2393,7 @@ class AIActionResultAIResponseActionTypedMoveAction(BaseModel):
     """Y coordinate to move to"""
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will
@@ -2447,7 +2447,7 @@ class AIActionResultAIResponseActionTypedScreenRotationAction(BaseModel):
     """Target screen orientation"""
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will
@@ -2550,7 +2550,7 @@ class AIActionResultAIResponseActionTypedWaitAction(BaseModel):
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """⚠️ DEPRECATED: Use `options.screenshot.range` instead.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will

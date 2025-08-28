@@ -107,7 +107,7 @@ class ActionsResource(SyncAPIResource):
               the action executor to understand the context of why the instruction is given
               including important previous actions and observations
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -217,7 +217,7 @@ class ActionsResource(SyncAPIResource):
 
           double: Whether to perform a double click
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -294,7 +294,7 @@ class ActionsResource(SyncAPIResource):
 
           double: Whether to perform a double click
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -420,7 +420,7 @@ class ActionsResource(SyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -496,7 +496,7 @@ class ActionsResource(SyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 50ms
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -677,7 +677,7 @@ class ActionsResource(SyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 1s
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -756,7 +756,7 @@ class ActionsResource(SyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 1s
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -873,7 +873,7 @@ class ActionsResource(SyncAPIResource):
 
           y: Y coordinate to move to
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -962,7 +962,7 @@ class ActionsResource(SyncAPIResource):
         Args:
           buttons: Button to press
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -1171,7 +1171,7 @@ class ActionsResource(SyncAPIResource):
               true, all keys are pressed together as a shortcut (e.g., Ctrl+C). When false,
               keys are pressed one by one in sequence.
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -1492,7 +1492,7 @@ class ActionsResource(SyncAPIResource):
         Args:
           orientation: Target screen orientation
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -1663,7 +1663,7 @@ class ActionsResource(SyncAPIResource):
 
           y: Y coordinate of the scroll position
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -1750,7 +1750,7 @@ class ActionsResource(SyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -1996,7 +1996,7 @@ class ActionsResource(SyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -2078,7 +2078,7 @@ class ActionsResource(SyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -2201,7 +2201,7 @@ class ActionsResource(SyncAPIResource):
 
           y: Y coordinate of the tap
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -2272,7 +2272,7 @@ class ActionsResource(SyncAPIResource):
           target: Describe the target to operate using natural language, e.g., 'login button' or
               'Chrome'.
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -2384,7 +2384,7 @@ class ActionsResource(SyncAPIResource):
         Args:
           points: Array of touch points and their actions
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -2476,7 +2476,7 @@ class ActionsResource(SyncAPIResource):
         Args:
           text: Text to type
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -2603,7 +2603,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action executor to understand the context of why the instruction is given
               including important previous actions and observations
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -2713,7 +2713,7 @@ class AsyncActionsResource(AsyncAPIResource):
 
           double: Whether to perform a double click
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -2790,7 +2790,7 @@ class AsyncActionsResource(AsyncAPIResource):
 
           double: Whether to perform a double click
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -2916,7 +2916,7 @@ class AsyncActionsResource(AsyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -2992,7 +2992,7 @@ class AsyncActionsResource(AsyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 50ms
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -3173,7 +3173,7 @@ class AsyncActionsResource(AsyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 1s
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -3252,7 +3252,7 @@ class AsyncActionsResource(AsyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 1s
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -3369,7 +3369,7 @@ class AsyncActionsResource(AsyncAPIResource):
 
           y: Y coordinate to move to
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -3458,7 +3458,7 @@ class AsyncActionsResource(AsyncAPIResource):
         Args:
           buttons: Button to press
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -3667,7 +3667,7 @@ class AsyncActionsResource(AsyncAPIResource):
               true, all keys are pressed together as a shortcut (e.g., Ctrl+C). When false,
               keys are pressed one by one in sequence.
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -3992,7 +3992,7 @@ class AsyncActionsResource(AsyncAPIResource):
         Args:
           orientation: Target screen orientation
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -4163,7 +4163,7 @@ class AsyncActionsResource(AsyncAPIResource):
 
           y: Y coordinate of the scroll position
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -4250,7 +4250,7 @@ class AsyncActionsResource(AsyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -4498,7 +4498,7 @@ class AsyncActionsResource(AsyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -4580,7 +4580,7 @@ class AsyncActionsResource(AsyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -4703,7 +4703,7 @@ class AsyncActionsResource(AsyncAPIResource):
 
           y: Y coordinate of the tap
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -4774,7 +4774,7 @@ class AsyncActionsResource(AsyncAPIResource):
           target: Describe the target to operate using natural language, e.g., 'login button' or
               'Chrome'.
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -4886,7 +4886,7 @@ class AsyncActionsResource(AsyncAPIResource):
         Args:
           points: Array of touch points and their actions
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
@@ -4978,7 +4978,7 @@ class AsyncActionsResource(AsyncAPIResource):
         Args:
           text: Text to type
 
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.range` instead. This field will be
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.

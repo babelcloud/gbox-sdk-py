@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from .linux_box import LinuxBox as LinuxBox
 from .android_box import AndroidBox as AndroidBox
+from .device_info import DeviceInfo as DeviceInfo
 from .box_list_params import BoxListParams as BoxListParams
 from .box_stop_params import BoxStopParams as BoxStopParams
 from .box_start_params import BoxStartParams as BoxStartParams
@@ -17,6 +18,7 @@ from .box_retrieve_response import BoxRetrieveResponse as BoxRetrieveResponse
 from .box_run_code_response import BoxRunCodeResponse as BoxRunCodeResponse
 from .box_create_linux_params import BoxCreateLinuxParams as BoxCreateLinuxParams
 from .box_live_view_url_params import BoxLiveViewURLParams as BoxLiveViewURLParams
+from .get_device_list_response import GetDeviceListResponse as GetDeviceListResponse
 from .box_create_android_params import BoxCreateAndroidParams as BoxCreateAndroidParams
 from .box_live_view_url_response import BoxLiveViewURLResponse as BoxLiveViewURLResponse
 from .box_websocket_url_response import BoxWebsocketURLResponse as BoxWebsocketURLResponse

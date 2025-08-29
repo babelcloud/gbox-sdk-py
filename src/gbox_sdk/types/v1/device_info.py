@@ -17,6 +17,9 @@ class DeviceInfo(BaseModel):
     is_idle: bool = FieldInfo(alias="isIdle")
     """Whether device is idle"""
 
+    product_model: str = FieldInfo(alias="productModel")
+    """Product model from ro.product.model"""
+
     provider_id: str = FieldInfo(alias="providerId")
     """Provider ID"""
 

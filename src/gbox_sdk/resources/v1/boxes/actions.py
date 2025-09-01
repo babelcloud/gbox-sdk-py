@@ -1564,7 +1564,7 @@ class ActionsResource(SyncAPIResource):
         clip: action_screenshot_params.Clip | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        scale: float | NotGiven = NOT_GIVEN,
+        save_to_album: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1585,18 +1585,7 @@ class ActionsResource(SyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          scale: The scale of the action to be performed. Must be greater than 0.1 and less than
-              or equal to 1.
-
-              Notes:
-
-              - Scale does not change the box's actual screen resolution.
-              - It affects the size of the output screenshot and the coordinates/distances of
-                actions. Coordinates and distances are scaled by this factor. Example: when
-                scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
-                Click({x:50, y:50}).
-              - If not provided, uses the scale value from UI action settings; otherwise uses
-                the passed value.
+          save_to_album: Whether to save the screenshot to the device screenshot album
 
           extra_headers: Send extra headers
 
@@ -1615,7 +1604,7 @@ class ActionsResource(SyncAPIResource):
                     "clip": clip,
                     "output_format": output_format,
                     "presigned_expires_in": presigned_expires_in,
-                    "scale": scale,
+                    "save_to_album": save_to_album,
                 },
                 action_screenshot_params.ActionScreenshotParams,
             ),
@@ -4064,7 +4053,7 @@ class AsyncActionsResource(AsyncAPIResource):
         clip: action_screenshot_params.Clip | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        scale: float | NotGiven = NOT_GIVEN,
+        save_to_album: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -4085,18 +4074,7 @@ class AsyncActionsResource(AsyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          scale: The scale of the action to be performed. Must be greater than 0.1 and less than
-              or equal to 1.
-
-              Notes:
-
-              - Scale does not change the box's actual screen resolution.
-              - It affects the size of the output screenshot and the coordinates/distances of
-                actions. Coordinates and distances are scaled by this factor. Example: when
-                scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
-                Click({x:50, y:50}).
-              - If not provided, uses the scale value from UI action settings; otherwise uses
-                the passed value.
+          save_to_album: Whether to save the screenshot to the device screenshot album
 
           extra_headers: Send extra headers
 
@@ -4115,7 +4093,7 @@ class AsyncActionsResource(AsyncAPIResource):
                     "clip": clip,
                     "output_format": output_format,
                     "presigned_expires_in": presigned_expires_in,
-                    "scale": scale,
+                    "save_to_album": save_to_album,
                 },
                 action_screenshot_params.ActionScreenshotParams,
             ),

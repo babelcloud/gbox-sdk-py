@@ -1242,7 +1242,7 @@ class TestActions:
             },
             output_format="base64",
             presigned_expires_in="30m",
-            scale=1,
+            save_to_album=False,
         )
         assert_matches_type(ActionScreenshotResponse, action, path=["response"])
 
@@ -3272,7 +3272,7 @@ class TestAsyncActions:
             },
             output_format="base64",
             presigned_expires_in="30m",
-            scale=1,
+            save_to_album=False,
         )
         assert_matches_type(ActionScreenshotResponse, action, path=["response"])
 

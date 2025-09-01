@@ -162,6 +162,7 @@ exclude = [
     "**/lib/python*/site-packages",
     "**/__pycache__",
     ".rye",
+    ".git",
 ]
 
 reportImplicitOverride = true

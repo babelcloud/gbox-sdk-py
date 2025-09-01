@@ -27,10 +27,10 @@ from ....types.v1.boxes import (
     f_remove_params,
     f_rename_params,
 )
+from ....types.v1.boxes.file import File
 from ....types.v1.boxes.f_info_response import FInfoResponse
 from ....types.v1.boxes.f_list_response import FListResponse
 from ....types.v1.boxes.f_read_response import FReadResponse
-from ....types.v1.boxes.f_write_response import FWriteResponse
 from ....types.v1.boxes.f_exists_response import FExistsResponse
 from ....types.v1.boxes.f_remove_response import FRemoveResponse
 from ....types.v1.boxes.f_rename_response import FRenameResponse
@@ -395,7 +395,7 @@ class FsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> FWriteResponse:
+    ) -> File:
         """Creates or overwrites a file.
 
         Creates necessary directories in the path if they
@@ -436,7 +436,7 @@ class FsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> FWriteResponse:
+    ) -> File:
         """Creates or overwrites a file.
 
         Creates necessary directories in the path if they
@@ -477,7 +477,7 @@ class FsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> FWriteResponse:
+    ) -> File:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         body = deepcopy_minimal(
@@ -494,7 +494,7 @@ class FsResource(SyncAPIResource):
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
-                cast_to=FWriteResponse,
+                cast_to=File,
             )
         else:
             files = extract_files(cast(Mapping[str, object], body), paths=[["content"]])
@@ -509,7 +509,7 @@ class FsResource(SyncAPIResource):
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
-                cast_to=FWriteResponse,
+                cast_to=File,
             )
 
 
@@ -870,7 +870,7 @@ class AsyncFsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> FWriteResponse:
+    ) -> File:
         """Creates or overwrites a file.
 
         Creates necessary directories in the path if they
@@ -911,7 +911,7 @@ class AsyncFsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> FWriteResponse:
+    ) -> File:
         """Creates or overwrites a file.
 
         Creates necessary directories in the path if they
@@ -952,7 +952,7 @@ class AsyncFsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> FWriteResponse:
+    ) -> File:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         body = deepcopy_minimal(
@@ -969,7 +969,7 @@ class AsyncFsResource(AsyncAPIResource):
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
-                cast_to=FWriteResponse,
+                cast_to=File,
             )
         else:
             files = extract_files(cast(Mapping[str, object], body), paths=[["content"]])
@@ -984,7 +984,7 @@ class AsyncFsResource(AsyncAPIResource):
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
-                cast_to=FWriteResponse,
+                cast_to=File,
             )
 
 

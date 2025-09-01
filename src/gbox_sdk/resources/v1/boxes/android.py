@@ -36,7 +36,7 @@ from ....types.v1.boxes import (
     android_list_pkg_simple_params,
 )
 from ....types.v1.boxes.android_app import AndroidApp
-from ....types.v1.boxes.android_get_response import AndroidGetResponse
+from ....types.v1.boxes.android_pkg import AndroidPkg
 from ....types.v1.boxes.android_install_response import AndroidInstallResponse
 from ....types.v1.boxes.android_list_app_response import AndroidListAppResponse
 from ....types.v1.boxes.android_list_pkg_response import AndroidListPkgResponse
@@ -220,7 +220,7 @@ class AndroidResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AndroidGetResponse:
+    ) -> AndroidPkg:
         """
         Get pkg
 
@@ -242,7 +242,7 @@ class AndroidResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AndroidGetResponse,
+            cast_to=AndroidPkg,
         )
 
     def get_app(
@@ -973,7 +973,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AndroidGetResponse:
+    ) -> AndroidPkg:
         """
         Get pkg
 
@@ -995,7 +995,7 @@ class AsyncAndroidResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AndroidGetResponse,
+            cast_to=AndroidPkg,
         )
 
     async def get_app(

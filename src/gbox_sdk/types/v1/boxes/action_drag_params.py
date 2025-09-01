@@ -2,10 +2,11 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Iterable
+from typing import Union, Iterable
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from ...._utils import PropertyInfo
+from .action_common_options_param import ActionCommonOptionsParam
 
 __all__ = [
     "ActionDragParams",
@@ -14,14 +15,8 @@ __all__ = [
     "DragSimpleEndDragPathPoint",
     "DragSimpleStart",
     "DragSimpleStartDragPathPoint",
-    "DragSimpleOptions",
-    "DragSimpleOptionsScreenshot",
-    "DragSimpleOptionsScreenshotActionScreenshotOption",
     "DragAdvanced",
     "DragAdvancedPath",
-    "DragAdvancedOptions",
-    "DragAdvancedOptionsScreenshot",
-    "DragAdvancedOptionsScreenshotActionScreenshotOption",
 ]
 
 
@@ -47,8 +42,8 @@ class DragSimple(TypedDict, total=False):
     still be returned but with empty URIs. Default is false.
     """
 
-    options: DragSimpleOptions
-    """Action common option"""
+    options: ActionCommonOptionsParam
+    """Action common options"""
 
     output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
     """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
@@ -111,59 +106,6 @@ class DragSimpleStartDragPathPoint(TypedDict, total=False):
 DragSimpleStart: TypeAlias = Union[DragSimpleStartDragPathPoint, str]
 
 
-class DragSimpleOptionsScreenshotActionScreenshotOption(TypedDict, total=False):
-    delay: str
-    """Delay after performing the action, before taking the final screenshot.
-
-    Execution flow:
-
-    1. Take screenshot before action
-    2. Perform the action
-    3. Wait for screenshotDelay (this parameter)
-    4. Take screenshot after action
-
-    Example: '500ms' means wait 500ms after the action before capturing the final
-    screenshot.
-
-    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-    """
-
-    output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
-    """Type of the URI. default is base64."""
-
-    presigned_expires_in: Annotated[str, PropertyInfo(alias="presignedExpiresIn")]
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
-
-    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-    """
-
-    range: List[Literal["before", "after", "trace"]]
-    """Specify which screenshots to capture.
-
-    Available options:
-
-    - before: Screenshot before the action
-    - after: Screenshot after the action
-    - trace: Screenshot with operation trace
-
-    Default captures all three types. Can specify one or multiple in an array.
-    """
-
-
-DragSimpleOptionsScreenshot: TypeAlias = Union[bool, DragSimpleOptionsScreenshotActionScreenshotOption]
-
-
-class DragSimpleOptions(TypedDict, total=False):
-    screenshot: DragSimpleOptionsScreenshot
-    """Screenshot options.
-
-    Can be a boolean to enable/disable screenshots, or an object to configure
-    screenshot options.
-    """
-
-
 class DragAdvanced(TypedDict, total=False):
     path: Required[Iterable[DragAdvancedPath]]
     """Path of the drag action as a series of coordinates"""
@@ -183,8 +125,8 @@ class DragAdvanced(TypedDict, total=False):
     still be returned but with empty URIs. Default is false.
     """
 
-    options: DragAdvancedOptions
-    """Action common option"""
+    options: ActionCommonOptionsParam
+    """Action common options"""
 
     output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
     """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
@@ -231,59 +173,6 @@ class DragAdvancedPath(TypedDict, total=False):
 
     y: Required[float]
     """Y coordinate of a point in the drag path"""
-
-
-class DragAdvancedOptionsScreenshotActionScreenshotOption(TypedDict, total=False):
-    delay: str
-    """Delay after performing the action, before taking the final screenshot.
-
-    Execution flow:
-
-    1. Take screenshot before action
-    2. Perform the action
-    3. Wait for screenshotDelay (this parameter)
-    4. Take screenshot after action
-
-    Example: '500ms' means wait 500ms after the action before capturing the final
-    screenshot.
-
-    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-    Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-    """
-
-    output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
-    """Type of the URI. default is base64."""
-
-    presigned_expires_in: Annotated[str, PropertyInfo(alias="presignedExpiresIn")]
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
-
-    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-    """
-
-    range: List[Literal["before", "after", "trace"]]
-    """Specify which screenshots to capture.
-
-    Available options:
-
-    - before: Screenshot before the action
-    - after: Screenshot after the action
-    - trace: Screenshot with operation trace
-
-    Default captures all three types. Can specify one or multiple in an array.
-    """
-
-
-DragAdvancedOptionsScreenshot: TypeAlias = Union[bool, DragAdvancedOptionsScreenshotActionScreenshotOption]
-
-
-class DragAdvancedOptions(TypedDict, total=False):
-    screenshot: DragAdvancedOptionsScreenshot
-    """Screenshot options.
-
-    Can be a boolean to enable/disable screenshots, or an object to configure
-    screenshot options.
-    """
 
 
 ActionDragParams: TypeAlias = Union[DragSimple, DragAdvanced]

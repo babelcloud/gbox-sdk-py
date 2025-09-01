@@ -6,7 +6,7 @@ from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
 
-__all__ = ["ActionScreenRotationResponse", "Screenshot", "ScreenshotAfter", "ScreenshotBefore", "ScreenshotTrace"]
+__all__ = ["ActionResult", "Screenshot", "ScreenshotAfter", "ScreenshotBefore", "ScreenshotTrace"]
 
 
 class ScreenshotAfter(BaseModel):
@@ -41,7 +41,7 @@ class Screenshot(BaseModel):
     """Screenshot with action operation trace"""
 
 
-class ActionScreenRotationResponse(BaseModel):
+class ActionResult(BaseModel):
     message: str
     """message"""
 

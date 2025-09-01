@@ -19,7 +19,7 @@ from gbox_sdk._response import (
 )
 from gbox_sdk.types.v1.boxes import (
     AndroidApp,
-    AndroidGetResponse,
+    AndroidPkg,
     AndroidInstallResponse,
     AndroidListAppResponse,
     AndroidListPkgResponse,
@@ -257,7 +257,7 @@ class TestAndroid:
             package_name="com.example.myapp",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
-        assert_matches_type(AndroidGetResponse, android, path=["response"])
+        assert_matches_type(AndroidPkg, android, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -270,7 +270,7 @@ class TestAndroid:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         android = response.parse()
-        assert_matches_type(AndroidGetResponse, android, path=["response"])
+        assert_matches_type(AndroidPkg, android, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -283,7 +283,7 @@ class TestAndroid:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             android = response.parse()
-            assert_matches_type(AndroidGetResponse, android, path=["response"])
+            assert_matches_type(AndroidPkg, android, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1166,7 +1166,7 @@ class TestAsyncAndroid:
             package_name="com.example.myapp",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
-        assert_matches_type(AndroidGetResponse, android, path=["response"])
+        assert_matches_type(AndroidPkg, android, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -1179,7 +1179,7 @@ class TestAsyncAndroid:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         android = await response.parse()
-        assert_matches_type(AndroidGetResponse, android, path=["response"])
+        assert_matches_type(AndroidPkg, android, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -1192,7 +1192,7 @@ class TestAsyncAndroid:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             android = await response.parse()
-            assert_matches_type(AndroidGetResponse, android, path=["response"])
+            assert_matches_type(AndroidPkg, android, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

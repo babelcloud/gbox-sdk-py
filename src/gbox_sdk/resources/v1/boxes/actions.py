@@ -38,26 +38,15 @@ from ....types.v1.boxes import (
     action_screen_rotation_params,
     action_settings_update_params,
 )
-from ....types.v1.boxes.action_ai_response import ActionAIResponse
-from ....types.v1.boxes.action_tap_response import ActionTapResponse
-from ....types.v1.boxes.action_drag_response import ActionDragResponse
-from ....types.v1.boxes.action_move_response import ActionMoveResponse
-from ....types.v1.boxes.action_type_response import ActionTypeResponse
-from ....types.v1.boxes.action_click_response import ActionClickResponse
-from ....types.v1.boxes.action_swipe_response import ActionSwipeResponse
-from ....types.v1.boxes.action_touch_response import ActionTouchResponse
-from ....types.v1.boxes.action_scroll_response import ActionScrollResponse
+from ....types.v1.boxes.action_result import ActionResult
 from ....types.v1.boxes.action_extract_response import ActionExtractResponse
 from ....types.v1.boxes.action_settings_response import ActionSettingsResponse
-from ....types.v1.boxes.action_press_key_response import ActionPressKeyResponse
-from ....types.v1.boxes.action_long_press_response import ActionLongPressResponse
 from ....types.v1.boxes.action_screenshot_response import ActionScreenshotResponse
-from ....types.v1.boxes.action_press_button_response import ActionPressButtonResponse
+from ....types.v1.boxes.action_common_options_param import ActionCommonOptionsParam
 from ....types.v1.boxes.action_screen_layout_response import ActionScreenLayoutResponse
 from ....types.v1.boxes.action_recording_stop_response import ActionRecordingStopResponse
 from ....types.v1.boxes.action_rewind_extract_response import ActionRewindExtractResponse
 from ....types.v1.boxes.action_settings_reset_response import ActionSettingsResetResponse
-from ....types.v1.boxes.action_screen_rotation_response import ActionScreenRotationResponse
 from ....types.v1.boxes.action_settings_update_response import ActionSettingsUpdateResponse
 
 __all__ = ["ActionsResource", "AsyncActionsResource"]
@@ -90,7 +79,7 @@ class ActionsResource(SyncAPIResource):
         instruction: str,
         background: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_ai_params.Options | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -102,7 +91,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionAIResponse:
+    ) -> ActionResult:
         """Use natural language instructions to perform UI operations on the box.
 
         The
@@ -122,7 +111,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -188,7 +177,7 @@ class ActionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionAIResponse,
+            cast_to=ActionResult,
         )
 
     @overload
@@ -201,7 +190,7 @@ class ActionsResource(SyncAPIResource):
         button: Literal["left", "right", "middle"] | NotGiven = NOT_GIVEN,
         double: bool | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_click_params.ClickOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -211,7 +200,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionClickResponse:
+    ) -> ActionResult:
         """
         Click
 
@@ -229,7 +218,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -279,7 +268,7 @@ class ActionsResource(SyncAPIResource):
         button: Literal["left", "right", "middle"] | NotGiven = NOT_GIVEN,
         double: bool | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_click_params.ClickByNaturalLanguageOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -289,7 +278,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionClickResponse:
+    ) -> ActionResult:
         """
         Click
 
@@ -306,7 +295,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -357,7 +346,7 @@ class ActionsResource(SyncAPIResource):
         button: Literal["left", "right", "middle"] | NotGiven = NOT_GIVEN,
         double: bool | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_click_params.ClickOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -368,7 +357,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionClickResponse:
+    ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
@@ -391,7 +380,7 @@ class ActionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionClickResponse,
+            cast_to=ActionResult,
         )
 
     @overload
@@ -403,7 +392,7 @@ class ActionsResource(SyncAPIResource):
         start: action_drag_params.DragSimpleStart,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_drag_params.DragSimpleOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -413,7 +402,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionDragResponse:
+    ) -> ActionResult:
         """
         Drag
 
@@ -432,7 +421,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -481,7 +470,7 @@ class ActionsResource(SyncAPIResource):
         path: Iterable[action_drag_params.DragAdvancedPath],
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_drag_params.DragAdvancedOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -491,7 +480,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionDragResponse:
+    ) -> ActionResult:
         """
         Drag
 
@@ -508,7 +497,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -558,7 +547,7 @@ class ActionsResource(SyncAPIResource):
         start: action_drag_params.DragSimpleStart | NotGiven = NOT_GIVEN,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_drag_params.DragSimpleOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -569,7 +558,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionDragResponse:
+    ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
@@ -591,7 +580,7 @@ class ActionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionDragResponse,
+            cast_to=ActionResult,
         )
 
     def extract(
@@ -658,7 +647,7 @@ class ActionsResource(SyncAPIResource):
         y: float,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_long_press_params.LongPressOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -668,7 +657,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionLongPressResponse:
+    ) -> ActionResult:
         """
         Perform a long press action at specified coordinates for a specified duration.
         Useful for triggering context menus, drag operations, or other long-press
@@ -689,7 +678,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -738,7 +727,7 @@ class ActionsResource(SyncAPIResource):
         target: str,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_long_press_params.LongPressByNaturalLanguageOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -748,7 +737,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionLongPressResponse:
+    ) -> ActionResult:
         """
         Perform a long press action at specified coordinates for a specified duration.
         Useful for triggering context menus, drag operations, or other long-press
@@ -768,7 +757,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -818,7 +807,7 @@ class ActionsResource(SyncAPIResource):
         y: float | NotGiven = NOT_GIVEN,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_long_press_params.LongPressOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -829,7 +818,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionLongPressResponse:
+    ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
@@ -851,7 +840,7 @@ class ActionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionLongPressResponse,
+            cast_to=ActionResult,
         )
 
     def move(
@@ -861,7 +850,7 @@ class ActionsResource(SyncAPIResource):
         x: float,
         y: float,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_move_params.Options | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -871,7 +860,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionMoveResponse:
+    ) -> ActionResult:
         """
         Move to position
 
@@ -885,7 +874,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -943,7 +932,7 @@ class ActionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionMoveResponse,
+            cast_to=ActionResult,
         )
 
     def press_button(
@@ -952,7 +941,7 @@ class ActionsResource(SyncAPIResource):
         *,
         buttons: List[Literal["power", "volumeUp", "volumeDown", "volumeMute", "home", "back", "menu", "appSwitch"]],
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_press_button_params.Options | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -962,7 +951,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionPressButtonResponse:
+    ) -> ActionResult:
         """
         Press device buttons like power, volume, home, back, etc.
 
@@ -974,7 +963,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -1031,7 +1020,7 @@ class ActionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionPressButtonResponse,
+            cast_to=ActionResult,
         )
 
     def press_key(
@@ -1154,7 +1143,7 @@ class ActionsResource(SyncAPIResource):
         ],
         combination: bool | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_press_key_params.Options | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -1164,7 +1153,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionPressKeyResponse:
+    ) -> ActionResult:
         """
         Simulates pressing a specific key by triggering the complete keyboard key event
         chain (keydown, keypress, keyup). Use this to activate keyboard key event
@@ -1183,7 +1172,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -1241,7 +1230,7 @@ class ActionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionPressKeyResponse,
+            cast_to=ActionResult,
         )
 
     def recording_start(
@@ -1479,7 +1468,7 @@ class ActionsResource(SyncAPIResource):
         *,
         orientation: Literal["portrait", "landscapeLeft", "portraitUpsideDown", "landscapeRight"],
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_screen_rotation_params.Options | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -1489,7 +1478,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionScreenRotationResponse:
+    ) -> ActionResult:
         """Rotate the screen orientation.
 
         Note that even after rotating the screen,
@@ -1504,7 +1493,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -1561,7 +1550,7 @@ class ActionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionScreenRotationResponse,
+            cast_to=ActionResult,
         )
 
     def screenshot(
@@ -1642,7 +1631,7 @@ class ActionsResource(SyncAPIResource):
         x: float,
         y: float,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_scroll_params.ScrollAdvancedOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -1652,7 +1641,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionScrollResponse:
+    ) -> ActionResult:
         """Performs a scroll action.
 
         Supports both advanced scroll with coordinates and
@@ -1675,7 +1664,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -1725,7 +1714,7 @@ class ActionsResource(SyncAPIResource):
         distance: Union[float, Literal["tiny", "short", "medium", "long"]] | NotGiven = NOT_GIVEN,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_scroll_params.ScrollSimpleOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -1735,7 +1724,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionScrollResponse:
+    ) -> ActionResult:
         """Performs a scroll action.
 
         Supports both advanced scroll with coordinates and
@@ -1762,7 +1751,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -1813,7 +1802,7 @@ class ActionsResource(SyncAPIResource):
         x: float | NotGiven = NOT_GIVEN,
         y: float | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_scroll_params.ScrollAdvancedOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -1826,7 +1815,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionScrollResponse:
+    ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
@@ -1851,7 +1840,7 @@ class ActionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionScrollResponse,
+            cast_to=ActionResult,
         )
 
     def settings(
@@ -1976,7 +1965,7 @@ class ActionsResource(SyncAPIResource):
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         location: str | NotGiven = NOT_GIVEN,
-        options: action_swipe_params.SwipeSimpleOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -1986,7 +1975,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionSwipeResponse:
+    ) -> ActionResult:
         """
         Performs a swipe in the specified direction
 
@@ -2011,7 +2000,7 @@ class ActionsResource(SyncAPIResource):
           location: Natural language description of the location where the swipe should originate.
               If not provided, the swipe will be performed from the center of the screen.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -2061,7 +2050,7 @@ class ActionsResource(SyncAPIResource):
         start: action_swipe_params.SwipeAdvancedStart,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_swipe_params.SwipeAdvancedOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -2071,7 +2060,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionSwipeResponse:
+    ) -> ActionResult:
         """
         Performs a swipe in the specified direction
 
@@ -2090,7 +2079,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -2142,7 +2131,7 @@ class ActionsResource(SyncAPIResource):
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         location: str | NotGiven = NOT_GIVEN,
-        options: action_swipe_params.SwipeSimpleOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -2154,7 +2143,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionSwipeResponse:
+    ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
@@ -2178,7 +2167,7 @@ class ActionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionSwipeResponse,
+            cast_to=ActionResult,
         )
 
     @overload
@@ -2189,7 +2178,7 @@ class ActionsResource(SyncAPIResource):
         x: float,
         y: float,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_tap_params.TapOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -2199,7 +2188,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionTapResponse:
+    ) -> ActionResult:
         """
         Tap action for Android devices using ADB input tap command
 
@@ -2213,7 +2202,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -2261,7 +2250,7 @@ class ActionsResource(SyncAPIResource):
         *,
         target: str,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_tap_params.TapByNaturalLanguageOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -2271,7 +2260,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionTapResponse:
+    ) -> ActionResult:
         """
         Tap action for Android devices using ADB input tap command
 
@@ -2284,7 +2273,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -2333,7 +2322,7 @@ class ActionsResource(SyncAPIResource):
         x: float | NotGiven = NOT_GIVEN,
         y: float | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_tap_params.TapOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -2344,7 +2333,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionTapResponse:
+    ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
@@ -2365,7 +2354,7 @@ class ActionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionTapResponse,
+            cast_to=ActionResult,
         )
 
     def touch(
@@ -2374,7 +2363,7 @@ class ActionsResource(SyncAPIResource):
         *,
         points: Iterable[action_touch_params.Point],
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_touch_params.Options | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -2384,7 +2373,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionTouchResponse:
+    ) -> ActionResult:
         """
         Touch
 
@@ -2396,7 +2385,7 @@ class ActionsResource(SyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -2453,7 +2442,7 @@ class ActionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionTouchResponse,
+            cast_to=ActionResult,
         )
 
     def type(
@@ -2463,7 +2452,7 @@ class ActionsResource(SyncAPIResource):
         text: str,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         mode: Literal["append", "replace"] | NotGiven = NOT_GIVEN,
-        options: action_type_params.Options | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         press_enter: bool | NotGiven = NOT_GIVEN,
@@ -2474,7 +2463,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionTypeResponse:
+    ) -> ActionResult:
         """
         Directly inputs text content without triggering physical key events (keydown,
         etc.), ideal for quickly filling large amounts of text when intermediate input
@@ -2491,7 +2480,7 @@ class ActionsResource(SyncAPIResource):
           mode: Text input mode: 'append' to add text to existing content, 'replace' to replace
               all existing text
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -2552,7 +2541,7 @@ class ActionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionTypeResponse,
+            cast_to=ActionResult,
         )
 
 
@@ -2583,7 +2572,7 @@ class AsyncActionsResource(AsyncAPIResource):
         instruction: str,
         background: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_ai_params.Options | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -2595,7 +2584,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionAIResponse:
+    ) -> ActionResult:
         """Use natural language instructions to perform UI operations on the box.
 
         The
@@ -2615,7 +2604,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -2681,7 +2670,7 @@ class AsyncActionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionAIResponse,
+            cast_to=ActionResult,
         )
 
     @overload
@@ -2694,7 +2683,7 @@ class AsyncActionsResource(AsyncAPIResource):
         button: Literal["left", "right", "middle"] | NotGiven = NOT_GIVEN,
         double: bool | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_click_params.ClickOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -2704,7 +2693,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionClickResponse:
+    ) -> ActionResult:
         """
         Click
 
@@ -2722,7 +2711,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -2772,7 +2761,7 @@ class AsyncActionsResource(AsyncAPIResource):
         button: Literal["left", "right", "middle"] | NotGiven = NOT_GIVEN,
         double: bool | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_click_params.ClickByNaturalLanguageOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -2782,7 +2771,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionClickResponse:
+    ) -> ActionResult:
         """
         Click
 
@@ -2799,7 +2788,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -2850,7 +2839,7 @@ class AsyncActionsResource(AsyncAPIResource):
         button: Literal["left", "right", "middle"] | NotGiven = NOT_GIVEN,
         double: bool | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_click_params.ClickOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -2861,7 +2850,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionClickResponse:
+    ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
@@ -2884,7 +2873,7 @@ class AsyncActionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionClickResponse,
+            cast_to=ActionResult,
         )
 
     @overload
@@ -2896,7 +2885,7 @@ class AsyncActionsResource(AsyncAPIResource):
         start: action_drag_params.DragSimpleStart,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_drag_params.DragSimpleOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -2906,7 +2895,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionDragResponse:
+    ) -> ActionResult:
         """
         Drag
 
@@ -2925,7 +2914,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -2974,7 +2963,7 @@ class AsyncActionsResource(AsyncAPIResource):
         path: Iterable[action_drag_params.DragAdvancedPath],
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_drag_params.DragAdvancedOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -2984,7 +2973,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionDragResponse:
+    ) -> ActionResult:
         """
         Drag
 
@@ -3001,7 +2990,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -3051,7 +3040,7 @@ class AsyncActionsResource(AsyncAPIResource):
         start: action_drag_params.DragSimpleStart | NotGiven = NOT_GIVEN,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_drag_params.DragSimpleOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -3062,7 +3051,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionDragResponse:
+    ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
@@ -3084,7 +3073,7 @@ class AsyncActionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionDragResponse,
+            cast_to=ActionResult,
         )
 
     async def extract(
@@ -3151,7 +3140,7 @@ class AsyncActionsResource(AsyncAPIResource):
         y: float,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_long_press_params.LongPressOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -3161,7 +3150,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionLongPressResponse:
+    ) -> ActionResult:
         """
         Perform a long press action at specified coordinates for a specified duration.
         Useful for triggering context menus, drag operations, or other long-press
@@ -3182,7 +3171,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -3231,7 +3220,7 @@ class AsyncActionsResource(AsyncAPIResource):
         target: str,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_long_press_params.LongPressByNaturalLanguageOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -3241,7 +3230,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionLongPressResponse:
+    ) -> ActionResult:
         """
         Perform a long press action at specified coordinates for a specified duration.
         Useful for triggering context menus, drag operations, or other long-press
@@ -3261,7 +3250,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -3311,7 +3300,7 @@ class AsyncActionsResource(AsyncAPIResource):
         y: float | NotGiven = NOT_GIVEN,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_long_press_params.LongPressOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -3322,7 +3311,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionLongPressResponse:
+    ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
@@ -3344,7 +3333,7 @@ class AsyncActionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionLongPressResponse,
+            cast_to=ActionResult,
         )
 
     async def move(
@@ -3354,7 +3343,7 @@ class AsyncActionsResource(AsyncAPIResource):
         x: float,
         y: float,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_move_params.Options | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -3364,7 +3353,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionMoveResponse:
+    ) -> ActionResult:
         """
         Move to position
 
@@ -3378,7 +3367,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -3436,7 +3425,7 @@ class AsyncActionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionMoveResponse,
+            cast_to=ActionResult,
         )
 
     async def press_button(
@@ -3445,7 +3434,7 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         buttons: List[Literal["power", "volumeUp", "volumeDown", "volumeMute", "home", "back", "menu", "appSwitch"]],
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_press_button_params.Options | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -3455,7 +3444,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionPressButtonResponse:
+    ) -> ActionResult:
         """
         Press device buttons like power, volume, home, back, etc.
 
@@ -3467,7 +3456,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -3524,7 +3513,7 @@ class AsyncActionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionPressButtonResponse,
+            cast_to=ActionResult,
         )
 
     async def press_key(
@@ -3647,7 +3636,7 @@ class AsyncActionsResource(AsyncAPIResource):
         ],
         combination: bool | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_press_key_params.Options | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -3657,7 +3646,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionPressKeyResponse:
+    ) -> ActionResult:
         """
         Simulates pressing a specific key by triggering the complete keyboard key event
         chain (keydown, keypress, keyup). Use this to activate keyboard key event
@@ -3676,7 +3665,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -3734,7 +3723,7 @@ class AsyncActionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionPressKeyResponse,
+            cast_to=ActionResult,
         )
 
     async def recording_start(
@@ -3976,7 +3965,7 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         orientation: Literal["portrait", "landscapeLeft", "portraitUpsideDown", "landscapeRight"],
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_screen_rotation_params.Options | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -3986,7 +3975,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionScreenRotationResponse:
+    ) -> ActionResult:
         """Rotate the screen orientation.
 
         Note that even after rotating the screen,
@@ -4001,7 +3990,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -4058,7 +4047,7 @@ class AsyncActionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionScreenRotationResponse,
+            cast_to=ActionResult,
         )
 
     async def screenshot(
@@ -4139,7 +4128,7 @@ class AsyncActionsResource(AsyncAPIResource):
         x: float,
         y: float,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_scroll_params.ScrollAdvancedOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -4149,7 +4138,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionScrollResponse:
+    ) -> ActionResult:
         """Performs a scroll action.
 
         Supports both advanced scroll with coordinates and
@@ -4172,7 +4161,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -4222,7 +4211,7 @@ class AsyncActionsResource(AsyncAPIResource):
         distance: Union[float, Literal["tiny", "short", "medium", "long"]] | NotGiven = NOT_GIVEN,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_scroll_params.ScrollSimpleOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -4232,7 +4221,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionScrollResponse:
+    ) -> ActionResult:
         """Performs a scroll action.
 
         Supports both advanced scroll with coordinates and
@@ -4259,7 +4248,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -4310,7 +4299,7 @@ class AsyncActionsResource(AsyncAPIResource):
         x: float | NotGiven = NOT_GIVEN,
         y: float | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_scroll_params.ScrollAdvancedOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -4323,7 +4312,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionScrollResponse:
+    ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
@@ -4348,7 +4337,7 @@ class AsyncActionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionScrollResponse,
+            cast_to=ActionResult,
         )
 
     async def settings(
@@ -4475,7 +4464,7 @@ class AsyncActionsResource(AsyncAPIResource):
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         location: str | NotGiven = NOT_GIVEN,
-        options: action_swipe_params.SwipeSimpleOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -4485,7 +4474,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionSwipeResponse:
+    ) -> ActionResult:
         """
         Performs a swipe in the specified direction
 
@@ -4510,7 +4499,7 @@ class AsyncActionsResource(AsyncAPIResource):
           location: Natural language description of the location where the swipe should originate.
               If not provided, the swipe will be performed from the center of the screen.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -4560,7 +4549,7 @@ class AsyncActionsResource(AsyncAPIResource):
         start: action_swipe_params.SwipeAdvancedStart,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_swipe_params.SwipeAdvancedOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -4570,7 +4559,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionSwipeResponse:
+    ) -> ActionResult:
         """
         Performs a swipe in the specified direction
 
@@ -4589,7 +4578,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -4641,7 +4630,7 @@ class AsyncActionsResource(AsyncAPIResource):
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         location: str | NotGiven = NOT_GIVEN,
-        options: action_swipe_params.SwipeSimpleOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -4653,7 +4642,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionSwipeResponse:
+    ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
@@ -4677,7 +4666,7 @@ class AsyncActionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionSwipeResponse,
+            cast_to=ActionResult,
         )
 
     @overload
@@ -4688,7 +4677,7 @@ class AsyncActionsResource(AsyncAPIResource):
         x: float,
         y: float,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_tap_params.TapOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -4698,7 +4687,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionTapResponse:
+    ) -> ActionResult:
         """
         Tap action for Android devices using ADB input tap command
 
@@ -4712,7 +4701,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -4760,7 +4749,7 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         target: str,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_tap_params.TapByNaturalLanguageOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -4770,7 +4759,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionTapResponse:
+    ) -> ActionResult:
         """
         Tap action for Android devices using ADB input tap command
 
@@ -4783,7 +4772,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -4832,7 +4821,7 @@ class AsyncActionsResource(AsyncAPIResource):
         x: float | NotGiven = NOT_GIVEN,
         y: float | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_tap_params.TapOptions | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -4843,7 +4832,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionTapResponse:
+    ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
@@ -4864,7 +4853,7 @@ class AsyncActionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionTapResponse,
+            cast_to=ActionResult,
         )
 
     async def touch(
@@ -4873,7 +4862,7 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         points: Iterable[action_touch_params.Point],
         include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: action_touch_params.Options | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -4883,7 +4872,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionTouchResponse:
+    ) -> ActionResult:
         """
         Touch
 
@@ -4895,7 +4884,7 @@ class AsyncActionsResource(AsyncAPIResource):
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -4952,7 +4941,7 @@ class AsyncActionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionTouchResponse,
+            cast_to=ActionResult,
         )
 
     async def type(
@@ -4962,7 +4951,7 @@ class AsyncActionsResource(AsyncAPIResource):
         text: str,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         mode: Literal["append", "replace"] | NotGiven = NOT_GIVEN,
-        options: action_type_params.Options | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         press_enter: bool | NotGiven = NOT_GIVEN,
@@ -4973,7 +4962,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionTypeResponse:
+    ) -> ActionResult:
         """
         Directly inputs text content without triggering physical key events (keydown,
         etc.), ideal for quickly filling large amounts of text when intermediate input
@@ -4990,7 +4979,7 @@ class AsyncActionsResource(AsyncAPIResource):
           mode: Text input mode: 'append' to add text to existing content, 'replace' to replace
               all existing text
 
-          options: Action common option
+          options: Action common options
 
           output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
               default is base64. This field will be ignored when `options.screenshot` is
@@ -5051,7 +5040,7 @@ class AsyncActionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionTypeResponse,
+            cast_to=ActionResult,
         )
 
 

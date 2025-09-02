@@ -4,6 +4,7 @@ from typing_extensions import Self
 from gbox_sdk._types import NOT_GIVEN, NotGiven
 from gbox_sdk._client import GboxClient
 from gbox_sdk.wrapper.box.media import MediaOperator
+from gbox_sdk.wrapper.box.proxy import ProxyOperator
 from gbox_sdk.types.v1.linux_box import LinuxBox
 from gbox_sdk.wrapper.box.action import ActionOperator
 from gbox_sdk.wrapper.box.browser import BrowserOperator
@@ -46,6 +47,7 @@ class BaseBox:
         self.browser = BrowserOperator(self.client, self.data.id)
         self.storage = StorageOperator(self.client, self.data.id)
         self.media = MediaOperator(self.client, self.data.id)
+        self.proxy = ProxyOperator(self.client, self.data.id)
 
     def _sync_data(self) -> None:
         """

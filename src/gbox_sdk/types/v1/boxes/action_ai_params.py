@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from typing import List
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
+from ...._types import SequenceNotStr
 from ...._utils import PropertyInfo
 from .action_common_options_param import ActionCommonOptionsParam
 
@@ -87,7 +87,7 @@ class ActionAIParams(TypedDict, total=False):
 
 
 class Settings(TypedDict, total=False):
-    disable_actions: Annotated[List[str], PropertyInfo(alias="disableActions")]
+    disable_actions: Annotated[SequenceNotStr[str], PropertyInfo(alias="disableActions")]
     """Whether disable actions"""
 
     system_prompt: Annotated[str, PropertyInfo(alias="systemPrompt")]

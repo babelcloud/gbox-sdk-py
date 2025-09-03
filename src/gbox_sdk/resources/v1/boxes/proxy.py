@@ -2,11 +2,9 @@
 
 from __future__ import annotations
 
-from typing import List
-
 import httpx
 
-from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
+from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven, SequenceNotStr
 from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -118,7 +116,7 @@ class ProxyResource(SyncAPIResource):
         host: str,
         port: float,
         auth: proxy_set_params.Auth | NotGiven = NOT_GIVEN,
-        excludes: List[str] | NotGiven = NOT_GIVEN,
+        excludes: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         pac_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -266,7 +264,7 @@ class AsyncProxyResource(AsyncAPIResource):
         host: str,
         port: float,
         auth: proxy_set_params.Auth | NotGiven = NOT_GIVEN,
-        excludes: List[str] | NotGiven = NOT_GIVEN,
+        excludes: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         pac_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.

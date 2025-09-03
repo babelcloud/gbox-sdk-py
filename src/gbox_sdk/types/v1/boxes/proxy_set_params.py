@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from typing import List
 from typing_extensions import Required, Annotated, TypedDict
 
+from ...._types import SequenceNotStr
 from ...._utils import PropertyInfo
 
 __all__ = ["ProxySetParams", "Auth"]
@@ -20,7 +20,7 @@ class ProxySetParams(TypedDict, total=False):
     auth: Auth
     """Box Proxy Auth"""
 
-    excludes: List[str]
+    excludes: SequenceNotStr[str]
     """List of IP addresses and domains that should bypass the proxy.
 
     These addresses will be accessed directly without going through the proxy

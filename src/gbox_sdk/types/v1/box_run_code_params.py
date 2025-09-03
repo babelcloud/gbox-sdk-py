@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from typing import List
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
+from ..._types import SequenceNotStr
 from ..._utils import PropertyInfo
 
 __all__ = ["BoxRunCodeParams"]
@@ -14,7 +14,7 @@ class BoxRunCodeParams(TypedDict, total=False):
     code: Required[str]
     """The code to run"""
 
-    argv: List[str]
+    argv: SequenceNotStr[str]
     """The arguments to run the code.
 
     For example, if you want to run "python index.py --help", you should pass

@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Mapping, cast
+from typing import Any, Mapping, cast
 
 import httpx
 
-from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven, FileTypes
+from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven, FileTypes, SequenceNotStr
 from ...._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -60,7 +60,7 @@ class MediaResource(SyncAPIResource):
         box_id: str,
         *,
         name: str,
-        media: List[FileTypes] | NotGiven = NOT_GIVEN,
+        media: SequenceNotStr[FileTypes] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -411,7 +411,7 @@ class MediaResource(SyncAPIResource):
         album_name: str,
         *,
         box_id: str,
-        media: List[FileTypes],
+        media: SequenceNotStr[FileTypes],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -479,7 +479,7 @@ class AsyncMediaResource(AsyncAPIResource):
         box_id: str,
         *,
         name: str,
-        media: List[FileTypes] | NotGiven = NOT_GIVEN,
+        media: SequenceNotStr[FileTypes] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -830,7 +830,7 @@ class AsyncMediaResource(AsyncAPIResource):
         album_name: str,
         *,
         box_id: str,
-        media: List[FileTypes],
+        media: SequenceNotStr[FileTypes],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

@@ -63,7 +63,7 @@ from .storage import (
     StorageResourceWithStreamingResponse,
     AsyncStorageResourceWithStreamingResponse,
 )
-from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
+from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven, SequenceNotStr
 from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ....types.v1 import (
@@ -402,7 +402,7 @@ class BoxesResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        commands: Union[str, List[str]],
+        commands: Union[str, SequenceNotStr[str]],
         envs: object | NotGiven = NOT_GIVEN,
         api_timeout: str | NotGiven = NOT_GIVEN,
         working_dir: str | NotGiven = NOT_GIVEN,
@@ -506,7 +506,7 @@ class BoxesResource(SyncAPIResource):
         box_id: str,
         *,
         code: str,
-        argv: List[str] | NotGiven = NOT_GIVEN,
+        argv: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         envs: object | NotGiven = NOT_GIVEN,
         language: Literal["bash", "python", "typescript"] | NotGiven = NOT_GIVEN,
         api_timeout: str | NotGiven = NOT_GIVEN,
@@ -1068,7 +1068,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        commands: Union[str, List[str]],
+        commands: Union[str, SequenceNotStr[str]],
         envs: object | NotGiven = NOT_GIVEN,
         api_timeout: str | NotGiven = NOT_GIVEN,
         working_dir: str | NotGiven = NOT_GIVEN,
@@ -1172,7 +1172,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         box_id: str,
         *,
         code: str,
-        argv: List[str] | NotGiven = NOT_GIVEN,
+        argv: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         envs: object | NotGiven = NOT_GIVEN,
         language: Literal["bash", "python", "typescript"] | NotGiven = NOT_GIVEN,
         api_timeout: str | NotGiven = NOT_GIVEN,

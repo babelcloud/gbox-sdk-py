@@ -14,8 +14,10 @@ from .box_start_response import BoxStartResponse as BoxStartResponse
 from .box_run_code_params import BoxRunCodeParams as BoxRunCodeParams
 from .box_display_response import BoxDisplayResponse as BoxDisplayResponse
 from .box_terminate_params import BoxTerminateParams as BoxTerminateParams
+from .device_to_box_params import DeviceToBoxParams as DeviceToBoxParams
 from .box_retrieve_response import BoxRetrieveResponse as BoxRetrieveResponse
 from .box_run_code_response import BoxRunCodeResponse as BoxRunCodeResponse
+from .device_to_box_response import DeviceToBoxResponse as DeviceToBoxResponse
 from .box_create_linux_params import BoxCreateLinuxParams as BoxCreateLinuxParams
 from .box_live_view_url_params import BoxLiveViewURLParams as BoxLiveViewURLParams
 from .get_device_list_response import GetDeviceListResponse as GetDeviceListResponse

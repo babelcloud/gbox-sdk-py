@@ -1759,35 +1759,22 @@ class ActionOperator:
         clip: Union[Clip, NotGiven] = NOT_GIVEN,
         output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
         presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
-        scale: Union[float, NotGiven] = NOT_GIVEN,
+        save_to_album: Union[bool, NotGiven] = NOT_GIVEN,
     ) -> ActionScreenshotResponse:
         """
         Take a screenshot of the box.
 
         Args:
-            path: The path to save the screenshot to.
+          clip: Clipping region for screenshot capture
 
-            clip: Clipping region for screenshot capture
+          output_format: Type of the URI. default is base64.
 
-            output_format: Type of the URI. default is base64.
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
 
-            presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-                Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-                Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-
-            scale: The scale of the action to be performed. Must be greater than 0.1 and less than
-                or equal to 1.
-
-                Notes:
-
-                - Scale does not change the box's actual screen resolution.
-                - It affects the size of the output screenshot and the coordinates/distances of
-                    actions. Coordinates and distances are scaled by this factor. Example: when
-                    scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
-                    Click({x:50, y:50}).
-                - If not provided, uses the scale value from UI action settings; otherwise uses
-                    the passed value.
+          save_to_album: Whether to save the screenshot to the device screenshot album
 
         Returns:
             ActionScreenshotResponse: The response containing the screenshot data.
@@ -1812,7 +1799,7 @@ class ActionOperator:
             clip=clip,
             output_format=output_format,
             presigned_expires_in=presigned_expires_in,
-            scale=scale,
+            save_to_album=save_to_album,
         )
 
         if file_path:

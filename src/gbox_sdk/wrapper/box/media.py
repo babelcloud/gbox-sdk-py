@@ -7,14 +7,12 @@ from typing_extensions import List, Union, Optional, Protocol
 from gbox_sdk._types import FileTypes
 from gbox_sdk._utils import file_from_path
 from gbox_sdk._client import GboxClient
+from gbox_sdk.types.v1.boxes.media_album import MediaAlbum
 from gbox_sdk.types.v1.boxes.media_get_media_response import MediaGetMediaResponse
 from gbox_sdk.types.v1.boxes.media_list_media_response import (
-    DataPhoto as MediaListMediaPhotoResponse,
-    DataVideo as MediaListMediaVideoResponse,
     MediaListMediaResponse,
 )
 from gbox_sdk.types.v1.boxes.media_list_albums_response import MediaListAlbumsResponse
-from gbox_sdk.types.v1.boxes.media_get_album_detail_response import MediaGetAlbumDetailResponse
 from gbox_sdk.types.v1.boxes.media_get_media_support_response import MediaGetMediaSupportResponse
 
 
@@ -156,7 +154,7 @@ class MediaItemOperator:
         client: GboxClient,
         box_id: str,
         album_name: str,
-        data: Union[MediaListMediaPhotoResponse, MediaListMediaVideoResponse],
+        data: MediaGetMediaResponse,
     ):
         self.client = client
         self.box_id = box_id
@@ -393,7 +391,7 @@ class MediaOperator:
         """
         return self.client.v1.boxes.media.delete_album(box_id=self.box_id, album_name=album_name)
 
-    def get_album_info(self, album_name: str) -> MediaGetAlbumDetailResponse:
+    def get_album_info(self, album_name: str) -> MediaAlbum:
         """
         Get the info of an album.
 

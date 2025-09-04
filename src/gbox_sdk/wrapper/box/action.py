@@ -13,10 +13,6 @@ from gbox_sdk.types.v1.boxes.action_ai_response import ActionAIResponse
 from gbox_sdk.types.v1.boxes.action_drag_params import DragSimpleEnd, DragSimpleStart, DragAdvancedPath
 from gbox_sdk.types.v1.boxes.action_swipe_params import SwipeAdvancedEnd, SwipeAdvancedStart
 from gbox_sdk.types.v1.boxes.action_touch_params import Point
-from gbox_sdk.types.v1.boxes.action_drag_response import ActionDragResponse
-from gbox_sdk.types.v1.boxes.action_type_response import ActionTypeResponse
-from gbox_sdk.types.v1.boxes.action_swipe_response import ActionSwipeResponse
-from gbox_sdk.types.v1.boxes.action_touch_response import ActionTouchResponse
 from gbox_sdk.types.v1.boxes.action_extract_response import ActionExtractResponse
 from gbox_sdk.types.v1.boxes.action_press_key_params import KeysType
 from gbox_sdk.types.v1.boxes.action_screenshot_params import Clip, ActionScreenshotParams
@@ -27,7 +23,6 @@ from gbox_sdk.types.v1.boxes.action_screen_layout_response import ActionScreenLa
 from gbox_sdk.types.v1.boxes.action_recording_stop_response import ActionRecordingStopResponse
 from gbox_sdk.types.v1.boxes.action_rewind_extract_response import ActionRewindExtractResponse
 from gbox_sdk.types.v1.boxes.action_settings_reset_response import ActionSettingsResetResponse
-from gbox_sdk.types.v1.boxes.action_screen_rotation_response import ActionScreenRotationResponse
 from gbox_sdk.types.v1.boxes.action_settings_update_response import ActionSettingsUpdateResponse
 
 
@@ -560,7 +555,7 @@ class ActionOperator:
         output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
         presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
         screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
-    ) -> ActionDragResponse:
+    ) -> ActionResult:
         """
         Drag
 
@@ -667,7 +662,7 @@ class ActionOperator:
         output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
         presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
         screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
-    ) -> ActionSwipeResponse:
+    ) -> ActionResult:
         """
         Performs a swipe in the specified direction
 
@@ -1578,7 +1573,7 @@ class ActionOperator:
         output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
         presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
         screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
-    ) -> ActionTouchResponse:
+    ) -> ActionResult:
         """
         Simulate a touch action on the box.
 
@@ -1648,7 +1643,7 @@ class ActionOperator:
         presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
         press_enter: Union[bool, NotGiven] = NOT_GIVEN,
         screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
-    ) -> ActionTypeResponse:
+    ) -> ActionResult:
         """
         Simulate typing text on the box.
 
@@ -1827,7 +1822,7 @@ class ActionOperator:
         output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
         presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
         screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
-    ) -> ActionScreenRotationResponse:
+    ) -> ActionResult:
         """
         Rotate the screen orientation.
 

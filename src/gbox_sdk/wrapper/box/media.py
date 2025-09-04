@@ -1,20 +1,19 @@
 import os
+from typing import cast
 from pathlib import Path
 from datetime import datetime
 from dataclasses import dataclass
 from typing_extensions import List, Union, Optional, Protocol
 
-from gbox_sdk._types import FileTypes
+from gbox_sdk._types import NOT_GIVEN, NotGiven, FileTypes
 from gbox_sdk._utils import file_from_path
 from gbox_sdk._client import GboxClient
+from gbox_sdk.types.v1.boxes.media_album import MediaAlbum
 from gbox_sdk.types.v1.boxes.media_get_media_response import MediaGetMediaResponse
 from gbox_sdk.types.v1.boxes.media_list_media_response import (
-    DataPhoto as MediaListMediaPhotoResponse,
-    DataVideo as MediaListMediaVideoResponse,
     MediaListMediaResponse,
 )
 from gbox_sdk.types.v1.boxes.media_list_albums_response import MediaListAlbumsResponse
-from gbox_sdk.types.v1.boxes.media_get_album_detail_response import MediaGetAlbumDetailResponse
 from gbox_sdk.types.v1.boxes.media_get_media_support_response import MediaGetMediaSupportResponse
 
 
@@ -156,7 +155,7 @@ class MediaItemOperator:
         client: GboxClient,
         box_id: str,
         album_name: str,
-        data: Union[MediaListMediaPhotoResponse, MediaListMediaVideoResponse],
+        data: MediaGetMediaResponse,
     ):
         self.client = client
         self.box_id = box_id
@@ -315,6 +314,7 @@ class MediaAlbumOperator:
             box_id=self.box_id,
             media=processed_media,
         )
+        self._sync_data()
         return self
 
     def delete_media(self, media_name: str) -> None:
@@ -324,11 +324,16 @@ class MediaAlbumOperator:
         Examples:
             >>> album.delete_media("My Media")
         """
-        return self.client.v1.boxes.media.delete_media(
+        self.client.v1.boxes.media.delete_media(
             box_id=self.box_id,
             album_name=self.data.name,
             media_name=media_name,
         )
+        self._sync_data()
+
+    def _sync_data(self) -> None:
+        res = self.client.v1.boxes.media.get_album_detail(box_id=self.box_id, album_name=self.data.name)
+        self.data = res
 
 
 class MediaOperator:
@@ -368,7 +373,12 @@ class MediaOperator:
         """
         return self.client.v1.boxes.media.list_albums(box_id=self.box_id)
 
-    def create_album(self, *, name: str, media: List[Union[FileTypes, str]]) -> MediaAlbumOperator:
+    def create_album(
+        self,
+        *,
+        name: str,
+        media: Union[List[Union[FileTypes, str]], NotGiven] = NOT_GIVEN,
+    ) -> MediaAlbumOperator:
         """
         Create a new album in the box.
 
@@ -380,8 +390,16 @@ class MediaOperator:
         Examples:
             >>> album = box.media.create_album("My Album")
         """
-        processed_media = process_media_array(media, self.client, self.box_id)
-        res = self.client.v1.boxes.media.create_album(box_id=self.box_id, name=name, media=processed_media)
+        if media is NOT_GIVEN:
+            processed_media: Union[List[FileTypes], NotGiven] = NOT_GIVEN
+        else:
+            media_list = cast(List[Union[FileTypes, str]], media)
+            processed_media = process_media_array(media_list, self.client, self.box_id)
+        res = self.client.v1.boxes.media.create_album(
+            box_id=self.box_id,
+            name=name,
+            media=processed_media,
+        )
         return MediaAlbumOperator(self.client, self.box_id, res)
 
     def delete_album(self, album_name: str) -> None:
@@ -391,9 +409,9 @@ class MediaOperator:
         Examples:
             >>> box.media.delete_album("My Album")
         """
-        return self.client.v1.boxes.media.delete_album(box_id=self.box_id, album_name=album_name)
+        self.client.v1.boxes.media.delete_album(box_id=self.box_id, album_name=album_name)
 
-    def get_album_info(self, album_name: str) -> MediaGetAlbumDetailResponse:
+    def get_album_info(self, album_name: str) -> MediaAlbum:
         """
         Get the info of an album.
 

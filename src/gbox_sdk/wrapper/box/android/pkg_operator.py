@@ -3,8 +3,8 @@ from typing import Union
 from gbox_sdk._client import GboxClient
 from gbox_sdk._response import BinaryAPIResponse
 from gbox_sdk.types.v1.android_box import AndroidBox
+from gbox_sdk.types.v1.boxes.android_pkg import AndroidPkg
 from gbox_sdk.types.v1.boxes.android_open_params import AndroidOpenParams
-from gbox_sdk.types.v1.boxes.android_get_response import AndroidGetResponse
 from gbox_sdk.types.v1.boxes.android_restart_params import AndroidRestartParams
 from gbox_sdk.types.v1.boxes.android_list_activities_response import AndroidListActivitiesResponse
 
@@ -21,7 +21,7 @@ class AndroidPkgOperator:
         data (AndroidGetResponse): The package data object.
     """
 
-    def __init__(self, client: GboxClient, box: AndroidBox, data: AndroidGetResponse):
+    def __init__(self, client: GboxClient, box: AndroidBox, data: AndroidPkg):
         """
         Initialize an AndroidPkgOperator instance.
 

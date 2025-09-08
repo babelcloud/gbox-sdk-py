@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Union, cast
+from typing import Any, List, cast
 from typing_extensions import Literal
 
 import httpx
@@ -402,7 +402,7 @@ class BoxesResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        commands: Union[str, SequenceNotStr[str]],
+        command: str | NotGiven = NOT_GIVEN,
         envs: object | NotGiven = NOT_GIVEN,
         api_timeout: str | NotGiven = NOT_GIVEN,
         working_dir: str | NotGiven = NOT_GIVEN,
@@ -419,7 +419,7 @@ class BoxesResource(SyncAPIResource):
         the box and receive the output
 
         Args:
-          commands: The command to run. Can be a single string or an array of strings
+          command: The command to run
 
           envs: The environment variables to run the command
 
@@ -446,7 +446,7 @@ class BoxesResource(SyncAPIResource):
             f"/boxes/{box_id}/commands",
             body=maybe_transform(
                 {
-                    "commands": commands,
+                    "command": command,
                     "envs": envs,
                     "api_timeout": api_timeout,
                     "working_dir": working_dir,
@@ -1068,7 +1068,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        commands: Union[str, SequenceNotStr[str]],
+        command: str | NotGiven = NOT_GIVEN,
         envs: object | NotGiven = NOT_GIVEN,
         api_timeout: str | NotGiven = NOT_GIVEN,
         working_dir: str | NotGiven = NOT_GIVEN,
@@ -1085,7 +1085,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         the box and receive the output
 
         Args:
-          commands: The command to run. Can be a single string or an array of strings
+          command: The command to run
 
           envs: The environment variables to run the command
 
@@ -1112,7 +1112,7 @@ class AsyncBoxesResource(AsyncAPIResource):
             f"/boxes/{box_id}/commands",
             body=await async_maybe_transform(
                 {
-                    "commands": commands,
+                    "command": command,
                     "envs": envs,
                     "api_timeout": api_timeout,
                     "working_dir": working_dir,

@@ -257,7 +257,6 @@ class TestBoxes:
     def test_method_execute_commands(self, client: GboxClient) -> None:
         box = client.v1.boxes.execute_commands(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            commands=["ls", "-l"],
         )
         assert_matches_type(BoxExecuteCommandsResponse, box, path=["response"])
 
@@ -266,7 +265,7 @@ class TestBoxes:
     def test_method_execute_commands_with_all_params(self, client: GboxClient) -> None:
         box = client.v1.boxes.execute_commands(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            commands=["ls", "-l"],
+            command="ls -l",
             envs={
                 "PATH": "/usr/bin:/bin",
                 "NODE_ENV": "production",
@@ -281,7 +280,6 @@ class TestBoxes:
     def test_raw_response_execute_commands(self, client: GboxClient) -> None:
         response = client.v1.boxes.with_raw_response.execute_commands(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            commands=["ls", "-l"],
         )
 
         assert response.is_closed is True
@@ -294,7 +292,6 @@ class TestBoxes:
     def test_streaming_response_execute_commands(self, client: GboxClient) -> None:
         with client.v1.boxes.with_streaming_response.execute_commands(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            commands=["ls", "-l"],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -310,7 +307,6 @@ class TestBoxes:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.with_raw_response.execute_commands(
                 box_id="",
-                commands=["ls", "-l"],
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -906,7 +902,6 @@ class TestAsyncBoxes:
     async def test_method_execute_commands(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.execute_commands(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            commands=["ls", "-l"],
         )
         assert_matches_type(BoxExecuteCommandsResponse, box, path=["response"])
 
@@ -915,7 +910,7 @@ class TestAsyncBoxes:
     async def test_method_execute_commands_with_all_params(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.execute_commands(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            commands=["ls", "-l"],
+            command="ls -l",
             envs={
                 "PATH": "/usr/bin:/bin",
                 "NODE_ENV": "production",
@@ -930,7 +925,6 @@ class TestAsyncBoxes:
     async def test_raw_response_execute_commands(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.with_raw_response.execute_commands(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            commands=["ls", "-l"],
         )
 
         assert response.is_closed is True
@@ -943,7 +937,6 @@ class TestAsyncBoxes:
     async def test_streaming_response_execute_commands(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.with_streaming_response.execute_commands(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            commands=["ls", "-l"],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -959,7 +952,6 @@ class TestAsyncBoxes:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.with_raw_response.execute_commands(
                 box_id="",
-                commands=["ls", "-l"],
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")

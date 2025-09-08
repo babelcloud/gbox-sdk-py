@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 
@@ -10,7 +10,7 @@ __all__ = ["BoxExecuteCommandsParams"]
 
 
 class BoxExecuteCommandsParams(TypedDict, total=False):
-    command: str
+    command: Required[str]
     """The command to run"""
 
     envs: object

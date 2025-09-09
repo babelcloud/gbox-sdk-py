@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Union, cast
+from typing import Any, List, cast
 from typing_extensions import Literal
 
 import httpx
@@ -63,7 +63,7 @@ from .storage import (
     StorageResourceWithStreamingResponse,
     AsyncStorageResourceWithStreamingResponse,
 )
-from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
+from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven, SequenceNotStr
 from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ....types.v1 import (
@@ -402,7 +402,7 @@ class BoxesResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        commands: Union[str, List[str]],
+        command: str,
         envs: object | NotGiven = NOT_GIVEN,
         api_timeout: str | NotGiven = NOT_GIVEN,
         working_dir: str | NotGiven = NOT_GIVEN,
@@ -419,7 +419,7 @@ class BoxesResource(SyncAPIResource):
         the box and receive the output
 
         Args:
-          commands: The command to run. Can be a single string or an array of strings
+          command: The command to run
 
           envs: The environment variables to run the command
 
@@ -446,7 +446,7 @@ class BoxesResource(SyncAPIResource):
             f"/boxes/{box_id}/commands",
             body=maybe_transform(
                 {
-                    "commands": commands,
+                    "command": command,
                     "envs": envs,
                     "api_timeout": api_timeout,
                     "working_dir": working_dir,
@@ -506,7 +506,7 @@ class BoxesResource(SyncAPIResource):
         box_id: str,
         *,
         code: str,
-        argv: List[str] | NotGiven = NOT_GIVEN,
+        argv: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         envs: object | NotGiven = NOT_GIVEN,
         language: Literal["bash", "python", "typescript"] | NotGiven = NOT_GIVEN,
         api_timeout: str | NotGiven = NOT_GIVEN,
@@ -1068,7 +1068,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        commands: Union[str, List[str]],
+        command: str,
         envs: object | NotGiven = NOT_GIVEN,
         api_timeout: str | NotGiven = NOT_GIVEN,
         working_dir: str | NotGiven = NOT_GIVEN,
@@ -1085,7 +1085,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         the box and receive the output
 
         Args:
-          commands: The command to run. Can be a single string or an array of strings
+          command: The command to run
 
           envs: The environment variables to run the command
 
@@ -1112,7 +1112,7 @@ class AsyncBoxesResource(AsyncAPIResource):
             f"/boxes/{box_id}/commands",
             body=await async_maybe_transform(
                 {
-                    "commands": commands,
+                    "command": command,
                     "envs": envs,
                     "api_timeout": api_timeout,
                     "working_dir": working_dir,
@@ -1172,7 +1172,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         box_id: str,
         *,
         code: str,
-        argv: List[str] | NotGiven = NOT_GIVEN,
+        argv: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         envs: object | NotGiven = NOT_GIVEN,
         language: Literal["bash", "python", "typescript"] | NotGiven = NOT_GIVEN,
         api_timeout: str | NotGiven = NOT_GIVEN,

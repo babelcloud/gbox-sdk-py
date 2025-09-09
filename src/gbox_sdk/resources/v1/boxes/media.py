@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Mapping, cast
+from typing import Any, Mapping, cast
 
 import httpx
 
-from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven, FileTypes
+from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven, FileTypes, SequenceNotStr
 from ...._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -26,12 +26,10 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.v1.boxes import media_create_album_params, media_update_album_params
+from ....types.v1.boxes.media_album import MediaAlbum
 from ....types.v1.boxes.media_get_media_response import MediaGetMediaResponse
 from ....types.v1.boxes.media_list_media_response import MediaListMediaResponse
 from ....types.v1.boxes.media_list_albums_response import MediaListAlbumsResponse
-from ....types.v1.boxes.media_create_album_response import MediaCreateAlbumResponse
-from ....types.v1.boxes.media_update_album_response import MediaUpdateAlbumResponse
-from ....types.v1.boxes.media_get_album_detail_response import MediaGetAlbumDetailResponse
 from ....types.v1.boxes.media_get_media_support_response import MediaGetMediaSupportResponse
 
 __all__ = ["MediaResource", "AsyncMediaResource"]
@@ -62,14 +60,14 @@ class MediaResource(SyncAPIResource):
         box_id: str,
         *,
         name: str,
-        media: List[FileTypes] | NotGiven = NOT_GIVEN,
+        media: SequenceNotStr[FileTypes] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> MediaCreateAlbumResponse:
+    ) -> MediaAlbum:
         """
         Create a new album with media files
 
@@ -109,7 +107,7 @@ class MediaResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
             ),
-            cast_to=MediaCreateAlbumResponse,
+            cast_to=MediaAlbum,
         )
 
     def delete_album(
@@ -249,7 +247,7 @@ class MediaResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> MediaGetAlbumDetailResponse:
+    ) -> MediaAlbum:
         """
         Get detailed information about a specific album including its media files
 
@@ -274,7 +272,7 @@ class MediaResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
             ),
-            cast_to=MediaGetAlbumDetailResponse,
+            cast_to=MediaAlbum,
         )
 
     def get_media(
@@ -440,14 +438,14 @@ class MediaResource(SyncAPIResource):
         album_name: str,
         *,
         box_id: str,
-        media: List[FileTypes],
+        media: SequenceNotStr[FileTypes],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> MediaUpdateAlbumResponse:
+    ) -> MediaAlbum:
         """
         Add media files to an existing album
 
@@ -482,7 +480,7 @@ class MediaResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
             ),
-            cast_to=MediaUpdateAlbumResponse,
+            cast_to=MediaAlbum,
         )
 
 
@@ -511,14 +509,14 @@ class AsyncMediaResource(AsyncAPIResource):
         box_id: str,
         *,
         name: str,
-        media: List[FileTypes] | NotGiven = NOT_GIVEN,
+        media: SequenceNotStr[FileTypes] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> MediaCreateAlbumResponse:
+    ) -> MediaAlbum:
         """
         Create a new album with media files
 
@@ -558,7 +556,7 @@ class AsyncMediaResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
             ),
-            cast_to=MediaCreateAlbumResponse,
+            cast_to=MediaAlbum,
         )
 
     async def delete_album(
@@ -698,7 +696,7 @@ class AsyncMediaResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> MediaGetAlbumDetailResponse:
+    ) -> MediaAlbum:
         """
         Get detailed information about a specific album including its media files
 
@@ -723,7 +721,7 @@ class AsyncMediaResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
             ),
-            cast_to=MediaGetAlbumDetailResponse,
+            cast_to=MediaAlbum,
         )
 
     async def get_media(
@@ -889,14 +887,14 @@ class AsyncMediaResource(AsyncAPIResource):
         album_name: str,
         *,
         box_id: str,
-        media: List[FileTypes],
+        media: SequenceNotStr[FileTypes],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> MediaUpdateAlbumResponse:
+    ) -> MediaAlbum:
         """
         Add media files to an existing album
 
@@ -931,7 +929,7 @@ class AsyncMediaResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
             ),
-            cast_to=MediaUpdateAlbumResponse,
+            cast_to=MediaAlbum,
         )
 
 

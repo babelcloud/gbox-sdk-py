@@ -2,21 +2,33 @@
 
 from __future__ import annotations
 
-from typing import List
-from typing_extensions import Required, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
+
+from ...._types import SequenceNotStr
+from ...._utils import PropertyInfo
 
 __all__ = ["ProxySetParams", "Auth"]
 
 
 class ProxySetParams(TypedDict, total=False):
-    auth: Required[Auth]
+    host: Required[str]
+    """The host address of the proxy server"""
+
+    port: Required[float]
+    """The port number of the proxy server"""
+
+    auth: Auth
     """Box Proxy Auth"""
 
-    excludes: Required[List[str]]
-    """Exclude IPs from the proxy. Default is ['127.0.0.1', 'localhost']"""
+    excludes: SequenceNotStr[str]
+    """List of IP addresses and domains that should bypass the proxy.
 
-    url: Required[str]
-    """Proxy URL"""
+    These addresses will be accessed directly without going through the proxy
+    server. Default is ['127.0.0.1', 'localhost']
+    """
+
+    pac_url: Annotated[str, PropertyInfo(alias="pacUrl")]
+    """PAC (Proxy Auto-Configuration) URL."""
 
 
 class Auth(TypedDict, total=False):

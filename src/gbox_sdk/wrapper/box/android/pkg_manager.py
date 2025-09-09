@@ -8,8 +8,8 @@ from gbox_sdk._client import GboxClient
 from gbox_sdk._response import BinaryAPIResponse
 from gbox_sdk.types.v1.android_box import AndroidBox
 from gbox_sdk.wrapper.box.android.types import ListAndroidPkg
+from gbox_sdk.types.v1.boxes.android_pkg import AndroidPkg
 from gbox_sdk.wrapper.box.android.pkg_operator import AndroidPkgOperator
-from gbox_sdk.types.v1.boxes.android_get_response import AndroidGetResponse
 from gbox_sdk.types.v1.boxes.android_install_response import AndroidInstallResponse
 from gbox_sdk.types.v1.boxes.android_list_pkg_response import AndroidListPkgResponse
 from gbox_sdk.types.v1.boxes.android_list_pkg_simple_response import AndroidListPkgSimpleResponse
@@ -134,7 +134,7 @@ class AndroidPkgManager:
         operators: List[AndroidPkgOperator] = []
         for pkg in res.data:
             # Create AndroidGetResponse using camelCase field names
-            android_get_response = AndroidGetResponse(
+            android_get_response = AndroidPkg(
                 apkPath=pkg.apk_path,
                 isRunning=pkg.is_running,
                 name=pkg.name,
@@ -187,7 +187,7 @@ class AndroidPkgManager:
         res = self.client.v1.boxes.android.get(package_name, box_id=self.box.id)
         return AndroidPkgOperator(self.client, self.box, res)
 
-    def get_info(self, package_name: str) -> AndroidGetResponse:
+    def get_info(self, package_name: str) -> AndroidPkg:
         """
         Get detailed information for a specific installed package.
 

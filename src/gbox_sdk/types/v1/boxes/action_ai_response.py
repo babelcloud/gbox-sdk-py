@@ -6,6 +6,7 @@ from typing_extensions import Literal, TypeAlias
 from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
+from .action_common_options import ActionCommonOptions
 
 __all__ = [
     "ActionAIResponse",
@@ -18,7 +19,7 @@ __all__ = [
     "AIActionScreenshotResultAIResponseActionTypedTouchActionPointStart",
     "AIActionScreenshotResultAIResponseActionTypedTouchActionPointAction",
     "AIActionScreenshotResultAIResponseActionTypedTouchActionPointActionTouchPointMoveAction",
-    "AIActionScreenshotResultAIResponseActionTypedTouchActionPointActionTouchPointWaitActionDto",
+    "AIActionScreenshotResultAIResponseActionTypedTouchActionPointActionTouchPointWaitAction",
     "AIActionScreenshotResultAIResponseActionTypedDragAdvancedAction",
     "AIActionScreenshotResultAIResponseActionTypedDragAdvancedActionPath",
     "AIActionScreenshotResultAIResponseActionTypedDragSimpleAction",
@@ -56,7 +57,7 @@ __all__ = [
     "AIActionResultAIResponseActionTypedTouchActionPointStart",
     "AIActionResultAIResponseActionTypedTouchActionPointAction",
     "AIActionResultAIResponseActionTypedTouchActionPointActionTouchPointMoveAction",
-    "AIActionResultAIResponseActionTypedTouchActionPointActionTouchPointWaitActionDto",
+    "AIActionResultAIResponseActionTypedTouchActionPointActionTouchPointWaitAction",
     "AIActionResultAIResponseActionTypedDragAdvancedAction",
     "AIActionResultAIResponseActionTypedDragAdvancedActionPath",
     "AIActionResultAIResponseActionTypedDragSimpleAction",
@@ -98,24 +99,39 @@ class AIActionScreenshotResultAIResponseActionTypedClickAction(BaseModel):
     """Whether to perform a double click"""
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
+    options: Optional[ActionCommonOptions] = None
+    """Action common options"""
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 
@@ -158,7 +174,7 @@ class AIActionScreenshotResultAIResponseActionTypedTouchActionPointActionTouchPo
     """Target Y coordinate"""
 
 
-class AIActionScreenshotResultAIResponseActionTypedTouchActionPointActionTouchPointWaitActionDto(BaseModel):
+class AIActionScreenshotResultAIResponseActionTypedTouchActionPointActionTouchPointWaitAction(BaseModel):
     duration: str
     """Duration to wait (e.g. "500ms")
 
@@ -172,7 +188,7 @@ class AIActionScreenshotResultAIResponseActionTypedTouchActionPointActionTouchPo
 
 AIActionScreenshotResultAIResponseActionTypedTouchActionPointAction: TypeAlias = Union[
     AIActionScreenshotResultAIResponseActionTypedTouchActionPointActionTouchPointMoveAction,
-    AIActionScreenshotResultAIResponseActionTypedTouchActionPointActionTouchPointWaitActionDto,
+    AIActionScreenshotResultAIResponseActionTypedTouchActionPointActionTouchPointWaitAction,
 ]
 
 
@@ -189,24 +205,39 @@ class AIActionScreenshotResultAIResponseActionTypedTouchAction(BaseModel):
     """Array of touch points and their actions"""
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
+    options: Optional[ActionCommonOptions] = None
+    """Action common options"""
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 
@@ -243,24 +274,39 @@ class AIActionScreenshotResultAIResponseActionTypedDragAdvancedAction(BaseModel)
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
+    options: Optional[ActionCommonOptions] = None
+    """Action common options"""
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 
@@ -318,24 +364,39 @@ class AIActionScreenshotResultAIResponseActionTypedDragSimpleAction(BaseModel):
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
+    options: Optional[ActionCommonOptions] = None
+    """Action common options"""
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 
@@ -356,15 +417,15 @@ class AIActionScreenshotResultAIResponseActionTypedScrollAction(BaseModel):
     scroll_x: float = FieldInfo(alias="scrollX")
     """Horizontal scroll amount.
 
-    Positive values scroll content rightward (reveals content on the left), negative
-    values scroll content leftward (reveals content on the right).
+    Positive values scroll content rightward (reveals content on the right),
+    negative values scroll content leftward (reveals content on the left).
     """
 
     scroll_y: float = FieldInfo(alias="scrollY")
     """Vertical scroll amount.
 
-    Positive values scroll content downward (reveals content above), negative values
-    scroll content upward (reveals content below).
+    Positive values scroll content downward (reveals content below), negative values
+    scroll content upward (reveals content above).
     """
 
     x: float
@@ -374,24 +435,39 @@ class AIActionScreenshotResultAIResponseActionTypedScrollAction(BaseModel):
     """Y coordinate of the scroll position"""
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
+    options: Optional[ActionCommonOptions] = None
+    """Action common options"""
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 
@@ -435,24 +511,39 @@ class AIActionScreenshotResultAIResponseActionTypedScrollSimpleAction(BaseModel)
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
+    options: Optional[ActionCommonOptions] = None
+    """Action common options"""
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 
@@ -493,10 +584,11 @@ class AIActionScreenshotResultAIResponseActionTypedSwipeSimpleAction(BaseModel):
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
     location: Optional[str] = None
@@ -505,18 +597,32 @@ class AIActionScreenshotResultAIResponseActionTypedSwipeSimpleAction(BaseModel):
     If not provided, the swipe will be performed from the center of the screen.
     """
 
+    options: Optional[ActionCommonOptions] = None
+    """Action common options"""
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 
@@ -574,24 +680,39 @@ class AIActionScreenshotResultAIResponseActionTypedSwipeAdvancedAction(BaseModel
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
+    options: Optional[ActionCommonOptions] = None
+    """Action common options"""
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 
@@ -736,24 +857,39 @@ class AIActionScreenshotResultAIResponseActionTypedPressKeyAction(BaseModel):
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
+    options: Optional[ActionCommonOptions] = None
+    """Action common options"""
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 
@@ -775,24 +911,39 @@ class AIActionScreenshotResultAIResponseActionTypedPressButtonAction(BaseModel):
     """Button to press"""
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
+    options: Optional[ActionCommonOptions] = None
+    """Action common options"""
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 
@@ -824,24 +975,39 @@ class AIActionScreenshotResultAIResponseActionTypedLongPressAction(BaseModel):
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
+    options: Optional[ActionCommonOptions] = None
+    """Action common options"""
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 
@@ -863,10 +1029,11 @@ class AIActionScreenshotResultAIResponseActionTypedTypeAction(BaseModel):
     """Text to type"""
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
     mode: Optional[Literal["append", "replace"]] = None
@@ -875,11 +1042,21 @@ class AIActionScreenshotResultAIResponseActionTypedTypeAction(BaseModel):
     all existing text
     """
 
+    options: Optional[ActionCommonOptions] = None
+    """Action common options"""
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -889,7 +1066,11 @@ class AIActionScreenshotResultAIResponseActionTypedTypeAction(BaseModel):
     """Whether to press Enter after typing the text"""
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 
@@ -914,24 +1095,39 @@ class AIActionScreenshotResultAIResponseActionTypedMoveAction(BaseModel):
     """Y coordinate to move to"""
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
+    options: Optional[ActionCommonOptions] = None
+    """Action common options"""
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 
@@ -953,24 +1149,39 @@ class AIActionScreenshotResultAIResponseActionTypedScreenRotationAction(BaseMode
     """Target screen orientation"""
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
+    options: Optional[ActionCommonOptions] = None
+    """Action common options"""
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 
@@ -1008,6 +1219,16 @@ class AIActionScreenshotResultAIResponseActionTypedScreenshotAction(BaseModel):
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
     """Type of the URI. default is base64."""
 
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
+
+    save_to_album: Optional[bool] = FieldInfo(alias="saveToAlbum", default=None)
+    """Whether to save the screenshot to the device screenshot album"""
+
 
 class AIActionScreenshotResultAIResponseActionTypedWaitAction(BaseModel):
     duration: str
@@ -1018,24 +1239,39 @@ class AIActionScreenshotResultAIResponseActionTypedWaitAction(BaseModel):
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
+    options: Optional[ActionCommonOptions] = None
+    """Action common options"""
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 
@@ -1110,13 +1346,13 @@ class AIActionScreenshotResultScreenshotTrace(BaseModel):
 
 
 class AIActionScreenshotResultScreenshot(BaseModel):
-    after: AIActionScreenshotResultScreenshotAfter
+    after: Optional[AIActionScreenshotResultScreenshotAfter] = None
     """Screenshot taken after action execution"""
 
-    before: AIActionScreenshotResultScreenshotBefore
+    before: Optional[AIActionScreenshotResultScreenshotBefore] = None
     """Screenshot taken before action execution"""
 
-    trace: AIActionScreenshotResultScreenshotTrace
+    trace: Optional[AIActionScreenshotResultScreenshotTrace] = None
     """Screenshot with action operation trace"""
 
 
@@ -1124,10 +1360,13 @@ class AIActionScreenshotResult(BaseModel):
     ai_response: AIActionScreenshotResultAIResponse = FieldInfo(alias="aiResponse")
     """Response of AI action execution"""
 
+    message: str
+    """message"""
+
     output: str
     """output"""
 
-    screenshot: AIActionScreenshotResultScreenshot
+    screenshot: Optional[AIActionScreenshotResultScreenshot] = None
     """Complete screenshot result with operation trace, before and after images"""
 
 
@@ -1145,24 +1384,39 @@ class AIActionResultAIResponseActionTypedClickAction(BaseModel):
     """Whether to perform a double click"""
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
+    options: Optional[ActionCommonOptions] = None
+    """Action common options"""
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 
@@ -1205,7 +1459,7 @@ class AIActionResultAIResponseActionTypedTouchActionPointActionTouchPointMoveAct
     """Target Y coordinate"""
 
 
-class AIActionResultAIResponseActionTypedTouchActionPointActionTouchPointWaitActionDto(BaseModel):
+class AIActionResultAIResponseActionTypedTouchActionPointActionTouchPointWaitAction(BaseModel):
     duration: str
     """Duration to wait (e.g. "500ms")
 
@@ -1219,7 +1473,7 @@ class AIActionResultAIResponseActionTypedTouchActionPointActionTouchPointWaitAct
 
 AIActionResultAIResponseActionTypedTouchActionPointAction: TypeAlias = Union[
     AIActionResultAIResponseActionTypedTouchActionPointActionTouchPointMoveAction,
-    AIActionResultAIResponseActionTypedTouchActionPointActionTouchPointWaitActionDto,
+    AIActionResultAIResponseActionTypedTouchActionPointActionTouchPointWaitAction,
 ]
 
 
@@ -1236,24 +1490,39 @@ class AIActionResultAIResponseActionTypedTouchAction(BaseModel):
     """Array of touch points and their actions"""
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
+    options: Optional[ActionCommonOptions] = None
+    """Action common options"""
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 
@@ -1290,24 +1559,39 @@ class AIActionResultAIResponseActionTypedDragAdvancedAction(BaseModel):
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
+    options: Optional[ActionCommonOptions] = None
+    """Action common options"""
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 
@@ -1365,24 +1649,39 @@ class AIActionResultAIResponseActionTypedDragSimpleAction(BaseModel):
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
+    options: Optional[ActionCommonOptions] = None
+    """Action common options"""
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 
@@ -1403,15 +1702,15 @@ class AIActionResultAIResponseActionTypedScrollAction(BaseModel):
     scroll_x: float = FieldInfo(alias="scrollX")
     """Horizontal scroll amount.
 
-    Positive values scroll content rightward (reveals content on the left), negative
-    values scroll content leftward (reveals content on the right).
+    Positive values scroll content rightward (reveals content on the right),
+    negative values scroll content leftward (reveals content on the left).
     """
 
     scroll_y: float = FieldInfo(alias="scrollY")
     """Vertical scroll amount.
 
-    Positive values scroll content downward (reveals content above), negative values
-    scroll content upward (reveals content below).
+    Positive values scroll content downward (reveals content below), negative values
+    scroll content upward (reveals content above).
     """
 
     x: float
@@ -1421,24 +1720,39 @@ class AIActionResultAIResponseActionTypedScrollAction(BaseModel):
     """Y coordinate of the scroll position"""
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
+    options: Optional[ActionCommonOptions] = None
+    """Action common options"""
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 
@@ -1482,24 +1796,39 @@ class AIActionResultAIResponseActionTypedScrollSimpleAction(BaseModel):
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
+    options: Optional[ActionCommonOptions] = None
+    """Action common options"""
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 
@@ -1540,10 +1869,11 @@ class AIActionResultAIResponseActionTypedSwipeSimpleAction(BaseModel):
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
     location: Optional[str] = None
@@ -1552,18 +1882,32 @@ class AIActionResultAIResponseActionTypedSwipeSimpleAction(BaseModel):
     If not provided, the swipe will be performed from the center of the screen.
     """
 
+    options: Optional[ActionCommonOptions] = None
+    """Action common options"""
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 
@@ -1621,24 +1965,39 @@ class AIActionResultAIResponseActionTypedSwipeAdvancedAction(BaseModel):
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
+    options: Optional[ActionCommonOptions] = None
+    """Action common options"""
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 
@@ -1783,24 +2142,39 @@ class AIActionResultAIResponseActionTypedPressKeyAction(BaseModel):
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
+    options: Optional[ActionCommonOptions] = None
+    """Action common options"""
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 
@@ -1822,24 +2196,39 @@ class AIActionResultAIResponseActionTypedPressButtonAction(BaseModel):
     """Button to press"""
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
+    options: Optional[ActionCommonOptions] = None
+    """Action common options"""
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 
@@ -1871,24 +2260,39 @@ class AIActionResultAIResponseActionTypedLongPressAction(BaseModel):
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
+    options: Optional[ActionCommonOptions] = None
+    """Action common options"""
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 
@@ -1910,10 +2314,11 @@ class AIActionResultAIResponseActionTypedTypeAction(BaseModel):
     """Text to type"""
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
     mode: Optional[Literal["append", "replace"]] = None
@@ -1922,11 +2327,21 @@ class AIActionResultAIResponseActionTypedTypeAction(BaseModel):
     all existing text
     """
 
+    options: Optional[ActionCommonOptions] = None
+    """Action common options"""
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -1936,7 +2351,11 @@ class AIActionResultAIResponseActionTypedTypeAction(BaseModel):
     """Whether to press Enter after typing the text"""
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 
@@ -1961,24 +2380,39 @@ class AIActionResultAIResponseActionTypedMoveAction(BaseModel):
     """Y coordinate to move to"""
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
+    options: Optional[ActionCommonOptions] = None
+    """Action common options"""
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 
@@ -2000,24 +2434,39 @@ class AIActionResultAIResponseActionTypedScreenRotationAction(BaseModel):
     """Target screen orientation"""
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
+    options: Optional[ActionCommonOptions] = None
+    """Action common options"""
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 
@@ -2055,6 +2504,16 @@ class AIActionResultAIResponseActionTypedScreenshotAction(BaseModel):
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
     """Type of the URI. default is base64."""
 
+    presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
+    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+    """
+
+    save_to_album: Optional[bool] = FieldInfo(alias="saveToAlbum", default=None)
+    """Whether to save the screenshot to the device screenshot album"""
+
 
 class AIActionResultAIResponseActionTypedWaitAction(BaseModel):
     duration: str
@@ -2065,24 +2524,39 @@ class AIActionResultAIResponseActionTypedWaitAction(BaseModel):
     """
 
     include_screenshot: Optional[bool] = FieldInfo(alias="includeScreenshot", default=None)
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
+    options: Optional[ActionCommonOptions] = None
+    """Action common options"""
+
     output_format: Optional[Literal["base64", "storageKey"]] = FieldInfo(alias="outputFormat", default=None)
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Optional[str] = FieldInfo(alias="presignedExpiresIn", default=None)
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
     screenshot_delay: Optional[str] = FieldInfo(alias="screenshotDelay", default=None)
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 

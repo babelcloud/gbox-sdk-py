@@ -2,10 +2,11 @@ from typing import List, Union, Optional
 
 from gbox_sdk._types import NOT_GIVEN, NotGiven
 from gbox_sdk._client import GboxClient
+from gbox_sdk.types.v1.boxes.dir import Dir
+from gbox_sdk.types.v1.boxes.file import File
 from gbox_sdk.types.v1.boxes.f_write_params import FileTypes
-from gbox_sdk.types.v1.boxes.f_list_response import Data, DataDir, DataFile, FListResponse
+from gbox_sdk.types.v1.boxes.f_list_response import Data, FListResponse
 from gbox_sdk.types.v1.boxes.f_read_response import FReadResponse
-from gbox_sdk.types.v1.boxes.f_write_response import FWriteResponse
 from gbox_sdk.types.v1.boxes.f_exists_response import FExistsResponse
 from gbox_sdk.types.v1.boxes.f_remove_response import FRemoveResponse
 from gbox_sdk.types.v1.boxes.f_rename_response import FRenameResponse
@@ -135,7 +136,7 @@ class FileSystemOperator:
         )
 
         # Convert FWriteResponse to DataFile format for FileOperator
-        data_file = DataFile(
+        data_file = File(
             path=res.path, type="file", mode=res.mode, name=res.name, size=res.size, lastModified=res.last_modified
         )
 
@@ -231,12 +232,12 @@ class FileSystemOperator:
         """
         res = self.client.v1.boxes.fs.info(box_id=self.box_id, path=path, working_dir=working_dir)
         if res.type == "file":
-            data_file = DataFile(
+            data_file = File(
                 path=res.path, type="file", mode=res.mode, name=res.name, size=res.size, lastModified=res.last_modified
             )
             return FileOperator(self.client, self.box_id, data_file)
         else:
-            data_dir = DataDir(path=res.path, type="dir", mode=res.mode, name=res.name, lastModified=res.last_modified)
+            data_dir = Dir(path=res.path, type="dir", mode=res.mode, name=res.name, lastModified=res.last_modified)
             return DirectoryOperator(self.client, self.box_id, data_dir)
 
     def _data_to_operator(self, data: Optional[Data]) -> Union["FileOperator", "DirectoryOperator"]:
@@ -270,12 +271,12 @@ class FileOperator:
         data (DataFile): The file data.
     """
 
-    def __init__(self, client: GboxClient, box_id: str, data: DataFile):
+    def __init__(self, client: GboxClient, box_id: str, data: File):
         self.client = client
         self.box_id = box_id
         self.data = data
 
-    def write(self, content: Union[str, FileTypes], *, working_dir: Union[str, NotGiven] = NOT_GIVEN) -> FWriteResponse:
+    def write(self, content: Union[str, FileTypes], *, working_dir: Union[str, NotGiven] = NOT_GIVEN) -> File:
         """
         Write content to this file (text or binary).
 
@@ -344,7 +345,7 @@ class DirectoryOperator:
         data (DataDir): The directory data.
     """
 
-    def __init__(self, client: GboxClient, box_id: str, data: DataDir):
+    def __init__(self, client: GboxClient, box_id: str, data: Dir):
         self.client = client
         self.box_id = box_id
         self.data = data
@@ -399,12 +400,12 @@ class DirectoryOperator:
         result: List[Union["FileOperator", "DirectoryOperator"]] = []
         for r in res.data:
             if r.type == "file":
-                file = DataFile(
+                file = File(
                     path=r.path, type=r.type, mode=r.mode, name=r.name, size=r.size, lastModified=r.last_modified
                 )
                 result.append(FileOperator(self.client, self.box_id, file))
             else:
-                dir = DataDir(path=r.path, type=r.type, mode=r.mode, name=r.name, lastModified=r.last_modified)
+                dir = Dir(path=r.path, type=r.type, mode=r.mode, name=r.name, lastModified=r.last_modified)
                 result.append(DirectoryOperator(self.client, self.box_id, dir))
         return result
 

@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import List, Union
 from typing_extensions import Required, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
@@ -11,8 +10,8 @@ __all__ = ["BoxExecuteCommandsParams"]
 
 
 class BoxExecuteCommandsParams(TypedDict, total=False):
-    commands: Required[Union[str, List[str]]]
-    """The command to run. Can be a single string or an array of strings"""
+    command: Required[str]
+    """The command to run"""
 
     envs: object
     """The environment variables to run the command"""

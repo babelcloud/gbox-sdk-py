@@ -33,26 +33,22 @@ from ....types.v1.boxes import (
     action_long_press_params,
     action_screenshot_params,
     action_press_button_params,
+    action_rewind_extract_params,
     action_recording_start_params,
     action_screen_rotation_params,
+    action_settings_update_params,
 )
+from ....types.v1.boxes.action_result import ActionResult
 from ....types.v1.boxes.action_ai_response import ActionAIResponse
-from ....types.v1.boxes.action_tap_response import ActionTapResponse
-from ....types.v1.boxes.action_drag_response import ActionDragResponse
-from ....types.v1.boxes.action_move_response import ActionMoveResponse
-from ....types.v1.boxes.action_type_response import ActionTypeResponse
-from ....types.v1.boxes.action_click_response import ActionClickResponse
-from ....types.v1.boxes.action_swipe_response import ActionSwipeResponse
-from ....types.v1.boxes.action_touch_response import ActionTouchResponse
-from ....types.v1.boxes.action_scroll_response import ActionScrollResponse
 from ....types.v1.boxes.action_extract_response import ActionExtractResponse
-from ....types.v1.boxes.action_press_key_response import ActionPressKeyResponse
-from ....types.v1.boxes.action_long_press_response import ActionLongPressResponse
+from ....types.v1.boxes.action_settings_response import ActionSettingsResponse
 from ....types.v1.boxes.action_screenshot_response import ActionScreenshotResponse
-from ....types.v1.boxes.action_press_button_response import ActionPressButtonResponse
+from ....types.v1.boxes.action_common_options_param import ActionCommonOptionsParam
 from ....types.v1.boxes.action_screen_layout_response import ActionScreenLayoutResponse
 from ....types.v1.boxes.action_recording_stop_response import ActionRecordingStopResponse
-from ....types.v1.boxes.action_screen_rotation_response import ActionScreenRotationResponse
+from ....types.v1.boxes.action_rewind_extract_response import ActionRewindExtractResponse
+from ....types.v1.boxes.action_settings_reset_response import ActionSettingsResetResponse
+from ....types.v1.boxes.action_settings_update_response import ActionSettingsUpdateResponse
 
 __all__ = ["ActionsResource", "AsyncActionsResource"]
 
@@ -84,6 +80,7 @@ class ActionsResource(SyncAPIResource):
         instruction: str,
         background: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -110,17 +107,28 @@ class ActionsResource(SyncAPIResource):
               the action executor to understand the context of why the instruction is given
               including important previous actions and observations
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -160,6 +168,7 @@ class ActionsResource(SyncAPIResource):
                         "instruction": instruction,
                         "background": background,
                         "include_screenshot": include_screenshot,
+                        "options": options,
                         "output_format": output_format,
                         "presigned_expires_in": presigned_expires_in,
                         "screenshot_delay": screenshot_delay,
@@ -185,6 +194,7 @@ class ActionsResource(SyncAPIResource):
         button: Literal["left", "right", "middle"] | NotGiven = NOT_GIVEN,
         double: bool | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -194,7 +204,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionClickResponse:
+    ) -> ActionResult:
         """
         Click
 
@@ -207,17 +217,28 @@ class ActionsResource(SyncAPIResource):
 
           double: Whether to perform a double click
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -251,6 +272,7 @@ class ActionsResource(SyncAPIResource):
         button: Literal["left", "right", "middle"] | NotGiven = NOT_GIVEN,
         double: bool | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -260,7 +282,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionClickResponse:
+    ) -> ActionResult:
         """
         Click
 
@@ -272,17 +294,28 @@ class ActionsResource(SyncAPIResource):
 
           double: Whether to perform a double click
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -317,6 +350,7 @@ class ActionsResource(SyncAPIResource):
         button: Literal["left", "right", "middle"] | NotGiven = NOT_GIVEN,
         double: bool | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -327,34 +361,30 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionClickResponse:
+    ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return cast(
-            ActionClickResponse,
-            self._post(
-                f"/boxes/{box_id}/actions/click",
-                body=maybe_transform(
-                    {
-                        "x": x,
-                        "y": y,
-                        "button": button,
-                        "double": double,
-                        "include_screenshot": include_screenshot,
-                        "output_format": output_format,
-                        "presigned_expires_in": presigned_expires_in,
-                        "screenshot_delay": screenshot_delay,
-                        "target": target,
-                    },
-                    action_click_params.ActionClickParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, ActionClickResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+        return self._post(
+            f"/boxes/{box_id}/actions/click",
+            body=maybe_transform(
+                {
+                    "x": x,
+                    "y": y,
+                    "button": button,
+                    "double": double,
+                    "include_screenshot": include_screenshot,
+                    "options": options,
+                    "output_format": output_format,
+                    "presigned_expires_in": presigned_expires_in,
+                    "screenshot_delay": screenshot_delay,
+                    "target": target,
+                },
+                action_click_params.ActionClickParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
         )
 
     @overload
@@ -366,6 +396,7 @@ class ActionsResource(SyncAPIResource):
         start: action_drag_params.DragSimpleStart,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -375,7 +406,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionDragResponse:
+    ) -> ActionResult:
         """
         Drag
 
@@ -389,17 +420,28 @@ class ActionsResource(SyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -432,6 +474,7 @@ class ActionsResource(SyncAPIResource):
         path: Iterable[action_drag_params.DragAdvancedPath],
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -441,7 +484,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionDragResponse:
+    ) -> ActionResult:
         """
         Drag
 
@@ -453,17 +496,28 @@ class ActionsResource(SyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 50ms
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -497,6 +551,7 @@ class ActionsResource(SyncAPIResource):
         start: action_drag_params.DragSimpleStart | NotGiven = NOT_GIVEN,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -507,33 +562,29 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionDragResponse:
+    ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return cast(
-            ActionDragResponse,
-            self._post(
-                f"/boxes/{box_id}/actions/drag",
-                body=maybe_transform(
-                    {
-                        "end": end,
-                        "start": start,
-                        "duration": duration,
-                        "include_screenshot": include_screenshot,
-                        "output_format": output_format,
-                        "presigned_expires_in": presigned_expires_in,
-                        "screenshot_delay": screenshot_delay,
-                        "path": path,
-                    },
-                    action_drag_params.ActionDragParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, ActionDragResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+        return self._post(
+            f"/boxes/{box_id}/actions/drag",
+            body=maybe_transform(
+                {
+                    "end": end,
+                    "start": start,
+                    "duration": duration,
+                    "include_screenshot": include_screenshot,
+                    "options": options,
+                    "output_format": output_format,
+                    "presigned_expires_in": presigned_expires_in,
+                    "screenshot_delay": screenshot_delay,
+                    "path": path,
+                },
+                action_drag_params.ActionDragParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
         )
 
     def extract(
@@ -600,6 +651,7 @@ class ActionsResource(SyncAPIResource):
         y: float,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -609,7 +661,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionLongPressResponse:
+    ) -> ActionResult:
         """
         Perform a long press action at specified coordinates for a specified duration.
         Useful for triggering context menus, drag operations, or other long-press
@@ -625,17 +677,28 @@ class ActionsResource(SyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 1s
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -668,6 +731,7 @@ class ActionsResource(SyncAPIResource):
         target: str,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -677,7 +741,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionLongPressResponse:
+    ) -> ActionResult:
         """
         Perform a long press action at specified coordinates for a specified duration.
         Useful for triggering context menus, drag operations, or other long-press
@@ -692,17 +756,28 @@ class ActionsResource(SyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 1s
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -736,6 +811,7 @@ class ActionsResource(SyncAPIResource):
         y: float | NotGiven = NOT_GIVEN,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -746,33 +822,29 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionLongPressResponse:
+    ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return cast(
-            ActionLongPressResponse,
-            self._post(
-                f"/boxes/{box_id}/actions/long-press",
-                body=maybe_transform(
-                    {
-                        "x": x,
-                        "y": y,
-                        "duration": duration,
-                        "include_screenshot": include_screenshot,
-                        "output_format": output_format,
-                        "presigned_expires_in": presigned_expires_in,
-                        "screenshot_delay": screenshot_delay,
-                        "target": target,
-                    },
-                    action_long_press_params.ActionLongPressParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, ActionLongPressResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+        return self._post(
+            f"/boxes/{box_id}/actions/long-press",
+            body=maybe_transform(
+                {
+                    "x": x,
+                    "y": y,
+                    "duration": duration,
+                    "include_screenshot": include_screenshot,
+                    "options": options,
+                    "output_format": output_format,
+                    "presigned_expires_in": presigned_expires_in,
+                    "screenshot_delay": screenshot_delay,
+                    "target": target,
+                },
+                action_long_press_params.ActionLongPressParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
         )
 
     def move(
@@ -782,6 +854,7 @@ class ActionsResource(SyncAPIResource):
         x: float,
         y: float,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -791,7 +864,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionMoveResponse:
+    ) -> ActionResult:
         """
         Move to position
 
@@ -800,17 +873,28 @@ class ActionsResource(SyncAPIResource):
 
           y: Y coordinate to move to
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -835,28 +919,24 @@ class ActionsResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return cast(
-            ActionMoveResponse,
-            self._post(
-                f"/boxes/{box_id}/actions/move",
-                body=maybe_transform(
-                    {
-                        "x": x,
-                        "y": y,
-                        "include_screenshot": include_screenshot,
-                        "output_format": output_format,
-                        "presigned_expires_in": presigned_expires_in,
-                        "screenshot_delay": screenshot_delay,
-                    },
-                    action_move_params.ActionMoveParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, ActionMoveResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+        return self._post(
+            f"/boxes/{box_id}/actions/move",
+            body=maybe_transform(
+                {
+                    "x": x,
+                    "y": y,
+                    "include_screenshot": include_screenshot,
+                    "options": options,
+                    "output_format": output_format,
+                    "presigned_expires_in": presigned_expires_in,
+                    "screenshot_delay": screenshot_delay,
+                },
+                action_move_params.ActionMoveParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
         )
 
     def press_button(
@@ -865,6 +945,7 @@ class ActionsResource(SyncAPIResource):
         *,
         buttons: List[Literal["power", "volumeUp", "volumeDown", "volumeMute", "home", "back", "menu", "appSwitch"]],
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -874,24 +955,35 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionPressButtonResponse:
+    ) -> ActionResult:
         """
         Press device buttons like power, volume, home, back, etc.
 
         Args:
           buttons: Button to press
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -916,27 +1008,23 @@ class ActionsResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return cast(
-            ActionPressButtonResponse,
-            self._post(
-                f"/boxes/{box_id}/actions/press-button",
-                body=maybe_transform(
-                    {
-                        "buttons": buttons,
-                        "include_screenshot": include_screenshot,
-                        "output_format": output_format,
-                        "presigned_expires_in": presigned_expires_in,
-                        "screenshot_delay": screenshot_delay,
-                    },
-                    action_press_button_params.ActionPressButtonParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, ActionPressButtonResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+        return self._post(
+            f"/boxes/{box_id}/actions/press-button",
+            body=maybe_transform(
+                {
+                    "buttons": buttons,
+                    "include_screenshot": include_screenshot,
+                    "options": options,
+                    "output_format": output_format,
+                    "presigned_expires_in": presigned_expires_in,
+                    "screenshot_delay": screenshot_delay,
+                },
+                action_press_button_params.ActionPressButtonParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
         )
 
     def press_key(
@@ -1059,6 +1147,7 @@ class ActionsResource(SyncAPIResource):
         ],
         combination: bool | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -1068,7 +1157,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionPressKeyResponse:
+    ) -> ActionResult:
         """
         Simulates pressing a specific key by triggering the complete keyboard key event
         chain (keydown, keypress, keyup). Use this to activate keyboard key event
@@ -1082,17 +1171,28 @@ class ActionsResource(SyncAPIResource):
               true, all keys are pressed together as a shortcut (e.g., Ctrl+C). When false,
               keys are pressed one by one in sequence.
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -1117,28 +1217,24 @@ class ActionsResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return cast(
-            ActionPressKeyResponse,
-            self._post(
-                f"/boxes/{box_id}/actions/press-key",
-                body=maybe_transform(
-                    {
-                        "keys": keys,
-                        "combination": combination,
-                        "include_screenshot": include_screenshot,
-                        "output_format": output_format,
-                        "presigned_expires_in": presigned_expires_in,
-                        "screenshot_delay": screenshot_delay,
-                    },
-                    action_press_key_params.ActionPressKeyParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, ActionPressKeyResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+        return self._post(
+            f"/boxes/{box_id}/actions/press-key",
+            body=maybe_transform(
+                {
+                    "keys": keys,
+                    "combination": combination,
+                    "include_screenshot": include_screenshot,
+                    "options": options,
+                    "output_format": output_format,
+                    "presigned_expires_in": presigned_expires_in,
+                    "screenshot_delay": screenshot_delay,
+                },
+                action_press_key_params.ActionPressKeyParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
         )
 
     def recording_start(
@@ -1219,6 +1315,117 @@ class ActionsResource(SyncAPIResource):
             cast_to=ActionRecordingStopResponse,
         )
 
+    def rewind_disable(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Disable the device's background screen rewind recording.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._delete(
+            f"/boxes/{box_id}/actions/recording/rewind",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    def rewind_enable(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Enable the device's background screen rewind recording.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._post(
+            f"/boxes/{box_id}/actions/recording/rewind",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    def rewind_extract(
+        self,
+        box_id: str,
+        *,
+        duration: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionRewindExtractResponse:
+        """
+        Rewind and capture the device's background screen recording from a specified
+        time period.
+
+        Args:
+          duration: How far back in time to rewind for extracting recorded video. This specifies the
+              duration to go back from the current moment (e.g., '30s' rewinds 30 seconds to
+              get recent recorded activity). Default is 30s, max is 5m.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Maximum allowed: 5m
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return self._post(
+            f"/boxes/{box_id}/actions/recording/rewind/extract",
+            body=maybe_transform({"duration": duration}, action_rewind_extract_params.ActionRewindExtractParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionRewindExtractResponse,
+        )
+
     def screen_layout(
         self,
         box_id: str,
@@ -1265,6 +1472,7 @@ class ActionsResource(SyncAPIResource):
         *,
         orientation: Literal["portrait", "landscapeLeft", "portraitUpsideDown", "landscapeRight"],
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -1274,7 +1482,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionScreenRotationResponse:
+    ) -> ActionResult:
         """Rotate the screen orientation.
 
         Note that even after rotating the screen,
@@ -1284,17 +1492,28 @@ class ActionsResource(SyncAPIResource):
         Args:
           orientation: Target screen orientation
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -1319,27 +1538,23 @@ class ActionsResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return cast(
-            ActionScreenRotationResponse,
-            self._post(
-                f"/boxes/{box_id}/actions/screen-rotation",
-                body=maybe_transform(
-                    {
-                        "orientation": orientation,
-                        "include_screenshot": include_screenshot,
-                        "output_format": output_format,
-                        "presigned_expires_in": presigned_expires_in,
-                        "screenshot_delay": screenshot_delay,
-                    },
-                    action_screen_rotation_params.ActionScreenRotationParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, ActionScreenRotationResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+        return self._post(
+            f"/boxes/{box_id}/actions/screen-rotation",
+            body=maybe_transform(
+                {
+                    "orientation": orientation,
+                    "include_screenshot": include_screenshot,
+                    "options": options,
+                    "output_format": output_format,
+                    "presigned_expires_in": presigned_expires_in,
+                    "screenshot_delay": screenshot_delay,
+                },
+                action_screen_rotation_params.ActionScreenRotationParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
         )
 
     def screenshot(
@@ -1348,6 +1563,8 @@ class ActionsResource(SyncAPIResource):
         *,
         clip: action_screenshot_params.Clip | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
+        save_to_album: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1362,6 +1579,13 @@ class ActionsResource(SyncAPIResource):
           clip: Clipping region for screenshot capture
 
           output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+          save_to_album: Whether to save the screenshot to the device screenshot album
 
           extra_headers: Send extra headers
 
@@ -1379,6 +1603,8 @@ class ActionsResource(SyncAPIResource):
                 {
                     "clip": clip,
                     "output_format": output_format,
+                    "presigned_expires_in": presigned_expires_in,
+                    "save_to_album": save_to_album,
                 },
                 action_screenshot_params.ActionScreenshotParams,
             ),
@@ -1398,6 +1624,7 @@ class ActionsResource(SyncAPIResource):
         x: float,
         y: float,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -1407,7 +1634,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionScrollResponse:
+    ) -> ActionResult:
         """Performs a scroll action.
 
         Supports both advanced scroll with coordinates and
@@ -1415,27 +1642,38 @@ class ActionsResource(SyncAPIResource):
 
         Args:
           scroll_x: Horizontal scroll amount. Positive values scroll content rightward (reveals
-              content on the left), negative values scroll content leftward (reveals content
-              on the right).
+              content on the right), negative values scroll content leftward (reveals content
+              on the left).
 
           scroll_y: Vertical scroll amount. Positive values scroll content downward (reveals content
-              above), negative values scroll content upward (reveals content below).
+              below), negative values scroll content upward (reveals content above).
 
           x: X coordinate of the scroll position
 
           y: Y coordinate of the scroll position
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -1469,6 +1707,7 @@ class ActionsResource(SyncAPIResource):
         distance: Union[float, Literal["tiny", "short", "medium", "long"]] | NotGiven = NOT_GIVEN,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -1478,7 +1717,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionScrollResponse:
+    ) -> ActionResult:
         """Performs a scroll action.
 
         Supports both advanced scroll with coordinates and
@@ -1500,17 +1739,28 @@ class ActionsResource(SyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -1545,6 +1795,7 @@ class ActionsResource(SyncAPIResource):
         x: float | NotGiven = NOT_GIVEN,
         y: float | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -1557,36 +1808,144 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionScrollResponse:
+    ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return cast(
-            ActionScrollResponse,
-            self._post(
-                f"/boxes/{box_id}/actions/scroll",
-                body=maybe_transform(
-                    {
-                        "scroll_x": scroll_x,
-                        "scroll_y": scroll_y,
-                        "x": x,
-                        "y": y,
-                        "include_screenshot": include_screenshot,
-                        "output_format": output_format,
-                        "presigned_expires_in": presigned_expires_in,
-                        "screenshot_delay": screenshot_delay,
-                        "direction": direction,
-                        "distance": distance,
-                        "duration": duration,
-                    },
-                    action_scroll_params.ActionScrollParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, ActionScrollResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+        return self._post(
+            f"/boxes/{box_id}/actions/scroll",
+            body=maybe_transform(
+                {
+                    "scroll_x": scroll_x,
+                    "scroll_y": scroll_y,
+                    "x": x,
+                    "y": y,
+                    "include_screenshot": include_screenshot,
+                    "options": options,
+                    "output_format": output_format,
+                    "presigned_expires_in": presigned_expires_in,
+                    "screenshot_delay": screenshot_delay,
+                    "direction": direction,
+                    "distance": distance,
+                    "duration": duration,
+                },
+                action_scroll_params.ActionScrollParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
+        )
+
+    def settings(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionSettingsResponse:
+        """
+        Get the box action settings
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return self._get(
+            f"/boxes/{box_id}/actions/settings",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionSettingsResponse,
+        )
+
+    def settings_reset(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionSettingsResetResponse:
+        """
+        Reset the box settings to default
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return self._delete(
+            f"/boxes/{box_id}/actions/settings",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionSettingsResetResponse,
+        )
+
+    def settings_update(
+        self,
+        box_id: str,
+        *,
+        scale: float,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionSettingsUpdateResponse:
+        """
+        Update the box action settings
+
+        Args:
+          scale: The scale of the action to be performed. Must be greater than 0.1 and less than
+              or equal to 1.
+
+              Notes:
+
+              - Scale does not change the box's actual screen resolution.
+              - It affects the size of the output screenshot and the coordinates/distances of
+                actions. Coordinates and distances are scaled by this factor. Example: when
+                scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
+                Click({x:50, y:50}).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return self._put(
+            f"/boxes/{box_id}/actions/settings",
+            body=maybe_transform({"scale": scale}, action_settings_update_params.ActionSettingsUpdateParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionSettingsUpdateResponse,
         )
 
     @overload
@@ -1599,6 +1958,7 @@ class ActionsResource(SyncAPIResource):
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         location: str | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -1608,7 +1968,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionSwipeResponse:
+    ) -> ActionResult:
         """
         Performs a swipe in the specified direction
 
@@ -1625,20 +1985,31 @@ class ActionsResource(SyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
           location: Natural language description of the location where the swipe should originate.
               If not provided, the swipe will be performed from the center of the screen.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -1672,6 +2043,7 @@ class ActionsResource(SyncAPIResource):
         start: action_swipe_params.SwipeAdvancedStart,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -1681,7 +2053,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionSwipeResponse:
+    ) -> ActionResult:
         """
         Performs a swipe in the specified direction
 
@@ -1695,17 +2067,28 @@ class ActionsResource(SyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -1741,6 +2124,7 @@ class ActionsResource(SyncAPIResource):
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         location: str | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -1752,35 +2136,31 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionSwipeResponse:
+    ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return cast(
-            ActionSwipeResponse,
-            self._post(
-                f"/boxes/{box_id}/actions/swipe",
-                body=maybe_transform(
-                    {
-                        "direction": direction,
-                        "distance": distance,
-                        "duration": duration,
-                        "include_screenshot": include_screenshot,
-                        "location": location,
-                        "output_format": output_format,
-                        "presigned_expires_in": presigned_expires_in,
-                        "screenshot_delay": screenshot_delay,
-                        "end": end,
-                        "start": start,
-                    },
-                    action_swipe_params.ActionSwipeParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, ActionSwipeResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+        return self._post(
+            f"/boxes/{box_id}/actions/swipe",
+            body=maybe_transform(
+                {
+                    "direction": direction,
+                    "distance": distance,
+                    "duration": duration,
+                    "include_screenshot": include_screenshot,
+                    "location": location,
+                    "options": options,
+                    "output_format": output_format,
+                    "presigned_expires_in": presigned_expires_in,
+                    "screenshot_delay": screenshot_delay,
+                    "end": end,
+                    "start": start,
+                },
+                action_swipe_params.ActionSwipeParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
         )
 
     @overload
@@ -1791,6 +2171,7 @@ class ActionsResource(SyncAPIResource):
         x: float,
         y: float,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -1800,7 +2181,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionTapResponse:
+    ) -> ActionResult:
         """
         Tap action for Android devices using ADB input tap command
 
@@ -1809,17 +2190,28 @@ class ActionsResource(SyncAPIResource):
 
           y: Y coordinate of the tap
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -1851,6 +2243,7 @@ class ActionsResource(SyncAPIResource):
         *,
         target: str,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -1860,7 +2253,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionTapResponse:
+    ) -> ActionResult:
         """
         Tap action for Android devices using ADB input tap command
 
@@ -1868,17 +2261,28 @@ class ActionsResource(SyncAPIResource):
           target: Describe the target to operate using natural language, e.g., 'login button' or
               'Chrome'.
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -1911,6 +2315,7 @@ class ActionsResource(SyncAPIResource):
         x: float | NotGiven = NOT_GIVEN,
         y: float | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -1921,30 +2326,28 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionTapResponse:
+    ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return cast(
-            ActionTapResponse,
-            self._post(
-                f"/boxes/{box_id}/actions/tap",
-                body=maybe_transform(
-                    {
-                        "x": x,
-                        "y": y,
-                        "include_screenshot": include_screenshot,
-                        "output_format": output_format,
-                        "presigned_expires_in": presigned_expires_in,
-                        "screenshot_delay": screenshot_delay,
-                        "target": target,
-                    },
-                    action_tap_params.ActionTapParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(Any, ActionTapResponse),  # Union types cannot be passed in as arguments in the type system
+        return self._post(
+            f"/boxes/{box_id}/actions/tap",
+            body=maybe_transform(
+                {
+                    "x": x,
+                    "y": y,
+                    "include_screenshot": include_screenshot,
+                    "options": options,
+                    "output_format": output_format,
+                    "presigned_expires_in": presigned_expires_in,
+                    "screenshot_delay": screenshot_delay,
+                    "target": target,
+                },
+                action_tap_params.ActionTapParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
         )
 
     def touch(
@@ -1953,6 +2356,7 @@ class ActionsResource(SyncAPIResource):
         *,
         points: Iterable[action_touch_params.Point],
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -1962,24 +2366,35 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionTouchResponse:
+    ) -> ActionResult:
         """
         Touch
 
         Args:
           points: Array of touch points and their actions
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -2004,27 +2419,23 @@ class ActionsResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return cast(
-            ActionTouchResponse,
-            self._post(
-                f"/boxes/{box_id}/actions/touch",
-                body=maybe_transform(
-                    {
-                        "points": points,
-                        "include_screenshot": include_screenshot,
-                        "output_format": output_format,
-                        "presigned_expires_in": presigned_expires_in,
-                        "screenshot_delay": screenshot_delay,
-                    },
-                    action_touch_params.ActionTouchParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, ActionTouchResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+        return self._post(
+            f"/boxes/{box_id}/actions/touch",
+            body=maybe_transform(
+                {
+                    "points": points,
+                    "include_screenshot": include_screenshot,
+                    "options": options,
+                    "output_format": output_format,
+                    "presigned_expires_in": presigned_expires_in,
+                    "screenshot_delay": screenshot_delay,
+                },
+                action_touch_params.ActionTouchParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
         )
 
     def type(
@@ -2034,6 +2445,7 @@ class ActionsResource(SyncAPIResource):
         text: str,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         mode: Literal["append", "replace"] | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         press_enter: bool | NotGiven = NOT_GIVEN,
@@ -2044,7 +2456,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionTypeResponse:
+    ) -> ActionResult:
         """
         Directly inputs text content without triggering physical key events (keydown,
         etc.), ideal for quickly filling large amounts of text when intermediate input
@@ -2053,22 +2465,33 @@ class ActionsResource(SyncAPIResource):
         Args:
           text: Text to type
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
           mode: Text input mode: 'append' to add text to existing content, 'replace' to replace
               all existing text
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
           press_enter: Whether to press Enter after typing the text
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -2093,29 +2516,25 @@ class ActionsResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return cast(
-            ActionTypeResponse,
-            self._post(
-                f"/boxes/{box_id}/actions/type",
-                body=maybe_transform(
-                    {
-                        "text": text,
-                        "include_screenshot": include_screenshot,
-                        "mode": mode,
-                        "output_format": output_format,
-                        "presigned_expires_in": presigned_expires_in,
-                        "press_enter": press_enter,
-                        "screenshot_delay": screenshot_delay,
-                    },
-                    action_type_params.ActionTypeParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, ActionTypeResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+        return self._post(
+            f"/boxes/{box_id}/actions/type",
+            body=maybe_transform(
+                {
+                    "text": text,
+                    "include_screenshot": include_screenshot,
+                    "mode": mode,
+                    "options": options,
+                    "output_format": output_format,
+                    "presigned_expires_in": presigned_expires_in,
+                    "press_enter": press_enter,
+                    "screenshot_delay": screenshot_delay,
+                },
+                action_type_params.ActionTypeParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
         )
 
 
@@ -2146,6 +2565,7 @@ class AsyncActionsResource(AsyncAPIResource):
         instruction: str,
         background: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -2172,17 +2592,28 @@ class AsyncActionsResource(AsyncAPIResource):
               the action executor to understand the context of why the instruction is given
               including important previous actions and observations
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -2222,6 +2653,7 @@ class AsyncActionsResource(AsyncAPIResource):
                         "instruction": instruction,
                         "background": background,
                         "include_screenshot": include_screenshot,
+                        "options": options,
                         "output_format": output_format,
                         "presigned_expires_in": presigned_expires_in,
                         "screenshot_delay": screenshot_delay,
@@ -2247,6 +2679,7 @@ class AsyncActionsResource(AsyncAPIResource):
         button: Literal["left", "right", "middle"] | NotGiven = NOT_GIVEN,
         double: bool | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -2256,7 +2689,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionClickResponse:
+    ) -> ActionResult:
         """
         Click
 
@@ -2269,17 +2702,28 @@ class AsyncActionsResource(AsyncAPIResource):
 
           double: Whether to perform a double click
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -2313,6 +2757,7 @@ class AsyncActionsResource(AsyncAPIResource):
         button: Literal["left", "right", "middle"] | NotGiven = NOT_GIVEN,
         double: bool | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -2322,7 +2767,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionClickResponse:
+    ) -> ActionResult:
         """
         Click
 
@@ -2334,17 +2779,28 @@ class AsyncActionsResource(AsyncAPIResource):
 
           double: Whether to perform a double click
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -2379,6 +2835,7 @@ class AsyncActionsResource(AsyncAPIResource):
         button: Literal["left", "right", "middle"] | NotGiven = NOT_GIVEN,
         double: bool | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -2389,34 +2846,30 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionClickResponse:
+    ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return cast(
-            ActionClickResponse,
-            await self._post(
-                f"/boxes/{box_id}/actions/click",
-                body=await async_maybe_transform(
-                    {
-                        "x": x,
-                        "y": y,
-                        "button": button,
-                        "double": double,
-                        "include_screenshot": include_screenshot,
-                        "output_format": output_format,
-                        "presigned_expires_in": presigned_expires_in,
-                        "screenshot_delay": screenshot_delay,
-                        "target": target,
-                    },
-                    action_click_params.ActionClickParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, ActionClickResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+        return await self._post(
+            f"/boxes/{box_id}/actions/click",
+            body=await async_maybe_transform(
+                {
+                    "x": x,
+                    "y": y,
+                    "button": button,
+                    "double": double,
+                    "include_screenshot": include_screenshot,
+                    "options": options,
+                    "output_format": output_format,
+                    "presigned_expires_in": presigned_expires_in,
+                    "screenshot_delay": screenshot_delay,
+                    "target": target,
+                },
+                action_click_params.ActionClickParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
         )
 
     @overload
@@ -2428,6 +2881,7 @@ class AsyncActionsResource(AsyncAPIResource):
         start: action_drag_params.DragSimpleStart,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -2437,7 +2891,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionDragResponse:
+    ) -> ActionResult:
         """
         Drag
 
@@ -2451,17 +2905,28 @@ class AsyncActionsResource(AsyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -2494,6 +2959,7 @@ class AsyncActionsResource(AsyncAPIResource):
         path: Iterable[action_drag_params.DragAdvancedPath],
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -2503,7 +2969,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionDragResponse:
+    ) -> ActionResult:
         """
         Drag
 
@@ -2515,17 +2981,28 @@ class AsyncActionsResource(AsyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 50ms
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -2559,6 +3036,7 @@ class AsyncActionsResource(AsyncAPIResource):
         start: action_drag_params.DragSimpleStart | NotGiven = NOT_GIVEN,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -2569,33 +3047,29 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionDragResponse:
+    ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return cast(
-            ActionDragResponse,
-            await self._post(
-                f"/boxes/{box_id}/actions/drag",
-                body=await async_maybe_transform(
-                    {
-                        "end": end,
-                        "start": start,
-                        "duration": duration,
-                        "include_screenshot": include_screenshot,
-                        "output_format": output_format,
-                        "presigned_expires_in": presigned_expires_in,
-                        "screenshot_delay": screenshot_delay,
-                        "path": path,
-                    },
-                    action_drag_params.ActionDragParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, ActionDragResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+        return await self._post(
+            f"/boxes/{box_id}/actions/drag",
+            body=await async_maybe_transform(
+                {
+                    "end": end,
+                    "start": start,
+                    "duration": duration,
+                    "include_screenshot": include_screenshot,
+                    "options": options,
+                    "output_format": output_format,
+                    "presigned_expires_in": presigned_expires_in,
+                    "screenshot_delay": screenshot_delay,
+                    "path": path,
+                },
+                action_drag_params.ActionDragParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
         )
 
     async def extract(
@@ -2662,6 +3136,7 @@ class AsyncActionsResource(AsyncAPIResource):
         y: float,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -2671,7 +3146,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionLongPressResponse:
+    ) -> ActionResult:
         """
         Perform a long press action at specified coordinates for a specified duration.
         Useful for triggering context menus, drag operations, or other long-press
@@ -2687,17 +3162,28 @@ class AsyncActionsResource(AsyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 1s
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -2730,6 +3216,7 @@ class AsyncActionsResource(AsyncAPIResource):
         target: str,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -2739,7 +3226,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionLongPressResponse:
+    ) -> ActionResult:
         """
         Perform a long press action at specified coordinates for a specified duration.
         Useful for triggering context menus, drag operations, or other long-press
@@ -2754,17 +3241,28 @@ class AsyncActionsResource(AsyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 1s
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -2798,6 +3296,7 @@ class AsyncActionsResource(AsyncAPIResource):
         y: float | NotGiven = NOT_GIVEN,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -2808,33 +3307,29 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionLongPressResponse:
+    ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return cast(
-            ActionLongPressResponse,
-            await self._post(
-                f"/boxes/{box_id}/actions/long-press",
-                body=await async_maybe_transform(
-                    {
-                        "x": x,
-                        "y": y,
-                        "duration": duration,
-                        "include_screenshot": include_screenshot,
-                        "output_format": output_format,
-                        "presigned_expires_in": presigned_expires_in,
-                        "screenshot_delay": screenshot_delay,
-                        "target": target,
-                    },
-                    action_long_press_params.ActionLongPressParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, ActionLongPressResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+        return await self._post(
+            f"/boxes/{box_id}/actions/long-press",
+            body=await async_maybe_transform(
+                {
+                    "x": x,
+                    "y": y,
+                    "duration": duration,
+                    "include_screenshot": include_screenshot,
+                    "options": options,
+                    "output_format": output_format,
+                    "presigned_expires_in": presigned_expires_in,
+                    "screenshot_delay": screenshot_delay,
+                    "target": target,
+                },
+                action_long_press_params.ActionLongPressParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
         )
 
     async def move(
@@ -2844,6 +3339,7 @@ class AsyncActionsResource(AsyncAPIResource):
         x: float,
         y: float,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -2853,7 +3349,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionMoveResponse:
+    ) -> ActionResult:
         """
         Move to position
 
@@ -2862,17 +3358,28 @@ class AsyncActionsResource(AsyncAPIResource):
 
           y: Y coordinate to move to
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -2897,28 +3404,24 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return cast(
-            ActionMoveResponse,
-            await self._post(
-                f"/boxes/{box_id}/actions/move",
-                body=await async_maybe_transform(
-                    {
-                        "x": x,
-                        "y": y,
-                        "include_screenshot": include_screenshot,
-                        "output_format": output_format,
-                        "presigned_expires_in": presigned_expires_in,
-                        "screenshot_delay": screenshot_delay,
-                    },
-                    action_move_params.ActionMoveParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, ActionMoveResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+        return await self._post(
+            f"/boxes/{box_id}/actions/move",
+            body=await async_maybe_transform(
+                {
+                    "x": x,
+                    "y": y,
+                    "include_screenshot": include_screenshot,
+                    "options": options,
+                    "output_format": output_format,
+                    "presigned_expires_in": presigned_expires_in,
+                    "screenshot_delay": screenshot_delay,
+                },
+                action_move_params.ActionMoveParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
         )
 
     async def press_button(
@@ -2927,6 +3430,7 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         buttons: List[Literal["power", "volumeUp", "volumeDown", "volumeMute", "home", "back", "menu", "appSwitch"]],
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -2936,24 +3440,35 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionPressButtonResponse:
+    ) -> ActionResult:
         """
         Press device buttons like power, volume, home, back, etc.
 
         Args:
           buttons: Button to press
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -2978,27 +3493,23 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return cast(
-            ActionPressButtonResponse,
-            await self._post(
-                f"/boxes/{box_id}/actions/press-button",
-                body=await async_maybe_transform(
-                    {
-                        "buttons": buttons,
-                        "include_screenshot": include_screenshot,
-                        "output_format": output_format,
-                        "presigned_expires_in": presigned_expires_in,
-                        "screenshot_delay": screenshot_delay,
-                    },
-                    action_press_button_params.ActionPressButtonParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, ActionPressButtonResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+        return await self._post(
+            f"/boxes/{box_id}/actions/press-button",
+            body=await async_maybe_transform(
+                {
+                    "buttons": buttons,
+                    "include_screenshot": include_screenshot,
+                    "options": options,
+                    "output_format": output_format,
+                    "presigned_expires_in": presigned_expires_in,
+                    "screenshot_delay": screenshot_delay,
+                },
+                action_press_button_params.ActionPressButtonParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
         )
 
     async def press_key(
@@ -3121,6 +3632,7 @@ class AsyncActionsResource(AsyncAPIResource):
         ],
         combination: bool | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -3130,7 +3642,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionPressKeyResponse:
+    ) -> ActionResult:
         """
         Simulates pressing a specific key by triggering the complete keyboard key event
         chain (keydown, keypress, keyup). Use this to activate keyboard key event
@@ -3144,17 +3656,28 @@ class AsyncActionsResource(AsyncAPIResource):
               true, all keys are pressed together as a shortcut (e.g., Ctrl+C). When false,
               keys are pressed one by one in sequence.
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -3179,28 +3702,24 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return cast(
-            ActionPressKeyResponse,
-            await self._post(
-                f"/boxes/{box_id}/actions/press-key",
-                body=await async_maybe_transform(
-                    {
-                        "keys": keys,
-                        "combination": combination,
-                        "include_screenshot": include_screenshot,
-                        "output_format": output_format,
-                        "presigned_expires_in": presigned_expires_in,
-                        "screenshot_delay": screenshot_delay,
-                    },
-                    action_press_key_params.ActionPressKeyParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, ActionPressKeyResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+        return await self._post(
+            f"/boxes/{box_id}/actions/press-key",
+            body=await async_maybe_transform(
+                {
+                    "keys": keys,
+                    "combination": combination,
+                    "include_screenshot": include_screenshot,
+                    "options": options,
+                    "output_format": output_format,
+                    "presigned_expires_in": presigned_expires_in,
+                    "screenshot_delay": screenshot_delay,
+                },
+                action_press_key_params.ActionPressKeyParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
         )
 
     async def recording_start(
@@ -3283,6 +3802,119 @@ class AsyncActionsResource(AsyncAPIResource):
             cast_to=ActionRecordingStopResponse,
         )
 
+    async def rewind_disable(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Disable the device's background screen rewind recording.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._delete(
+            f"/boxes/{box_id}/actions/recording/rewind",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    async def rewind_enable(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Enable the device's background screen rewind recording.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._post(
+            f"/boxes/{box_id}/actions/recording/rewind",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    async def rewind_extract(
+        self,
+        box_id: str,
+        *,
+        duration: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionRewindExtractResponse:
+        """
+        Rewind and capture the device's background screen recording from a specified
+        time period.
+
+        Args:
+          duration: How far back in time to rewind for extracting recorded video. This specifies the
+              duration to go back from the current moment (e.g., '30s' rewinds 30 seconds to
+              get recent recorded activity). Default is 30s, max is 5m.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Maximum allowed: 5m
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return await self._post(
+            f"/boxes/{box_id}/actions/recording/rewind/extract",
+            body=await async_maybe_transform(
+                {"duration": duration}, action_rewind_extract_params.ActionRewindExtractParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionRewindExtractResponse,
+        )
+
     async def screen_layout(
         self,
         box_id: str,
@@ -3329,6 +3961,7 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         orientation: Literal["portrait", "landscapeLeft", "portraitUpsideDown", "landscapeRight"],
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -3338,7 +3971,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionScreenRotationResponse:
+    ) -> ActionResult:
         """Rotate the screen orientation.
 
         Note that even after rotating the screen,
@@ -3348,17 +3981,28 @@ class AsyncActionsResource(AsyncAPIResource):
         Args:
           orientation: Target screen orientation
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -3383,27 +4027,23 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return cast(
-            ActionScreenRotationResponse,
-            await self._post(
-                f"/boxes/{box_id}/actions/screen-rotation",
-                body=await async_maybe_transform(
-                    {
-                        "orientation": orientation,
-                        "include_screenshot": include_screenshot,
-                        "output_format": output_format,
-                        "presigned_expires_in": presigned_expires_in,
-                        "screenshot_delay": screenshot_delay,
-                    },
-                    action_screen_rotation_params.ActionScreenRotationParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, ActionScreenRotationResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+        return await self._post(
+            f"/boxes/{box_id}/actions/screen-rotation",
+            body=await async_maybe_transform(
+                {
+                    "orientation": orientation,
+                    "include_screenshot": include_screenshot,
+                    "options": options,
+                    "output_format": output_format,
+                    "presigned_expires_in": presigned_expires_in,
+                    "screenshot_delay": screenshot_delay,
+                },
+                action_screen_rotation_params.ActionScreenRotationParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
         )
 
     async def screenshot(
@@ -3412,6 +4052,8 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         clip: action_screenshot_params.Clip | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
+        presigned_expires_in: str | NotGiven = NOT_GIVEN,
+        save_to_album: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -3426,6 +4068,13 @@ class AsyncActionsResource(AsyncAPIResource):
           clip: Clipping region for screenshot capture
 
           output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+          save_to_album: Whether to save the screenshot to the device screenshot album
 
           extra_headers: Send extra headers
 
@@ -3443,6 +4092,8 @@ class AsyncActionsResource(AsyncAPIResource):
                 {
                     "clip": clip,
                     "output_format": output_format,
+                    "presigned_expires_in": presigned_expires_in,
+                    "save_to_album": save_to_album,
                 },
                 action_screenshot_params.ActionScreenshotParams,
             ),
@@ -3462,6 +4113,7 @@ class AsyncActionsResource(AsyncAPIResource):
         x: float,
         y: float,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -3471,7 +4123,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionScrollResponse:
+    ) -> ActionResult:
         """Performs a scroll action.
 
         Supports both advanced scroll with coordinates and
@@ -3479,27 +4131,38 @@ class AsyncActionsResource(AsyncAPIResource):
 
         Args:
           scroll_x: Horizontal scroll amount. Positive values scroll content rightward (reveals
-              content on the left), negative values scroll content leftward (reveals content
-              on the right).
+              content on the right), negative values scroll content leftward (reveals content
+              on the left).
 
           scroll_y: Vertical scroll amount. Positive values scroll content downward (reveals content
-              above), negative values scroll content upward (reveals content below).
+              below), negative values scroll content upward (reveals content above).
 
           x: X coordinate of the scroll position
 
           y: Y coordinate of the scroll position
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -3533,6 +4196,7 @@ class AsyncActionsResource(AsyncAPIResource):
         distance: Union[float, Literal["tiny", "short", "medium", "long"]] | NotGiven = NOT_GIVEN,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -3542,7 +4206,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionScrollResponse:
+    ) -> ActionResult:
         """Performs a scroll action.
 
         Supports both advanced scroll with coordinates and
@@ -3564,17 +4228,28 @@ class AsyncActionsResource(AsyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -3609,6 +4284,7 @@ class AsyncActionsResource(AsyncAPIResource):
         x: float | NotGiven = NOT_GIVEN,
         y: float | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -3621,36 +4297,146 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionScrollResponse:
+    ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return cast(
-            ActionScrollResponse,
-            await self._post(
-                f"/boxes/{box_id}/actions/scroll",
-                body=await async_maybe_transform(
-                    {
-                        "scroll_x": scroll_x,
-                        "scroll_y": scroll_y,
-                        "x": x,
-                        "y": y,
-                        "include_screenshot": include_screenshot,
-                        "output_format": output_format,
-                        "presigned_expires_in": presigned_expires_in,
-                        "screenshot_delay": screenshot_delay,
-                        "direction": direction,
-                        "distance": distance,
-                        "duration": duration,
-                    },
-                    action_scroll_params.ActionScrollParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, ActionScrollResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+        return await self._post(
+            f"/boxes/{box_id}/actions/scroll",
+            body=await async_maybe_transform(
+                {
+                    "scroll_x": scroll_x,
+                    "scroll_y": scroll_y,
+                    "x": x,
+                    "y": y,
+                    "include_screenshot": include_screenshot,
+                    "options": options,
+                    "output_format": output_format,
+                    "presigned_expires_in": presigned_expires_in,
+                    "screenshot_delay": screenshot_delay,
+                    "direction": direction,
+                    "distance": distance,
+                    "duration": duration,
+                },
+                action_scroll_params.ActionScrollParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
+        )
+
+    async def settings(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionSettingsResponse:
+        """
+        Get the box action settings
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return await self._get(
+            f"/boxes/{box_id}/actions/settings",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionSettingsResponse,
+        )
+
+    async def settings_reset(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionSettingsResetResponse:
+        """
+        Reset the box settings to default
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return await self._delete(
+            f"/boxes/{box_id}/actions/settings",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionSettingsResetResponse,
+        )
+
+    async def settings_update(
+        self,
+        box_id: str,
+        *,
+        scale: float,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ActionSettingsUpdateResponse:
+        """
+        Update the box action settings
+
+        Args:
+          scale: The scale of the action to be performed. Must be greater than 0.1 and less than
+              or equal to 1.
+
+              Notes:
+
+              - Scale does not change the box's actual screen resolution.
+              - It affects the size of the output screenshot and the coordinates/distances of
+                actions. Coordinates and distances are scaled by this factor. Example: when
+                scale = 1, Click({x:100, y:100}); when scale = 0.5, the equivalent position is
+                Click({x:50, y:50}).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return await self._put(
+            f"/boxes/{box_id}/actions/settings",
+            body=await async_maybe_transform(
+                {"scale": scale}, action_settings_update_params.ActionSettingsUpdateParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionSettingsUpdateResponse,
         )
 
     @overload
@@ -3663,6 +4449,7 @@ class AsyncActionsResource(AsyncAPIResource):
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         location: str | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -3672,7 +4459,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionSwipeResponse:
+    ) -> ActionResult:
         """
         Performs a swipe in the specified direction
 
@@ -3689,20 +4476,31 @@ class AsyncActionsResource(AsyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
           location: Natural language description of the location where the swipe should originate.
               If not provided, the swipe will be performed from the center of the screen.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -3736,6 +4534,7 @@ class AsyncActionsResource(AsyncAPIResource):
         start: action_swipe_params.SwipeAdvancedStart,
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -3745,7 +4544,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionSwipeResponse:
+    ) -> ActionResult:
         """
         Performs a swipe in the specified direction
 
@@ -3759,17 +4558,28 @@ class AsyncActionsResource(AsyncAPIResource):
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 500ms
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -3805,6 +4615,7 @@ class AsyncActionsResource(AsyncAPIResource):
         duration: str | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         location: str | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -3816,35 +4627,31 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionSwipeResponse:
+    ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return cast(
-            ActionSwipeResponse,
-            await self._post(
-                f"/boxes/{box_id}/actions/swipe",
-                body=await async_maybe_transform(
-                    {
-                        "direction": direction,
-                        "distance": distance,
-                        "duration": duration,
-                        "include_screenshot": include_screenshot,
-                        "location": location,
-                        "output_format": output_format,
-                        "presigned_expires_in": presigned_expires_in,
-                        "screenshot_delay": screenshot_delay,
-                        "end": end,
-                        "start": start,
-                    },
-                    action_swipe_params.ActionSwipeParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, ActionSwipeResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+        return await self._post(
+            f"/boxes/{box_id}/actions/swipe",
+            body=await async_maybe_transform(
+                {
+                    "direction": direction,
+                    "distance": distance,
+                    "duration": duration,
+                    "include_screenshot": include_screenshot,
+                    "location": location,
+                    "options": options,
+                    "output_format": output_format,
+                    "presigned_expires_in": presigned_expires_in,
+                    "screenshot_delay": screenshot_delay,
+                    "end": end,
+                    "start": start,
+                },
+                action_swipe_params.ActionSwipeParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
         )
 
     @overload
@@ -3855,6 +4662,7 @@ class AsyncActionsResource(AsyncAPIResource):
         x: float,
         y: float,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -3864,7 +4672,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionTapResponse:
+    ) -> ActionResult:
         """
         Tap action for Android devices using ADB input tap command
 
@@ -3873,17 +4681,28 @@ class AsyncActionsResource(AsyncAPIResource):
 
           y: Y coordinate of the tap
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -3915,6 +4734,7 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         target: str,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -3924,7 +4744,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionTapResponse:
+    ) -> ActionResult:
         """
         Tap action for Android devices using ADB input tap command
 
@@ -3932,17 +4752,28 @@ class AsyncActionsResource(AsyncAPIResource):
           target: Describe the target to operate using natural language, e.g., 'login button' or
               'Chrome'.
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -3975,6 +4806,7 @@ class AsyncActionsResource(AsyncAPIResource):
         x: float | NotGiven = NOT_GIVEN,
         y: float | NotGiven = NOT_GIVEN,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -3985,30 +4817,28 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionTapResponse:
+    ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return cast(
-            ActionTapResponse,
-            await self._post(
-                f"/boxes/{box_id}/actions/tap",
-                body=await async_maybe_transform(
-                    {
-                        "x": x,
-                        "y": y,
-                        "include_screenshot": include_screenshot,
-                        "output_format": output_format,
-                        "presigned_expires_in": presigned_expires_in,
-                        "screenshot_delay": screenshot_delay,
-                        "target": target,
-                    },
-                    action_tap_params.ActionTapParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(Any, ActionTapResponse),  # Union types cannot be passed in as arguments in the type system
+        return await self._post(
+            f"/boxes/{box_id}/actions/tap",
+            body=await async_maybe_transform(
+                {
+                    "x": x,
+                    "y": y,
+                    "include_screenshot": include_screenshot,
+                    "options": options,
+                    "output_format": output_format,
+                    "presigned_expires_in": presigned_expires_in,
+                    "screenshot_delay": screenshot_delay,
+                    "target": target,
+                },
+                action_tap_params.ActionTapParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
         )
 
     async def touch(
@@ -4017,6 +4847,7 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         points: Iterable[action_touch_params.Point],
         include_screenshot: bool | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         screenshot_delay: str | NotGiven = NOT_GIVEN,
@@ -4026,24 +4857,35 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionTouchResponse:
+    ) -> ActionResult:
         """
         Touch
 
         Args:
           points: Array of touch points and their actions
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -4068,27 +4910,23 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return cast(
-            ActionTouchResponse,
-            await self._post(
-                f"/boxes/{box_id}/actions/touch",
-                body=await async_maybe_transform(
-                    {
-                        "points": points,
-                        "include_screenshot": include_screenshot,
-                        "output_format": output_format,
-                        "presigned_expires_in": presigned_expires_in,
-                        "screenshot_delay": screenshot_delay,
-                    },
-                    action_touch_params.ActionTouchParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, ActionTouchResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+        return await self._post(
+            f"/boxes/{box_id}/actions/touch",
+            body=await async_maybe_transform(
+                {
+                    "points": points,
+                    "include_screenshot": include_screenshot,
+                    "options": options,
+                    "output_format": output_format,
+                    "presigned_expires_in": presigned_expires_in,
+                    "screenshot_delay": screenshot_delay,
+                },
+                action_touch_params.ActionTouchParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
         )
 
     async def type(
@@ -4098,6 +4936,7 @@ class AsyncActionsResource(AsyncAPIResource):
         text: str,
         include_screenshot: bool | NotGiven = NOT_GIVEN,
         mode: Literal["append", "replace"] | NotGiven = NOT_GIVEN,
+        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         press_enter: bool | NotGiven = NOT_GIVEN,
@@ -4108,7 +4947,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionTypeResponse:
+    ) -> ActionResult:
         """
         Directly inputs text content without triggering physical key events (keydown,
         etc.), ideal for quickly filling large amounts of text when intermediate input
@@ -4117,22 +4956,33 @@ class AsyncActionsResource(AsyncAPIResource):
         Args:
           text: Text to type
 
-          include_screenshot: Whether to include screenshots in the action response. If false, the screenshot
-              object will still be returned but with empty URIs. Default is false.
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
 
           mode: Text input mode: 'append' to add text to existing content, 'replace' to replace
               all existing text
 
-          output_format: Type of the URI. default is base64.
+          options: Action common options
 
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
           press_enter: Whether to press Enter after typing the text
 
-          screenshot_delay: Delay after performing the action, before taking the final screenshot.
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
 
               Execution flow:
 
@@ -4157,29 +5007,25 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return cast(
-            ActionTypeResponse,
-            await self._post(
-                f"/boxes/{box_id}/actions/type",
-                body=await async_maybe_transform(
-                    {
-                        "text": text,
-                        "include_screenshot": include_screenshot,
-                        "mode": mode,
-                        "output_format": output_format,
-                        "presigned_expires_in": presigned_expires_in,
-                        "press_enter": press_enter,
-                        "screenshot_delay": screenshot_delay,
-                    },
-                    action_type_params.ActionTypeParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, ActionTypeResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+        return await self._post(
+            f"/boxes/{box_id}/actions/type",
+            body=await async_maybe_transform(
+                {
+                    "text": text,
+                    "include_screenshot": include_screenshot,
+                    "mode": mode,
+                    "options": options,
+                    "output_format": output_format,
+                    "presigned_expires_in": presigned_expires_in,
+                    "press_enter": press_enter,
+                    "screenshot_delay": screenshot_delay,
+                },
+                action_type_params.ActionTypeParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionResult,
         )
 
 
@@ -4217,6 +5063,15 @@ class ActionsResourceWithRawResponse:
         self.recording_stop = to_raw_response_wrapper(
             actions.recording_stop,
         )
+        self.rewind_disable = to_raw_response_wrapper(
+            actions.rewind_disable,
+        )
+        self.rewind_enable = to_raw_response_wrapper(
+            actions.rewind_enable,
+        )
+        self.rewind_extract = to_raw_response_wrapper(
+            actions.rewind_extract,
+        )
         self.screen_layout = to_raw_response_wrapper(
             actions.screen_layout,
         )
@@ -4228,6 +5083,15 @@ class ActionsResourceWithRawResponse:
         )
         self.scroll = to_raw_response_wrapper(
             actions.scroll,
+        )
+        self.settings = to_raw_response_wrapper(
+            actions.settings,
+        )
+        self.settings_reset = to_raw_response_wrapper(
+            actions.settings_reset,
+        )
+        self.settings_update = to_raw_response_wrapper(
+            actions.settings_update,
         )
         self.swipe = to_raw_response_wrapper(
             actions.swipe,
@@ -4277,6 +5141,15 @@ class AsyncActionsResourceWithRawResponse:
         self.recording_stop = async_to_raw_response_wrapper(
             actions.recording_stop,
         )
+        self.rewind_disable = async_to_raw_response_wrapper(
+            actions.rewind_disable,
+        )
+        self.rewind_enable = async_to_raw_response_wrapper(
+            actions.rewind_enable,
+        )
+        self.rewind_extract = async_to_raw_response_wrapper(
+            actions.rewind_extract,
+        )
         self.screen_layout = async_to_raw_response_wrapper(
             actions.screen_layout,
         )
@@ -4288,6 +5161,15 @@ class AsyncActionsResourceWithRawResponse:
         )
         self.scroll = async_to_raw_response_wrapper(
             actions.scroll,
+        )
+        self.settings = async_to_raw_response_wrapper(
+            actions.settings,
+        )
+        self.settings_reset = async_to_raw_response_wrapper(
+            actions.settings_reset,
+        )
+        self.settings_update = async_to_raw_response_wrapper(
+            actions.settings_update,
         )
         self.swipe = async_to_raw_response_wrapper(
             actions.swipe,
@@ -4337,6 +5219,15 @@ class ActionsResourceWithStreamingResponse:
         self.recording_stop = to_streamed_response_wrapper(
             actions.recording_stop,
         )
+        self.rewind_disable = to_streamed_response_wrapper(
+            actions.rewind_disable,
+        )
+        self.rewind_enable = to_streamed_response_wrapper(
+            actions.rewind_enable,
+        )
+        self.rewind_extract = to_streamed_response_wrapper(
+            actions.rewind_extract,
+        )
         self.screen_layout = to_streamed_response_wrapper(
             actions.screen_layout,
         )
@@ -4348,6 +5239,15 @@ class ActionsResourceWithStreamingResponse:
         )
         self.scroll = to_streamed_response_wrapper(
             actions.scroll,
+        )
+        self.settings = to_streamed_response_wrapper(
+            actions.settings,
+        )
+        self.settings_reset = to_streamed_response_wrapper(
+            actions.settings_reset,
+        )
+        self.settings_update = to_streamed_response_wrapper(
+            actions.settings_update,
         )
         self.swipe = to_streamed_response_wrapper(
             actions.swipe,
@@ -4397,6 +5297,15 @@ class AsyncActionsResourceWithStreamingResponse:
         self.recording_stop = async_to_streamed_response_wrapper(
             actions.recording_stop,
         )
+        self.rewind_disable = async_to_streamed_response_wrapper(
+            actions.rewind_disable,
+        )
+        self.rewind_enable = async_to_streamed_response_wrapper(
+            actions.rewind_enable,
+        )
+        self.rewind_extract = async_to_streamed_response_wrapper(
+            actions.rewind_extract,
+        )
         self.screen_layout = async_to_streamed_response_wrapper(
             actions.screen_layout,
         )
@@ -4408,6 +5317,15 @@ class AsyncActionsResourceWithStreamingResponse:
         )
         self.scroll = async_to_streamed_response_wrapper(
             actions.scroll,
+        )
+        self.settings = async_to_streamed_response_wrapper(
+            actions.settings,
+        )
+        self.settings_reset = async_to_streamed_response_wrapper(
+            actions.settings_reset,
+        )
+        self.settings_update = async_to_streamed_response_wrapper(
+            actions.settings_update,
         )
         self.swipe = async_to_streamed_response_wrapper(
             actions.swipe,

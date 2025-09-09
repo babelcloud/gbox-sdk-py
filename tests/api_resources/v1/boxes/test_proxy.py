@@ -8,6 +8,8 @@ from typing import Any, cast
 import pytest
 
 from gbox_sdk import GboxClient, AsyncGboxClient
+from tests.utils import assert_matches_type
+from gbox_sdk.types.v1.boxes import ProxyGetResponse, ProxySetResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -63,7 +65,7 @@ class TestProxy:
         proxy = client.v1.boxes.proxy.get(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
-        assert proxy is None
+        assert_matches_type(ProxyGetResponse, proxy, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -75,7 +77,7 @@ class TestProxy:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         proxy = response.parse()
-        assert proxy is None
+        assert_matches_type(ProxyGetResponse, proxy, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -87,7 +89,7 @@ class TestProxy:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             proxy = response.parse()
-            assert proxy is None
+            assert_matches_type(ProxyGetResponse, proxy, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -104,50 +106,54 @@ class TestProxy:
     def test_method_set(self, client: GboxClient) -> None:
         proxy = client.v1.boxes.proxy.set(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            host="127.0.0.1",
+            port=8080,
+        )
+        assert_matches_type(ProxySetResponse, proxy, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_set_with_all_params(self, client: GboxClient) -> None:
+        proxy = client.v1.boxes.proxy.set(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            host="127.0.0.1",
+            port=8080,
             auth={
                 "password": "password",
                 "username": "admin",
             },
             excludes=["127.0.0.1", "localhost"],
-            url="http://127.0.0.1:8080",
+            pac_url="http://proxy.company.com/proxy.pac",
         )
-        assert proxy is None
+        assert_matches_type(ProxySetResponse, proxy, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_set(self, client: GboxClient) -> None:
         response = client.v1.boxes.proxy.with_raw_response.set(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            auth={
-                "password": "password",
-                "username": "admin",
-            },
-            excludes=["127.0.0.1", "localhost"],
-            url="http://127.0.0.1:8080",
+            host="127.0.0.1",
+            port=8080,
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         proxy = response.parse()
-        assert proxy is None
+        assert_matches_type(ProxySetResponse, proxy, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_set(self, client: GboxClient) -> None:
         with client.v1.boxes.proxy.with_streaming_response.set(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            auth={
-                "password": "password",
-                "username": "admin",
-            },
-            excludes=["127.0.0.1", "localhost"],
-            url="http://127.0.0.1:8080",
+            host="127.0.0.1",
+            port=8080,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             proxy = response.parse()
-            assert proxy is None
+            assert_matches_type(ProxySetResponse, proxy, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -157,12 +163,8 @@ class TestProxy:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.proxy.with_raw_response.set(
                 box_id="",
-                auth={
-                    "password": "password",
-                    "username": "admin",
-                },
-                excludes=["127.0.0.1", "localhost"],
-                url="http://127.0.0.1:8080",
+                host="127.0.0.1",
+                port=8080,
             )
 
 
@@ -219,7 +221,7 @@ class TestAsyncProxy:
         proxy = await async_client.v1.boxes.proxy.get(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
-        assert proxy is None
+        assert_matches_type(ProxyGetResponse, proxy, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -231,7 +233,7 @@ class TestAsyncProxy:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         proxy = await response.parse()
-        assert proxy is None
+        assert_matches_type(ProxyGetResponse, proxy, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -243,7 +245,7 @@ class TestAsyncProxy:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             proxy = await response.parse()
-            assert proxy is None
+            assert_matches_type(ProxyGetResponse, proxy, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -260,50 +262,54 @@ class TestAsyncProxy:
     async def test_method_set(self, async_client: AsyncGboxClient) -> None:
         proxy = await async_client.v1.boxes.proxy.set(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            host="127.0.0.1",
+            port=8080,
+        )
+        assert_matches_type(ProxySetResponse, proxy, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_set_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        proxy = await async_client.v1.boxes.proxy.set(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            host="127.0.0.1",
+            port=8080,
             auth={
                 "password": "password",
                 "username": "admin",
             },
             excludes=["127.0.0.1", "localhost"],
-            url="http://127.0.0.1:8080",
+            pac_url="http://proxy.company.com/proxy.pac",
         )
-        assert proxy is None
+        assert_matches_type(ProxySetResponse, proxy, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_set(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.proxy.with_raw_response.set(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            auth={
-                "password": "password",
-                "username": "admin",
-            },
-            excludes=["127.0.0.1", "localhost"],
-            url="http://127.0.0.1:8080",
+            host="127.0.0.1",
+            port=8080,
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         proxy = await response.parse()
-        assert proxy is None
+        assert_matches_type(ProxySetResponse, proxy, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_set(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.proxy.with_streaming_response.set(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            auth={
-                "password": "password",
-                "username": "admin",
-            },
-            excludes=["127.0.0.1", "localhost"],
-            url="http://127.0.0.1:8080",
+            host="127.0.0.1",
+            port=8080,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             proxy = await response.parse()
-            assert proxy is None
+            assert_matches_type(ProxySetResponse, proxy, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -313,10 +319,6 @@ class TestAsyncProxy:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.proxy.with_raw_response.set(
                 box_id="",
-                auth={
-                    "password": "password",
-                    "username": "admin",
-                },
-                excludes=["127.0.0.1", "localhost"],
-                url="http://127.0.0.1:8080",
+                host="127.0.0.1",
+                port=8080,
             )

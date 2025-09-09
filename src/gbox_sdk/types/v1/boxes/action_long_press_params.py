@@ -6,6 +6,7 @@ from typing import Union
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from ...._utils import PropertyInfo
+from .action_common_options_param import ActionCommonOptionsParam
 
 __all__ = ["ActionLongPressParams", "LongPress", "LongPressByNaturalLanguage"]
 
@@ -25,24 +26,39 @@ class LongPress(TypedDict, total=False):
     """
 
     include_screenshot: Annotated[bool, PropertyInfo(alias="includeScreenshot")]
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
+    options: ActionCommonOptionsParam
+    """Action common options"""
+
     output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Annotated[str, PropertyInfo(alias="presignedExpiresIn")]
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
     screenshot_delay: Annotated[str, PropertyInfo(alias="screenshotDelay")]
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 
@@ -74,24 +90,39 @@ class LongPressByNaturalLanguage(TypedDict, total=False):
     """
 
     include_screenshot: Annotated[bool, PropertyInfo(alias="includeScreenshot")]
-    """Whether to include screenshots in the action response.
+    """⚠️ DEPRECATED: Use `options.screenshot.phases` instead.
 
-    If false, the screenshot object will still be returned but with empty URIs.
-    Default is false.
+    This field will be ignored when `options.screenshot` is provided. Whether to
+    include screenshots in the action response. If false, the screenshot object will
+    still be returned but with empty URIs. Default is false.
     """
 
+    options: ActionCommonOptionsParam
+    """Action common options"""
+
     output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
-    """Type of the URI. default is base64."""
+    """⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead.
+
+    Type of the URI. default is base64. This field will be ignored when
+    `options.screenshot` is provided.
+    """
 
     presigned_expires_in: Annotated[str, PropertyInfo(alias="presignedExpiresIn")]
-    """Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    """⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead.
+
+    Presigned url expires in. Only takes effect when outputFormat is storageKey.
+    This field will be ignored when `options.screenshot` is provided.
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
 
     screenshot_delay: Annotated[str, PropertyInfo(alias="screenshotDelay")]
-    """Delay after performing the action, before taking the final screenshot.
+    """⚠️ DEPRECATED: Use `options.screenshot.delay` instead.
+
+    This field will be ignored when `options.screenshot` is provided.
+
+    Delay after performing the action, before taking the final screenshot.
 
     Execution flow:
 

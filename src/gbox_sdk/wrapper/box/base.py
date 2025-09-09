@@ -4,6 +4,7 @@ from typing_extensions import Self
 from gbox_sdk._types import NOT_GIVEN, NotGiven
 from gbox_sdk._client import GboxClient
 from gbox_sdk.wrapper.box.media import MediaOperator
+from gbox_sdk.wrapper.box.proxy import ProxyOperator
 from gbox_sdk.types.v1.linux_box import LinuxBox
 from gbox_sdk.wrapper.box.action import ActionOperator
 from gbox_sdk.wrapper.box.browser import BrowserOperator
@@ -46,6 +47,7 @@ class BaseBox:
         self.browser = BrowserOperator(self.client, self.data.id)
         self.storage = StorageOperator(self.client, self.data.id)
         self.media = MediaOperator(self.client, self.data.id)
+        self.proxy = ProxyOperator(self.client, self.data.id)
 
     def _sync_data(self) -> None:
         """
@@ -126,7 +128,7 @@ class BaseBox:
 
     def command(
         self,
-        commands: Union[List[str], str],
+        command: str,
         on_stdout: Optional[Callable[[str], None]] = None,
         on_stderr: Optional[Callable[[str], None]] = None,
         envs: Union[Dict[str, str], NotGiven] = NOT_GIVEN,
@@ -137,7 +139,7 @@ class BaseBox:
         Execute shell commands in the box.
 
         Args:
-            commands: The command to run. Can be a single string or an array of strings
+            command: The command to run. Can be a single string or an array of strings
 
             envs: The environment variables to run the command
 
@@ -158,14 +160,14 @@ class BaseBox:
             Union[BoxExecuteCommandsResponse, WebSocketResult]: The response containing the command execution result.
 
         Example:
-            >>> box.command(commands=["ls", "-l"], on_stdout=lambda x: print(x), on_stderr=lambda x: print(x))
+            >>> box.command(commands="ls -l", on_stdout=lambda x: print(x), on_stderr=lambda x: print(x))
         """
         if on_stdout is not None or on_stderr is not None:
-            return self._command_via_websocket(commands, on_stdout, on_stderr, envs, api_timeout, working_dir)
+            return self._command_via_websocket(command, on_stdout, on_stderr, envs, api_timeout, working_dir)
 
         return self.client.v1.boxes.execute_commands(
             box_id=self.data.id,
-            commands=commands,
+            command=command,
             envs=envs,
             api_timeout=api_timeout,
             working_dir=working_dir,

@@ -10,10 +10,10 @@ import pytest
 from gbox_sdk import GboxClient, AsyncGboxClient
 from tests.utils import assert_matches_type
 from gbox_sdk.types.v1.boxes import (
+    File,
     FInfoResponse,
     FListResponse,
     FReadResponse,
-    FWriteResponse,
     FExistsResponse,
     FRemoveResponse,
     FRenameResponse,
@@ -375,7 +375,7 @@ class TestFs:
             content="Hello, World!\nThis is file content.",
             path="/home/user/documents/output.txt",
         )
-        assert_matches_type(FWriteResponse, f, path=["response"])
+        assert_matches_type(File, f, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -386,7 +386,7 @@ class TestFs:
             path="/home/user/documents/output.txt",
             working_dir="/home/user/documents",
         )
-        assert_matches_type(FWriteResponse, f, path=["response"])
+        assert_matches_type(File, f, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -400,7 +400,7 @@ class TestFs:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         f = response.parse()
-        assert_matches_type(FWriteResponse, f, path=["response"])
+        assert_matches_type(File, f, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -414,7 +414,7 @@ class TestFs:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             f = response.parse()
-            assert_matches_type(FWriteResponse, f, path=["response"])
+            assert_matches_type(File, f, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -436,7 +436,7 @@ class TestFs:
             content=b"raw file contents",
             path="/home/user/documents/output.txt",
         )
-        assert_matches_type(FWriteResponse, f, path=["response"])
+        assert_matches_type(File, f, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -447,7 +447,7 @@ class TestFs:
             path="/home/user/documents/output.txt",
             working_dir="/home/user/documents",
         )
-        assert_matches_type(FWriteResponse, f, path=["response"])
+        assert_matches_type(File, f, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -461,7 +461,7 @@ class TestFs:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         f = response.parse()
-        assert_matches_type(FWriteResponse, f, path=["response"])
+        assert_matches_type(File, f, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -475,7 +475,7 @@ class TestFs:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             f = response.parse()
-            assert_matches_type(FWriteResponse, f, path=["response"])
+            assert_matches_type(File, f, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -845,7 +845,7 @@ class TestAsyncFs:
             content="Hello, World!\nThis is file content.",
             path="/home/user/documents/output.txt",
         )
-        assert_matches_type(FWriteResponse, f, path=["response"])
+        assert_matches_type(File, f, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -856,7 +856,7 @@ class TestAsyncFs:
             path="/home/user/documents/output.txt",
             working_dir="/home/user/documents",
         )
-        assert_matches_type(FWriteResponse, f, path=["response"])
+        assert_matches_type(File, f, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -870,7 +870,7 @@ class TestAsyncFs:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         f = await response.parse()
-        assert_matches_type(FWriteResponse, f, path=["response"])
+        assert_matches_type(File, f, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -884,7 +884,7 @@ class TestAsyncFs:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             f = await response.parse()
-            assert_matches_type(FWriteResponse, f, path=["response"])
+            assert_matches_type(File, f, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -906,7 +906,7 @@ class TestAsyncFs:
             content=b"raw file contents",
             path="/home/user/documents/output.txt",
         )
-        assert_matches_type(FWriteResponse, f, path=["response"])
+        assert_matches_type(File, f, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -917,7 +917,7 @@ class TestAsyncFs:
             path="/home/user/documents/output.txt",
             working_dir="/home/user/documents",
         )
-        assert_matches_type(FWriteResponse, f, path=["response"])
+        assert_matches_type(File, f, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -931,7 +931,7 @@ class TestAsyncFs:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         f = await response.parse()
-        assert_matches_type(FWriteResponse, f, path=["response"])
+        assert_matches_type(File, f, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -945,7 +945,7 @@ class TestAsyncFs:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             f = await response.parse()
-            assert_matches_type(FWriteResponse, f, path=["response"])
+            assert_matches_type(File, f, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

@@ -6,10 +6,10 @@ from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
 
-__all__ = ["AndroidGetResponse"]
+__all__ = ["AndroidPkg"]
 
 
-class AndroidGetResponse(BaseModel):
+class AndroidPkg(BaseModel):
     apk_path: str = FieldInfo(alias="apkPath")
     """Android apk path"""
 

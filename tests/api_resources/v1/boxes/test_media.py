@@ -18,12 +18,10 @@ from gbox_sdk._response import (
     AsyncStreamedBinaryAPIResponse,
 )
 from gbox_sdk.types.v1.boxes import (
+    MediaAlbum,
     MediaGetMediaResponse,
     MediaListMediaResponse,
     MediaListAlbumsResponse,
-    MediaCreateAlbumResponse,
-    MediaUpdateAlbumResponse,
-    MediaGetAlbumDetailResponse,
     MediaGetMediaSupportResponse,
 )
 
@@ -40,7 +38,7 @@ class TestMedia:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             name="Vacation Photos",
         )
-        assert_matches_type(MediaCreateAlbumResponse, media, path=["response"])
+        assert_matches_type(MediaAlbum, media, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -50,7 +48,7 @@ class TestMedia:
             name="Vacation Photos",
             media=[b"raw file contents"],
         )
-        assert_matches_type(MediaCreateAlbumResponse, media, path=["response"])
+        assert_matches_type(MediaAlbum, media, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -63,7 +61,7 @@ class TestMedia:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         media = response.parse()
-        assert_matches_type(MediaCreateAlbumResponse, media, path=["response"])
+        assert_matches_type(MediaAlbum, media, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -76,7 +74,7 @@ class TestMedia:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             media = response.parse()
-            assert_matches_type(MediaCreateAlbumResponse, media, path=["response"])
+            assert_matches_type(MediaAlbum, media, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -290,7 +288,7 @@ class TestMedia:
             album_name="Pictures",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
-        assert_matches_type(MediaGetAlbumDetailResponse, media, path=["response"])
+        assert_matches_type(MediaAlbum, media, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -303,7 +301,7 @@ class TestMedia:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         media = response.parse()
-        assert_matches_type(MediaGetAlbumDetailResponse, media, path=["response"])
+        assert_matches_type(MediaAlbum, media, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -316,7 +314,7 @@ class TestMedia:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             media = response.parse()
-            assert_matches_type(MediaGetAlbumDetailResponse, media, path=["response"])
+            assert_matches_type(MediaAlbum, media, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -543,7 +541,7 @@ class TestMedia:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             media=[b"raw file contents"],
         )
-        assert_matches_type(MediaUpdateAlbumResponse, media, path=["response"])
+        assert_matches_type(MediaAlbum, media, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -557,7 +555,7 @@ class TestMedia:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         media = response.parse()
-        assert_matches_type(MediaUpdateAlbumResponse, media, path=["response"])
+        assert_matches_type(MediaAlbum, media, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -571,7 +569,7 @@ class TestMedia:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             media = response.parse()
-            assert_matches_type(MediaUpdateAlbumResponse, media, path=["response"])
+            assert_matches_type(MediaAlbum, media, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -605,7 +603,7 @@ class TestAsyncMedia:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             name="Vacation Photos",
         )
-        assert_matches_type(MediaCreateAlbumResponse, media, path=["response"])
+        assert_matches_type(MediaAlbum, media, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -615,7 +613,7 @@ class TestAsyncMedia:
             name="Vacation Photos",
             media=[b"raw file contents"],
         )
-        assert_matches_type(MediaCreateAlbumResponse, media, path=["response"])
+        assert_matches_type(MediaAlbum, media, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -628,7 +626,7 @@ class TestAsyncMedia:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         media = await response.parse()
-        assert_matches_type(MediaCreateAlbumResponse, media, path=["response"])
+        assert_matches_type(MediaAlbum, media, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -641,7 +639,7 @@ class TestAsyncMedia:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             media = await response.parse()
-            assert_matches_type(MediaCreateAlbumResponse, media, path=["response"])
+            assert_matches_type(MediaAlbum, media, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -857,7 +855,7 @@ class TestAsyncMedia:
             album_name="Pictures",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
-        assert_matches_type(MediaGetAlbumDetailResponse, media, path=["response"])
+        assert_matches_type(MediaAlbum, media, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -870,7 +868,7 @@ class TestAsyncMedia:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         media = await response.parse()
-        assert_matches_type(MediaGetAlbumDetailResponse, media, path=["response"])
+        assert_matches_type(MediaAlbum, media, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -883,7 +881,7 @@ class TestAsyncMedia:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             media = await response.parse()
-            assert_matches_type(MediaGetAlbumDetailResponse, media, path=["response"])
+            assert_matches_type(MediaAlbum, media, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1110,7 +1108,7 @@ class TestAsyncMedia:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             media=[b"raw file contents"],
         )
-        assert_matches_type(MediaUpdateAlbumResponse, media, path=["response"])
+        assert_matches_type(MediaAlbum, media, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -1124,7 +1122,7 @@ class TestAsyncMedia:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         media = await response.parse()
-        assert_matches_type(MediaUpdateAlbumResponse, media, path=["response"])
+        assert_matches_type(MediaAlbum, media, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -1138,7 +1136,7 @@ class TestAsyncMedia:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             media = await response.parse()
-            assert_matches_type(MediaUpdateAlbumResponse, media, path=["response"])
+            assert_matches_type(MediaAlbum, media, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

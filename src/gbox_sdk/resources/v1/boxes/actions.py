@@ -1565,6 +1565,7 @@ class ActionsResource(SyncAPIResource):
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         save_to_album: bool | NotGiven = NOT_GIVEN,
+        scroll_capture: action_screenshot_params.ScrollCapture | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1587,6 +1588,8 @@ class ActionsResource(SyncAPIResource):
 
           save_to_album: Whether to save the screenshot to the device screenshot album
 
+          scroll_capture: Scroll capture parameters
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -1605,6 +1608,7 @@ class ActionsResource(SyncAPIResource):
                     "output_format": output_format,
                     "presigned_expires_in": presigned_expires_in,
                     "save_to_album": save_to_album,
+                    "scroll_capture": scroll_capture,
                 },
                 action_screenshot_params.ActionScreenshotParams,
             ),
@@ -4054,6 +4058,7 @@ class AsyncActionsResource(AsyncAPIResource):
         output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
         presigned_expires_in: str | NotGiven = NOT_GIVEN,
         save_to_album: bool | NotGiven = NOT_GIVEN,
+        scroll_capture: action_screenshot_params.ScrollCapture | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -4076,6 +4081,8 @@ class AsyncActionsResource(AsyncAPIResource):
 
           save_to_album: Whether to save the screenshot to the device screenshot album
 
+          scroll_capture: Scroll capture parameters
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -4094,6 +4101,7 @@ class AsyncActionsResource(AsyncAPIResource):
                     "output_format": output_format,
                     "presigned_expires_in": presigned_expires_in,
                     "save_to_album": save_to_album,
+                    "scroll_capture": scroll_capture,
                 },
                 action_screenshot_params.ActionScreenshotParams,
             ),

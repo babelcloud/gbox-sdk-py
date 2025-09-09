@@ -1,6 +1,7 @@
-from typing_extensions import List
+from typing_extensions import List, Union
 
 from gbox_sdk._client import GboxClient
+from gbox_sdk.types.v1.boxes.browser_open_tab_params import BrowserOpenTabParams
 from gbox_sdk.types.v1.boxes.browser_get_tabs_response import Data, BrowserGetTabsResponse
 from gbox_sdk.types.v1.boxes.browser_open_tab_response import BrowserOpenTabResponse
 from gbox_sdk.types.v1.boxes.browser_close_tab_response import BrowserCloseTabResponse
@@ -127,7 +128,7 @@ class BrowserOperator:
         """
         return self.client.v1.boxes.browser.switch_tab(tab_id=tab_id, box_id=self.box_id)
 
-    def open_tab(self, url: str) -> BrowserOpenTabResponse:
+    def open_tab(self, url: Union[str, BrowserOpenTabParams]) -> BrowserOpenTabResponse:
         """
         Create and open a new browser tab with the specified URL.
 
@@ -145,7 +146,11 @@ class BrowserOperator:
         Example:
             >>> box.browser.open_tab("https://www.google.com")
         """
-        return self.client.v1.boxes.browser.open_tab(url=url, box_id=self.box_id)
+        if isinstance(url, str):
+            tab_url = url
+        else:
+            tab_url = url["url"]
+        return self.client.v1.boxes.browser.open_tab(url=tab_url, box_id=self.box_id)
 
 
 class BrowserTabOperator:

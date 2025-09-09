@@ -128,7 +128,7 @@ class BaseBox:
 
     def command(
         self,
-        commands: Union[List[str], str],
+        command: str,
         on_stdout: Optional[Callable[[str], None]] = None,
         on_stderr: Optional[Callable[[str], None]] = None,
         envs: Union[Dict[str, str], NotGiven] = NOT_GIVEN,
@@ -139,7 +139,7 @@ class BaseBox:
         Execute shell commands in the box.
 
         Args:
-            commands: The command to run. Can be a single string or an array of strings
+            command: The command to run. Can be a single string or an array of strings
 
             envs: The environment variables to run the command
 
@@ -160,14 +160,14 @@ class BaseBox:
             Union[BoxExecuteCommandsResponse, WebSocketResult]: The response containing the command execution result.
 
         Example:
-            >>> box.command(commands=["ls", "-l"], on_stdout=lambda x: print(x), on_stderr=lambda x: print(x))
+            >>> box.command(commands="ls -l", on_stdout=lambda x: print(x), on_stderr=lambda x: print(x))
         """
         if on_stdout is not None or on_stderr is not None:
-            return self._command_via_websocket(commands, on_stdout, on_stderr, envs, api_timeout, working_dir)
+            return self._command_via_websocket(command, on_stdout, on_stderr, envs, api_timeout, working_dir)
 
         return self.client.v1.boxes.execute_commands(
             box_id=self.data.id,
-            commands=commands,
+            command=command,
             envs=envs,
             api_timeout=api_timeout,
             working_dir=working_dir,

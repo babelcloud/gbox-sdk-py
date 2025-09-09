@@ -1,5 +1,62 @@
 # Changelog
 
+## 0.1.0-alpha.34 (2025-09-09)
+
+Full Changelog: [v0.1.0-alpha.33...v0.1.0-alpha.34](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.33...v0.1.0-alpha.34)
+
+### Features
+
+* api update ([7887e28](https://github.com/babelcloud/gbox-sdk-py/commit/7887e2831d3f89278c5bf5aefe32146a4fae0727))
+* api update ([d384ce5](https://github.com/babelcloud/gbox-sdk-py/commit/d384ce56b44af32340e98d23517c8deae8eadecc))
+* **api:** api update ([8739b30](https://github.com/babelcloud/gbox-sdk-py/commit/8739b30d5caff7444086564b804aa00d8ad91094))
+* **api:** api update ([1686cd9](https://github.com/babelcloud/gbox-sdk-py/commit/1686cd950446035229318cf2ef808684fec38174))
+* **api:** api update ([07d685b](https://github.com/babelcloud/gbox-sdk-py/commit/07d685bcfc41803bcec32bd44c4ef9c43920548e))
+* **api:** api update ([72d3d68](https://github.com/babelcloud/gbox-sdk-py/commit/72d3d687dcc0bd4d1544bc9efe748803f4b577e2))
+* **api:** api update ([ac56fcc](https://github.com/babelcloud/gbox-sdk-py/commit/ac56fccb5526092c98b930485ec4a6ae98490d07))
+* **api:** api update ([2c5f996](https://github.com/babelcloud/gbox-sdk-py/commit/2c5f9964dd41db320dbb7dbc7dad5b318519a71e))
+* **api:** api update ([597ff88](https://github.com/babelcloud/gbox-sdk-py/commit/597ff882099cb5f784c2e96b01b69d07734875cf))
+* **api:** api update ([8fd05e0](https://github.com/babelcloud/gbox-sdk-py/commit/8fd05e0675ce693233d6fc6f210fefd2a363b7fd))
+* **api:** api update ([5b8cc2f](https://github.com/babelcloud/gbox-sdk-py/commit/5b8cc2fc140d2ecb9b047578b00482786745823a))
+* **api:** api update ([66d2e3e](https://github.com/babelcloud/gbox-sdk-py/commit/66d2e3ea661c528041ee01ed81e3dcf7fc4bc0f9))
+* **api:** api update ([c6e6a20](https://github.com/babelcloud/gbox-sdk-py/commit/c6e6a203825e5c5b418228412118983585c12bf1))
+* **api:** api update ([e85718d](https://github.com/babelcloud/gbox-sdk-py/commit/e85718d8d583843a36aaa4d63f4add9dcdafea88))
+* **api:** api update ([2d3f0ba](https://github.com/babelcloud/gbox-sdk-py/commit/2d3f0bab05b27736a9aedd6c20b298e877437511))
+* **api:** api update ([6fad226](https://github.com/babelcloud/gbox-sdk-py/commit/6fad2260f4faf32db26304e4d970c5328c23b80b))
+* **api:** api update ([1d71775](https://github.com/babelcloud/gbox-sdk-py/commit/1d7177509d5f5399b6f38045914f6fa63a4b75b8))
+* **api:** api update ([5c26be6](https://github.com/babelcloud/gbox-sdk-py/commit/5c26be66bd16fdc471bc6c1ded0c95bc1844526c))
+* **api:** api update ([e1cf29a](https://github.com/babelcloud/gbox-sdk-py/commit/e1cf29a476ab1b09f58018d340b3dcf2729b2386))
+* **api:** api update ([8a6a11b](https://github.com/babelcloud/gbox-sdk-py/commit/8a6a11bccb0ade64dd304c0ac642b05b2301a189))
+* **api:** api update ([73cff0a](https://github.com/babelcloud/gbox-sdk-py/commit/73cff0ae362ebf8f0440014870f15f1e86606e2d))
+* **api:** api update ([4acaf69](https://github.com/babelcloud/gbox-sdk-py/commit/4acaf69ed661388dd1d62838ffe57ff03a6c6100))
+* **api:** api update ([152897f](https://github.com/babelcloud/gbox-sdk-py/commit/152897f18839c2c74716ffa16970f32757b3406d))
+* **api:** api update ([12bc484](https://github.com/babelcloud/gbox-sdk-py/commit/12bc4845e3afcd18c80eb343454a77bf6921b1b3))
+* **api:** api update ([d619ae7](https://github.com/babelcloud/gbox-sdk-py/commit/d619ae7941657a1d99175d52390ed088b0648ef8))
+* **api:** api update ([11190c9](https://github.com/babelcloud/gbox-sdk-py/commit/11190c927f9eb6936700202267324002730fea4e))
+* **api:** api update ([15f75f4](https://github.com/babelcloud/gbox-sdk-py/commit/15f75f4bc0e4d508662ebfd984431761feed19c9))
+* **api:** api update ([4183fe9](https://github.com/babelcloud/gbox-sdk-py/commit/4183fe9bb361afae41e986d4d872ca1ced818ff5))
+* **api:** api update ([6def2c4](https://github.com/babelcloud/gbox-sdk-py/commit/6def2c43752f24cf9d914789856fc3e20b6b3c28))
+* **api:** api update ([69a5f8d](https://github.com/babelcloud/gbox-sdk-py/commit/69a5f8db44846556b8c9fbae45c2f20f9d48ae1f))
+* **box:** update command method to accept single command string and add getConnectAddress method in AndroidBoxOperator ([0e7dfaa](https://github.com/babelcloud/gbox-sdk-py/commit/0e7dfaa9de1730a1da3bb91870c4420637597d0c))
+* improve future compat with pydantic v3 ([cd94645](https://github.com/babelcloud/gbox-sdk-py/commit/cd94645a1a9d8e893a4ae49cef6e51d0fee4fa4e))
+* **types:** replace List[str] with SequenceNotStr in params ([8b86098](https://github.com/babelcloud/gbox-sdk-py/commit/8b86098561019a0cac8dd9a54a5ca3f3f234cff6))
+
+
+### Bug Fixes
+
+* avoid newer type syntax ([5ae3fcc](https://github.com/babelcloud/gbox-sdk-py/commit/5ae3fcc51edbef75f443f8253fe91cb6e015fd9a))
+* lint ([51e267c](https://github.com/babelcloud/gbox-sdk-py/commit/51e267cabf54c85182bfbb9c14b7313038889b0b))
+* lint changes ([edd975d](https://github.com/babelcloud/gbox-sdk-py/commit/edd975dbc3570163342b480b692d311b33e374ee))
+
+
+### Chores
+
+* **internal:** add Sequence related utils ([bd145b5](https://github.com/babelcloud/gbox-sdk-py/commit/bd145b5cbfe47c738dd0bbd7695aa4fd1dab2a22))
+* **internal:** change ci workflow machines ([d54ec35](https://github.com/babelcloud/gbox-sdk-py/commit/d54ec355ed0f93a7a3ebda37a558281f8ade185a))
+* **internal:** codegen related update ([96e3e8b](https://github.com/babelcloud/gbox-sdk-py/commit/96e3e8b54931faf5c86f9bdb033995ac3cc5acd4))
+* **internal:** move mypy configurations to `pyproject.toml` file ([f9fa525](https://github.com/babelcloud/gbox-sdk-py/commit/f9fa52593f31ab959e36fbd34b8e178ff49a298e))
+* **internal:** update pyright exclude list ([b9be869](https://github.com/babelcloud/gbox-sdk-py/commit/b9be869c19d019b5890c2280706ad284ccb118d1))
+* update github action ([88c9d20](https://github.com/babelcloud/gbox-sdk-py/commit/88c9d204e3583ba73ea4de7b6b409c3ada39ed69))
+
 ## 0.1.0-alpha.33 (2025-08-18)
 
 Full Changelog: [v0.1.0-alpha.32...v0.1.0-alpha.33](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.32...v0.1.0-alpha.33)

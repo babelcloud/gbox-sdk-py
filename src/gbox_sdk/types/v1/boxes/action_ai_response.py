@@ -43,6 +43,7 @@ __all__ = [
     "AIActionScreenshotResultAIResponseActionTypedScreenRotationAction",
     "AIActionScreenshotResultAIResponseActionTypedScreenshotAction",
     "AIActionScreenshotResultAIResponseActionTypedScreenshotActionClip",
+    "AIActionScreenshotResultAIResponseActionTypedScreenshotActionScrollCapture",
     "AIActionScreenshotResultAIResponseActionTypedWaitAction",
     "AIActionScreenshotResultScreenshot",
     "AIActionScreenshotResultScreenshotAfter",
@@ -81,6 +82,7 @@ __all__ = [
     "AIActionResultAIResponseActionTypedScreenRotationAction",
     "AIActionResultAIResponseActionTypedScreenshotAction",
     "AIActionResultAIResponseActionTypedScreenshotActionClip",
+    "AIActionResultAIResponseActionTypedScreenshotActionScrollCapture",
     "AIActionResultAIResponseActionTypedWaitAction",
 ]
 
@@ -1212,6 +1214,14 @@ class AIActionScreenshotResultAIResponseActionTypedScreenshotActionClip(BaseMode
     """Y coordinate of the clip"""
 
 
+class AIActionScreenshotResultAIResponseActionTypedScreenshotActionScrollCapture(BaseModel):
+    max_height: float = FieldInfo(alias="maxHeight")
+    """Maximum height of the screenshot in pixels"""
+
+    scroll_back: bool = FieldInfo(alias="scrollBack")
+    """Whether to scroll back to the original position after capturing the screenshot"""
+
+
 class AIActionScreenshotResultAIResponseActionTypedScreenshotAction(BaseModel):
     clip: Optional[AIActionScreenshotResultAIResponseActionTypedScreenshotActionClip] = None
     """Clipping region for screenshot capture"""
@@ -1228,6 +1238,11 @@ class AIActionScreenshotResultAIResponseActionTypedScreenshotAction(BaseModel):
 
     save_to_album: Optional[bool] = FieldInfo(alias="saveToAlbum", default=None)
     """Whether to save the screenshot to the device screenshot album"""
+
+    scroll_capture: Optional[AIActionScreenshotResultAIResponseActionTypedScreenshotActionScrollCapture] = FieldInfo(
+        alias="scrollCapture", default=None
+    )
+    """Scroll capture parameters"""
 
 
 class AIActionScreenshotResultAIResponseActionTypedWaitAction(BaseModel):
@@ -2497,6 +2512,14 @@ class AIActionResultAIResponseActionTypedScreenshotActionClip(BaseModel):
     """Y coordinate of the clip"""
 
 
+class AIActionResultAIResponseActionTypedScreenshotActionScrollCapture(BaseModel):
+    max_height: float = FieldInfo(alias="maxHeight")
+    """Maximum height of the screenshot in pixels"""
+
+    scroll_back: bool = FieldInfo(alias="scrollBack")
+    """Whether to scroll back to the original position after capturing the screenshot"""
+
+
 class AIActionResultAIResponseActionTypedScreenshotAction(BaseModel):
     clip: Optional[AIActionResultAIResponseActionTypedScreenshotActionClip] = None
     """Clipping region for screenshot capture"""
@@ -2513,6 +2536,11 @@ class AIActionResultAIResponseActionTypedScreenshotAction(BaseModel):
 
     save_to_album: Optional[bool] = FieldInfo(alias="saveToAlbum", default=None)
     """Whether to save the screenshot to the device screenshot album"""
+
+    scroll_capture: Optional[AIActionResultAIResponseActionTypedScreenshotActionScrollCapture] = FieldInfo(
+        alias="scrollCapture", default=None
+    )
+    """Scroll capture parameters"""
 
 
 class AIActionResultAIResponseActionTypedWaitAction(BaseModel):

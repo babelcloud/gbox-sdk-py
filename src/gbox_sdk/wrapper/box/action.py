@@ -1993,7 +1993,7 @@ class RecordingOperator:
         self.box_id = box_id
         self.rewind = RecordingRewindOperator(client, box_id)
 
-    def start(self, duration: str) -> None:
+    def start(self, duration: Union[str, NotGiven] = NOT_GIVEN) -> None:
         """
         Start recording the box screen.
 

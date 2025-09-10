@@ -248,6 +248,27 @@ class MediaAlbumOperator:
         res = self.list_media_info()
         return [MediaItemOperator(self.client, self.box_id, self.data.name, media) for media in res.data]
 
+    def get_media(self, media_name: str) -> MediaItemOperator:
+        """
+        Get a media item from the album.
+
+        Example:
+            >>> media = album.get_media("My Media")
+        """
+        res = self.client.v1.boxes.media.get_media(box_id=self.box_id, album_name=self.data.name, media_name=media_name)
+        return MediaItemOperator(self.client, self.box_id, self.data.name, res)
+
+    def get_media_info(self, media_name: str) -> MediaGetMediaResponse:
+        """
+        Get the info of a media item from the album.
+
+        Example:
+            >>> media = album.get_media_info("My Media")
+        """
+        return self.client.v1.boxes.media.get_media(
+            box_id=self.box_id, album_name=self.data.name, media_name=media_name
+        )
+
     def download(self, local_path: str) -> DownloadSummary:
         """
         Download all media files from the album to the specified local folder

@@ -41,7 +41,7 @@ class BrowserOperator:
         """
         return self.client.v1.boxes.browser.cdp_url(box_id=self.box_id)
 
-    def list_tab(self) -> List["BrowserTabOperator"]:
+    def list_tabs(self) -> List["BrowserTabOperator"]:
         """
         Retrieve a comprehensive list of all currently open browser tabs in the
         specified box. This endpoint returns detailed information about each tab
@@ -54,7 +54,7 @@ class BrowserOperator:
             list: A list of tab objects. BrowserTabOperator
 
         Example:
-            >>> box.browser.list_tab()
+            >>> box.browser.list_tabs()
         """
         tab_info = self.client.v1.boxes.browser.get_tabs(box_id=self.box_id)
         return [BrowserTabOperator(client=self.client, box_id=self.box_id, data=tab) for tab in tab_info.data]

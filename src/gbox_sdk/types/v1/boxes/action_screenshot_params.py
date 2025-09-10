@@ -45,8 +45,13 @@ class Clip(TypedDict, total=False):
 
 
 class ScrollCapture(TypedDict, total=False):
-    max_height: Required[Annotated[float, PropertyInfo(alias="maxHeight")]]
-    """Maximum height of the screenshot in pixels"""
+    max_height: Annotated[float, PropertyInfo(alias="maxHeight")]
+    """Maximum height of the screenshot in pixels.
 
-    scroll_back: Required[Annotated[bool, PropertyInfo(alias="scrollBack")]]
+    Limits the maximum height of the automatically scrolled content. Useful for
+    managing memory usage when capturing tall content like long web pages. Default:
+    4000px
+    """
+
+    scroll_back: Annotated[bool, PropertyInfo(alias="scrollBack")]
     """Whether to scroll back to the original position after capturing the screenshot"""

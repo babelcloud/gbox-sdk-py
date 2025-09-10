@@ -6,7 +6,7 @@ from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from ...._utils import PropertyInfo
 
-__all__ = ["ActionScreenshotParams", "Clip"]
+__all__ = ["ActionScreenshotParams", "Clip", "ScrollCapture"]
 
 
 class ActionScreenshotParams(TypedDict, total=False):
@@ -26,6 +26,9 @@ class ActionScreenshotParams(TypedDict, total=False):
     save_to_album: Annotated[bool, PropertyInfo(alias="saveToAlbum")]
     """Whether to save the screenshot to the device screenshot album"""
 
+    scroll_capture: Annotated[ScrollCapture, PropertyInfo(alias="scrollCapture")]
+    """Scroll capture parameters"""
+
 
 class Clip(TypedDict, total=False):
     height: Required[float]
@@ -39,3 +42,16 @@ class Clip(TypedDict, total=False):
 
     y: Required[float]
     """Y coordinate of the clip"""
+
+
+class ScrollCapture(TypedDict, total=False):
+    max_height: Annotated[float, PropertyInfo(alias="maxHeight")]
+    """Maximum height of the screenshot in pixels.
+
+    Limits the maximum height of the automatically scrolled content. Useful for
+    managing memory usage when capturing tall content like long web pages. Default:
+    4000px
+    """
+
+    scroll_back: Annotated[bool, PropertyInfo(alias="scrollBack")]
+    """Whether to scroll back to the original position after capturing the screenshot"""

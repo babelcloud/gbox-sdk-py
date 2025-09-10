@@ -1243,6 +1243,10 @@ class TestActions:
             output_format="base64",
             presigned_expires_in="30m",
             save_to_album=False,
+            scroll_capture={
+                "max_height": 4000,
+                "scroll_back": True,
+            },
         )
         assert_matches_type(ActionScreenshotResponse, action, path=["response"])
 
@@ -3273,6 +3277,10 @@ class TestAsyncActions:
             output_format="base64",
             presigned_expires_in="30m",
             save_to_album=False,
+            scroll_capture={
+                "max_height": 4000,
+                "scroll_back": True,
+            },
         )
         assert_matches_type(ActionScreenshotResponse, action, path=["response"])
 

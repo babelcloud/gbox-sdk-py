@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.0-alpha.35 (2025-09-10)
+
+Full Changelog: [v0.1.0-alpha.34...v0.1.0-alpha.35](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.34...v0.1.0-alpha.35)
+
+### Features
+
+* **api:** api update ([14ba96b](https://github.com/babelcloud/gbox-sdk-py/commit/14ba96b4e54b3af3767ea7c3f0899785223a6c33))
+* **api:** api update ([fd08fcf](https://github.com/babelcloud/gbox-sdk-py/commit/fd08fcfd26405247d846e65a7204879d432b8caf))
+* **media:** add getMedia and getMediaInfo methods for media retrieval ([9987ec8](https://github.com/babelcloud/gbox-sdk-py/commit/9987ec88158ee018f55f204509a22b760976696e))
+
 ## 0.1.0-alpha.34 (2025-09-09)
 
 Full Changelog: [v0.1.0-alpha.33...v0.1.0-alpha.34](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.33...v0.1.0-alpha.34)

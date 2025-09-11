@@ -132,7 +132,7 @@ class BaseBox:
         on_stdout: Optional[Callable[[str], None]] = None,
         on_stderr: Optional[Callable[[str], None]] = None,
         envs: Union[Dict[str, str], NotGiven] = NOT_GIVEN,
-        api_timeout: Union[str, NotGiven] = NOT_GIVEN,
+        timeout: Union[str, NotGiven] = NOT_GIVEN,
         working_dir: Union[str, NotGiven] = NOT_GIVEN,
     ) -> Union["BoxExecuteCommandsResponse", "WebSocketResult"]:
         """
@@ -143,7 +143,7 @@ class BaseBox:
 
             envs: The environment variables to run the command
 
-            api_timeout: The timeout of the command. If the command times out, the exit code will be 124.
+            timeout: The timeout of the command. If the command times out, the exit code will be 124.
                 For example: 'timeout 5s sleep 10s' will result in exit code 124.
 
                 Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
@@ -163,13 +163,13 @@ class BaseBox:
             >>> box.command(commands="ls -l", on_stdout=lambda x: print(x), on_stderr=lambda x: print(x))
         """
         if on_stdout is not None or on_stderr is not None:
-            return self._command_via_websocket(command, on_stdout, on_stderr, envs, api_timeout, working_dir)
+            return self._command_via_websocket(command, on_stdout, on_stderr, envs, timeout, working_dir)
 
         return self.client.v1.boxes.execute_commands(
             box_id=self.data.id,
             command=command,
             envs=envs,
-            api_timeout=api_timeout,
+            api_timeout=timeout,
             working_dir=working_dir,
         )
 
@@ -179,7 +179,7 @@ class BaseBox:
         on_stdout: Optional[Callable[[str], None]] = None,
         on_stderr: Optional[Callable[[str], None]] = None,
         envs: Union[Dict[str, str], NotGiven] = NOT_GIVEN,
-        api_timeout: Union[str, NotGiven] = NOT_GIVEN,
+        timeout: Union[str, NotGiven] = NOT_GIVEN,
         working_dir: Union[str, NotGiven] = NOT_GIVEN,
     ) -> "WebSocketResult":
         """
@@ -203,7 +203,7 @@ class BaseBox:
                         on_stdout=on_stdout,
                         on_stderr=on_stderr,
                         envs=envs,
-                        api_timeout=api_timeout,
+                        timeout=timeout,
                         working_dir=working_dir,
                     ),
                     loop,
@@ -215,7 +215,7 @@ class BaseBox:
                         on_stdout=on_stdout,
                         on_stderr=on_stderr,
                         envs=envs,
-                        api_timeout=api_timeout,
+                        timeout=timeout,
                         working_dir=working_dir,
                     )
                 )
@@ -229,7 +229,7 @@ class BaseBox:
         argv: Union[List[str], NotGiven] = NOT_GIVEN,
         envs: Union[Dict[str, str], NotGiven] = NOT_GIVEN,
         language: Union[Literal["bash", "python", "typescript"], NotGiven] = NOT_GIVEN,
-        api_timeout: Union[str, NotGiven] = NOT_GIVEN,
+        timeout: Union[str, NotGiven] = NOT_GIVEN,
         working_dir: Union[str, NotGiven] = NOT_GIVEN,
         on_stdout: Optional[Callable[[str], None]] = None,
         on_stderr: Optional[Callable[[str], None]] = None,
@@ -247,7 +247,7 @@ class BaseBox:
 
             language: The language of the code.
 
-            api_timeout: The timeout of the code execution. If the code execution times out, the exit
+            timeout: The timeout of the code execution. If the code execution times out, the exit
                 code will be 124.
 
                 Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
@@ -277,7 +277,7 @@ class BaseBox:
                 argv=argv,
                 envs=envs,
                 language=language,
-                api_timeout=api_timeout,
+                timeout=timeout,
                 working_dir=working_dir,
                 on_stdout=on_stdout,
                 on_stderr=on_stderr,
@@ -289,7 +289,7 @@ class BaseBox:
             argv=argv,
             envs=envs,
             language=language,
-            api_timeout=api_timeout,
+            api_timeout=timeout,
             working_dir=working_dir,
         )
 
@@ -299,7 +299,7 @@ class BaseBox:
         argv: Union[List[str], NotGiven] = NOT_GIVEN,
         envs: Union[Dict[str, str], NotGiven] = NOT_GIVEN,
         language: Union[Literal["bash", "python", "typescript"], NotGiven] = NOT_GIVEN,
-        api_timeout: Union[str, NotGiven] = NOT_GIVEN,
+        timeout: Union[str, NotGiven] = NOT_GIVEN,
         working_dir: Union[str, NotGiven] = NOT_GIVEN,
         on_stdout: Optional[Callable[[str], None]] = None,
         on_stderr: Optional[Callable[[str], None]] = None,
@@ -327,7 +327,7 @@ class BaseBox:
                         argv=argv,
                         envs=envs,
                         language=language,
-                        api_timeout=api_timeout,
+                        timeout=timeout,
                         working_dir=working_dir,
                     ),
                     loop,
@@ -341,7 +341,7 @@ class BaseBox:
                         argv=argv,
                         envs=envs,
                         language=language,
-                        api_timeout=api_timeout,
+                        timeout=timeout,
                         working_dir=working_dir,
                     )
                 )

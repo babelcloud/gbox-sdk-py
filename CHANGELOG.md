@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.0-alpha.36 (2025-09-11)
+
+Full Changelog: [v0.1.0-alpha.35...v0.1.0-alpha.36](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.35...v0.1.0-alpha.36)
+
+### Features
+
+* **utils:** add utils ([2116842](https://github.com/babelcloud/gbox-sdk-py/commit/21168424fa38336962260a84cb53022218ce2f2a))
+
+
+### Bug Fixes
+
+* Rename api_timeout to timeout ([b221a7f](https://github.com/babelcloud/gbox-sdk-py/commit/b221a7f355ae1214effb323250dd341e6eef5703))
+
 ## 0.1.0-alpha.35 (2025-09-10)
 
 Full Changelog: [v0.1.0-alpha.34...v0.1.0-alpha.35](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.34...v0.1.0-alpha.35)

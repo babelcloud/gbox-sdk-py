@@ -53,6 +53,7 @@ from .action_settings_response import ActionSettingsResponse as ActionSettingsRe
 from .android_install_response import AndroidInstallResponse as AndroidInstallResponse
 from .android_uninstall_params import AndroidUninstallParams as AndroidUninstallParams
 from .browser_cdp_url_response import BrowserCdpURLResponse as BrowserCdpURLResponse
+from .browser_set_proxy_params import BrowserSetProxyParams as BrowserSetProxyParams
 from .media_get_media_response import MediaGetMediaResponse as MediaGetMediaResponse
 from .action_screenshot_options import ActionScreenshotOptions as ActionScreenshotOptions
 from .android_list_app_response import AndroidListAppResponse as AndroidListAppResponse
@@ -66,6 +67,7 @@ from .media_update_album_params import MediaUpdateAlbumParams as MediaUpdateAlbu
 from .action_press_button_params import ActionPressButtonParams as ActionPressButtonParams
 from .action_screenshot_response import ActionScreenshotResponse as ActionScreenshotResponse
 from .browser_close_tab_response import BrowserCloseTabResponse as BrowserCloseTabResponse
+from .browser_get_proxy_response import BrowserGetProxyResponse as BrowserGetProxyResponse
 from .media_list_albums_response import MediaListAlbumsResponse as MediaListAlbumsResponse
 from .action_common_options_param import ActionCommonOptionsParam as ActionCommonOptionsParam
 from .browser_switch_tab_response import BrowserSwitchTabResponse as BrowserSwitchTabResponse

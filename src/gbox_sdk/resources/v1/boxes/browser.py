@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven, SequenceNotStr
 from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -15,10 +15,16 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.v1.boxes import browser_cdp_url_params, browser_open_tab_params, browser_update_tab_params
+from ....types.v1.boxes import (
+    browser_cdp_url_params,
+    browser_open_tab_params,
+    browser_set_proxy_params,
+    browser_update_tab_params,
+)
 from ....types.v1.boxes.browser_get_tabs_response import BrowserGetTabsResponse
 from ....types.v1.boxes.browser_open_tab_response import BrowserOpenTabResponse
 from ....types.v1.boxes.browser_close_tab_response import BrowserCloseTabResponse
+from ....types.v1.boxes.browser_get_proxy_response import BrowserGetProxyResponse
 from ....types.v1.boxes.browser_switch_tab_response import BrowserSwitchTabResponse
 from ....types.v1.boxes.browser_update_tab_response import BrowserUpdateTabResponse
 
@@ -87,6 +93,38 @@ class BrowserResource(SyncAPIResource):
             cast_to=str,
         )
 
+    def clear_proxy(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._delete(
+            f"/boxes/{box_id}/browser/proxy",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
     def close_tab(
         self,
         tab_id: str,
@@ -124,6 +162,37 @@ class BrowserResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=BrowserCloseTabResponse,
+        )
+
+    def get_proxy(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BrowserGetProxyResponse:
+        """
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return self._get(
+            f"/boxes/{box_id}/browser/proxy",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BrowserGetProxyResponse,
         )
 
     def get_tabs(
@@ -206,6 +275,65 @@ class BrowserResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=BrowserOpenTabResponse,
+        )
+
+    def set_proxy(
+        self,
+        box_id: str,
+        *,
+        http_server: str,
+        https_server: str,
+        socks5_server: str,
+        bypass_list: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        pac_url: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Args:
+          http_server: HTTP proxy server, format: http://<username>:<password>@<host>:<port>
+
+          https_server: HTTPS proxy server, format: https://<username>:<password>@<host>:<port>
+
+          socks5_server: SOCKS5 proxy server, format: socks5://<username>:<password>@<host>:<port>
+
+          bypass_list: List of IP addresses and domains that should bypass the proxy. These addresses
+              will be accessed directly without going through the proxy server. Default is
+              ['127.0.0.1', 'localhost']
+
+          pac_url: PAC (Proxy Auto-Configuration) URL.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._post(
+            f"/boxes/{box_id}/browser/proxy",
+            body=maybe_transform(
+                {
+                    "http_server": http_server,
+                    "https_server": https_server,
+                    "socks5_server": socks5_server,
+                    "bypass_list": bypass_list,
+                    "pac_url": pac_url,
+                },
+                browser_set_proxy_params.BrowserSetProxyParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
         )
 
     def switch_tab(
@@ -357,6 +485,38 @@ class AsyncBrowserResource(AsyncAPIResource):
             cast_to=str,
         )
 
+    async def clear_proxy(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._delete(
+            f"/boxes/{box_id}/browser/proxy",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
     async def close_tab(
         self,
         tab_id: str,
@@ -394,6 +554,37 @@ class AsyncBrowserResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=BrowserCloseTabResponse,
+        )
+
+    async def get_proxy(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BrowserGetProxyResponse:
+        """
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return await self._get(
+            f"/boxes/{box_id}/browser/proxy",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BrowserGetProxyResponse,
         )
 
     async def get_tabs(
@@ -476,6 +667,65 @@ class AsyncBrowserResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=BrowserOpenTabResponse,
+        )
+
+    async def set_proxy(
+        self,
+        box_id: str,
+        *,
+        http_server: str,
+        https_server: str,
+        socks5_server: str,
+        bypass_list: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        pac_url: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Args:
+          http_server: HTTP proxy server, format: http://<username>:<password>@<host>:<port>
+
+          https_server: HTTPS proxy server, format: https://<username>:<password>@<host>:<port>
+
+          socks5_server: SOCKS5 proxy server, format: socks5://<username>:<password>@<host>:<port>
+
+          bypass_list: List of IP addresses and domains that should bypass the proxy. These addresses
+              will be accessed directly without going through the proxy server. Default is
+              ['127.0.0.1', 'localhost']
+
+          pac_url: PAC (Proxy Auto-Configuration) URL.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._post(
+            f"/boxes/{box_id}/browser/proxy",
+            body=await async_maybe_transform(
+                {
+                    "http_server": http_server,
+                    "https_server": https_server,
+                    "socks5_server": socks5_server,
+                    "bypass_list": bypass_list,
+                    "pac_url": pac_url,
+                },
+                browser_set_proxy_params.BrowserSetProxyParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
         )
 
     async def switch_tab(
@@ -572,14 +822,23 @@ class BrowserResourceWithRawResponse:
         self.cdp_url = to_raw_response_wrapper(
             browser.cdp_url,
         )
+        self.clear_proxy = to_raw_response_wrapper(
+            browser.clear_proxy,
+        )
         self.close_tab = to_raw_response_wrapper(
             browser.close_tab,
+        )
+        self.get_proxy = to_raw_response_wrapper(
+            browser.get_proxy,
         )
         self.get_tabs = to_raw_response_wrapper(
             browser.get_tabs,
         )
         self.open_tab = to_raw_response_wrapper(
             browser.open_tab,
+        )
+        self.set_proxy = to_raw_response_wrapper(
+            browser.set_proxy,
         )
         self.switch_tab = to_raw_response_wrapper(
             browser.switch_tab,
@@ -596,14 +855,23 @@ class AsyncBrowserResourceWithRawResponse:
         self.cdp_url = async_to_raw_response_wrapper(
             browser.cdp_url,
         )
+        self.clear_proxy = async_to_raw_response_wrapper(
+            browser.clear_proxy,
+        )
         self.close_tab = async_to_raw_response_wrapper(
             browser.close_tab,
+        )
+        self.get_proxy = async_to_raw_response_wrapper(
+            browser.get_proxy,
         )
         self.get_tabs = async_to_raw_response_wrapper(
             browser.get_tabs,
         )
         self.open_tab = async_to_raw_response_wrapper(
             browser.open_tab,
+        )
+        self.set_proxy = async_to_raw_response_wrapper(
+            browser.set_proxy,
         )
         self.switch_tab = async_to_raw_response_wrapper(
             browser.switch_tab,
@@ -620,14 +888,23 @@ class BrowserResourceWithStreamingResponse:
         self.cdp_url = to_streamed_response_wrapper(
             browser.cdp_url,
         )
+        self.clear_proxy = to_streamed_response_wrapper(
+            browser.clear_proxy,
+        )
         self.close_tab = to_streamed_response_wrapper(
             browser.close_tab,
+        )
+        self.get_proxy = to_streamed_response_wrapper(
+            browser.get_proxy,
         )
         self.get_tabs = to_streamed_response_wrapper(
             browser.get_tabs,
         )
         self.open_tab = to_streamed_response_wrapper(
             browser.open_tab,
+        )
+        self.set_proxy = to_streamed_response_wrapper(
+            browser.set_proxy,
         )
         self.switch_tab = to_streamed_response_wrapper(
             browser.switch_tab,
@@ -644,14 +921,23 @@ class AsyncBrowserResourceWithStreamingResponse:
         self.cdp_url = async_to_streamed_response_wrapper(
             browser.cdp_url,
         )
+        self.clear_proxy = async_to_streamed_response_wrapper(
+            browser.clear_proxy,
+        )
         self.close_tab = async_to_streamed_response_wrapper(
             browser.close_tab,
+        )
+        self.get_proxy = async_to_streamed_response_wrapper(
+            browser.get_proxy,
         )
         self.get_tabs = async_to_streamed_response_wrapper(
             browser.get_tabs,
         )
         self.open_tab = async_to_streamed_response_wrapper(
             browser.open_tab,
+        )
+        self.set_proxy = async_to_streamed_response_wrapper(
+            browser.set_proxy,
         )
         self.switch_tab = async_to_streamed_response_wrapper(
             browser.switch_tab,

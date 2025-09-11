@@ -36,7 +36,7 @@ class WebSocketClient:
         on_stdout: Optional[Callable[[str], None]] = None,
         on_stderr: Optional[Callable[[str], None]] = None,
         envs: Union[Dict[str, str], NotGiven] = NOT_GIVEN,
-        api_timeout: Union[str, NotGiven] = NOT_GIVEN,
+        timeout: Union[str, NotGiven] = NOT_GIVEN,
         working_dir: Union[str, NotGiven] = NOT_GIVEN,
     ) -> WebSocketResult:
         """
@@ -63,8 +63,8 @@ class WebSocketClient:
 
         if envs is not NOT_GIVEN:
             payload["envs"] = envs
-        if api_timeout is not NOT_GIVEN:
-            payload["timeout"] = api_timeout
+        if timeout is not NOT_GIVEN:
+            payload["timeout"] = timeout
         if working_dir is not NOT_GIVEN:
             payload["workingDir"] = working_dir
 
@@ -78,7 +78,7 @@ class WebSocketClient:
         argv: Union[List[str], NotGiven] = NOT_GIVEN,
         envs: Union[Dict[str, str], NotGiven] = NOT_GIVEN,
         language: Union[Literal["bash", "python", "typescript"], NotGiven] = NOT_GIVEN,
-        api_timeout: Union[str, NotGiven] = NOT_GIVEN,
+        timeout: Union[str, NotGiven] = NOT_GIVEN,
         working_dir: Union[str, NotGiven] = NOT_GIVEN,
     ) -> WebSocketResult:
         """
@@ -112,8 +112,8 @@ class WebSocketClient:
             payload["argv"] = argv
         if envs is not NOT_GIVEN:
             payload["envs"] = envs
-        if api_timeout is not NOT_GIVEN:
-            payload["timeout"] = api_timeout
+        if timeout is not NOT_GIVEN:
+            payload["timeout"] = timeout
         if working_dir is not NOT_GIVEN:
             payload["workingDir"] = working_dir
 

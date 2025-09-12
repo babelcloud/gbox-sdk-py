@@ -34,7 +34,6 @@ from ....types.v1.boxes import (
     action_screenshot_params,
     action_press_button_params,
     action_rewind_extract_params,
-    action_recording_start_params,
     action_screen_rotation_params,
     action_settings_update_params,
 )
@@ -1241,7 +1240,6 @@ class ActionsResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        duration: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1256,12 +1254,6 @@ class ActionsResource(SyncAPIResource):
         previous one and keep only the latest recording.
 
         Args:
-          duration: Duration of the recording. Default is 30m, max is 30m. The recording will
-              automatically stop when the duration time is reached.
-
-              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-              Example formats: "500ms", "30s", "5m", "1h" Maximum allowed: 30m
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -1275,7 +1267,6 @@ class ActionsResource(SyncAPIResource):
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
             f"/boxes/{box_id}/actions/recording/start",
-            body=maybe_transform({"duration": duration}, action_recording_start_params.ActionRecordingStartParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -3730,7 +3721,6 @@ class AsyncActionsResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        duration: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -3745,12 +3735,6 @@ class AsyncActionsResource(AsyncAPIResource):
         previous one and keep only the latest recording.
 
         Args:
-          duration: Duration of the recording. Default is 30m, max is 30m. The recording will
-              automatically stop when the duration time is reached.
-
-              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-              Example formats: "500ms", "30s", "5m", "1h" Maximum allowed: 30m
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -3764,9 +3748,6 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
             f"/boxes/{box_id}/actions/recording/start",
-            body=await async_maybe_transform(
-                {"duration": duration}, action_recording_start_params.ActionRecordingStartParams
-            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

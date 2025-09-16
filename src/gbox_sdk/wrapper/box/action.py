@@ -1881,7 +1881,7 @@ class ActionOperator:
             screenshot_delay=screenshot_delay,
         )
 
-    def screen_recording_start(self, duration: str) -> None:
+    def screen_recording_start(self) -> None:
         """
         Start recording the box screen.
 
@@ -1899,7 +1899,7 @@ class ActionOperator:
         Example:
             >>> response = myBox.action.screen_recording_start(duration="30m")
         """
-        return self.client.v1.boxes.actions.recording_start(box_id=self.box_id, duration=duration)
+        return self.client.v1.boxes.actions.recording_start(box_id=self.box_id)
 
     def screen_recording_stop(self) -> ActionRecordingStopResponse:
         """
@@ -1993,7 +1993,7 @@ class RecordingOperator:
         self.box_id = box_id
         self.rewind = RecordingRewindOperator(client, box_id)
 
-    def start(self, duration: Union[str, NotGiven] = NOT_GIVEN) -> None:
+    def start(self) -> None:
         """
         Start recording the box screen.
 
@@ -2011,7 +2011,7 @@ class RecordingOperator:
         Example:
             >>> response = myBox.action.recording.start(duration="30m")
         """
-        return self.client.v1.boxes.actions.recording_start(box_id=self.box_id, duration=duration)
+        return self.client.v1.boxes.actions.recording_start(box_id=self.box_id)
 
     def stop(self) -> ActionRecordingStopResponse:
         """

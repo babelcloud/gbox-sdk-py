@@ -42,6 +42,12 @@ class Screenshot(BaseModel):
 
 
 class ActionResult(BaseModel):
+    action_id: str = FieldInfo(alias="actionId")
+    """Unique identifier for each action.
+
+    Use this ID to locate the action and report issues.
+    """
+
     message: str
     """message"""
 

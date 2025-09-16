@@ -1377,6 +1377,12 @@ class AIActionScreenshotResultScreenshot(BaseModel):
 
 
 class AIActionScreenshotResult(BaseModel):
+    action_id: str = FieldInfo(alias="actionId")
+    """Unique identifier for each action.
+
+    Use this ID to locate the action and report issues.
+    """
+
     ai_response: AIActionScreenshotResultAIResponse = FieldInfo(alias="aiResponse")
     """Response of AI action execution"""
 

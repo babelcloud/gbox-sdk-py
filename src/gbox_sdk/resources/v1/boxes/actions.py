@@ -33,6 +33,7 @@ from ....types.v1.boxes import (
     action_long_press_params,
     action_screenshot_params,
     action_press_button_params,
+    action_clipboard_set_params,
     action_rewind_extract_params,
     action_screen_rotation_params,
     action_settings_update_params,
@@ -384,6 +385,73 @@ class ActionsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ActionResult,
+        )
+
+    def clipboard_get(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return self._get(
+            f"/boxes/{box_id}/actions/clipboard",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+        )
+
+    def clipboard_set(
+        self,
+        box_id: str,
+        *,
+        content: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Args:
+          content: The content to set the clipboard content
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._post(
+            f"/boxes/{box_id}/actions/clipboard",
+            body=maybe_transform({"content": content}, action_clipboard_set_params.ActionClipboardSetParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
         )
 
     @overload
@@ -2867,6 +2935,75 @@ class AsyncActionsResource(AsyncAPIResource):
             cast_to=ActionResult,
         )
 
+    async def clipboard_get(
+        self,
+        box_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return await self._get(
+            f"/boxes/{box_id}/actions/clipboard",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+        )
+
+    async def clipboard_set(
+        self,
+        box_id: str,
+        *,
+        content: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Args:
+          content: The content to set the clipboard content
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._post(
+            f"/boxes/{box_id}/actions/clipboard",
+            body=await async_maybe_transform(
+                {"content": content}, action_clipboard_set_params.ActionClipboardSetParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
     @overload
     async def drag(
         self,
@@ -5028,6 +5165,12 @@ class ActionsResourceWithRawResponse:
         self.click = to_raw_response_wrapper(
             actions.click,
         )
+        self.clipboard_get = to_raw_response_wrapper(
+            actions.clipboard_get,
+        )
+        self.clipboard_set = to_raw_response_wrapper(
+            actions.clipboard_set,
+        )
         self.drag = to_raw_response_wrapper(
             actions.drag,
         )
@@ -5105,6 +5248,12 @@ class AsyncActionsResourceWithRawResponse:
         )
         self.click = async_to_raw_response_wrapper(
             actions.click,
+        )
+        self.clipboard_get = async_to_raw_response_wrapper(
+            actions.clipboard_get,
+        )
+        self.clipboard_set = async_to_raw_response_wrapper(
+            actions.clipboard_set,
         )
         self.drag = async_to_raw_response_wrapper(
             actions.drag,
@@ -5184,6 +5333,12 @@ class ActionsResourceWithStreamingResponse:
         self.click = to_streamed_response_wrapper(
             actions.click,
         )
+        self.clipboard_get = to_streamed_response_wrapper(
+            actions.clipboard_get,
+        )
+        self.clipboard_set = to_streamed_response_wrapper(
+            actions.clipboard_set,
+        )
         self.drag = to_streamed_response_wrapper(
             actions.drag,
         )
@@ -5261,6 +5416,12 @@ class AsyncActionsResourceWithStreamingResponse:
         )
         self.click = async_to_streamed_response_wrapper(
             actions.click,
+        )
+        self.clipboard_get = async_to_streamed_response_wrapper(
+            actions.clipboard_get,
+        )
+        self.clipboard_set = async_to_streamed_response_wrapper(
+            actions.clipboard_set,
         )
         self.drag = async_to_streamed_response_wrapper(
             actions.drag,

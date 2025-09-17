@@ -75,6 +75,7 @@ from gbox_sdk.types.v1.boxes import (
     ActionResult,
     ActionScreenshotOptions,
     ActionAIResponse,
+    ActionClipboardGetResponse,
     ActionExtractResponse,
     ActionRecordingStopResponse,
     ActionRewindExtractResponse,
@@ -90,6 +91,8 @@ Methods:
 
 - <code title="post /boxes/{boxId}/actions/ai">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">ai</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_ai_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_ai_response.py">ActionAIResponse</a></code>
 - <code title="post /boxes/{boxId}/actions/click">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">click</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_click_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_result.py">ActionResult</a></code>
+- <code title="get /boxes/{boxId}/actions/clipboard">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">clipboard_get</a>(box_id) -> str</code>
+- <code title="post /boxes/{boxId}/actions/clipboard">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">clipboard_set</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_clipboard_set_params.py">params</a>) -> None</code>
 - <code title="post /boxes/{boxId}/actions/drag">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">drag</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_drag_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_result.py">ActionResult</a></code>
 - <code title="post /boxes/{boxId}/actions/extract">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">extract</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_extract_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_extract_response.py">ActionExtractResponse</a></code>
 - <code title="post /boxes/{boxId}/actions/long-press">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">long_press</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_long_press_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_result.py">ActionResult</a></code>

@@ -399,6 +399,8 @@ class ActionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
+        Get the clipboard content
+
         Args:
           extra_headers: Send extra headers
 
@@ -431,6 +433,8 @@ class ActionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
+        Set the clipboard content
+
         Args:
           content: The content to set the clipboard content
 
@@ -2947,6 +2951,8 @@ class AsyncActionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
+        Get the clipboard content
+
         Args:
           extra_headers: Send extra headers
 
@@ -2979,6 +2985,8 @@ class AsyncActionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
+        Set the clipboard content
+
         Args:
           content: The content to set the clipboard content
 

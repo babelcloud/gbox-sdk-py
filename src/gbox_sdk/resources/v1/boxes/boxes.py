@@ -63,7 +63,7 @@ from .storage import (
     StorageResourceWithStreamingResponse,
     AsyncStorageResourceWithStreamingResponse,
 )
-from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven, SequenceNotStr
+from ...._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
 from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ....types.v1 import (
@@ -75,6 +75,7 @@ from ....types.v1 import (
     box_create_linux_params,
     box_live_view_url_params,
     box_create_android_params,
+    box_resolution_set_params,
     box_execute_commands_params,
     box_web_terminal_url_params,
 )
@@ -159,10 +160,10 @@ class BoxesResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BoxRetrieveResponse:
         """
-        Get box
+        This endpoint retrieves information about a box
 
         Args:
           extra_headers: Send extra headers
@@ -191,21 +192,24 @@ class BoxesResource(SyncAPIResource):
     def list(
         self,
         *,
-        device_type: str | NotGiven = NOT_GIVEN,
-        labels: object | NotGiven = NOT_GIVEN,
-        page: int | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        status: List[Literal["all", "pending", "running", "error", "terminated"]] | NotGiven = NOT_GIVEN,
-        type: List[Literal["all", "linux", "android"]] | NotGiven = NOT_GIVEN,
+        device_type: str | Omit = omit,
+        labels: object | Omit = omit,
+        page: int | Omit = omit,
+        page_size: int | Omit = omit,
+        status: List[Literal["all", "pending", "running", "error", "terminated"]] | Omit = omit,
+        type: List[Literal["all", "linux", "android"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BoxListResponse:
-        """
-        List box
+        """Returns a paginated list of box instances.
+
+        Use this endpoint to monitor
+        environments, filter by status or type, or retrieve boxes by labels or device
+        type.
 
         Args:
           device_type: Filter boxes by their device type (virtual, physical)
@@ -259,18 +263,21 @@ class BoxesResource(SyncAPIResource):
     def create_android(
         self,
         *,
-        config: box_create_android_params.Config | NotGiven = NOT_GIVEN,
-        api_timeout: str | NotGiven = NOT_GIVEN,
-        wait: bool | NotGiven = NOT_GIVEN,
+        config: box_create_android_params.Config | Omit = omit,
+        api_timeout: str | Omit = omit,
+        wait: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidBox:
-        """
-        Create android box
+        """Provisions a new Android box that you can operate through the GBOX SDK.
+
+        Use this
+        endpoint when you want to create a fresh Android environment for testing,
+        automation, or agent execution.
 
         Args:
           config: Configuration for a Android box instance
@@ -312,18 +319,21 @@ class BoxesResource(SyncAPIResource):
     def create_linux(
         self,
         *,
-        config: box_create_linux_params.Config | NotGiven = NOT_GIVEN,
-        api_timeout: str | NotGiven = NOT_GIVEN,
-        wait: bool | NotGiven = NOT_GIVEN,
+        config: box_create_linux_params.Config | Omit = omit,
+        api_timeout: str | Omit = omit,
+        wait: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> LinuxBox:
-        """
-        Create linux box
+        """Provisions a new Linux box that you can operate through the GBOX SDK.
+
+        Use this
+        endpoint when you want to create a fresh Linux environment for testing,
+        automation, or agent execution.
 
         Args:
           config: Configuration for a Linux box instance
@@ -371,13 +381,13 @@ class BoxesResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BoxDisplayResponse:
         """Retrieve the current display properties for a running box.
 
         This endpoint
         provides details about the box's screen resolution, orientation, and other
-        visual properties
+        visual properties.
 
         Args:
           extra_headers: Send extra headers
@@ -403,15 +413,15 @@ class BoxesResource(SyncAPIResource):
         box_id: str,
         *,
         command: str,
-        envs: object | NotGiven = NOT_GIVEN,
-        api_timeout: str | NotGiven = NOT_GIVEN,
-        working_dir: str | NotGiven = NOT_GIVEN,
+        envs: object | Omit = omit,
+        api_timeout: str | Omit = omit,
+        working_dir: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BoxExecuteCommandsResponse:
         """Execute a command on a running box.
 
@@ -463,18 +473,18 @@ class BoxesResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        expires_in: str | NotGiven = NOT_GIVEN,
+        expires_in: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BoxLiveViewURLResponse:
         """
         This endpoint allows you to generate a pre-signed URL for accessing the live
         view of a running box. The URL is valid for a limited time and can be used to
-        view the box's live stream
+        view the box's live stream.
 
         Args:
           expires_in: The live view will be alive for the given duration
@@ -501,25 +511,73 @@ class BoxesResource(SyncAPIResource):
             cast_to=BoxLiveViewURLResponse,
         )
 
-    def run_code(
+    def resolution_set(
         self,
         box_id: str,
         *,
-        code: str,
-        argv: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        envs: object | NotGiven = NOT_GIVEN,
-        language: Literal["bash", "python", "typescript"] | NotGiven = NOT_GIVEN,
-        api_timeout: str | NotGiven = NOT_GIVEN,
-        working_dir: str | NotGiven = NOT_GIVEN,
+        height: float,
+        width: float,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> BoxRunCodeResponse:
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
         """
-        Run code on the box
+        Args:
+          height: The height of the screen
+
+          width: The width of the screen
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._post(
+            f"/boxes/{box_id}/resolution",
+            body=maybe_transform(
+                {
+                    "height": height,
+                    "width": width,
+                },
+                box_resolution_set_params.BoxResolutionSetParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    def run_code(
+        self,
+        box_id: str,
+        *,
+        code: str,
+        argv: SequenceNotStr[str] | Omit = omit,
+        envs: object | Omit = omit,
+        language: Literal["bash", "python", "typescript"] | Omit = omit,
+        api_timeout: str | Omit = omit,
+        working_dir: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BoxRunCodeResponse:
+        """Executes code inside the specified box.
+
+        Supports multiple languages (bash,
+        Python, TypeScript) and allows you to configure environment variables,
+        arguments, working directory, and timeouts.
 
         Args:
           code: The code to run
@@ -573,13 +631,13 @@ class BoxesResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        wait: bool | NotGiven = NOT_GIVEN,
+        wait: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BoxStartResponse:
         """
         Start box
@@ -613,13 +671,13 @@ class BoxesResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        wait: bool | NotGiven = NOT_GIVEN,
+        wait: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BoxStopResponse:
         """
         Stop box
@@ -653,17 +711,18 @@ class BoxesResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        wait: bool | NotGiven = NOT_GIVEN,
+        wait: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """Terminate a running box.
 
-        This action will stop the box and release its resources
+        This action will stop the box and release its
+        resources.
 
         Args:
           wait: Wait for the box operation to be completed, default is true
@@ -692,18 +751,18 @@ class BoxesResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        expires_in: str | NotGiven = NOT_GIVEN,
+        expires_in: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BoxWebTerminalURLResponse:
         """
         This endpoint allows you to generate a pre-signed URL for accessing the web
         terminal of a running box. The URL is valid for a limited time and can be used
-        to access the box's terminal interface
+        to access the box's terminal interface.
 
         Args:
           expires_in: The web terminal will be alive for the given duration
@@ -739,7 +798,7 @@ class BoxesResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BoxWebsocketURLResponse:
         """Get the websocket url for the box.
 
@@ -825,10 +884,10 @@ class AsyncBoxesResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BoxRetrieveResponse:
         """
-        Get box
+        This endpoint retrieves information about a box
 
         Args:
           extra_headers: Send extra headers
@@ -857,21 +916,24 @@ class AsyncBoxesResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        device_type: str | NotGiven = NOT_GIVEN,
-        labels: object | NotGiven = NOT_GIVEN,
-        page: int | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        status: List[Literal["all", "pending", "running", "error", "terminated"]] | NotGiven = NOT_GIVEN,
-        type: List[Literal["all", "linux", "android"]] | NotGiven = NOT_GIVEN,
+        device_type: str | Omit = omit,
+        labels: object | Omit = omit,
+        page: int | Omit = omit,
+        page_size: int | Omit = omit,
+        status: List[Literal["all", "pending", "running", "error", "terminated"]] | Omit = omit,
+        type: List[Literal["all", "linux", "android"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BoxListResponse:
-        """
-        List box
+        """Returns a paginated list of box instances.
+
+        Use this endpoint to monitor
+        environments, filter by status or type, or retrieve boxes by labels or device
+        type.
 
         Args:
           device_type: Filter boxes by their device type (virtual, physical)
@@ -925,18 +987,21 @@ class AsyncBoxesResource(AsyncAPIResource):
     async def create_android(
         self,
         *,
-        config: box_create_android_params.Config | NotGiven = NOT_GIVEN,
-        api_timeout: str | NotGiven = NOT_GIVEN,
-        wait: bool | NotGiven = NOT_GIVEN,
+        config: box_create_android_params.Config | Omit = omit,
+        api_timeout: str | Omit = omit,
+        wait: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidBox:
-        """
-        Create android box
+        """Provisions a new Android box that you can operate through the GBOX SDK.
+
+        Use this
+        endpoint when you want to create a fresh Android environment for testing,
+        automation, or agent execution.
 
         Args:
           config: Configuration for a Android box instance
@@ -978,18 +1043,21 @@ class AsyncBoxesResource(AsyncAPIResource):
     async def create_linux(
         self,
         *,
-        config: box_create_linux_params.Config | NotGiven = NOT_GIVEN,
-        api_timeout: str | NotGiven = NOT_GIVEN,
-        wait: bool | NotGiven = NOT_GIVEN,
+        config: box_create_linux_params.Config | Omit = omit,
+        api_timeout: str | Omit = omit,
+        wait: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> LinuxBox:
-        """
-        Create linux box
+        """Provisions a new Linux box that you can operate through the GBOX SDK.
+
+        Use this
+        endpoint when you want to create a fresh Linux environment for testing,
+        automation, or agent execution.
 
         Args:
           config: Configuration for a Linux box instance
@@ -1037,13 +1105,13 @@ class AsyncBoxesResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BoxDisplayResponse:
         """Retrieve the current display properties for a running box.
 
         This endpoint
         provides details about the box's screen resolution, orientation, and other
-        visual properties
+        visual properties.
 
         Args:
           extra_headers: Send extra headers
@@ -1069,15 +1137,15 @@ class AsyncBoxesResource(AsyncAPIResource):
         box_id: str,
         *,
         command: str,
-        envs: object | NotGiven = NOT_GIVEN,
-        api_timeout: str | NotGiven = NOT_GIVEN,
-        working_dir: str | NotGiven = NOT_GIVEN,
+        envs: object | Omit = omit,
+        api_timeout: str | Omit = omit,
+        working_dir: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BoxExecuteCommandsResponse:
         """Execute a command on a running box.
 
@@ -1129,18 +1197,18 @@ class AsyncBoxesResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        expires_in: str | NotGiven = NOT_GIVEN,
+        expires_in: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BoxLiveViewURLResponse:
         """
         This endpoint allows you to generate a pre-signed URL for accessing the live
         view of a running box. The URL is valid for a limited time and can be used to
-        view the box's live stream
+        view the box's live stream.
 
         Args:
           expires_in: The live view will be alive for the given duration
@@ -1167,25 +1235,73 @@ class AsyncBoxesResource(AsyncAPIResource):
             cast_to=BoxLiveViewURLResponse,
         )
 
-    async def run_code(
+    async def resolution_set(
         self,
         box_id: str,
         *,
-        code: str,
-        argv: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        envs: object | NotGiven = NOT_GIVEN,
-        language: Literal["bash", "python", "typescript"] | NotGiven = NOT_GIVEN,
-        api_timeout: str | NotGiven = NOT_GIVEN,
-        working_dir: str | NotGiven = NOT_GIVEN,
+        height: float,
+        width: float,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> BoxRunCodeResponse:
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
         """
-        Run code on the box
+        Args:
+          height: The height of the screen
+
+          width: The width of the screen
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._post(
+            f"/boxes/{box_id}/resolution",
+            body=await async_maybe_transform(
+                {
+                    "height": height,
+                    "width": width,
+                },
+                box_resolution_set_params.BoxResolutionSetParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    async def run_code(
+        self,
+        box_id: str,
+        *,
+        code: str,
+        argv: SequenceNotStr[str] | Omit = omit,
+        envs: object | Omit = omit,
+        language: Literal["bash", "python", "typescript"] | Omit = omit,
+        api_timeout: str | Omit = omit,
+        working_dir: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BoxRunCodeResponse:
+        """Executes code inside the specified box.
+
+        Supports multiple languages (bash,
+        Python, TypeScript) and allows you to configure environment variables,
+        arguments, working directory, and timeouts.
 
         Args:
           code: The code to run
@@ -1239,13 +1355,13 @@ class AsyncBoxesResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        wait: bool | NotGiven = NOT_GIVEN,
+        wait: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BoxStartResponse:
         """
         Start box
@@ -1279,13 +1395,13 @@ class AsyncBoxesResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        wait: bool | NotGiven = NOT_GIVEN,
+        wait: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BoxStopResponse:
         """
         Stop box
@@ -1319,17 +1435,18 @@ class AsyncBoxesResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        wait: bool | NotGiven = NOT_GIVEN,
+        wait: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """Terminate a running box.
 
-        This action will stop the box and release its resources
+        This action will stop the box and release its
+        resources.
 
         Args:
           wait: Wait for the box operation to be completed, default is true
@@ -1358,18 +1475,18 @@ class AsyncBoxesResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        expires_in: str | NotGiven = NOT_GIVEN,
+        expires_in: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BoxWebTerminalURLResponse:
         """
         This endpoint allows you to generate a pre-signed URL for accessing the web
         terminal of a running box. The URL is valid for a limited time and can be used
-        to access the box's terminal interface
+        to access the box's terminal interface.
 
         Args:
           expires_in: The web terminal will be alive for the given duration
@@ -1407,7 +1524,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BoxWebsocketURLResponse:
         """Get the websocket url for the box.
 
@@ -1460,6 +1577,9 @@ class BoxesResourceWithRawResponse:
         )
         self.live_view_url = to_raw_response_wrapper(
             boxes.live_view_url,
+        )
+        self.resolution_set = to_raw_response_wrapper(
+            boxes.resolution_set,
         )
         self.run_code = to_raw_response_wrapper(
             boxes.run_code,
@@ -1534,6 +1654,9 @@ class AsyncBoxesResourceWithRawResponse:
         self.live_view_url = async_to_raw_response_wrapper(
             boxes.live_view_url,
         )
+        self.resolution_set = async_to_raw_response_wrapper(
+            boxes.resolution_set,
+        )
         self.run_code = async_to_raw_response_wrapper(
             boxes.run_code,
         )
@@ -1607,6 +1730,9 @@ class BoxesResourceWithStreamingResponse:
         self.live_view_url = to_streamed_response_wrapper(
             boxes.live_view_url,
         )
+        self.resolution_set = to_streamed_response_wrapper(
+            boxes.resolution_set,
+        )
         self.run_code = to_streamed_response_wrapper(
             boxes.run_code,
         )
@@ -1679,6 +1805,9 @@ class AsyncBoxesResourceWithStreamingResponse:
         )
         self.live_view_url = async_to_streamed_response_wrapper(
             boxes.live_view_url,
+        )
+        self.resolution_set = async_to_streamed_response_wrapper(
+            boxes.resolution_set,
         )
         self.run_code = async_to_streamed_response_wrapper(
             boxes.run_code,

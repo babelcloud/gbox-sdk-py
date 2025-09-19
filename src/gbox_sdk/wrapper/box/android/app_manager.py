@@ -4,7 +4,7 @@ from urllib.parse import urlparse
 from urllib.request import url2pathname
 from typing_extensions import Union
 
-from gbox_sdk._types import NOT_GIVEN, NotGiven, FileTypes
+from gbox_sdk._types import Omit, FileTypes, omit
 from gbox_sdk._client import GboxClient
 from gbox_sdk._response import BinaryAPIResponse
 from gbox_sdk.types.v1.android_box import AndroidBox
@@ -41,7 +41,7 @@ class AndroidAppManager:
         self,
         *,
         apk: Union[str, FileTypes],
-        open: Union[bool, NotGiven] = NOT_GIVEN,
+        open: Union[bool, Omit] = omit,
     ) -> AndroidAppOperator:
         """
         Install an Android app on the box.
@@ -119,7 +119,7 @@ class AndroidAppManager:
         res = self.client.v1.boxes.android.install(box_id=self.box.id, apk=apk, open=open)
         return self._install_res_to_operator(res)
 
-    def uninstall(self, package_name: str, *, keep_data: Union[bool, NotGiven] = NOT_GIVEN) -> None:
+    def uninstall(self, package_name: str, *, keep_data: Union[bool, Omit] = omit) -> None:
         """
         Uninstall an Android app from the box.
 

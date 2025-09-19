@@ -1,6 +1,6 @@
 from typing_extensions import List, Union
 
-from gbox_sdk._types import NOT_GIVEN, NotGiven
+from gbox_sdk._types import Omit, omit
 from gbox_sdk._client import GboxClient
 from gbox_sdk.types.v1.boxes.proxy_set_params import Auth
 from gbox_sdk.types.v1.boxes.proxy_get_response import ProxyGetResponse
@@ -17,9 +17,9 @@ class ProxyOperator:
         *,
         host: str,
         port: float,
-        auth: Union[Auth, NotGiven] = NOT_GIVEN,
-        excludes: Union[List[str], NotGiven] = NOT_GIVEN,
-        pac_url: Union[str, NotGiven] = NOT_GIVEN,
+        auth: Union[Auth, Omit] = omit,
+        excludes: Union[List[str], Omit] = omit,
+        pac_url: Union[str, Omit] = omit,
     ) -> ProxySetResponse:
         """
         Set the proxy for the box

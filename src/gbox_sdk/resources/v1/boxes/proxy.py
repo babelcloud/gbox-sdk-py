@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven, SequenceNotStr
+from ...._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
 from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -51,10 +51,10 @@ class ProxyResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Clear the proxy for the box
+        Clears the HTTP proxy for the box
 
         Args:
           extra_headers: Send extra headers
@@ -85,10 +85,12 @@ class ProxyResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProxyGetResponse:
-        """
-        Get the proxy for the box
+        """Retrieves the HTTP proxy settings for a specific box.
+
+        Use this endpoint to route
+        traffic through the box's network.
 
         Args:
           extra_headers: Send extra headers
@@ -115,18 +117,20 @@ class ProxyResource(SyncAPIResource):
         *,
         host: str,
         port: float,
-        auth: proxy_set_params.Auth | NotGiven = NOT_GIVEN,
-        excludes: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        pac_url: str | NotGiven = NOT_GIVEN,
+        auth: proxy_set_params.Auth | Omit = omit,
+        excludes: SequenceNotStr[str] | Omit = omit,
+        pac_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProxySetResponse:
-        """
-        Set the proxy for the box
+        """Configures the HTTP proxy settings for a specific box.
+
+        Use this endpoint when
+        you need the box's outbound network traffic to pass through a proxy server.
 
         Args:
           host: The host address of the proxy server
@@ -199,10 +203,10 @@ class AsyncProxyResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Clear the proxy for the box
+        Clears the HTTP proxy for the box
 
         Args:
           extra_headers: Send extra headers
@@ -233,10 +237,12 @@ class AsyncProxyResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProxyGetResponse:
-        """
-        Get the proxy for the box
+        """Retrieves the HTTP proxy settings for a specific box.
+
+        Use this endpoint to route
+        traffic through the box's network.
 
         Args:
           extra_headers: Send extra headers
@@ -263,18 +269,20 @@ class AsyncProxyResource(AsyncAPIResource):
         *,
         host: str,
         port: float,
-        auth: proxy_set_params.Auth | NotGiven = NOT_GIVEN,
-        excludes: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        pac_url: str | NotGiven = NOT_GIVEN,
+        auth: proxy_set_params.Auth | Omit = omit,
+        excludes: SequenceNotStr[str] | Omit = omit,
+        pac_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProxySetResponse:
-        """
-        Set the proxy for the box
+        """Configures the HTTP proxy settings for a specific box.
+
+        Use this endpoint when
+        you need the box's outbound network traffic to pass through a proxy server.
 
         Args:
           host: The host address of the proxy server

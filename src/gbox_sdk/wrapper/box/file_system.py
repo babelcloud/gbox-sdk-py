@@ -1,6 +1,6 @@
 from typing import List, Union, Optional
 
-from gbox_sdk._types import NOT_GIVEN, NotGiven
+from gbox_sdk._types import Omit, omit
 from gbox_sdk._client import GboxClient
 from gbox_sdk.types.v1.boxes.dir import Dir
 from gbox_sdk.types.v1.boxes.file import File
@@ -31,8 +31,8 @@ class FileSystemOperator:
         self,
         path: str,
         *,
-        depth: Union[float, NotGiven] = NOT_GIVEN,
-        working_dir: Union[str, NotGiven] = NOT_GIVEN,
+        depth: Union[float, Omit] = omit,
+        working_dir: Union[str, Omit] = omit,
     ) -> FListResponse:
         """
         Get detailed information about files and directories at a given path or with given parameters.
@@ -58,8 +58,8 @@ class FileSystemOperator:
         self,
         path: str,
         *,
-        depth: Union[float, NotGiven] = NOT_GIVEN,
-        working_dir: Union[str, NotGiven] = NOT_GIVEN,
+        depth: Union[float, Omit] = omit,
+        working_dir: Union[str, Omit] = omit,
     ) -> List[Union["FileOperator", "DirectoryOperator"]]:
         """
         List files and directories at a given path or with given parameters, returning operator objects.
@@ -86,7 +86,7 @@ class FileSystemOperator:
         self,
         path: str,
         *,
-        working_dir: Union[str, NotGiven] = NOT_GIVEN,
+        working_dir: Union[str, Omit] = omit,
     ) -> FReadResponse:
         """
         Read the content of a file.
@@ -108,7 +108,7 @@ class FileSystemOperator:
         return self.client.v1.boxes.fs.read(box_id=self.box_id, path=path, working_dir=working_dir)
 
     def write(
-        self, *, content: Union[str, FileTypes], path: str, working_dir: Union[str, NotGiven] = NOT_GIVEN
+        self, *, content: Union[str, FileTypes], path: str, working_dir: Union[str, Omit] = omit
     ) -> "FileOperator":
         """
         Write content to a file (text or binary).
@@ -132,7 +132,7 @@ class FileSystemOperator:
             >>> box.file_system.write(content="Hello, World!", path="/path/to/file")
         """
         res = self.client.v1.boxes.fs.write(
-            box_id=self.box_id, content=content, path=path, working_dir=working_dir if working_dir else NOT_GIVEN
+            box_id=self.box_id, content=content, path=path, working_dir=working_dir if working_dir else omit
         )
 
         # Convert FWriteResponse to DataFile format for FileOperator
@@ -142,7 +142,7 @@ class FileSystemOperator:
 
         return FileOperator(self.client, self.box_id, data_file)
 
-    def remove(self, path: str, *, working_dir: Union[str, NotGiven] = NOT_GIVEN) -> FRemoveResponse:
+    def remove(self, path: str, *, working_dir: Union[str, Omit] = omit) -> FRemoveResponse:
         """
         Remove a file or directory.
 
@@ -162,7 +162,7 @@ class FileSystemOperator:
         """
         return self.client.v1.boxes.fs.remove(box_id=self.box_id, path=path, working_dir=working_dir)
 
-    def exists(self, path: str, *, working_dir: Union[str, NotGiven] = NOT_GIVEN) -> FExistsResponse:
+    def exists(self, path: str, *, working_dir: Union[str, Omit] = omit) -> FExistsResponse:
         """
         Check if a file or directory exists.
 
@@ -182,7 +182,7 @@ class FileSystemOperator:
         """
         return self.client.v1.boxes.fs.exists(box_id=self.box_id, path=path, working_dir=working_dir)
 
-    def rename(self, *, old_path: str, new_path: str, working_dir: Union[str, NotGiven] = NOT_GIVEN) -> FRenameResponse:
+    def rename(self, *, old_path: str, new_path: str, working_dir: Union[str, Omit] = omit) -> FRenameResponse:
         """
         Rename a file or directory.
 
@@ -210,9 +210,7 @@ class FileSystemOperator:
             box_id=self.box_id, old_path=old_path, new_path=new_path, working_dir=working_dir
         )
 
-    def get(
-        self, path: str, *, working_dir: Union[str, NotGiven] = NOT_GIVEN
-    ) -> Union["FileOperator", "DirectoryOperator"]:
+    def get(self, path: str, *, working_dir: Union[str, Omit] = omit) -> Union["FileOperator", "DirectoryOperator"]:
         """
         Get an operator for a file or directory by its information.
 
@@ -276,7 +274,7 @@ class FileOperator:
         self.box_id = box_id
         self.data = data
 
-    def write(self, content: Union[str, FileTypes], *, working_dir: Union[str, NotGiven] = NOT_GIVEN) -> File:
+    def write(self, content: Union[str, FileTypes], *, working_dir: Union[str, Omit] = omit) -> File:
         """
         Write content to this file (text or binary).
 
@@ -295,10 +293,10 @@ class FileOperator:
             box_id=self.box_id,
             content=content,
             path=self.data.path,
-            working_dir=working_dir if working_dir else NOT_GIVEN,
+            working_dir=working_dir if working_dir else omit,
         )
 
-    def read(self, *, working_dir: Union[str, NotGiven] = NOT_GIVEN) -> FReadResponse:
+    def read(self, *, working_dir: Union[str, Omit] = omit) -> FReadResponse:
         """
         Read the content of this file.
 
@@ -314,7 +312,7 @@ class FileOperator:
         """
         return self.client.v1.boxes.fs.read(box_id=self.box_id, path=self.data.path, working_dir=working_dir)
 
-    def rename(self, new_path: str, *, working_dir: Union[str, NotGiven] = NOT_GIVEN) -> FRenameResponse:
+    def rename(self, new_path: str, *, working_dir: Union[str, Omit] = omit) -> FRenameResponse:
         """
         Rename this file.
 
@@ -350,9 +348,7 @@ class DirectoryOperator:
         self.box_id = box_id
         self.data = data
 
-    def list_info(
-        self, *, depth: Union[float, NotGiven] = NOT_GIVEN, working_dir: Union[str, NotGiven] = NOT_GIVEN
-    ) -> FListResponse:
+    def list_info(self, *, depth: Union[float, Omit] = omit, working_dir: Union[str, Omit] = omit) -> FListResponse:
         """
         Get detailed information about files and directories in this directory.
 
@@ -376,7 +372,7 @@ class DirectoryOperator:
         )
 
     def list(
-        self, *, depth: Union[float, NotGiven] = NOT_GIVEN, working_dir: Union[str, NotGiven] = NOT_GIVEN
+        self, *, depth: Union[float, Omit] = omit, working_dir: Union[str, Omit] = omit
     ) -> List[Union["FileOperator", "DirectoryOperator"]]:
         """
         List files and directories in this directory, returning operator objects.
@@ -409,7 +405,7 @@ class DirectoryOperator:
                 result.append(DirectoryOperator(self.client, self.box_id, dir))
         return result
 
-    def rename(self, *, new_path: str, working_dir: Union[str, NotGiven] = NOT_GIVEN) -> FRenameResponse:
+    def rename(self, *, new_path: str, working_dir: Union[str, Omit] = omit) -> FRenameResponse:
         """
         Rename this directory.
 

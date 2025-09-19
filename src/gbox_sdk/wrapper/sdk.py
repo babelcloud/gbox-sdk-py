@@ -4,7 +4,7 @@ from typing_extensions import Literal, TypedDict
 import httpx
 
 from gbox_sdk import GboxClient
-from gbox_sdk._types import NOT_GIVEN, Timeout, NotGiven
+from gbox_sdk._types import NOT_GIVEN, Omit, Timeout, NotGiven, omit
 from gbox_sdk.wrapper.utils import is_linux_box, is_android_box
 from gbox_sdk.wrapper.box.linux import LinuxBoxOperator
 from gbox_sdk.types.v1.linux_box import LinuxBox
@@ -133,7 +133,7 @@ class GboxSDK:
         Args:
             api_key (Optional[str]): API key for authentication.
             base_url (Optional[Union[str, httpx.URL]]): Base URL for the API.
-            timeout (Union[float, Timeout, None, NotGiven]): Request timeout setting.
+            timeout (Union[float, Timeout, None, Omit]): Request timeout setting.
             max_retries (Optional[int]): Maximum number of retries for failed requests.
             default_headers (Optional[Mapping[str, str]]): Default headers to include in requests.
             default_query (Optional[Mapping[str, object]]): Default query parameters for requests.
@@ -158,8 +158,8 @@ class GboxSDK:
         self,
         *,
         type: Literal["android"],
-        config: Union[AndroidConfig, NotGiven] = NOT_GIVEN,
-        wait: Union[bool, NotGiven] = NOT_GIVEN,
+        config: Union[AndroidConfig, Omit] = omit,
+        wait: Union[bool, Omit] = omit,
     ) -> AndroidBoxOperator:
         """Create a new Android box and return its operator."""
         ...
@@ -169,8 +169,8 @@ class GboxSDK:
         self,
         *,
         type: Literal["linux"],
-        config: Union[LinuxConfig, NotGiven] = NOT_GIVEN,
-        wait: Union[bool, NotGiven] = NOT_GIVEN,
+        config: Union[LinuxConfig, Omit] = omit,
+        wait: Union[bool, Omit] = omit,
     ) -> LinuxBoxOperator:
         """Create a new Linux box and return its operator."""
         ...
@@ -179,9 +179,9 @@ class GboxSDK:
         self,
         *,
         type: Union[Literal["android"], Literal["linux"]],
-        config: Union[AndroidConfig, LinuxConfig, NotGiven] = NOT_GIVEN,
-        wait: Union[bool, NotGiven] = NOT_GIVEN,
-        timeout: Union[str, NotGiven] = NOT_GIVEN,
+        config: Union[AndroidConfig, LinuxConfig, Omit] = omit,
+        wait: Union[bool, Omit] = omit,
+        timeout: Union[str, Omit] = omit,
     ) -> BoxOperator:
         """
         Create a new box and return its operator.
@@ -232,12 +232,12 @@ class GboxSDK:
     def list_info(
         self,
         *,
-        device_type: Union[str, NotGiven] = NOT_GIVEN,
-        labels: Union[object, NotGiven] = NOT_GIVEN,
-        page: Union[int, NotGiven] = NOT_GIVEN,
-        page_size: Union[int, NotGiven] = NOT_GIVEN,
-        status: Union[List[Literal["all", "pending", "running", "error", "terminated"]], NotGiven] = NOT_GIVEN,
-        type: Union[List[Literal["all", "linux", "android"]], NotGiven] = NOT_GIVEN,
+        device_type: Union[str, Omit] = omit,
+        labels: Union[object, Omit] = omit,
+        page: Union[int, Omit] = omit,
+        page_size: Union[int, Omit] = omit,
+        status: Union[List[Literal["all", "pending", "running", "error", "terminated"]], Omit] = omit,
+        type: Union[List[Literal["all", "linux", "android"]], Omit] = omit,
     ) -> BoxListResponse:
         """
         List information of all boxes matching the query.
@@ -274,12 +274,12 @@ class GboxSDK:
     def list(
         self,
         *,
-        device_type: Union[str, NotGiven] = NOT_GIVEN,
-        labels: Union[object, NotGiven] = NOT_GIVEN,
-        page: Union[int, NotGiven] = NOT_GIVEN,
-        page_size: Union[int, NotGiven] = NOT_GIVEN,
-        status: Union[List[Literal["all", "pending", "running", "error", "terminated"]], NotGiven] = NOT_GIVEN,
-        type: Union[List[Literal["all", "linux", "android"]], NotGiven] = NOT_GIVEN,
+        device_type: Union[str, Omit] = omit,
+        labels: Union[object, Omit] = omit,
+        page: Union[int, Omit] = omit,
+        page_size: Union[int, Omit] = omit,
+        status: Union[List[Literal["all", "pending", "running", "error", "terminated"]], Omit] = omit,
+        type: Union[List[Literal["all", "linux", "android"]], Omit] = omit,
     ) -> BoxListOperatorResponse:
         """
         List all boxes matching the query and return their operator objects.
@@ -358,7 +358,7 @@ class GboxSDK:
         res = self.client.v1.boxes.retrieve(box_id)
         return self._data_to_operator(res)
 
-    def terminate(self, box_id: str, *, wait: Union[bool, NotGiven] = NOT_GIVEN) -> None:
+    def terminate(self, box_id: str, *, wait: Union[bool, Omit] = omit) -> None:
         """
         Terminate a specific box.
 

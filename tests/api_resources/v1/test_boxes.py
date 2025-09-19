@@ -366,6 +366,56 @@ class TestBoxes:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
+    def test_method_resolution_set(self, client: GboxClient) -> None:
+        box = client.v1.boxes.resolution_set(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            height=1080,
+            width=1920,
+        )
+        assert box is None
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_resolution_set(self, client: GboxClient) -> None:
+        response = client.v1.boxes.with_raw_response.resolution_set(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            height=1080,
+            width=1920,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        box = response.parse()
+        assert box is None
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_resolution_set(self, client: GboxClient) -> None:
+        with client.v1.boxes.with_streaming_response.resolution_set(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            height=1080,
+            width=1920,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            box = response.parse()
+            assert box is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_path_params_resolution_set(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            client.v1.boxes.with_raw_response.resolution_set(
+                box_id="",
+                height=1080,
+                width=1920,
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
     def test_method_run_code(self, client: GboxClient) -> None:
         box = client.v1.boxes.run_code(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
@@ -1011,6 +1061,56 @@ class TestAsyncBoxes:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.with_raw_response.live_view_url(
                 box_id="",
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_resolution_set(self, async_client: AsyncGboxClient) -> None:
+        box = await async_client.v1.boxes.resolution_set(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            height=1080,
+            width=1920,
+        )
+        assert box is None
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_resolution_set(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.with_raw_response.resolution_set(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            height=1080,
+            width=1920,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        box = await response.parse()
+        assert box is None
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_resolution_set(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.with_streaming_response.resolution_set(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            height=1080,
+            width=1920,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            box = await response.parse()
+            assert box is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_path_params_resolution_set(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            await async_client.v1.boxes.with_raw_response.resolution_set(
+                box_id="",
+                height=1080,
+                width=1920,
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")

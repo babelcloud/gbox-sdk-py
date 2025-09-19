@@ -4,7 +4,7 @@ import base64
 from typing import List, Union, Callable, Optional
 from typing_extensions import Literal, Iterable, cast, overload
 
-from gbox_sdk._types import NOT_GIVEN, NotGiven
+from gbox_sdk._types import Omit, omit
 from gbox_sdk._client import GboxClient
 from gbox_sdk._utils._utils import required_args
 from gbox_sdk.types.v1.boxes.action_result import ActionResult
@@ -55,20 +55,21 @@ class ActionOperator:
         self.client = client
         self.box_id = box_id
         self.recording = RecordingOperator(client, box_id)
+        self.clipboard = ClipboardOperator(client, box_id)
 
     def ai(
         self,
         instruction: str,
         *,
-        background: Union[str, NotGiven] = NOT_GIVEN,
-        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
-        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
-        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
-        settings: Union[Settings, NotGiven] = NOT_GIVEN,
+        background: Union[str, Omit] = omit,
+        include_screenshot: Union[bool, Omit] = omit,
+        output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
+        screenshot_delay: Union[str, Omit] = omit,
+        settings: Union[Settings, Omit] = omit,
         on_action_start: Optional[Callable[[], None]] = None,
         on_action_end: Optional[Callable[[], None]] = None,
-        presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
-        options: Union[ActionCommonOptionsParam, NotGiven] = NOT_GIVEN,
+        presigned_expires_in: Union[str, Omit] = omit,
+        options: Union[ActionCommonOptionsParam, Omit] = omit,
     ) -> ActionAIResponse:
         """
         Perform an AI-powered action on the box.
@@ -166,15 +167,15 @@ class ActionOperator:
         self,
         instruction: str,
         *,
-        background: Union[str, NotGiven] = NOT_GIVEN,
-        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
-        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
-        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
-        settings: Union[Settings, NotGiven] = NOT_GIVEN,
+        background: Union[str, Omit] = omit,
+        include_screenshot: Union[bool, Omit] = omit,
+        output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
+        screenshot_delay: Union[str, Omit] = omit,
+        settings: Union[Settings, Omit] = omit,
         on_action_start: Optional[Callable[[], None]] = None,
         on_action_end: Optional[Callable[[], None]] = None,
-        presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
-        options: Union[ActionCommonOptionsParam, NotGiven] = NOT_GIVEN,
+        presigned_expires_in: Union[str, Omit] = omit,
+        options: Union[ActionCommonOptionsParam, Omit] = omit,
     ) -> ActionAIResponse:
         """
         Perform an AI-powered action on the box with streaming support.
@@ -307,13 +308,13 @@ class ActionOperator:
         *,
         x: float,
         y: float,
-        button: Union[Literal["left", "right", "middle"], NotGiven] = NOT_GIVEN,
-        double: Union[bool, NotGiven] = NOT_GIVEN,
-        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
-        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
-        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
-        options: Union[ActionCommonOptionsParam, NotGiven] = NOT_GIVEN,
-        presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
+        button: Union[Literal["left", "right", "middle"], Omit] = omit,
+        double: Union[bool, Omit] = omit,
+        include_screenshot: Union[bool, Omit] = omit,
+        output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
+        screenshot_delay: Union[str, Omit] = omit,
+        options: Union[ActionCommonOptionsParam, Omit] = omit,
+        presigned_expires_in: Union[str, Omit] = omit,
     ) -> ActionResult:
         """
         Perform a click action on the box.
@@ -374,14 +375,14 @@ class ActionOperator:
     def click(
         self,
         *,
-        target: Union[str, NotGiven] = NOT_GIVEN,
-        button: Union[Literal["left", "right", "middle"], NotGiven] = NOT_GIVEN,
-        double: Union[bool, NotGiven] = NOT_GIVEN,
-        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
-        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
-        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
-        options: Union[ActionCommonOptionsParam, NotGiven] = NOT_GIVEN,
-        presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
+        target: Union[str, Omit] = omit,
+        button: Union[Literal["left", "right", "middle"], Omit] = omit,
+        double: Union[bool, Omit] = omit,
+        include_screenshot: Union[bool, Omit] = omit,
+        output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
+        screenshot_delay: Union[str, Omit] = omit,
+        options: Union[ActionCommonOptionsParam, Omit] = omit,
+        presigned_expires_in: Union[str, Omit] = omit,
     ) -> ActionResult:
         """
         Perform a click action on the box.
@@ -441,18 +442,18 @@ class ActionOperator:
     def click(
         self,
         *,
-        x: Union[float, NotGiven] = NOT_GIVEN,
-        y: Union[float, NotGiven] = NOT_GIVEN,
-        button: Union[Literal["left", "right", "middle"], NotGiven] = NOT_GIVEN,
-        double: Union[bool, NotGiven] = NOT_GIVEN,
-        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
-        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
-        presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
-        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
-        options: Union[ActionCommonOptionsParam, NotGiven] = NOT_GIVEN,
-        target: Union[str, NotGiven] = NOT_GIVEN,
+        x: Union[float, Omit] = omit,
+        y: Union[float, Omit] = omit,
+        button: Union[Literal["left", "right", "middle"], Omit] = omit,
+        double: Union[bool, Omit] = omit,
+        include_screenshot: Union[bool, Omit] = omit,
+        output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
+        presigned_expires_in: Union[str, Omit] = omit,
+        screenshot_delay: Union[str, Omit] = omit,
+        options: Union[ActionCommonOptionsParam, Omit] = omit,
+        target: Union[str, Omit] = omit,
     ) -> ActionResult:
-        if target is not NOT_GIVEN:
+        if target is not omit:
             return self.client.v1.boxes.actions.click(
                 box_id=self.box_id,
                 target=cast(str, target),
@@ -464,7 +465,7 @@ class ActionOperator:
                 presigned_expires_in=presigned_expires_in,
                 screenshot_delay=screenshot_delay,
             )
-        elif x is not NOT_GIVEN and y is not NOT_GIVEN:
+        elif x is not omit and y is not omit:
             return self.client.v1.boxes.actions.click(
                 box_id=self.box_id,
                 x=cast(float, x),
@@ -486,12 +487,12 @@ class ActionOperator:
         *,
         end: DragSimpleEnd,
         start: DragSimpleStart,
-        duration: Union[str, NotGiven] = NOT_GIVEN,
-        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
-        options: Union[ActionCommonOptionsParam, NotGiven] = NOT_GIVEN,
-        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
-        presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
-        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
+        duration: Union[str, Omit] = omit,
+        include_screenshot: Union[bool, Omit] = omit,
+        options: Union[ActionCommonOptionsParam, Omit] = omit,
+        output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
+        presigned_expires_in: Union[str, Omit] = omit,
+        screenshot_delay: Union[str, Omit] = omit,
     ) -> ActionResult:
         """
         Drag
@@ -549,12 +550,12 @@ class ActionOperator:
         self,
         *,
         path: Iterable[DragAdvancedPath],
-        duration: Union[str, NotGiven] = NOT_GIVEN,
-        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
-        options: Union[ActionCommonOptionsParam, NotGiven] = NOT_GIVEN,
-        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
-        presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
-        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
+        duration: Union[str, Omit] = omit,
+        include_screenshot: Union[bool, Omit] = omit,
+        options: Union[ActionCommonOptionsParam, Omit] = omit,
+        output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
+        presigned_expires_in: Union[str, Omit] = omit,
+        screenshot_delay: Union[str, Omit] = omit,
     ) -> ActionResult:
         """
         Drag
@@ -609,17 +610,17 @@ class ActionOperator:
     def drag(
         self,
         *,
-        end: Union[DragSimpleEnd, NotGiven] = NOT_GIVEN,
-        start: Union[DragSimpleStart, NotGiven] = NOT_GIVEN,
-        duration: Union[str, NotGiven] = NOT_GIVEN,
-        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
-        options: Union[ActionCommonOptionsParam, NotGiven] = NOT_GIVEN,
-        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
-        presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
-        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
-        path: Union[Iterable[DragAdvancedPath], NotGiven] = NOT_GIVEN,
+        end: Union[DragSimpleEnd, Omit] = omit,
+        start: Union[DragSimpleStart, Omit] = omit,
+        duration: Union[str, Omit] = omit,
+        include_screenshot: Union[bool, Omit] = omit,
+        options: Union[ActionCommonOptionsParam, Omit] = omit,
+        output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
+        presigned_expires_in: Union[str, Omit] = omit,
+        screenshot_delay: Union[str, Omit] = omit,
+        path: Union[Iterable[DragAdvancedPath], Omit] = omit,
     ) -> ActionResult:
-        if path is not NOT_GIVEN:
+        if path is not omit:
             return self.client.v1.boxes.actions.drag(
                 box_id=self.box_id,
                 path=cast(Iterable[DragAdvancedPath], path),
@@ -630,7 +631,7 @@ class ActionOperator:
                 options=options,
                 presigned_expires_in=presigned_expires_in,
             )
-        elif start is not NOT_GIVEN and end is not NOT_GIVEN:
+        elif start is not omit and end is not omit:
             return self.client.v1.boxes.actions.drag(
                 box_id=self.box_id,
                 start=cast(DragSimpleStart, start),
@@ -652,16 +653,16 @@ class ActionOperator:
         self,
         *,
         direction: Union[
-            Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"], NotGiven
-        ] = NOT_GIVEN,
-        distance: Union[float, Literal["tiny", "short", "medium", "long"], NotGiven] = NOT_GIVEN,
-        duration: Union[str, NotGiven] = NOT_GIVEN,
-        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
-        location: Union[str, NotGiven] = NOT_GIVEN,
-        options: Union[ActionCommonOptionsParam, NotGiven] = NOT_GIVEN,
-        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
-        presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
-        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
+            Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"], Omit
+        ] = omit,
+        distance: Union[float, Literal["tiny", "short", "medium", "long"], Omit] = omit,
+        duration: Union[str, Omit] = omit,
+        include_screenshot: Union[bool, Omit] = omit,
+        location: Union[str, Omit] = omit,
+        options: Union[ActionCommonOptionsParam, Omit] = omit,
+        output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
+        presigned_expires_in: Union[str, Omit] = omit,
+        screenshot_delay: Union[str, Omit] = omit,
     ) -> ActionResult:
         """
         Performs a swipe in the specified direction
@@ -726,12 +727,12 @@ class ActionOperator:
         *,
         end: SwipeAdvancedEnd,
         start: SwipeAdvancedStart,
-        duration: Union[str, NotGiven] = NOT_GIVEN,
-        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
-        options: Union[ActionCommonOptionsParam, NotGiven] = NOT_GIVEN,
-        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
-        presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
-        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
+        duration: Union[str, Omit] = omit,
+        include_screenshot: Union[bool, Omit] = omit,
+        options: Union[ActionCommonOptionsParam, Omit] = omit,
+        output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
+        presigned_expires_in: Union[str, Omit] = omit,
+        screenshot_delay: Union[str, Omit] = omit,
     ) -> ActionResult:
         """
         Performs a swipe in the specified direction
@@ -789,20 +790,20 @@ class ActionOperator:
         self,
         *,
         direction: Union[
-            Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"], NotGiven
-        ] = NOT_GIVEN,
-        distance: Union[float, Literal["tiny", "short", "medium", "long"], NotGiven] = NOT_GIVEN,
-        duration: Union[str, NotGiven] = NOT_GIVEN,
-        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
-        location: Union[str, NotGiven] = NOT_GIVEN,
-        options: Union[ActionCommonOptionsParam, NotGiven] = NOT_GIVEN,
-        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
-        presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
-        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
-        end: Union[SwipeAdvancedEnd, NotGiven] = NOT_GIVEN,
-        start: Union[SwipeAdvancedStart, NotGiven] = NOT_GIVEN,
+            Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"], Omit
+        ] = omit,
+        distance: Union[float, Literal["tiny", "short", "medium", "long"], Omit] = omit,
+        duration: Union[str, Omit] = omit,
+        include_screenshot: Union[bool, Omit] = omit,
+        location: Union[str, Omit] = omit,
+        options: Union[ActionCommonOptionsParam, Omit] = omit,
+        output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
+        presigned_expires_in: Union[str, Omit] = omit,
+        screenshot_delay: Union[str, Omit] = omit,
+        end: Union[SwipeAdvancedEnd, Omit] = omit,
+        start: Union[SwipeAdvancedStart, Omit] = omit,
     ) -> ActionResult:
-        if direction is not NOT_GIVEN:
+        if direction is not omit:
             return self.client.v1.boxes.actions.swipe(
                 box_id=self.box_id,
                 direction=cast(
@@ -817,7 +818,7 @@ class ActionOperator:
                 presigned_expires_in=presigned_expires_in,
                 location=location,
             )
-        elif start is not NOT_GIVEN and end is not NOT_GIVEN:
+        elif start is not omit and end is not omit:
             return self.client.v1.boxes.actions.swipe(
                 box_id=self.box_id,
                 start=cast(SwipeAdvancedStart, start),
@@ -839,12 +840,12 @@ class ActionOperator:
         self,
         *,
         keys: KeysType,
-        combination: Union[bool, NotGiven] = NOT_GIVEN,
-        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
-        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
-        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
-        options: Union[ActionCommonOptionsParam, NotGiven] = NOT_GIVEN,
-        presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
+        combination: Union[bool, Omit] = omit,
+        include_screenshot: Union[bool, Omit] = omit,
+        output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
+        screenshot_delay: Union[str, Omit] = omit,
+        options: Union[ActionCommonOptionsParam, Omit] = omit,
+        presigned_expires_in: Union[str, Omit] = omit,
     ) -> ActionResult:
         """
         Simulates pressing a specific key by triggering the complete keyboard key event
@@ -917,11 +918,11 @@ class ActionOperator:
         self,
         buttons: List[Literal["power", "volumeUp", "volumeDown", "volumeMute", "home", "back", "menu", "appSwitch"]],
         *,
-        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
-        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
-        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
-        options: Union[ActionCommonOptionsParam, NotGiven] = NOT_GIVEN,
-        presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
+        include_screenshot: Union[bool, Omit] = omit,
+        output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
+        screenshot_delay: Union[str, Omit] = omit,
+        options: Union[ActionCommonOptionsParam, Omit] = omit,
+        presigned_expires_in: Union[str, Omit] = omit,
     ) -> ActionResult:
         """
         Press device buttons like power, volume, home, back, etc.
@@ -986,11 +987,11 @@ class ActionOperator:
         *,
         x: float,
         y: float,
-        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
-        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
-        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
-        options: Union[ActionCommonOptionsParam, NotGiven] = NOT_GIVEN,
-        presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
+        include_screenshot: Union[bool, Omit] = omit,
+        output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
+        screenshot_delay: Union[str, Omit] = omit,
+        options: Union[ActionCommonOptionsParam, Omit] = omit,
+        presigned_expires_in: Union[str, Omit] = omit,
     ) -> ActionResult:
         """
         Move an element or pointer on the box.
@@ -1059,11 +1060,11 @@ class ActionOperator:
         *,
         x: float,
         y: float,
-        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
-        options: Union[ActionCommonOptionsParam, NotGiven] = NOT_GIVEN,
-        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
-        presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
-        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
+        include_screenshot: Union[bool, Omit] = omit,
+        options: Union[ActionCommonOptionsParam, Omit] = omit,
+        output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
+        presigned_expires_in: Union[str, Omit] = omit,
+        screenshot_delay: Union[str, Omit] = omit,
     ) -> ActionResult:
         """
         Tap action for Android devices using ADB input tap command
@@ -1116,11 +1117,11 @@ class ActionOperator:
         self,
         *,
         target: str,
-        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
-        options: Union[ActionCommonOptionsParam, NotGiven] = NOT_GIVEN,
-        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
-        presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
-        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
+        include_screenshot: Union[bool, Omit] = omit,
+        options: Union[ActionCommonOptionsParam, Omit] = omit,
+        output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
+        presigned_expires_in: Union[str, Omit] = omit,
+        screenshot_delay: Union[str, Omit] = omit,
     ) -> ActionResult:
         """
         Tap action for Android devices using ADB input tap command
@@ -1171,16 +1172,16 @@ class ActionOperator:
     def tap(
         self,
         *,
-        x: Union[float, NotGiven] = NOT_GIVEN,
-        y: Union[float, NotGiven] = NOT_GIVEN,
-        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
-        options: Union[ActionCommonOptionsParam, NotGiven] = NOT_GIVEN,
-        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
-        presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
-        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
-        target: Union[str, NotGiven] = NOT_GIVEN,
+        x: Union[float, Omit] = omit,
+        y: Union[float, Omit] = omit,
+        include_screenshot: Union[bool, Omit] = omit,
+        options: Union[ActionCommonOptionsParam, Omit] = omit,
+        output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
+        presigned_expires_in: Union[str, Omit] = omit,
+        screenshot_delay: Union[str, Omit] = omit,
+        target: Union[str, Omit] = omit,
     ) -> ActionResult:
-        if x is not NOT_GIVEN and y is not NOT_GIVEN:
+        if x is not omit and y is not omit:
             return self.client.v1.boxes.actions.tap(
                 box_id=self.box_id,
                 x=cast(float, x),
@@ -1191,7 +1192,7 @@ class ActionOperator:
                 presigned_expires_in=presigned_expires_in,
                 screenshot_delay=screenshot_delay,
             )
-        elif target is not NOT_GIVEN:
+        elif target is not omit:
             return self.client.v1.boxes.actions.tap(
                 box_id=self.box_id,
                 target=cast(str, target),
@@ -1210,12 +1211,12 @@ class ActionOperator:
         *,
         x: float,
         y: float,
-        duration: Union[str, NotGiven] = NOT_GIVEN,
-        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
-        options: Union[ActionCommonOptionsParam, NotGiven] = NOT_GIVEN,
-        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
-        presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
-        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
+        duration: Union[str, Omit] = omit,
+        include_screenshot: Union[bool, Omit] = omit,
+        options: Union[ActionCommonOptionsParam, Omit] = omit,
+        output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
+        presigned_expires_in: Union[str, Omit] = omit,
+        screenshot_delay: Union[str, Omit] = omit,
     ) -> ActionResult:
         """
         Perform a long press action at specified coordinates for a specified duration.
@@ -1275,12 +1276,12 @@ class ActionOperator:
         self,
         *,
         target: str,
-        duration: Union[str, NotGiven] = NOT_GIVEN,
-        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
-        options: Union[ActionCommonOptionsParam, NotGiven] = NOT_GIVEN,
-        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
-        presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
-        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
+        duration: Union[str, Omit] = omit,
+        include_screenshot: Union[bool, Omit] = omit,
+        options: Union[ActionCommonOptionsParam, Omit] = omit,
+        output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
+        presigned_expires_in: Union[str, Omit] = omit,
+        screenshot_delay: Union[str, Omit] = omit,
     ) -> ActionResult:
         """
         Perform a long press action at specified coordinates for a specified duration.
@@ -1338,17 +1339,17 @@ class ActionOperator:
     def long_press(
         self,
         *,
-        x: Union[float, NotGiven] = NOT_GIVEN,
-        y: Union[float, NotGiven] = NOT_GIVEN,
-        duration: Union[str, NotGiven] = NOT_GIVEN,
-        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
-        options: Union[ActionCommonOptionsParam, NotGiven] = NOT_GIVEN,
-        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
-        presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
-        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
-        target: Union[str, NotGiven] = NOT_GIVEN,
+        x: Union[float, Omit] = omit,
+        y: Union[float, Omit] = omit,
+        duration: Union[str, Omit] = omit,
+        include_screenshot: Union[bool, Omit] = omit,
+        options: Union[ActionCommonOptionsParam, Omit] = omit,
+        output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
+        presigned_expires_in: Union[str, Omit] = omit,
+        screenshot_delay: Union[str, Omit] = omit,
+        target: Union[str, Omit] = omit,
     ) -> ActionResult:
-        if x is not NOT_GIVEN and y is not NOT_GIVEN:
+        if x is not omit and y is not omit:
             return self.client.v1.boxes.actions.long_press(
                 box_id=self.box_id,
                 x=cast(float, x),
@@ -1360,7 +1361,7 @@ class ActionOperator:
                 screenshot_delay=screenshot_delay,
                 options=options,
             )
-        elif target is not NOT_GIVEN:
+        elif target is not omit:
             return self.client.v1.boxes.actions.long_press(
                 box_id=self.box_id,
                 target=cast(str, target),
@@ -1384,11 +1385,11 @@ class ActionOperator:
         scroll_y: float,
         x: float,
         y: float,
-        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
-        options: Union[ActionCommonOptionsParam, NotGiven] = NOT_GIVEN,
-        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
-        presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
-        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
+        include_screenshot: Union[bool, Omit] = omit,
+        options: Union[ActionCommonOptionsParam, Omit] = omit,
+        output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
+        presigned_expires_in: Union[str, Omit] = omit,
+        screenshot_delay: Union[str, Omit] = omit,
     ) -> ActionResult:
         """Performs a scroll action.
 
@@ -1450,13 +1451,13 @@ class ActionOperator:
         self,
         *,
         direction: Literal["up", "down", "left", "right"],
-        distance: Union[float, Literal["tiny", "short", "medium", "long"], NotGiven] = NOT_GIVEN,
-        duration: Union[str, NotGiven] = NOT_GIVEN,
-        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
-        options: Union[ActionCommonOptionsParam, NotGiven] = NOT_GIVEN,
-        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
-        presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
-        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
+        distance: Union[float, Literal["tiny", "short", "medium", "long"], Omit] = omit,
+        duration: Union[str, Omit] = omit,
+        include_screenshot: Union[bool, Omit] = omit,
+        options: Union[ActionCommonOptionsParam, Omit] = omit,
+        output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
+        presigned_expires_in: Union[str, Omit] = omit,
+        screenshot_delay: Union[str, Omit] = omit,
     ) -> ActionResult:
         """Performs a scroll action.
 
@@ -1521,20 +1522,20 @@ class ActionOperator:
     def scroll(
         self,
         *,
-        scroll_x: Union[float, NotGiven] = NOT_GIVEN,
-        scroll_y: Union[float, NotGiven] = NOT_GIVEN,
-        x: Union[float, NotGiven] = NOT_GIVEN,
-        y: Union[float, NotGiven] = NOT_GIVEN,
-        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
-        options: Union[ActionCommonOptionsParam, NotGiven] = NOT_GIVEN,
-        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
-        presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
-        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
-        direction: Union[Literal["up", "down", "left", "right"], NotGiven] = NOT_GIVEN,
-        distance: Union[float, Literal["tiny", "short", "medium", "long"], NotGiven] = NOT_GIVEN,
-        duration: Union[str, NotGiven] = NOT_GIVEN,
+        scroll_x: Union[float, Omit] = omit,
+        scroll_y: Union[float, Omit] = omit,
+        x: Union[float, Omit] = omit,
+        y: Union[float, Omit] = omit,
+        include_screenshot: Union[bool, Omit] = omit,
+        options: Union[ActionCommonOptionsParam, Omit] = omit,
+        output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
+        presigned_expires_in: Union[str, Omit] = omit,
+        screenshot_delay: Union[str, Omit] = omit,
+        direction: Union[Literal["up", "down", "left", "right"], Omit] = omit,
+        distance: Union[float, Literal["tiny", "short", "medium", "long"], Omit] = omit,
+        duration: Union[str, Omit] = omit,
     ) -> ActionResult:
-        if scroll_x is not NOT_GIVEN and scroll_y is not NOT_GIVEN and x is not NOT_GIVEN and y is not NOT_GIVEN:
+        if scroll_x is not omit and scroll_y is not omit and x is not omit and y is not omit:
             return self.client.v1.boxes.actions.scroll(
                 box_id=self.box_id,
                 scroll_x=cast(float, scroll_x),
@@ -1547,7 +1548,7 @@ class ActionOperator:
                 options=options,
                 presigned_expires_in=presigned_expires_in,
             )
-        elif direction is not NOT_GIVEN:
+        elif direction is not omit:
             return self.client.v1.boxes.actions.scroll(
                 box_id=self.box_id,
                 direction=cast(Literal["up", "down", "left", "right"], direction),
@@ -1568,11 +1569,11 @@ class ActionOperator:
         self,
         *,
         points: Iterable[Point],
-        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
-        options: Union[ActionCommonOptionsParam, NotGiven] = NOT_GIVEN,
-        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
-        presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
-        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
+        include_screenshot: Union[bool, Omit] = omit,
+        options: Union[ActionCommonOptionsParam, Omit] = omit,
+        output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
+        presigned_expires_in: Union[str, Omit] = omit,
+        screenshot_delay: Union[str, Omit] = omit,
     ) -> ActionResult:
         """
         Simulate a touch action on the box.
@@ -1636,13 +1637,13 @@ class ActionOperator:
         self,
         text: str,
         *,
-        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
-        mode: Union[Literal["append", "replace"], NotGiven] = NOT_GIVEN,
-        options: Union[ActionCommonOptionsParam, NotGiven] = NOT_GIVEN,
-        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
-        presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
-        press_enter: Union[bool, NotGiven] = NOT_GIVEN,
-        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
+        include_screenshot: Union[bool, Omit] = omit,
+        mode: Union[Literal["append", "replace"], Omit] = omit,
+        options: Union[ActionCommonOptionsParam, Omit] = omit,
+        output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
+        presigned_expires_in: Union[str, Omit] = omit,
+        press_enter: Union[bool, Omit] = omit,
+        screenshot_delay: Union[str, Omit] = omit,
     ) -> ActionResult:
         """
         Simulate typing text on the box.
@@ -1713,7 +1714,7 @@ class ActionOperator:
         self,
         *,
         instruction: str,
-        schema: Union[object, NotGiven] = NOT_GIVEN,
+        schema: Union[object, Omit] = omit,
     ) -> ActionExtractResponse:
         """
         Extract data from the UI interface using a JSON schema.
@@ -1750,11 +1751,11 @@ class ActionOperator:
     def screenshot(
         self,
         *,
-        path: Union[str, NotGiven] = NOT_GIVEN,
-        clip: Union[Clip, NotGiven] = NOT_GIVEN,
-        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
-        presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
-        save_to_album: Union[bool, NotGiven] = NOT_GIVEN,
+        path: Union[str, Omit] = omit,
+        clip: Union[Clip, Omit] = omit,
+        output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
+        presigned_expires_in: Union[str, Omit] = omit,
+        save_to_album: Union[bool, Omit] = omit,
     ) -> ActionScreenshotResponse:
         """
         Take a screenshot of the box.
@@ -1784,7 +1785,7 @@ class ActionOperator:
             Take a screenshot with specific format:
             >>> response = action_operator.screenshot(output_format="base64")
         """
-        if path is not NOT_GIVEN:
+        if path is not omit:
             file_path = path
         else:
             file_path = None
@@ -1818,10 +1819,10 @@ class ActionOperator:
         self,
         orientation: Literal["portrait", "landscapeLeft", "portraitUpsideDown", "landscapeRight"],
         *,
-        include_screenshot: Union[bool, NotGiven] = NOT_GIVEN,
-        output_format: Union[Literal["base64", "storageKey"], NotGiven] = NOT_GIVEN,
-        presigned_expires_in: Union[str, NotGiven] = NOT_GIVEN,
-        screenshot_delay: Union[str, NotGiven] = NOT_GIVEN,
+        include_screenshot: Union[bool, Omit] = omit,
+        output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
+        presigned_expires_in: Union[str, Omit] = omit,
+        screenshot_delay: Union[str, Omit] = omit,
     ) -> ActionResult:
         """
         Rotate the screen orientation.
@@ -1881,7 +1882,7 @@ class ActionOperator:
             screenshot_delay=screenshot_delay,
         )
 
-    def screen_recording_start(self, duration: str) -> None:
+    def screen_recording_start(self) -> None:
         """
         Start recording the box screen.
 
@@ -1899,7 +1900,7 @@ class ActionOperator:
         Example:
             >>> response = myBox.action.screen_recording_start(duration="30m")
         """
-        return self.client.v1.boxes.actions.recording_start(box_id=self.box_id, duration=duration)
+        return self.client.v1.boxes.actions.recording_start(box_id=self.box_id)
 
     def screen_recording_stop(self) -> ActionRecordingStopResponse:
         """
@@ -1993,7 +1994,7 @@ class RecordingOperator:
         self.box_id = box_id
         self.rewind = RecordingRewindOperator(client, box_id)
 
-    def start(self, duration: Union[str, NotGiven] = NOT_GIVEN) -> None:
+    def start(self) -> None:
         """
         Start recording the box screen.
 
@@ -2011,7 +2012,7 @@ class RecordingOperator:
         Example:
             >>> response = myBox.action.recording.start(duration="30m")
         """
-        return self.client.v1.boxes.actions.recording_start(box_id=self.box_id, duration=duration)
+        return self.client.v1.boxes.actions.recording_start(box_id=self.box_id)
 
     def stop(self) -> ActionRecordingStopResponse:
         """
@@ -2069,3 +2070,30 @@ class RecordingRewindOperator:
             >>> response = myBox.action.recording.rewind.extract(duration="30s")
         """
         return self.client.v1.boxes.actions.rewind_extract(box_id=self.box_id, duration=duration)
+
+
+class ClipboardOperator:
+    def __init__(self, client: GboxClient, box_id: str):
+        self.client = client
+        self.box_id = box_id
+
+    def get(self) -> str:
+        """
+        Get the clipboard content.
+
+        Example:
+            >>> response = myBox.action.clipboard.get()
+        """
+        return self.client.v1.boxes.actions.clipboard_get(box_id=self.box_id)
+
+    def set(self, content: str) -> None:
+        """
+        Set the clipboard content
+
+        Args:
+          content: The content to set the clipboard content
+
+        Example:
+            >>> response = myBox.action.clipboard.set("Hello, world!")
+        """
+        return self.client.v1.boxes.actions.clipboard_set(box_id=self.box_id, content=content)

@@ -75,6 +75,7 @@ from ....types.v1 import (
     box_create_linux_params,
     box_live_view_url_params,
     box_create_android_params,
+    box_resolution_set_params,
     box_execute_commands_params,
     box_web_terminal_url_params,
 )
@@ -499,6 +500,51 @@ class BoxesResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=BoxLiveViewURLResponse,
+        )
+
+    def resolution_set(
+        self,
+        box_id: str,
+        *,
+        height: float,
+        width: float,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Args:
+          height: The height of the screen
+
+          width: The width of the screen
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._post(
+            f"/boxes/{box_id}/resolution",
+            body=maybe_transform(
+                {
+                    "height": height,
+                    "width": width,
+                },
+                box_resolution_set_params.BoxResolutionSetParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
         )
 
     def run_code(
@@ -1167,6 +1213,51 @@ class AsyncBoxesResource(AsyncAPIResource):
             cast_to=BoxLiveViewURLResponse,
         )
 
+    async def resolution_set(
+        self,
+        box_id: str,
+        *,
+        height: float,
+        width: float,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Args:
+          height: The height of the screen
+
+          width: The width of the screen
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._post(
+            f"/boxes/{box_id}/resolution",
+            body=await async_maybe_transform(
+                {
+                    "height": height,
+                    "width": width,
+                },
+                box_resolution_set_params.BoxResolutionSetParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
     async def run_code(
         self,
         box_id: str,
@@ -1461,6 +1552,9 @@ class BoxesResourceWithRawResponse:
         self.live_view_url = to_raw_response_wrapper(
             boxes.live_view_url,
         )
+        self.resolution_set = to_raw_response_wrapper(
+            boxes.resolution_set,
+        )
         self.run_code = to_raw_response_wrapper(
             boxes.run_code,
         )
@@ -1533,6 +1627,9 @@ class AsyncBoxesResourceWithRawResponse:
         )
         self.live_view_url = async_to_raw_response_wrapper(
             boxes.live_view_url,
+        )
+        self.resolution_set = async_to_raw_response_wrapper(
+            boxes.resolution_set,
         )
         self.run_code = async_to_raw_response_wrapper(
             boxes.run_code,
@@ -1607,6 +1704,9 @@ class BoxesResourceWithStreamingResponse:
         self.live_view_url = to_streamed_response_wrapper(
             boxes.live_view_url,
         )
+        self.resolution_set = to_streamed_response_wrapper(
+            boxes.resolution_set,
+        )
         self.run_code = to_streamed_response_wrapper(
             boxes.run_code,
         )
@@ -1679,6 +1779,9 @@ class AsyncBoxesResourceWithStreamingResponse:
         )
         self.live_view_url = async_to_streamed_response_wrapper(
             boxes.live_view_url,
+        )
+        self.resolution_set = async_to_streamed_response_wrapper(
+            boxes.resolution_set,
         )
         self.run_code = async_to_streamed_response_wrapper(
             boxes.run_code,

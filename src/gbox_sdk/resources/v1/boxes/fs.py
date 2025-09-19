@@ -7,7 +7,7 @@ from typing_extensions import overload
 
 import httpx
 
-from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven, FileTypes
+from ...._types import Body, Omit, Query, Headers, NotGiven, FileTypes, omit, not_given
 from ...._utils import extract_files, required_args, maybe_transform, deepcopy_minimal, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -63,14 +63,14 @@ class FsResource(SyncAPIResource):
         box_id: str,
         *,
         path: str,
-        depth: float | NotGiven = NOT_GIVEN,
-        working_dir: str | NotGiven = NOT_GIVEN,
+        depth: float | Omit = omit,
+        working_dir: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FListResponse:
         """
         List box files
@@ -117,13 +117,13 @@ class FsResource(SyncAPIResource):
         box_id: str,
         *,
         path: str,
-        working_dir: str | NotGiven = NOT_GIVEN,
+        working_dir: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FExistsResponse:
         """Check if file/dir exists
 
@@ -169,13 +169,13 @@ class FsResource(SyncAPIResource):
         box_id: str,
         *,
         path: str,
-        working_dir: str | NotGiven = NOT_GIVEN,
+        working_dir: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FInfoResponse:
         """Get file/dir
 
@@ -224,13 +224,13 @@ class FsResource(SyncAPIResource):
         box_id: str,
         *,
         path: str,
-        working_dir: str | NotGiven = NOT_GIVEN,
+        working_dir: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FReadResponse:
         """Read box file
 
@@ -276,13 +276,13 @@ class FsResource(SyncAPIResource):
         box_id: str,
         *,
         path: str,
-        working_dir: str | NotGiven = NOT_GIVEN,
+        working_dir: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FRemoveResponse:
         """Delete a file or dir.
 
@@ -327,13 +327,13 @@ class FsResource(SyncAPIResource):
         *,
         new_path: str,
         old_path: str,
-        working_dir: str | NotGiven = NOT_GIVEN,
+        working_dir: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FRenameResponse:
         """Rename a file or dir.
 
@@ -388,13 +388,13 @@ class FsResource(SyncAPIResource):
         *,
         content: str,
         path: str,
-        working_dir: str | NotGiven = NOT_GIVEN,
+        working_dir: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> File:
         """Creates or overwrites a file.
 
@@ -429,13 +429,13 @@ class FsResource(SyncAPIResource):
         *,
         content: FileTypes,
         path: str,
-        working_dir: str | NotGiven = NOT_GIVEN,
+        working_dir: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> File:
         """Creates or overwrites a file.
 
@@ -470,13 +470,13 @@ class FsResource(SyncAPIResource):
         *,
         content: str | FileTypes,
         path: str,
-        working_dir: str | NotGiven = NOT_GIVEN,
+        working_dir: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> File:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
@@ -538,14 +538,14 @@ class AsyncFsResource(AsyncAPIResource):
         box_id: str,
         *,
         path: str,
-        depth: float | NotGiven = NOT_GIVEN,
-        working_dir: str | NotGiven = NOT_GIVEN,
+        depth: float | Omit = omit,
+        working_dir: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FListResponse:
         """
         List box files
@@ -592,13 +592,13 @@ class AsyncFsResource(AsyncAPIResource):
         box_id: str,
         *,
         path: str,
-        working_dir: str | NotGiven = NOT_GIVEN,
+        working_dir: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FExistsResponse:
         """Check if file/dir exists
 
@@ -644,13 +644,13 @@ class AsyncFsResource(AsyncAPIResource):
         box_id: str,
         *,
         path: str,
-        working_dir: str | NotGiven = NOT_GIVEN,
+        working_dir: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FInfoResponse:
         """Get file/dir
 
@@ -699,13 +699,13 @@ class AsyncFsResource(AsyncAPIResource):
         box_id: str,
         *,
         path: str,
-        working_dir: str | NotGiven = NOT_GIVEN,
+        working_dir: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FReadResponse:
         """Read box file
 
@@ -751,13 +751,13 @@ class AsyncFsResource(AsyncAPIResource):
         box_id: str,
         *,
         path: str,
-        working_dir: str | NotGiven = NOT_GIVEN,
+        working_dir: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FRemoveResponse:
         """Delete a file or dir.
 
@@ -802,13 +802,13 @@ class AsyncFsResource(AsyncAPIResource):
         *,
         new_path: str,
         old_path: str,
-        working_dir: str | NotGiven = NOT_GIVEN,
+        working_dir: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FRenameResponse:
         """Rename a file or dir.
 
@@ -863,13 +863,13 @@ class AsyncFsResource(AsyncAPIResource):
         *,
         content: str,
         path: str,
-        working_dir: str | NotGiven = NOT_GIVEN,
+        working_dir: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> File:
         """Creates or overwrites a file.
 
@@ -904,13 +904,13 @@ class AsyncFsResource(AsyncAPIResource):
         *,
         content: FileTypes,
         path: str,
-        working_dir: str | NotGiven = NOT_GIVEN,
+        working_dir: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> File:
         """Creates or overwrites a file.
 
@@ -945,13 +945,13 @@ class AsyncFsResource(AsyncAPIResource):
         *,
         content: str | FileTypes,
         path: str,
-        working_dir: str | NotGiven = NOT_GIVEN,
+        working_dir: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> File:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")

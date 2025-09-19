@@ -7,7 +7,7 @@ from typing_extensions import Literal, overload
 
 import httpx
 
-from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven, FileTypes
+from ...._types import Body, Omit, Query, Headers, NoneType, NotGiven, FileTypes, omit, not_given
 from ...._utils import extract_files, required_args, maybe_transform, deepcopy_minimal, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -77,7 +77,7 @@ class AndroidResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BinaryAPIResponse:
         """
         Backup
@@ -113,7 +113,7 @@ class AndroidResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BinaryAPIResponse:
         """
         Backup all
@@ -148,7 +148,7 @@ class AndroidResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Close app
@@ -184,7 +184,7 @@ class AndroidResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Close all apps
@@ -219,7 +219,7 @@ class AndroidResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidPkg:
         """
         Get pkg
@@ -255,7 +255,7 @@ class AndroidResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidApp:
         """
         Get installed app info by package name
@@ -290,7 +290,7 @@ class AndroidResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidGetConnectAddressResponse:
         """
         Get connect address
@@ -320,13 +320,13 @@ class AndroidResource(SyncAPIResource):
         box_id: str,
         *,
         apk: FileTypes,
-        open: bool | NotGiven = NOT_GIVEN,
+        open: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidInstallResponse:
         """
         Install app
@@ -374,13 +374,13 @@ class AndroidResource(SyncAPIResource):
         box_id: str,
         *,
         apk: str,
-        open: bool | NotGiven = NOT_GIVEN,
+        open: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidInstallResponse:
         """
         Install app
@@ -431,13 +431,13 @@ class AndroidResource(SyncAPIResource):
         box_id: str,
         *,
         apk: FileTypes | str,
-        open: bool | NotGiven = NOT_GIVEN,
+        open: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidInstallResponse:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
@@ -482,7 +482,7 @@ class AndroidResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidListActivitiesResponse:
         """
         Get pkg activities
@@ -517,7 +517,7 @@ class AndroidResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidListAppResponse:
         """
         List all installed apps on the launcher
@@ -545,14 +545,14 @@ class AndroidResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        pkg_type: List[Literal["system", "thirdParty"]] | NotGiven = NOT_GIVEN,
-        running_filter: List[Literal["running", "notRunning"]] | NotGiven = NOT_GIVEN,
+        pkg_type: List[Literal["system", "thirdParty"]] | Omit = omit,
+        running_filter: List[Literal["running", "notRunning"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidListPkgResponse:
         """Retrieve detailed information for all installed pkg.
 
@@ -597,13 +597,13 @@ class AndroidResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        pkg_type: List[Literal["system", "thirdParty"]] | NotGiven = NOT_GIVEN,
+        pkg_type: List[Literal["system", "thirdParty"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidListPkgSimpleResponse:
         """A faster endpoint to quickly retrieve basic pkg information.
 
@@ -643,13 +643,13 @@ class AndroidResource(SyncAPIResource):
         package_name: str,
         *,
         box_id: str,
-        activity_name: str | NotGiven = NOT_GIVEN,
+        activity_name: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Open app
@@ -684,13 +684,13 @@ class AndroidResource(SyncAPIResource):
         package_name: str,
         *,
         box_id: str,
-        activity_name: str | NotGiven = NOT_GIVEN,
+        activity_name: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Restart app
@@ -730,7 +730,7 @@ class AndroidResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Restore
@@ -763,13 +763,13 @@ class AndroidResource(SyncAPIResource):
         package_name: str,
         *,
         box_id: str,
-        keep_data: bool | NotGiven = NOT_GIVEN,
+        keep_data: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Uninstall app
@@ -830,7 +830,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncBinaryAPIResponse:
         """
         Backup
@@ -866,7 +866,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncBinaryAPIResponse:
         """
         Backup all
@@ -901,7 +901,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Close app
@@ -937,7 +937,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Close all apps
@@ -972,7 +972,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidPkg:
         """
         Get pkg
@@ -1008,7 +1008,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidApp:
         """
         Get installed app info by package name
@@ -1043,7 +1043,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidGetConnectAddressResponse:
         """
         Get connect address
@@ -1073,13 +1073,13 @@ class AsyncAndroidResource(AsyncAPIResource):
         box_id: str,
         *,
         apk: FileTypes,
-        open: bool | NotGiven = NOT_GIVEN,
+        open: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidInstallResponse:
         """
         Install app
@@ -1127,13 +1127,13 @@ class AsyncAndroidResource(AsyncAPIResource):
         box_id: str,
         *,
         apk: str,
-        open: bool | NotGiven = NOT_GIVEN,
+        open: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidInstallResponse:
         """
         Install app
@@ -1184,13 +1184,13 @@ class AsyncAndroidResource(AsyncAPIResource):
         box_id: str,
         *,
         apk: FileTypes | str,
-        open: bool | NotGiven = NOT_GIVEN,
+        open: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidInstallResponse:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
@@ -1235,7 +1235,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidListActivitiesResponse:
         """
         Get pkg activities
@@ -1270,7 +1270,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidListAppResponse:
         """
         List all installed apps on the launcher
@@ -1298,14 +1298,14 @@ class AsyncAndroidResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        pkg_type: List[Literal["system", "thirdParty"]] | NotGiven = NOT_GIVEN,
-        running_filter: List[Literal["running", "notRunning"]] | NotGiven = NOT_GIVEN,
+        pkg_type: List[Literal["system", "thirdParty"]] | Omit = omit,
+        running_filter: List[Literal["running", "notRunning"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidListPkgResponse:
         """Retrieve detailed information for all installed pkg.
 
@@ -1350,13 +1350,13 @@ class AsyncAndroidResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        pkg_type: List[Literal["system", "thirdParty"]] | NotGiven = NOT_GIVEN,
+        pkg_type: List[Literal["system", "thirdParty"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidListPkgSimpleResponse:
         """A faster endpoint to quickly retrieve basic pkg information.
 
@@ -1396,13 +1396,13 @@ class AsyncAndroidResource(AsyncAPIResource):
         package_name: str,
         *,
         box_id: str,
-        activity_name: str | NotGiven = NOT_GIVEN,
+        activity_name: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Open app
@@ -1437,13 +1437,13 @@ class AsyncAndroidResource(AsyncAPIResource):
         package_name: str,
         *,
         box_id: str,
-        activity_name: str | NotGiven = NOT_GIVEN,
+        activity_name: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Restart app
@@ -1485,7 +1485,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Restore
@@ -1518,13 +1518,13 @@ class AsyncAndroidResource(AsyncAPIResource):
         package_name: str,
         *,
         box_id: str,
-        keep_data: bool | NotGiven = NOT_GIVEN,
+        keep_data: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Uninstall app

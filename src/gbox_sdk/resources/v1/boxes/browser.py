@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven, SequenceNotStr
+from ...._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
 from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -55,13 +55,13 @@ class BrowserResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        expires_in: str | NotGiven = NOT_GIVEN,
+        expires_in: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
         This endpoint allows you to generate a pre-signed URL for accessing the Chrome
@@ -102,7 +102,7 @@ class BrowserResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Args:
@@ -135,7 +135,7 @@ class BrowserResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrowserCloseTabResponse:
         """Close a specific browser tab identified by its id.
 
@@ -173,7 +173,7 @@ class BrowserResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrowserGetProxyResponse:
         """
         Args:
@@ -204,7 +204,7 @@ class BrowserResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrowserGetTabsResponse:
         """
         Retrieve a comprehensive list of all currently open browser tabs in the
@@ -243,7 +243,7 @@ class BrowserResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrowserOpenTabResponse:
         """Create and open a new browser tab with the specified URL.
 
@@ -284,14 +284,14 @@ class BrowserResource(SyncAPIResource):
         http_server: str,
         https_server: str,
         socks5_server: str,
-        bypass_list: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        pac_url: str | NotGiven = NOT_GIVEN,
+        bypass_list: SequenceNotStr[str] | Omit = omit,
+        pac_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Args:
@@ -346,7 +346,7 @@ class BrowserResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrowserSwitchTabResponse:
         """
         Switch to a specific browser tab by bringing it to the foreground (making it the
@@ -387,7 +387,7 @@ class BrowserResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrowserUpdateTabResponse:
         """Navigate an existing browser tab to a new URL.
 
@@ -447,13 +447,13 @@ class AsyncBrowserResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        expires_in: str | NotGiven = NOT_GIVEN,
+        expires_in: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
         This endpoint allows you to generate a pre-signed URL for accessing the Chrome
@@ -494,7 +494,7 @@ class AsyncBrowserResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Args:
@@ -527,7 +527,7 @@ class AsyncBrowserResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrowserCloseTabResponse:
         """Close a specific browser tab identified by its id.
 
@@ -565,7 +565,7 @@ class AsyncBrowserResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrowserGetProxyResponse:
         """
         Args:
@@ -596,7 +596,7 @@ class AsyncBrowserResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrowserGetTabsResponse:
         """
         Retrieve a comprehensive list of all currently open browser tabs in the
@@ -635,7 +635,7 @@ class AsyncBrowserResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrowserOpenTabResponse:
         """Create and open a new browser tab with the specified URL.
 
@@ -676,14 +676,14 @@ class AsyncBrowserResource(AsyncAPIResource):
         http_server: str,
         https_server: str,
         socks5_server: str,
-        bypass_list: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        pac_url: str | NotGiven = NOT_GIVEN,
+        bypass_list: SequenceNotStr[str] | Omit = omit,
+        pac_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Args:
@@ -738,7 +738,7 @@ class AsyncBrowserResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrowserSwitchTabResponse:
         """
         Switch to a specific browser tab by bringing it to the foreground (making it the
@@ -779,7 +779,7 @@ class AsyncBrowserResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrowserUpdateTabResponse:
         """Navigate an existing browser tab to a new URL.
 

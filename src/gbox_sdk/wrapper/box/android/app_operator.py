@@ -1,6 +1,6 @@
 from typing import Union
 
-from gbox_sdk._types import NOT_GIVEN, NotGiven
+from gbox_sdk._types import Omit, omit
 from gbox_sdk._client import GboxClient
 from gbox_sdk._response import BinaryAPIResponse
 from gbox_sdk.types.v1.android_box import AndroidBox
@@ -33,7 +33,7 @@ class AndroidAppOperator:
         self.box = box
         self.data = data
 
-    def open(self, activity_name: Union[str, NotGiven] = NOT_GIVEN) -> None:
+    def open(self, activity_name: Union[str, Omit] = omit) -> None:
         """
         Open the app, optionally specifying an activity name.
 
@@ -48,7 +48,7 @@ class AndroidAppOperator:
             self.data.package_name, box_id=self.box.id, activity_name=activity_name
         )
 
-    def restart(self, activity_name: Union[str, NotGiven] = NOT_GIVEN) -> None:
+    def restart(self, activity_name: Union[str, Omit] = omit) -> None:
         """
         Restart the app, optionally specifying an activity name.
 

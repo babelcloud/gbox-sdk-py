@@ -1,6 +1,6 @@
 from typing_extensions import Union
 
-from gbox_sdk._types import NOT_GIVEN, NotGiven
+from gbox_sdk._types import Omit, omit
 from gbox_sdk._client import GboxClient
 
 
@@ -21,7 +21,7 @@ class StorageOperator:
         self.client = client
         self.box_id = box_id
 
-    def create_presigned_url(self, storage_key: str, *, expires_in: Union[str, NotGiven] = NOT_GIVEN) -> str:
+    def create_presigned_url(self, storage_key: str, *, expires_in: Union[str, Omit] = omit) -> str:
         """
         Create a presigned url for a storage key.
 

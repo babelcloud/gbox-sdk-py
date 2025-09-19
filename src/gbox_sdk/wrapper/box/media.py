@@ -5,7 +5,7 @@ from datetime import datetime
 from dataclasses import dataclass
 from typing_extensions import List, Union, Optional, Protocol
 
-from gbox_sdk._types import NOT_GIVEN, NotGiven, FileTypes
+from gbox_sdk._types import Omit, FileTypes, omit
 from gbox_sdk._utils import file_from_path
 from gbox_sdk._client import GboxClient
 from gbox_sdk.types.v1.boxes.media_album import MediaAlbum
@@ -398,7 +398,7 @@ class MediaOperator:
         self,
         *,
         name: str,
-        media: Union[List[Union[FileTypes, str]], NotGiven] = NOT_GIVEN,
+        media: Union[List[Union[FileTypes, str]], Omit] = omit,
     ) -> MediaAlbumOperator:
         """
         Create a new album in the box.
@@ -411,8 +411,8 @@ class MediaOperator:
         Examples:
             >>> album = box.media.create_album("My Album")
         """
-        if media is NOT_GIVEN:
-            processed_media: Union[List[FileTypes], NotGiven] = NOT_GIVEN
+        if media is omit:
+            processed_media: Union[List[FileTypes], Omit] = omit
         else:
             media_list = cast(List[Union[FileTypes, str]], media)
             processed_media = process_media_array(media_list, self.client, self.box_id)

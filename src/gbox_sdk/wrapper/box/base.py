@@ -1,7 +1,7 @@
 from typing import Dict, List, Union, Literal, Callable, Optional
 from typing_extensions import Self
 
-from gbox_sdk._types import NOT_GIVEN, NotGiven
+from gbox_sdk._types import Omit, omit
 from gbox_sdk._client import GboxClient
 from gbox_sdk.wrapper.box.media import MediaOperator
 from gbox_sdk.wrapper.box.proxy import ProxyOperator
@@ -56,7 +56,7 @@ class BaseBox:
         res = self.client.v1.boxes.retrieve(box_id=self.data.id)
         self.data = res
 
-    def start(self, *, wait: Union[bool, NotGiven] = NOT_GIVEN) -> Self:
+    def start(self, *, wait: Union[bool, Omit] = omit) -> Self:
         """
         Start the box.
 
@@ -74,7 +74,7 @@ class BaseBox:
         self._sync_data()
         return self
 
-    def stop(self, *, wait: Union[bool, NotGiven] = NOT_GIVEN) -> Self:
+    def stop(self, *, wait: Union[bool, Omit] = omit) -> Self:
         """
         Stop the box.
 
@@ -92,7 +92,7 @@ class BaseBox:
         self._sync_data()
         return self
 
-    def terminate(self, *, wait: Union[bool, NotGiven] = NOT_GIVEN) -> Self:
+    def terminate(self, *, wait: Union[bool, Omit] = omit) -> Self:
         """
         Terminate the box.
 
@@ -131,9 +131,9 @@ class BaseBox:
         command: str,
         on_stdout: Optional[Callable[[str], None]] = None,
         on_stderr: Optional[Callable[[str], None]] = None,
-        envs: Union[Dict[str, str], NotGiven] = NOT_GIVEN,
-        timeout: Union[str, NotGiven] = NOT_GIVEN,
-        working_dir: Union[str, NotGiven] = NOT_GIVEN,
+        envs: Union[Dict[str, str], Omit] = omit,
+        timeout: Union[str, Omit] = omit,
+        working_dir: Union[str, Omit] = omit,
     ) -> Union["BoxExecuteCommandsResponse", "WebSocketResult"]:
         """
         Execute shell commands in the box.
@@ -178,9 +178,9 @@ class BaseBox:
         commands: Union[List[str], str],
         on_stdout: Optional[Callable[[str], None]] = None,
         on_stderr: Optional[Callable[[str], None]] = None,
-        envs: Union[Dict[str, str], NotGiven] = NOT_GIVEN,
-        timeout: Union[str, NotGiven] = NOT_GIVEN,
-        working_dir: Union[str, NotGiven] = NOT_GIVEN,
+        envs: Union[Dict[str, str], Omit] = omit,
+        timeout: Union[str, Omit] = omit,
+        working_dir: Union[str, Omit] = omit,
     ) -> "WebSocketResult":
         """
         Execute commands via WebSocket with streaming output.
@@ -226,11 +226,11 @@ class BaseBox:
     def run_code(
         self,
         code: str,
-        argv: Union[List[str], NotGiven] = NOT_GIVEN,
-        envs: Union[Dict[str, str], NotGiven] = NOT_GIVEN,
-        language: Union[Literal["bash", "python", "typescript"], NotGiven] = NOT_GIVEN,
-        timeout: Union[str, NotGiven] = NOT_GIVEN,
-        working_dir: Union[str, NotGiven] = NOT_GIVEN,
+        argv: Union[List[str], Omit] = omit,
+        envs: Union[Dict[str, str], Omit] = omit,
+        language: Union[Literal["bash", "python", "typescript"], Omit] = omit,
+        timeout: Union[str, Omit] = omit,
+        working_dir: Union[str, Omit] = omit,
         on_stdout: Optional[Callable[[str], None]] = None,
         on_stderr: Optional[Callable[[str], None]] = None,
     ) -> Union["BoxRunCodeResponse", "WebSocketResult"]:
@@ -296,11 +296,11 @@ class BaseBox:
     def _run_code_via_websocket(
         self,
         code: str,
-        argv: Union[List[str], NotGiven] = NOT_GIVEN,
-        envs: Union[Dict[str, str], NotGiven] = NOT_GIVEN,
-        language: Union[Literal["bash", "python", "typescript"], NotGiven] = NOT_GIVEN,
-        timeout: Union[str, NotGiven] = NOT_GIVEN,
-        working_dir: Union[str, NotGiven] = NOT_GIVEN,
+        argv: Union[List[str], Omit] = omit,
+        envs: Union[Dict[str, str], Omit] = omit,
+        language: Union[Literal["bash", "python", "typescript"], Omit] = omit,
+        timeout: Union[str, Omit] = omit,
+        working_dir: Union[str, Omit] = omit,
         on_stdout: Optional[Callable[[str], None]] = None,
         on_stderr: Optional[Callable[[str], None]] = None,
     ) -> "WebSocketResult":
@@ -352,7 +352,7 @@ class BaseBox:
     def live_view(
         self,
         *,
-        expires_in: Union[str, NotGiven] = NOT_GIVEN,
+        expires_in: Union[str, Omit] = omit,
     ) -> BoxLiveViewURLResponse:
         """
         Get the live view URL for the box.
@@ -370,7 +370,7 @@ class BaseBox:
     def web_terminal(
         self,
         *,
-        expires_in: Union[str, NotGiven] = NOT_GIVEN,
+        expires_in: Union[str, Omit] = omit,
     ) -> BoxWebTerminalURLResponse:
         """
         Get the web terminal URL for the box.

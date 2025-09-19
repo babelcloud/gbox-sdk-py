@@ -8,7 +8,7 @@ from typing_extensions import Literal
 import websocket
 from websocket import WebSocket
 
-from gbox_sdk._types import NOT_GIVEN, NotGiven
+from gbox_sdk._types import Omit, omit
 
 
 @dataclass
@@ -35,9 +35,9 @@ class WebSocketClient:
         commands: Union[List[str], str],
         on_stdout: Optional[Callable[[str], None]] = None,
         on_stderr: Optional[Callable[[str], None]] = None,
-        envs: Union[Dict[str, str], NotGiven] = NOT_GIVEN,
-        timeout: Union[str, NotGiven] = NOT_GIVEN,
-        working_dir: Union[str, NotGiven] = NOT_GIVEN,
+        envs: Union[Dict[str, str], Omit] = omit,
+        timeout: Union[str, Omit] = omit,
+        working_dir: Union[str, Omit] = omit,
     ) -> WebSocketResult:
         """
         Execute commands via WebSocket with streaming output
@@ -61,11 +61,11 @@ class WebSocketClient:
             "command": command_obj,
         }
 
-        if envs is not NOT_GIVEN:
+        if envs is not omit:
             payload["envs"] = envs
-        if timeout is not NOT_GIVEN:
+        if timeout is not omit:
             payload["timeout"] = timeout
-        if working_dir is not NOT_GIVEN:
+        if working_dir is not omit:
             payload["workingDir"] = working_dir
 
         return await self._execute_via_websocket(payload, on_stdout, on_stderr)
@@ -75,11 +75,11 @@ class WebSocketClient:
         code: str,
         on_stdout: Optional[Callable[[str], None]] = None,
         on_stderr: Optional[Callable[[str], None]] = None,
-        argv: Union[List[str], NotGiven] = NOT_GIVEN,
-        envs: Union[Dict[str, str], NotGiven] = NOT_GIVEN,
-        language: Union[Literal["bash", "python", "typescript"], NotGiven] = NOT_GIVEN,
-        timeout: Union[str, NotGiven] = NOT_GIVEN,
-        working_dir: Union[str, NotGiven] = NOT_GIVEN,
+        argv: Union[List[str], Omit] = omit,
+        envs: Union[Dict[str, str], Omit] = omit,
+        language: Union[Literal["bash", "python", "typescript"], Omit] = omit,
+        timeout: Union[str, Omit] = omit,
+        working_dir: Union[str, Omit] = omit,
     ) -> WebSocketResult:
         """
         Run code via WebSocket with streaming output
@@ -101,20 +101,20 @@ class WebSocketClient:
             "code": code,
         }
 
-        if language is not NOT_GIVEN:
+        if language is not omit:
             run_code_obj["language"] = language
 
         payload: Dict[str, Any] = {
             "runCode": run_code_obj,
         }
 
-        if argv is not NOT_GIVEN:
+        if argv is not omit:
             payload["argv"] = argv
-        if envs is not NOT_GIVEN:
+        if envs is not omit:
             payload["envs"] = envs
-        if timeout is not NOT_GIVEN:
+        if timeout is not omit:
             payload["timeout"] = timeout
-        if working_dir is not NOT_GIVEN:
+        if working_dir is not omit:
             payload["workingDir"] = working_dir
 
         return await self._execute_via_websocket(payload, on_stdout, on_stderr)

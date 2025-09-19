@@ -3,7 +3,7 @@ from typing import List
 from builtins import open as _open
 from typing_extensions import Union, Literal
 
-from gbox_sdk._types import NOT_GIVEN, NotGiven, FileTypes
+from gbox_sdk._types import Omit, FileTypes, omit
 from gbox_sdk._client import GboxClient
 from gbox_sdk._response import BinaryAPIResponse
 from gbox_sdk.types.v1.android_box import AndroidBox
@@ -41,7 +41,7 @@ class AndroidPkgManager:
         self,
         *,
         apk: Union[str, FileTypes],
-        open: Union[bool, NotGiven] = NOT_GIVEN,
+        open: Union[bool, Omit] = omit,
     ) -> AndroidInstallResponse:
         """
         Install an Android package on the box.
@@ -91,7 +91,7 @@ class AndroidPkgManager:
 
         return self.client.v1.boxes.android.install(box_id=self.box.id, apk=apk, open=open)
 
-    def uninstall(self, package_name: str, *, keep_data: Union[bool, NotGiven] = NOT_GIVEN) -> None:
+    def uninstall(self, package_name: str, *, keep_data: Union[bool, Omit] = omit) -> None:
         """
         Uninstall an Android package from the box.
 
@@ -109,8 +109,8 @@ class AndroidPkgManager:
     def list(
         self,
         *,
-        pkg_type: Union[List[Literal["system", "thirdParty"]], NotGiven] = NOT_GIVEN,
-        running_filter: Union[List[Literal["running", "notRunning"]], NotGiven] = NOT_GIVEN,
+        pkg_type: Union[List[Literal["system", "thirdParty"]], Omit] = omit,
+        running_filter: Union[List[Literal["running", "notRunning"]], Omit] = omit,
     ) -> ListAndroidPkg:
         """
         List all installed Android packages as operator objects.
@@ -148,8 +148,8 @@ class AndroidPkgManager:
     def list_info(
         self,
         *,
-        pkg_type: Union[List[Literal["system", "thirdParty"]], NotGiven] = NOT_GIVEN,
-        running_filter: Union[List[Literal["running", "notRunning"]], NotGiven] = NOT_GIVEN,
+        pkg_type: Union[List[Literal["system", "thirdParty"]], Omit] = omit,
+        running_filter: Union[List[Literal["running", "notRunning"]], Omit] = omit,
     ) -> AndroidListPkgResponse:
         """
         Get detailed information of all installed Android packages.
@@ -227,7 +227,7 @@ class AndroidPkgManager:
     def list_simple_info(
         self,
         *,
-        pkg_type: Union[List[Literal["system", "thirdParty"]], NotGiven] = NOT_GIVEN,
+        pkg_type: Union[List[Literal["system", "thirdParty"]], Omit] = omit,
     ) -> AndroidListPkgSimpleResponse:
         """
         List all installed Android packages with simple information.

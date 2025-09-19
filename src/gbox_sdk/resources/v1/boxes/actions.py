@@ -7,7 +7,7 @@ from typing_extensions import Literal, overload
 
 import httpx
 
-from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
+from ...._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from ...._utils import required_args, maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -78,20 +78,20 @@ class ActionsResource(SyncAPIResource):
         box_id: str,
         *,
         instruction: str,
-        background: str | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
-        settings: action_ai_params.Settings | NotGiven = NOT_GIVEN,
-        stream: bool | NotGiven = NOT_GIVEN,
+        background: str | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
+        settings: action_ai_params.Settings | Omit = omit,
+        stream: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionAIResponse:
         """Use natural language instructions to perform UI operations on the box.
 
@@ -191,19 +191,19 @@ class ActionsResource(SyncAPIResource):
         *,
         x: float,
         y: float,
-        button: Literal["left", "right", "middle"] | NotGiven = NOT_GIVEN,
-        double: bool | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        button: Literal["left", "right", "middle"] | Omit = omit,
+        double: bool | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
         Click
@@ -269,19 +269,19 @@ class ActionsResource(SyncAPIResource):
         box_id: str,
         *,
         target: str,
-        button: Literal["left", "right", "middle"] | NotGiven = NOT_GIVEN,
-        double: bool | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        button: Literal["left", "right", "middle"] | Omit = omit,
+        double: bool | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
         Click
@@ -345,22 +345,22 @@ class ActionsResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        x: float | NotGiven = NOT_GIVEN,
-        y: float | NotGiven = NOT_GIVEN,
-        button: Literal["left", "right", "middle"] | NotGiven = NOT_GIVEN,
-        double: bool | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
-        target: str | NotGiven = NOT_GIVEN,
+        x: float | Omit = omit,
+        y: float | Omit = omit,
+        button: Literal["left", "right", "middle"] | Omit = omit,
+        double: bool | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
+        target: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
@@ -396,7 +396,7 @@ class ActionsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
         Get the clipboard content
@@ -430,7 +430,7 @@ class ActionsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Set the clipboard content
@@ -465,18 +465,18 @@ class ActionsResource(SyncAPIResource):
         *,
         end: action_drag_params.DragSimpleEnd,
         start: action_drag_params.DragSimpleStart,
-        duration: str | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        duration: str | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
         Drag
@@ -543,18 +543,18 @@ class ActionsResource(SyncAPIResource):
         box_id: str,
         *,
         path: Iterable[action_drag_params.DragAdvancedPath],
-        duration: str | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        duration: str | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
         Drag
@@ -618,21 +618,21 @@ class ActionsResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        end: action_drag_params.DragSimpleEnd | NotGiven = NOT_GIVEN,
-        start: action_drag_params.DragSimpleStart | NotGiven = NOT_GIVEN,
-        duration: str | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
-        path: Iterable[action_drag_params.DragAdvancedPath] | NotGiven = NOT_GIVEN,
+        end: action_drag_params.DragSimpleEnd | Omit = omit,
+        start: action_drag_params.DragSimpleStart | Omit = omit,
+        duration: str | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
+        path: Iterable[action_drag_params.DragAdvancedPath] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
@@ -663,13 +663,13 @@ class ActionsResource(SyncAPIResource):
         box_id: str,
         *,
         instruction: str,
-        schema: object | NotGiven = NOT_GIVEN,
+        schema: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionExtractResponse:
         """
         Extract data from the UI interface using a JSON schema.
@@ -720,18 +720,18 @@ class ActionsResource(SyncAPIResource):
         *,
         x: float,
         y: float,
-        duration: str | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        duration: str | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
         Perform a long press action at specified coordinates for a specified duration.
@@ -800,18 +800,18 @@ class ActionsResource(SyncAPIResource):
         box_id: str,
         *,
         target: str,
-        duration: str | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        duration: str | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
         Perform a long press action at specified coordinates for a specified duration.
@@ -878,21 +878,21 @@ class ActionsResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        x: float | NotGiven = NOT_GIVEN,
-        y: float | NotGiven = NOT_GIVEN,
-        duration: str | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
-        target: str | NotGiven = NOT_GIVEN,
+        x: float | Omit = omit,
+        y: float | Omit = omit,
+        duration: str | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
+        target: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
@@ -924,17 +924,17 @@ class ActionsResource(SyncAPIResource):
         *,
         x: float,
         y: float,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
         Move to position
@@ -1015,17 +1015,17 @@ class ActionsResource(SyncAPIResource):
         box_id: str,
         *,
         buttons: List[Literal["power", "volumeUp", "volumeDown", "volumeMute", "home", "back", "menu", "appSwitch"]],
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
         Press device buttons like power, volume, home, back, etc.
@@ -1216,18 +1216,18 @@ class ActionsResource(SyncAPIResource):
                 "mediaPreviousTrack",
             ]
         ],
-        combination: bool | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        combination: bool | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
         Simulates pressing a specific key by triggering the complete keyboard key event
@@ -1317,7 +1317,7 @@ class ActionsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """Start recording the box screen.
 
@@ -1354,7 +1354,7 @@ class ActionsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionRecordingStopResponse:
         """
         Stop recording the box screen
@@ -1387,7 +1387,7 @@ class ActionsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Disable the device's background screen rewind recording.
@@ -1421,7 +1421,7 @@ class ActionsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Enable the device's background screen rewind recording.
@@ -1450,13 +1450,13 @@ class ActionsResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        duration: str | NotGiven = NOT_GIVEN,
+        duration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionRewindExtractResponse:
         """
         Rewind and capture the device's background screen recording from a specified
@@ -1498,7 +1498,7 @@ class ActionsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionScreenLayoutResponse:
         """Get the current structured screen layout information.
 
@@ -1534,17 +1534,17 @@ class ActionsResource(SyncAPIResource):
         box_id: str,
         *,
         orientation: Literal["portrait", "landscapeLeft", "portraitUpsideDown", "landscapeRight"],
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """Rotate the screen orientation.
 
@@ -1624,17 +1624,17 @@ class ActionsResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        clip: action_screenshot_params.Clip | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        save_to_album: bool | NotGiven = NOT_GIVEN,
-        scroll_capture: action_screenshot_params.ScrollCapture | NotGiven = NOT_GIVEN,
+        clip: action_screenshot_params.Clip | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        save_to_album: bool | Omit = omit,
+        scroll_capture: action_screenshot_params.ScrollCapture | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionScreenshotResponse:
         """
         Take screenshot
@@ -1690,17 +1690,17 @@ class ActionsResource(SyncAPIResource):
         scroll_y: float,
         x: float,
         y: float,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """Performs a scroll action.
 
@@ -1771,19 +1771,19 @@ class ActionsResource(SyncAPIResource):
         box_id: str,
         *,
         direction: Literal["up", "down", "left", "right"],
-        distance: Union[float, Literal["tiny", "short", "medium", "long"]] | NotGiven = NOT_GIVEN,
-        duration: str | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        distance: Union[float, Literal["tiny", "short", "medium", "long"]] | Omit = omit,
+        duration: str | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """Performs a scroll action.
 
@@ -1857,24 +1857,24 @@ class ActionsResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        scroll_x: float | NotGiven = NOT_GIVEN,
-        scroll_y: float | NotGiven = NOT_GIVEN,
-        x: float | NotGiven = NOT_GIVEN,
-        y: float | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
-        direction: Literal["up", "down", "left", "right"] | NotGiven = NOT_GIVEN,
-        distance: Union[float, Literal["tiny", "short", "medium", "long"]] | NotGiven = NOT_GIVEN,
-        duration: str | NotGiven = NOT_GIVEN,
+        scroll_x: float | Omit = omit,
+        scroll_y: float | Omit = omit,
+        x: float | Omit = omit,
+        y: float | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
+        direction: Literal["up", "down", "left", "right"] | Omit = omit,
+        distance: Union[float, Literal["tiny", "short", "medium", "long"]] | Omit = omit,
+        duration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
@@ -1912,7 +1912,7 @@ class ActionsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionSettingsResponse:
         """
         Get the box action settings
@@ -1945,7 +1945,7 @@ class ActionsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionSettingsResetResponse:
         """
         Reset the box settings to default
@@ -1979,7 +1979,7 @@ class ActionsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionSettingsUpdateResponse:
         """
         Update the box action settings
@@ -2021,20 +2021,20 @@ class ActionsResource(SyncAPIResource):
         box_id: str,
         *,
         direction: Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"],
-        distance: Union[float, Literal["tiny", "short", "medium", "long"]] | NotGiven = NOT_GIVEN,
-        duration: str | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        location: str | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        distance: Union[float, Literal["tiny", "short", "medium", "long"]] | Omit = omit,
+        duration: str | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        location: str | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
         Performs a swipe in the specified direction
@@ -2108,18 +2108,18 @@ class ActionsResource(SyncAPIResource):
         *,
         end: action_swipe_params.SwipeAdvancedEnd,
         start: action_swipe_params.SwipeAdvancedStart,
-        duration: str | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        duration: str | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
         Performs a swipe in the specified direction
@@ -2185,24 +2185,23 @@ class ActionsResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        direction: Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"]
-        | NotGiven = NOT_GIVEN,
-        distance: Union[float, Literal["tiny", "short", "medium", "long"]] | NotGiven = NOT_GIVEN,
-        duration: str | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        location: str | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
-        end: action_swipe_params.SwipeAdvancedEnd | NotGiven = NOT_GIVEN,
-        start: action_swipe_params.SwipeAdvancedStart | NotGiven = NOT_GIVEN,
+        direction: Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"] | Omit = omit,
+        distance: Union[float, Literal["tiny", "short", "medium", "long"]] | Omit = omit,
+        duration: str | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        location: str | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
+        end: action_swipe_params.SwipeAdvancedEnd | Omit = omit,
+        start: action_swipe_params.SwipeAdvancedStart | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
@@ -2237,17 +2236,17 @@ class ActionsResource(SyncAPIResource):
         *,
         x: float,
         y: float,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
         Tap action for Android devices using ADB input tap command
@@ -2309,17 +2308,17 @@ class ActionsResource(SyncAPIResource):
         box_id: str,
         *,
         target: str,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
         Tap action for Android devices using ADB input tap command
@@ -2379,20 +2378,20 @@ class ActionsResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        x: float | NotGiven = NOT_GIVEN,
-        y: float | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
-        target: str | NotGiven = NOT_GIVEN,
+        x: float | Omit = omit,
+        y: float | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
+        target: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
@@ -2422,17 +2421,17 @@ class ActionsResource(SyncAPIResource):
         box_id: str,
         *,
         points: Iterable[action_touch_params.Point],
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
         Touch
@@ -2510,19 +2509,19 @@ class ActionsResource(SyncAPIResource):
         box_id: str,
         *,
         text: str,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        mode: Literal["append", "replace"] | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        press_enter: bool | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | Omit = omit,
+        mode: Literal["append", "replace"] | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        press_enter: bool | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
         Directly inputs text content without triggering physical key events (keydown,
@@ -2630,20 +2629,20 @@ class AsyncActionsResource(AsyncAPIResource):
         box_id: str,
         *,
         instruction: str,
-        background: str | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
-        settings: action_ai_params.Settings | NotGiven = NOT_GIVEN,
-        stream: bool | NotGiven = NOT_GIVEN,
+        background: str | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
+        settings: action_ai_params.Settings | Omit = omit,
+        stream: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionAIResponse:
         """Use natural language instructions to perform UI operations on the box.
 
@@ -2743,19 +2742,19 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         x: float,
         y: float,
-        button: Literal["left", "right", "middle"] | NotGiven = NOT_GIVEN,
-        double: bool | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        button: Literal["left", "right", "middle"] | Omit = omit,
+        double: bool | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
         Click
@@ -2821,19 +2820,19 @@ class AsyncActionsResource(AsyncAPIResource):
         box_id: str,
         *,
         target: str,
-        button: Literal["left", "right", "middle"] | NotGiven = NOT_GIVEN,
-        double: bool | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        button: Literal["left", "right", "middle"] | Omit = omit,
+        double: bool | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
         Click
@@ -2897,22 +2896,22 @@ class AsyncActionsResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        x: float | NotGiven = NOT_GIVEN,
-        y: float | NotGiven = NOT_GIVEN,
-        button: Literal["left", "right", "middle"] | NotGiven = NOT_GIVEN,
-        double: bool | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
-        target: str | NotGiven = NOT_GIVEN,
+        x: float | Omit = omit,
+        y: float | Omit = omit,
+        button: Literal["left", "right", "middle"] | Omit = omit,
+        double: bool | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
+        target: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
@@ -2948,7 +2947,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
         Get the clipboard content
@@ -2982,7 +2981,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Set the clipboard content
@@ -3019,18 +3018,18 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         end: action_drag_params.DragSimpleEnd,
         start: action_drag_params.DragSimpleStart,
-        duration: str | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        duration: str | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
         Drag
@@ -3097,18 +3096,18 @@ class AsyncActionsResource(AsyncAPIResource):
         box_id: str,
         *,
         path: Iterable[action_drag_params.DragAdvancedPath],
-        duration: str | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        duration: str | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
         Drag
@@ -3172,21 +3171,21 @@ class AsyncActionsResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        end: action_drag_params.DragSimpleEnd | NotGiven = NOT_GIVEN,
-        start: action_drag_params.DragSimpleStart | NotGiven = NOT_GIVEN,
-        duration: str | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
-        path: Iterable[action_drag_params.DragAdvancedPath] | NotGiven = NOT_GIVEN,
+        end: action_drag_params.DragSimpleEnd | Omit = omit,
+        start: action_drag_params.DragSimpleStart | Omit = omit,
+        duration: str | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
+        path: Iterable[action_drag_params.DragAdvancedPath] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
@@ -3217,13 +3216,13 @@ class AsyncActionsResource(AsyncAPIResource):
         box_id: str,
         *,
         instruction: str,
-        schema: object | NotGiven = NOT_GIVEN,
+        schema: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionExtractResponse:
         """
         Extract data from the UI interface using a JSON schema.
@@ -3274,18 +3273,18 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         x: float,
         y: float,
-        duration: str | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        duration: str | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
         Perform a long press action at specified coordinates for a specified duration.
@@ -3354,18 +3353,18 @@ class AsyncActionsResource(AsyncAPIResource):
         box_id: str,
         *,
         target: str,
-        duration: str | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        duration: str | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
         Perform a long press action at specified coordinates for a specified duration.
@@ -3432,21 +3431,21 @@ class AsyncActionsResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        x: float | NotGiven = NOT_GIVEN,
-        y: float | NotGiven = NOT_GIVEN,
-        duration: str | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
-        target: str | NotGiven = NOT_GIVEN,
+        x: float | Omit = omit,
+        y: float | Omit = omit,
+        duration: str | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
+        target: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
@@ -3478,17 +3477,17 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         x: float,
         y: float,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
         Move to position
@@ -3569,17 +3568,17 @@ class AsyncActionsResource(AsyncAPIResource):
         box_id: str,
         *,
         buttons: List[Literal["power", "volumeUp", "volumeDown", "volumeMute", "home", "back", "menu", "appSwitch"]],
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
         Press device buttons like power, volume, home, back, etc.
@@ -3770,18 +3769,18 @@ class AsyncActionsResource(AsyncAPIResource):
                 "mediaPreviousTrack",
             ]
         ],
-        combination: bool | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        combination: bool | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
         Simulates pressing a specific key by triggering the complete keyboard key event
@@ -3871,7 +3870,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """Start recording the box screen.
 
@@ -3908,7 +3907,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionRecordingStopResponse:
         """
         Stop recording the box screen
@@ -3941,7 +3940,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Disable the device's background screen rewind recording.
@@ -3975,7 +3974,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Enable the device's background screen rewind recording.
@@ -4004,13 +4003,13 @@ class AsyncActionsResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        duration: str | NotGiven = NOT_GIVEN,
+        duration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionRewindExtractResponse:
         """
         Rewind and capture the device's background screen recording from a specified
@@ -4054,7 +4053,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionScreenLayoutResponse:
         """Get the current structured screen layout information.
 
@@ -4090,17 +4089,17 @@ class AsyncActionsResource(AsyncAPIResource):
         box_id: str,
         *,
         orientation: Literal["portrait", "landscapeLeft", "portraitUpsideDown", "landscapeRight"],
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """Rotate the screen orientation.
 
@@ -4180,17 +4179,17 @@ class AsyncActionsResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        clip: action_screenshot_params.Clip | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        save_to_album: bool | NotGiven = NOT_GIVEN,
-        scroll_capture: action_screenshot_params.ScrollCapture | NotGiven = NOT_GIVEN,
+        clip: action_screenshot_params.Clip | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        save_to_album: bool | Omit = omit,
+        scroll_capture: action_screenshot_params.ScrollCapture | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionScreenshotResponse:
         """
         Take screenshot
@@ -4246,17 +4245,17 @@ class AsyncActionsResource(AsyncAPIResource):
         scroll_y: float,
         x: float,
         y: float,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """Performs a scroll action.
 
@@ -4327,19 +4326,19 @@ class AsyncActionsResource(AsyncAPIResource):
         box_id: str,
         *,
         direction: Literal["up", "down", "left", "right"],
-        distance: Union[float, Literal["tiny", "short", "medium", "long"]] | NotGiven = NOT_GIVEN,
-        duration: str | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        distance: Union[float, Literal["tiny", "short", "medium", "long"]] | Omit = omit,
+        duration: str | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """Performs a scroll action.
 
@@ -4413,24 +4412,24 @@ class AsyncActionsResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        scroll_x: float | NotGiven = NOT_GIVEN,
-        scroll_y: float | NotGiven = NOT_GIVEN,
-        x: float | NotGiven = NOT_GIVEN,
-        y: float | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
-        direction: Literal["up", "down", "left", "right"] | NotGiven = NOT_GIVEN,
-        distance: Union[float, Literal["tiny", "short", "medium", "long"]] | NotGiven = NOT_GIVEN,
-        duration: str | NotGiven = NOT_GIVEN,
+        scroll_x: float | Omit = omit,
+        scroll_y: float | Omit = omit,
+        x: float | Omit = omit,
+        y: float | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
+        direction: Literal["up", "down", "left", "right"] | Omit = omit,
+        distance: Union[float, Literal["tiny", "short", "medium", "long"]] | Omit = omit,
+        duration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
@@ -4468,7 +4467,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionSettingsResponse:
         """
         Get the box action settings
@@ -4501,7 +4500,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionSettingsResetResponse:
         """
         Reset the box settings to default
@@ -4535,7 +4534,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionSettingsUpdateResponse:
         """
         Update the box action settings
@@ -4579,20 +4578,20 @@ class AsyncActionsResource(AsyncAPIResource):
         box_id: str,
         *,
         direction: Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"],
-        distance: Union[float, Literal["tiny", "short", "medium", "long"]] | NotGiven = NOT_GIVEN,
-        duration: str | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        location: str | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        distance: Union[float, Literal["tiny", "short", "medium", "long"]] | Omit = omit,
+        duration: str | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        location: str | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
         Performs a swipe in the specified direction
@@ -4666,18 +4665,18 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         end: action_swipe_params.SwipeAdvancedEnd,
         start: action_swipe_params.SwipeAdvancedStart,
-        duration: str | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        duration: str | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
         Performs a swipe in the specified direction
@@ -4743,24 +4742,23 @@ class AsyncActionsResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        direction: Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"]
-        | NotGiven = NOT_GIVEN,
-        distance: Union[float, Literal["tiny", "short", "medium", "long"]] | NotGiven = NOT_GIVEN,
-        duration: str | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        location: str | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
-        end: action_swipe_params.SwipeAdvancedEnd | NotGiven = NOT_GIVEN,
-        start: action_swipe_params.SwipeAdvancedStart | NotGiven = NOT_GIVEN,
+        direction: Literal["up", "down", "left", "right", "upLeft", "upRight", "downLeft", "downRight"] | Omit = omit,
+        distance: Union[float, Literal["tiny", "short", "medium", "long"]] | Omit = omit,
+        duration: str | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        location: str | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
+        end: action_swipe_params.SwipeAdvancedEnd | Omit = omit,
+        start: action_swipe_params.SwipeAdvancedStart | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
@@ -4795,17 +4793,17 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         x: float,
         y: float,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
         Tap action for Android devices using ADB input tap command
@@ -4867,17 +4865,17 @@ class AsyncActionsResource(AsyncAPIResource):
         box_id: str,
         *,
         target: str,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
         Tap action for Android devices using ADB input tap command
@@ -4937,20 +4935,20 @@ class AsyncActionsResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        x: float | NotGiven = NOT_GIVEN,
-        y: float | NotGiven = NOT_GIVEN,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
-        target: str | NotGiven = NOT_GIVEN,
+        x: float | Omit = omit,
+        y: float | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
+        target: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
@@ -4980,17 +4978,17 @@ class AsyncActionsResource(AsyncAPIResource):
         box_id: str,
         *,
         points: Iterable[action_touch_params.Point],
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
         Touch
@@ -5068,19 +5066,19 @@ class AsyncActionsResource(AsyncAPIResource):
         box_id: str,
         *,
         text: str,
-        include_screenshot: bool | NotGiven = NOT_GIVEN,
-        mode: Literal["append", "replace"] | NotGiven = NOT_GIVEN,
-        options: ActionCommonOptionsParam | NotGiven = NOT_GIVEN,
-        output_format: Literal["base64", "storageKey"] | NotGiven = NOT_GIVEN,
-        presigned_expires_in: str | NotGiven = NOT_GIVEN,
-        press_enter: bool | NotGiven = NOT_GIVEN,
-        screenshot_delay: str | NotGiven = NOT_GIVEN,
+        include_screenshot: bool | Omit = omit,
+        mode: Literal["append", "replace"] | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        press_enter: bool | Omit = omit,
+        screenshot_delay: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
         Directly inputs text content without triggering physical key events (keydown,

@@ -151,7 +151,7 @@ class AndroidResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Close app
+        Forces the specified Android application to close inside the box
 
         Args:
           extra_headers: Send extra headers
@@ -187,7 +187,7 @@ class AndroidResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Close all apps
+        Terminates all running Android applications inside the box
 
         Args:
           extra_headers: Send extra headers
@@ -329,7 +329,7 @@ class AndroidResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidInstallResponse:
         """
-        Install app
+        Install an Android app on the box
 
         Args:
           apk: APK file or ZIP archive to install (max file size: 512MB).
@@ -383,7 +383,7 @@ class AndroidResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidInstallResponse:
         """
-        Install app
+        Install an Android app on the box
 
         Args:
           apk: HTTP URL to download APK file or ZIP archive (max file size: 512MB).
@@ -475,7 +475,7 @@ class AndroidResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidListActivitiesResponse:
         """
-        Get pkg activities
+        Retrieves the list of activities defined in a specific Android package
 
         Args:
           extra_headers: Send extra headers
@@ -544,10 +544,10 @@ class AndroidResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidListPkgResponse:
-        """Retrieve detailed information for all installed pkg.
+        """Retrieves detailed information for all installed pkgs.
 
         This endpoint provides
-        comprehensive pkg details
+        comprehensive pkg details.
 
         Args:
           pkg_type: system or thirdParty, default is thirdParty
@@ -599,7 +599,7 @@ class AndroidResource(SyncAPIResource):
 
         This API provides
         better performance for scenarios where you need to get essential pkg details
-        quickly
+        quickly.
 
         Args:
           pkg_type: system or thirdParty, default is thirdParty
@@ -642,7 +642,7 @@ class AndroidResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Open app
+        Launches a specific Android application within the box
 
         Args:
           activity_name: Activity name, default is the main activity.
@@ -683,7 +683,7 @@ class AndroidResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Restart app
+        Closes and immediately reopens the specified Android application inside the box
 
         Args:
           activity_name: Activity name, default is the main activity.
@@ -762,7 +762,7 @@ class AndroidResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Uninstall app
+        Uninstalls an Android app from the box
 
         Args:
           keep_data: uninstalls the pkg while retaining the data/cache
@@ -894,7 +894,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Close app
+        Forces the specified Android application to close inside the box
 
         Args:
           extra_headers: Send extra headers
@@ -930,7 +930,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Close all apps
+        Terminates all running Android applications inside the box
 
         Args:
           extra_headers: Send extra headers
@@ -1072,7 +1072,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidInstallResponse:
         """
-        Install app
+        Install an Android app on the box
 
         Args:
           apk: APK file or ZIP archive to install (max file size: 512MB).
@@ -1126,7 +1126,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidInstallResponse:
         """
-        Install app
+        Install an Android app on the box
 
         Args:
           apk: HTTP URL to download APK file or ZIP archive (max file size: 512MB).
@@ -1218,7 +1218,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidListActivitiesResponse:
         """
-        Get pkg activities
+        Retrieves the list of activities defined in a specific Android package
 
         Args:
           extra_headers: Send extra headers
@@ -1287,10 +1287,10 @@ class AsyncAndroidResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidListPkgResponse:
-        """Retrieve detailed information for all installed pkg.
+        """Retrieves detailed information for all installed pkgs.
 
         This endpoint provides
-        comprehensive pkg details
+        comprehensive pkg details.
 
         Args:
           pkg_type: system or thirdParty, default is thirdParty
@@ -1342,7 +1342,7 @@ class AsyncAndroidResource(AsyncAPIResource):
 
         This API provides
         better performance for scenarios where you need to get essential pkg details
-        quickly
+        quickly.
 
         Args:
           pkg_type: system or thirdParty, default is thirdParty
@@ -1385,7 +1385,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Open app
+        Launches a specific Android application within the box
 
         Args:
           activity_name: Activity name, default is the main activity.
@@ -1426,7 +1426,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Restart app
+        Closes and immediately reopens the specified Android application inside the box
 
         Args:
           activity_name: Activity name, default is the main activity.
@@ -1507,7 +1507,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Uninstall app
+        Uninstalls an Android app from the box
 
         Args:
           keep_data: uninstalls the pkg while retaining the data/cache

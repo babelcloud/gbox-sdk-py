@@ -22,6 +22,7 @@ from .box_create_linux_params import BoxCreateLinuxParams as BoxCreateLinuxParam
 from .box_live_view_url_params import BoxLiveViewURLParams as BoxLiveViewURLParams
 from .get_device_list_response import GetDeviceListResponse as GetDeviceListResponse
 from .box_create_android_params import BoxCreateAndroidParams as BoxCreateAndroidParams
+from .box_resolution_set_params import BoxResolutionSetParams as BoxResolutionSetParams
 from .box_live_view_url_response import BoxLiveViewURLResponse as BoxLiveViewURLResponse
 from .box_websocket_url_response import BoxWebsocketURLResponse as BoxWebsocketURLResponse
 from .box_execute_commands_params import BoxExecuteCommandsParams as BoxExecuteCommandsParams

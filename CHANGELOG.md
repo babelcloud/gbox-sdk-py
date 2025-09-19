@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.1.0-alpha.38 (2025-09-19)
+
+Full Changelog: [v0.1.0-alpha.37...v0.1.0-alpha.38](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.37...v0.1.0-alpha.38)
+
+### Features
+
+* **action:** add ClipboardOperator ([b16746d](https://github.com/babelcloud/gbox-sdk-py/commit/b16746d7e3d00f772c3e1cf93f43c10340f963b5))
+* **api:** api update ([1ee55ab](https://github.com/babelcloud/gbox-sdk-py/commit/1ee55ab5b56cb485f6e3911b0cfc429ed71c35a6))
+* **api:** api update ([5044938](https://github.com/babelcloud/gbox-sdk-py/commit/504493861ebd7d3d241397a32aea6edfbd50cde4))
+* **api:** api update ([ca2282e](https://github.com/babelcloud/gbox-sdk-py/commit/ca2282ebda2607e8006ec8d72325dff0b83c13d8))
+* **api:** api update ([5e5e9d0](https://github.com/babelcloud/gbox-sdk-py/commit/5e5e9d0b201bfb4b77d54051ad450199f05161af))
+* **api:** api update ([d83a7a5](https://github.com/babelcloud/gbox-sdk-py/commit/d83a7a5e4084e6a818d9e36c46693a4ef44bcde9))
+* **api:** api update ([f4d0001](https://github.com/babelcloud/gbox-sdk-py/commit/f4d00011505bd243c550f8554fce290aa0278d82))
+* **api:** api update ([e775d03](https://github.com/babelcloud/gbox-sdk-py/commit/e775d03e687135d52e3b1963a9b88c893b3246f2))
+
+
+### Bug Fixes
+
+* **recording:** remove duration parameter ([98a74eb](https://github.com/babelcloud/gbox-sdk-py/commit/98a74eb42365fdd2cdd98563bb544de2a7932855))
+
+
+### Chores
+
+* **internal:** update pydantic dependency ([f19422f](https://github.com/babelcloud/gbox-sdk-py/commit/f19422f45b5471c8a1ca489f1f1382ea9ea25254))
+* **types:** change optional parameter type from NotGiven to Omit ([795ab09](https://github.com/babelcloud/gbox-sdk-py/commit/795ab090a8d349451000fa9d624a955a28a12a45))
+
 ## 0.1.0-alpha.37 (2025-09-11)
 
 Full Changelog: [v0.1.0-alpha.36...v0.1.0-alpha.37](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.36...v0.1.0-alpha.37)

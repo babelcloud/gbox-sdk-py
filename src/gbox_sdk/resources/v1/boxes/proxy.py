@@ -54,7 +54,7 @@ class ProxyResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Clear the proxy for the box
+        Clears the HTTP proxy for the box
 
         Args:
           extra_headers: Send extra headers
@@ -87,8 +87,10 @@ class ProxyResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProxyGetResponse:
-        """
-        Get the proxy for the box
+        """Retrieves the HTTP proxy settings for a specific box.
+
+        Use this endpoint to route
+        traffic through the box's network.
 
         Args:
           extra_headers: Send extra headers
@@ -125,8 +127,10 @@ class ProxyResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProxySetResponse:
-        """
-        Set the proxy for the box
+        """Configures the HTTP proxy settings for a specific box.
+
+        Use this endpoint when
+        you need the box's outbound network traffic to pass through a proxy server.
 
         Args:
           host: The host address of the proxy server
@@ -202,7 +206,7 @@ class AsyncProxyResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Clear the proxy for the box
+        Clears the HTTP proxy for the box
 
         Args:
           extra_headers: Send extra headers
@@ -235,8 +239,10 @@ class AsyncProxyResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProxyGetResponse:
-        """
-        Get the proxy for the box
+        """Retrieves the HTTP proxy settings for a specific box.
+
+        Use this endpoint to route
+        traffic through the box's network.
 
         Args:
           extra_headers: Send extra headers
@@ -273,8 +279,10 @@ class AsyncProxyResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProxySetResponse:
-        """
-        Set the proxy for the box
+        """Configures the HTTP proxy settings for a specific box.
+
+        Use this endpoint when
+        you need the box's outbound network traffic to pass through a proxy server.
 
         Args:
           host: The host address of the proxy server

@@ -206,7 +206,7 @@ class ActionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
-        Click
+        Simulates a click action on the box
 
         Args:
           x: X coordinate of the click
@@ -284,7 +284,7 @@ class ActionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
-        Click
+        Simulates a click action on the box
 
         Args:
           target: Describe the target to operate using natural language, e.g., 'login button' or
@@ -479,7 +479,9 @@ class ActionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
-        Drag
+        Simulates a drag gesture, moving from a start point to an end point over a set
+        duration. Supports simple start/end coordinates, multi-point drag paths, and
+        natural-language targets.
 
         Args:
           end: End point of the drag path (coordinates or natural language)
@@ -557,7 +559,9 @@ class ActionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
-        Drag
+        Simulates a drag gesture, moving from a start point to an end point over a set
+        duration. Supports simple start/end coordinates, multi-point drag paths, and
+        natural-language targets.
 
         Args:
           path: Path of the drag action as a series of coordinates
@@ -937,7 +941,9 @@ class ActionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
-        Move to position
+        Moves the focus to a specific coordinate on the box without performing a click
+        or tap. Use this endpoint to position the cursor, hover over elements, or
+        prepare for chained actions such as drag or swipe.
 
         Args:
           x: X coordinate to move to
@@ -1546,7 +1552,7 @@ class ActionsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
-        """Rotate the screen orientation.
+        """Rotates the screen orientation.
 
         Note that even after rotating the screen,
         applications or system layouts may not automatically adapt to the gravity sensor
@@ -1637,7 +1643,7 @@ class ActionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionScreenshotResponse:
         """
-        Take screenshot
+        Captures a screenshot of the current box screen
 
         Args:
           clip: Clipping region for screenshot capture
@@ -1915,7 +1921,7 @@ class ActionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionSettingsResponse:
         """
-        Get the box action settings
+        Get the action settings for the box
 
         Args:
           extra_headers: Send extra headers
@@ -1948,7 +1954,7 @@ class ActionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionSettingsResetResponse:
         """
-        Reset the box settings to default
+        Resets the box settings to default
 
         Args:
           extra_headers: Send extra headers
@@ -1982,7 +1988,7 @@ class ActionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionSettingsUpdateResponse:
         """
-        Update the box action settings
+        Update the action settings for the box
 
         Args:
           scale: The scale of the action to be performed. Must be greater than 0.1 and less than
@@ -2433,8 +2439,10 @@ class ActionsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
-        """
-        Touch
+        """Performs more advanced touch gestures.
+
+        Use this endpoint to simulate realistic
+        behaviors.
 
         Args:
           points: Array of touch points and their actions
@@ -2757,7 +2765,7 @@ class AsyncActionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
-        Click
+        Simulates a click action on the box
 
         Args:
           x: X coordinate of the click
@@ -2835,7 +2843,7 @@ class AsyncActionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
-        Click
+        Simulates a click action on the box
 
         Args:
           target: Describe the target to operate using natural language, e.g., 'login button' or
@@ -3032,7 +3040,9 @@ class AsyncActionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
-        Drag
+        Simulates a drag gesture, moving from a start point to an end point over a set
+        duration. Supports simple start/end coordinates, multi-point drag paths, and
+        natural-language targets.
 
         Args:
           end: End point of the drag path (coordinates or natural language)
@@ -3110,7 +3120,9 @@ class AsyncActionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
-        Drag
+        Simulates a drag gesture, moving from a start point to an end point over a set
+        duration. Supports simple start/end coordinates, multi-point drag paths, and
+        natural-language targets.
 
         Args:
           path: Path of the drag action as a series of coordinates
@@ -3490,7 +3502,9 @@ class AsyncActionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
         """
-        Move to position
+        Moves the focus to a specific coordinate on the box without performing a click
+        or tap. Use this endpoint to position the cursor, hover over elements, or
+        prepare for chained actions such as drag or swipe.
 
         Args:
           x: X coordinate to move to
@@ -4101,7 +4115,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
-        """Rotate the screen orientation.
+        """Rotates the screen orientation.
 
         Note that even after rotating the screen,
         applications or system layouts may not automatically adapt to the gravity sensor
@@ -4192,7 +4206,7 @@ class AsyncActionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionScreenshotResponse:
         """
-        Take screenshot
+        Captures a screenshot of the current box screen
 
         Args:
           clip: Clipping region for screenshot capture
@@ -4470,7 +4484,7 @@ class AsyncActionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionSettingsResponse:
         """
-        Get the box action settings
+        Get the action settings for the box
 
         Args:
           extra_headers: Send extra headers
@@ -4503,7 +4517,7 @@ class AsyncActionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionSettingsResetResponse:
         """
-        Reset the box settings to default
+        Resets the box settings to default
 
         Args:
           extra_headers: Send extra headers
@@ -4537,7 +4551,7 @@ class AsyncActionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionSettingsUpdateResponse:
         """
-        Update the box action settings
+        Update the action settings for the box
 
         Args:
           scale: The scale of the action to be performed. Must be greater than 0.1 and less than
@@ -4990,8 +5004,10 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ActionResult:
-        """
-        Touch
+        """Performs more advanced touch gestures.
+
+        Use this endpoint to simulate realistic
+        behaviors.
 
         Args:
           points: Array of touch points and their actions

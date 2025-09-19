@@ -72,8 +72,11 @@ class FsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FListResponse:
-        """
-        List box files
+        """Lists files and directories in a box.
+
+        You can specify the directory path and
+        depth, and optionally a working directory. The response includes metadata such
+        as type, size, permissions, and last modified time.
 
         Args:
           path: Target directory path in the box
@@ -177,12 +180,11 @@ class FsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FInfoResponse:
-        """Get file/dir
+        """
+        Retrieves metadata for a specific file or directory inside a box
 
         Args:
-          path: Target path in the box.
-
-        If the path does not start with '/', the file/directory
+          path: Target path in the box. If the path does not start with '/', the file/directory
               will be checked relative to the working directory
 
           working_dir: Working directory. If not provided, the file will be read from the
@@ -232,12 +234,13 @@ class FsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FReadResponse:
-        """Read box file
+        """Reads the contents of a file inside the box and returns it as a string.
+
+        Supports
+        absolute or relative paths, with `workingDir` as the base for relative paths.
 
         Args:
-          path: Target path in the box.
-
-        If the path does not start with '/', the file will be
+          path: Target path in the box. If the path does not start with '/', the file will be
               read from the working directory.
 
           working_dir: Working directory. If not provided, the file will be read from the
@@ -284,9 +287,10 @@ class FsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FRemoveResponse:
-        """Delete a file or dir.
+        """Deletes a file or a directory.
 
-        If target path is not exists, the delete will be failed.
+        If target path doesn't exist, the delete will
+        fail.
 
         Args:
           path: Target path in the box. If the path does not start with '/', the file/directory
@@ -335,10 +339,10 @@ class FsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FRenameResponse:
-        """Rename a file or dir.
+        """Renames a file or a directory.
 
-        If target newPath is already exists, the rename will be
-        failed.
+        If the target newPath already exists, the rename
+        will fail.
 
         Args:
           new_path: New path in the box. If the path does not start with '/', the file/directory
@@ -399,7 +403,7 @@ class FsResource(SyncAPIResource):
         """Creates or overwrites a file.
 
         Creates necessary directories in the path if they
-        don't exist. If target path is already exists, the write will be failed.
+        don't exist. If the target path already exists, the write will fail.
 
         Args:
           content: Content of the file (Max size: 512MB)
@@ -440,7 +444,7 @@ class FsResource(SyncAPIResource):
         """Creates or overwrites a file.
 
         Creates necessary directories in the path if they
-        don't exist. If target path is already exists, the write will be failed.
+        don't exist. If the target path already exists, the write will fail.
 
         Args:
           content: Binary content of the file (Max file size: 512MB)
@@ -547,8 +551,11 @@ class AsyncFsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FListResponse:
-        """
-        List box files
+        """Lists files and directories in a box.
+
+        You can specify the directory path and
+        depth, and optionally a working directory. The response includes metadata such
+        as type, size, permissions, and last modified time.
 
         Args:
           path: Target directory path in the box
@@ -652,12 +659,11 @@ class AsyncFsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FInfoResponse:
-        """Get file/dir
+        """
+        Retrieves metadata for a specific file or directory inside a box
 
         Args:
-          path: Target path in the box.
-
-        If the path does not start with '/', the file/directory
+          path: Target path in the box. If the path does not start with '/', the file/directory
               will be checked relative to the working directory
 
           working_dir: Working directory. If not provided, the file will be read from the
@@ -707,12 +713,13 @@ class AsyncFsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FReadResponse:
-        """Read box file
+        """Reads the contents of a file inside the box and returns it as a string.
+
+        Supports
+        absolute or relative paths, with `workingDir` as the base for relative paths.
 
         Args:
-          path: Target path in the box.
-
-        If the path does not start with '/', the file will be
+          path: Target path in the box. If the path does not start with '/', the file will be
               read from the working directory.
 
           working_dir: Working directory. If not provided, the file will be read from the
@@ -759,9 +766,10 @@ class AsyncFsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FRemoveResponse:
-        """Delete a file or dir.
+        """Deletes a file or a directory.
 
-        If target path is not exists, the delete will be failed.
+        If target path doesn't exist, the delete will
+        fail.
 
         Args:
           path: Target path in the box. If the path does not start with '/', the file/directory
@@ -810,10 +818,10 @@ class AsyncFsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FRenameResponse:
-        """Rename a file or dir.
+        """Renames a file or a directory.
 
-        If target newPath is already exists, the rename will be
-        failed.
+        If the target newPath already exists, the rename
+        will fail.
 
         Args:
           new_path: New path in the box. If the path does not start with '/', the file/directory
@@ -874,7 +882,7 @@ class AsyncFsResource(AsyncAPIResource):
         """Creates or overwrites a file.
 
         Creates necessary directories in the path if they
-        don't exist. If target path is already exists, the write will be failed.
+        don't exist. If the target path already exists, the write will fail.
 
         Args:
           content: Content of the file (Max size: 512MB)
@@ -915,7 +923,7 @@ class AsyncFsResource(AsyncAPIResource):
         """Creates or overwrites a file.
 
         Creates necessary directories in the path if they
-        don't exist. If target path is already exists, the write will be failed.
+        don't exist. If the target path already exists, the write will fail.
 
         Args:
           content: Binary content of the file (Max file size: 512MB)

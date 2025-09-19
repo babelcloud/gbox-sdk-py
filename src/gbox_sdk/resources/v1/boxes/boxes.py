@@ -163,7 +163,7 @@ class BoxesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BoxRetrieveResponse:
         """
-        Get box
+        This endpoint retrieves information about a box
 
         Args:
           extra_headers: Send extra headers
@@ -205,8 +205,11 @@ class BoxesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BoxListResponse:
-        """
-        List box
+        """Returns a paginated list of box instances.
+
+        Use this endpoint to monitor
+        environments, filter by status or type, or retrieve boxes by labels or device
+        type.
 
         Args:
           device_type: Filter boxes by their device type (virtual, physical)
@@ -270,8 +273,11 @@ class BoxesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidBox:
-        """
-        Create android box
+        """Provisions a new Android box that you can operate through the GBOX SDK.
+
+        Use this
+        endpoint when you want to create a fresh Android environment for testing,
+        automation, or agent execution.
 
         Args:
           config: Configuration for a Android box instance
@@ -323,8 +329,11 @@ class BoxesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> LinuxBox:
-        """
-        Create linux box
+        """Provisions a new Linux box that you can operate through the GBOX SDK.
+
+        Use this
+        endpoint when you want to create a fresh Linux environment for testing,
+        automation, or agent execution.
 
         Args:
           config: Configuration for a Linux box instance
@@ -378,7 +387,7 @@ class BoxesResource(SyncAPIResource):
 
         This endpoint
         provides details about the box's screen resolution, orientation, and other
-        visual properties
+        visual properties.
 
         Args:
           extra_headers: Send extra headers
@@ -475,7 +484,7 @@ class BoxesResource(SyncAPIResource):
         """
         This endpoint allows you to generate a pre-signed URL for accessing the live
         view of a running box. The URL is valid for a limited time and can be used to
-        view the box's live stream
+        view the box's live stream.
 
         Args:
           expires_in: The live view will be alive for the given duration
@@ -564,8 +573,11 @@ class BoxesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BoxRunCodeResponse:
-        """
-        Run code on the box
+        """Executes code inside the specified box.
+
+        Supports multiple languages (bash,
+        Python, TypeScript) and allows you to configure environment variables,
+        arguments, working directory, and timeouts.
 
         Args:
           code: The code to run
@@ -709,7 +721,8 @@ class BoxesResource(SyncAPIResource):
     ) -> None:
         """Terminate a running box.
 
-        This action will stop the box and release its resources
+        This action will stop the box and release its
+        resources.
 
         Args:
           wait: Wait for the box operation to be completed, default is true
@@ -749,7 +762,7 @@ class BoxesResource(SyncAPIResource):
         """
         This endpoint allows you to generate a pre-signed URL for accessing the web
         terminal of a running box. The URL is valid for a limited time and can be used
-        to access the box's terminal interface
+        to access the box's terminal interface.
 
         Args:
           expires_in: The web terminal will be alive for the given duration
@@ -874,7 +887,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BoxRetrieveResponse:
         """
-        Get box
+        This endpoint retrieves information about a box
 
         Args:
           extra_headers: Send extra headers
@@ -916,8 +929,11 @@ class AsyncBoxesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BoxListResponse:
-        """
-        List box
+        """Returns a paginated list of box instances.
+
+        Use this endpoint to monitor
+        environments, filter by status or type, or retrieve boxes by labels or device
+        type.
 
         Args:
           device_type: Filter boxes by their device type (virtual, physical)
@@ -981,8 +997,11 @@ class AsyncBoxesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AndroidBox:
-        """
-        Create android box
+        """Provisions a new Android box that you can operate through the GBOX SDK.
+
+        Use this
+        endpoint when you want to create a fresh Android environment for testing,
+        automation, or agent execution.
 
         Args:
           config: Configuration for a Android box instance
@@ -1034,8 +1053,11 @@ class AsyncBoxesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> LinuxBox:
-        """
-        Create linux box
+        """Provisions a new Linux box that you can operate through the GBOX SDK.
+
+        Use this
+        endpoint when you want to create a fresh Linux environment for testing,
+        automation, or agent execution.
 
         Args:
           config: Configuration for a Linux box instance
@@ -1089,7 +1111,7 @@ class AsyncBoxesResource(AsyncAPIResource):
 
         This endpoint
         provides details about the box's screen resolution, orientation, and other
-        visual properties
+        visual properties.
 
         Args:
           extra_headers: Send extra headers
@@ -1186,7 +1208,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         """
         This endpoint allows you to generate a pre-signed URL for accessing the live
         view of a running box. The URL is valid for a limited time and can be used to
-        view the box's live stream
+        view the box's live stream.
 
         Args:
           expires_in: The live view will be alive for the given duration
@@ -1275,8 +1297,11 @@ class AsyncBoxesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BoxRunCodeResponse:
-        """
-        Run code on the box
+        """Executes code inside the specified box.
+
+        Supports multiple languages (bash,
+        Python, TypeScript) and allows you to configure environment variables,
+        arguments, working directory, and timeouts.
 
         Args:
           code: The code to run
@@ -1420,7 +1445,8 @@ class AsyncBoxesResource(AsyncAPIResource):
     ) -> None:
         """Terminate a running box.
 
-        This action will stop the box and release its resources
+        This action will stop the box and release its
+        resources.
 
         Args:
           wait: Wait for the box operation to be completed, default is true
@@ -1460,7 +1486,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         """
         This endpoint allows you to generate a pre-signed URL for accessing the web
         terminal of a running box. The URL is valid for a limited time and can be used
-        to access the box's terminal interface
+        to access the box's terminal interface.
 
         Args:
           expires_in: The web terminal will be alive for the given duration

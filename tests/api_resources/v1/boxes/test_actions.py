@@ -581,8 +581,10 @@ class TestActions:
     def test_method_elements_detect_with_all_params(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.elements_detect(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            output_format="base64",
-            presigned_expires_in="30m",
+            screenshot={
+                "output_format": "base64",
+                "presigned_expires_in": "30m",
+            },
         )
         assert action is None
 
@@ -2746,8 +2748,10 @@ class TestAsyncActions:
     async def test_method_elements_detect_with_all_params(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.elements_detect(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            output_format="base64",
-            presigned_expires_in="30m",
+            screenshot={
+                "output_format": "base64",
+                "presigned_expires_in": "30m",
+            },
         )
         assert action is None
 

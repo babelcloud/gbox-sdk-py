@@ -6,10 +6,15 @@ from typing_extensions import Literal, Annotated, TypedDict
 
 from ...._utils import PropertyInfo
 
-__all__ = ["ActionElementsDetectParams"]
+__all__ = ["ActionElementsDetectParams", "Screenshot"]
 
 
 class ActionElementsDetectParams(TypedDict, total=False):
+    screenshot: Screenshot
+    """Detect elements screenshot options"""
+
+
+class Screenshot(TypedDict, total=False):
     output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
     """Type of the URI. default is base64."""
 

@@ -667,8 +667,7 @@ class ActionsResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        output_format: Literal["base64", "storageKey"] | Omit = omit,
-        presigned_expires_in: str | Omit = omit,
+        screenshot: action_elements_detect_params.Screenshot | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -683,12 +682,7 @@ class ActionsResource(SyncAPIResource):
         the browser is not running, the Elements array will be empty.
 
         Args:
-          output_format: Type of the URI. default is base64.
-
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
-
-              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+          screenshot: Detect elements screenshot options
 
           extra_headers: Send extra headers
 
@@ -703,13 +697,7 @@ class ActionsResource(SyncAPIResource):
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
             f"/boxes/{box_id}/actions/elements/detect",
-            body=maybe_transform(
-                {
-                    "output_format": output_format,
-                    "presigned_expires_in": presigned_expires_in,
-                },
-                action_elements_detect_params.ActionElementsDetectParams,
-            ),
+            body=maybe_transform({"screenshot": screenshot}, action_elements_detect_params.ActionElementsDetectParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -3281,8 +3269,7 @@ class AsyncActionsResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        output_format: Literal["base64", "storageKey"] | Omit = omit,
-        presigned_expires_in: str | Omit = omit,
+        screenshot: action_elements_detect_params.Screenshot | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -3297,12 +3284,7 @@ class AsyncActionsResource(AsyncAPIResource):
         the browser is not running, the Elements array will be empty.
 
         Args:
-          output_format: Type of the URI. default is base64.
-
-          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
-
-              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+          screenshot: Detect elements screenshot options
 
           extra_headers: Send extra headers
 
@@ -3318,11 +3300,7 @@ class AsyncActionsResource(AsyncAPIResource):
         return await self._post(
             f"/boxes/{box_id}/actions/elements/detect",
             body=await async_maybe_transform(
-                {
-                    "output_format": output_format,
-                    "presigned_expires_in": presigned_expires_in,
-                },
-                action_elements_detect_params.ActionElementsDetectParams,
+                {"screenshot": screenshot}, action_elements_detect_params.ActionElementsDetectParams
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout

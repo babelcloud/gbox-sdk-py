@@ -19,6 +19,7 @@ from gbox_sdk.types.v1.boxes import (
     ActionRecordingStopResponse,
     ActionRewindExtractResponse,
     ActionSettingsResetResponse,
+    ActionElementsDetectResponse,
     ActionSettingsUpdateResponse,
 )
 
@@ -574,7 +575,7 @@ class TestActions:
         action = client.v1.boxes.actions.elements_detect(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
-        assert action is None
+        assert_matches_type(ActionElementsDetectResponse, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -586,7 +587,7 @@ class TestActions:
                 "presigned_expires_in": "30m",
             },
         )
-        assert action is None
+        assert_matches_type(ActionElementsDetectResponse, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -598,7 +599,7 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert action is None
+        assert_matches_type(ActionElementsDetectResponse, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -610,7 +611,7 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert action is None
+            assert_matches_type(ActionElementsDetectResponse, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -2741,7 +2742,7 @@ class TestAsyncActions:
         action = await async_client.v1.boxes.actions.elements_detect(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
-        assert action is None
+        assert_matches_type(ActionElementsDetectResponse, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2753,7 +2754,7 @@ class TestAsyncActions:
                 "presigned_expires_in": "30m",
             },
         )
-        assert action is None
+        assert_matches_type(ActionElementsDetectResponse, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2765,7 +2766,7 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert action is None
+        assert_matches_type(ActionElementsDetectResponse, action, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -2777,7 +2778,7 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert action is None
+            assert_matches_type(ActionElementsDetectResponse, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

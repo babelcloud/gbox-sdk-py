@@ -49,6 +49,7 @@ from ....types.v1.boxes.action_screen_layout_response import ActionScreenLayoutR
 from ....types.v1.boxes.action_recording_stop_response import ActionRecordingStopResponse
 from ....types.v1.boxes.action_rewind_extract_response import ActionRewindExtractResponse
 from ....types.v1.boxes.action_settings_reset_response import ActionSettingsResetResponse
+from ....types.v1.boxes.action_elements_detect_response import ActionElementsDetectResponse
 from ....types.v1.boxes.action_settings_update_response import ActionSettingsUpdateResponse
 
 __all__ = ["ActionsResource", "AsyncActionsResource"]
@@ -674,7 +675,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    ) -> ActionElementsDetectResponse:
         """Detect and identify interactive UI elements in the current screen.
 
         Note: This
@@ -694,14 +695,13 @@ class ActionsResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
             f"/boxes/{box_id}/actions/elements/detect",
             body=maybe_transform({"screenshot": screenshot}, action_elements_detect_params.ActionElementsDetectParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=ActionElementsDetectResponse,
         )
 
     def extract(
@@ -3276,7 +3276,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    ) -> ActionElementsDetectResponse:
         """Detect and identify interactive UI elements in the current screen.
 
         Note: This
@@ -3296,7 +3296,6 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
             f"/boxes/{box_id}/actions/elements/detect",
             body=await async_maybe_transform(
@@ -3305,7 +3304,7 @@ class AsyncActionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=ActionElementsDetectResponse,
         )
 
     async def extract(

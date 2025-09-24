@@ -35,6 +35,7 @@ from ....types.v1.boxes import (
     action_press_button_params,
     action_clipboard_set_params,
     action_rewind_extract_params,
+    action_elements_detect_params,
     action_screen_rotation_params,
     action_settings_update_params,
 )
@@ -660,6 +661,59 @@ class ActionsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ActionResult,
+        )
+
+    def elements_detect(
+        self,
+        box_id: str,
+        *,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """Detect and identify interactive UI elements in the current screen.
+
+        Note: This
+        feature currently only supports element detection within a running browser. If
+        the browser is not running, the Elements array will be empty.
+
+        Args:
+          output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._post(
+            f"/boxes/{box_id}/actions/elements/detect",
+            body=maybe_transform(
+                {
+                    "output_format": output_format,
+                    "presigned_expires_in": presigned_expires_in,
+                },
+                action_elements_detect_params.ActionElementsDetectParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
         )
 
     def extract(
@@ -3223,6 +3277,59 @@ class AsyncActionsResource(AsyncAPIResource):
             cast_to=ActionResult,
         )
 
+    async def elements_detect(
+        self,
+        box_id: str,
+        *,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """Detect and identify interactive UI elements in the current screen.
+
+        Note: This
+        feature currently only supports element detection within a running browser. If
+        the browser is not running, the Elements array will be empty.
+
+        Args:
+          output_format: Type of the URI. default is base64.
+
+          presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._post(
+            f"/boxes/{box_id}/actions/elements/detect",
+            body=await async_maybe_transform(
+                {
+                    "output_format": output_format,
+                    "presigned_expires_in": presigned_expires_in,
+                },
+                action_elements_detect_params.ActionElementsDetectParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
     async def extract(
         self,
         box_id: str,
@@ -5196,6 +5303,9 @@ class ActionsResourceWithRawResponse:
         self.drag = to_raw_response_wrapper(
             actions.drag,
         )
+        self.elements_detect = to_raw_response_wrapper(
+            actions.elements_detect,
+        )
         self.extract = to_raw_response_wrapper(
             actions.extract,
         )
@@ -5279,6 +5389,9 @@ class AsyncActionsResourceWithRawResponse:
         )
         self.drag = async_to_raw_response_wrapper(
             actions.drag,
+        )
+        self.elements_detect = async_to_raw_response_wrapper(
+            actions.elements_detect,
         )
         self.extract = async_to_raw_response_wrapper(
             actions.extract,
@@ -5364,6 +5477,9 @@ class ActionsResourceWithStreamingResponse:
         self.drag = to_streamed_response_wrapper(
             actions.drag,
         )
+        self.elements_detect = to_streamed_response_wrapper(
+            actions.elements_detect,
+        )
         self.extract = to_streamed_response_wrapper(
             actions.extract,
         )
@@ -5447,6 +5563,9 @@ class AsyncActionsResourceWithStreamingResponse:
         )
         self.drag = async_to_streamed_response_wrapper(
             actions.drag,
+        )
+        self.elements_detect = async_to_streamed_response_wrapper(
+            actions.elements_detect,
         )
         self.extract = async_to_streamed_response_wrapper(
             actions.extract,

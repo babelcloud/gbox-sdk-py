@@ -9,7 +9,7 @@ from ...._utils import PropertyInfo
 from .detected_element_param import DetectedElementParam
 from .action_common_options_param import ActionCommonOptionsParam
 
-__all__ = ["ActionClickParams", "Click", "ClickByNaturalLanguage", "ClickByElementDto"]
+__all__ = ["ActionClickParams", "Click", "ClickByNaturalLanguage", "ClickByElement"]
 
 
 class Click(TypedDict, total=False):
@@ -138,7 +138,7 @@ class ClickByNaturalLanguage(TypedDict, total=False):
     """
 
 
-class ClickByElementDto(TypedDict, total=False):
+class ClickByElement(TypedDict, total=False):
     target: Required[DetectedElementParam]
     """Detected UI element"""
 
@@ -198,4 +198,4 @@ class ClickByElementDto(TypedDict, total=False):
     """
 
 
-ActionClickParams: TypeAlias = Union[Click, ClickByNaturalLanguage, ClickByElementDto]
+ActionClickParams: TypeAlias = Union[Click, ClickByNaturalLanguage, ClickByElement]

@@ -9,7 +9,7 @@ from ...._utils import PropertyInfo
 from .detected_element_param import DetectedElementParam
 from .action_common_options_param import ActionCommonOptionsParam
 
-__all__ = ["ActionLongPressParams", "LongPress", "LongPressByNaturalLanguage", "LongPressByElementDto"]
+__all__ = ["ActionLongPressParams", "LongPress", "LongPressByNaturalLanguage", "LongPressByElement"]
 
 
 class LongPress(TypedDict, total=False):
@@ -140,7 +140,7 @@ class LongPressByNaturalLanguage(TypedDict, total=False):
     """
 
 
-class LongPressByElementDto(TypedDict, total=False):
+class LongPressByElement(TypedDict, total=False):
     target: Required[DetectedElementParam]
     """Detected UI element"""
 
@@ -201,4 +201,4 @@ class LongPressByElementDto(TypedDict, total=False):
     """
 
 
-ActionLongPressParams: TypeAlias = Union[LongPress, LongPressByNaturalLanguage, LongPressByElementDto]
+ActionLongPressParams: TypeAlias = Union[LongPress, LongPressByNaturalLanguage, LongPressByElement]

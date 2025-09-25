@@ -75,6 +75,7 @@ from gbox_sdk.types.v1.boxes import (
     ActionCommonOptions,
     ActionResult,
     ActionScreenshotOptions,
+    DetectedElement,
     ActionAIResponse,
     ActionClipboardGetResponse,
     ActionElementsDetectResponse,

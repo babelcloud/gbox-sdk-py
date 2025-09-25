@@ -21,6 +21,7 @@ from .f_read_response import FReadResponse as FReadResponse
 from .f_remove_params import FRemoveParams as FRemoveParams
 from .f_rename_params import FRenameParams as FRenameParams
 from .action_ai_params import ActionAIParams as ActionAIParams
+from .detected_element import DetectedElement as DetectedElement
 from .proxy_set_params import ProxySetParams as ProxySetParams
 from .action_tap_params import ActionTapParams as ActionTapParams
 from .f_exists_response import FExistsResponse as FExistsResponse
@@ -43,6 +44,7 @@ from .android_install_params import AndroidInstallParams as AndroidInstallParams
 from .android_restart_params import AndroidRestartParams as AndroidRestartParams
 from .android_restore_params import AndroidRestoreParams as AndroidRestoreParams
 from .browser_cdp_url_params import BrowserCdpURLParams as BrowserCdpURLParams
+from .detected_element_param import DetectedElementParam as DetectedElementParam
 from .action_extract_response import ActionExtractResponse as ActionExtractResponse
 from .action_press_key_params import ActionPressKeyParams as ActionPressKeyParams
 from .android_list_pkg_params import AndroidListPkgParams as AndroidListPkgParams

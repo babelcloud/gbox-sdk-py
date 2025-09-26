@@ -10,6 +10,7 @@ import pytest
 from gbox_sdk import GboxClient, AsyncGboxClient
 from tests.utils import assert_matches_type
 from gbox_sdk.types.v1.boxes import (
+    BrowserOpenResponse,
     BrowserGetTabsResponse,
     BrowserOpenTabResponse,
     BrowserCloseTabResponse,
@@ -114,6 +115,48 @@ class TestBrowser:
     def test_path_params_clear_proxy(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.browser.with_raw_response.clear_proxy(
+                "",
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_close(self, client: GboxClient) -> None:
+        browser = client.v1.boxes.browser.close(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert browser is None
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_close(self, client: GboxClient) -> None:
+        response = client.v1.boxes.browser.with_raw_response.close(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        browser = response.parse()
+        assert browser is None
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_close(self, client: GboxClient) -> None:
+        with client.v1.boxes.browser.with_streaming_response.close(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            browser = response.parse()
+            assert browser is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_path_params_close(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            client.v1.boxes.browser.with_raw_response.close(
                 "",
             )
 
@@ -251,6 +294,59 @@ class TestBrowser:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.browser.with_raw_response.get_tabs(
                 "",
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_open(self, client: GboxClient) -> None:
+        browser = client.v1.boxes.browser.open(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert_matches_type(BrowserOpenResponse, browser, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_open_with_all_params(self, client: GboxClient) -> None:
+        browser = client.v1.boxes.browser.open(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            maximize=False,
+            show_controls=True,
+            size="1024x768",
+        )
+        assert_matches_type(BrowserOpenResponse, browser, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_open(self, client: GboxClient) -> None:
+        response = client.v1.boxes.browser.with_raw_response.open(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        browser = response.parse()
+        assert_matches_type(BrowserOpenResponse, browser, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_open(self, client: GboxClient) -> None:
+        with client.v1.boxes.browser.with_streaming_response.open(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            browser = response.parse()
+            assert_matches_type(BrowserOpenResponse, browser, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_path_params_open(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            client.v1.boxes.browser.with_raw_response.open(
+                box_id="",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -585,6 +681,48 @@ class TestAsyncBrowser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
+    async def test_method_close(self, async_client: AsyncGboxClient) -> None:
+        browser = await async_client.v1.boxes.browser.close(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert browser is None
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_close(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.browser.with_raw_response.close(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        browser = await response.parse()
+        assert browser is None
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_close(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.browser.with_streaming_response.close(
+            "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            browser = await response.parse()
+            assert browser is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_path_params_close(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            await async_client.v1.boxes.browser.with_raw_response.close(
+                "",
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
     async def test_method_close_tab(self, async_client: AsyncGboxClient) -> None:
         browser = await async_client.v1.boxes.browser.close_tab(
             tab_id="tabId",
@@ -717,6 +855,59 @@ class TestAsyncBrowser:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.browser.with_raw_response.get_tabs(
                 "",
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_open(self, async_client: AsyncGboxClient) -> None:
+        browser = await async_client.v1.boxes.browser.open(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert_matches_type(BrowserOpenResponse, browser, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_open_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        browser = await async_client.v1.boxes.browser.open(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            maximize=False,
+            show_controls=True,
+            size="1024x768",
+        )
+        assert_matches_type(BrowserOpenResponse, browser, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_open(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.browser.with_raw_response.open(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        browser = await response.parse()
+        assert_matches_type(BrowserOpenResponse, browser, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_open(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.browser.with_streaming_response.open(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            browser = await response.parse()
+            assert_matches_type(BrowserOpenResponse, browser, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_path_params_open(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            await async_client.v1.boxes.browser.with_raw_response.open(
+                box_id="",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")

@@ -2,7 +2,7 @@ import os
 import json
 import base64
 from typing import List, Union, Callable, Optional
-from typing_extensions import Literal, Iterable, TypedDict, cast, overload
+from typing_extensions import Literal, Iterable, cast, overload
 
 from gbox_sdk._types import Omit, omit
 from gbox_sdk._client import GboxClient
@@ -14,7 +14,6 @@ from gbox_sdk.types.v1.boxes.action_ai_response import ActionAIResponse
 from gbox_sdk.types.v1.boxes.action_drag_params import DragSimpleEnd, DragSimpleStart, DragAdvancedPath
 from gbox_sdk.types.v1.boxes.action_swipe_params import SwipeAdvancedEnd, SwipeAdvancedStart
 from gbox_sdk.types.v1.boxes.action_touch_params import Point
-from gbox_sdk.types.v1.boxes.detected_element_param import DetectedElementParam
 from gbox_sdk.types.v1.boxes.action_extract_response import ActionExtractResponse
 from gbox_sdk.types.v1.boxes.action_press_key_params import KeysType
 from gbox_sdk.types.v1.boxes.action_screenshot_params import Clip, ActionScreenshotParams
@@ -447,7 +446,7 @@ class ActionOperator:
     def click(
         self,
         *,
-        target: DetectedElementParam,
+        target: DetectedElement,
         button: Union[Literal["left", "right", "middle"], Omit] = omit,
         double: Union[bool, Omit] = omit,
         include_screenshot: Union[bool, Omit] = omit,
@@ -522,7 +521,7 @@ class ActionOperator:
         presigned_expires_in: Union[str, Omit] = omit,
         screenshot_delay: Union[str, Omit] = omit,
         options: Union[ActionCommonOptionsParam, Omit] = omit,
-        target: Union[str, DetectedElementParam, Omit] = omit,
+        target: Union[str, DetectedElement, Omit] = omit,
     ) -> ActionResult:
         if isinstance(target, str):
             return self.client.v1.boxes.actions.click(
@@ -536,7 +535,7 @@ class ActionOperator:
                 presigned_expires_in=presigned_expires_in,
                 screenshot_delay=screenshot_delay,
             )
-        elif target is not omit and isinstance(target, dict):
+        elif isinstance(target, DetectedElement):
             return self.client.v1.boxes.actions.click(
                 box_id=self.box_id,
                 target=target,
@@ -1255,7 +1254,7 @@ class ActionOperator:
     def tap(
         self,
         *,
-        target: DetectedElementParam,
+        target: DetectedElement,
         include_screenshot: Union[bool, Omit] = omit,
         options: Union[ActionCommonOptionsParam, Omit] = omit,
         output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
@@ -1317,7 +1316,7 @@ class ActionOperator:
         output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
         presigned_expires_in: Union[str, Omit] = omit,
         screenshot_delay: Union[str, Omit] = omit,
-        target: Union[str, DetectedElementParam, Omit] = omit,
+        target: Union[str, DetectedElement, Omit] = omit,
     ) -> ActionResult:
         if x is not omit and y is not omit:
             return self.client.v1.boxes.actions.tap(
@@ -1340,7 +1339,7 @@ class ActionOperator:
                 presigned_expires_in=presigned_expires_in,
                 screenshot_delay=screenshot_delay,
             )
-        elif target is not omit and isinstance(target, dict):
+        elif target is not omit and isinstance(target, DetectedElement):
             return self.client.v1.boxes.actions.tap(
                 box_id=self.box_id,
                 target=target,
@@ -1487,7 +1486,7 @@ class ActionOperator:
     def long_press(
         self,
         *,
-        target: DetectedElementParam,
+        target: DetectedElement,
         duration: Union[str, Omit] = omit,
         include_screenshot: Union[bool, Omit] = omit,
         options: Union[ActionCommonOptionsParam, Omit] = omit,
@@ -1558,7 +1557,7 @@ class ActionOperator:
         output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
         presigned_expires_in: Union[str, Omit] = omit,
         screenshot_delay: Union[str, Omit] = omit,
-        target: Union[str, DetectedElementParam, Omit] = omit,
+        target: Union[str, DetectedElement, Omit] = omit,
     ) -> ActionResult:
         if x is not omit and y is not omit:
             return self.client.v1.boxes.actions.long_press(
@@ -1583,7 +1582,7 @@ class ActionOperator:
                 screenshot_delay=screenshot_delay,
                 options=options,
             )
-        elif target is not omit and isinstance(target, dict):
+        elif target is not omit and isinstance(target, DetectedElement):
             return self.client.v1.boxes.actions.long_press(
                 box_id=self.box_id,
                 target=target,
@@ -2327,11 +2326,14 @@ class ElementsOperator:
         self.client = client
         self.box_id = box_id
 
-    class _DetectResult(TypedDict):
-        elements: "ElementManager"
-        screenshot: ElementsDetectScreenshot
+    class DetectResult:
+        """Result of element detection operation."""
 
-    def detect(self, screenshot: Union[Screenshot, Omit] = omit) -> _DetectResult:
+        def __init__(self, elements: "ElementManager", screenshot: ElementsDetectScreenshot):
+            self.elements = elements
+            self.screenshot = screenshot
+
+    def detect(self, screenshot: Union[Screenshot, Omit] = omit) -> "DetectResult":
         """
         Detect and identify interactive UI elements in the current screen.
 
@@ -2340,18 +2342,18 @@ class ElementsOperator:
                 `gbox_sdk.types.v1.boxes.action_elements_detect_params.Screenshot`.
 
         Returns:
-            A dict with:
+            A DetectResult object with:
             - elements: an `ElementManager` for convenient access to detected elements
             - screenshot: the screenshot metadata from detection
 
         Example:
             >>> response = myBox.action.elements.detect()
-            >>> first = response["elements"].list()[0]
+            >>> first = response.elements.list()[0]
         """
         result = self.client.v1.boxes.actions.elements_detect(box_id=self.box_id, screenshot=screenshot)
         element_manager = ElementManager(self.client, self.box_id, result.elements)
 
-        return {"elements": element_manager, "screenshot": result.screenshot}
+        return self.DetectResult(elements=element_manager, screenshot=result.screenshot)
 
 
 class ElementManager:

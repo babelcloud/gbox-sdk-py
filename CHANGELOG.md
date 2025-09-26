@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.0-alpha.40 (2025-09-26)
+
+Full Changelog: [v0.1.0-alpha.39...v0.1.0-alpha.40](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.39...v0.1.0-alpha.40)
+
+### Features
+
+* **api:** api update ([61bded1](https://github.com/babelcloud/gbox-sdk-py/commit/61bded1b845a00d3dd1f905d61fc00316e476cd8))
+* **api:** api update ([52bf5ec](https://github.com/babelcloud/gbox-sdk-py/commit/52bf5ec6403ad7f319a8ef982fea567be6cff9e7))
+* optimize elementsOperator return type ([41382b4](https://github.com/babelcloud/gbox-sdk-py/commit/41382b46ba74a0bda89fdc373b371abee0c8d68a))
+
 ## 0.1.0-alpha.39 (2025-09-26)
 
 Full Changelog: [v0.1.0-alpha.38...v0.1.0-alpha.39](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.38...v0.1.0-alpha.39)

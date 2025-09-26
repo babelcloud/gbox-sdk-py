@@ -201,6 +201,7 @@ from gbox_sdk.types.v1.boxes import (
     BrowserCloseTabResponse,
     BrowserGetProxyResponse,
     BrowserGetTabsResponse,
+    BrowserOpenResponse,
     BrowserOpenTabResponse,
     BrowserSwitchTabResponse,
     BrowserUpdateTabResponse,
@@ -211,9 +212,11 @@ Methods:
 
 - <code title="post /boxes/{boxId}/browser/connect-url/cdp">client.v1.boxes.browser.<a href="./src/gbox_sdk/resources/v1/boxes/browser.py">cdp_url</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/browser_cdp_url_params.py">params</a>) -> str</code>
 - <code title="delete /boxes/{boxId}/browser/proxy">client.v1.boxes.browser.<a href="./src/gbox_sdk/resources/v1/boxes/browser.py">clear_proxy</a>(box_id) -> None</code>
+- <code title="delete /boxes/{boxId}/browser/close">client.v1.boxes.browser.<a href="./src/gbox_sdk/resources/v1/boxes/browser.py">close</a>(box_id) -> None</code>
 - <code title="delete /boxes/{boxId}/browser/tabs/{tabId}">client.v1.boxes.browser.<a href="./src/gbox_sdk/resources/v1/boxes/browser.py">close_tab</a>(tab_id, \*, box_id) -> <a href="./src/gbox_sdk/types/v1/boxes/browser_close_tab_response.py">BrowserCloseTabResponse</a></code>
 - <code title="get /boxes/{boxId}/browser/proxy">client.v1.boxes.browser.<a href="./src/gbox_sdk/resources/v1/boxes/browser.py">get_proxy</a>(box_id) -> <a href="./src/gbox_sdk/types/v1/boxes/browser_get_proxy_response.py">BrowserGetProxyResponse</a></code>
 - <code title="get /boxes/{boxId}/browser/tabs">client.v1.boxes.browser.<a href="./src/gbox_sdk/resources/v1/boxes/browser.py">get_tabs</a>(box_id) -> <a href="./src/gbox_sdk/types/v1/boxes/browser_get_tabs_response.py">BrowserGetTabsResponse</a></code>
+- <code title="post /boxes/{boxId}/browser/open">client.v1.boxes.browser.<a href="./src/gbox_sdk/resources/v1/boxes/browser.py">open</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/browser_open_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/browser_open_response.py">BrowserOpenResponse</a></code>
 - <code title="post /boxes/{boxId}/browser/tabs">client.v1.boxes.browser.<a href="./src/gbox_sdk/resources/v1/boxes/browser.py">open_tab</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/browser_open_tab_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/browser_open_tab_response.py">BrowserOpenTabResponse</a></code>
 - <code title="post /boxes/{boxId}/browser/proxy">client.v1.boxes.browser.<a href="./src/gbox_sdk/resources/v1/boxes/browser.py">set_proxy</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/browser_set_proxy_params.py">params</a>) -> None</code>
 - <code title="post /boxes/{boxId}/browser/tabs/{tabId}/switch">client.v1.boxes.browser.<a href="./src/gbox_sdk/resources/v1/boxes/browser.py">switch_tab</a>(tab_id, \*, box_id) -> <a href="./src/gbox_sdk/types/v1/boxes/browser_switch_tab_response.py">BrowserSwitchTabResponse</a></code>

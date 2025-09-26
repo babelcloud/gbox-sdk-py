@@ -40,8 +40,8 @@ from ....types.v1.boxes import (
     action_settings_update_params,
 )
 from ....types.v1.boxes.action_result import ActionResult
+from ....types.v1.boxes.detected_element import DetectedElement
 from ....types.v1.boxes.action_ai_response import ActionAIResponse
-from ....types.v1.boxes.detected_element_param import DetectedElementParam
 from ....types.v1.boxes.action_extract_response import ActionExtractResponse
 from ....types.v1.boxes.action_settings_response import ActionSettingsResponse
 from ....types.v1.boxes.action_screenshot_response import ActionScreenshotResponse
@@ -348,7 +348,7 @@ class ActionsResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        target: DetectedElementParam,
+        target: DetectedElement,
         button: Literal["left", "right", "middle"] | Omit = omit,
         double: bool | Omit = omit,
         include_screenshot: bool | Omit = omit,
@@ -433,7 +433,7 @@ class ActionsResource(SyncAPIResource):
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
         screenshot_delay: str | Omit = omit,
-        target: str | DetectedElementParam | Omit = omit,
+        target: str | DetectedElement | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1001,7 +1001,7 @@ class ActionsResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        target: DetectedElementParam,
+        target: DetectedElement,
         duration: str | Omit = omit,
         include_screenshot: bool | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
@@ -1087,7 +1087,7 @@ class ActionsResource(SyncAPIResource):
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
         screenshot_delay: str | Omit = omit,
-        target: str | DetectedElementParam | Omit = omit,
+        target: str | DetectedElement | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2581,7 +2581,7 @@ class ActionsResource(SyncAPIResource):
         self,
         box_id: str,
         *,
-        target: DetectedElementParam,
+        target: DetectedElement,
         include_screenshot: bool | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
@@ -2658,7 +2658,7 @@ class ActionsResource(SyncAPIResource):
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
         screenshot_delay: str | Omit = omit,
-        target: str | DetectedElementParam | Omit = omit,
+        target: str | DetectedElement | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -3171,7 +3171,7 @@ class AsyncActionsResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        target: DetectedElementParam,
+        target: DetectedElement,
         button: Literal["left", "right", "middle"] | Omit = omit,
         double: bool | Omit = omit,
         include_screenshot: bool | Omit = omit,
@@ -3256,7 +3256,7 @@ class AsyncActionsResource(AsyncAPIResource):
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
         screenshot_delay: str | Omit = omit,
-        target: str | DetectedElementParam | Omit = omit,
+        target: str | DetectedElement | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -3828,7 +3828,7 @@ class AsyncActionsResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        target: DetectedElementParam,
+        target: DetectedElement,
         duration: str | Omit = omit,
         include_screenshot: bool | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
@@ -3914,7 +3914,7 @@ class AsyncActionsResource(AsyncAPIResource):
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
         screenshot_delay: str | Omit = omit,
-        target: str | DetectedElementParam | Omit = omit,
+        target: str | DetectedElement | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -5412,7 +5412,7 @@ class AsyncActionsResource(AsyncAPIResource):
         self,
         box_id: str,
         *,
-        target: DetectedElementParam,
+        target: DetectedElement,
         include_screenshot: bool | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
@@ -5489,7 +5489,7 @@ class AsyncActionsResource(AsyncAPIResource):
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
         screenshot_delay: str | Omit = omit,
-        target: str | DetectedElementParam | Omit = omit,
+        target: str | DetectedElement | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

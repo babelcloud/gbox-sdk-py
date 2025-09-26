@@ -37,9 +37,11 @@ from .action_click_params import ActionClickParams as ActionClickParams
 from .action_swipe_params import ActionSwipeParams as ActionSwipeParams
 from .action_touch_params import ActionTouchParams as ActionTouchParams
 from .android_open_params import AndroidOpenParams as AndroidOpenParams
+from .browser_open_params import BrowserOpenParams as BrowserOpenParams
 from .action_scroll_params import ActionScrollParams as ActionScrollParams
 from .action_common_options import ActionCommonOptions as ActionCommonOptions
 from .action_extract_params import ActionExtractParams as ActionExtractParams
+from .browser_open_response import BrowserOpenResponse as BrowserOpenResponse
 from .android_install_params import AndroidInstallParams as AndroidInstallParams
 from .android_restart_params import AndroidRestartParams as AndroidRestartParams
 from .android_restore_params import AndroidRestoreParams as AndroidRestoreParams

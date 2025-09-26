@@ -20,6 +20,7 @@ from gbox_sdk.types.v1 import (
     BoxRetrieveResponse,
     BoxLiveViewURLResponse,
     BoxWebsocketURLResponse,
+    BoxResolutionSetResponse,
     BoxWebTerminalURLResponse,
     BoxExecuteCommandsResponse,
 )
@@ -372,7 +373,7 @@ class TestBoxes:
             height=1080,
             width=1920,
         )
-        assert box is None
+        assert_matches_type(BoxResolutionSetResponse, box, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -386,7 +387,7 @@ class TestBoxes:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         box = response.parse()
-        assert box is None
+        assert_matches_type(BoxResolutionSetResponse, box, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -400,7 +401,7 @@ class TestBoxes:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             box = response.parse()
-            assert box is None
+            assert_matches_type(BoxResolutionSetResponse, box, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1071,7 +1072,7 @@ class TestAsyncBoxes:
             height=1080,
             width=1920,
         )
-        assert box is None
+        assert_matches_type(BoxResolutionSetResponse, box, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -1085,7 +1086,7 @@ class TestAsyncBoxes:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         box = await response.parse()
-        assert box is None
+        assert_matches_type(BoxResolutionSetResponse, box, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -1099,7 +1100,7 @@ class TestAsyncBoxes:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             box = await response.parse()
-            assert box is None
+            assert_matches_type(BoxResolutionSetResponse, box, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

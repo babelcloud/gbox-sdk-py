@@ -21,6 +21,7 @@ from .f_read_response import FReadResponse as FReadResponse
 from .f_remove_params import FRemoveParams as FRemoveParams
 from .f_rename_params import FRenameParams as FRenameParams
 from .action_ai_params import ActionAIParams as ActionAIParams
+from .detected_element import DetectedElement as DetectedElement
 from .proxy_set_params import ProxySetParams as ProxySetParams
 from .action_tap_params import ActionTapParams as ActionTapParams
 from .f_exists_response import FExistsResponse as FExistsResponse
@@ -43,6 +44,7 @@ from .android_install_params import AndroidInstallParams as AndroidInstallParams
 from .android_restart_params import AndroidRestartParams as AndroidRestartParams
 from .android_restore_params import AndroidRestoreParams as AndroidRestoreParams
 from .browser_cdp_url_params import BrowserCdpURLParams as BrowserCdpURLParams
+from .detected_element_param import DetectedElementParam as DetectedElementParam
 from .action_extract_response import ActionExtractResponse as ActionExtractResponse
 from .action_press_key_params import ActionPressKeyParams as ActionPressKeyParams
 from .android_list_pkg_params import AndroidListPkgParams as AndroidListPkgParams
@@ -76,6 +78,7 @@ from .browser_update_tab_response import BrowserUpdateTabResponse as BrowserUpda
 from .action_rewind_extract_params import ActionRewindExtractParams as ActionRewindExtractParams
 from .storage_presigned_url_params import StoragePresignedURLParams as StoragePresignedURLParams
 from .action_clipboard_get_response import ActionClipboardGetResponse as ActionClipboardGetResponse
+from .action_elements_detect_params import ActionElementsDetectParams as ActionElementsDetectParams
 from .action_screen_layout_response import ActionScreenLayoutResponse as ActionScreenLayoutResponse
 from .action_screen_rotation_params import ActionScreenRotationParams as ActionScreenRotationParams
 from .action_settings_update_params import ActionSettingsUpdateParams as ActionSettingsUpdateParams
@@ -84,6 +87,7 @@ from .action_rewind_extract_response import ActionRewindExtractResponse as Actio
 from .action_settings_reset_response import ActionSettingsResetResponse as ActionSettingsResetResponse
 from .android_list_pkg_simple_params import AndroidListPkgSimpleParams as AndroidListPkgSimpleParams
 from .storage_presigned_url_response import StoragePresignedURLResponse as StoragePresignedURLResponse
+from .action_elements_detect_response import ActionElementsDetectResponse as ActionElementsDetectResponse
 from .action_screenshot_options_param import ActionScreenshotOptionsParam as ActionScreenshotOptionsParam
 from .action_settings_update_response import ActionSettingsUpdateResponse as ActionSettingsUpdateResponse
 from .android_list_activities_response import AndroidListActivitiesResponse as AndroidListActivitiesResponse

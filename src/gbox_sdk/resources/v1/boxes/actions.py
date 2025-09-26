@@ -35,11 +35,13 @@ from ....types.v1.boxes import (
     action_press_button_params,
     action_clipboard_set_params,
     action_rewind_extract_params,
+    action_elements_detect_params,
     action_screen_rotation_params,
     action_settings_update_params,
 )
 from ....types.v1.boxes.action_result import ActionResult
 from ....types.v1.boxes.action_ai_response import ActionAIResponse
+from ....types.v1.boxes.detected_element_param import DetectedElementParam
 from ....types.v1.boxes.action_extract_response import ActionExtractResponse
 from ....types.v1.boxes.action_settings_response import ActionSettingsResponse
 from ....types.v1.boxes.action_screenshot_response import ActionScreenshotResponse
@@ -48,6 +50,7 @@ from ....types.v1.boxes.action_screen_layout_response import ActionScreenLayoutR
 from ....types.v1.boxes.action_recording_stop_response import ActionRecordingStopResponse
 from ....types.v1.boxes.action_rewind_extract_response import ActionRewindExtractResponse
 from ....types.v1.boxes.action_settings_reset_response import ActionSettingsResetResponse
+from ....types.v1.boxes.action_elements_detect_response import ActionElementsDetectResponse
 from ....types.v1.boxes.action_settings_update_response import ActionSettingsUpdateResponse
 
 __all__ = ["ActionsResource", "AsyncActionsResource"]
@@ -340,6 +343,82 @@ class ActionsResource(SyncAPIResource):
         """
         ...
 
+    @overload
+    def click(
+        self,
+        box_id: str,
+        *,
+        target: DetectedElementParam,
+        button: Literal["left", "right", "middle"] | Omit = omit,
+        double: bool | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ActionResult:
+        """
+        Simulates a click action on the box
+
+        Args:
+          target: Detected UI element
+
+          button: Mouse button to click
+
+          double: Whether to perform a double click
+
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
+
+          options: Action common options
+
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
     @required_args(["x", "y"], ["target"])
     def click(
         self,
@@ -354,7 +433,7 @@ class ActionsResource(SyncAPIResource):
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
         screenshot_delay: str | Omit = omit,
-        target: str | Omit = omit,
+        target: str | DetectedElementParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -662,6 +741,46 @@ class ActionsResource(SyncAPIResource):
             cast_to=ActionResult,
         )
 
+    def elements_detect(
+        self,
+        box_id: str,
+        *,
+        screenshot: action_elements_detect_params.Screenshot | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ActionElementsDetectResponse:
+        """Detect and identify interactive UI elements in the current screen.
+
+        Note: This
+        feature currently only supports element detection within a running browser. If
+        the browser is not running, the Elements array will be empty.
+
+        Args:
+          screenshot: Detect elements screenshot options
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return self._post(
+            f"/boxes/{box_id}/actions/elements/detect",
+            body=maybe_transform({"screenshot": screenshot}, action_elements_detect_params.ActionElementsDetectParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionElementsDetectResponse,
+        )
+
     def extract(
         self,
         box_id: str,
@@ -877,6 +996,84 @@ class ActionsResource(SyncAPIResource):
         """
         ...
 
+    @overload
+    def long_press(
+        self,
+        box_id: str,
+        *,
+        target: DetectedElementParam,
+        duration: str | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ActionResult:
+        """
+        Perform a long press action at specified coordinates for a specified duration.
+        Useful for triggering context menus, drag operations, or other long-press
+        interactions.
+
+        Args:
+          target: Detected UI element
+
+          duration: Duration to hold the press (e.g. '1s', '500ms')
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 1s
+
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
+
+          options: Action common options
+
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
     @required_args(["x", "y"], ["target"])
     def long_press(
         self,
@@ -890,7 +1087,7 @@ class ActionsResource(SyncAPIResource):
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
         screenshot_delay: str | Omit = omit,
-        target: str | Omit = omit,
+        target: str | DetectedElementParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2379,6 +2576,76 @@ class ActionsResource(SyncAPIResource):
         """
         ...
 
+    @overload
+    def tap(
+        self,
+        box_id: str,
+        *,
+        target: DetectedElementParam,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ActionResult:
+        """
+        Tap action for Android devices using ADB input tap command
+
+        Args:
+          target: Detected UI element
+
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
+
+          options: Action common options
+
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
     @required_args(["x", "y"], ["target"])
     def tap(
         self,
@@ -2391,7 +2658,7 @@ class ActionsResource(SyncAPIResource):
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
         screenshot_delay: str | Omit = omit,
-        target: str | Omit = omit,
+        target: str | DetectedElementParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2899,6 +3166,82 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         ...
 
+    @overload
+    async def click(
+        self,
+        box_id: str,
+        *,
+        target: DetectedElementParam,
+        button: Literal["left", "right", "middle"] | Omit = omit,
+        double: bool | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ActionResult:
+        """
+        Simulates a click action on the box
+
+        Args:
+          target: Detected UI element
+
+          button: Mouse button to click
+
+          double: Whether to perform a double click
+
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
+
+          options: Action common options
+
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
     @required_args(["x", "y"], ["target"])
     async def click(
         self,
@@ -2913,7 +3256,7 @@ class AsyncActionsResource(AsyncAPIResource):
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
         screenshot_delay: str | Omit = omit,
-        target: str | Omit = omit,
+        target: str | DetectedElementParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -3223,6 +3566,48 @@ class AsyncActionsResource(AsyncAPIResource):
             cast_to=ActionResult,
         )
 
+    async def elements_detect(
+        self,
+        box_id: str,
+        *,
+        screenshot: action_elements_detect_params.Screenshot | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ActionElementsDetectResponse:
+        """Detect and identify interactive UI elements in the current screen.
+
+        Note: This
+        feature currently only supports element detection within a running browser. If
+        the browser is not running, the Elements array will be empty.
+
+        Args:
+          screenshot: Detect elements screenshot options
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return await self._post(
+            f"/boxes/{box_id}/actions/elements/detect",
+            body=await async_maybe_transform(
+                {"screenshot": screenshot}, action_elements_detect_params.ActionElementsDetectParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ActionElementsDetectResponse,
+        )
+
     async def extract(
         self,
         box_id: str,
@@ -3438,6 +3823,84 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         ...
 
+    @overload
+    async def long_press(
+        self,
+        box_id: str,
+        *,
+        target: DetectedElementParam,
+        duration: str | Omit = omit,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ActionResult:
+        """
+        Perform a long press action at specified coordinates for a specified duration.
+        Useful for triggering context menus, drag operations, or other long-press
+        interactions.
+
+        Args:
+          target: Detected UI element
+
+          duration: Duration to hold the press (e.g. '1s', '500ms')
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 1s
+
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
+
+          options: Action common options
+
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
     @required_args(["x", "y"], ["target"])
     async def long_press(
         self,
@@ -3451,7 +3914,7 @@ class AsyncActionsResource(AsyncAPIResource):
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
         screenshot_delay: str | Omit = omit,
-        target: str | Omit = omit,
+        target: str | DetectedElementParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -4944,6 +5407,76 @@ class AsyncActionsResource(AsyncAPIResource):
         """
         ...
 
+    @overload
+    async def tap(
+        self,
+        box_id: str,
+        *,
+        target: DetectedElementParam,
+        include_screenshot: bool | Omit = omit,
+        options: ActionCommonOptionsParam | Omit = omit,
+        output_format: Literal["base64", "storageKey"] | Omit = omit,
+        presigned_expires_in: str | Omit = omit,
+        screenshot_delay: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ActionResult:
+        """
+        Tap action for Android devices using ADB input tap command
+
+        Args:
+          target: Detected UI element
+
+          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+              ignored when `options.screenshot` is provided. Whether to include screenshots in
+              the action response. If false, the screenshot object will still be returned but
+              with empty URIs. Default is false.
+
+          options: Action common options
+
+          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+              default is base64. This field will be ignored when `options.screenshot` is
+              provided.
+
+          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+              url expires in. Only takes effect when outputFormat is storageKey. This field
+              will be ignored when `options.screenshot` is provided.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+              ignored when `options.screenshot` is provided.
+
+              Delay after performing the action, before taking the final screenshot.
+
+              Execution flow:
+
+              1. Take screenshot before action
+              2. Perform the action
+              3. Wait for screenshotDelay (this parameter)
+              4. Take screenshot after action
+
+              Example: '500ms' means wait 500ms after the action before capturing the final
+              screenshot.
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
     @required_args(["x", "y"], ["target"])
     async def tap(
         self,
@@ -4956,7 +5489,7 @@ class AsyncActionsResource(AsyncAPIResource):
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
         screenshot_delay: str | Omit = omit,
-        target: str | Omit = omit,
+        target: str | DetectedElementParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -5196,6 +5729,9 @@ class ActionsResourceWithRawResponse:
         self.drag = to_raw_response_wrapper(
             actions.drag,
         )
+        self.elements_detect = to_raw_response_wrapper(
+            actions.elements_detect,
+        )
         self.extract = to_raw_response_wrapper(
             actions.extract,
         )
@@ -5279,6 +5815,9 @@ class AsyncActionsResourceWithRawResponse:
         )
         self.drag = async_to_raw_response_wrapper(
             actions.drag,
+        )
+        self.elements_detect = async_to_raw_response_wrapper(
+            actions.elements_detect,
         )
         self.extract = async_to_raw_response_wrapper(
             actions.extract,
@@ -5364,6 +5903,9 @@ class ActionsResourceWithStreamingResponse:
         self.drag = to_streamed_response_wrapper(
             actions.drag,
         )
+        self.elements_detect = to_streamed_response_wrapper(
+            actions.elements_detect,
+        )
         self.extract = to_streamed_response_wrapper(
             actions.extract,
         )
@@ -5447,6 +5989,9 @@ class AsyncActionsResourceWithStreamingResponse:
         )
         self.drag = async_to_streamed_response_wrapper(
             actions.drag,
+        )
+        self.elements_detect = async_to_streamed_response_wrapper(
+            actions.elements_detect,
         )
         self.extract = async_to_streamed_response_wrapper(
             actions.extract,

@@ -29,6 +29,7 @@ from gbox_sdk.types.v1 import (
     BoxDisplayResponse,
     BoxExecuteCommandsResponse,
     BoxLiveViewURLResponse,
+    BoxResolutionSetResponse,
     BoxRunCodeResponse,
     BoxStartResponse,
     BoxStopResponse,
@@ -46,7 +47,7 @@ Methods:
 - <code title="get /boxes/{boxId}/display">client.v1.boxes.<a href="./src/gbox_sdk/resources/v1/boxes/boxes.py">display</a>(box_id) -> <a href="./src/gbox_sdk/types/v1/box_display_response.py">BoxDisplayResponse</a></code>
 - <code title="post /boxes/{boxId}/commands">client.v1.boxes.<a href="./src/gbox_sdk/resources/v1/boxes/boxes.py">execute_commands</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/box_execute_commands_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/box_execute_commands_response.py">BoxExecuteCommandsResponse</a></code>
 - <code title="post /boxes/{boxId}/live-view-url">client.v1.boxes.<a href="./src/gbox_sdk/resources/v1/boxes/boxes.py">live_view_url</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/box_live_view_url_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/box_live_view_url_response.py">BoxLiveViewURLResponse</a></code>
-- <code title="post /boxes/{boxId}/resolution">client.v1.boxes.<a href="./src/gbox_sdk/resources/v1/boxes/boxes.py">resolution_set</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/box_resolution_set_params.py">params</a>) -> None</code>
+- <code title="post /boxes/{boxId}/resolution">client.v1.boxes.<a href="./src/gbox_sdk/resources/v1/boxes/boxes.py">resolution_set</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/box_resolution_set_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/box_resolution_set_response.py">BoxResolutionSetResponse</a></code>
 - <code title="post /boxes/{boxId}/run-code">client.v1.boxes.<a href="./src/gbox_sdk/resources/v1/boxes/boxes.py">run_code</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/box_run_code_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/box_run_code_response.py">BoxRunCodeResponse</a></code>
 - <code title="post /boxes/{boxId}/start">client.v1.boxes.<a href="./src/gbox_sdk/resources/v1/boxes/boxes.py">start</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/box_start_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/box_start_response.py">BoxStartResponse</a></code>
 - <code title="post /boxes/{boxId}/stop">client.v1.boxes.<a href="./src/gbox_sdk/resources/v1/boxes/boxes.py">stop</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/box_stop_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/box_stop_response.py">BoxStopResponse</a></code>
@@ -75,8 +76,10 @@ from gbox_sdk.types.v1.boxes import (
     ActionCommonOptions,
     ActionResult,
     ActionScreenshotOptions,
+    DetectedElement,
     ActionAIResponse,
     ActionClipboardGetResponse,
+    ActionElementsDetectResponse,
     ActionExtractResponse,
     ActionRecordingStopResponse,
     ActionRewindExtractResponse,
@@ -95,6 +98,7 @@ Methods:
 - <code title="get /boxes/{boxId}/actions/clipboard">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">clipboard_get</a>(box_id) -> str</code>
 - <code title="post /boxes/{boxId}/actions/clipboard">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">clipboard_set</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_clipboard_set_params.py">params</a>) -> None</code>
 - <code title="post /boxes/{boxId}/actions/drag">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">drag</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_drag_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_result.py">ActionResult</a></code>
+- <code title="post /boxes/{boxId}/actions/elements/detect">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">elements_detect</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_elements_detect_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_elements_detect_response.py">ActionElementsDetectResponse</a></code>
 - <code title="post /boxes/{boxId}/actions/extract">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">extract</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_extract_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_extract_response.py">ActionExtractResponse</a></code>
 - <code title="post /boxes/{boxId}/actions/long-press">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">long_press</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_long_press_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_result.py">ActionResult</a></code>
 - <code title="post /boxes/{boxId}/actions/move">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">move</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_move_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_result.py">ActionResult</a></code>

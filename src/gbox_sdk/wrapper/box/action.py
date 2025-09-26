@@ -2,27 +2,31 @@ import os
 import json
 import base64
 from typing import List, Union, Callable, Optional
-from typing_extensions import Literal, Iterable, cast, overload
+from typing_extensions import Literal, Iterable, TypedDict, cast, overload
 
 from gbox_sdk._types import Omit, omit
 from gbox_sdk._client import GboxClient
 from gbox_sdk._utils._utils import required_args
 from gbox_sdk.types.v1.boxes.action_result import ActionResult
 from gbox_sdk.types.v1.boxes.action_ai_params import Settings
+from gbox_sdk.types.v1.boxes.detected_element import DetectedElement
 from gbox_sdk.types.v1.boxes.action_ai_response import ActionAIResponse
 from gbox_sdk.types.v1.boxes.action_drag_params import DragSimpleEnd, DragSimpleStart, DragAdvancedPath
 from gbox_sdk.types.v1.boxes.action_swipe_params import SwipeAdvancedEnd, SwipeAdvancedStart
 from gbox_sdk.types.v1.boxes.action_touch_params import Point
+from gbox_sdk.types.v1.boxes.detected_element_param import DetectedElementParam
 from gbox_sdk.types.v1.boxes.action_extract_response import ActionExtractResponse
 from gbox_sdk.types.v1.boxes.action_press_key_params import KeysType
 from gbox_sdk.types.v1.boxes.action_screenshot_params import Clip, ActionScreenshotParams
 from gbox_sdk.types.v1.boxes.action_settings_response import ActionSettingsResponse
 from gbox_sdk.types.v1.boxes.action_screenshot_response import ActionScreenshotResponse
 from gbox_sdk.types.v1.boxes.action_common_options_param import ActionCommonOptionsParam
+from gbox_sdk.types.v1.boxes.action_elements_detect_params import Screenshot
 from gbox_sdk.types.v1.boxes.action_screen_layout_response import ActionScreenLayoutResponse
 from gbox_sdk.types.v1.boxes.action_recording_stop_response import ActionRecordingStopResponse
 from gbox_sdk.types.v1.boxes.action_rewind_extract_response import ActionRewindExtractResponse
 from gbox_sdk.types.v1.boxes.action_settings_reset_response import ActionSettingsResetResponse
+from gbox_sdk.types.v1.boxes.action_elements_detect_response import Screenshot as ElementsDetectScreenshot
 from gbox_sdk.types.v1.boxes.action_settings_update_response import ActionSettingsUpdateResponse
 
 
@@ -56,6 +60,7 @@ class ActionOperator:
         self.box_id = box_id
         self.recording = RecordingOperator(client, box_id)
         self.clipboard = ClipboardOperator(client, box_id)
+        self.elements = ElementsOperator(client, box_id)
 
     def ai(
         self,
@@ -375,7 +380,7 @@ class ActionOperator:
     def click(
         self,
         *,
-        target: Union[str, Omit] = omit,
+        target: str,
         button: Union[Literal["left", "right", "middle"], Omit] = omit,
         double: Union[bool, Omit] = omit,
         include_screenshot: Union[bool, Omit] = omit,
@@ -438,6 +443,72 @@ class ActionOperator:
             >>> response = myBox.action.click(x=100, y=100)
         """
 
+    @overload
+    def click(
+        self,
+        *,
+        target: DetectedElementParam,
+        button: Union[Literal["left", "right", "middle"], Omit] = omit,
+        double: Union[bool, Omit] = omit,
+        include_screenshot: Union[bool, Omit] = omit,
+        output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
+        screenshot_delay: Union[str, Omit] = omit,
+        options: Union[ActionCommonOptionsParam, Omit] = omit,
+        presigned_expires_in: Union[str, Omit] = omit,
+    ) -> ActionResult:
+        """
+        Perform a click action on the box.
+
+        Args:
+            target: Detected UI element
+
+            button: Mouse button to click
+
+            double: Whether to perform a double click
+
+            include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+                ignored when `options.screenshot` is provided. Whether to include screenshots in
+                the action response. If false, the screenshot object will still be returned but
+                with empty URIs. Default is false.
+
+            options: Action common options
+
+            output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+                default is base64. This field will be ignored when `options.screenshot` is
+                provided.
+
+            presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+                url expires in. Only takes effect when outputFormat is storageKey. This field
+                will be ignored when `options.screenshot` is provided.
+
+                Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+                Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+            screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+                ignored when `options.screenshot` is provided.
+
+                Delay after performing the action, before taking the final screenshot.
+
+                Execution flow:
+
+                1. Take screenshot before action
+                2. Perform the action
+                3. Wait for screenshotDelay (this parameter)
+                4. Take screenshot after action
+
+                Example: '500ms' means wait 500ms after the action before capturing the final
+                screenshot.
+
+                Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+                Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+
+        Returns:
+            ActionResult: The response from the click action.
+
+        Example:
+            >>> response = myBox.action.click(x=100, y=100)
+        """
+
     @required_args(["x", "y"], ["target"])
     def click(
         self,
@@ -451,12 +522,24 @@ class ActionOperator:
         presigned_expires_in: Union[str, Omit] = omit,
         screenshot_delay: Union[str, Omit] = omit,
         options: Union[ActionCommonOptionsParam, Omit] = omit,
-        target: Union[str, Omit] = omit,
+        target: Union[str, DetectedElementParam, Omit] = omit,
     ) -> ActionResult:
-        if target is not omit:
+        if isinstance(target, str):
             return self.client.v1.boxes.actions.click(
                 box_id=self.box_id,
-                target=cast(str, target),
+                target=target,
+                button=button,
+                double=double,
+                include_screenshot=include_screenshot,
+                options=options,
+                output_format=output_format,
+                presigned_expires_in=presigned_expires_in,
+                screenshot_delay=screenshot_delay,
+            )
+        elif target is not omit and isinstance(target, dict):
+            return self.client.v1.boxes.actions.click(
+                box_id=self.box_id,
+                target=target,
                 button=button,
                 double=double,
                 include_screenshot=include_screenshot,
@@ -1168,6 +1251,61 @@ class ActionOperator:
         """
         ...
 
+    @overload
+    def tap(
+        self,
+        *,
+        target: DetectedElementParam,
+        include_screenshot: Union[bool, Omit] = omit,
+        options: Union[ActionCommonOptionsParam, Omit] = omit,
+        output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
+        presigned_expires_in: Union[str, Omit] = omit,
+        screenshot_delay: Union[str, Omit] = omit,
+    ) -> ActionResult:
+        """
+        Tap action for Android devices using ADB input tap command
+
+        Args:
+            target: Detected UI element
+
+            include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+                ignored when `options.screenshot` is provided. Whether to include screenshots in
+                the action response. If false, the screenshot object will still be returned but
+                with empty URIs. Default is false.
+
+            options: Action common options
+
+            output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+                default is base64. This field will be ignored when `options.screenshot` is
+                provided.
+
+            presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+                url expires in. Only takes effect when outputFormat is storageKey. This field
+                will be ignored when `options.screenshot` is provided.
+
+                Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+                Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+            screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+                ignored when `options.screenshot` is provided.
+
+                Delay after performing the action, before taking the final screenshot.
+
+                Execution flow:
+
+                1. Take screenshot before action
+                2. Perform the action
+                3. Wait for screenshotDelay (this parameter)
+                4. Take screenshot after action
+
+                Example: '500ms' means wait 500ms after the action before capturing the final
+                screenshot.
+
+                Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+                Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+        """
+        ...
+
     @required_args(["x", "y"], ["target"])
     def tap(
         self,
@@ -1179,7 +1317,7 @@ class ActionOperator:
         output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
         presigned_expires_in: Union[str, Omit] = omit,
         screenshot_delay: Union[str, Omit] = omit,
-        target: Union[str, Omit] = omit,
+        target: Union[str, DetectedElementParam, Omit] = omit,
     ) -> ActionResult:
         if x is not omit and y is not omit:
             return self.client.v1.boxes.actions.tap(
@@ -1192,10 +1330,20 @@ class ActionOperator:
                 presigned_expires_in=presigned_expires_in,
                 screenshot_delay=screenshot_delay,
             )
-        elif target is not omit:
+        elif target is not omit and isinstance(target, str):
             return self.client.v1.boxes.actions.tap(
                 box_id=self.box_id,
-                target=cast(str, target),
+                target=target,
+                include_screenshot=include_screenshot,
+                options=options,
+                output_format=output_format,
+                presigned_expires_in=presigned_expires_in,
+                screenshot_delay=screenshot_delay,
+            )
+        elif target is not omit and isinstance(target, dict):
+            return self.client.v1.boxes.actions.tap(
+                box_id=self.box_id,
+                target=target,
                 include_screenshot=include_screenshot,
                 options=options,
                 output_format=output_format,
@@ -1335,6 +1483,69 @@ class ActionOperator:
         """
         ...
 
+    @overload
+    def long_press(
+        self,
+        *,
+        target: DetectedElementParam,
+        duration: Union[str, Omit] = omit,
+        include_screenshot: Union[bool, Omit] = omit,
+        options: Union[ActionCommonOptionsParam, Omit] = omit,
+        output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
+        presigned_expires_in: Union[str, Omit] = omit,
+        screenshot_delay: Union[str, Omit] = omit,
+    ) -> ActionResult:
+        """
+        Perform a long press action at specified coordinates for a specified duration.
+        Useful for triggering context menus, drag operations, or other long-press
+        interactions.
+
+        Args:
+            target: Detected UI element
+
+            duration: Duration to hold the press (e.g. '1s', '500ms')
+
+                Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+                Example formats: "500ms", "30s", "5m", "1h" Default: 1s
+
+            include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
+                ignored when `options.screenshot` is provided. Whether to include screenshots in
+                the action response. If false, the screenshot object will still be returned but
+                with empty URIs. Default is false.
+
+            options: Action common options
+
+            output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
+                default is base64. This field will be ignored when `options.screenshot` is
+                provided.
+
+            presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
+                url expires in. Only takes effect when outputFormat is storageKey. This field
+                will be ignored when `options.screenshot` is provided.
+
+                Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+                Example formats: "500ms", "30s", "5m", "1h" Default: 30m
+
+            screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
+                ignored when `options.screenshot` is provided.
+
+                Delay after performing the action, before taking the final screenshot.
+
+                Execution flow:
+
+                1. Take screenshot before action
+                2. Perform the action
+                3. Wait for screenshotDelay (this parameter)
+                4. Take screenshot after action
+
+                Example: '500ms' means wait 500ms after the action before capturing the final
+                screenshot.
+
+                Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+                Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
+        """
+        ...
+
     @required_args(["x", "y"], ["target"])
     def long_press(
         self,
@@ -1347,7 +1558,7 @@ class ActionOperator:
         output_format: Union[Literal["base64", "storageKey"], Omit] = omit,
         presigned_expires_in: Union[str, Omit] = omit,
         screenshot_delay: Union[str, Omit] = omit,
-        target: Union[str, Omit] = omit,
+        target: Union[str, DetectedElementParam, Omit] = omit,
     ) -> ActionResult:
         if x is not omit and y is not omit:
             return self.client.v1.boxes.actions.long_press(
@@ -1361,10 +1572,21 @@ class ActionOperator:
                 screenshot_delay=screenshot_delay,
                 options=options,
             )
-        elif target is not omit:
+        elif target is not omit and isinstance(target, str):
             return self.client.v1.boxes.actions.long_press(
                 box_id=self.box_id,
-                target=cast(str, target),
+                target=target,
+                duration=duration,
+                include_screenshot=include_screenshot,
+                output_format=output_format,
+                presigned_expires_in=presigned_expires_in,
+                screenshot_delay=screenshot_delay,
+                options=options,
+            )
+        elif target is not omit and isinstance(target, dict):
+            return self.client.v1.boxes.actions.long_press(
+                box_id=self.box_id,
+                target=target,
                 duration=duration,
                 include_screenshot=include_screenshot,
                 output_format=output_format,
@@ -1562,7 +1784,8 @@ class ActionOperator:
             )
         else:
             raise ValueError(
-                "Either 'scroll_x' and 'scroll_y' (for simple scroll) or 'direction' (for direction scroll) must be provided"
+                "Either 'scroll_x' and 'scroll_y' (for simple scroll) or 'direction' "
+                "(for direction scroll) must be provided"
             )
 
     def touch(
@@ -2097,3 +2320,55 @@ class ClipboardOperator:
             >>> response = myBox.action.clipboard.set("Hello, world!")
         """
         return self.client.v1.boxes.actions.clipboard_set(box_id=self.box_id, content=content)
+
+
+class ElementsOperator:
+    def __init__(self, client: GboxClient, box_id: str):
+        self.client = client
+        self.box_id = box_id
+
+    class _DetectResult(TypedDict):
+        elements: "ElementManager"
+        screenshot: ElementsDetectScreenshot
+
+    def detect(self, screenshot: Union[Screenshot, Omit] = omit) -> _DetectResult:
+        """
+        Detect and identify interactive UI elements in the current screen.
+
+        Args:
+            screenshot: Detect elements screenshot options. See
+                `gbox_sdk.types.v1.boxes.action_elements_detect_params.Screenshot`.
+
+        Returns:
+            A dict with:
+            - elements: an `ElementManager` for convenient access to detected elements
+            - screenshot: the screenshot metadata from detection
+
+        Example:
+            >>> response = myBox.action.elements.detect()
+            >>> first = response["elements"].list()[0]
+        """
+        result = self.client.v1.boxes.actions.elements_detect(box_id=self.box_id, screenshot=screenshot)
+        element_manager = ElementManager(self.client, self.box_id, result.elements)
+
+        return {"elements": element_manager, "screenshot": result.screenshot}
+
+
+class ElementManager:
+    """The elements manager contains a list of detected elements."""
+
+    def __init__(self, client: GboxClient, box_id: str, elements: List[DetectedElement]):
+        self.client = client
+        self.box_id = box_id
+        self.elements = elements
+
+    def get(self, id: str) -> DetectedElement:
+        """Get an element by its id."""
+        element = next((element for element in self.elements if element.id == id), None)
+        if element is None:
+            raise ValueError(f"Element with id {id} not found")
+        return element
+
+    def list(self) -> List[DetectedElement]:
+        """List all elements."""
+        return self.elements

@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.1.0-alpha.39 (2025-09-26)
+
+Full Changelog: [v0.1.0-alpha.38...v0.1.0-alpha.39](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.38...v0.1.0-alpha.39)
+
+### Features
+
+* add ResolutionOperator to BaseBox for enhanced resolution handling ([07c5f55](https://github.com/babelcloud/gbox-sdk-py/commit/07c5f55e5e6180bf6fc31945375c6a44483932d5))
+* **api:** api update ([015d327](https://github.com/babelcloud/gbox-sdk-py/commit/015d327dd1c2d6694ea7a0d3d0e55c526e32e536))
+* **api:** api update ([97d1f06](https://github.com/babelcloud/gbox-sdk-py/commit/97d1f06bed2b86a16894e06cf1cb582f9134b72b))
+* **api:** api update ([642ee5a](https://github.com/babelcloud/gbox-sdk-py/commit/642ee5af2c9aeaa21babdf96c109f1814abd9501))
+* **api:** api update ([fb65f7b](https://github.com/babelcloud/gbox-sdk-py/commit/fb65f7be17f16caed0322f3b59019c278229869b))
+* **api:** api update ([e6b43ec](https://github.com/babelcloud/gbox-sdk-py/commit/e6b43ece99e17e53d6156f511c6f8bc96b2c125d))
+* **api:** api update ([5788589](https://github.com/babelcloud/gbox-sdk-py/commit/5788589900e2283ddcf99c4cde22c4b128a4475f))
+
+
+### Chores
+
+* do not install brew dependencies in ./scripts/bootstrap by default ([8c861fa](https://github.com/babelcloud/gbox-sdk-py/commit/8c861fa0d590b823327759b2353c4253fa6f3f5d))
+
 ## 0.1.0-alpha.38 (2025-09-19)
 
 Full Changelog: [v0.1.0-alpha.37...v0.1.0-alpha.38](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.37...v0.1.0-alpha.38)

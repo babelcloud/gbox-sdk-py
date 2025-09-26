@@ -19,6 +19,7 @@ from gbox_sdk.types.v1.boxes import (
     ActionRecordingStopResponse,
     ActionRewindExtractResponse,
     ActionSettingsResetResponse,
+    ActionElementsDetectResponse,
     ActionSettingsUpdateResponse,
 )
 
@@ -242,6 +243,135 @@ class TestActions:
             client.v1.boxes.actions.with_raw_response.click(
                 box_id="",
                 target="login button",
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_click_overload_3(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.click(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            target={
+                "id": "1",
+                "center_x": 150,
+                "center_y": 125,
+                "height": 50,
+                "label": "Click me",
+                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                "source": "chromium",
+                "type": "button",
+                "width": 100,
+                "x": 100,
+                "y": 100,
+            },
+        )
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_click_with_all_params_overload_3(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.click(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            target={
+                "id": "1",
+                "center_x": 150,
+                "center_y": 125,
+                "height": 50,
+                "label": "Click me",
+                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                "source": "chromium",
+                "type": "button",
+                "width": 100,
+                "x": 100,
+                "y": 100,
+            },
+            button="left",
+            double=False,
+            include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "phases": ["before", "after"],
+                    "presigned_expires_in": "30m",
+                }
+            },
+            output_format="base64",
+            presigned_expires_in="30m",
+            screenshot_delay="500ms",
+        )
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_click_overload_3(self, client: GboxClient) -> None:
+        response = client.v1.boxes.actions.with_raw_response.click(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            target={
+                "id": "1",
+                "center_x": 150,
+                "center_y": 125,
+                "height": 50,
+                "label": "Click me",
+                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                "source": "chromium",
+                "type": "button",
+                "width": 100,
+                "x": 100,
+                "y": 100,
+            },
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = response.parse()
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_click_overload_3(self, client: GboxClient) -> None:
+        with client.v1.boxes.actions.with_streaming_response.click(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            target={
+                "id": "1",
+                "center_x": 150,
+                "center_y": 125,
+                "height": 50,
+                "label": "Click me",
+                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                "source": "chromium",
+                "type": "button",
+                "width": 100,
+                "x": 100,
+                "y": 100,
+            },
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = response.parse()
+            assert_matches_type(ActionResult, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_path_params_click_overload_3(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            client.v1.boxes.actions.with_raw_response.click(
+                box_id="",
+                target={
+                    "id": "1",
+                    "center_x": 150,
+                    "center_y": 125,
+                    "height": 50,
+                    "label": "Click me",
+                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                    "source": "chromium",
+                    "type": "button",
+                    "width": 100,
+                    "x": 100,
+                    "y": 100,
+                },
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -570,6 +700,60 @@ class TestActions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
+    def test_method_elements_detect(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.elements_detect(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert_matches_type(ActionElementsDetectResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_elements_detect_with_all_params(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.elements_detect(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            screenshot={
+                "output_format": "base64",
+                "presigned_expires_in": "30m",
+            },
+        )
+        assert_matches_type(ActionElementsDetectResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_elements_detect(self, client: GboxClient) -> None:
+        response = client.v1.boxes.actions.with_raw_response.elements_detect(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = response.parse()
+        assert_matches_type(ActionElementsDetectResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_elements_detect(self, client: GboxClient) -> None:
+        with client.v1.boxes.actions.with_streaming_response.elements_detect(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = response.parse()
+            assert_matches_type(ActionElementsDetectResponse, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_path_params_elements_detect(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            client.v1.boxes.actions.with_raw_response.elements_detect(
+                box_id="",
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
     def test_method_extract(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.extract(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
@@ -763,6 +947,134 @@ class TestActions:
             client.v1.boxes.actions.with_raw_response.long_press(
                 box_id="",
                 target="Chrome icon",
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_long_press_overload_3(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.long_press(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            target={
+                "id": "1",
+                "center_x": 150,
+                "center_y": 125,
+                "height": 50,
+                "label": "Click me",
+                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                "source": "chromium",
+                "type": "button",
+                "width": 100,
+                "x": 100,
+                "y": 100,
+            },
+        )
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_long_press_with_all_params_overload_3(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.long_press(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            target={
+                "id": "1",
+                "center_x": 150,
+                "center_y": 125,
+                "height": 50,
+                "label": "Click me",
+                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                "source": "chromium",
+                "type": "button",
+                "width": 100,
+                "x": 100,
+                "y": 100,
+            },
+            duration="1s",
+            include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "phases": ["before", "after"],
+                    "presigned_expires_in": "30m",
+                }
+            },
+            output_format="base64",
+            presigned_expires_in="30m",
+            screenshot_delay="500ms",
+        )
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_long_press_overload_3(self, client: GboxClient) -> None:
+        response = client.v1.boxes.actions.with_raw_response.long_press(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            target={
+                "id": "1",
+                "center_x": 150,
+                "center_y": 125,
+                "height": 50,
+                "label": "Click me",
+                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                "source": "chromium",
+                "type": "button",
+                "width": 100,
+                "x": 100,
+                "y": 100,
+            },
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = response.parse()
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_long_press_overload_3(self, client: GboxClient) -> None:
+        with client.v1.boxes.actions.with_streaming_response.long_press(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            target={
+                "id": "1",
+                "center_x": 150,
+                "center_y": 125,
+                "height": 50,
+                "label": "Click me",
+                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                "source": "chromium",
+                "type": "button",
+                "width": 100,
+                "x": 100,
+                "y": 100,
+            },
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = response.parse()
+            assert_matches_type(ActionResult, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_path_params_long_press_overload_3(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            client.v1.boxes.actions.with_raw_response.long_press(
+                box_id="",
+                target={
+                    "id": "1",
+                    "center_x": 150,
+                    "center_y": 125,
+                    "height": 50,
+                    "label": "Click me",
+                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                    "source": "chromium",
+                    "type": "button",
+                    "width": 100,
+                    "x": 100,
+                    "y": 100,
+                },
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -1958,6 +2270,133 @@ class TestActions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
+    def test_method_tap_overload_3(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.tap(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            target={
+                "id": "1",
+                "center_x": 150,
+                "center_y": 125,
+                "height": 50,
+                "label": "Click me",
+                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                "source": "chromium",
+                "type": "button",
+                "width": 100,
+                "x": 100,
+                "y": 100,
+            },
+        )
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_tap_with_all_params_overload_3(self, client: GboxClient) -> None:
+        action = client.v1.boxes.actions.tap(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            target={
+                "id": "1",
+                "center_x": 150,
+                "center_y": 125,
+                "height": 50,
+                "label": "Click me",
+                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                "source": "chromium",
+                "type": "button",
+                "width": 100,
+                "x": 100,
+                "y": 100,
+            },
+            include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "phases": ["before", "after"],
+                    "presigned_expires_in": "30m",
+                }
+            },
+            output_format="base64",
+            presigned_expires_in="30m",
+            screenshot_delay="500ms",
+        )
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_tap_overload_3(self, client: GboxClient) -> None:
+        response = client.v1.boxes.actions.with_raw_response.tap(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            target={
+                "id": "1",
+                "center_x": 150,
+                "center_y": 125,
+                "height": 50,
+                "label": "Click me",
+                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                "source": "chromium",
+                "type": "button",
+                "width": 100,
+                "x": 100,
+                "y": 100,
+            },
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = response.parse()
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_tap_overload_3(self, client: GboxClient) -> None:
+        with client.v1.boxes.actions.with_streaming_response.tap(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            target={
+                "id": "1",
+                "center_x": 150,
+                "center_y": 125,
+                "height": 50,
+                "label": "Click me",
+                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                "source": "chromium",
+                "type": "button",
+                "width": 100,
+                "x": 100,
+                "y": 100,
+            },
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = response.parse()
+            assert_matches_type(ActionResult, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_path_params_tap_overload_3(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            client.v1.boxes.actions.with_raw_response.tap(
+                box_id="",
+                target={
+                    "id": "1",
+                    "center_x": 150,
+                    "center_y": 125,
+                    "height": 50,
+                    "label": "Click me",
+                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                    "source": "chromium",
+                    "type": "button",
+                    "width": 100,
+                    "x": 100,
+                    "y": 100,
+                },
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
     def test_method_touch(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.touch(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
@@ -2359,6 +2798,135 @@ class TestAsyncActions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
+    async def test_method_click_overload_3(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.click(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            target={
+                "id": "1",
+                "center_x": 150,
+                "center_y": 125,
+                "height": 50,
+                "label": "Click me",
+                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                "source": "chromium",
+                "type": "button",
+                "width": 100,
+                "x": 100,
+                "y": 100,
+            },
+        )
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_click_with_all_params_overload_3(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.click(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            target={
+                "id": "1",
+                "center_x": 150,
+                "center_y": 125,
+                "height": 50,
+                "label": "Click me",
+                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                "source": "chromium",
+                "type": "button",
+                "width": 100,
+                "x": 100,
+                "y": 100,
+            },
+            button="left",
+            double=False,
+            include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "phases": ["before", "after"],
+                    "presigned_expires_in": "30m",
+                }
+            },
+            output_format="base64",
+            presigned_expires_in="30m",
+            screenshot_delay="500ms",
+        )
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_click_overload_3(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.actions.with_raw_response.click(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            target={
+                "id": "1",
+                "center_x": 150,
+                "center_y": 125,
+                "height": 50,
+                "label": "Click me",
+                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                "source": "chromium",
+                "type": "button",
+                "width": 100,
+                "x": 100,
+                "y": 100,
+            },
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = await response.parse()
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_click_overload_3(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.actions.with_streaming_response.click(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            target={
+                "id": "1",
+                "center_x": 150,
+                "center_y": 125,
+                "height": 50,
+                "label": "Click me",
+                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                "source": "chromium",
+                "type": "button",
+                "width": 100,
+                "x": 100,
+                "y": 100,
+            },
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = await response.parse()
+            assert_matches_type(ActionResult, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_path_params_click_overload_3(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            await async_client.v1.boxes.actions.with_raw_response.click(
+                box_id="",
+                target={
+                    "id": "1",
+                    "center_x": 150,
+                    "center_y": 125,
+                    "height": 50,
+                    "label": "Click me",
+                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                    "source": "chromium",
+                    "type": "button",
+                    "width": 100,
+                    "x": 100,
+                    "y": 100,
+                },
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
     async def test_method_clipboard_get(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.clipboard_get(
             "c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
@@ -2683,6 +3251,60 @@ class TestAsyncActions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
+    async def test_method_elements_detect(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.elements_detect(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert_matches_type(ActionElementsDetectResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_elements_detect_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.elements_detect(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            screenshot={
+                "output_format": "base64",
+                "presigned_expires_in": "30m",
+            },
+        )
+        assert_matches_type(ActionElementsDetectResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_elements_detect(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.actions.with_raw_response.elements_detect(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = await response.parse()
+        assert_matches_type(ActionElementsDetectResponse, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_elements_detect(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.actions.with_streaming_response.elements_detect(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = await response.parse()
+            assert_matches_type(ActionElementsDetectResponse, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_path_params_elements_detect(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            await async_client.v1.boxes.actions.with_raw_response.elements_detect(
+                box_id="",
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
     async def test_method_extract(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.extract(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
@@ -2876,6 +3498,134 @@ class TestAsyncActions:
             await async_client.v1.boxes.actions.with_raw_response.long_press(
                 box_id="",
                 target="Chrome icon",
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_long_press_overload_3(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.long_press(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            target={
+                "id": "1",
+                "center_x": 150,
+                "center_y": 125,
+                "height": 50,
+                "label": "Click me",
+                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                "source": "chromium",
+                "type": "button",
+                "width": 100,
+                "x": 100,
+                "y": 100,
+            },
+        )
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_long_press_with_all_params_overload_3(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.long_press(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            target={
+                "id": "1",
+                "center_x": 150,
+                "center_y": 125,
+                "height": 50,
+                "label": "Click me",
+                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                "source": "chromium",
+                "type": "button",
+                "width": 100,
+                "x": 100,
+                "y": 100,
+            },
+            duration="1s",
+            include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "phases": ["before", "after"],
+                    "presigned_expires_in": "30m",
+                }
+            },
+            output_format="base64",
+            presigned_expires_in="30m",
+            screenshot_delay="500ms",
+        )
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_long_press_overload_3(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.actions.with_raw_response.long_press(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            target={
+                "id": "1",
+                "center_x": 150,
+                "center_y": 125,
+                "height": 50,
+                "label": "Click me",
+                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                "source": "chromium",
+                "type": "button",
+                "width": 100,
+                "x": 100,
+                "y": 100,
+            },
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = await response.parse()
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_long_press_overload_3(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.actions.with_streaming_response.long_press(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            target={
+                "id": "1",
+                "center_x": 150,
+                "center_y": 125,
+                "height": 50,
+                "label": "Click me",
+                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                "source": "chromium",
+                "type": "button",
+                "width": 100,
+                "x": 100,
+                "y": 100,
+            },
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = await response.parse()
+            assert_matches_type(ActionResult, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_path_params_long_press_overload_3(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            await async_client.v1.boxes.actions.with_raw_response.long_press(
+                box_id="",
+                target={
+                    "id": "1",
+                    "center_x": 150,
+                    "center_y": 125,
+                    "height": 50,
+                    "label": "Click me",
+                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                    "source": "chromium",
+                    "type": "button",
+                    "width": 100,
+                    "x": 100,
+                    "y": 100,
+                },
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -4067,6 +4817,133 @@ class TestAsyncActions:
             await async_client.v1.boxes.actions.with_raw_response.tap(
                 box_id="",
                 target="login button",
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_tap_overload_3(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.tap(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            target={
+                "id": "1",
+                "center_x": 150,
+                "center_y": 125,
+                "height": 50,
+                "label": "Click me",
+                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                "source": "chromium",
+                "type": "button",
+                "width": 100,
+                "x": 100,
+                "y": 100,
+            },
+        )
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_tap_with_all_params_overload_3(self, async_client: AsyncGboxClient) -> None:
+        action = await async_client.v1.boxes.actions.tap(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            target={
+                "id": "1",
+                "center_x": 150,
+                "center_y": 125,
+                "height": 50,
+                "label": "Click me",
+                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                "source": "chromium",
+                "type": "button",
+                "width": 100,
+                "x": 100,
+                "y": 100,
+            },
+            include_screenshot=False,
+            options={
+                "screenshot": {
+                    "delay": "500ms",
+                    "output_format": "base64",
+                    "phases": ["before", "after"],
+                    "presigned_expires_in": "30m",
+                }
+            },
+            output_format="base64",
+            presigned_expires_in="30m",
+            screenshot_delay="500ms",
+        )
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_tap_overload_3(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.actions.with_raw_response.tap(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            target={
+                "id": "1",
+                "center_x": 150,
+                "center_y": 125,
+                "height": 50,
+                "label": "Click me",
+                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                "source": "chromium",
+                "type": "button",
+                "width": 100,
+                "x": 100,
+                "y": 100,
+            },
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        action = await response.parse()
+        assert_matches_type(ActionResult, action, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_tap_overload_3(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.actions.with_streaming_response.tap(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            target={
+                "id": "1",
+                "center_x": 150,
+                "center_y": 125,
+                "height": 50,
+                "label": "Click me",
+                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                "source": "chromium",
+                "type": "button",
+                "width": 100,
+                "x": 100,
+                "y": 100,
+            },
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            action = await response.parse()
+            assert_matches_type(ActionResult, action, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_path_params_tap_overload_3(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            await async_client.v1.boxes.actions.with_raw_response.tap(
+                box_id="",
+                target={
+                    "id": "1",
+                    "center_x": 150,
+                    "center_y": 125,
+                    "height": 50,
+                    "label": "Click me",
+                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                    "source": "chromium",
+                    "type": "button",
+                    "width": 100,
+                    "x": 100,
+                    "y": 100,
+                },
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")

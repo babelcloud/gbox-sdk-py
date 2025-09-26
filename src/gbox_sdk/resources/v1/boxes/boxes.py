@@ -97,6 +97,7 @@ from ....types.v1.box_retrieve_response import BoxRetrieveResponse
 from ....types.v1.box_run_code_response import BoxRunCodeResponse
 from ....types.v1.box_live_view_url_response import BoxLiveViewURLResponse
 from ....types.v1.box_websocket_url_response import BoxWebsocketURLResponse
+from ....types.v1.box_resolution_set_response import BoxResolutionSetResponse
 from ....types.v1.box_execute_commands_response import BoxExecuteCommandsResponse
 from ....types.v1.box_web_terminal_url_response import BoxWebTerminalURLResponse
 
@@ -523,8 +524,10 @@ class BoxesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    ) -> BoxResolutionSetResponse:
         """
+        Set the screen resolution
+
         Args:
           height: The height of the screen
 
@@ -540,7 +543,6 @@ class BoxesResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
             f"/boxes/{box_id}/resolution",
             body=maybe_transform(
@@ -553,7 +555,7 @@ class BoxesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=BoxResolutionSetResponse,
         )
 
     def run_code(
@@ -1247,8 +1249,10 @@ class AsyncBoxesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    ) -> BoxResolutionSetResponse:
         """
+        Set the screen resolution
+
         Args:
           height: The height of the screen
 
@@ -1264,7 +1268,6 @@ class AsyncBoxesResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
             f"/boxes/{box_id}/resolution",
             body=await async_maybe_transform(
@@ -1277,7 +1280,7 @@ class AsyncBoxesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=BoxResolutionSetResponse,
         )
 
     async def run_code(

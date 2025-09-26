@@ -22,6 +22,7 @@ from gbox_sdk.types.v1.boxes import (
     ActionElementsDetectResponse,
     ActionSettingsUpdateResponse,
 )
+from gbox_sdk.types.v1.boxes.detected_element import DetectedElement
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -250,7 +251,7 @@ class TestActions:
     def test_method_click_overload_3(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.click(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target={
+            target=cast(DetectedElement, {
                 "id": "1",
                 "center_x": 150,
                 "center_y": 125,
@@ -262,7 +263,7 @@ class TestActions:
                 "width": 100,
                 "x": 100,
                 "y": 100,
-            },
+            }),
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -271,7 +272,7 @@ class TestActions:
     def test_method_click_with_all_params_overload_3(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.click(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target={
+            target=cast(DetectedElement, {
                 "id": "1",
                 "center_x": 150,
                 "center_y": 125,
@@ -283,7 +284,7 @@ class TestActions:
                 "width": 100,
                 "x": 100,
                 "y": 100,
-            },
+            }),
             button="left",
             double=False,
             include_screenshot=False,
@@ -306,7 +307,7 @@ class TestActions:
     def test_raw_response_click_overload_3(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.click(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target={
+            target=cast(DetectedElement, {
                 "id": "1",
                 "center_x": 150,
                 "center_y": 125,
@@ -318,7 +319,7 @@ class TestActions:
                 "width": 100,
                 "x": 100,
                 "y": 100,
-            },
+            }),
         )
 
         assert response.is_closed is True
@@ -331,7 +332,7 @@ class TestActions:
     def test_streaming_response_click_overload_3(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.click(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target={
+            target=cast(DetectedElement, {
                 "id": "1",
                 "center_x": 150,
                 "center_y": 125,
@@ -343,7 +344,7 @@ class TestActions:
                 "width": 100,
                 "x": 100,
                 "y": 100,
-            },
+            }),
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -359,7 +360,7 @@ class TestActions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.actions.with_raw_response.click(
                 box_id="",
-                target={
+                target=cast(DetectedElement, {
                     "id": "1",
                     "center_x": 150,
                     "center_y": 125,
@@ -371,7 +372,7 @@ class TestActions:
                     "width": 100,
                     "x": 100,
                     "y": 100,
-                },
+                }),
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -954,7 +955,7 @@ class TestActions:
     def test_method_long_press_overload_3(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.long_press(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target={
+            target=cast(DetectedElement, {
                 "id": "1",
                 "center_x": 150,
                 "center_y": 125,
@@ -966,7 +967,7 @@ class TestActions:
                 "width": 100,
                 "x": 100,
                 "y": 100,
-            },
+            }),
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -975,7 +976,7 @@ class TestActions:
     def test_method_long_press_with_all_params_overload_3(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.long_press(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target={
+            target=cast(DetectedElement, {
                 "id": "1",
                 "center_x": 150,
                 "center_y": 125,
@@ -987,7 +988,7 @@ class TestActions:
                 "width": 100,
                 "x": 100,
                 "y": 100,
-            },
+            }),
             duration="1s",
             include_screenshot=False,
             options={
@@ -1009,7 +1010,7 @@ class TestActions:
     def test_raw_response_long_press_overload_3(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.long_press(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target={
+            target=cast(DetectedElement, {
                 "id": "1",
                 "center_x": 150,
                 "center_y": 125,
@@ -1021,7 +1022,7 @@ class TestActions:
                 "width": 100,
                 "x": 100,
                 "y": 100,
-            },
+            }),
         )
 
         assert response.is_closed is True
@@ -1034,7 +1035,7 @@ class TestActions:
     def test_streaming_response_long_press_overload_3(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.long_press(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target={
+            target=cast(DetectedElement, {
                 "id": "1",
                 "center_x": 150,
                 "center_y": 125,
@@ -1046,7 +1047,7 @@ class TestActions:
                 "width": 100,
                 "x": 100,
                 "y": 100,
-            },
+            }),
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1062,7 +1063,7 @@ class TestActions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.actions.with_raw_response.long_press(
                 box_id="",
-                target={
+                target=cast(DetectedElement, {
                     "id": "1",
                     "center_x": 150,
                     "center_y": 125,
@@ -1074,7 +1075,7 @@ class TestActions:
                     "width": 100,
                     "x": 100,
                     "y": 100,
-                },
+                }),
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -2273,7 +2274,7 @@ class TestActions:
     def test_method_tap_overload_3(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.tap(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target={
+            target=cast(DetectedElement, {
                 "id": "1",
                 "center_x": 150,
                 "center_y": 125,
@@ -2285,7 +2286,7 @@ class TestActions:
                 "width": 100,
                 "x": 100,
                 "y": 100,
-            },
+            }),
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -2294,7 +2295,7 @@ class TestActions:
     def test_method_tap_with_all_params_overload_3(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.tap(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target={
+            target=cast(DetectedElement, {
                 "id": "1",
                 "center_x": 150,
                 "center_y": 125,
@@ -2306,7 +2307,7 @@ class TestActions:
                 "width": 100,
                 "x": 100,
                 "y": 100,
-            },
+            }),
             include_screenshot=False,
             options={
                 "screenshot": {
@@ -2327,7 +2328,7 @@ class TestActions:
     def test_raw_response_tap_overload_3(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.tap(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target={
+            target=cast(DetectedElement, {
                 "id": "1",
                 "center_x": 150,
                 "center_y": 125,
@@ -2339,7 +2340,7 @@ class TestActions:
                 "width": 100,
                 "x": 100,
                 "y": 100,
-            },
+            }),
         )
 
         assert response.is_closed is True
@@ -2352,7 +2353,7 @@ class TestActions:
     def test_streaming_response_tap_overload_3(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.tap(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target={
+            target=cast(DetectedElement, {
                 "id": "1",
                 "center_x": 150,
                 "center_y": 125,
@@ -2364,7 +2365,7 @@ class TestActions:
                 "width": 100,
                 "x": 100,
                 "y": 100,
-            },
+            }),
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -2380,7 +2381,7 @@ class TestActions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.actions.with_raw_response.tap(
                 box_id="",
-                target={
+                target=cast(DetectedElement, {
                     "id": "1",
                     "center_x": 150,
                     "center_y": 125,
@@ -2392,7 +2393,7 @@ class TestActions:
                     "width": 100,
                     "x": 100,
                     "y": 100,
-                },
+                }),
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -2426,8 +2427,6 @@ class TestActions:
                         {
                             "duration": "200ms",
                             "type": "move",
-                            "x": 400,
-                            "y": 300,
                         }
                     ],
                 }
@@ -2801,7 +2800,7 @@ class TestAsyncActions:
     async def test_method_click_overload_3(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.click(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target={
+            target=cast(DetectedElement, {
                 "id": "1",
                 "center_x": 150,
                 "center_y": 125,
@@ -2813,7 +2812,7 @@ class TestAsyncActions:
                 "width": 100,
                 "x": 100,
                 "y": 100,
-            },
+            }),
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -2822,7 +2821,7 @@ class TestAsyncActions:
     async def test_method_click_with_all_params_overload_3(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.click(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target={
+            target=cast(DetectedElement, {
                 "id": "1",
                 "center_x": 150,
                 "center_y": 125,
@@ -2834,7 +2833,7 @@ class TestAsyncActions:
                 "width": 100,
                 "x": 100,
                 "y": 100,
-            },
+            }),
             button="left",
             double=False,
             include_screenshot=False,
@@ -2857,7 +2856,7 @@ class TestAsyncActions:
     async def test_raw_response_click_overload_3(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.click(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target={
+            target=cast(DetectedElement, {
                 "id": "1",
                 "center_x": 150,
                 "center_y": 125,
@@ -2869,7 +2868,7 @@ class TestAsyncActions:
                 "width": 100,
                 "x": 100,
                 "y": 100,
-            },
+            }),
         )
 
         assert response.is_closed is True
@@ -2882,7 +2881,7 @@ class TestAsyncActions:
     async def test_streaming_response_click_overload_3(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.click(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target={
+            target=cast(DetectedElement, {
                 "id": "1",
                 "center_x": 150,
                 "center_y": 125,
@@ -2894,7 +2893,7 @@ class TestAsyncActions:
                 "width": 100,
                 "x": 100,
                 "y": 100,
-            },
+            }),
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -2910,7 +2909,7 @@ class TestAsyncActions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.click(
                 box_id="",
-                target={
+                target=cast(DetectedElement, {
                     "id": "1",
                     "center_x": 150,
                     "center_y": 125,
@@ -2922,7 +2921,7 @@ class TestAsyncActions:
                     "width": 100,
                     "x": 100,
                     "y": 100,
-                },
+                }),
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -3505,7 +3504,7 @@ class TestAsyncActions:
     async def test_method_long_press_overload_3(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.long_press(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target={
+            target=cast(DetectedElement, {
                 "id": "1",
                 "center_x": 150,
                 "center_y": 125,
@@ -3517,7 +3516,7 @@ class TestAsyncActions:
                 "width": 100,
                 "x": 100,
                 "y": 100,
-            },
+            }),
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -3526,7 +3525,7 @@ class TestAsyncActions:
     async def test_method_long_press_with_all_params_overload_3(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.long_press(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target={
+            target=cast(DetectedElement, {
                 "id": "1",
                 "center_x": 150,
                 "center_y": 125,
@@ -3538,7 +3537,7 @@ class TestAsyncActions:
                 "width": 100,
                 "x": 100,
                 "y": 100,
-            },
+            }),
             duration="1s",
             include_screenshot=False,
             options={
@@ -3560,7 +3559,7 @@ class TestAsyncActions:
     async def test_raw_response_long_press_overload_3(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.long_press(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target={
+            target=cast(DetectedElement, {
                 "id": "1",
                 "center_x": 150,
                 "center_y": 125,
@@ -3572,7 +3571,7 @@ class TestAsyncActions:
                 "width": 100,
                 "x": 100,
                 "y": 100,
-            },
+            }),
         )
 
         assert response.is_closed is True
@@ -3585,7 +3584,7 @@ class TestAsyncActions:
     async def test_streaming_response_long_press_overload_3(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.long_press(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target={
+            target=cast(DetectedElement, {
                 "id": "1",
                 "center_x": 150,
                 "center_y": 125,
@@ -3597,7 +3596,7 @@ class TestAsyncActions:
                 "width": 100,
                 "x": 100,
                 "y": 100,
-            },
+            }),
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -3613,7 +3612,7 @@ class TestAsyncActions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.long_press(
                 box_id="",
-                target={
+                target=cast(DetectedElement, {
                     "id": "1",
                     "center_x": 150,
                     "center_y": 125,
@@ -3625,7 +3624,7 @@ class TestAsyncActions:
                     "width": 100,
                     "x": 100,
                     "y": 100,
-                },
+                }),
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -4824,7 +4823,7 @@ class TestAsyncActions:
     async def test_method_tap_overload_3(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.tap(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target={
+            target=cast(DetectedElement, {
                 "id": "1",
                 "center_x": 150,
                 "center_y": 125,
@@ -4836,7 +4835,7 @@ class TestAsyncActions:
                 "width": 100,
                 "x": 100,
                 "y": 100,
-            },
+            }),
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -4845,7 +4844,7 @@ class TestAsyncActions:
     async def test_method_tap_with_all_params_overload_3(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.tap(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target={
+            target=cast(DetectedElement, {
                 "id": "1",
                 "center_x": 150,
                 "center_y": 125,
@@ -4857,7 +4856,7 @@ class TestAsyncActions:
                 "width": 100,
                 "x": 100,
                 "y": 100,
-            },
+            }),
             include_screenshot=False,
             options={
                 "screenshot": {
@@ -4878,7 +4877,7 @@ class TestAsyncActions:
     async def test_raw_response_tap_overload_3(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.tap(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target={
+            target=cast(DetectedElement, {
                 "id": "1",
                 "center_x": 150,
                 "center_y": 125,
@@ -4890,7 +4889,7 @@ class TestAsyncActions:
                 "width": 100,
                 "x": 100,
                 "y": 100,
-            },
+            }),
         )
 
         assert response.is_closed is True
@@ -4903,7 +4902,7 @@ class TestAsyncActions:
     async def test_streaming_response_tap_overload_3(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.tap(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target={
+            target=cast(DetectedElement, {
                 "id": "1",
                 "center_x": 150,
                 "center_y": 125,
@@ -4915,7 +4914,7 @@ class TestAsyncActions:
                 "width": 100,
                 "x": 100,
                 "y": 100,
-            },
+            }),
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -4931,7 +4930,7 @@ class TestAsyncActions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.tap(
                 box_id="",
-                target={
+                target=cast(DetectedElement, {
                     "id": "1",
                     "center_x": 150,
                     "center_y": 125,
@@ -4943,7 +4942,7 @@ class TestAsyncActions:
                     "width": 100,
                     "x": 100,
                     "y": 100,
-                },
+                }),
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -4977,8 +4976,6 @@ class TestAsyncActions:
                         {
                             "duration": "200ms",
                             "type": "move",
-                            "x": 400,
-                            "y": 300,
                         }
                     ],
                 }

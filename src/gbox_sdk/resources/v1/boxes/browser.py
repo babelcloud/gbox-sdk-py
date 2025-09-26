@@ -22,6 +22,7 @@ from ....types.v1.boxes import (
     browser_set_proxy_params,
     browser_update_tab_params,
 )
+from ....types.v1.boxes.browser_open_response import BrowserOpenResponse
 from ....types.v1.boxes.browser_get_tabs_response import BrowserGetTabsResponse
 from ....types.v1.boxes.browser_open_tab_response import BrowserOpenTabResponse
 from ....types.v1.boxes.browser_close_tab_response import BrowserCloseTabResponse
@@ -138,6 +139,8 @@ class BrowserResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
+        Close the browser in the specified box
+
         Args:
           extra_headers: Send extra headers
 
@@ -279,8 +282,12 @@ class BrowserResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> str:
-        """
+    ) -> BrowserOpenResponse:
+        """Open the browser in the specified box.
+
+        If the browser is already open, repeated
+        calls will not open a new browser.
+
         Args:
           maximize: Whether to maximize the browser window.
 
@@ -314,7 +321,7 @@ class BrowserResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=str,
+            cast_to=BrowserOpenResponse,
         )
 
     def open_tab(
@@ -613,6 +620,8 @@ class AsyncBrowserResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
+        Close the browser in the specified box
+
         Args:
           extra_headers: Send extra headers
 
@@ -754,8 +763,12 @@ class AsyncBrowserResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> str:
-        """
+    ) -> BrowserOpenResponse:
+        """Open the browser in the specified box.
+
+        If the browser is already open, repeated
+        calls will not open a new browser.
+
         Args:
           maximize: Whether to maximize the browser window.
 
@@ -789,7 +802,7 @@ class AsyncBrowserResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=str,
+            cast_to=BrowserOpenResponse,
         )
 
     async def open_tab(

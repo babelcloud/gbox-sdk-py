@@ -10,6 +10,7 @@ import pytest
 from gbox_sdk import GboxClient, AsyncGboxClient
 from tests.utils import assert_matches_type
 from gbox_sdk.types.v1.boxes import (
+    BrowserOpenResponse,
     BrowserGetTabsResponse,
     BrowserOpenTabResponse,
     BrowserCloseTabResponse,
@@ -301,7 +302,7 @@ class TestBrowser:
         browser = client.v1.boxes.browser.open(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
-        assert_matches_type(str, browser, path=["response"])
+        assert_matches_type(BrowserOpenResponse, browser, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -312,7 +313,7 @@ class TestBrowser:
             show_controls=True,
             size="1024x768",
         )
-        assert_matches_type(str, browser, path=["response"])
+        assert_matches_type(BrowserOpenResponse, browser, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -324,7 +325,7 @@ class TestBrowser:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         browser = response.parse()
-        assert_matches_type(str, browser, path=["response"])
+        assert_matches_type(BrowserOpenResponse, browser, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -336,7 +337,7 @@ class TestBrowser:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             browser = response.parse()
-            assert_matches_type(str, browser, path=["response"])
+            assert_matches_type(BrowserOpenResponse, browser, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -862,7 +863,7 @@ class TestAsyncBrowser:
         browser = await async_client.v1.boxes.browser.open(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
         )
-        assert_matches_type(str, browser, path=["response"])
+        assert_matches_type(BrowserOpenResponse, browser, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -873,7 +874,7 @@ class TestAsyncBrowser:
             show_controls=True,
             size="1024x768",
         )
-        assert_matches_type(str, browser, path=["response"])
+        assert_matches_type(BrowserOpenResponse, browser, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -885,7 +886,7 @@ class TestAsyncBrowser:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         browser = await response.parse()
-        assert_matches_type(str, browser, path=["response"])
+        assert_matches_type(BrowserOpenResponse, browser, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -897,7 +898,7 @@ class TestAsyncBrowser:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             browser = await response.parse()
-            assert_matches_type(str, browser, path=["response"])
+            assert_matches_type(BrowserOpenResponse, browser, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

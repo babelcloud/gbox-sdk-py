@@ -10,6 +10,7 @@ from gbox_sdk.wrapper.box.action import ActionOperator
 from gbox_sdk.wrapper.box.browser import BrowserOperator
 from gbox_sdk.wrapper.box.storage import StorageOperator
 from gbox_sdk.types.v1.android_box import AndroidBox
+from gbox_sdk.wrapper.box.resolution import ResolutionOperator
 from gbox_sdk.wrapper.box.file_system import FileSystemOperator
 from gbox_sdk.wrapper.box.websocket_client import WebSocketClient, WebSocketResult
 from gbox_sdk.types.v1.box_display_response import BoxDisplayResponse
@@ -48,6 +49,7 @@ class BaseBox:
         self.storage = StorageOperator(self.client, self.data.id)
         self.media = MediaOperator(self.client, self.data.id)
         self.proxy = ProxyOperator(self.client, self.data.id)
+        self.resolution = ResolutionOperator(self.client, self.data.id)
 
     def _sync_data(self) -> None:
         """

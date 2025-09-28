@@ -116,6 +116,12 @@ class ScrollSimple(TypedDict, total=False):
     still be returned but with empty URIs. Default is false.
     """
 
+    location: str
+    """Natural language description of the location where the scroll should originate.
+
+    If not provided, the scroll will be performed from the center of the screen.
+    """
+
     options: ActionCommonOptionsParam
     """Action common options"""
 

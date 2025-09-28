@@ -1977,6 +1977,7 @@ class ActionsResource(SyncAPIResource):
         distance: Union[float, Literal["tiny", "short", "medium", "long"]] | Omit = omit,
         duration: str | Omit = omit,
         include_screenshot: bool | Omit = omit,
+        location: str | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -2013,6 +2014,9 @@ class ActionsResource(SyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
+
+          location: Natural language description of the location where the scroll should originate.
+              If not provided, the scroll will be performed from the center of the screen.
 
           options: Action common options
 
@@ -2072,6 +2076,7 @@ class ActionsResource(SyncAPIResource):
         direction: Literal["up", "down", "left", "right"] | Omit = omit,
         distance: Union[float, Literal["tiny", "short", "medium", "long"]] | Omit = omit,
         duration: str | Omit = omit,
+        location: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2097,6 +2102,7 @@ class ActionsResource(SyncAPIResource):
                     "direction": direction,
                     "distance": distance,
                     "duration": duration,
+                    "location": location,
                 },
                 action_scroll_params.ActionScrollParams,
             ),
@@ -4806,6 +4812,7 @@ class AsyncActionsResource(AsyncAPIResource):
         distance: Union[float, Literal["tiny", "short", "medium", "long"]] | Omit = omit,
         duration: str | Omit = omit,
         include_screenshot: bool | Omit = omit,
+        location: str | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -4842,6 +4849,9 @@ class AsyncActionsResource(AsyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
+
+          location: Natural language description of the location where the scroll should originate.
+              If not provided, the scroll will be performed from the center of the screen.
 
           options: Action common options
 
@@ -4901,6 +4911,7 @@ class AsyncActionsResource(AsyncAPIResource):
         direction: Literal["up", "down", "left", "right"] | Omit = omit,
         distance: Union[float, Literal["tiny", "short", "medium", "long"]] | Omit = omit,
         duration: str | Omit = omit,
+        location: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -4926,6 +4937,7 @@ class AsyncActionsResource(AsyncAPIResource):
                     "direction": direction,
                     "distance": distance,
                     "duration": duration,
+                    "location": location,
                 },
                 action_scroll_params.ActionScrollParams,
             ),

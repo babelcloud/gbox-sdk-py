@@ -1775,6 +1775,7 @@ class TestActions:
             distance=300,
             duration="500ms",
             include_screenshot=False,
+            location="Side bar",
             options={
                 "screenshot": {
                     "delay": "500ms",
@@ -4326,6 +4327,7 @@ class TestAsyncActions:
             distance=300,
             duration="500ms",
             include_screenshot=False,
+            location="Side bar",
             options={
                 "screenshot": {
                     "delay": "500ms",

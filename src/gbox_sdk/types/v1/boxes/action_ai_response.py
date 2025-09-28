@@ -520,6 +520,12 @@ class AIActionScreenshotResultAIResponseActionTypedScrollSimpleAction(BaseModel)
     still be returned but with empty URIs. Default is false.
     """
 
+    location: Optional[str] = None
+    """Natural language description of the location where the scroll should originate.
+
+    If not provided, the scroll will be performed from the center of the screen.
+    """
+
     options: Optional[ActionCommonOptions] = None
     """Action common options"""
 
@@ -1827,6 +1833,12 @@ class AIActionResultAIResponseActionTypedScrollSimpleAction(BaseModel):
     This field will be ignored when `options.screenshot` is provided. Whether to
     include screenshots in the action response. If false, the screenshot object will
     still be returned but with empty URIs. Default is false.
+    """
+
+    location: Optional[str] = None
+    """Natural language description of the location where the scroll should originate.
+
+    If not provided, the scroll will be performed from the center of the screen.
     """
 
     options: Optional[ActionCommonOptions] = None

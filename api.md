@@ -77,7 +77,6 @@ from gbox_sdk.types.v1.boxes import (
     ActionResult,
     ActionScreenshotOptions,
     DetectedElement,
-    ActionAIResponse,
     ActionClipboardGetResponse,
     ActionElementsDetectResponse,
     ActionExtractResponse,
@@ -93,7 +92,6 @@ from gbox_sdk.types.v1.boxes import (
 
 Methods:
 
-- <code title="post /boxes/{boxId}/actions/ai">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">ai</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_ai_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_ai_response.py">ActionAIResponse</a></code>
 - <code title="post /boxes/{boxId}/actions/click">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">click</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_click_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_result.py">ActionResult</a></code>
 - <code title="get /boxes/{boxId}/actions/clipboard">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">clipboard_get</a>(box_id) -> str</code>
 - <code title="post /boxes/{boxId}/actions/clipboard">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">clipboard_set</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_clipboard_set_params.py">params</a>) -> None</code>

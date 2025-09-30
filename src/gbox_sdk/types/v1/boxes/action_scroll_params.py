@@ -40,6 +40,9 @@ class ScrollAdvanced(TypedDict, total=False):
     still be returned but with empty URIs. Default is false.
     """
 
+    model: Literal["gpt-5", "gpt-4o", "uitars", "cua"]
+    """Model to use for natural-language target resolution. Defaults to 'uitars'."""
+
     options: ActionCommonOptionsParam
     """Action common options"""
 
@@ -121,6 +124,9 @@ class ScrollSimple(TypedDict, total=False):
 
     If not provided, the scroll will be performed from the center of the screen.
     """
+
+    model: Literal["gpt-5", "gpt-4o", "uitars", "cua"]
+    """Model to use for natural-language target resolution. Defaults to 'uitars'."""
 
     options: ActionCommonOptionsParam
     """Action common options"""

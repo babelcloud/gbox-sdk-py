@@ -11,6 +11,7 @@ from .box_start_params import BoxStartParams as BoxStartParams
 from .box_list_response import BoxListResponse as BoxListResponse
 from .box_stop_response import BoxStopResponse as BoxStopResponse
 from .box_start_response import BoxStartResponse as BoxStartResponse
+from .device_list_params import DeviceListParams as DeviceListParams
 from .box_run_code_params import BoxRunCodeParams as BoxRunCodeParams
 from .box_display_response import BoxDisplayResponse as BoxDisplayResponse
 from .box_terminate_params import BoxTerminateParams as BoxTerminateParams

@@ -9,7 +9,10 @@ import pytest
 
 from gbox_sdk import GboxClient, AsyncGboxClient
 from tests.utils import assert_matches_type
-from gbox_sdk.types.v1 import DeviceInfo, GetDeviceListResponse
+from gbox_sdk.types.v1 import (
+    DeviceInfo,
+    GetDeviceListResponse,
+)
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -20,13 +23,27 @@ class TestDevices:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list(self, client: GboxClient) -> None:
-        device = client.v1.devices.list()
+        device = client.v1.devices.list(
+            x_device_ap="x-device-ap",
+        )
+        assert_matches_type(GetDeviceListResponse, device, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_list_with_all_params(self, client: GboxClient) -> None:
+        device = client.v1.devices.list(
+            x_device_ap="x-device-ap",
+            page=1,
+            page_size=10,
+        )
         assert_matches_type(GetDeviceListResponse, device, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: GboxClient) -> None:
-        response = client.v1.devices.with_raw_response.list()
+        response = client.v1.devices.with_raw_response.list(
+            x_device_ap="x-device-ap",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -36,7 +53,9 @@ class TestDevices:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: GboxClient) -> None:
-        with client.v1.devices.with_streaming_response.list() as response:
+        with client.v1.devices.with_streaming_response.list(
+            x_device_ap="x-device-ap",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -147,13 +166,27 @@ class TestAsyncDevices:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncGboxClient) -> None:
-        device = await async_client.v1.devices.list()
+        device = await async_client.v1.devices.list(
+            x_device_ap="x-device-ap",
+        )
+        assert_matches_type(GetDeviceListResponse, device, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_list_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        device = await async_client.v1.devices.list(
+            x_device_ap="x-device-ap",
+            page=1,
+            page_size=10,
+        )
         assert_matches_type(GetDeviceListResponse, device, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGboxClient) -> None:
-        response = await async_client.v1.devices.with_raw_response.list()
+        response = await async_client.v1.devices.with_raw_response.list(
+            x_device_ap="x-device-ap",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -163,7 +196,9 @@ class TestAsyncDevices:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGboxClient) -> None:
-        async with async_client.v1.devices.with_streaming_response.list() as response:
+        async with async_client.v1.devices.with_streaming_response.list(
+            x_device_ap="x-device-ap",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 

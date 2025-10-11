@@ -28,9 +28,6 @@ class ActionTypeParams(TypedDict, total=False):
     all existing text
     """
 
-    model: Literal["gpt-5", "gpt-4o", "uitars", "cua"]
-    """Model to use for natural-language target resolution. Defaults to 'uitars'."""
-
     options: ActionCommonOptionsParam
     """Action common options"""
 

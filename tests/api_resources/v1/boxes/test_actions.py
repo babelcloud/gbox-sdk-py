@@ -49,14 +49,14 @@ class TestActions:
             button="left",
             double=False,
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -122,14 +122,14 @@ class TestActions:
             button="left",
             double=False,
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -216,14 +216,14 @@ class TestActions:
             button="left",
             double=False,
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -423,14 +423,14 @@ class TestActions:
             },
             duration="500ms",
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -539,14 +539,14 @@ class TestActions:
             ],
             duration="50ms",
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -759,14 +759,14 @@ class TestActions:
             y=250,
             duration="1s",
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -831,14 +831,14 @@ class TestActions:
             target="Chrome icon",
             duration="1s",
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -924,14 +924,14 @@ class TestActions:
             }),
             duration="1s",
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -1030,14 +1030,14 @@ class TestActions:
             x=200,
             y=300,
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -1101,14 +1101,14 @@ class TestActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             buttons=["power"],
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -1170,14 +1170,14 @@ class TestActions:
             keys=["enter"],
             combination=True,
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -1499,14 +1499,14 @@ class TestActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             orientation="landscapeLeft",
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -1636,14 +1636,14 @@ class TestActions:
             x=400,
             y=300,
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -1716,14 +1716,14 @@ class TestActions:
             duration="500ms",
             include_screenshot=False,
             location="Side bar",
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -1917,14 +1917,14 @@ class TestActions:
             duration="500ms",
             include_screenshot=False,
             location="Chrome App",
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -2000,14 +2000,14 @@ class TestActions:
             },
             duration="500ms",
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -2091,14 +2091,14 @@ class TestActions:
             x=350,
             y=250,
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -2162,14 +2162,14 @@ class TestActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             target="login button",
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -2254,14 +2254,14 @@ class TestActions:
                 "y": 100,
             }),
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -2378,14 +2378,14 @@ class TestActions:
                 }
             ],
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -2468,14 +2468,14 @@ class TestActions:
             text="Hello World",
             include_screenshot=False,
             mode="append",
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -2547,14 +2547,14 @@ class TestAsyncActions:
             button="left",
             double=False,
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -2620,14 +2620,14 @@ class TestAsyncActions:
             button="left",
             double=False,
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -2714,14 +2714,14 @@ class TestAsyncActions:
             button="left",
             double=False,
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -2921,14 +2921,14 @@ class TestAsyncActions:
             },
             duration="500ms",
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -3037,14 +3037,14 @@ class TestAsyncActions:
             ],
             duration="50ms",
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -3257,14 +3257,14 @@ class TestAsyncActions:
             y=250,
             duration="1s",
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -3329,14 +3329,14 @@ class TestAsyncActions:
             target="Chrome icon",
             duration="1s",
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -3422,14 +3422,14 @@ class TestAsyncActions:
             }),
             duration="1s",
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -3528,14 +3528,14 @@ class TestAsyncActions:
             x=200,
             y=300,
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -3599,14 +3599,14 @@ class TestAsyncActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             buttons=["power"],
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -3668,14 +3668,14 @@ class TestAsyncActions:
             keys=["enter"],
             combination=True,
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -3997,14 +3997,14 @@ class TestAsyncActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             orientation="landscapeLeft",
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -4134,14 +4134,14 @@ class TestAsyncActions:
             x=400,
             y=300,
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -4214,14 +4214,14 @@ class TestAsyncActions:
             duration="500ms",
             include_screenshot=False,
             location="Side bar",
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -4415,14 +4415,14 @@ class TestAsyncActions:
             duration="500ms",
             include_screenshot=False,
             location="Chrome App",
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -4498,14 +4498,14 @@ class TestAsyncActions:
             },
             duration="500ms",
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -4589,14 +4589,14 @@ class TestAsyncActions:
             x=350,
             y=250,
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -4660,14 +4660,14 @@ class TestAsyncActions:
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             target="login button",
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -4752,14 +4752,14 @@ class TestAsyncActions:
                 "y": 100,
             }),
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -4876,14 +4876,14 @@ class TestAsyncActions:
                 }
             ],
             include_screenshot=False,
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -4966,14 +4966,14 @@ class TestAsyncActions:
             text="Hello World",
             include_screenshot=False,
             mode="append",
-            model="gpt-5",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",

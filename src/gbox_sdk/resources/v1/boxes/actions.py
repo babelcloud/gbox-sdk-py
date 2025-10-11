@@ -84,7 +84,6 @@ class ActionsResource(SyncAPIResource):
         button: Literal["left", "right", "middle"] | Omit = omit,
         double: bool | Omit = omit,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -112,8 +111,6 @@ class ActionsResource(SyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -165,7 +162,6 @@ class ActionsResource(SyncAPIResource):
         button: Literal["left", "right", "middle"] | Omit = omit,
         double: bool | Omit = omit,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -192,8 +188,6 @@ class ActionsResource(SyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -245,7 +239,6 @@ class ActionsResource(SyncAPIResource):
         button: Literal["left", "right", "middle"] | Omit = omit,
         double: bool | Omit = omit,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -271,8 +264,6 @@ class ActionsResource(SyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -325,7 +316,6 @@ class ActionsResource(SyncAPIResource):
         button: Literal["left", "right", "middle"] | Omit = omit,
         double: bool | Omit = omit,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -349,7 +339,6 @@ class ActionsResource(SyncAPIResource):
                     "button": button,
                     "double": double,
                     "include_screenshot": include_screenshot,
-                    "model": model,
                     "options": options,
                     "output_format": output_format,
                     "presigned_expires_in": presigned_expires_in,
@@ -444,7 +433,6 @@ class ActionsResource(SyncAPIResource):
         start: action_drag_params.DragSimpleStart,
         duration: str | Omit = omit,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -475,8 +463,6 @@ class ActionsResource(SyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -527,7 +513,6 @@ class ActionsResource(SyncAPIResource):
         path: Iterable[action_drag_params.DragAdvancedPath],
         duration: str | Omit = omit,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -556,8 +541,6 @@ class ActionsResource(SyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -609,7 +592,6 @@ class ActionsResource(SyncAPIResource):
         start: action_drag_params.DragSimpleStart | Omit = omit,
         duration: str | Omit = omit,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -632,7 +614,6 @@ class ActionsResource(SyncAPIResource):
                     "start": start,
                     "duration": duration,
                     "include_screenshot": include_screenshot,
-                    "model": model,
                     "options": options,
                     "output_format": output_format,
                     "presigned_expires_in": presigned_expires_in,
@@ -751,7 +732,6 @@ class ActionsResource(SyncAPIResource):
         y: float,
         duration: str | Omit = omit,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -782,8 +762,6 @@ class ActionsResource(SyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -834,7 +812,6 @@ class ActionsResource(SyncAPIResource):
         target: str,
         duration: str | Omit = omit,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -864,8 +841,6 @@ class ActionsResource(SyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -916,7 +891,6 @@ class ActionsResource(SyncAPIResource):
         target: DetectedElementParam,
         duration: str | Omit = omit,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -945,8 +919,6 @@ class ActionsResource(SyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -998,7 +970,6 @@ class ActionsResource(SyncAPIResource):
         y: float | Omit = omit,
         duration: str | Omit = omit,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -1021,7 +992,6 @@ class ActionsResource(SyncAPIResource):
                     "y": y,
                     "duration": duration,
                     "include_screenshot": include_screenshot,
-                    "model": model,
                     "options": options,
                     "output_format": output_format,
                     "presigned_expires_in": presigned_expires_in,
@@ -1043,7 +1013,6 @@ class ActionsResource(SyncAPIResource):
         x: float,
         y: float,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -1069,8 +1038,6 @@ class ActionsResource(SyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -1120,7 +1087,6 @@ class ActionsResource(SyncAPIResource):
                     "x": x,
                     "y": y,
                     "include_screenshot": include_screenshot,
-                    "model": model,
                     "options": options,
                     "output_format": output_format,
                     "presigned_expires_in": presigned_expires_in,
@@ -1140,7 +1106,6 @@ class ActionsResource(SyncAPIResource):
         *,
         buttons: List[Literal["power", "volumeUp", "volumeDown", "volumeMute", "home", "back", "menu", "appSwitch"]],
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -1162,8 +1127,6 @@ class ActionsResource(SyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -1212,7 +1175,6 @@ class ActionsResource(SyncAPIResource):
                 {
                     "buttons": buttons,
                     "include_screenshot": include_screenshot,
-                    "model": model,
                     "options": options,
                     "output_format": output_format,
                     "presigned_expires_in": presigned_expires_in,
@@ -1346,7 +1308,6 @@ class ActionsResource(SyncAPIResource):
         ],
         combination: bool | Omit = omit,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -1375,8 +1336,6 @@ class ActionsResource(SyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -1426,7 +1385,6 @@ class ActionsResource(SyncAPIResource):
                     "keys": keys,
                     "combination": combination,
                     "include_screenshot": include_screenshot,
-                    "model": model,
                     "options": options,
                     "output_format": output_format,
                     "presigned_expires_in": presigned_expires_in,
@@ -1667,7 +1625,6 @@ class ActionsResource(SyncAPIResource):
         *,
         orientation: Literal["portrait", "landscapeLeft", "portraitUpsideDown", "landscapeRight"],
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -1692,8 +1649,6 @@ class ActionsResource(SyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -1742,7 +1697,6 @@ class ActionsResource(SyncAPIResource):
                 {
                     "orientation": orientation,
                     "include_screenshot": include_screenshot,
-                    "model": model,
                     "options": options,
                     "output_format": output_format,
                     "presigned_expires_in": presigned_expires_in,
@@ -1827,7 +1781,6 @@ class ActionsResource(SyncAPIResource):
         x: float,
         y: float,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -1860,8 +1813,6 @@ class ActionsResource(SyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -1914,7 +1865,6 @@ class ActionsResource(SyncAPIResource):
         duration: str | Omit = omit,
         include_screenshot: bool | Omit = omit,
         location: str | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -1954,8 +1904,6 @@ class ActionsResource(SyncAPIResource):
 
           location: Natural language description of the location where the scroll should originate.
               If not provided, the scroll will be performed from the center of the screen.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -2008,7 +1956,6 @@ class ActionsResource(SyncAPIResource):
         x: float | Omit = omit,
         y: float | Omit = omit,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -2035,7 +1982,6 @@ class ActionsResource(SyncAPIResource):
                     "x": x,
                     "y": y,
                     "include_screenshot": include_screenshot,
-                    "model": model,
                     "options": options,
                     "output_format": output_format,
                     "presigned_expires_in": presigned_expires_in,
@@ -2175,7 +2121,6 @@ class ActionsResource(SyncAPIResource):
         duration: str | Omit = omit,
         include_screenshot: bool | Omit = omit,
         location: str | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -2210,8 +2155,6 @@ class ActionsResource(SyncAPIResource):
 
           location: Natural language description of the location where the swipe should originate.
               If not provided, the swipe will be performed from the center of the screen.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -2263,7 +2206,6 @@ class ActionsResource(SyncAPIResource):
         start: action_swipe_params.SwipeAdvancedStart,
         duration: str | Omit = omit,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -2292,8 +2234,6 @@ class ActionsResource(SyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -2346,7 +2286,6 @@ class ActionsResource(SyncAPIResource):
         duration: str | Omit = omit,
         include_screenshot: bool | Omit = omit,
         location: str | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -2371,7 +2310,6 @@ class ActionsResource(SyncAPIResource):
                     "duration": duration,
                     "include_screenshot": include_screenshot,
                     "location": location,
-                    "model": model,
                     "options": options,
                     "output_format": output_format,
                     "presigned_expires_in": presigned_expires_in,
@@ -2395,7 +2333,6 @@ class ActionsResource(SyncAPIResource):
         x: float,
         y: float,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -2419,8 +2356,6 @@ class ActionsResource(SyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -2470,7 +2405,6 @@ class ActionsResource(SyncAPIResource):
         *,
         target: str,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -2493,8 +2427,6 @@ class ActionsResource(SyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -2544,7 +2476,6 @@ class ActionsResource(SyncAPIResource):
         *,
         target: DetectedElementParam,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -2566,8 +2497,6 @@ class ActionsResource(SyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -2618,7 +2547,6 @@ class ActionsResource(SyncAPIResource):
         x: float | Omit = omit,
         y: float | Omit = omit,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -2640,7 +2568,6 @@ class ActionsResource(SyncAPIResource):
                     "x": x,
                     "y": y,
                     "include_screenshot": include_screenshot,
-                    "model": model,
                     "options": options,
                     "output_format": output_format,
                     "presigned_expires_in": presigned_expires_in,
@@ -2661,7 +2588,6 @@ class ActionsResource(SyncAPIResource):
         *,
         points: Iterable[action_touch_params.Point],
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -2685,8 +2611,6 @@ class ActionsResource(SyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -2735,7 +2659,6 @@ class ActionsResource(SyncAPIResource):
                 {
                     "points": points,
                     "include_screenshot": include_screenshot,
-                    "model": model,
                     "options": options,
                     "output_format": output_format,
                     "presigned_expires_in": presigned_expires_in,
@@ -2756,7 +2679,6 @@ class ActionsResource(SyncAPIResource):
         text: str,
         include_screenshot: bool | Omit = omit,
         mode: Literal["append", "replace"] | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -2784,8 +2706,6 @@ class ActionsResource(SyncAPIResource):
 
           mode: Text input mode: 'append' to add text to existing content, 'replace' to replace
               all existing text
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -2837,7 +2757,6 @@ class ActionsResource(SyncAPIResource):
                     "text": text,
                     "include_screenshot": include_screenshot,
                     "mode": mode,
-                    "model": model,
                     "options": options,
                     "output_format": output_format,
                     "presigned_expires_in": presigned_expires_in,
@@ -2883,7 +2802,6 @@ class AsyncActionsResource(AsyncAPIResource):
         button: Literal["left", "right", "middle"] | Omit = omit,
         double: bool | Omit = omit,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -2911,8 +2829,6 @@ class AsyncActionsResource(AsyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -2964,7 +2880,6 @@ class AsyncActionsResource(AsyncAPIResource):
         button: Literal["left", "right", "middle"] | Omit = omit,
         double: bool | Omit = omit,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -2991,8 +2906,6 @@ class AsyncActionsResource(AsyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -3044,7 +2957,6 @@ class AsyncActionsResource(AsyncAPIResource):
         button: Literal["left", "right", "middle"] | Omit = omit,
         double: bool | Omit = omit,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -3070,8 +2982,6 @@ class AsyncActionsResource(AsyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -3124,7 +3034,6 @@ class AsyncActionsResource(AsyncAPIResource):
         button: Literal["left", "right", "middle"] | Omit = omit,
         double: bool | Omit = omit,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -3148,7 +3057,6 @@ class AsyncActionsResource(AsyncAPIResource):
                     "button": button,
                     "double": double,
                     "include_screenshot": include_screenshot,
-                    "model": model,
                     "options": options,
                     "output_format": output_format,
                     "presigned_expires_in": presigned_expires_in,
@@ -3245,7 +3153,6 @@ class AsyncActionsResource(AsyncAPIResource):
         start: action_drag_params.DragSimpleStart,
         duration: str | Omit = omit,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -3276,8 +3183,6 @@ class AsyncActionsResource(AsyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -3328,7 +3233,6 @@ class AsyncActionsResource(AsyncAPIResource):
         path: Iterable[action_drag_params.DragAdvancedPath],
         duration: str | Omit = omit,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -3357,8 +3261,6 @@ class AsyncActionsResource(AsyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -3410,7 +3312,6 @@ class AsyncActionsResource(AsyncAPIResource):
         start: action_drag_params.DragSimpleStart | Omit = omit,
         duration: str | Omit = omit,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -3433,7 +3334,6 @@ class AsyncActionsResource(AsyncAPIResource):
                     "start": start,
                     "duration": duration,
                     "include_screenshot": include_screenshot,
-                    "model": model,
                     "options": options,
                     "output_format": output_format,
                     "presigned_expires_in": presigned_expires_in,
@@ -3554,7 +3454,6 @@ class AsyncActionsResource(AsyncAPIResource):
         y: float,
         duration: str | Omit = omit,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -3585,8 +3484,6 @@ class AsyncActionsResource(AsyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -3637,7 +3534,6 @@ class AsyncActionsResource(AsyncAPIResource):
         target: str,
         duration: str | Omit = omit,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -3667,8 +3563,6 @@ class AsyncActionsResource(AsyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -3719,7 +3613,6 @@ class AsyncActionsResource(AsyncAPIResource):
         target: DetectedElementParam,
         duration: str | Omit = omit,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -3748,8 +3641,6 @@ class AsyncActionsResource(AsyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -3801,7 +3692,6 @@ class AsyncActionsResource(AsyncAPIResource):
         y: float | Omit = omit,
         duration: str | Omit = omit,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -3824,7 +3714,6 @@ class AsyncActionsResource(AsyncAPIResource):
                     "y": y,
                     "duration": duration,
                     "include_screenshot": include_screenshot,
-                    "model": model,
                     "options": options,
                     "output_format": output_format,
                     "presigned_expires_in": presigned_expires_in,
@@ -3846,7 +3735,6 @@ class AsyncActionsResource(AsyncAPIResource):
         x: float,
         y: float,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -3872,8 +3760,6 @@ class AsyncActionsResource(AsyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -3923,7 +3809,6 @@ class AsyncActionsResource(AsyncAPIResource):
                     "x": x,
                     "y": y,
                     "include_screenshot": include_screenshot,
-                    "model": model,
                     "options": options,
                     "output_format": output_format,
                     "presigned_expires_in": presigned_expires_in,
@@ -3943,7 +3828,6 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         buttons: List[Literal["power", "volumeUp", "volumeDown", "volumeMute", "home", "back", "menu", "appSwitch"]],
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -3965,8 +3849,6 @@ class AsyncActionsResource(AsyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -4015,7 +3897,6 @@ class AsyncActionsResource(AsyncAPIResource):
                 {
                     "buttons": buttons,
                     "include_screenshot": include_screenshot,
-                    "model": model,
                     "options": options,
                     "output_format": output_format,
                     "presigned_expires_in": presigned_expires_in,
@@ -4149,7 +4030,6 @@ class AsyncActionsResource(AsyncAPIResource):
         ],
         combination: bool | Omit = omit,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -4178,8 +4058,6 @@ class AsyncActionsResource(AsyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -4229,7 +4107,6 @@ class AsyncActionsResource(AsyncAPIResource):
                     "keys": keys,
                     "combination": combination,
                     "include_screenshot": include_screenshot,
-                    "model": model,
                     "options": options,
                     "output_format": output_format,
                     "presigned_expires_in": presigned_expires_in,
@@ -4472,7 +4349,6 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         orientation: Literal["portrait", "landscapeLeft", "portraitUpsideDown", "landscapeRight"],
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -4497,8 +4373,6 @@ class AsyncActionsResource(AsyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -4547,7 +4421,6 @@ class AsyncActionsResource(AsyncAPIResource):
                 {
                     "orientation": orientation,
                     "include_screenshot": include_screenshot,
-                    "model": model,
                     "options": options,
                     "output_format": output_format,
                     "presigned_expires_in": presigned_expires_in,
@@ -4632,7 +4505,6 @@ class AsyncActionsResource(AsyncAPIResource):
         x: float,
         y: float,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -4665,8 +4537,6 @@ class AsyncActionsResource(AsyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -4719,7 +4589,6 @@ class AsyncActionsResource(AsyncAPIResource):
         duration: str | Omit = omit,
         include_screenshot: bool | Omit = omit,
         location: str | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -4759,8 +4628,6 @@ class AsyncActionsResource(AsyncAPIResource):
 
           location: Natural language description of the location where the scroll should originate.
               If not provided, the scroll will be performed from the center of the screen.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -4813,7 +4680,6 @@ class AsyncActionsResource(AsyncAPIResource):
         x: float | Omit = omit,
         y: float | Omit = omit,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -4840,7 +4706,6 @@ class AsyncActionsResource(AsyncAPIResource):
                     "x": x,
                     "y": y,
                     "include_screenshot": include_screenshot,
-                    "model": model,
                     "options": options,
                     "output_format": output_format,
                     "presigned_expires_in": presigned_expires_in,
@@ -4982,7 +4847,6 @@ class AsyncActionsResource(AsyncAPIResource):
         duration: str | Omit = omit,
         include_screenshot: bool | Omit = omit,
         location: str | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -5017,8 +4881,6 @@ class AsyncActionsResource(AsyncAPIResource):
 
           location: Natural language description of the location where the swipe should originate.
               If not provided, the swipe will be performed from the center of the screen.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -5070,7 +4932,6 @@ class AsyncActionsResource(AsyncAPIResource):
         start: action_swipe_params.SwipeAdvancedStart,
         duration: str | Omit = omit,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -5099,8 +4960,6 @@ class AsyncActionsResource(AsyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -5153,7 +5012,6 @@ class AsyncActionsResource(AsyncAPIResource):
         duration: str | Omit = omit,
         include_screenshot: bool | Omit = omit,
         location: str | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -5178,7 +5036,6 @@ class AsyncActionsResource(AsyncAPIResource):
                     "duration": duration,
                     "include_screenshot": include_screenshot,
                     "location": location,
-                    "model": model,
                     "options": options,
                     "output_format": output_format,
                     "presigned_expires_in": presigned_expires_in,
@@ -5202,7 +5059,6 @@ class AsyncActionsResource(AsyncAPIResource):
         x: float,
         y: float,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -5226,8 +5082,6 @@ class AsyncActionsResource(AsyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -5277,7 +5131,6 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         target: str,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -5300,8 +5153,6 @@ class AsyncActionsResource(AsyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -5351,7 +5202,6 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         target: DetectedElementParam,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -5373,8 +5223,6 @@ class AsyncActionsResource(AsyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -5425,7 +5273,6 @@ class AsyncActionsResource(AsyncAPIResource):
         x: float | Omit = omit,
         y: float | Omit = omit,
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -5447,7 +5294,6 @@ class AsyncActionsResource(AsyncAPIResource):
                     "x": x,
                     "y": y,
                     "include_screenshot": include_screenshot,
-                    "model": model,
                     "options": options,
                     "output_format": output_format,
                     "presigned_expires_in": presigned_expires_in,
@@ -5468,7 +5314,6 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         points: Iterable[action_touch_params.Point],
         include_screenshot: bool | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -5492,8 +5337,6 @@ class AsyncActionsResource(AsyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -5542,7 +5385,6 @@ class AsyncActionsResource(AsyncAPIResource):
                 {
                     "points": points,
                     "include_screenshot": include_screenshot,
-                    "model": model,
                     "options": options,
                     "output_format": output_format,
                     "presigned_expires_in": presigned_expires_in,
@@ -5563,7 +5405,6 @@ class AsyncActionsResource(AsyncAPIResource):
         text: str,
         include_screenshot: bool | Omit = omit,
         mode: Literal["append", "replace"] | Omit = omit,
-        model: Literal["gpt-5", "gpt-4o", "uitars", "cua"] | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -5591,8 +5432,6 @@ class AsyncActionsResource(AsyncAPIResource):
 
           mode: Text input mode: 'append' to add text to existing content, 'replace' to replace
               all existing text
-
-          model: Model to use for natural-language target resolution. Defaults to 'uitars'.
 
           options: Action common options
 
@@ -5644,7 +5483,6 @@ class AsyncActionsResource(AsyncAPIResource):
                     "text": text,
                     "include_screenshot": include_screenshot,
                     "mode": mode,
-                    "model": model,
                     "options": options,
                     "output_format": output_format,
                     "presigned_expires_in": presigned_expires_in,

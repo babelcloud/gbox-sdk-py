@@ -12,6 +12,7 @@ from .box import (
     FileSystemOperator,
 )
 from .sdk import GboxSDK
+from .profile import Profile, ProfileData, ProfileConfig, ProfileOptions
 
 __all__ = [
     "GboxSDK",
@@ -26,4 +27,8 @@ __all__ = [
     "AndroidBoxOperator",
     "AndroidAppOperator",
     "AndroidPkgOperator",
+    "Profile",
+    "ProfileData",
+    "ProfileConfig",
+    "ProfileOptions",
 ]

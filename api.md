@@ -228,6 +228,7 @@ Types:
 from gbox_sdk.types.v1.boxes import (
     AndroidApp,
     AndroidPkg,
+    AndroidAppiumURLResponse,
     AndroidGetConnectAddressResponse,
     AndroidInstallResponse,
     AndroidListActivitiesResponse,
@@ -239,6 +240,7 @@ from gbox_sdk.types.v1.boxes import (
 
 Methods:
 
+- <code title="post /boxes/{boxId}/android/connect-url/appium">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">appium_url</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/android_appium_url_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/android_appium_url_response.py">AndroidAppiumURLResponse</a></code>
 - <code title="post /boxes/{boxId}/android/packages/{packageName}/backup">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">backup</a>(package_name, \*, box_id) -> BinaryAPIResponse</code>
 - <code title="post /boxes/{boxId}/android/packages/backup-all">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">backup_all</a>(box_id) -> BinaryAPIResponse</code>
 - <code title="post /boxes/{boxId}/android/packages/{packageName}/close">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">close</a>(package_name, \*, box_id) -> None</code>

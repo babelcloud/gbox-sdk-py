@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>gbox_sdk.wrapper.box.android package &#8212; gbox-sdk-py 0.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <script src="../_static/documentation_options.js?v=01f34227"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="gbox_sdk.wrapper.box package" href="gbox_sdk.wrapper.box.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="gbox-sdk-wrapper-box-android-package">
+<h1>gbox_sdk.wrapper.box.android package<a class="headerlink" href="#gbox-sdk-wrapper-box-android-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-gbox_sdk.wrapper.box.android.android">
+<span id="gbox-sdk-wrapper-box-android-android-module"></span><h2>gbox_sdk.wrapper.box.android.android module<a class="headerlink" href="#module-gbox_sdk.wrapper.box.android.android" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-gbox_sdk.wrapper.box.android.app_manager">
+<span id="gbox-sdk-wrapper-box-android-app-manager-module"></span><h2>gbox_sdk.wrapper.box.android.app_manager module<a class="headerlink" href="#module-gbox_sdk.wrapper.box.android.app_manager" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.app_manager.AndroidAppManager">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gbox_sdk.wrapper.box.android.app_manager.</span></span><span class="sig-name descname"><span class="pre">AndroidAppManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.app_manager.AndroidAppManager" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Manager class for handling Android app operations within a box.</p>
+<p>Provides methods to install, uninstall, list, retrieve, close, and backup Android apps.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>client (GboxClient): The API client used for communication.
+box (AndroidBox): The Android box data object.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.app_manager.AndroidAppManager.backup_all">
+<span class="sig-name descname"><span class="pre">backup_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.app_manager.AndroidAppManager.backup_all" title="Link to this definition">¶</a></dt>
+<dd><p>Backup all installed Android apps on the box.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryAPIResponse</span></code></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Returns:</dt><dd><p>BinaryAPIResponse: The backup response containing binary data.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">backup_all</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.app_manager.AndroidAppManager.close_all">
+<span class="sig-name descname"><span class="pre">close_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.app_manager.AndroidAppManager.close_all" title="Link to this definition">¶</a></dt>
+<dd><p>Close all running Android apps on the box.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">close_all</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.app_manager.AndroidAppManager.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">package_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.app_manager.AndroidAppManager.get" title="Link to this definition">¶</a></dt>
+<dd><p>Get an operator for a specific installed app.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AndroidAppOperator" title="gbox_sdk.AndroidAppOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">AndroidAppOperator</span></code></a></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Args:</dt><dd><p>package_name: The package name of the app.</p>
+</dd>
+<dt>Returns:</dt><dd><p>AndroidAppOperator: Operator for the specified app.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;com.example.app&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.app_manager.AndroidAppManager.get_info">
+<span class="sig-name descname"><span class="pre">get_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">package_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.app_manager.AndroidAppManager.get_info" title="Link to this definition">¶</a></dt>
+<dd><p>Get detailed information for a specific installed app.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="gbox_sdk.types.v1.boxes.html#gbox_sdk.types.v1.boxes.android_app.AndroidApp" title="gbox_sdk.types.v1.boxes.android_app.AndroidApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">AndroidApp</span></code></a></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Args:</dt><dd><p>package_name: The package name of the app.</p>
+</dd>
+<dt>Returns:</dt><dd><p>AndroidGetResponse: App information response.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">get_info</span><span class="p">(</span><span class="s2">&quot;com.example.app&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.app_manager.AndroidAppManager.install">
+<span class="sig-name descname"><span class="pre">install</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">open=&lt;gbox_sdk.Omit</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.app_manager.AndroidAppManager.install" title="Link to this definition">¶</a></dt>
+<dd><p>Install an Android app on the box.</p>
+<p>Supports multiple APK input formats:
+- Local file path: “/path/to/app.apk”
+- File URL: “<a class="reference external" href="file:///path/to/app.apk">file:///path/to/app.apk</a>”
+- HTTP URL: “<a class="reference external" href="https://example.com/app.apk">https://example.com/app.apk</a>”
+- File object or stream</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AndroidAppOperator" title="gbox_sdk.AndroidAppOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">AndroidAppOperator</span></code></a></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Args:</dt><dd><p>apk: APK file or ZIP archive to install (max file size: 512MB).</p>
+<blockquote>
+<div><p><strong>Single APK mode (installMultiple: false):</strong></p>
+<ul class="simple">
+<li><p>Upload a single APK file (e.g., app.apk)</p></li>
+</ul>
+<p><strong>Install-Multiple mode (installMultiple: true):</strong></p>
+<ul class="simple">
+<li><p>Upload a ZIP archive containing multiple APK files</p></li>
+<li><p>ZIP filename example: com.reddit.frontpage-gplay.zip</p></li>
+<li><p>ZIP contents example:</p></li>
+</ul>
+<p>com.reddit.frontpage-gplay.zip
+└── com.reddit.frontpage-gplay/ (folder)</p>
+<blockquote>
+<div><p>├── reddit-base.apk (base APK)
+├── reddit-arm64.apk (architecture-specific)
+├── reddit-en.apk (language pack)
+└── reddit-mdpi.apk (density-specific resources)</p>
+</div></blockquote>
+<p>This is commonly used for split APKs where different components are separated by
+architecture, language, or screen density.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>install_multiple: Whether to use ‘adb install-multiple’ command for installation. When true, uses</dt><dd><p>install-multiple which is useful for split APKs or when installing multiple
+related packages. When false, uses standard ‘adb install’ command. Split APKs
+are commonly used for apps with different architecture variants, language packs,
+or modular components.</p>
+</dd>
+<dt>open: Whether to open the app after installation. Will find and launch the launcher</dt><dd><p>activity of the installed app. If there are multiple launcher activities, only
+one will be opened. If the installed APK has no launcher activity, this
+parameter will have no effect.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>AndroidAppOperator: Operator for the installed app.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">install</span><span class="p">(</span><span class="n">apk</span><span class="o">=</span><span class="s2">&quot;/path/to/app.apk&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">install</span><span class="p">(</span><span class="n">apk</span><span class="o">=</span><span class="s2">&quot;https://example.com/app.apk&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.app_manager.AndroidAppManager.list">
+<span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.app_manager.AndroidAppManager.list" title="Link to this definition">¶</a></dt>
+<dd><p>List all installed Android apps as operator objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#gbox_sdk.wrapper.box.android.types.ListAndroidApp" title="gbox_sdk.wrapper.box.android.types.ListAndroidApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ListAndroidApp</span></code></a></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Returns:</dt><dd><p>ListAndroidApp: Response containing app operator instances.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">list</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.app_manager.AndroidAppManager.list_info">
+<span class="sig-name descname"><span class="pre">list_info</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.app_manager.AndroidAppManager.list_info" title="Link to this definition">¶</a></dt>
+<dd><p>Get detailed information of all installed Android apps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="gbox_sdk.types.v1.boxes.html#gbox_sdk.types.v1.boxes.android_list_app_response.AndroidListAppResponse" title="gbox_sdk.types.v1.boxes.android_list_app_response.AndroidListAppResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">AndroidListAppResponse</span></code></a></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Returns:</dt><dd><p>AndroidListAppResponse: Response containing app information.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">list_info</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.app_manager.AndroidAppManager.uninstall">
+<span class="sig-name descname"><span class="pre">uninstall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">package_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_data=&lt;gbox_sdk.Omit</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.app_manager.AndroidAppManager.uninstall" title="Link to this definition">¶</a></dt>
+<dd><p>Uninstall an Android app from the box.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Args:</dt><dd><p>package_name: The package name of the app to uninstall.</p>
+<p>keep_data: uninstalls the pkg while retaining the data/cache</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">uninstall</span><span class="p">(</span><span class="s2">&quot;com.example.app&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">uninstall</span><span class="p">(</span><span class="n">package_name</span><span class="o">=</span><span class="s2">&quot;com.example.app&quot;</span><span class="p">,</span> <span class="n">keep_data</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-gbox_sdk.wrapper.box.android.app_operator">
+<span id="gbox-sdk-wrapper-box-android-app-operator-module"></span><h2>gbox_sdk.wrapper.box.android.app_operator module<a class="headerlink" href="#module-gbox_sdk.wrapper.box.android.app_operator" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-gbox_sdk.wrapper.box.android.pkg_manager">
+<span id="gbox-sdk-wrapper-box-android-pkg-manager-module"></span><h2>gbox_sdk.wrapper.box.android.pkg_manager module<a class="headerlink" href="#module-gbox_sdk.wrapper.box.android.pkg_manager" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.pkg_manager.AndroidPkgManager">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gbox_sdk.wrapper.box.android.pkg_manager.</span></span><span class="sig-name descname"><span class="pre">AndroidPkgManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.pkg_manager.AndroidPkgManager" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Manager class for handling Android package operations within a box.</p>
+<p>Provides methods to install, uninstall, list, retrieve, close, and backup Android packages.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>client (GboxClient): The API client used for communication.
+box (AndroidBox): The Android box data object.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.pkg_manager.AndroidPkgManager.backup_all">
+<span class="sig-name descname"><span class="pre">backup_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.pkg_manager.AndroidPkgManager.backup_all" title="Link to this definition">¶</a></dt>
+<dd><p>Backup all installed Android packages on the box.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryAPIResponse</span></code></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Returns:</dt><dd><p>BinaryAPIResponse: The backup response containing binary data.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">backup_all</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.pkg_manager.AndroidPkgManager.close_all">
+<span class="sig-name descname"><span class="pre">close_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.pkg_manager.AndroidPkgManager.close_all" title="Link to this definition">¶</a></dt>
+<dd><p>Close all running Android packages on the box.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">close_all</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.pkg_manager.AndroidPkgManager.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">package_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.pkg_manager.AndroidPkgManager.get" title="Link to this definition">¶</a></dt>
+<dd><p>Get an operator for a specific installed package.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AndroidPkgOperator" title="gbox_sdk.AndroidPkgOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">AndroidPkgOperator</span></code></a></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Args:</dt><dd><p>package_name (str): The package name of the app.</p>
+</dd>
+<dt>Returns:</dt><dd><p>AndroidPkgOperator: Operator for the specified package.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;com.example.app&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.pkg_manager.AndroidPkgManager.get_info">
+<span class="sig-name descname"><span class="pre">get_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">package_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.pkg_manager.AndroidPkgManager.get_info" title="Link to this definition">¶</a></dt>
+<dd><p>Get detailed information for a specific installed package.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">AndroidPkg</span></code></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Args:</dt><dd><p>package_name (str): The package name of the app.</p>
+</dd>
+<dt>Returns:</dt><dd><p>AndroidGetResponse: Package information response.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">get_info</span><span class="p">(</span><span class="s2">&quot;com.example.app&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.pkg_manager.AndroidPkgManager.install">
+<span class="sig-name descname"><span class="pre">install</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">open=&lt;gbox_sdk.Omit</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.pkg_manager.AndroidPkgManager.install" title="Link to this definition">¶</a></dt>
+<dd><p>Install an Android package on the box.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="gbox_sdk.types.v1.boxes.html#gbox_sdk.types.v1.boxes.android_install_response.AndroidInstallResponse" title="gbox_sdk.types.v1.boxes.android_install_response.AndroidInstallResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">AndroidInstallResponse</span></code></a></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Args:</dt><dd><p>apk: APK file or ZIP archive to install (max file size: 512MB).</p>
+<blockquote>
+<div><p><strong>Single APK mode (installMultiple: false):</strong></p>
+<ul class="simple">
+<li><p>Upload a single APK file (e.g., app.apk)</p></li>
+</ul>
+<p><strong>Install-Multiple mode (installMultiple: true):</strong></p>
+<ul class="simple">
+<li><p>Upload a ZIP archive containing multiple APK files</p></li>
+<li><p>ZIP filename example: com.reddit.frontpage-gplay.zip</p></li>
+<li><p>ZIP contents example:</p></li>
+</ul>
+<p>com.reddit.frontpage-gplay.zip
+└── com.reddit.frontpage-gplay/ (folder)</p>
+<blockquote>
+<div><p>├── reddit-base.apk (base APK)
+├── reddit-arm64.apk (architecture-specific)
+├── reddit-en.apk (language pack)
+└── reddit-mdpi.apk (density-specific resources)</p>
+</div></blockquote>
+<p>This is commonly used for split APKs where different components are separated by
+architecture, language, or screen density.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>open: Whether to open the app after installation. Will find and launch the launcher</dt><dd><p>activity of the installed app. If there are multiple launcher activities, only
+one will be opened. If the installed APK has no launcher activity, this
+parameter will have no effect.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>AndroidInstallResponse: The response of the install operation.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">install</span><span class="p">(</span><span class="n">apk</span><span class="o">=</span><span class="s2">&quot;/path/to/app.apk&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">install</span><span class="p">(</span><span class="n">apk</span><span class="o">=</span><span class="s2">&quot;https://example.com/app.apk&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.pkg_manager.AndroidPkgManager.list">
+<span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pkg_type=&lt;gbox_sdk.Omit</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">running_filter=&lt;gbox_sdk.Omit</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.pkg_manager.AndroidPkgManager.list" title="Link to this definition">¶</a></dt>
+<dd><p>List all installed Android packages as operator objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#gbox_sdk.wrapper.box.android.types.ListAndroidPkg" title="gbox_sdk.wrapper.box.android.types.ListAndroidPkg"><code class="xref py py-class docutils literal notranslate"><span class="pre">ListAndroidPkg</span></code></a></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Args:</dt><dd><p>pkg_type: system or thirdParty, default is thirdParty</p>
+<dl class="simple">
+<dt>running_filter: Filter pkgs by running status: running (show only running pkgs), notRunning</dt><dd><p>(show only non-running pkgs). Default is all</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>ListAndroidPkg: Response containing package operator instances.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">list</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">pkg_type</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;thirdParty&quot;</span><span class="p">],</span> <span class="n">running_filter</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;running&quot;</span><span class="p">,</span> <span class="s2">&quot;notRunning&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.pkg_manager.AndroidPkgManager.list_info">
+<span class="sig-name descname"><span class="pre">list_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pkg_type=&lt;gbox_sdk.Omit</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">running_filter=&lt;gbox_sdk.Omit</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.pkg_manager.AndroidPkgManager.list_info" title="Link to this definition">¶</a></dt>
+<dd><p>Get detailed information of all installed Android packages.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="gbox_sdk.types.v1.boxes.html#gbox_sdk.types.v1.boxes.android_list_pkg_response.AndroidListPkgResponse" title="gbox_sdk.types.v1.boxes.android_list_pkg_response.AndroidListPkgResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">AndroidListPkgResponse</span></code></a></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Args:</dt><dd><p>pkg_type: system or thirdParty, default is thirdParty</p>
+<dl class="simple">
+<dt>running_filter: Filter pkgs by running status: running (show only running pkgs), notRunning</dt><dd><p>(show only non-running pkgs). Default is all</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>AndroidListPkgResponse: Response containing package information.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">list_info</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">list_info</span><span class="p">(</span><span class="n">pkg_type</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;thirdParty&quot;</span><span class="p">],</span> <span class="n">running_filter</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;running&quot;</span><span class="p">,</span> <span class="s2">&quot;notRunning&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.pkg_manager.AndroidPkgManager.list_simple_info">
+<span class="sig-name descname"><span class="pre">list_simple_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pkg_type=&lt;gbox_sdk.Omit</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.pkg_manager.AndroidPkgManager.list_simple_info" title="Link to this definition">¶</a></dt>
+<dd><p>List all installed Android packages with simple information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="gbox_sdk.types.v1.boxes.html#gbox_sdk.types.v1.boxes.android_list_pkg_simple_response.AndroidListPkgSimpleResponse" title="gbox_sdk.types.v1.boxes.android_list_pkg_simple_response.AndroidListPkgSimpleResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">AndroidListPkgSimpleResponse</span></code></a></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Args:</dt><dd><p>pkg_type: system or thirdParty, default is thirdParty</p>
+</dd>
+<dt>Returns:</dt><dd><p>ListAndroidPkgResponse: Response containing package information.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">list_simple_info</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.pkg_manager.AndroidPkgManager.uninstall">
+<span class="sig-name descname"><span class="pre">uninstall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">package_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_data=&lt;gbox_sdk.Omit</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.pkg_manager.AndroidPkgManager.uninstall" title="Link to this definition">¶</a></dt>
+<dd><p>Uninstall an Android package from the box.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Args:</dt><dd><p>package_name: The package name of the app to uninstall.</p>
+<p>keep_data: uninstalls the pkg while retaining the data/cache</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">uninstall</span><span class="p">(</span><span class="s2">&quot;com.example.app&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">uninstall</span><span class="p">(</span><span class="n">package_name</span><span class="o">=</span><span class="s2">&quot;com.example.app&quot;</span><span class="p">,</span> <span class="n">keep_data</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-gbox_sdk.wrapper.box.android.pkg_operator">
+<span id="gbox-sdk-wrapper-box-android-pkg-operator-module"></span><h2>gbox_sdk.wrapper.box.android.pkg_operator module<a class="headerlink" href="#module-gbox_sdk.wrapper.box.android.pkg_operator" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-gbox_sdk.wrapper.box.android.types">
+<span id="gbox-sdk-wrapper-box-android-types-module"></span><h2>gbox_sdk.wrapper.box.android.types module<a class="headerlink" href="#module-gbox_sdk.wrapper.box.android.types" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.types.AndroidUninstall">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gbox_sdk.wrapper.box.android.types.</span></span><span class="sig-name descname"><span class="pre">AndroidUninstall</span></span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.types.AndroidUninstall" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TypedDict</span></code></p>
+<p>Parameters for uninstalling an Android package (without box_id).</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.types.AndroidUninstall.keep_data">
+<span class="sig-name descname"><span class="pre">keep_data</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">Annotated</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code><span class="pre">]</span></em><a class="headerlink" href="#gbox_sdk.wrapper.box.android.types.AndroidUninstall.keep_data" title="Link to this definition">¶</a></dt>
+<dd><p>uninstalls the pkg while retaining the data/cache</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.types.InstallAndroidAppByLocalFile">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gbox_sdk.wrapper.box.android.types.</span></span><span class="sig-name descname"><span class="pre">InstallAndroidAppByLocalFile</span></span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.types.InstallAndroidAppByLocalFile" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TypedDict</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.types.InstallAndroidAppByLocalFile.apk">
+<span class="sig-name descname"><span class="pre">apk</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">Required</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code><span class="pre">]</span></em><a class="headerlink" href="#gbox_sdk.wrapper.box.android.types.InstallAndroidAppByLocalFile.apk" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.types.ListAndroidApp">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gbox_sdk.wrapper.box.android.types.</span></span><span class="sig-name descname"><span class="pre">ListAndroidApp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operators</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.types.ListAndroidApp" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Response type for listing Android apps as operators.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.types.ListAndroidPkg">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gbox_sdk.wrapper.box.android.types.</span></span><span class="sig-name descname"><span class="pre">ListAndroidPkg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operators</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.types.ListAndroidPkg" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Response type for listing Android packages as operators.</p>
+</dd></dl>
+
+</section>
+<section id="module-gbox_sdk.wrapper.box.android">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-gbox_sdk.wrapper.box.android" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidAppManager">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gbox_sdk.wrapper.box.android.</span></span><span class="sig-name descname"><span class="pre">AndroidAppManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidAppManager" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Manager class for handling Android app operations within a box.</p>
+<p>Provides methods to install, uninstall, list, retrieve, close, and backup Android apps.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>client (GboxClient): The API client used for communication.
+box (AndroidBox): The Android box data object.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidAppManager.backup_all">
+<span class="sig-name descname"><span class="pre">backup_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidAppManager.backup_all" title="Link to this definition">¶</a></dt>
+<dd><p>Backup all installed Android apps on the box.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryAPIResponse</span></code></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Returns:</dt><dd><p>BinaryAPIResponse: The backup response containing binary data.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">backup_all</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidAppManager.close_all">
+<span class="sig-name descname"><span class="pre">close_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidAppManager.close_all" title="Link to this definition">¶</a></dt>
+<dd><p>Close all running Android apps on the box.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">close_all</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidAppManager.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">package_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidAppManager.get" title="Link to this definition">¶</a></dt>
+<dd><p>Get an operator for a specific installed app.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AndroidAppOperator" title="gbox_sdk.AndroidAppOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">AndroidAppOperator</span></code></a></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Args:</dt><dd><p>package_name: The package name of the app.</p>
+</dd>
+<dt>Returns:</dt><dd><p>AndroidAppOperator: Operator for the specified app.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;com.example.app&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidAppManager.get_info">
+<span class="sig-name descname"><span class="pre">get_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">package_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidAppManager.get_info" title="Link to this definition">¶</a></dt>
+<dd><p>Get detailed information for a specific installed app.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="gbox_sdk.types.v1.boxes.html#gbox_sdk.types.v1.boxes.android_app.AndroidApp" title="gbox_sdk.types.v1.boxes.android_app.AndroidApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">AndroidApp</span></code></a></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Args:</dt><dd><p>package_name: The package name of the app.</p>
+</dd>
+<dt>Returns:</dt><dd><p>AndroidGetResponse: App information response.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">get_info</span><span class="p">(</span><span class="s2">&quot;com.example.app&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidAppManager.install">
+<span class="sig-name descname"><span class="pre">install</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">open=&lt;gbox_sdk.Omit</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidAppManager.install" title="Link to this definition">¶</a></dt>
+<dd><p>Install an Android app on the box.</p>
+<p>Supports multiple APK input formats:
+- Local file path: “/path/to/app.apk”
+- File URL: “<a class="reference external" href="file:///path/to/app.apk">file:///path/to/app.apk</a>”
+- HTTP URL: “<a class="reference external" href="https://example.com/app.apk">https://example.com/app.apk</a>”
+- File object or stream</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AndroidAppOperator" title="gbox_sdk.AndroidAppOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">AndroidAppOperator</span></code></a></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Args:</dt><dd><p>apk: APK file or ZIP archive to install (max file size: 512MB).</p>
+<blockquote>
+<div><p><strong>Single APK mode (installMultiple: false):</strong></p>
+<ul class="simple">
+<li><p>Upload a single APK file (e.g., app.apk)</p></li>
+</ul>
+<p><strong>Install-Multiple mode (installMultiple: true):</strong></p>
+<ul class="simple">
+<li><p>Upload a ZIP archive containing multiple APK files</p></li>
+<li><p>ZIP filename example: com.reddit.frontpage-gplay.zip</p></li>
+<li><p>ZIP contents example:</p></li>
+</ul>
+<p>com.reddit.frontpage-gplay.zip
+└── com.reddit.frontpage-gplay/ (folder)</p>
+<blockquote>
+<div><p>├── reddit-base.apk (base APK)
+├── reddit-arm64.apk (architecture-specific)
+├── reddit-en.apk (language pack)
+└── reddit-mdpi.apk (density-specific resources)</p>
+</div></blockquote>
+<p>This is commonly used for split APKs where different components are separated by
+architecture, language, or screen density.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>install_multiple: Whether to use ‘adb install-multiple’ command for installation. When true, uses</dt><dd><p>install-multiple which is useful for split APKs or when installing multiple
+related packages. When false, uses standard ‘adb install’ command. Split APKs
+are commonly used for apps with different architecture variants, language packs,
+or modular components.</p>
+</dd>
+<dt>open: Whether to open the app after installation. Will find and launch the launcher</dt><dd><p>activity of the installed app. If there are multiple launcher activities, only
+one will be opened. If the installed APK has no launcher activity, this
+parameter will have no effect.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>AndroidAppOperator: Operator for the installed app.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">install</span><span class="p">(</span><span class="n">apk</span><span class="o">=</span><span class="s2">&quot;/path/to/app.apk&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">install</span><span class="p">(</span><span class="n">apk</span><span class="o">=</span><span class="s2">&quot;https://example.com/app.apk&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidAppManager.list">
+<span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidAppManager.list" title="Link to this definition">¶</a></dt>
+<dd><p>List all installed Android apps as operator objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#gbox_sdk.wrapper.box.android.types.ListAndroidApp" title="gbox_sdk.wrapper.box.android.types.ListAndroidApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ListAndroidApp</span></code></a></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Returns:</dt><dd><p>ListAndroidApp: Response containing app operator instances.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">list</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidAppManager.list_info">
+<span class="sig-name descname"><span class="pre">list_info</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidAppManager.list_info" title="Link to this definition">¶</a></dt>
+<dd><p>Get detailed information of all installed Android apps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="gbox_sdk.types.v1.boxes.html#gbox_sdk.types.v1.boxes.android_list_app_response.AndroidListAppResponse" title="gbox_sdk.types.v1.boxes.android_list_app_response.AndroidListAppResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">AndroidListAppResponse</span></code></a></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Returns:</dt><dd><p>AndroidListAppResponse: Response containing app information.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">list_info</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidAppManager.uninstall">
+<span class="sig-name descname"><span class="pre">uninstall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">package_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_data=&lt;gbox_sdk.Omit</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidAppManager.uninstall" title="Link to this definition">¶</a></dt>
+<dd><p>Uninstall an Android app from the box.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Args:</dt><dd><p>package_name: The package name of the app to uninstall.</p>
+<p>keep_data: uninstalls the pkg while retaining the data/cache</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">uninstall</span><span class="p">(</span><span class="s2">&quot;com.example.app&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">uninstall</span><span class="p">(</span><span class="n">package_name</span><span class="o">=</span><span class="s2">&quot;com.example.app&quot;</span><span class="p">,</span> <span class="n">keep_data</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidAppOperator">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gbox_sdk.wrapper.box.android.</span></span><span class="sig-name descname"><span class="pre">AndroidAppOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidAppOperator" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Operator class for managing a specific Android app within a box.</p>
+<p>Provides methods to open, restart, close, list activities, and backup the app.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>client (GboxClient): The API client used for communication.
+box (AndroidBox): The Android box data object.
+data (AndroidApp): The app data object.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidAppOperator.backup">
+<span class="sig-name descname"><span class="pre">backup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidAppOperator.backup" title="Link to this definition">¶</a></dt>
+<dd><p>Backup the app.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryAPIResponse</span></code></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Returns:</dt><dd><p>BinaryAPIResponse: The backup response containing binary data.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">backup</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidAppOperator.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidAppOperator.close" title="Link to this definition">¶</a></dt>
+<dd><p>Close the app.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidAppOperator.list_activities">
+<span class="sig-name descname"><span class="pre">list_activities</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidAppOperator.list_activities" title="Link to this definition">¶</a></dt>
+<dd><p>List all activities of the app.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="gbox_sdk.types.v1.boxes.html#gbox_sdk.types.v1.boxes.android_list_activities_response.AndroidListActivitiesResponse" title="gbox_sdk.types.v1.boxes.android_list_activities_response.AndroidListActivitiesResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">AndroidListActivitiesResponse</span></code></a></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Returns:</dt><dd><p>AndroidListActivitiesResponse: The response containing the list of activities.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">list_activities</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidAppOperator.open">
+<span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">activity_name=&lt;gbox_sdk.Omit</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidAppOperator.open" title="Link to this definition">¶</a></dt>
+<dd><p>Open the app, optionally specifying an activity name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Args:</dt><dd><p>activity_name: Activity name, default is the main activity.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;com.example.app.MainActivity&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidAppOperator.restart">
+<span class="sig-name descname"><span class="pre">restart</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">activity_name=&lt;gbox_sdk.Omit</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidAppOperator.restart" title="Link to this definition">¶</a></dt>
+<dd><p>Restart the app, optionally specifying an activity name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Args:</dt><dd><p>activity_name: Activity name, default is the main activity.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">restart</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">restart</span><span class="p">(</span><span class="s2">&quot;com.example.app.MainActivity&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidBoxOperator">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gbox_sdk.wrapper.box.android.</span></span><span class="sig-name descname"><span class="pre">AndroidBoxOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidBoxOperator" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="gbox_sdk.html#gbox_sdk.BaseBox" title="gbox_sdk.BaseBox"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseBox</span></code></a></p>
+<p>Operator class for managing Android boxes, providing access to app and package management functionalities.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>app (AndroidAppManager): Manager for Android app operations.
+pkg (AndroidPkgManager): Manager for Android package operations.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidBoxOperator.get_connect_address">
+<span class="sig-name descname"><span class="pre">get_connect_address</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidBoxOperator.get_connect_address" title="Link to this definition">¶</a></dt>
+<dd><p>Get the connect address for the Android box.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="gbox_sdk.types.v1.boxes.html#gbox_sdk.types.v1.boxes.android_get_connect_address_response.AndroidGetConnectAddressResponse" title="gbox_sdk.types.v1.boxes.android_get_connect_address_response.AndroidGetConnectAddressResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">AndroidGetConnectAddressResponse</span></code></a></span></p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>AndroidGetConnectAddressResponse: The connect address for the Android box.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidPkgManager">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gbox_sdk.wrapper.box.android.</span></span><span class="sig-name descname"><span class="pre">AndroidPkgManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidPkgManager" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Manager class for handling Android package operations within a box.</p>
+<p>Provides methods to install, uninstall, list, retrieve, close, and backup Android packages.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>client (GboxClient): The API client used for communication.
+box (AndroidBox): The Android box data object.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidPkgManager.backup_all">
+<span class="sig-name descname"><span class="pre">backup_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidPkgManager.backup_all" title="Link to this definition">¶</a></dt>
+<dd><p>Backup all installed Android packages on the box.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryAPIResponse</span></code></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Returns:</dt><dd><p>BinaryAPIResponse: The backup response containing binary data.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">backup_all</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidPkgManager.close_all">
+<span class="sig-name descname"><span class="pre">close_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidPkgManager.close_all" title="Link to this definition">¶</a></dt>
+<dd><p>Close all running Android packages on the box.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">close_all</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidPkgManager.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">package_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidPkgManager.get" title="Link to this definition">¶</a></dt>
+<dd><p>Get an operator for a specific installed package.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AndroidPkgOperator" title="gbox_sdk.AndroidPkgOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">AndroidPkgOperator</span></code></a></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Args:</dt><dd><p>package_name (str): The package name of the app.</p>
+</dd>
+<dt>Returns:</dt><dd><p>AndroidPkgOperator: Operator for the specified package.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;com.example.app&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidPkgManager.get_info">
+<span class="sig-name descname"><span class="pre">get_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">package_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidPkgManager.get_info" title="Link to this definition">¶</a></dt>
+<dd><p>Get detailed information for a specific installed package.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">AndroidPkg</span></code></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Args:</dt><dd><p>package_name (str): The package name of the app.</p>
+</dd>
+<dt>Returns:</dt><dd><p>AndroidGetResponse: Package information response.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">get_info</span><span class="p">(</span><span class="s2">&quot;com.example.app&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidPkgManager.install">
+<span class="sig-name descname"><span class="pre">install</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">open=&lt;gbox_sdk.Omit</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidPkgManager.install" title="Link to this definition">¶</a></dt>
+<dd><p>Install an Android package on the box.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="gbox_sdk.types.v1.boxes.html#gbox_sdk.types.v1.boxes.android_install_response.AndroidInstallResponse" title="gbox_sdk.types.v1.boxes.android_install_response.AndroidInstallResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">AndroidInstallResponse</span></code></a></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Args:</dt><dd><p>apk: APK file or ZIP archive to install (max file size: 512MB).</p>
+<blockquote>
+<div><p><strong>Single APK mode (installMultiple: false):</strong></p>
+<ul class="simple">
+<li><p>Upload a single APK file (e.g., app.apk)</p></li>
+</ul>
+<p><strong>Install-Multiple mode (installMultiple: true):</strong></p>
+<ul class="simple">
+<li><p>Upload a ZIP archive containing multiple APK files</p></li>
+<li><p>ZIP filename example: com.reddit.frontpage-gplay.zip</p></li>
+<li><p>ZIP contents example:</p></li>
+</ul>
+<p>com.reddit.frontpage-gplay.zip
+└── com.reddit.frontpage-gplay/ (folder)</p>
+<blockquote>
+<div><p>├── reddit-base.apk (base APK)
+├── reddit-arm64.apk (architecture-specific)
+├── reddit-en.apk (language pack)
+└── reddit-mdpi.apk (density-specific resources)</p>
+</div></blockquote>
+<p>This is commonly used for split APKs where different components are separated by
+architecture, language, or screen density.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>open: Whether to open the app after installation. Will find and launch the launcher</dt><dd><p>activity of the installed app. If there are multiple launcher activities, only
+one will be opened. If the installed APK has no launcher activity, this
+parameter will have no effect.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>AndroidInstallResponse: The response of the install operation.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">install</span><span class="p">(</span><span class="n">apk</span><span class="o">=</span><span class="s2">&quot;/path/to/app.apk&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">install</span><span class="p">(</span><span class="n">apk</span><span class="o">=</span><span class="s2">&quot;https://example.com/app.apk&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidPkgManager.list">
+<span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pkg_type=&lt;gbox_sdk.Omit</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">running_filter=&lt;gbox_sdk.Omit</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidPkgManager.list" title="Link to this definition">¶</a></dt>
+<dd><p>List all installed Android packages as operator objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#gbox_sdk.wrapper.box.android.types.ListAndroidPkg" title="gbox_sdk.wrapper.box.android.types.ListAndroidPkg"><code class="xref py py-class docutils literal notranslate"><span class="pre">ListAndroidPkg</span></code></a></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Args:</dt><dd><p>pkg_type: system or thirdParty, default is thirdParty</p>
+<dl class="simple">
+<dt>running_filter: Filter pkgs by running status: running (show only running pkgs), notRunning</dt><dd><p>(show only non-running pkgs). Default is all</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>ListAndroidPkg: Response containing package operator instances.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">list</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">pkg_type</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;thirdParty&quot;</span><span class="p">],</span> <span class="n">running_filter</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;running&quot;</span><span class="p">,</span> <span class="s2">&quot;notRunning&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidPkgManager.list_info">
+<span class="sig-name descname"><span class="pre">list_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pkg_type=&lt;gbox_sdk.Omit</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">running_filter=&lt;gbox_sdk.Omit</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidPkgManager.list_info" title="Link to this definition">¶</a></dt>
+<dd><p>Get detailed information of all installed Android packages.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="gbox_sdk.types.v1.boxes.html#gbox_sdk.types.v1.boxes.android_list_pkg_response.AndroidListPkgResponse" title="gbox_sdk.types.v1.boxes.android_list_pkg_response.AndroidListPkgResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">AndroidListPkgResponse</span></code></a></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Args:</dt><dd><p>pkg_type: system or thirdParty, default is thirdParty</p>
+<dl class="simple">
+<dt>running_filter: Filter pkgs by running status: running (show only running pkgs), notRunning</dt><dd><p>(show only non-running pkgs). Default is all</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>AndroidListPkgResponse: Response containing package information.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">list_info</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">list_info</span><span class="p">(</span><span class="n">pkg_type</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;thirdParty&quot;</span><span class="p">],</span> <span class="n">running_filter</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;running&quot;</span><span class="p">,</span> <span class="s2">&quot;notRunning&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidPkgManager.list_simple_info">
+<span class="sig-name descname"><span class="pre">list_simple_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pkg_type=&lt;gbox_sdk.Omit</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidPkgManager.list_simple_info" title="Link to this definition">¶</a></dt>
+<dd><p>List all installed Android packages with simple information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="gbox_sdk.types.v1.boxes.html#gbox_sdk.types.v1.boxes.android_list_pkg_simple_response.AndroidListPkgSimpleResponse" title="gbox_sdk.types.v1.boxes.android_list_pkg_simple_response.AndroidListPkgSimpleResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">AndroidListPkgSimpleResponse</span></code></a></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Args:</dt><dd><p>pkg_type: system or thirdParty, default is thirdParty</p>
+</dd>
+<dt>Returns:</dt><dd><p>ListAndroidPkgResponse: Response containing package information.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">list_simple_info</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidPkgManager.uninstall">
+<span class="sig-name descname"><span class="pre">uninstall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">package_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_data=&lt;gbox_sdk.Omit</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidPkgManager.uninstall" title="Link to this definition">¶</a></dt>
+<dd><p>Uninstall an Android package from the box.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Args:</dt><dd><p>package_name: The package name of the app to uninstall.</p>
+<p>keep_data: uninstalls the pkg while retaining the data/cache</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">uninstall</span><span class="p">(</span><span class="s2">&quot;com.example.app&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">uninstall</span><span class="p">(</span><span class="n">package_name</span><span class="o">=</span><span class="s2">&quot;com.example.app&quot;</span><span class="p">,</span> <span class="n">keep_data</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidPkgOperator">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gbox_sdk.wrapper.box.android.</span></span><span class="sig-name descname"><span class="pre">AndroidPkgOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidPkgOperator" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Operator class for managing a specific Android package within a box.</p>
+<p>Provides methods to open, close, restart, list activities, and backup the package.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>client (GboxClient): The API client used for communication.
+box (AndroidBox): The Android box data object.
+data (AndroidGetResponse): The package data object.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidPkgOperator.backup">
+<span class="sig-name descname"><span class="pre">backup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidPkgOperator.backup" title="Link to this definition">¶</a></dt>
+<dd><p>Backup the package.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryAPIResponse</span></code></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Returns:</dt><dd><p>BinaryAPIResponse: The backup response containing binary data.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">backup</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidPkgOperator.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidPkgOperator.close" title="Link to this definition">¶</a></dt>
+<dd><p>Close the package.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidPkgOperator.list_activities">
+<span class="sig-name descname"><span class="pre">list_activities</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidPkgOperator.list_activities" title="Link to this definition">¶</a></dt>
+<dd><p>List all activities of the package.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="gbox_sdk.types.v1.boxes.html#gbox_sdk.types.v1.boxes.android_list_activities_response.AndroidListActivitiesResponse" title="gbox_sdk.types.v1.boxes.android_list_activities_response.AndroidListActivitiesResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">AndroidListActivitiesResponse</span></code></a></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Returns:</dt><dd><p>AndroidListActivitiesResponse: The response containing the list of activities.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">list_activities</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidPkgOperator.open">
+<span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">activity_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidPkgOperator.open" title="Link to this definition">¶</a></dt>
+<dd><p>Open the package, optionally specifying an activity name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Args:</dt><dd><p>activity_name: Activity name, default is the main activity.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;com.example.app.MainActivity&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gbox_sdk.wrapper.box.android.AndroidPkgOperator.restart">
+<span class="sig-name descname"><span class="pre">restart</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">activity_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gbox_sdk.wrapper.box.android.AndroidPkgOperator.restart" title="Link to this definition">¶</a></dt>
+<dd><p>Restart the package, optionally specifying an activity name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+<dl>
+<dt>Args:</dt><dd><p>activity_name: Activity name, default is the main activity.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">restart</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">box</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">restart</span><span class="p">(</span><span class="s2">&quot;com.example.app.MainActivity&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">gbox-sdk-py</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">gbox_sdk</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="gbox_sdk.html">gbox_sdk package</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="gbox_sdk.html">gbox_sdk package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="gbox_sdk.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gbox_sdk.html#module-gbox_sdk">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gbox_sdk.resources.html">gbox_sdk.resources package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gbox_sdk.resources.v1.html">gbox_sdk.resources.v1 package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gbox_sdk.resources.v1.boxes.html">gbox_sdk.resources.v1.boxes package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gbox_sdk.types.html">gbox_sdk.types package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gbox_sdk.types.v1.html">gbox_sdk.types.v1 package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gbox_sdk.types.v1.boxes.html">gbox_sdk.types.v1.boxes package</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="gbox_sdk.wrapper.html">gbox_sdk.wrapper package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="gbox_sdk.wrapper.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gbox_sdk.wrapper.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gbox_sdk.wrapper.html#module-gbox_sdk.wrapper.sdk">gbox_sdk.wrapper.sdk module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gbox_sdk.wrapper.html#module-gbox_sdk.wrapper.utils">gbox_sdk.wrapper.utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gbox_sdk.wrapper.html#module-gbox_sdk.wrapper">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="gbox_sdk.wrapper.box.html">gbox_sdk.wrapper.box package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="gbox_sdk.wrapper.box.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gbox_sdk.wrapper.box.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gbox_sdk.wrapper.box.html#module-gbox_sdk.wrapper.box.action">gbox_sdk.wrapper.box.action module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gbox_sdk.wrapper.box.html#module-gbox_sdk.wrapper.box.base">gbox_sdk.wrapper.box.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gbox_sdk.wrapper.box.html#module-gbox_sdk.wrapper.box.browser">gbox_sdk.wrapper.box.browser module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gbox_sdk.wrapper.box.html#module-gbox_sdk.wrapper.box.file_system">gbox_sdk.wrapper.box.file_system module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gbox_sdk.wrapper.box.html#module-gbox_sdk.wrapper.box.linux">gbox_sdk.wrapper.box.linux module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gbox_sdk.wrapper.box.html#module-gbox_sdk.wrapper.box">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">gbox_sdk.wrapper.box.android package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gbox_sdk.wrapper.box.android.android">gbox_sdk.wrapper.box.android.android module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gbox_sdk.wrapper.box.android.app_manager">gbox_sdk.wrapper.box.android.app_manager module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gbox_sdk.wrapper.box.android.app_operator">gbox_sdk.wrapper.box.android.app_operator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gbox_sdk.wrapper.box.android.pkg_manager">gbox_sdk.wrapper.box.android.pkg_manager module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gbox_sdk.wrapper.box.android.pkg_operator">gbox_sdk.wrapper.box.android.pkg_operator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gbox_sdk.wrapper.box.android.types">gbox_sdk.wrapper.box.android.types module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gbox_sdk.wrapper.box.android">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">gbox_sdk</a><ul>
+  <li><a href="gbox_sdk.html">gbox_sdk package</a><ul>
+  <li><a href="gbox_sdk.wrapper.html">gbox_sdk.wrapper package</a><ul>
+  <li><a href="gbox_sdk.wrapper.box.html">gbox_sdk.wrapper.box package</a><ul>
+      <li>Previous: <a href="gbox_sdk.wrapper.box.html" title="previous chapter">gbox_sdk.wrapper.box package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, babelcloud.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../_sources/source/gbox_sdk.wrapper.box.android.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

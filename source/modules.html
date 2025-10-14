@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>gbox_sdk &#8212; gbox-sdk-py 0.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <script src="../_static/documentation_options.js?v=01f34227"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gbox_sdk package" href="gbox_sdk.html" />
+    <link rel="prev" title="gbox-sdk-py documentation" href="../index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="gbox-sdk">
+<h1>gbox_sdk<a class="headerlink" href="#gbox-sdk" title="Link to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="gbox_sdk.html">gbox_sdk package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gbox_sdk.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.resources.html">gbox_sdk.resources package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.resources.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.resources.html#module-gbox_sdk.resources">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.types.html">gbox_sdk.types package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.types.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.types.html#module-gbox_sdk.types">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.wrapper.html">gbox_sdk.wrapper package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.wrapper.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.wrapper.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.wrapper.html#module-gbox_sdk.wrapper.sdk">gbox_sdk.wrapper.sdk module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.wrapper.html#module-gbox_sdk.wrapper.utils">gbox_sdk.wrapper.utils module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.wrapper.html#module-gbox_sdk.wrapper">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gbox_sdk.html#module-gbox_sdk">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.APIConnectionError"><code class="docutils literal notranslate"><span class="pre">APIConnectionError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.APIError"><code class="docutils literal notranslate"><span class="pre">APIError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.APIError.body"><code class="docutils literal notranslate"><span class="pre">APIError.body</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.APIError.message"><code class="docutils literal notranslate"><span class="pre">APIError.message</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.APIError.request"><code class="docutils literal notranslate"><span class="pre">APIError.request</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.APIResponseValidationError"><code class="docutils literal notranslate"><span class="pre">APIResponseValidationError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.APIResponseValidationError.response"><code class="docutils literal notranslate"><span class="pre">APIResponseValidationError.response</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.APIResponseValidationError.status_code"><code class="docutils literal notranslate"><span class="pre">APIResponseValidationError.status_code</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.APIStatusError"><code class="docutils literal notranslate"><span class="pre">APIStatusError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.APIStatusError.response"><code class="docutils literal notranslate"><span class="pre">APIStatusError.response</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.APIStatusError.status_code"><code class="docutils literal notranslate"><span class="pre">APIStatusError.status_code</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.APITimeoutError"><code class="docutils literal notranslate"><span class="pre">APITimeoutError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.ActionOperator"><code class="docutils literal notranslate"><span class="pre">ActionOperator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.ActionOperator.click"><code class="docutils literal notranslate"><span class="pre">ActionOperator.click()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.ActionOperator.drag"><code class="docutils literal notranslate"><span class="pre">ActionOperator.drag()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.ActionOperator.extract"><code class="docutils literal notranslate"><span class="pre">ActionOperator.extract()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.ActionOperator.get_settings"><code class="docutils literal notranslate"><span class="pre">ActionOperator.get_settings()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.ActionOperator.long_press"><code class="docutils literal notranslate"><span class="pre">ActionOperator.long_press()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.ActionOperator.move"><code class="docutils literal notranslate"><span class="pre">ActionOperator.move()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.ActionOperator.press_button"><code class="docutils literal notranslate"><span class="pre">ActionOperator.press_button()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.ActionOperator.press_key"><code class="docutils literal notranslate"><span class="pre">ActionOperator.press_key()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.ActionOperator.reset_settings"><code class="docutils literal notranslate"><span class="pre">ActionOperator.reset_settings()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.ActionOperator.screen_layout"><code class="docutils literal notranslate"><span class="pre">ActionOperator.screen_layout()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.ActionOperator.screen_recording_start"><code class="docutils literal notranslate"><span class="pre">ActionOperator.screen_recording_start()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.ActionOperator.screen_recording_stop"><code class="docutils literal notranslate"><span class="pre">ActionOperator.screen_recording_stop()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.ActionOperator.screen_rotation"><code class="docutils literal notranslate"><span class="pre">ActionOperator.screen_rotation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.ActionOperator.screenshot"><code class="docutils literal notranslate"><span class="pre">ActionOperator.screenshot()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.ActionOperator.scroll"><code class="docutils literal notranslate"><span class="pre">ActionOperator.scroll()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.ActionOperator.swipe"><code class="docutils literal notranslate"><span class="pre">ActionOperator.swipe()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.ActionOperator.tap"><code class="docutils literal notranslate"><span class="pre">ActionOperator.tap()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.ActionOperator.touch"><code class="docutils literal notranslate"><span class="pre">ActionOperator.touch()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.ActionOperator.type"><code class="docutils literal notranslate"><span class="pre">ActionOperator.type()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.ActionOperator.update_settings"><code class="docutils literal notranslate"><span class="pre">ActionOperator.update_settings()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.ActionScreenshot"><code class="docutils literal notranslate"><span class="pre">ActionScreenshot</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.ActionScreenshot.clip"><code class="docutils literal notranslate"><span class="pre">ActionScreenshot.clip</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.ActionScreenshot.output_format"><code class="docutils literal notranslate"><span class="pre">ActionScreenshot.output_format</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.ActionScreenshot.path"><code class="docutils literal notranslate"><span class="pre">ActionScreenshot.path</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.ActionScreenshot.presigned_expires_in"><code class="docutils literal notranslate"><span class="pre">ActionScreenshot.presigned_expires_in</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.ActionScreenshot.save_to_album"><code class="docutils literal notranslate"><span class="pre">ActionScreenshot.save_to_album</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.ActionScreenshot.scroll_capture"><code class="docutils literal notranslate"><span class="pre">ActionScreenshot.scroll_capture</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AndroidAppOperator"><code class="docutils literal notranslate"><span class="pre">AndroidAppOperator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AndroidAppOperator.backup"><code class="docutils literal notranslate"><span class="pre">AndroidAppOperator.backup()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AndroidAppOperator.close"><code class="docutils literal notranslate"><span class="pre">AndroidAppOperator.close()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AndroidAppOperator.list_activities"><code class="docutils literal notranslate"><span class="pre">AndroidAppOperator.list_activities()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AndroidAppOperator.open"><code class="docutils literal notranslate"><span class="pre">AndroidAppOperator.open()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AndroidAppOperator.restart"><code class="docutils literal notranslate"><span class="pre">AndroidAppOperator.restart()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AndroidBoxOperator"><code class="docutils literal notranslate"><span class="pre">AndroidBoxOperator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AndroidBoxOperator.get_connect_address"><code class="docutils literal notranslate"><span class="pre">AndroidBoxOperator.get_connect_address()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AndroidPkgOperator"><code class="docutils literal notranslate"><span class="pre">AndroidPkgOperator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AndroidPkgOperator.backup"><code class="docutils literal notranslate"><span class="pre">AndroidPkgOperator.backup()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AndroidPkgOperator.close"><code class="docutils literal notranslate"><span class="pre">AndroidPkgOperator.close()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AndroidPkgOperator.list_activities"><code class="docutils literal notranslate"><span class="pre">AndroidPkgOperator.list_activities()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AndroidPkgOperator.open"><code class="docutils literal notranslate"><span class="pre">AndroidPkgOperator.open()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AndroidPkgOperator.restart"><code class="docutils literal notranslate"><span class="pre">AndroidPkgOperator.restart()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AsyncClient"><code class="docutils literal notranslate"><span class="pre">AsyncClient</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AsyncGboxClient"><code class="docutils literal notranslate"><span class="pre">AsyncGboxClient</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AsyncGboxClient.api_key"><code class="docutils literal notranslate"><span class="pre">AsyncGboxClient.api_key</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AsyncGboxClient.auth_headers"><code class="docutils literal notranslate"><span class="pre">AsyncGboxClient.auth_headers</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AsyncGboxClient.copy"><code class="docutils literal notranslate"><span class="pre">AsyncGboxClient.copy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AsyncGboxClient.default_headers"><code class="docutils literal notranslate"><span class="pre">AsyncGboxClient.default_headers</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AsyncGboxClient.qs"><code class="docutils literal notranslate"><span class="pre">AsyncGboxClient.qs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AsyncGboxClient.v1"><code class="docutils literal notranslate"><span class="pre">AsyncGboxClient.v1</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AsyncGboxClient.with_options"><code class="docutils literal notranslate"><span class="pre">AsyncGboxClient.with_options()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AsyncGboxClient.with_raw_response"><code class="docutils literal notranslate"><span class="pre">AsyncGboxClient.with_raw_response</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AsyncGboxClient.with_streaming_response"><code class="docutils literal notranslate"><span class="pre">AsyncGboxClient.with_streaming_response</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AsyncStream"><code class="docutils literal notranslate"><span class="pre">AsyncStream</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AsyncStream.close"><code class="docutils literal notranslate"><span class="pre">AsyncStream.close()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AsyncStream.response"><code class="docutils literal notranslate"><span class="pre">AsyncStream.response</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AuthenticationError"><code class="docutils literal notranslate"><span class="pre">AuthenticationError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.AuthenticationError.status_code"><code class="docutils literal notranslate"><span class="pre">AuthenticationError.status_code</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.BadRequestError"><code class="docutils literal notranslate"><span class="pre">BadRequestError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.BadRequestError.status_code"><code class="docutils literal notranslate"><span class="pre">BadRequestError.status_code</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.BaseBox"><code class="docutils literal notranslate"><span class="pre">BaseBox</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.BaseBox.command"><code class="docutils literal notranslate"><span class="pre">BaseBox.command()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.BaseBox.display"><code class="docutils literal notranslate"><span class="pre">BaseBox.display()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.BaseBox.live_view"><code class="docutils literal notranslate"><span class="pre">BaseBox.live_view()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.BaseBox.run_code"><code class="docutils literal notranslate"><span class="pre">BaseBox.run_code()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.BaseBox.start"><code class="docutils literal notranslate"><span class="pre">BaseBox.start()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.BaseBox.stop"><code class="docutils literal notranslate"><span class="pre">BaseBox.stop()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.BaseBox.terminate"><code class="docutils literal notranslate"><span class="pre">BaseBox.terminate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.BaseBox.web_terminal"><code class="docutils literal notranslate"><span class="pre">BaseBox.web_terminal()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.BaseModel"><code class="docutils literal notranslate"><span class="pre">BaseModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.BaseModel.construct"><code class="docutils literal notranslate"><span class="pre">BaseModel.construct()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.BaseModel.model_config"><code class="docutils literal notranslate"><span class="pre">BaseModel.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.BaseModel.model_construct"><code class="docutils literal notranslate"><span class="pre">BaseModel.model_construct()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.BaseModel.to_dict"><code class="docutils literal notranslate"><span class="pre">BaseModel.to_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.BaseModel.to_json"><code class="docutils literal notranslate"><span class="pre">BaseModel.to_json()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.BrowserOperator"><code class="docutils literal notranslate"><span class="pre">BrowserOperator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.BrowserOperator.cdp_url"><code class="docutils literal notranslate"><span class="pre">BrowserOperator.cdp_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.BrowserOperator.close_tab"><code class="docutils literal notranslate"><span class="pre">BrowserOperator.close_tab()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.BrowserOperator.list_tab_info"><code class="docutils literal notranslate"><span class="pre">BrowserOperator.list_tab_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.BrowserOperator.list_tabs"><code class="docutils literal notranslate"><span class="pre">BrowserOperator.list_tabs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.BrowserOperator.open_tab"><code class="docutils literal notranslate"><span class="pre">BrowserOperator.open_tab()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.BrowserOperator.switch_tab"><code class="docutils literal notranslate"><span class="pre">BrowserOperator.switch_tab()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.BrowserOperator.update_tab"><code class="docutils literal notranslate"><span class="pre">BrowserOperator.update_tab()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.Client"><code class="docutils literal notranslate"><span class="pre">Client</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.ConflictError"><code class="docutils literal notranslate"><span class="pre">ConflictError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.ConflictError.status_code"><code class="docutils literal notranslate"><span class="pre">ConflictError.status_code</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.DefaultAioHttpClient"><code class="docutils literal notranslate"><span class="pre">DefaultAioHttpClient</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.DefaultAsyncHttpxClient"><code class="docutils literal notranslate"><span class="pre">DefaultAsyncHttpxClient</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.DefaultHttpxClient"><code class="docutils literal notranslate"><span class="pre">DefaultHttpxClient</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.DirectoryOperator"><code class="docutils literal notranslate"><span class="pre">DirectoryOperator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.DirectoryOperator.list"><code class="docutils literal notranslate"><span class="pre">DirectoryOperator.list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.DirectoryOperator.list_info"><code class="docutils literal notranslate"><span class="pre">DirectoryOperator.list_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.DirectoryOperator.rename"><code class="docutils literal notranslate"><span class="pre">DirectoryOperator.rename()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.FileOperator"><code class="docutils literal notranslate"><span class="pre">FileOperator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.FileOperator.read"><code class="docutils literal notranslate"><span class="pre">FileOperator.read()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.FileOperator.rename"><code class="docutils literal notranslate"><span class="pre">FileOperator.rename()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.FileOperator.write"><code class="docutils literal notranslate"><span class="pre">FileOperator.write()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.FileSystemOperator"><code class="docutils literal notranslate"><span class="pre">FileSystemOperator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.FileSystemOperator.exists"><code class="docutils literal notranslate"><span class="pre">FileSystemOperator.exists()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.FileSystemOperator.get"><code class="docutils literal notranslate"><span class="pre">FileSystemOperator.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.FileSystemOperator.list"><code class="docutils literal notranslate"><span class="pre">FileSystemOperator.list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.FileSystemOperator.list_info"><code class="docutils literal notranslate"><span class="pre">FileSystemOperator.list_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.FileSystemOperator.read"><code class="docutils literal notranslate"><span class="pre">FileSystemOperator.read()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.FileSystemOperator.remove"><code class="docutils literal notranslate"><span class="pre">FileSystemOperator.remove()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.FileSystemOperator.rename"><code class="docutils literal notranslate"><span class="pre">FileSystemOperator.rename()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.FileSystemOperator.write"><code class="docutils literal notranslate"><span class="pre">FileSystemOperator.write()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.GboxClient"><code class="docutils literal notranslate"><span class="pre">GboxClient</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.GboxClient.api_key"><code class="docutils literal notranslate"><span class="pre">GboxClient.api_key</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.GboxClient.auth_headers"><code class="docutils literal notranslate"><span class="pre">GboxClient.auth_headers</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.GboxClient.copy"><code class="docutils literal notranslate"><span class="pre">GboxClient.copy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.GboxClient.default_headers"><code class="docutils literal notranslate"><span class="pre">GboxClient.default_headers</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.GboxClient.qs"><code class="docutils literal notranslate"><span class="pre">GboxClient.qs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.GboxClient.v1"><code class="docutils literal notranslate"><span class="pre">GboxClient.v1</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.GboxClient.with_options"><code class="docutils literal notranslate"><span class="pre">GboxClient.with_options()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.GboxClient.with_raw_response"><code class="docutils literal notranslate"><span class="pre">GboxClient.with_raw_response</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.GboxClient.with_streaming_response"><code class="docutils literal notranslate"><span class="pre">GboxClient.with_streaming_response</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.GboxClientError"><code class="docutils literal notranslate"><span class="pre">GboxClientError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.GboxSDK"><code class="docutils literal notranslate"><span class="pre">GboxSDK</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.GboxSDK.create"><code class="docutils literal notranslate"><span class="pre">GboxSDK.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.GboxSDK.get"><code class="docutils literal notranslate"><span class="pre">GboxSDK.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.GboxSDK.get_info"><code class="docutils literal notranslate"><span class="pre">GboxSDK.get_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.GboxSDK.list"><code class="docutils literal notranslate"><span class="pre">GboxSDK.list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.GboxSDK.list_info"><code class="docutils literal notranslate"><span class="pre">GboxSDK.list_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.GboxSDK.terminate"><code class="docutils literal notranslate"><span class="pre">GboxSDK.terminate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.InternalServerError"><code class="docutils literal notranslate"><span class="pre">InternalServerError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.LinuxBoxOperator"><code class="docutils literal notranslate"><span class="pre">LinuxBoxOperator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.NoneType"><code class="docutils literal notranslate"><span class="pre">NoneType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.NotFoundError"><code class="docutils literal notranslate"><span class="pre">NotFoundError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.NotFoundError.status_code"><code class="docutils literal notranslate"><span class="pre">NotFoundError.status_code</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.NotGiven"><code class="docutils literal notranslate"><span class="pre">NotGiven</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.Omit"><code class="docutils literal notranslate"><span class="pre">Omit</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.PermissionDeniedError"><code class="docutils literal notranslate"><span class="pre">PermissionDeniedError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.PermissionDeniedError.status_code"><code class="docutils literal notranslate"><span class="pre">PermissionDeniedError.status_code</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.RateLimitError"><code class="docutils literal notranslate"><span class="pre">RateLimitError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.RateLimitError.status_code"><code class="docutils literal notranslate"><span class="pre">RateLimitError.status_code</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.RequestOptions"><code class="docutils literal notranslate"><span class="pre">RequestOptions</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.RequestOptions.extra_json"><code class="docutils literal notranslate"><span class="pre">RequestOptions.extra_json</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.RequestOptions.follow_redirects"><code class="docutils literal notranslate"><span class="pre">RequestOptions.follow_redirects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.RequestOptions.headers"><code class="docutils literal notranslate"><span class="pre">RequestOptions.headers</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.RequestOptions.idempotency_key"><code class="docutils literal notranslate"><span class="pre">RequestOptions.idempotency_key</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.RequestOptions.max_retries"><code class="docutils literal notranslate"><span class="pre">RequestOptions.max_retries</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.RequestOptions.params"><code class="docutils literal notranslate"><span class="pre">RequestOptions.params</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.RequestOptions.timeout"><code class="docutils literal notranslate"><span class="pre">RequestOptions.timeout</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.Stream"><code class="docutils literal notranslate"><span class="pre">Stream</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.Stream.close"><code class="docutils literal notranslate"><span class="pre">Stream.close()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.Stream.response"><code class="docutils literal notranslate"><span class="pre">Stream.response</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.Timeout"><code class="docutils literal notranslate"><span class="pre">Timeout</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.Timeout.as_dict"><code class="docutils literal notranslate"><span class="pre">Timeout.as_dict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.Transport"><code class="docutils literal notranslate"><span class="pre">Transport</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.UnprocessableEntityError"><code class="docutils literal notranslate"><span class="pre">UnprocessableEntityError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.UnprocessableEntityError.status_code"><code class="docutils literal notranslate"><span class="pre">UnprocessableEntityError.status_code</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gbox_sdk.html#gbox_sdk.file_from_path"><code class="docutils literal notranslate"><span class="pre">file_from_path()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">gbox-sdk-py</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">gbox_sdk</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gbox_sdk.html">gbox_sdk package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gbox_sdk.html">gbox_sdk package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gbox_sdk.resources.html">gbox_sdk.resources package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gbox_sdk.resources.v1.html">gbox_sdk.resources.v1 package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gbox_sdk.resources.v1.boxes.html">gbox_sdk.resources.v1.boxes package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gbox_sdk.types.html">gbox_sdk.types package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gbox_sdk.types.v1.html">gbox_sdk.types.v1 package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gbox_sdk.types.v1.boxes.html">gbox_sdk.types.v1.boxes package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gbox_sdk.wrapper.html">gbox_sdk.wrapper package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gbox_sdk.wrapper.box.html">gbox_sdk.wrapper.box package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gbox_sdk.wrapper.box.android.html">gbox_sdk.wrapper.box.android package</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../index.html" title="previous chapter">gbox-sdk-py documentation</a></li>
+      <li>Next: <a href="gbox_sdk.html" title="next chapter">gbox_sdk package</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, babelcloud.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../_sources/source/modules.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

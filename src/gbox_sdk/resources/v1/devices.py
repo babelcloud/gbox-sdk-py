@@ -7,7 +7,7 @@ import httpx
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
-from ...types.v1 import device_to_box_params
+from ...types.v1 import device_list_params, device_to_box_params
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
     to_raw_response_wrapper,
@@ -45,6 +45,9 @@ class DevicesResource(SyncAPIResource):
     def list(
         self,
         *,
+        x_device_ap: str,
+        page: int | Omit = omit,
+        page_size: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -52,11 +55,37 @@ class DevicesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> GetDeviceListResponse:
-        """Get device list"""
+        """
+        Get device list
+
+        Args:
+          page: Page number
+
+          page_size: Page size
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {"x-device-ap": x_device_ap, **(extra_headers or {})}
         return self._get(
             "/devices",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "page": page,
+                        "page_size": page_size,
+                    },
+                    device_list_params.DeviceListParams,
+                ),
             ),
             cast_to=GetDeviceListResponse,
         )
@@ -158,6 +187,9 @@ class AsyncDevicesResource(AsyncAPIResource):
     async def list(
         self,
         *,
+        x_device_ap: str,
+        page: int | Omit = omit,
+        page_size: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -165,11 +197,37 @@ class AsyncDevicesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> GetDeviceListResponse:
-        """Get device list"""
+        """
+        Get device list
+
+        Args:
+          page: Page number
+
+          page_size: Page size
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {"x-device-ap": x_device_ap, **(extra_headers or {})}
         return await self._get(
             "/devices",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "page": page,
+                        "page_size": page_size,
+                    },
+                    device_list_params.DeviceListParams,
+                ),
             ),
             cast_to=GetDeviceListResponse,
         )

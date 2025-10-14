@@ -11,7 +11,6 @@ from gbox_sdk import GboxClient, AsyncGboxClient
 from tests.utils import assert_matches_type
 from gbox_sdk.types.v1.boxes import (
     ActionResult,
-    ActionAIResponse,
     ActionExtractResponse,
     ActionSettingsResponse,
     ActionScreenshotResponse,
@@ -29,79 +28,6 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 class TestActions:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_method_ai(self, client: GboxClient) -> None:
-        action = client.v1.boxes.actions.ai(
-            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            instruction="click the login button",
-        )
-        assert_matches_type(ActionAIResponse, action, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_method_ai_with_all_params(self, client: GboxClient) -> None:
-        action = client.v1.boxes.actions.ai(
-            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            instruction="click the login button",
-            background="The user is on the login page",
-            include_screenshot=False,
-            options={
-                "screenshot": {
-                    "delay": "500ms",
-                    "output_format": "base64",
-                    "phases": ["before", "after"],
-                    "presigned_expires_in": "30m",
-                }
-            },
-            output_format="base64",
-            presigned_expires_in="30m",
-            screenshot_delay="500ms",
-            settings={
-                "disable_actions": ["swipe"],
-                "system_prompt": "You are a helpful assistant specialized in UI automation. When given a screenshot and instruction, analyze the visual elements carefully and execute the most appropriate action. Always prioritize user safety and avoid destructive actions unless explicitly requested.",
-            },
-            stream=False,
-        )
-        assert_matches_type(ActionAIResponse, action, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_raw_response_ai(self, client: GboxClient) -> None:
-        response = client.v1.boxes.actions.with_raw_response.ai(
-            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            instruction="click the login button",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        action = response.parse()
-        assert_matches_type(ActionAIResponse, action, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_streaming_response_ai(self, client: GboxClient) -> None:
-        with client.v1.boxes.actions.with_streaming_response.ai(
-            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            instruction="click the login button",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            action = response.parse()
-            assert_matches_type(ActionAIResponse, action, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_path_params_ai(self, client: GboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
-            client.v1.boxes.actions.with_raw_response.ai(
-                box_id="",
-                instruction="click the login button",
-            )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -124,12 +50,13 @@ class TestActions:
             double=False,
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -196,12 +123,13 @@ class TestActions:
             double=False,
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -251,19 +179,22 @@ class TestActions:
     def test_method_click_overload_3(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.click(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target=cast(DetectedElement, {
-                "id": "1",
-                "center_x": 150,
-                "center_y": 125,
-                "height": 50,
-                "label": "Click me",
-                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
-                "source": "chromium",
-                "type": "button",
-                "width": 100,
-                "x": 100,
-                "y": 100,
-            }),
+            target=cast(
+                DetectedElement,
+                {
+                    "id": "1",
+                    "center_x": 150,
+                    "center_y": 125,
+                    "height": 50,
+                    "label": "Click me",
+                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                    "source": "chromium",
+                    "type": "button",
+                    "width": 100,
+                    "x": 100,
+                    "y": 100,
+                },
+            ),
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -272,29 +203,33 @@ class TestActions:
     def test_method_click_with_all_params_overload_3(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.click(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target=cast(DetectedElement, {
-                "id": "1",
-                "center_x": 150,
-                "center_y": 125,
-                "height": 50,
-                "label": "Click me",
-                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
-                "source": "chromium",
-                "type": "button",
-                "width": 100,
-                "x": 100,
-                "y": 100,
-            }),
+            target=cast(
+                DetectedElement,
+                {
+                    "id": "1",
+                    "center_x": 150,
+                    "center_y": 125,
+                    "height": 50,
+                    "label": "Click me",
+                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                    "source": "chromium",
+                    "type": "button",
+                    "width": 100,
+                    "x": 100,
+                    "y": 100,
+                },
+            ),
             button="left",
             double=False,
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -307,19 +242,22 @@ class TestActions:
     def test_raw_response_click_overload_3(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.click(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target=cast(DetectedElement, {
-                "id": "1",
-                "center_x": 150,
-                "center_y": 125,
-                "height": 50,
-                "label": "Click me",
-                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
-                "source": "chromium",
-                "type": "button",
-                "width": 100,
-                "x": 100,
-                "y": 100,
-            }),
+            target=cast(
+                DetectedElement,
+                {
+                    "id": "1",
+                    "center_x": 150,
+                    "center_y": 125,
+                    "height": 50,
+                    "label": "Click me",
+                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                    "source": "chromium",
+                    "type": "button",
+                    "width": 100,
+                    "x": 100,
+                    "y": 100,
+                },
+            ),
         )
 
         assert response.is_closed is True
@@ -332,19 +270,22 @@ class TestActions:
     def test_streaming_response_click_overload_3(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.click(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target=cast(DetectedElement, {
-                "id": "1",
-                "center_x": 150,
-                "center_y": 125,
-                "height": 50,
-                "label": "Click me",
-                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
-                "source": "chromium",
-                "type": "button",
-                "width": 100,
-                "x": 100,
-                "y": 100,
-            }),
+            target=cast(
+                DetectedElement,
+                {
+                    "id": "1",
+                    "center_x": 150,
+                    "center_y": 125,
+                    "height": 50,
+                    "label": "Click me",
+                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                    "source": "chromium",
+                    "type": "button",
+                    "width": 100,
+                    "x": 100,
+                    "y": 100,
+                },
+            ),
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -360,19 +301,22 @@ class TestActions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.actions.with_raw_response.click(
                 box_id="",
-                target=cast(DetectedElement, {
-                    "id": "1",
-                    "center_x": 150,
-                    "center_y": 125,
-                    "height": 50,
-                    "label": "Click me",
-                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
-                    "source": "chromium",
-                    "type": "button",
-                    "width": 100,
-                    "x": 100,
-                    "y": 100,
-                }),
+                target=cast(
+                    DetectedElement,
+                    {
+                        "id": "1",
+                        "center_x": 150,
+                        "center_y": 125,
+                        "height": 50,
+                        "label": "Click me",
+                        "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                        "source": "chromium",
+                        "type": "button",
+                        "width": 100,
+                        "x": 100,
+                        "y": 100,
+                    },
+                ),
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -495,12 +439,13 @@ class TestActions:
             duration="500ms",
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -610,12 +555,13 @@ class TestActions:
             duration="50ms",
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -829,12 +775,13 @@ class TestActions:
             duration="1s",
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -900,12 +847,13 @@ class TestActions:
             duration="1s",
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -955,19 +903,22 @@ class TestActions:
     def test_method_long_press_overload_3(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.long_press(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target=cast(DetectedElement, {
-                "id": "1",
-                "center_x": 150,
-                "center_y": 125,
-                "height": 50,
-                "label": "Click me",
-                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
-                "source": "chromium",
-                "type": "button",
-                "width": 100,
-                "x": 100,
-                "y": 100,
-            }),
+            target=cast(
+                DetectedElement,
+                {
+                    "id": "1",
+                    "center_x": 150,
+                    "center_y": 125,
+                    "height": 50,
+                    "label": "Click me",
+                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                    "source": "chromium",
+                    "type": "button",
+                    "width": 100,
+                    "x": 100,
+                    "y": 100,
+                },
+            ),
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -976,28 +927,32 @@ class TestActions:
     def test_method_long_press_with_all_params_overload_3(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.long_press(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target=cast(DetectedElement, {
-                "id": "1",
-                "center_x": 150,
-                "center_y": 125,
-                "height": 50,
-                "label": "Click me",
-                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
-                "source": "chromium",
-                "type": "button",
-                "width": 100,
-                "x": 100,
-                "y": 100,
-            }),
+            target=cast(
+                DetectedElement,
+                {
+                    "id": "1",
+                    "center_x": 150,
+                    "center_y": 125,
+                    "height": 50,
+                    "label": "Click me",
+                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                    "source": "chromium",
+                    "type": "button",
+                    "width": 100,
+                    "x": 100,
+                    "y": 100,
+                },
+            ),
             duration="1s",
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -1010,19 +965,22 @@ class TestActions:
     def test_raw_response_long_press_overload_3(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.long_press(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target=cast(DetectedElement, {
-                "id": "1",
-                "center_x": 150,
-                "center_y": 125,
-                "height": 50,
-                "label": "Click me",
-                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
-                "source": "chromium",
-                "type": "button",
-                "width": 100,
-                "x": 100,
-                "y": 100,
-            }),
+            target=cast(
+                DetectedElement,
+                {
+                    "id": "1",
+                    "center_x": 150,
+                    "center_y": 125,
+                    "height": 50,
+                    "label": "Click me",
+                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                    "source": "chromium",
+                    "type": "button",
+                    "width": 100,
+                    "x": 100,
+                    "y": 100,
+                },
+            ),
         )
 
         assert response.is_closed is True
@@ -1035,19 +993,22 @@ class TestActions:
     def test_streaming_response_long_press_overload_3(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.long_press(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target=cast(DetectedElement, {
-                "id": "1",
-                "center_x": 150,
-                "center_y": 125,
-                "height": 50,
-                "label": "Click me",
-                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
-                "source": "chromium",
-                "type": "button",
-                "width": 100,
-                "x": 100,
-                "y": 100,
-            }),
+            target=cast(
+                DetectedElement,
+                {
+                    "id": "1",
+                    "center_x": 150,
+                    "center_y": 125,
+                    "height": 50,
+                    "label": "Click me",
+                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                    "source": "chromium",
+                    "type": "button",
+                    "width": 100,
+                    "x": 100,
+                    "y": 100,
+                },
+            ),
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1063,19 +1024,22 @@ class TestActions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.actions.with_raw_response.long_press(
                 box_id="",
-                target=cast(DetectedElement, {
-                    "id": "1",
-                    "center_x": 150,
-                    "center_y": 125,
-                    "height": 50,
-                    "label": "Click me",
-                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
-                    "source": "chromium",
-                    "type": "button",
-                    "width": 100,
-                    "x": 100,
-                    "y": 100,
-                }),
+                target=cast(
+                    DetectedElement,
+                    {
+                        "id": "1",
+                        "center_x": 150,
+                        "center_y": 125,
+                        "height": 50,
+                        "label": "Click me",
+                        "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                        "source": "chromium",
+                        "type": "button",
+                        "width": 100,
+                        "x": 100,
+                        "y": 100,
+                    },
+                ),
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -1097,12 +1061,13 @@ class TestActions:
             y=300,
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -1167,12 +1132,13 @@ class TestActions:
             buttons=["power"],
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -1235,12 +1201,13 @@ class TestActions:
             combination=True,
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -1563,12 +1530,13 @@ class TestActions:
             orientation="landscapeLeft",
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -1699,12 +1667,13 @@ class TestActions:
             y=300,
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -1776,13 +1745,15 @@ class TestActions:
             distance=300,
             duration="500ms",
             include_screenshot=False,
+            location="Side bar",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -1977,12 +1948,13 @@ class TestActions:
             include_screenshot=False,
             location="Chrome App",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -2059,12 +2031,13 @@ class TestActions:
             duration="500ms",
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -2149,12 +2122,13 @@ class TestActions:
             y=250,
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -2219,12 +2193,13 @@ class TestActions:
             target="login button",
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -2274,19 +2249,22 @@ class TestActions:
     def test_method_tap_overload_3(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.tap(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target=cast(DetectedElement, {
-                "id": "1",
-                "center_x": 150,
-                "center_y": 125,
-                "height": 50,
-                "label": "Click me",
-                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
-                "source": "chromium",
-                "type": "button",
-                "width": 100,
-                "x": 100,
-                "y": 100,
-            }),
+            target=cast(
+                DetectedElement,
+                {
+                    "id": "1",
+                    "center_x": 150,
+                    "center_y": 125,
+                    "height": 50,
+                    "label": "Click me",
+                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                    "source": "chromium",
+                    "type": "button",
+                    "width": 100,
+                    "x": 100,
+                    "y": 100,
+                },
+            ),
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -2295,27 +2273,31 @@ class TestActions:
     def test_method_tap_with_all_params_overload_3(self, client: GboxClient) -> None:
         action = client.v1.boxes.actions.tap(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target=cast(DetectedElement, {
-                "id": "1",
-                "center_x": 150,
-                "center_y": 125,
-                "height": 50,
-                "label": "Click me",
-                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
-                "source": "chromium",
-                "type": "button",
-                "width": 100,
-                "x": 100,
-                "y": 100,
-            }),
+            target=cast(
+                DetectedElement,
+                {
+                    "id": "1",
+                    "center_x": 150,
+                    "center_y": 125,
+                    "height": 50,
+                    "label": "Click me",
+                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                    "source": "chromium",
+                    "type": "button",
+                    "width": 100,
+                    "x": 100,
+                    "y": 100,
+                },
+            ),
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -2328,19 +2310,22 @@ class TestActions:
     def test_raw_response_tap_overload_3(self, client: GboxClient) -> None:
         response = client.v1.boxes.actions.with_raw_response.tap(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target=cast(DetectedElement, {
-                "id": "1",
-                "center_x": 150,
-                "center_y": 125,
-                "height": 50,
-                "label": "Click me",
-                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
-                "source": "chromium",
-                "type": "button",
-                "width": 100,
-                "x": 100,
-                "y": 100,
-            }),
+            target=cast(
+                DetectedElement,
+                {
+                    "id": "1",
+                    "center_x": 150,
+                    "center_y": 125,
+                    "height": 50,
+                    "label": "Click me",
+                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                    "source": "chromium",
+                    "type": "button",
+                    "width": 100,
+                    "x": 100,
+                    "y": 100,
+                },
+            ),
         )
 
         assert response.is_closed is True
@@ -2353,19 +2338,22 @@ class TestActions:
     def test_streaming_response_tap_overload_3(self, client: GboxClient) -> None:
         with client.v1.boxes.actions.with_streaming_response.tap(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target=cast(DetectedElement, {
-                "id": "1",
-                "center_x": 150,
-                "center_y": 125,
-                "height": 50,
-                "label": "Click me",
-                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
-                "source": "chromium",
-                "type": "button",
-                "width": 100,
-                "x": 100,
-                "y": 100,
-            }),
+            target=cast(
+                DetectedElement,
+                {
+                    "id": "1",
+                    "center_x": 150,
+                    "center_y": 125,
+                    "height": 50,
+                    "label": "Click me",
+                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                    "source": "chromium",
+                    "type": "button",
+                    "width": 100,
+                    "x": 100,
+                    "y": 100,
+                },
+            ),
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -2381,19 +2369,22 @@ class TestActions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.actions.with_raw_response.tap(
                 box_id="",
-                target=cast(DetectedElement, {
-                    "id": "1",
-                    "center_x": 150,
-                    "center_y": 125,
-                    "height": 50,
-                    "label": "Click me",
-                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
-                    "source": "chromium",
-                    "type": "button",
-                    "width": 100,
-                    "x": 100,
-                    "y": 100,
-                }),
+                target=cast(
+                    DetectedElement,
+                    {
+                        "id": "1",
+                        "center_x": 150,
+                        "center_y": 125,
+                        "height": 50,
+                        "label": "Click me",
+                        "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                        "source": "chromium",
+                        "type": "button",
+                        "width": 100,
+                        "x": 100,
+                        "y": 100,
+                    },
+                ),
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -2433,12 +2424,13 @@ class TestActions:
             ],
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -2522,12 +2514,13 @@ class TestActions:
             include_screenshot=False,
             mode="append",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -2581,79 +2574,6 @@ class TestAsyncActions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_ai(self, async_client: AsyncGboxClient) -> None:
-        action = await async_client.v1.boxes.actions.ai(
-            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            instruction="click the login button",
-        )
-        assert_matches_type(ActionAIResponse, action, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_method_ai_with_all_params(self, async_client: AsyncGboxClient) -> None:
-        action = await async_client.v1.boxes.actions.ai(
-            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            instruction="click the login button",
-            background="The user is on the login page",
-            include_screenshot=False,
-            options={
-                "screenshot": {
-                    "delay": "500ms",
-                    "output_format": "base64",
-                    "phases": ["before", "after"],
-                    "presigned_expires_in": "30m",
-                }
-            },
-            output_format="base64",
-            presigned_expires_in="30m",
-            screenshot_delay="500ms",
-            settings={
-                "disable_actions": ["swipe"],
-                "system_prompt": "You are a helpful assistant specialized in UI automation. When given a screenshot and instruction, analyze the visual elements carefully and execute the most appropriate action. Always prioritize user safety and avoid destructive actions unless explicitly requested.",
-            },
-            stream=False,
-        )
-        assert_matches_type(ActionAIResponse, action, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_raw_response_ai(self, async_client: AsyncGboxClient) -> None:
-        response = await async_client.v1.boxes.actions.with_raw_response.ai(
-            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            instruction="click the login button",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        action = await response.parse()
-        assert_matches_type(ActionAIResponse, action, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_streaming_response_ai(self, async_client: AsyncGboxClient) -> None:
-        async with async_client.v1.boxes.actions.with_streaming_response.ai(
-            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            instruction="click the login button",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            action = await response.parse()
-            assert_matches_type(ActionAIResponse, action, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_path_params_ai(self, async_client: AsyncGboxClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
-            await async_client.v1.boxes.actions.with_raw_response.ai(
-                box_id="",
-                instruction="click the login button",
-            )
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
     async def test_method_click_overload_1(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.click(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
@@ -2673,12 +2593,13 @@ class TestAsyncActions:
             double=False,
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -2745,12 +2666,13 @@ class TestAsyncActions:
             double=False,
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -2800,19 +2722,22 @@ class TestAsyncActions:
     async def test_method_click_overload_3(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.click(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target=cast(DetectedElement, {
-                "id": "1",
-                "center_x": 150,
-                "center_y": 125,
-                "height": 50,
-                "label": "Click me",
-                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
-                "source": "chromium",
-                "type": "button",
-                "width": 100,
-                "x": 100,
-                "y": 100,
-            }),
+            target=cast(
+                DetectedElement,
+                {
+                    "id": "1",
+                    "center_x": 150,
+                    "center_y": 125,
+                    "height": 50,
+                    "label": "Click me",
+                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                    "source": "chromium",
+                    "type": "button",
+                    "width": 100,
+                    "x": 100,
+                    "y": 100,
+                },
+            ),
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -2821,29 +2746,33 @@ class TestAsyncActions:
     async def test_method_click_with_all_params_overload_3(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.click(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target=cast(DetectedElement, {
-                "id": "1",
-                "center_x": 150,
-                "center_y": 125,
-                "height": 50,
-                "label": "Click me",
-                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
-                "source": "chromium",
-                "type": "button",
-                "width": 100,
-                "x": 100,
-                "y": 100,
-            }),
+            target=cast(
+                DetectedElement,
+                {
+                    "id": "1",
+                    "center_x": 150,
+                    "center_y": 125,
+                    "height": 50,
+                    "label": "Click me",
+                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                    "source": "chromium",
+                    "type": "button",
+                    "width": 100,
+                    "x": 100,
+                    "y": 100,
+                },
+            ),
             button="left",
             double=False,
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -2856,19 +2785,22 @@ class TestAsyncActions:
     async def test_raw_response_click_overload_3(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.click(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target=cast(DetectedElement, {
-                "id": "1",
-                "center_x": 150,
-                "center_y": 125,
-                "height": 50,
-                "label": "Click me",
-                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
-                "source": "chromium",
-                "type": "button",
-                "width": 100,
-                "x": 100,
-                "y": 100,
-            }),
+            target=cast(
+                DetectedElement,
+                {
+                    "id": "1",
+                    "center_x": 150,
+                    "center_y": 125,
+                    "height": 50,
+                    "label": "Click me",
+                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                    "source": "chromium",
+                    "type": "button",
+                    "width": 100,
+                    "x": 100,
+                    "y": 100,
+                },
+            ),
         )
 
         assert response.is_closed is True
@@ -2881,19 +2813,22 @@ class TestAsyncActions:
     async def test_streaming_response_click_overload_3(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.click(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target=cast(DetectedElement, {
-                "id": "1",
-                "center_x": 150,
-                "center_y": 125,
-                "height": 50,
-                "label": "Click me",
-                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
-                "source": "chromium",
-                "type": "button",
-                "width": 100,
-                "x": 100,
-                "y": 100,
-            }),
+            target=cast(
+                DetectedElement,
+                {
+                    "id": "1",
+                    "center_x": 150,
+                    "center_y": 125,
+                    "height": 50,
+                    "label": "Click me",
+                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                    "source": "chromium",
+                    "type": "button",
+                    "width": 100,
+                    "x": 100,
+                    "y": 100,
+                },
+            ),
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -2909,19 +2844,22 @@ class TestAsyncActions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.click(
                 box_id="",
-                target=cast(DetectedElement, {
-                    "id": "1",
-                    "center_x": 150,
-                    "center_y": 125,
-                    "height": 50,
-                    "label": "Click me",
-                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
-                    "source": "chromium",
-                    "type": "button",
-                    "width": 100,
-                    "x": 100,
-                    "y": 100,
-                }),
+                target=cast(
+                    DetectedElement,
+                    {
+                        "id": "1",
+                        "center_x": 150,
+                        "center_y": 125,
+                        "height": 50,
+                        "label": "Click me",
+                        "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                        "source": "chromium",
+                        "type": "button",
+                        "width": 100,
+                        "x": 100,
+                        "y": 100,
+                    },
+                ),
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -3044,12 +2982,13 @@ class TestAsyncActions:
             duration="500ms",
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -3159,12 +3098,13 @@ class TestAsyncActions:
             duration="50ms",
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -3378,12 +3318,13 @@ class TestAsyncActions:
             duration="1s",
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -3449,12 +3390,13 @@ class TestAsyncActions:
             duration="1s",
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -3504,19 +3446,22 @@ class TestAsyncActions:
     async def test_method_long_press_overload_3(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.long_press(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target=cast(DetectedElement, {
-                "id": "1",
-                "center_x": 150,
-                "center_y": 125,
-                "height": 50,
-                "label": "Click me",
-                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
-                "source": "chromium",
-                "type": "button",
-                "width": 100,
-                "x": 100,
-                "y": 100,
-            }),
+            target=cast(
+                DetectedElement,
+                {
+                    "id": "1",
+                    "center_x": 150,
+                    "center_y": 125,
+                    "height": 50,
+                    "label": "Click me",
+                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                    "source": "chromium",
+                    "type": "button",
+                    "width": 100,
+                    "x": 100,
+                    "y": 100,
+                },
+            ),
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -3525,28 +3470,32 @@ class TestAsyncActions:
     async def test_method_long_press_with_all_params_overload_3(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.long_press(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target=cast(DetectedElement, {
-                "id": "1",
-                "center_x": 150,
-                "center_y": 125,
-                "height": 50,
-                "label": "Click me",
-                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
-                "source": "chromium",
-                "type": "button",
-                "width": 100,
-                "x": 100,
-                "y": 100,
-            }),
+            target=cast(
+                DetectedElement,
+                {
+                    "id": "1",
+                    "center_x": 150,
+                    "center_y": 125,
+                    "height": 50,
+                    "label": "Click me",
+                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                    "source": "chromium",
+                    "type": "button",
+                    "width": 100,
+                    "x": 100,
+                    "y": 100,
+                },
+            ),
             duration="1s",
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -3559,19 +3508,22 @@ class TestAsyncActions:
     async def test_raw_response_long_press_overload_3(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.long_press(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target=cast(DetectedElement, {
-                "id": "1",
-                "center_x": 150,
-                "center_y": 125,
-                "height": 50,
-                "label": "Click me",
-                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
-                "source": "chromium",
-                "type": "button",
-                "width": 100,
-                "x": 100,
-                "y": 100,
-            }),
+            target=cast(
+                DetectedElement,
+                {
+                    "id": "1",
+                    "center_x": 150,
+                    "center_y": 125,
+                    "height": 50,
+                    "label": "Click me",
+                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                    "source": "chromium",
+                    "type": "button",
+                    "width": 100,
+                    "x": 100,
+                    "y": 100,
+                },
+            ),
         )
 
         assert response.is_closed is True
@@ -3584,19 +3536,22 @@ class TestAsyncActions:
     async def test_streaming_response_long_press_overload_3(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.long_press(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target=cast(DetectedElement, {
-                "id": "1",
-                "center_x": 150,
-                "center_y": 125,
-                "height": 50,
-                "label": "Click me",
-                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
-                "source": "chromium",
-                "type": "button",
-                "width": 100,
-                "x": 100,
-                "y": 100,
-            }),
+            target=cast(
+                DetectedElement,
+                {
+                    "id": "1",
+                    "center_x": 150,
+                    "center_y": 125,
+                    "height": 50,
+                    "label": "Click me",
+                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                    "source": "chromium",
+                    "type": "button",
+                    "width": 100,
+                    "x": 100,
+                    "y": 100,
+                },
+            ),
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -3612,19 +3567,22 @@ class TestAsyncActions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.long_press(
                 box_id="",
-                target=cast(DetectedElement, {
-                    "id": "1",
-                    "center_x": 150,
-                    "center_y": 125,
-                    "height": 50,
-                    "label": "Click me",
-                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
-                    "source": "chromium",
-                    "type": "button",
-                    "width": 100,
-                    "x": 100,
-                    "y": 100,
-                }),
+                target=cast(
+                    DetectedElement,
+                    {
+                        "id": "1",
+                        "center_x": 150,
+                        "center_y": 125,
+                        "height": 50,
+                        "label": "Click me",
+                        "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                        "source": "chromium",
+                        "type": "button",
+                        "width": 100,
+                        "x": 100,
+                        "y": 100,
+                    },
+                ),
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -3646,12 +3604,13 @@ class TestAsyncActions:
             y=300,
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -3716,12 +3675,13 @@ class TestAsyncActions:
             buttons=["power"],
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -3784,12 +3744,13 @@ class TestAsyncActions:
             combination=True,
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -4112,12 +4073,13 @@ class TestAsyncActions:
             orientation="landscapeLeft",
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -4248,12 +4210,13 @@ class TestAsyncActions:
             y=300,
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -4325,13 +4288,15 @@ class TestAsyncActions:
             distance=300,
             duration="500ms",
             include_screenshot=False,
+            location="Side bar",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -4526,12 +4491,13 @@ class TestAsyncActions:
             include_screenshot=False,
             location="Chrome App",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -4608,12 +4574,13 @@ class TestAsyncActions:
             duration="500ms",
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -4698,12 +4665,13 @@ class TestAsyncActions:
             y=250,
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -4768,12 +4736,13 @@ class TestAsyncActions:
             target="login button",
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -4823,19 +4792,22 @@ class TestAsyncActions:
     async def test_method_tap_overload_3(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.tap(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target=cast(DetectedElement, {
-                "id": "1",
-                "center_x": 150,
-                "center_y": 125,
-                "height": 50,
-                "label": "Click me",
-                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
-                "source": "chromium",
-                "type": "button",
-                "width": 100,
-                "x": 100,
-                "y": 100,
-            }),
+            target=cast(
+                DetectedElement,
+                {
+                    "id": "1",
+                    "center_x": 150,
+                    "center_y": 125,
+                    "height": 50,
+                    "label": "Click me",
+                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                    "source": "chromium",
+                    "type": "button",
+                    "width": 100,
+                    "x": 100,
+                    "y": 100,
+                },
+            ),
         )
         assert_matches_type(ActionResult, action, path=["response"])
 
@@ -4844,27 +4816,31 @@ class TestAsyncActions:
     async def test_method_tap_with_all_params_overload_3(self, async_client: AsyncGboxClient) -> None:
         action = await async_client.v1.boxes.actions.tap(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target=cast(DetectedElement, {
-                "id": "1",
-                "center_x": 150,
-                "center_y": 125,
-                "height": 50,
-                "label": "Click me",
-                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
-                "source": "chromium",
-                "type": "button",
-                "width": 100,
-                "x": 100,
-                "y": 100,
-            }),
+            target=cast(
+                DetectedElement,
+                {
+                    "id": "1",
+                    "center_x": 150,
+                    "center_y": 125,
+                    "height": 50,
+                    "label": "Click me",
+                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                    "source": "chromium",
+                    "type": "button",
+                    "width": 100,
+                    "x": 100,
+                    "y": 100,
+                },
+            ),
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -4877,19 +4853,22 @@ class TestAsyncActions:
     async def test_raw_response_tap_overload_3(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.actions.with_raw_response.tap(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target=cast(DetectedElement, {
-                "id": "1",
-                "center_x": 150,
-                "center_y": 125,
-                "height": 50,
-                "label": "Click me",
-                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
-                "source": "chromium",
-                "type": "button",
-                "width": 100,
-                "x": 100,
-                "y": 100,
-            }),
+            target=cast(
+                DetectedElement,
+                {
+                    "id": "1",
+                    "center_x": 150,
+                    "center_y": 125,
+                    "height": 50,
+                    "label": "Click me",
+                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                    "source": "chromium",
+                    "type": "button",
+                    "width": 100,
+                    "x": 100,
+                    "y": 100,
+                },
+            ),
         )
 
         assert response.is_closed is True
@@ -4902,19 +4881,22 @@ class TestAsyncActions:
     async def test_streaming_response_tap_overload_3(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.actions.with_streaming_response.tap(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            target=cast(DetectedElement, {
-                "id": "1",
-                "center_x": 150,
-                "center_y": 125,
-                "height": 50,
-                "label": "Click me",
-                "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
-                "source": "chromium",
-                "type": "button",
-                "width": 100,
-                "x": 100,
-                "y": 100,
-            }),
+            target=cast(
+                DetectedElement,
+                {
+                    "id": "1",
+                    "center_x": 150,
+                    "center_y": 125,
+                    "height": 50,
+                    "label": "Click me",
+                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                    "source": "chromium",
+                    "type": "button",
+                    "width": 100,
+                    "x": 100,
+                    "y": 100,
+                },
+            ),
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -4930,19 +4912,22 @@ class TestAsyncActions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.actions.with_raw_response.tap(
                 box_id="",
-                target=cast(DetectedElement, {
-                    "id": "1",
-                    "center_x": 150,
-                    "center_y": 125,
-                    "height": 50,
-                    "label": "Click me",
-                    "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
-                    "source": "chromium",
-                    "type": "button",
-                    "width": 100,
-                    "x": 100,
-                    "y": 100,
-                }),
+                target=cast(
+                    DetectedElement,
+                    {
+                        "id": "1",
+                        "center_x": 150,
+                        "center_y": 125,
+                        "height": 50,
+                        "label": "Click me",
+                        "path": "#root > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > button",
+                        "source": "chromium",
+                        "type": "button",
+                        "width": 100,
+                        "x": 100,
+                        "y": 100,
+                    },
+                ),
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -4982,12 +4967,13 @@ class TestAsyncActions:
             ],
             include_screenshot=False,
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",
@@ -5071,12 +5057,13 @@ class TestAsyncActions:
             include_screenshot=False,
             mode="append",
             options={
+                "model": "gpt-5",
                 "screenshot": {
                     "delay": "500ms",
                     "output_format": "base64",
                     "phases": ["before", "after"],
                     "presigned_expires_in": "30m",
-                }
+                },
             },
             output_format="base64",
             presigned_expires_in="30m",

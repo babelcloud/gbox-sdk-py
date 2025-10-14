@@ -10,7 +10,7 @@ from gbox_sdk.types.v1 import DeviceInfo, GetDeviceListResponse, DeviceToBoxResp
 
 Methods:
 
-- <code title="get /devices">client.v1.devices.<a href="./src/gbox_sdk/resources/v1/devices.py">list</a>() -> <a href="./src/gbox_sdk/types/v1/get_device_list_response.py">GetDeviceListResponse</a></code>
+- <code title="get /devices">client.v1.devices.<a href="./src/gbox_sdk/resources/v1/devices.py">list</a>(\*\*<a href="src/gbox_sdk/types/v1/device_list_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/get_device_list_response.py">GetDeviceListResponse</a></code>
 - <code title="get /devices/{deviceId}">client.v1.devices.<a href="./src/gbox_sdk/resources/v1/devices.py">get</a>(device_id) -> <a href="./src/gbox_sdk/types/v1/device_info.py">DeviceInfo</a></code>
 - <code title="post /devices/{deviceId}/box">client.v1.devices.<a href="./src/gbox_sdk/resources/v1/devices.py">to_box</a>(device_id, \*\*<a href="src/gbox_sdk/types/v1/device_to_box_params.py">params</a>) -> str</code>
 
@@ -77,7 +77,6 @@ from gbox_sdk.types.v1.boxes import (
     ActionResult,
     ActionScreenshotOptions,
     DetectedElement,
-    ActionAIResponse,
     ActionClipboardGetResponse,
     ActionElementsDetectResponse,
     ActionExtractResponse,
@@ -93,7 +92,6 @@ from gbox_sdk.types.v1.boxes import (
 
 Methods:
 
-- <code title="post /boxes/{boxId}/actions/ai">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">ai</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_ai_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_ai_response.py">ActionAIResponse</a></code>
 - <code title="post /boxes/{boxId}/actions/click">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">click</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_click_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_result.py">ActionResult</a></code>
 - <code title="get /boxes/{boxId}/actions/clipboard">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">clipboard_get</a>(box_id) -> str</code>
 - <code title="post /boxes/{boxId}/actions/clipboard">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">clipboard_set</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_clipboard_set_params.py">params</a>) -> None</code>

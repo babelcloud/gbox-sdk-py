@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Union, Iterable, cast
+from typing import List, Union, Iterable
 from typing_extensions import Literal, overload
 
 import httpx
@@ -19,7 +19,6 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.v1.boxes import (
-    action_ai_params,
     action_tap_params,
     action_drag_params,
     action_move_params,
@@ -41,7 +40,6 @@ from ....types.v1.boxes import (
 )
 from ....types.v1.boxes.action_result import ActionResult
 from ....types.v1.boxes.detected_element import DetectedElement
-from ....types.v1.boxes.action_ai_response import ActionAIResponse
 from ....types.v1.boxes.action_extract_response import ActionExtractResponse
 from ....types.v1.boxes.action_settings_response import ActionSettingsResponse
 from ....types.v1.boxes.action_screenshot_response import ActionScreenshotResponse
@@ -75,117 +73,6 @@ class ActionsResource(SyncAPIResource):
         For more information, see https://www.github.com/babelcloud/gbox-sdk-py#with_streaming_response
         """
         return ActionsResourceWithStreamingResponse(self)
-
-    def ai(
-        self,
-        box_id: str,
-        *,
-        instruction: str,
-        background: str | Omit = omit,
-        include_screenshot: bool | Omit = omit,
-        options: ActionCommonOptionsParam | Omit = omit,
-        output_format: Literal["base64", "storageKey"] | Omit = omit,
-        presigned_expires_in: str | Omit = omit,
-        screenshot_delay: str | Omit = omit,
-        settings: action_ai_params.Settings | Omit = omit,
-        stream: bool | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionAIResponse:
-        """Use natural language instructions to perform UI operations on the box.
-
-        The
-        endpoint will stream progress events before and after the action is executed. If
-        you don't need intermediate events, set stream to false.
-
-        Args:
-          instruction: Direct instruction of the UI action to perform (e.g., 'click the login button',
-              'input username in the email field', 'scroll down', 'swipe left')
-
-          background: The background of the UI action to perform. The purpose of background is to let
-              the action executor to understand the context of why the instruction is given
-              including important previous actions and observations
-
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
-              ignored when `options.screenshot` is provided. Whether to include screenshots in
-              the action response. If false, the screenshot object will still be returned but
-              with empty URIs. Default is false.
-
-          options: Action common options
-
-          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
-              default is base64. This field will be ignored when `options.screenshot` is
-              provided.
-
-          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
-              url expires in. Only takes effect when outputFormat is storageKey. This field
-              will be ignored when `options.screenshot` is provided.
-
-              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-
-          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
-              ignored when `options.screenshot` is provided.
-
-              Delay after performing the action, before taking the final screenshot.
-
-              Execution flow:
-
-              1. Take screenshot before action
-              2. Perform the action
-              3. Wait for screenshotDelay (this parameter)
-              4. Take screenshot after action
-
-              Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot.
-
-              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-
-          settings: AI action settings
-
-          stream: Whether to stream progress events using Server-Sent Events (SSE). When true, the
-              API returns an event stream. When false or omitted, the API returns a normal
-              JSON response.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not box_id:
-            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return cast(
-            ActionAIResponse,
-            self._post(
-                f"/boxes/{box_id}/actions/ai",
-                body=maybe_transform(
-                    {
-                        "instruction": instruction,
-                        "background": background,
-                        "include_screenshot": include_screenshot,
-                        "options": options,
-                        "output_format": output_format,
-                        "presigned_expires_in": presigned_expires_in,
-                        "screenshot_delay": screenshot_delay,
-                        "settings": settings,
-                        "stream": stream,
-                    },
-                    action_ai_params.ActionAIParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(Any, ActionAIResponse),  # Union types cannot be passed in as arguments in the type system
-            ),
-        )
 
     @overload
     def click(
@@ -1977,6 +1864,7 @@ class ActionsResource(SyncAPIResource):
         distance: Union[float, Literal["tiny", "short", "medium", "long"]] | Omit = omit,
         duration: str | Omit = omit,
         include_screenshot: bool | Omit = omit,
+        location: str | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -2013,6 +1901,9 @@ class ActionsResource(SyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
+
+          location: Natural language description of the location where the scroll should originate.
+              If not provided, the scroll will be performed from the center of the screen.
 
           options: Action common options
 
@@ -2072,6 +1963,7 @@ class ActionsResource(SyncAPIResource):
         direction: Literal["up", "down", "left", "right"] | Omit = omit,
         distance: Union[float, Literal["tiny", "short", "medium", "long"]] | Omit = omit,
         duration: str | Omit = omit,
+        location: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2097,6 +1989,7 @@ class ActionsResource(SyncAPIResource):
                     "direction": direction,
                     "distance": distance,
                     "duration": duration,
+                    "location": location,
                 },
                 action_scroll_params.ActionScrollParams,
             ),
@@ -2898,117 +2791,6 @@ class AsyncActionsResource(AsyncAPIResource):
         For more information, see https://www.github.com/babelcloud/gbox-sdk-py#with_streaming_response
         """
         return AsyncActionsResourceWithStreamingResponse(self)
-
-    async def ai(
-        self,
-        box_id: str,
-        *,
-        instruction: str,
-        background: str | Omit = omit,
-        include_screenshot: bool | Omit = omit,
-        options: ActionCommonOptionsParam | Omit = omit,
-        output_format: Literal["base64", "storageKey"] | Omit = omit,
-        presigned_expires_in: str | Omit = omit,
-        screenshot_delay: str | Omit = omit,
-        settings: action_ai_params.Settings | Omit = omit,
-        stream: bool | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionAIResponse:
-        """Use natural language instructions to perform UI operations on the box.
-
-        The
-        endpoint will stream progress events before and after the action is executed. If
-        you don't need intermediate events, set stream to false.
-
-        Args:
-          instruction: Direct instruction of the UI action to perform (e.g., 'click the login button',
-              'input username in the email field', 'scroll down', 'swipe left')
-
-          background: The background of the UI action to perform. The purpose of background is to let
-              the action executor to understand the context of why the instruction is given
-              including important previous actions and observations
-
-          include_screenshot: ⚠️ DEPRECATED: Use `options.screenshot.phases` instead. This field will be
-              ignored when `options.screenshot` is provided. Whether to include screenshots in
-              the action response. If false, the screenshot object will still be returned but
-              with empty URIs. Default is false.
-
-          options: Action common options
-
-          output_format: ⚠️ DEPRECATED: Use `options.screenshot.outputFormat` instead. Type of the URI.
-              default is base64. This field will be ignored when `options.screenshot` is
-              provided.
-
-          presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
-              url expires in. Only takes effect when outputFormat is storageKey. This field
-              will be ignored when `options.screenshot` is provided.
-
-              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-              Example formats: "500ms", "30s", "5m", "1h" Default: 30m
-
-          screenshot_delay: ⚠️ DEPRECATED: Use `options.screenshot.delay` instead. This field will be
-              ignored when `options.screenshot` is provided.
-
-              Delay after performing the action, before taking the final screenshot.
-
-              Execution flow:
-
-              1. Take screenshot before action
-              2. Perform the action
-              3. Wait for screenshotDelay (this parameter)
-              4. Take screenshot after action
-
-              Example: '500ms' means wait 500ms after the action before capturing the final
-              screenshot.
-
-              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
-              Example formats: "500ms", "30s", "5m", "1h" Default: 500ms Maximum allowed: 30s
-
-          settings: AI action settings
-
-          stream: Whether to stream progress events using Server-Sent Events (SSE). When true, the
-              API returns an event stream. When false or omitted, the API returns a normal
-              JSON response.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not box_id:
-            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        return cast(
-            ActionAIResponse,
-            await self._post(
-                f"/boxes/{box_id}/actions/ai",
-                body=await async_maybe_transform(
-                    {
-                        "instruction": instruction,
-                        "background": background,
-                        "include_screenshot": include_screenshot,
-                        "options": options,
-                        "output_format": output_format,
-                        "presigned_expires_in": presigned_expires_in,
-                        "screenshot_delay": screenshot_delay,
-                        "settings": settings,
-                        "stream": stream,
-                    },
-                    action_ai_params.ActionAIParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(Any, ActionAIResponse),  # Union types cannot be passed in as arguments in the type system
-            ),
-        )
 
     @overload
     async def click(
@@ -4806,6 +4588,7 @@ class AsyncActionsResource(AsyncAPIResource):
         distance: Union[float, Literal["tiny", "short", "medium", "long"]] | Omit = omit,
         duration: str | Omit = omit,
         include_screenshot: bool | Omit = omit,
+        location: str | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -4842,6 +4625,9 @@ class AsyncActionsResource(AsyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
+
+          location: Natural language description of the location where the scroll should originate.
+              If not provided, the scroll will be performed from the center of the screen.
 
           options: Action common options
 
@@ -4901,6 +4687,7 @@ class AsyncActionsResource(AsyncAPIResource):
         direction: Literal["up", "down", "left", "right"] | Omit = omit,
         distance: Union[float, Literal["tiny", "short", "medium", "long"]] | Omit = omit,
         duration: str | Omit = omit,
+        location: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -4926,6 +4713,7 @@ class AsyncActionsResource(AsyncAPIResource):
                     "direction": direction,
                     "distance": distance,
                     "duration": duration,
+                    "location": location,
                 },
                 action_scroll_params.ActionScrollParams,
             ),
@@ -5714,9 +5502,6 @@ class ActionsResourceWithRawResponse:
     def __init__(self, actions: ActionsResource) -> None:
         self._actions = actions
 
-        self.ai = to_raw_response_wrapper(
-            actions.ai,
-        )
         self.click = to_raw_response_wrapper(
             actions.click,
         )
@@ -5801,9 +5586,6 @@ class AsyncActionsResourceWithRawResponse:
     def __init__(self, actions: AsyncActionsResource) -> None:
         self._actions = actions
 
-        self.ai = async_to_raw_response_wrapper(
-            actions.ai,
-        )
         self.click = async_to_raw_response_wrapper(
             actions.click,
         )
@@ -5888,9 +5670,6 @@ class ActionsResourceWithStreamingResponse:
     def __init__(self, actions: ActionsResource) -> None:
         self._actions = actions
 
-        self.ai = to_streamed_response_wrapper(
-            actions.ai,
-        )
         self.click = to_streamed_response_wrapper(
             actions.click,
         )
@@ -5975,9 +5754,6 @@ class AsyncActionsResourceWithStreamingResponse:
     def __init__(self, actions: AsyncActionsResource) -> None:
         self._actions = actions
 
-        self.ai = async_to_streamed_response_wrapper(
-            actions.ai,
-        )
         self.click = async_to_streamed_response_wrapper(
             actions.click,
         )

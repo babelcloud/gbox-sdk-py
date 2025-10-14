@@ -6,6 +6,7 @@ import httpx
 from gbox_sdk import GboxClient
 from gbox_sdk._types import NOT_GIVEN, Omit, Timeout, NotGiven, omit
 from gbox_sdk.wrapper.utils import is_linux_box, is_android_box
+from gbox_sdk.wrapper.profile import Profile, ProfileOptions
 from gbox_sdk.wrapper.box.linux import LinuxBoxOperator
 from gbox_sdk.types.v1.linux_box import LinuxBox
 from gbox_sdk.types.v1.android_box import AndroidBox
@@ -126,6 +127,8 @@ class GboxSDK:
         default_query: Optional[Mapping[str, object]] = None,
         http_client: Optional[httpx.Client] = None,
         _strict_response_validation: Optional[bool] = None,
+        profile: Optional[Profile] = None,
+        profile_options: Optional[ProfileOptions] = None,
     ):
         """
         Initialize the GboxSDK instance.
@@ -139,10 +142,24 @@ class GboxSDK:
             default_query (Optional[Mapping[str, object]]): Default query parameters for requests.
             http_client (Optional[httpx.Client]): Custom HTTP client instance.
             _strict_response_validation (Optional[bool]): Whether to strictly validate API responses.
+            profile (Optional[Profile]): Profile instance for configuration management.
+            profile_options (Optional[ProfileOptions]): Options for profile-based initialization.
         """
+        # Handle profile-based configuration
+        final_api_key = api_key
+        final_base_url = base_url
+
+        if profile is not None:
+            # Use profile to build client options
+            profile_opts = profile.build_client_options(profile_options)
+            if not final_api_key and profile_opts.api_key:
+                final_api_key = profile_opts.api_key
+            if not final_base_url and profile_opts.base_url:
+                final_base_url = profile_opts.base_url
+
         self.client = GboxClient(
-            api_key=api_key,
-            base_url=base_url,
+            api_key=final_api_key,
+            base_url=final_base_url,
             timeout=timeout,
             max_retries=max_retries if max_retries is not None else 2,
             default_headers=default_headers,

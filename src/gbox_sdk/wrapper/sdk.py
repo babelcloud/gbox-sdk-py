@@ -148,7 +148,7 @@ class GboxSDK:
         # Handle profile-based configuration
         final_api_key = api_key
         final_base_url = base_url
-        
+
         if profile is not None:
             # Use profile to build client options
             profile_opts = profile.build_client_options(profile_options)
@@ -156,7 +156,7 @@ class GboxSDK:
                 final_api_key = profile_opts.api_key
             if not final_base_url and profile_opts.base_url:
                 final_base_url = profile_opts.base_url
-        
+
         self.client = GboxClient(
             api_key=final_api_key,
             base_url=final_base_url,

@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.1.0-alpha.41 (2025-10-14)
+
+Full Changelog: [v0.1.0-alpha.40...v0.1.0-alpha.41](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.40...v0.1.0-alpha.41)
+
+### Features
+
+* **api:** api update ([56f5e1a](https://github.com/babelcloud/gbox-sdk-py/commit/56f5e1a3f6009e8a8a7b8e291ceb99d1cf93bd5e))
+* **api:** api update ([ff39c20](https://github.com/babelcloud/gbox-sdk-py/commit/ff39c20bb58c98ee6c77ff3069ed3cba0530daba))
+* **api:** api update ([e526f96](https://github.com/babelcloud/gbox-sdk-py/commit/e526f9652e63aa2e7c48f896fba31351c19de502))
+* **api:** api update ([4dc9aca](https://github.com/babelcloud/gbox-sdk-py/commit/4dc9acae2d61a99a3ad3cf07897797ea304a87bc))
+
+
+### Chores
+
+* **internal:** detect missing future annotations with ruff ([d534c87](https://github.com/babelcloud/gbox-sdk-py/commit/d534c877c463cb263e9f0c9a894655632322a85d))
+
 ## 0.1.0-alpha.40 (2025-09-26)
 
 Full Changelog: [v0.1.0-alpha.39...v0.1.0-alpha.40](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.39...v0.1.0-alpha.40)

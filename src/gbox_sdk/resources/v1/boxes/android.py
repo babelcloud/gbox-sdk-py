@@ -33,6 +33,7 @@ from ....types.v1.boxes import (
     android_restore_params,
     android_list_pkg_params,
     android_uninstall_params,
+    android_appium_url_params,
     android_list_pkg_simple_params,
 )
 from ....types.v1.boxes.android_app import AndroidApp
@@ -40,6 +41,7 @@ from ....types.v1.boxes.android_pkg import AndroidPkg
 from ....types.v1.boxes.android_install_response import AndroidInstallResponse
 from ....types.v1.boxes.android_list_app_response import AndroidListAppResponse
 from ....types.v1.boxes.android_list_pkg_response import AndroidListPkgResponse
+from ....types.v1.boxes.android_appium_url_response import AndroidAppiumURLResponse
 from ....types.v1.boxes.android_list_activities_response import AndroidListActivitiesResponse
 from ....types.v1.boxes.android_list_pkg_simple_response import AndroidListPkgSimpleResponse
 from ....types.v1.boxes.android_get_connect_address_response import AndroidGetConnectAddressResponse
@@ -66,6 +68,46 @@ class AndroidResource(SyncAPIResource):
         For more information, see https://www.github.com/babelcloud/gbox-sdk-py#with_streaming_response
         """
         return AndroidResourceWithStreamingResponse(self)
+
+    def appium_url(
+        self,
+        box_id: str,
+        *,
+        expires_in: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AndroidAppiumURLResponse:
+        """
+        Generate a pre-signed proxy URL for Appium server of a running Android box.
+
+        Args:
+          expires_in: The Appium connection url will be alive for the given duration
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 120m
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return self._post(
+            f"/boxes/{box_id}/android/connect-url/appium",
+            body=maybe_transform({"expires_in": expires_in}, android_appium_url_params.AndroidAppiumURLParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AndroidAppiumURLResponse,
+        )
 
     def backup(
         self,
@@ -810,6 +852,48 @@ class AsyncAndroidResource(AsyncAPIResource):
         """
         return AsyncAndroidResourceWithStreamingResponse(self)
 
+    async def appium_url(
+        self,
+        box_id: str,
+        *,
+        expires_in: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AndroidAppiumURLResponse:
+        """
+        Generate a pre-signed proxy URL for Appium server of a running Android box.
+
+        Args:
+          expires_in: The Appium connection url will be alive for the given duration
+
+              Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+              Example formats: "500ms", "30s", "5m", "1h" Default: 120m
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not box_id:
+            raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
+        return await self._post(
+            f"/boxes/{box_id}/android/connect-url/appium",
+            body=await async_maybe_transform(
+                {"expires_in": expires_in}, android_appium_url_params.AndroidAppiumURLParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AndroidAppiumURLResponse,
+        )
+
     async def backup(
         self,
         package_name: str,
@@ -1539,6 +1623,9 @@ class AndroidResourceWithRawResponse:
     def __init__(self, android: AndroidResource) -> None:
         self._android = android
 
+        self.appium_url = to_raw_response_wrapper(
+            android.appium_url,
+        )
         self.backup = to_custom_raw_response_wrapper(
             android.backup,
             BinaryAPIResponse,
@@ -1595,6 +1682,9 @@ class AsyncAndroidResourceWithRawResponse:
     def __init__(self, android: AsyncAndroidResource) -> None:
         self._android = android
 
+        self.appium_url = async_to_raw_response_wrapper(
+            android.appium_url,
+        )
         self.backup = async_to_custom_raw_response_wrapper(
             android.backup,
             AsyncBinaryAPIResponse,
@@ -1651,6 +1741,9 @@ class AndroidResourceWithStreamingResponse:
     def __init__(self, android: AndroidResource) -> None:
         self._android = android
 
+        self.appium_url = to_streamed_response_wrapper(
+            android.appium_url,
+        )
         self.backup = to_custom_streamed_response_wrapper(
             android.backup,
             StreamedBinaryAPIResponse,
@@ -1707,6 +1800,9 @@ class AsyncAndroidResourceWithStreamingResponse:
     def __init__(self, android: AsyncAndroidResource) -> None:
         self._android = android
 
+        self.appium_url = async_to_streamed_response_wrapper(
+            android.appium_url,
+        )
         self.backup = async_to_custom_streamed_response_wrapper(
             android.backup,
             AsyncStreamedBinaryAPIResponse,

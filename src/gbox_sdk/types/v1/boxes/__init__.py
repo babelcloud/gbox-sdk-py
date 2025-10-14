@@ -56,6 +56,7 @@ from .android_uninstall_params import AndroidUninstallParams as AndroidUninstall
 from .browser_cdp_url_response import BrowserCdpURLResponse as BrowserCdpURLResponse
 from .browser_set_proxy_params import BrowserSetProxyParams as BrowserSetProxyParams
 from .media_get_media_response import MediaGetMediaResponse as MediaGetMediaResponse
+from .android_appium_url_params import AndroidAppiumURLParams as AndroidAppiumURLParams
 from .android_list_app_response import AndroidListAppResponse as AndroidListAppResponse
 from .android_list_pkg_response import AndroidListPkgResponse as AndroidListPkgResponse
 from .browser_get_tabs_response import BrowserGetTabsResponse as BrowserGetTabsResponse
@@ -71,6 +72,7 @@ from .browser_get_proxy_response import BrowserGetProxyResponse as BrowserGetPro
 from .media_list_albums_response import MediaListAlbumsResponse as MediaListAlbumsResponse
 from .action_clipboard_set_params import ActionClipboardSetParams as ActionClipboardSetParams
 from .action_common_options_param import ActionCommonOptionsParam as ActionCommonOptionsParam
+from .android_appium_url_response import AndroidAppiumURLResponse as AndroidAppiumURLResponse
 from .browser_switch_tab_response import BrowserSwitchTabResponse as BrowserSwitchTabResponse
 from .browser_update_tab_response import BrowserUpdateTabResponse as BrowserUpdateTabResponse
 from .action_rewind_extract_params import ActionRewindExtractParams as ActionRewindExtractParams

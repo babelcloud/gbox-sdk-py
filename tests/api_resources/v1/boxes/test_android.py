@@ -23,6 +23,7 @@ from gbox_sdk.types.v1.boxes import (
     AndroidInstallResponse,
     AndroidListAppResponse,
     AndroidListPkgResponse,
+    AndroidAppiumURLResponse,
     AndroidListPkgSimpleResponse,
     AndroidListActivitiesResponse,
     AndroidGetConnectAddressResponse,
@@ -33,6 +34,57 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 class TestAndroid:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_appium_url(self, client: GboxClient) -> None:
+        android = client.v1.boxes.android.appium_url(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert_matches_type(AndroidAppiumURLResponse, android, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_appium_url_with_all_params(self, client: GboxClient) -> None:
+        android = client.v1.boxes.android.appium_url(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            expires_in="120m",
+        )
+        assert_matches_type(AndroidAppiumURLResponse, android, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_appium_url(self, client: GboxClient) -> None:
+        response = client.v1.boxes.android.with_raw_response.appium_url(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        android = response.parse()
+        assert_matches_type(AndroidAppiumURLResponse, android, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_appium_url(self, client: GboxClient) -> None:
+        with client.v1.boxes.android.with_streaming_response.appium_url(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            android = response.parse()
+            assert_matches_type(AndroidAppiumURLResponse, android, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_path_params_appium_url(self, client: GboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            client.v1.boxes.android.with_raw_response.appium_url(
+                box_id="",
+            )
 
     @parametrize
     @pytest.mark.respx(base_url=base_url)
@@ -942,6 +994,57 @@ class TestAsyncAndroid:
     parametrize = pytest.mark.parametrize(
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_appium_url(self, async_client: AsyncGboxClient) -> None:
+        android = await async_client.v1.boxes.android.appium_url(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+        assert_matches_type(AndroidAppiumURLResponse, android, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_appium_url_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        android = await async_client.v1.boxes.android.appium_url(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+            expires_in="120m",
+        )
+        assert_matches_type(AndroidAppiumURLResponse, android, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_appium_url(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.android.with_raw_response.appium_url(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        android = await response.parse()
+        assert_matches_type(AndroidAppiumURLResponse, android, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_appium_url(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.android.with_streaming_response.appium_url(
+            box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            android = await response.parse()
+            assert_matches_type(AndroidAppiumURLResponse, android, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_path_params_appium_url(self, async_client: AsyncGboxClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
+            await async_client.v1.boxes.android.with_raw_response.appium_url(
+                box_id="",
+            )
 
     @parametrize
     @pytest.mark.respx(base_url=base_url)

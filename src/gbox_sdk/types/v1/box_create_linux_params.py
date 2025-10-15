@@ -44,6 +44,13 @@ class Config(TypedDict, total=False):
     Example formats: "500ms", "30s", "5m", "1h" Default: 60m
     """
 
+    keep_alive: Annotated[str, PropertyInfo(alias="keepAlive")]
+    """Keep alive duration on activity; 0 disables keep alive
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 0ms
+    """
+
     labels: Dict[str, str]
     """Key-value pairs of labels for the box.
 

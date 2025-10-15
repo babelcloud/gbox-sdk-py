@@ -131,6 +131,7 @@ class TestBoxes:
                     "ADB_TRACE": "all",
                 },
                 "expires_in": "15m",
+                "keep_alive": "0ms",
                 "labels": {
                     "app": "mobile-testing",
                     "version": "v1.0",
@@ -179,6 +180,7 @@ class TestBoxes:
                     "API_URL": "https://api.example.com",
                 },
                 "expires_in": "60m",
+                "keep_alive": "0ms",
                 "labels": {
                     "project": "web-automation",
                     "environment": "testing",
@@ -830,6 +832,7 @@ class TestAsyncBoxes:
                     "ADB_TRACE": "all",
                 },
                 "expires_in": "15m",
+                "keep_alive": "0ms",
                 "labels": {
                     "app": "mobile-testing",
                     "version": "v1.0",
@@ -878,6 +881,7 @@ class TestAsyncBoxes:
                     "API_URL": "https://api.example.com",
                 },
                 "expires_in": "60m",
+                "keep_alive": "0ms",
                 "labels": {
                     "project": "web-automation",
                     "environment": "testing",

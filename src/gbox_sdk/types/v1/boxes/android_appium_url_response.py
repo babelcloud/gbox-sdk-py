@@ -1,5 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from typing_extensions import Literal
+
 from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
@@ -41,6 +43,9 @@ class DefaultOption(BaseModel):
 class AndroidAppiumURLResponse(BaseModel):
     default_option: DefaultOption = FieldInfo(alias="defaultOption")
     """Ready-to-use WebdriverIO remote options"""
+
+    log_level: Literal["trace", "debug", "info", "warn", "error", "silent"] = FieldInfo(alias="logLevel")
+    """Log level for WebdriverIO/Appium client"""
 
     udid: str
     """Device UDID for Appium connection"""

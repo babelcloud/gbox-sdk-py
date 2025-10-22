@@ -2,6 +2,14 @@
 
 from __future__ import annotations
 
+from .models import (
+    ModelsResource,
+    AsyncModelsResource,
+    ModelsResourceWithRawResponse,
+    AsyncModelsResourceWithRawResponse,
+    ModelsResourceWithStreamingResponse,
+    AsyncModelsResourceWithStreamingResponse,
+)
 from .devices import (
     DevicesResource,
     AsyncDevicesResource,
@@ -28,6 +36,10 @@ class V1Resource(SyncAPIResource):
     @cached_property
     def devices(self) -> DevicesResource:
         return DevicesResource(self._client)
+
+    @cached_property
+    def models(self) -> ModelsResource:
+        return ModelsResource(self._client)
 
     @cached_property
     def boxes(self) -> BoxesResource:
@@ -57,6 +69,10 @@ class AsyncV1Resource(AsyncAPIResource):
     @cached_property
     def devices(self) -> AsyncDevicesResource:
         return AsyncDevicesResource(self._client)
+
+    @cached_property
+    def models(self) -> AsyncModelsResource:
+        return AsyncModelsResource(self._client)
 
     @cached_property
     def boxes(self) -> AsyncBoxesResource:
@@ -91,6 +107,10 @@ class V1ResourceWithRawResponse:
         return DevicesResourceWithRawResponse(self._v1.devices)
 
     @cached_property
+    def models(self) -> ModelsResourceWithRawResponse:
+        return ModelsResourceWithRawResponse(self._v1.models)
+
+    @cached_property
     def boxes(self) -> BoxesResourceWithRawResponse:
         return BoxesResourceWithRawResponse(self._v1.boxes)
 
@@ -102,6 +122,10 @@ class AsyncV1ResourceWithRawResponse:
     @cached_property
     def devices(self) -> AsyncDevicesResourceWithRawResponse:
         return AsyncDevicesResourceWithRawResponse(self._v1.devices)
+
+    @cached_property
+    def models(self) -> AsyncModelsResourceWithRawResponse:
+        return AsyncModelsResourceWithRawResponse(self._v1.models)
 
     @cached_property
     def boxes(self) -> AsyncBoxesResourceWithRawResponse:
@@ -117,6 +141,10 @@ class V1ResourceWithStreamingResponse:
         return DevicesResourceWithStreamingResponse(self._v1.devices)
 
     @cached_property
+    def models(self) -> ModelsResourceWithStreamingResponse:
+        return ModelsResourceWithStreamingResponse(self._v1.models)
+
+    @cached_property
     def boxes(self) -> BoxesResourceWithStreamingResponse:
         return BoxesResourceWithStreamingResponse(self._v1.boxes)
 
@@ -128,6 +156,10 @@ class AsyncV1ResourceWithStreamingResponse:
     @cached_property
     def devices(self) -> AsyncDevicesResourceWithStreamingResponse:
         return AsyncDevicesResourceWithStreamingResponse(self._v1.devices)
+
+    @cached_property
+    def models(self) -> AsyncModelsResourceWithStreamingResponse:
+        return AsyncModelsResourceWithStreamingResponse(self._v1.models)
 
     @cached_property
     def boxes(self) -> AsyncBoxesResourceWithStreamingResponse:

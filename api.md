@@ -14,6 +14,18 @@ Methods:
 - <code title="get /devices/{deviceId}">client.v1.devices.<a href="./src/gbox_sdk/resources/v1/devices.py">get</a>(device_id) -> <a href="./src/gbox_sdk/types/v1/device_info.py">DeviceInfo</a></code>
 - <code title="post /devices/{deviceId}/box">client.v1.devices.<a href="./src/gbox_sdk/resources/v1/devices.py">to_box</a>(device_id, \*\*<a href="src/gbox_sdk/types/v1/device_to_box_params.py">params</a>) -> str</code>
 
+## Models
+
+Types:
+
+```python
+from gbox_sdk.types.v1 import ModelCallResponse
+```
+
+Methods:
+
+- <code title="post /model">client.v1.models.<a href="./src/gbox_sdk/resources/v1/models.py">call</a>(\*\*<a href="src/gbox_sdk/types/v1/model_call_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/model_call_response.py">ModelCallResponse</a></code>
+
 ## Boxes
 
 Types:

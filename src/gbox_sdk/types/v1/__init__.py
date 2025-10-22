@@ -10,9 +10,11 @@ from .box_stop_params import BoxStopParams as BoxStopParams
 from .box_start_params import BoxStartParams as BoxStartParams
 from .box_list_response import BoxListResponse as BoxListResponse
 from .box_stop_response import BoxStopResponse as BoxStopResponse
+from .model_call_params import ModelCallParams as ModelCallParams
 from .box_start_response import BoxStartResponse as BoxStartResponse
 from .device_list_params import DeviceListParams as DeviceListParams
 from .box_run_code_params import BoxRunCodeParams as BoxRunCodeParams
+from .model_call_response import ModelCallResponse as ModelCallResponse
 from .box_display_response import BoxDisplayResponse as BoxDisplayResponse
 from .box_terminate_params import BoxTerminateParams as BoxTerminateParams
 from .device_to_box_params import DeviceToBoxParams as DeviceToBoxParams

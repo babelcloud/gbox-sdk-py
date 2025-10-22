@@ -22,8 +22,8 @@ class TestModels:
     def test_method_call(self, client: GboxClient) -> None:
         model = client.v1.models.call(
             action={
-                "type": "click",
                 "target": "the VSCode app icon on the bottom dock",
+                "type": "click",
             },
             screenshot="https://gru-activate2-public-assets.s3.us-west-2.amazonaws.com/jessica/screenshot-1759332945616-pu0ovj.png",
         )
@@ -34,8 +34,8 @@ class TestModels:
     def test_method_call_with_all_params(self, client: GboxClient) -> None:
         model = client.v1.models.call(
             action={
-                "type": "click",
                 "target": "the VSCode app icon on the bottom dock",
+                "type": "click",
             },
             screenshot="https://gru-activate2-public-assets.s3.us-west-2.amazonaws.com/jessica/screenshot-1759332945616-pu0ovj.png",
             model="gbox-handy-1",
@@ -47,8 +47,8 @@ class TestModels:
     def test_raw_response_call(self, client: GboxClient) -> None:
         response = client.v1.models.with_raw_response.call(
             action={
-                "type": "click",
                 "target": "the VSCode app icon on the bottom dock",
+                "type": "click",
             },
             screenshot="https://gru-activate2-public-assets.s3.us-west-2.amazonaws.com/jessica/screenshot-1759332945616-pu0ovj.png",
         )
@@ -63,8 +63,8 @@ class TestModels:
     def test_streaming_response_call(self, client: GboxClient) -> None:
         with client.v1.models.with_streaming_response.call(
             action={
-                "type": "click",
                 "target": "the VSCode app icon on the bottom dock",
+                "type": "click",
             },
             screenshot="https://gru-activate2-public-assets.s3.us-west-2.amazonaws.com/jessica/screenshot-1759332945616-pu0ovj.png",
         ) as response:
@@ -87,8 +87,8 @@ class TestAsyncModels:
     async def test_method_call(self, async_client: AsyncGboxClient) -> None:
         model = await async_client.v1.models.call(
             action={
-                "type": "click",
                 "target": "the VSCode app icon on the bottom dock",
+                "type": "click",
             },
             screenshot="https://gru-activate2-public-assets.s3.us-west-2.amazonaws.com/jessica/screenshot-1759332945616-pu0ovj.png",
         )
@@ -99,8 +99,8 @@ class TestAsyncModels:
     async def test_method_call_with_all_params(self, async_client: AsyncGboxClient) -> None:
         model = await async_client.v1.models.call(
             action={
-                "type": "click",
                 "target": "the VSCode app icon on the bottom dock",
+                "type": "click",
             },
             screenshot="https://gru-activate2-public-assets.s3.us-west-2.amazonaws.com/jessica/screenshot-1759332945616-pu0ovj.png",
             model="gbox-handy-1",
@@ -112,8 +112,8 @@ class TestAsyncModels:
     async def test_raw_response_call(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.models.with_raw_response.call(
             action={
-                "type": "click",
                 "target": "the VSCode app icon on the bottom dock",
+                "type": "click",
             },
             screenshot="https://gru-activate2-public-assets.s3.us-west-2.amazonaws.com/jessica/screenshot-1759332945616-pu0ovj.png",
         )
@@ -128,8 +128,8 @@ class TestAsyncModels:
     async def test_streaming_response_call(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.models.with_streaming_response.call(
             action={
-                "type": "click",
                 "target": "the VSCode app icon on the bottom dock",
+                "type": "click",
             },
             screenshot="https://gru-activate2-public-assets.s3.us-west-2.amazonaws.com/jessica/screenshot-1759332945616-pu0ovj.png",
         ) as response:

@@ -46,7 +46,7 @@ class ModelsResource(SyncAPIResource):
     def call(
         self,
         *,
-        action: object,
+        action: model_call_params.Action,
         screenshot: str,
         model: Literal["gbox-handy-1"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -114,7 +114,7 @@ class AsyncModelsResource(AsyncAPIResource):
     async def call(
         self,
         *,
-        action: object,
+        action: model_call_params.Action,
         screenshot: str,
         model: Literal["gbox-handy-1"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.

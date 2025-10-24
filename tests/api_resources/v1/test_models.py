@@ -25,7 +25,7 @@ class TestModels:
                 "target": "the VSCode app icon on the bottom dock",
                 "type": "click",
             },
-            screenshot="https://gru-activate2-public-assets.s3.us-west-2.amazonaws.com/jessica/screenshot-1759332945616-pu0ovj.png",
+            screenshot="screenshot",
         )
         assert_matches_type(ModelCallResponse, model, path=["response"])
 
@@ -37,7 +37,7 @@ class TestModels:
                 "target": "the VSCode app icon on the bottom dock",
                 "type": "click",
             },
-            screenshot="https://gru-activate2-public-assets.s3.us-west-2.amazonaws.com/jessica/screenshot-1759332945616-pu0ovj.png",
+            screenshot="screenshot",
             model="gbox-handy-1",
         )
         assert_matches_type(ModelCallResponse, model, path=["response"])
@@ -50,7 +50,7 @@ class TestModels:
                 "target": "the VSCode app icon on the bottom dock",
                 "type": "click",
             },
-            screenshot="https://gru-activate2-public-assets.s3.us-west-2.amazonaws.com/jessica/screenshot-1759332945616-pu0ovj.png",
+            screenshot="screenshot",
         )
 
         assert response.is_closed is True
@@ -66,7 +66,7 @@ class TestModels:
                 "target": "the VSCode app icon on the bottom dock",
                 "type": "click",
             },
-            screenshot="https://gru-activate2-public-assets.s3.us-west-2.amazonaws.com/jessica/screenshot-1759332945616-pu0ovj.png",
+            screenshot="screenshot",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -90,7 +90,7 @@ class TestAsyncModels:
                 "target": "the VSCode app icon on the bottom dock",
                 "type": "click",
             },
-            screenshot="https://gru-activate2-public-assets.s3.us-west-2.amazonaws.com/jessica/screenshot-1759332945616-pu0ovj.png",
+            screenshot="screenshot",
         )
         assert_matches_type(ModelCallResponse, model, path=["response"])
 
@@ -102,7 +102,7 @@ class TestAsyncModels:
                 "target": "the VSCode app icon on the bottom dock",
                 "type": "click",
             },
-            screenshot="https://gru-activate2-public-assets.s3.us-west-2.amazonaws.com/jessica/screenshot-1759332945616-pu0ovj.png",
+            screenshot="screenshot",
             model="gbox-handy-1",
         )
         assert_matches_type(ModelCallResponse, model, path=["response"])
@@ -115,7 +115,7 @@ class TestAsyncModels:
                 "target": "the VSCode app icon on the bottom dock",
                 "type": "click",
             },
-            screenshot="https://gru-activate2-public-assets.s3.us-west-2.amazonaws.com/jessica/screenshot-1759332945616-pu0ovj.png",
+            screenshot="screenshot",
         )
 
         assert response.is_closed is True
@@ -131,7 +131,7 @@ class TestAsyncModels:
                 "target": "the VSCode app icon on the bottom dock",
                 "type": "click",
             },
-            screenshot="https://gru-activate2-public-assets.s3.us-west-2.amazonaws.com/jessica/screenshot-1759332945616-pu0ovj.png",
+            screenshot="screenshot",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

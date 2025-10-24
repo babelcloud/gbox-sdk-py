@@ -13,7 +13,13 @@ class ModelCallParams(TypedDict, total=False):
     """Structured action object (click or drag)"""
 
     screenshot: Required[str]
-    """HTTP(S) URL to screenshot image"""
+    """Screenshot image as HTTP(S) URL or base64-encoded data URI.
+
+    Supports both formats: 1) HTTP(S) URL pointing to an image file; 2)
+    Base64-encoded data URI with format 'data:image/png;base64,[data]' or
+    'data:image/jpeg;base64,[data]'. Only PNG and JPEG formats are supported for
+    base64.
+    """
 
     model: Literal["gbox-handy-1"]
     """Model to use"""

@@ -62,7 +62,10 @@ class ModelsResource(SyncAPIResource):
         Args:
           action: Structured action object (click or drag)
 
-          screenshot: HTTP(S) URL to screenshot image
+          screenshot: Screenshot image as HTTP(S) URL or base64-encoded data URI. Supports both
+              formats: 1) HTTP(S) URL pointing to an image file; 2) Base64-encoded data URI
+              with format 'data:image/png;base64,[data]' or 'data:image/jpeg;base64,[data]'.
+              Only PNG and JPEG formats are supported for base64.
 
           model: Model to use
 
@@ -130,7 +133,10 @@ class AsyncModelsResource(AsyncAPIResource):
         Args:
           action: Structured action object (click or drag)
 
-          screenshot: HTTP(S) URL to screenshot image
+          screenshot: Screenshot image as HTTP(S) URL or base64-encoded data URI. Supports both
+              formats: 1) HTTP(S) URL pointing to an image file; 2) Base64-encoded data URI
+              with format 'data:image/png;base64,[data]' or 'data:image/jpeg;base64,[data]'.
+              Only PNG and JPEG formats are supported for base64.
 
           model: Model to use
 

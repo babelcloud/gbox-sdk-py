@@ -33,12 +33,18 @@ from .proxy_get_response import ProxyGetResponse as ProxyGetResponse
 from .proxy_set_response import ProxySetResponse as ProxySetResponse
 from .action_click_params import ActionClickParams as ActionClickParams
 from .action_swipe_params import ActionSwipeParams as ActionSwipeParams
+from .action_tap_response import ActionTapResponse as ActionTapResponse
 from .action_touch_params import ActionTouchParams as ActionTouchParams
 from .android_open_params import AndroidOpenParams as AndroidOpenParams
 from .browser_open_params import BrowserOpenParams as BrowserOpenParams
+from .action_drag_response import ActionDragResponse as ActionDragResponse
 from .action_scroll_params import ActionScrollParams as ActionScrollParams
+from .action_click_response import ActionClickResponse as ActionClickResponse
 from .action_extract_params import ActionExtractParams as ActionExtractParams
+from .action_swipe_response import ActionSwipeResponse as ActionSwipeResponse
+from .action_touch_response import ActionTouchResponse as ActionTouchResponse
 from .browser_open_response import BrowserOpenResponse as BrowserOpenResponse
+from .action_scroll_response import ActionScrollResponse as ActionScrollResponse
 from .android_install_params import AndroidInstallParams as AndroidInstallParams
 from .android_restart_params import AndroidRestartParams as AndroidRestartParams
 from .android_restore_params import AndroidRestoreParams as AndroidRestoreParams
@@ -65,6 +71,7 @@ from .browser_update_tab_params import BrowserUpdateTabParams as BrowserUpdateTa
 from .media_create_album_params import MediaCreateAlbumParams as MediaCreateAlbumParams
 from .media_list_media_response import MediaListMediaResponse as MediaListMediaResponse
 from .media_update_album_params import MediaUpdateAlbumParams as MediaUpdateAlbumParams
+from .action_long_press_response import ActionLongPressResponse as ActionLongPressResponse
 from .action_press_button_params import ActionPressButtonParams as ActionPressButtonParams
 from .action_screenshot_response import ActionScreenshotResponse as ActionScreenshotResponse
 from .browser_close_tab_response import BrowserCloseTabResponse as BrowserCloseTabResponse

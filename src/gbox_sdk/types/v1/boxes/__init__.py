@@ -50,6 +50,8 @@ from .android_restart_params import AndroidRestartParams as AndroidRestartParams
 from .android_restore_params import AndroidRestoreParams as AndroidRestoreParams
 from .browser_cdp_url_params import BrowserCdpURLParams as BrowserCdpURLParams
 from .detected_element_param import DetectedElementParam as DetectedElementParam
+from .snapshot_create_params import SnapshotCreateParams as SnapshotCreateParams
+from .snapshot_list_response import SnapshotListResponse as SnapshotListResponse
 from .action_extract_response import ActionExtractResponse as ActionExtractResponse
 from .action_press_key_params import ActionPressKeyParams as ActionPressKeyParams
 from .android_list_pkg_params import AndroidListPkgParams as AndroidListPkgParams
@@ -62,6 +64,7 @@ from .android_uninstall_params import AndroidUninstallParams as AndroidUninstall
 from .browser_cdp_url_response import BrowserCdpURLResponse as BrowserCdpURLResponse
 from .browser_set_proxy_params import BrowserSetProxyParams as BrowserSetProxyParams
 from .media_get_media_response import MediaGetMediaResponse as MediaGetMediaResponse
+from .snapshot_create_response import SnapshotCreateResponse as SnapshotCreateResponse
 from .android_appium_url_params import AndroidAppiumURLParams as AndroidAppiumURLParams
 from .android_list_app_response import AndroidListAppResponse as AndroidListAppResponse
 from .android_list_pkg_response import AndroidListPkgResponse as AndroidListPkgResponse

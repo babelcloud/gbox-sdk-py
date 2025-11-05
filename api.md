@@ -138,6 +138,19 @@ Methods:
 - <code title="post /boxes/{boxId}/actions/touch">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">touch</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_touch_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_touch_response.py">ActionTouchResponse</a></code>
 - <code title="post /boxes/{boxId}/actions/type">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">type</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_type_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_result.py">ActionResult</a></code>
 
+### Snapshot
+
+Types:
+
+```python
+from gbox_sdk.types.v1.boxes import SnapshotCreateResponse, SnapshotListResponse
+```
+
+Methods:
+
+- <code title="post /snapshots/{boxId}">client.v1.boxes.snapshot.<a href="./src/gbox_sdk/resources/v1/boxes/snapshot.py">create</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/snapshot_create_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/snapshot_create_response.py">SnapshotCreateResponse</a></code>
+- <code title="get /snapshots">client.v1.boxes.snapshot.<a href="./src/gbox_sdk/resources/v1/boxes/snapshot.py">list</a>() -> <a href="./src/gbox_sdk/types/v1/boxes/snapshot_list_response.py">SnapshotListResponse</a></code>
+
 ### Proxy
 
 Types:

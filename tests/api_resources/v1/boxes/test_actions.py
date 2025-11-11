@@ -55,6 +55,7 @@ class TestActions:
             button="left",
             double=False,
             include_screenshot=False,
+            modifier_keys=["control", "shift"],
             options={
                 "model": "gpt-5",
                 "screenshot": {
@@ -128,6 +129,7 @@ class TestActions:
             button="left",
             double=False,
             include_screenshot=False,
+            modifier_keys=["control", "shift"],
             options={
                 "model": "gpt-5",
                 "screenshot": {
@@ -222,6 +224,7 @@ class TestActions:
             button="left",
             double=False,
             include_screenshot=False,
+            modifier_keys=["control", "shift"],
             options={
                 "model": "gpt-5",
                 "screenshot": {
@@ -2555,6 +2558,7 @@ class TestAsyncActions:
             button="left",
             double=False,
             include_screenshot=False,
+            modifier_keys=["control", "shift"],
             options={
                 "model": "gpt-5",
                 "screenshot": {
@@ -2628,6 +2632,7 @@ class TestAsyncActions:
             button="left",
             double=False,
             include_screenshot=False,
+            modifier_keys=["control", "shift"],
             options={
                 "model": "gpt-5",
                 "screenshot": {
@@ -2722,6 +2727,7 @@ class TestAsyncActions:
             button="left",
             double=False,
             include_screenshot=False,
+            modifier_keys=["control", "shift"],
             options={
                 "model": "gpt-5",
                 "screenshot": {

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Dict
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Literal, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 
@@ -30,6 +30,9 @@ class BoxCreateLinuxParams(TypedDict, total=False):
 
 
 class Config(TypedDict, total=False):
+    device_type: Annotated[Literal["virtual", "physical"], PropertyInfo(alias="deviceType")]
+    """Device type - virtual or physical Linux device"""
+
     envs: Dict[str, str]
     """Environment variables for the box.
 

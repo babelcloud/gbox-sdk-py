@@ -175,6 +175,7 @@ class TestBoxes:
     def test_method_create_linux_with_all_params(self, client: GboxClient) -> None:
         box = client.v1.boxes.create_linux(
             config={
+                "device_type": "virtual",
                 "envs": {
                     "DEBUG": "true",
                     "API_URL": "https://api.example.com",
@@ -876,6 +877,7 @@ class TestAsyncBoxes:
     async def test_method_create_linux_with_all_params(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.create_linux(
             config={
+                "device_type": "virtual",
                 "envs": {
                     "DEBUG": "true",
                     "API_URL": "https://api.example.com",

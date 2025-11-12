@@ -54,6 +54,9 @@ class Config(BaseModel):
     specified otherwise.
     """
 
+    device_type: Optional[Literal["virtual", "physical"]] = FieldInfo(alias="deviceType", default=None)
+    """Device type - virtual or physical Linux device"""
+
 
 class LinuxBox(BaseModel):
     id: str

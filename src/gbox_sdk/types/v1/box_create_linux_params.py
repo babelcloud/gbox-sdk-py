@@ -30,8 +30,8 @@ class BoxCreateLinuxParams(TypedDict, total=False):
 
 
 class Config(TypedDict, total=False):
-    device_type: Annotated[Literal["virtual", "physical"], PropertyInfo(alias="deviceType")]
-    """Device type - virtual or physical Linux device"""
+    device_type: Annotated[Literal["container", "vm"], PropertyInfo(alias="deviceType")]
+    """Device type - container or vm Linux device"""
 
     envs: Dict[str, str]
     """Environment variables for the box.

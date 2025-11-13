@@ -42,6 +42,9 @@ class Config(BaseModel):
     os: ConfigOs
     """Linux operating system configuration"""
 
+    public_ip: str = FieldInfo(alias="publicIp")
+    """Public IP allocated to the box."""
+
     storage: float
     """Storage allocated to the box in GiB."""
 
@@ -54,8 +57,8 @@ class Config(BaseModel):
     specified otherwise.
     """
 
-    device_type: Optional[Literal["virtual", "physical"]] = FieldInfo(alias="deviceType", default=None)
-    """Device type - virtual or physical Linux device"""
+    device_type: Optional[Literal["container", "vm"]] = FieldInfo(alias="deviceType", default=None)
+    """Device type - container or vm Linux device"""
 
 
 class LinuxBox(BaseModel):

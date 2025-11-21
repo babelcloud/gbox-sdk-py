@@ -39,11 +39,13 @@ from .android_open_params import AndroidOpenParams as AndroidOpenParams
 from .browser_open_params import BrowserOpenParams as BrowserOpenParams
 from .action_drag_response import ActionDragResponse as ActionDragResponse
 from .action_scroll_params import ActionScrollParams as ActionScrollParams
+from .snapshot_list_params import SnapshotListParams as SnapshotListParams
 from .action_click_response import ActionClickResponse as ActionClickResponse
 from .action_extract_params import ActionExtractParams as ActionExtractParams
 from .action_swipe_response import ActionSwipeResponse as ActionSwipeResponse
 from .action_touch_response import ActionTouchResponse as ActionTouchResponse
 from .browser_open_response import BrowserOpenResponse as BrowserOpenResponse
+from .snapshot_get_response import SnapshotGetResponse as SnapshotGetResponse
 from .action_scroll_response import ActionScrollResponse as ActionScrollResponse
 from .android_install_params import AndroidInstallParams as AndroidInstallParams
 from .android_restart_params import AndroidRestartParams as AndroidRestartParams

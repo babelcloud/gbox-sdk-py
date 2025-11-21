@@ -143,13 +143,19 @@ Methods:
 Types:
 
 ```python
-from gbox_sdk.types.v1.boxes import SnapshotCreateResponse, SnapshotListResponse
+from gbox_sdk.types.v1.boxes import (
+    SnapshotCreateResponse,
+    SnapshotListResponse,
+    SnapshotGetResponse,
+)
 ```
 
 Methods:
 
 - <code title="post /snapshots/{boxId}">client.v1.boxes.snapshot.<a href="./src/gbox_sdk/resources/v1/boxes/snapshot.py">create</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/snapshot_create_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/snapshot_create_response.py">SnapshotCreateResponse</a></code>
-- <code title="get /snapshots">client.v1.boxes.snapshot.<a href="./src/gbox_sdk/resources/v1/boxes/snapshot.py">list</a>() -> <a href="./src/gbox_sdk/types/v1/boxes/snapshot_list_response.py">SnapshotListResponse</a></code>
+- <code title="get /snapshots">client.v1.boxes.snapshot.<a href="./src/gbox_sdk/resources/v1/boxes/snapshot.py">list</a>(\*\*<a href="src/gbox_sdk/types/v1/boxes/snapshot_list_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/snapshot_list_response.py">SnapshotListResponse</a></code>
+- <code title="get /snapshots/{snapshotName}">client.v1.boxes.snapshot.<a href="./src/gbox_sdk/resources/v1/boxes/snapshot.py">get</a>(snapshot_name) -> <a href="./src/gbox_sdk/types/v1/boxes/snapshot_get_response.py">SnapshotGetResponse</a></code>
+- <code title="delete /snapshots/{snapshotName}">client.v1.boxes.snapshot.<a href="./src/gbox_sdk/resources/v1/boxes/snapshot.py">remove</a>(snapshot_name) -> None</code>
 
 ### Proxy
 

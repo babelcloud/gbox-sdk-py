@@ -71,3 +71,6 @@ class Config(TypedDict, total=False):
     applications, or any other organizational tags that help you organize and filter
     your boxes.
     """
+
+    snapshot_name: Annotated[str, PropertyInfo(alias="snapshotName")]
+    """Snapshot name - snapshot for creating vm linux box"""

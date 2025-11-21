@@ -60,6 +60,12 @@ class Config(BaseModel):
     device_type: Optional[Literal["container", "vm"]] = FieldInfo(alias="deviceType", default=None)
     """Device type - container or vm Linux device"""
 
+    snapshot_id: Optional[str] = FieldInfo(alias="snapshotId", default=None)
+    """Snapshot id"""
+
+    snapshot_name: Optional[str] = FieldInfo(alias="snapshotName", default=None)
+    """Snapshot name"""
+
 
 class LinuxBox(BaseModel):
     id: str

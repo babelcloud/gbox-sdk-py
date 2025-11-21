@@ -21,3 +21,6 @@ class SnapshotCreateResponse(BaseModel):
 
     provider_type: Literal["vm"] = FieldInfo(alias="providerType")
     """The provider type of the snapshot"""
+
+    status: Literal["Pending", "Available", "Error"]
+    """The status of the snapshot"""

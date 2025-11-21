@@ -1,16 +1,15 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List
 from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
 
-__all__ = ["SnapshotListResponse", "Data"]
+__all__ = ["SnapshotGetResponse"]
 
 
-class Data(BaseModel):
+class SnapshotGetResponse(BaseModel):
     id: str
     """Unique identifier for the snapshot"""
 
@@ -25,17 +24,3 @@ class Data(BaseModel):
 
     status: Literal["Pending", "Available", "Error"]
     """The status of the snapshot"""
-
-
-class SnapshotListResponse(BaseModel):
-    data: List[Data]
-    """List of snapshots"""
-
-    page: int
-    """Page number"""
-
-    page_size: int = FieldInfo(alias="pageSize")
-    """Page size"""
-
-    total: int
-    """Total number of items"""

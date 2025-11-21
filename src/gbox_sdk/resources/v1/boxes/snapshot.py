@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from ...._types import Body, Query, Headers, NotGiven, not_given
+from ...._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -15,7 +15,8 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.v1.boxes import snapshot_create_params
+from ....types.v1.boxes import snapshot_list_params, snapshot_create_params
+from ....types.v1.boxes.snapshot_get_response import SnapshotGetResponse
 from ....types.v1.boxes.snapshot_list_response import SnapshotListResponse
 from ....types.v1.boxes.snapshot_create_response import SnapshotCreateResponse
 
@@ -84,6 +85,8 @@ class SnapshotResource(SyncAPIResource):
     def list(
         self,
         *,
+        page: int | Omit = omit,
+        page_size: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -91,13 +94,105 @@ class SnapshotResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SnapshotListResponse:
-        """List all snapshots for a given box."""
+        """
+        List all snapshots of current orginazation.
+
+        Args:
+          page: Page number
+
+          page_size: Page size
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return self._get(
             "/snapshots",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "page": page,
+                        "page_size": page_size,
+                    },
+                    snapshot_list_params.SnapshotListParams,
+                ),
             ),
             cast_to=SnapshotListResponse,
+        )
+
+    def get(
+        self,
+        snapshot_name: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> SnapshotGetResponse:
+        """
+        Get a snapshot with specified name
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not snapshot_name:
+            raise ValueError(f"Expected a non-empty value for `snapshot_name` but received {snapshot_name!r}")
+        return self._get(
+            f"/snapshots/{snapshot_name}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SnapshotGetResponse,
+        )
+
+    def remove(
+        self,
+        snapshot_name: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """
+        Remove a snapshot of specified id.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not snapshot_name:
+            raise ValueError(f"Expected a non-empty value for `snapshot_name` but received {snapshot_name!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._delete(
+            f"/snapshots/{snapshot_name}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
         )
 
 
@@ -163,6 +258,8 @@ class AsyncSnapshotResource(AsyncAPIResource):
     async def list(
         self,
         *,
+        page: int | Omit = omit,
+        page_size: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -170,13 +267,105 @@ class AsyncSnapshotResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SnapshotListResponse:
-        """List all snapshots for a given box."""
+        """
+        List all snapshots of current orginazation.
+
+        Args:
+          page: Page number
+
+          page_size: Page size
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return await self._get(
             "/snapshots",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "page": page,
+                        "page_size": page_size,
+                    },
+                    snapshot_list_params.SnapshotListParams,
+                ),
             ),
             cast_to=SnapshotListResponse,
+        )
+
+    async def get(
+        self,
+        snapshot_name: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> SnapshotGetResponse:
+        """
+        Get a snapshot with specified name
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not snapshot_name:
+            raise ValueError(f"Expected a non-empty value for `snapshot_name` but received {snapshot_name!r}")
+        return await self._get(
+            f"/snapshots/{snapshot_name}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SnapshotGetResponse,
+        )
+
+    async def remove(
+        self,
+        snapshot_name: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """
+        Remove a snapshot of specified id.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not snapshot_name:
+            raise ValueError(f"Expected a non-empty value for `snapshot_name` but received {snapshot_name!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._delete(
+            f"/snapshots/{snapshot_name}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
         )
 
 
@@ -190,6 +379,12 @@ class SnapshotResourceWithRawResponse:
         self.list = to_raw_response_wrapper(
             snapshot.list,
         )
+        self.get = to_raw_response_wrapper(
+            snapshot.get,
+        )
+        self.remove = to_raw_response_wrapper(
+            snapshot.remove,
+        )
 
 
 class AsyncSnapshotResourceWithRawResponse:
@@ -201,6 +396,12 @@ class AsyncSnapshotResourceWithRawResponse:
         )
         self.list = async_to_raw_response_wrapper(
             snapshot.list,
+        )
+        self.get = async_to_raw_response_wrapper(
+            snapshot.get,
+        )
+        self.remove = async_to_raw_response_wrapper(
+            snapshot.remove,
         )
 
 
@@ -214,6 +415,12 @@ class SnapshotResourceWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             snapshot.list,
         )
+        self.get = to_streamed_response_wrapper(
+            snapshot.get,
+        )
+        self.remove = to_streamed_response_wrapper(
+            snapshot.remove,
+        )
 
 
 class AsyncSnapshotResourceWithStreamingResponse:
@@ -225,4 +432,10 @@ class AsyncSnapshotResourceWithStreamingResponse:
         )
         self.list = async_to_streamed_response_wrapper(
             snapshot.list,
+        )
+        self.get = async_to_streamed_response_wrapper(
+            snapshot.get,
+        )
+        self.remove = async_to_streamed_response_wrapper(
+            snapshot.remove,
         )

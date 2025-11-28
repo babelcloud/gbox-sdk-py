@@ -14,6 +14,18 @@ Methods:
 - <code title="get /devices/{deviceId}">client.v1.devices.<a href="./src/gbox_sdk/resources/v1/devices.py">get</a>(device_id) -> <a href="./src/gbox_sdk/types/v1/device_info.py">DeviceInfo</a></code>
 - <code title="post /devices/{deviceId}/box">client.v1.devices.<a href="./src/gbox_sdk/resources/v1/devices.py">to_box</a>(device_id, \*\*<a href="src/gbox_sdk/types/v1/device_to_box_params.py">params</a>) -> str</code>
 
+## Models
+
+Types:
+
+```python
+from gbox_sdk.types.v1 import ModelCallResponse
+```
+
+Methods:
+
+- <code title="post /model">client.v1.models.<a href="./src/gbox_sdk/resources/v1/models.py">call</a>(\*\*<a href="src/gbox_sdk/types/v1/model_call_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/model_call_response.py">ModelCallResponse</a></code>
+
 ## Boxes
 
 Types:
@@ -77,28 +89,35 @@ from gbox_sdk.types.v1.boxes import (
     ActionResult,
     ActionScreenshotOptions,
     DetectedElement,
+    ActionClickResponse,
     ActionClipboardGetResponse,
+    ActionDragResponse,
     ActionElementsDetectResponse,
     ActionExtractResponse,
+    ActionLongPressResponse,
     ActionRecordingStopResponse,
     ActionRewindExtractResponse,
     ActionScreenLayoutResponse,
     ActionScreenshotResponse,
+    ActionScrollResponse,
     ActionSettingsResponse,
     ActionSettingsResetResponse,
     ActionSettingsUpdateResponse,
+    ActionSwipeResponse,
+    ActionTapResponse,
+    ActionTouchResponse,
 )
 ```
 
 Methods:
 
-- <code title="post /boxes/{boxId}/actions/click">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">click</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_click_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_result.py">ActionResult</a></code>
+- <code title="post /boxes/{boxId}/actions/click">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">click</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_click_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_click_response.py">ActionClickResponse</a></code>
 - <code title="get /boxes/{boxId}/actions/clipboard">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">clipboard_get</a>(box_id) -> str</code>
 - <code title="post /boxes/{boxId}/actions/clipboard">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">clipboard_set</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_clipboard_set_params.py">params</a>) -> None</code>
-- <code title="post /boxes/{boxId}/actions/drag">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">drag</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_drag_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_result.py">ActionResult</a></code>
+- <code title="post /boxes/{boxId}/actions/drag">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">drag</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_drag_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_drag_response.py">ActionDragResponse</a></code>
 - <code title="post /boxes/{boxId}/actions/elements/detect">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">elements_detect</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_elements_detect_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_elements_detect_response.py">ActionElementsDetectResponse</a></code>
 - <code title="post /boxes/{boxId}/actions/extract">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">extract</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_extract_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_extract_response.py">ActionExtractResponse</a></code>
-- <code title="post /boxes/{boxId}/actions/long-press">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">long_press</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_long_press_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_result.py">ActionResult</a></code>
+- <code title="post /boxes/{boxId}/actions/long-press">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">long_press</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_long_press_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_long_press_response.py">ActionLongPressResponse</a></code>
 - <code title="post /boxes/{boxId}/actions/move">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">move</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_move_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_result.py">ActionResult</a></code>
 - <code title="post /boxes/{boxId}/actions/press-button">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">press_button</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_press_button_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_result.py">ActionResult</a></code>
 - <code title="post /boxes/{boxId}/actions/press-key">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">press_key</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_press_key_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_result.py">ActionResult</a></code>
@@ -110,14 +129,33 @@ Methods:
 - <code title="get /boxes/{boxId}/actions/screen-layout">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">screen_layout</a>(box_id) -> <a href="./src/gbox_sdk/types/v1/boxes/action_screen_layout_response.py">ActionScreenLayoutResponse</a></code>
 - <code title="post /boxes/{boxId}/actions/screen-rotation">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">screen_rotation</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_screen_rotation_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_result.py">ActionResult</a></code>
 - <code title="post /boxes/{boxId}/actions/screenshot">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">screenshot</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_screenshot_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_screenshot_response.py">ActionScreenshotResponse</a></code>
-- <code title="post /boxes/{boxId}/actions/scroll">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">scroll</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_scroll_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_result.py">ActionResult</a></code>
+- <code title="post /boxes/{boxId}/actions/scroll">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">scroll</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_scroll_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_scroll_response.py">ActionScrollResponse</a></code>
 - <code title="get /boxes/{boxId}/actions/settings">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">settings</a>(box_id) -> <a href="./src/gbox_sdk/types/v1/boxes/action_settings_response.py">ActionSettingsResponse</a></code>
 - <code title="delete /boxes/{boxId}/actions/settings">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">settings_reset</a>(box_id) -> <a href="./src/gbox_sdk/types/v1/boxes/action_settings_reset_response.py">ActionSettingsResetResponse</a></code>
 - <code title="put /boxes/{boxId}/actions/settings">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">settings_update</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_settings_update_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_settings_update_response.py">ActionSettingsUpdateResponse</a></code>
-- <code title="post /boxes/{boxId}/actions/swipe">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">swipe</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_swipe_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_result.py">ActionResult</a></code>
-- <code title="post /boxes/{boxId}/actions/tap">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">tap</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_tap_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_result.py">ActionResult</a></code>
-- <code title="post /boxes/{boxId}/actions/touch">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">touch</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_touch_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_result.py">ActionResult</a></code>
+- <code title="post /boxes/{boxId}/actions/swipe">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">swipe</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_swipe_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_swipe_response.py">ActionSwipeResponse</a></code>
+- <code title="post /boxes/{boxId}/actions/tap">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">tap</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_tap_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_tap_response.py">ActionTapResponse</a></code>
+- <code title="post /boxes/{boxId}/actions/touch">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">touch</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_touch_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_touch_response.py">ActionTouchResponse</a></code>
 - <code title="post /boxes/{boxId}/actions/type">client.v1.boxes.actions.<a href="./src/gbox_sdk/resources/v1/boxes/actions.py">type</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/action_type_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/action_result.py">ActionResult</a></code>
+
+### Snapshot
+
+Types:
+
+```python
+from gbox_sdk.types.v1.boxes import (
+    SnapshotCreateResponse,
+    SnapshotListResponse,
+    SnapshotGetResponse,
+)
+```
+
+Methods:
+
+- <code title="post /snapshots/{boxId}">client.v1.boxes.snapshot.<a href="./src/gbox_sdk/resources/v1/boxes/snapshot.py">create</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/snapshot_create_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/snapshot_create_response.py">SnapshotCreateResponse</a></code>
+- <code title="get /snapshots">client.v1.boxes.snapshot.<a href="./src/gbox_sdk/resources/v1/boxes/snapshot.py">list</a>(\*\*<a href="src/gbox_sdk/types/v1/boxes/snapshot_list_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/snapshot_list_response.py">SnapshotListResponse</a></code>
+- <code title="get /snapshots/{snapshotName}">client.v1.boxes.snapshot.<a href="./src/gbox_sdk/resources/v1/boxes/snapshot.py">get</a>(snapshot_name) -> <a href="./src/gbox_sdk/types/v1/boxes/snapshot_get_response.py">SnapshotGetResponse</a></code>
+- <code title="delete /snapshots/{snapshotName}">client.v1.boxes.snapshot.<a href="./src/gbox_sdk/resources/v1/boxes/snapshot.py">remove</a>(snapshot_name) -> None</code>
 
 ### Proxy
 
@@ -228,6 +266,7 @@ Types:
 from gbox_sdk.types.v1.boxes import (
     AndroidApp,
     AndroidPkg,
+    AndroidAppiumURLResponse,
     AndroidGetConnectAddressResponse,
     AndroidInstallResponse,
     AndroidListActivitiesResponse,
@@ -239,6 +278,7 @@ from gbox_sdk.types.v1.boxes import (
 
 Methods:
 
+- <code title="post /boxes/{boxId}/android/connect-url/appium">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">appium_url</a>(box_id, \*\*<a href="src/gbox_sdk/types/v1/boxes/android_appium_url_params.py">params</a>) -> <a href="./src/gbox_sdk/types/v1/boxes/android_appium_url_response.py">AndroidAppiumURLResponse</a></code>
 - <code title="post /boxes/{boxId}/android/packages/{packageName}/backup">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">backup</a>(package_name, \*, box_id) -> BinaryAPIResponse</code>
 - <code title="post /boxes/{boxId}/android/packages/backup-all">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">backup_all</a>(box_id) -> BinaryAPIResponse</code>
 - <code title="post /boxes/{boxId}/android/packages/{packageName}/close">client.v1.boxes.android.<a href="./src/gbox_sdk/resources/v1/boxes/android.py">close</a>(package_name, \*, box_id) -> None</code>

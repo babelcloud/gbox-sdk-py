@@ -1,5 +1,44 @@
 # Changelog
 
+## 0.1.0-alpha.42 (2025-11-28)
+
+Full Changelog: [v0.1.0-alpha.41...v0.1.0-alpha.42](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.41...v0.1.0-alpha.42)
+
+### Features
+
+* **api:** api update ([587ba18](https://github.com/babelcloud/gbox-sdk-py/commit/587ba188e28daa293d6fc07fadb02787a191e19e))
+* **api:** api update ([2982c28](https://github.com/babelcloud/gbox-sdk-py/commit/2982c2858bbd8dedd9e9551f832d828042e3dc2d))
+* **api:** api update ([f7ccac2](https://github.com/babelcloud/gbox-sdk-py/commit/f7ccac22108864381fbabe34ffe59f3f9d46b879))
+* **api:** api update ([5c627d7](https://github.com/babelcloud/gbox-sdk-py/commit/5c627d73b1b930abf69f08c40a2504f62750f6d6))
+* **api:** api update ([df5876e](https://github.com/babelcloud/gbox-sdk-py/commit/df5876ed05231ee5b90ccff7bf2851897d974a8e))
+* **api:** api update ([b416416](https://github.com/babelcloud/gbox-sdk-py/commit/b4164163611f49880e86e852395df0ebf7c4ce0e))
+* **api:** api update ([7d0d335](https://github.com/babelcloud/gbox-sdk-py/commit/7d0d335f15219ee0262bb615821ba975fbec5902))
+* **api:** api update ([81bd4ad](https://github.com/babelcloud/gbox-sdk-py/commit/81bd4ad176524c933d50f44f47a20eba6f883f50))
+* **api:** api update ([68ce162](https://github.com/babelcloud/gbox-sdk-py/commit/68ce1621ebd5200b9da3c5d33d7e66e31a0267c9))
+* **api:** api update ([69414a0](https://github.com/babelcloud/gbox-sdk-py/commit/69414a0450da6b6a2f77aefefa25e925fabbc12c))
+* **api:** api update ([bf80a71](https://github.com/babelcloud/gbox-sdk-py/commit/bf80a71aac618785c3e3775be0ec47c2f740b636))
+* **api:** api update ([21a9d25](https://github.com/babelcloud/gbox-sdk-py/commit/21a9d25006827c3aa81e394dc4683f944d120870))
+* **api:** api update ([a4fa084](https://github.com/babelcloud/gbox-sdk-py/commit/a4fa084a0028968e2c5c6bffb84990d24cb32820))
+* **api:** api update ([874ec44](https://github.com/babelcloud/gbox-sdk-py/commit/874ec440b07600afbc0974fab08bdf477936133c))
+* **api:** api update ([7ab29ec](https://github.com/babelcloud/gbox-sdk-py/commit/7ab29ec5417489f1a2b168a9bc6d3f3801d250e6))
+
+
+### Bug Fixes
+
+* **client:** close streams without requiring full consumption ([12bd9ce](https://github.com/babelcloud/gbox-sdk-py/commit/12bd9ce7b5e266cc7791697c8d707b9a962b1b68))
+* compat with Python 3.14 ([ffde358](https://github.com/babelcloud/gbox-sdk-py/commit/ffde3585fbe7ad3ef7d849f6e85d40feccadaab3))
+* **compat:** update signatures of `model_dump` and `model_dump_json` for Pydantic v1 ([1c15423](https://github.com/babelcloud/gbox-sdk-py/commit/1c154234a2eff64229c3d1cb2c2d13c76882a9e2))
+* ensure streams are always closed ([e4ef68a](https://github.com/babelcloud/gbox-sdk-py/commit/e4ef68a67b7cc3d402b633ad805006b9fa36bc9e))
+
+
+### Chores
+
+* add Python 3.14 classifier and testing ([0aa8591](https://github.com/babelcloud/gbox-sdk-py/commit/0aa85916194fa140e06323c593bcd686ac327056))
+* bump `httpx-aiohttp` version to 0.1.9 ([d3b0ab9](https://github.com/babelcloud/gbox-sdk-py/commit/d3b0ab939b6ea1ba076374da27f8ea13813b3a45))
+* **internal/tests:** avoid race condition with implicit client cleanup ([0178cf3](https://github.com/babelcloud/gbox-sdk-py/commit/0178cf3a021f94850ec707e63f759cd24836128b))
+* **internal:** codegen related update ([e1a7621](https://github.com/babelcloud/gbox-sdk-py/commit/e1a762162c96140cb3482c905199cb4cbfba7eb7))
+* **internal:** grammar fix (it's -&gt; its) ([57b312c](https://github.com/babelcloud/gbox-sdk-py/commit/57b312cf2f7abfb5f2d38838c072ce30d178b375))
+
 ## 0.1.0-alpha.41 (2025-10-14)
 
 Full Changelog: [v0.1.0-alpha.40...v0.1.0-alpha.41](https://github.com/babelcloud/gbox-sdk-py/compare/v0.1.0-alpha.40...v0.1.0-alpha.41)

@@ -63,6 +63,14 @@ from .storage import (
     StorageResourceWithStreamingResponse,
     AsyncStorageResourceWithStreamingResponse,
 )
+from .snapshot import (
+    SnapshotResource,
+    AsyncSnapshotResource,
+    SnapshotResourceWithRawResponse,
+    AsyncSnapshotResourceWithRawResponse,
+    SnapshotResourceWithStreamingResponse,
+    AsyncSnapshotResourceWithStreamingResponse,
+)
 from ...._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
 from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
@@ -112,6 +120,10 @@ class BoxesResource(SyncAPIResource):
     @cached_property
     def actions(self) -> ActionsResource:
         return ActionsResource(self._client)
+
+    @cached_property
+    def snapshot(self) -> SnapshotResource:
+        return SnapshotResource(self._client)
 
     @cached_property
     def proxy(self) -> ProxyResource:
@@ -837,6 +849,10 @@ class AsyncBoxesResource(AsyncAPIResource):
     @cached_property
     def actions(self) -> AsyncActionsResource:
         return AsyncActionsResource(self._client)
+
+    @cached_property
+    def snapshot(self) -> AsyncSnapshotResource:
+        return AsyncSnapshotResource(self._client)
 
     @cached_property
     def proxy(self) -> AsyncProxyResource:
@@ -1612,6 +1628,10 @@ class BoxesResourceWithRawResponse:
         return ActionsResourceWithRawResponse(self._boxes.actions)
 
     @cached_property
+    def snapshot(self) -> SnapshotResourceWithRawResponse:
+        return SnapshotResourceWithRawResponse(self._boxes.snapshot)
+
+    @cached_property
     def proxy(self) -> ProxyResourceWithRawResponse:
         return ProxyResourceWithRawResponse(self._boxes.proxy)
 
@@ -1686,6 +1706,10 @@ class AsyncBoxesResourceWithRawResponse:
     @cached_property
     def actions(self) -> AsyncActionsResourceWithRawResponse:
         return AsyncActionsResourceWithRawResponse(self._boxes.actions)
+
+    @cached_property
+    def snapshot(self) -> AsyncSnapshotResourceWithRawResponse:
+        return AsyncSnapshotResourceWithRawResponse(self._boxes.snapshot)
 
     @cached_property
     def proxy(self) -> AsyncProxyResourceWithRawResponse:
@@ -1764,6 +1788,10 @@ class BoxesResourceWithStreamingResponse:
         return ActionsResourceWithStreamingResponse(self._boxes.actions)
 
     @cached_property
+    def snapshot(self) -> SnapshotResourceWithStreamingResponse:
+        return SnapshotResourceWithStreamingResponse(self._boxes.snapshot)
+
+    @cached_property
     def proxy(self) -> ProxyResourceWithStreamingResponse:
         return ProxyResourceWithStreamingResponse(self._boxes.proxy)
 
@@ -1838,6 +1866,10 @@ class AsyncBoxesResourceWithStreamingResponse:
     @cached_property
     def actions(self) -> AsyncActionsResourceWithStreamingResponse:
         return AsyncActionsResourceWithStreamingResponse(self._boxes.actions)
+
+    @cached_property
+    def snapshot(self) -> AsyncSnapshotResourceWithStreamingResponse:
+        return AsyncSnapshotResourceWithStreamingResponse(self._boxes.snapshot)
 
     @cached_property
     def proxy(self) -> AsyncProxyResourceWithStreamingResponse:

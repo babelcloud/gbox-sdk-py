@@ -131,6 +131,7 @@ class TestBoxes:
                     "ADB_TRACE": "all",
                 },
                 "expires_in": "15m",
+                "keep_alive": "0ms",
                 "labels": {
                     "app": "mobile-testing",
                     "version": "v1.0",
@@ -174,15 +175,18 @@ class TestBoxes:
     def test_method_create_linux_with_all_params(self, client: GboxClient) -> None:
         box = client.v1.boxes.create_linux(
             config={
+                "device_type": "container",
                 "envs": {
                     "DEBUG": "true",
                     "API_URL": "https://api.example.com",
                 },
                 "expires_in": "60m",
+                "keep_alive": "0ms",
                 "labels": {
                     "project": "web-automation",
                     "environment": "testing",
                 },
+                "snapshot_name": "snapshotName",
             },
             api_timeout="30s",
             wait=True,
@@ -830,6 +834,7 @@ class TestAsyncBoxes:
                     "ADB_TRACE": "all",
                 },
                 "expires_in": "15m",
+                "keep_alive": "0ms",
                 "labels": {
                     "app": "mobile-testing",
                     "version": "v1.0",
@@ -873,15 +878,18 @@ class TestAsyncBoxes:
     async def test_method_create_linux_with_all_params(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.create_linux(
             config={
+                "device_type": "container",
                 "envs": {
                     "DEBUG": "true",
                     "API_URL": "https://api.example.com",
                 },
                 "expires_in": "60m",
+                "keep_alive": "0ms",
                 "labels": {
                     "project": "web-automation",
                     "environment": "testing",
                 },
+                "snapshot_name": "snapshotName",
             },
             api_timeout="30s",
             wait=True,

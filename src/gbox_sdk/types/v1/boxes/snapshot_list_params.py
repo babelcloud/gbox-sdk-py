@@ -4,16 +4,14 @@ from __future__ import annotations
 
 from typing_extensions import Annotated, TypedDict
 
-from ..._utils import PropertyInfo
+from ...._utils import PropertyInfo
 
-__all__ = ["DeviceListParams"]
+__all__ = ["SnapshotListParams"]
 
 
-class DeviceListParams(TypedDict, total=False):
+class SnapshotListParams(TypedDict, total=False):
     page: int
     """Page number"""
 
     page_size: Annotated[int, PropertyInfo(alias="pageSize")]
     """Page size"""
-
-    x_device_ap: Annotated[str, PropertyInfo(alias="x-device-ap")]

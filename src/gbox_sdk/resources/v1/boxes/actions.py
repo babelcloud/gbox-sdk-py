@@ -39,9 +39,16 @@ from ....types.v1.boxes import (
     action_settings_update_params,
 )
 from ....types.v1.boxes.action_result import ActionResult
+from ....types.v1.boxes.action_tap_response import ActionTapResponse
+from ....types.v1.boxes.action_drag_response import ActionDragResponse
+from ....types.v1.boxes.action_click_response import ActionClickResponse
+from ....types.v1.boxes.action_swipe_response import ActionSwipeResponse
+from ....types.v1.boxes.action_touch_response import ActionTouchResponse
+from ....types.v1.boxes.action_scroll_response import ActionScrollResponse
 from ....types.v1.boxes.detected_element import DetectedElement
 from ....types.v1.boxes.action_extract_response import ActionExtractResponse
 from ....types.v1.boxes.action_settings_response import ActionSettingsResponse
+from ....types.v1.boxes.action_long_press_response import ActionLongPressResponse
 from ....types.v1.boxes.action_screenshot_response import ActionScreenshotResponse
 from ....types.v1.boxes.action_common_options_param import ActionCommonOptionsParam
 from ....types.v1.boxes.action_screen_layout_response import ActionScreenLayoutResponse
@@ -84,6 +91,121 @@ class ActionsResource(SyncAPIResource):
         button: Literal["left", "right", "middle"] | Omit = omit,
         double: bool | Omit = omit,
         include_screenshot: bool | Omit = omit,
+        modifier_keys: List[
+            Literal[
+                "a",
+                "b",
+                "c",
+                "d",
+                "e",
+                "f",
+                "g",
+                "h",
+                "i",
+                "j",
+                "k",
+                "l",
+                "m",
+                "n",
+                "o",
+                "p",
+                "q",
+                "r",
+                "s",
+                "t",
+                "u",
+                "v",
+                "w",
+                "x",
+                "y",
+                "z",
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "f1",
+                "f2",
+                "f3",
+                "f4",
+                "f5",
+                "f6",
+                "f7",
+                "f8",
+                "f9",
+                "f10",
+                "f11",
+                "f12",
+                "control",
+                "alt",
+                "shift",
+                "meta",
+                "win",
+                "cmd",
+                "option",
+                "arrowUp",
+                "arrowDown",
+                "arrowLeft",
+                "arrowRight",
+                "home",
+                "end",
+                "pageUp",
+                "pageDown",
+                "enter",
+                "space",
+                "tab",
+                "escape",
+                "backspace",
+                "delete",
+                "insert",
+                "capsLock",
+                "numLock",
+                "scrollLock",
+                "pause",
+                "printScreen",
+                ";",
+                "=",
+                ",",
+                "-",
+                ".",
+                "/",
+                "`",
+                "[",
+                "\\",
+                "]",
+                "'",
+                "numpad0",
+                "numpad1",
+                "numpad2",
+                "numpad3",
+                "numpad4",
+                "numpad5",
+                "numpad6",
+                "numpad7",
+                "numpad8",
+                "numpad9",
+                "numpadAdd",
+                "numpadSubtract",
+                "numpadMultiply",
+                "numpadDivide",
+                "numpadDecimal",
+                "numpadEnter",
+                "numpadEqual",
+                "volumeUp",
+                "volumeDown",
+                "volumeMute",
+                "mediaPlayPause",
+                "mediaStop",
+                "mediaNextTrack",
+                "mediaPreviousTrack",
+            ]
+        ]
+        | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -94,9 +216,9 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionClickResponse:
         """
-        Simulates a click action on the box
+        Simulates a click action on the box.
 
         Args:
           x: X coordinate of the click
@@ -111,6 +233,9 @@ class ActionsResource(SyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
+
+          modifier_keys: Modifier keys to hold while performing the click (e.g., control, shift, alt).
+              Supports the same key values as the pressKey action.
 
           options: Action common options
 
@@ -162,6 +287,121 @@ class ActionsResource(SyncAPIResource):
         button: Literal["left", "right", "middle"] | Omit = omit,
         double: bool | Omit = omit,
         include_screenshot: bool | Omit = omit,
+        modifier_keys: List[
+            Literal[
+                "a",
+                "b",
+                "c",
+                "d",
+                "e",
+                "f",
+                "g",
+                "h",
+                "i",
+                "j",
+                "k",
+                "l",
+                "m",
+                "n",
+                "o",
+                "p",
+                "q",
+                "r",
+                "s",
+                "t",
+                "u",
+                "v",
+                "w",
+                "x",
+                "y",
+                "z",
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "f1",
+                "f2",
+                "f3",
+                "f4",
+                "f5",
+                "f6",
+                "f7",
+                "f8",
+                "f9",
+                "f10",
+                "f11",
+                "f12",
+                "control",
+                "alt",
+                "shift",
+                "meta",
+                "win",
+                "cmd",
+                "option",
+                "arrowUp",
+                "arrowDown",
+                "arrowLeft",
+                "arrowRight",
+                "home",
+                "end",
+                "pageUp",
+                "pageDown",
+                "enter",
+                "space",
+                "tab",
+                "escape",
+                "backspace",
+                "delete",
+                "insert",
+                "capsLock",
+                "numLock",
+                "scrollLock",
+                "pause",
+                "printScreen",
+                ";",
+                "=",
+                ",",
+                "-",
+                ".",
+                "/",
+                "`",
+                "[",
+                "\\",
+                "]",
+                "'",
+                "numpad0",
+                "numpad1",
+                "numpad2",
+                "numpad3",
+                "numpad4",
+                "numpad5",
+                "numpad6",
+                "numpad7",
+                "numpad8",
+                "numpad9",
+                "numpadAdd",
+                "numpadSubtract",
+                "numpadMultiply",
+                "numpadDivide",
+                "numpadDecimal",
+                "numpadEnter",
+                "numpadEqual",
+                "volumeUp",
+                "volumeDown",
+                "volumeMute",
+                "mediaPlayPause",
+                "mediaStop",
+                "mediaNextTrack",
+                "mediaPreviousTrack",
+            ]
+        ]
+        | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -172,9 +412,9 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionClickResponse:
         """
-        Simulates a click action on the box
+        Simulates a click action on the box.
 
         Args:
           target: Describe the target to operate using natural language, e.g., 'login button' or
@@ -188,6 +428,9 @@ class ActionsResource(SyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
+
+          modifier_keys: Modifier keys to hold while performing the click (e.g., control, shift, alt).
+              Supports the same key values as the pressKey action.
 
           options: Action common options
 
@@ -239,6 +482,121 @@ class ActionsResource(SyncAPIResource):
         button: Literal["left", "right", "middle"] | Omit = omit,
         double: bool | Omit = omit,
         include_screenshot: bool | Omit = omit,
+        modifier_keys: List[
+            Literal[
+                "a",
+                "b",
+                "c",
+                "d",
+                "e",
+                "f",
+                "g",
+                "h",
+                "i",
+                "j",
+                "k",
+                "l",
+                "m",
+                "n",
+                "o",
+                "p",
+                "q",
+                "r",
+                "s",
+                "t",
+                "u",
+                "v",
+                "w",
+                "x",
+                "y",
+                "z",
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "f1",
+                "f2",
+                "f3",
+                "f4",
+                "f5",
+                "f6",
+                "f7",
+                "f8",
+                "f9",
+                "f10",
+                "f11",
+                "f12",
+                "control",
+                "alt",
+                "shift",
+                "meta",
+                "win",
+                "cmd",
+                "option",
+                "arrowUp",
+                "arrowDown",
+                "arrowLeft",
+                "arrowRight",
+                "home",
+                "end",
+                "pageUp",
+                "pageDown",
+                "enter",
+                "space",
+                "tab",
+                "escape",
+                "backspace",
+                "delete",
+                "insert",
+                "capsLock",
+                "numLock",
+                "scrollLock",
+                "pause",
+                "printScreen",
+                ";",
+                "=",
+                ",",
+                "-",
+                ".",
+                "/",
+                "`",
+                "[",
+                "\\",
+                "]",
+                "'",
+                "numpad0",
+                "numpad1",
+                "numpad2",
+                "numpad3",
+                "numpad4",
+                "numpad5",
+                "numpad6",
+                "numpad7",
+                "numpad8",
+                "numpad9",
+                "numpadAdd",
+                "numpadSubtract",
+                "numpadMultiply",
+                "numpadDivide",
+                "numpadDecimal",
+                "numpadEnter",
+                "numpadEqual",
+                "volumeUp",
+                "volumeDown",
+                "volumeMute",
+                "mediaPlayPause",
+                "mediaStop",
+                "mediaNextTrack",
+                "mediaPreviousTrack",
+            ]
+        ]
+        | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -249,9 +607,9 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionClickResponse:
         """
-        Simulates a click action on the box
+        Simulates a click action on the box.
 
         Args:
           target: Detected UI element
@@ -264,6 +622,9 @@ class ActionsResource(SyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
+
+          modifier_keys: Modifier keys to hold while performing the click (e.g., control, shift, alt).
+              Supports the same key values as the pressKey action.
 
           options: Action common options
 
@@ -316,6 +677,121 @@ class ActionsResource(SyncAPIResource):
         button: Literal["left", "right", "middle"] | Omit = omit,
         double: bool | Omit = omit,
         include_screenshot: bool | Omit = omit,
+        modifier_keys: List[
+            Literal[
+                "a",
+                "b",
+                "c",
+                "d",
+                "e",
+                "f",
+                "g",
+                "h",
+                "i",
+                "j",
+                "k",
+                "l",
+                "m",
+                "n",
+                "o",
+                "p",
+                "q",
+                "r",
+                "s",
+                "t",
+                "u",
+                "v",
+                "w",
+                "x",
+                "y",
+                "z",
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "f1",
+                "f2",
+                "f3",
+                "f4",
+                "f5",
+                "f6",
+                "f7",
+                "f8",
+                "f9",
+                "f10",
+                "f11",
+                "f12",
+                "control",
+                "alt",
+                "shift",
+                "meta",
+                "win",
+                "cmd",
+                "option",
+                "arrowUp",
+                "arrowDown",
+                "arrowLeft",
+                "arrowRight",
+                "home",
+                "end",
+                "pageUp",
+                "pageDown",
+                "enter",
+                "space",
+                "tab",
+                "escape",
+                "backspace",
+                "delete",
+                "insert",
+                "capsLock",
+                "numLock",
+                "scrollLock",
+                "pause",
+                "printScreen",
+                ";",
+                "=",
+                ",",
+                "-",
+                ".",
+                "/",
+                "`",
+                "[",
+                "\\",
+                "]",
+                "'",
+                "numpad0",
+                "numpad1",
+                "numpad2",
+                "numpad3",
+                "numpad4",
+                "numpad5",
+                "numpad6",
+                "numpad7",
+                "numpad8",
+                "numpad9",
+                "numpadAdd",
+                "numpadSubtract",
+                "numpadMultiply",
+                "numpadDivide",
+                "numpadDecimal",
+                "numpadEnter",
+                "numpadEqual",
+                "volumeUp",
+                "volumeDown",
+                "volumeMute",
+                "mediaPlayPause",
+                "mediaStop",
+                "mediaNextTrack",
+                "mediaPreviousTrack",
+            ]
+        ]
+        | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -327,7 +803,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionClickResponse:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
@@ -339,6 +815,7 @@ class ActionsResource(SyncAPIResource):
                     "button": button,
                     "double": double,
                     "include_screenshot": include_screenshot,
+                    "modifier_keys": modifier_keys,
                     "options": options,
                     "output_format": output_format,
                     "presigned_expires_in": presigned_expires_in,
@@ -350,7 +827,7 @@ class ActionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionResult,
+            cast_to=ActionClickResponse,
         )
 
     def clipboard_get(
@@ -443,7 +920,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionDragResponse:
         """
         Simulates a drag gesture, moving from a start point to an end point over a set
         duration. Supports simple start/end coordinates, multi-point drag paths, and
@@ -523,7 +1000,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionDragResponse:
         """
         Simulates a drag gesture, moving from a start point to an end point over a set
         duration. Supports simple start/end coordinates, multi-point drag paths, and
@@ -603,7 +1080,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionDragResponse:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
@@ -625,7 +1102,7 @@ class ActionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionResult,
+            cast_to=ActionDragResponse,
         )
 
     def elements_detect(
@@ -742,7 +1219,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionLongPressResponse:
         """
         Perform a long press action at specified coordinates for a specified duration.
         Useful for triggering context menus, drag operations, or other long-press
@@ -822,7 +1299,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionLongPressResponse:
         """
         Perform a long press action at specified coordinates for a specified duration.
         Useful for triggering context menus, drag operations, or other long-press
@@ -901,7 +1378,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionLongPressResponse:
         """
         Perform a long press action at specified coordinates for a specified duration.
         Useful for triggering context menus, drag operations, or other long-press
@@ -981,7 +1458,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionLongPressResponse:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
@@ -1003,7 +1480,7 @@ class ActionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionResult,
+            cast_to=ActionLongPressResponse,
         )
 
     def move(
@@ -1791,7 +2268,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionScrollResponse:
         """Performs a scroll action.
 
         Supports both advanced scroll with coordinates and
@@ -1875,7 +2352,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionScrollResponse:
         """Performs a scroll action.
 
         Supports both advanced scroll with coordinates and
@@ -1970,7 +2447,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionScrollResponse:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
@@ -1996,7 +2473,7 @@ class ActionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionResult,
+            cast_to=ActionScrollResponse,
         )
 
     def settings(
@@ -2131,7 +2608,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionSwipeResponse:
         """
         Performs a swipe in the specified direction
 
@@ -2216,7 +2693,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionSwipeResponse:
         """
         Performs a swipe in the specified direction
 
@@ -2298,7 +2775,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionSwipeResponse:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
@@ -2322,7 +2799,7 @@ class ActionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionResult,
+            cast_to=ActionSwipeResponse,
         )
 
     @overload
@@ -2343,7 +2820,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionTapResponse:
         """
         Tap action for Android devices using ADB input tap command
 
@@ -2415,7 +2892,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionTapResponse:
         """
         Tap action for Android devices using ADB input tap command
 
@@ -2486,7 +2963,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionTapResponse:
         """
         Tap action for Android devices using ADB input tap command
 
@@ -2558,7 +3035,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionTapResponse:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
@@ -2579,7 +3056,7 @@ class ActionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionResult,
+            cast_to=ActionTapResponse,
         )
 
     def touch(
@@ -2598,7 +3075,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionTouchResponse:
         """Performs more advanced touch gestures.
 
         Use this endpoint to simulate realistic
@@ -2669,7 +3146,7 @@ class ActionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionResult,
+            cast_to=ActionTouchResponse,
         )
 
     def type(
@@ -2802,6 +3279,121 @@ class AsyncActionsResource(AsyncAPIResource):
         button: Literal["left", "right", "middle"] | Omit = omit,
         double: bool | Omit = omit,
         include_screenshot: bool | Omit = omit,
+        modifier_keys: List[
+            Literal[
+                "a",
+                "b",
+                "c",
+                "d",
+                "e",
+                "f",
+                "g",
+                "h",
+                "i",
+                "j",
+                "k",
+                "l",
+                "m",
+                "n",
+                "o",
+                "p",
+                "q",
+                "r",
+                "s",
+                "t",
+                "u",
+                "v",
+                "w",
+                "x",
+                "y",
+                "z",
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "f1",
+                "f2",
+                "f3",
+                "f4",
+                "f5",
+                "f6",
+                "f7",
+                "f8",
+                "f9",
+                "f10",
+                "f11",
+                "f12",
+                "control",
+                "alt",
+                "shift",
+                "meta",
+                "win",
+                "cmd",
+                "option",
+                "arrowUp",
+                "arrowDown",
+                "arrowLeft",
+                "arrowRight",
+                "home",
+                "end",
+                "pageUp",
+                "pageDown",
+                "enter",
+                "space",
+                "tab",
+                "escape",
+                "backspace",
+                "delete",
+                "insert",
+                "capsLock",
+                "numLock",
+                "scrollLock",
+                "pause",
+                "printScreen",
+                ";",
+                "=",
+                ",",
+                "-",
+                ".",
+                "/",
+                "`",
+                "[",
+                "\\",
+                "]",
+                "'",
+                "numpad0",
+                "numpad1",
+                "numpad2",
+                "numpad3",
+                "numpad4",
+                "numpad5",
+                "numpad6",
+                "numpad7",
+                "numpad8",
+                "numpad9",
+                "numpadAdd",
+                "numpadSubtract",
+                "numpadMultiply",
+                "numpadDivide",
+                "numpadDecimal",
+                "numpadEnter",
+                "numpadEqual",
+                "volumeUp",
+                "volumeDown",
+                "volumeMute",
+                "mediaPlayPause",
+                "mediaStop",
+                "mediaNextTrack",
+                "mediaPreviousTrack",
+            ]
+        ]
+        | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -2812,9 +3404,9 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionClickResponse:
         """
-        Simulates a click action on the box
+        Simulates a click action on the box.
 
         Args:
           x: X coordinate of the click
@@ -2829,6 +3421,9 @@ class AsyncActionsResource(AsyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
+
+          modifier_keys: Modifier keys to hold while performing the click (e.g., control, shift, alt).
+              Supports the same key values as the pressKey action.
 
           options: Action common options
 
@@ -2880,6 +3475,121 @@ class AsyncActionsResource(AsyncAPIResource):
         button: Literal["left", "right", "middle"] | Omit = omit,
         double: bool | Omit = omit,
         include_screenshot: bool | Omit = omit,
+        modifier_keys: List[
+            Literal[
+                "a",
+                "b",
+                "c",
+                "d",
+                "e",
+                "f",
+                "g",
+                "h",
+                "i",
+                "j",
+                "k",
+                "l",
+                "m",
+                "n",
+                "o",
+                "p",
+                "q",
+                "r",
+                "s",
+                "t",
+                "u",
+                "v",
+                "w",
+                "x",
+                "y",
+                "z",
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "f1",
+                "f2",
+                "f3",
+                "f4",
+                "f5",
+                "f6",
+                "f7",
+                "f8",
+                "f9",
+                "f10",
+                "f11",
+                "f12",
+                "control",
+                "alt",
+                "shift",
+                "meta",
+                "win",
+                "cmd",
+                "option",
+                "arrowUp",
+                "arrowDown",
+                "arrowLeft",
+                "arrowRight",
+                "home",
+                "end",
+                "pageUp",
+                "pageDown",
+                "enter",
+                "space",
+                "tab",
+                "escape",
+                "backspace",
+                "delete",
+                "insert",
+                "capsLock",
+                "numLock",
+                "scrollLock",
+                "pause",
+                "printScreen",
+                ";",
+                "=",
+                ",",
+                "-",
+                ".",
+                "/",
+                "`",
+                "[",
+                "\\",
+                "]",
+                "'",
+                "numpad0",
+                "numpad1",
+                "numpad2",
+                "numpad3",
+                "numpad4",
+                "numpad5",
+                "numpad6",
+                "numpad7",
+                "numpad8",
+                "numpad9",
+                "numpadAdd",
+                "numpadSubtract",
+                "numpadMultiply",
+                "numpadDivide",
+                "numpadDecimal",
+                "numpadEnter",
+                "numpadEqual",
+                "volumeUp",
+                "volumeDown",
+                "volumeMute",
+                "mediaPlayPause",
+                "mediaStop",
+                "mediaNextTrack",
+                "mediaPreviousTrack",
+            ]
+        ]
+        | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -2890,9 +3600,9 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionClickResponse:
         """
-        Simulates a click action on the box
+        Simulates a click action on the box.
 
         Args:
           target: Describe the target to operate using natural language, e.g., 'login button' or
@@ -2906,6 +3616,9 @@ class AsyncActionsResource(AsyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
+
+          modifier_keys: Modifier keys to hold while performing the click (e.g., control, shift, alt).
+              Supports the same key values as the pressKey action.
 
           options: Action common options
 
@@ -2957,6 +3670,121 @@ class AsyncActionsResource(AsyncAPIResource):
         button: Literal["left", "right", "middle"] | Omit = omit,
         double: bool | Omit = omit,
         include_screenshot: bool | Omit = omit,
+        modifier_keys: List[
+            Literal[
+                "a",
+                "b",
+                "c",
+                "d",
+                "e",
+                "f",
+                "g",
+                "h",
+                "i",
+                "j",
+                "k",
+                "l",
+                "m",
+                "n",
+                "o",
+                "p",
+                "q",
+                "r",
+                "s",
+                "t",
+                "u",
+                "v",
+                "w",
+                "x",
+                "y",
+                "z",
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "f1",
+                "f2",
+                "f3",
+                "f4",
+                "f5",
+                "f6",
+                "f7",
+                "f8",
+                "f9",
+                "f10",
+                "f11",
+                "f12",
+                "control",
+                "alt",
+                "shift",
+                "meta",
+                "win",
+                "cmd",
+                "option",
+                "arrowUp",
+                "arrowDown",
+                "arrowLeft",
+                "arrowRight",
+                "home",
+                "end",
+                "pageUp",
+                "pageDown",
+                "enter",
+                "space",
+                "tab",
+                "escape",
+                "backspace",
+                "delete",
+                "insert",
+                "capsLock",
+                "numLock",
+                "scrollLock",
+                "pause",
+                "printScreen",
+                ";",
+                "=",
+                ",",
+                "-",
+                ".",
+                "/",
+                "`",
+                "[",
+                "\\",
+                "]",
+                "'",
+                "numpad0",
+                "numpad1",
+                "numpad2",
+                "numpad3",
+                "numpad4",
+                "numpad5",
+                "numpad6",
+                "numpad7",
+                "numpad8",
+                "numpad9",
+                "numpadAdd",
+                "numpadSubtract",
+                "numpadMultiply",
+                "numpadDivide",
+                "numpadDecimal",
+                "numpadEnter",
+                "numpadEqual",
+                "volumeUp",
+                "volumeDown",
+                "volumeMute",
+                "mediaPlayPause",
+                "mediaStop",
+                "mediaNextTrack",
+                "mediaPreviousTrack",
+            ]
+        ]
+        | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -2967,9 +3795,9 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionClickResponse:
         """
-        Simulates a click action on the box
+        Simulates a click action on the box.
 
         Args:
           target: Detected UI element
@@ -2982,6 +3810,9 @@ class AsyncActionsResource(AsyncAPIResource):
               ignored when `options.screenshot` is provided. Whether to include screenshots in
               the action response. If false, the screenshot object will still be returned but
               with empty URIs. Default is false.
+
+          modifier_keys: Modifier keys to hold while performing the click (e.g., control, shift, alt).
+              Supports the same key values as the pressKey action.
 
           options: Action common options
 
@@ -3034,6 +3865,121 @@ class AsyncActionsResource(AsyncAPIResource):
         button: Literal["left", "right", "middle"] | Omit = omit,
         double: bool | Omit = omit,
         include_screenshot: bool | Omit = omit,
+        modifier_keys: List[
+            Literal[
+                "a",
+                "b",
+                "c",
+                "d",
+                "e",
+                "f",
+                "g",
+                "h",
+                "i",
+                "j",
+                "k",
+                "l",
+                "m",
+                "n",
+                "o",
+                "p",
+                "q",
+                "r",
+                "s",
+                "t",
+                "u",
+                "v",
+                "w",
+                "x",
+                "y",
+                "z",
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "f1",
+                "f2",
+                "f3",
+                "f4",
+                "f5",
+                "f6",
+                "f7",
+                "f8",
+                "f9",
+                "f10",
+                "f11",
+                "f12",
+                "control",
+                "alt",
+                "shift",
+                "meta",
+                "win",
+                "cmd",
+                "option",
+                "arrowUp",
+                "arrowDown",
+                "arrowLeft",
+                "arrowRight",
+                "home",
+                "end",
+                "pageUp",
+                "pageDown",
+                "enter",
+                "space",
+                "tab",
+                "escape",
+                "backspace",
+                "delete",
+                "insert",
+                "capsLock",
+                "numLock",
+                "scrollLock",
+                "pause",
+                "printScreen",
+                ";",
+                "=",
+                ",",
+                "-",
+                ".",
+                "/",
+                "`",
+                "[",
+                "\\",
+                "]",
+                "'",
+                "numpad0",
+                "numpad1",
+                "numpad2",
+                "numpad3",
+                "numpad4",
+                "numpad5",
+                "numpad6",
+                "numpad7",
+                "numpad8",
+                "numpad9",
+                "numpadAdd",
+                "numpadSubtract",
+                "numpadMultiply",
+                "numpadDivide",
+                "numpadDecimal",
+                "numpadEnter",
+                "numpadEqual",
+                "volumeUp",
+                "volumeDown",
+                "volumeMute",
+                "mediaPlayPause",
+                "mediaStop",
+                "mediaNextTrack",
+                "mediaPreviousTrack",
+            ]
+        ]
+        | Omit = omit,
         options: ActionCommonOptionsParam | Omit = omit,
         output_format: Literal["base64", "storageKey"] | Omit = omit,
         presigned_expires_in: str | Omit = omit,
@@ -3045,7 +3991,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionClickResponse:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
@@ -3057,6 +4003,7 @@ class AsyncActionsResource(AsyncAPIResource):
                     "button": button,
                     "double": double,
                     "include_screenshot": include_screenshot,
+                    "modifier_keys": modifier_keys,
                     "options": options,
                     "output_format": output_format,
                     "presigned_expires_in": presigned_expires_in,
@@ -3068,7 +4015,7 @@ class AsyncActionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionResult,
+            cast_to=ActionClickResponse,
         )
 
     async def clipboard_get(
@@ -3163,7 +4110,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionDragResponse:
         """
         Simulates a drag gesture, moving from a start point to an end point over a set
         duration. Supports simple start/end coordinates, multi-point drag paths, and
@@ -3243,7 +4190,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionDragResponse:
         """
         Simulates a drag gesture, moving from a start point to an end point over a set
         duration. Supports simple start/end coordinates, multi-point drag paths, and
@@ -3323,7 +4270,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionDragResponse:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
@@ -3345,7 +4292,7 @@ class AsyncActionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionResult,
+            cast_to=ActionDragResponse,
         )
 
     async def elements_detect(
@@ -3464,7 +4411,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionLongPressResponse:
         """
         Perform a long press action at specified coordinates for a specified duration.
         Useful for triggering context menus, drag operations, or other long-press
@@ -3544,7 +4491,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionLongPressResponse:
         """
         Perform a long press action at specified coordinates for a specified duration.
         Useful for triggering context menus, drag operations, or other long-press
@@ -3623,7 +4570,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionLongPressResponse:
         """
         Perform a long press action at specified coordinates for a specified duration.
         Useful for triggering context menus, drag operations, or other long-press
@@ -3703,7 +4650,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionLongPressResponse:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
@@ -3725,7 +4672,7 @@ class AsyncActionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionResult,
+            cast_to=ActionLongPressResponse,
         )
 
     async def move(
@@ -4515,7 +5462,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionScrollResponse:
         """Performs a scroll action.
 
         Supports both advanced scroll with coordinates and
@@ -4599,7 +5546,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionScrollResponse:
         """Performs a scroll action.
 
         Supports both advanced scroll with coordinates and
@@ -4694,7 +5641,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionScrollResponse:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
@@ -4720,7 +5667,7 @@ class AsyncActionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionResult,
+            cast_to=ActionScrollResponse,
         )
 
     async def settings(
@@ -4857,7 +5804,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionSwipeResponse:
         """
         Performs a swipe in the specified direction
 
@@ -4942,7 +5889,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionSwipeResponse:
         """
         Performs a swipe in the specified direction
 
@@ -5024,7 +5971,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionSwipeResponse:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
@@ -5048,7 +5995,7 @@ class AsyncActionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionResult,
+            cast_to=ActionSwipeResponse,
         )
 
     @overload
@@ -5069,7 +6016,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionTapResponse:
         """
         Tap action for Android devices using ADB input tap command
 
@@ -5141,7 +6088,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionTapResponse:
         """
         Tap action for Android devices using ADB input tap command
 
@@ -5212,7 +6159,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionTapResponse:
         """
         Tap action for Android devices using ADB input tap command
 
@@ -5284,7 +6231,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionTapResponse:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
@@ -5305,7 +6252,7 @@ class AsyncActionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionResult,
+            cast_to=ActionTapResponse,
         )
 
     async def touch(
@@ -5324,7 +6271,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ActionResult:
+    ) -> ActionTouchResponse:
         """Performs more advanced touch gestures.
 
         Use this endpoint to simulate realistic
@@ -5395,7 +6342,7 @@ class AsyncActionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ActionResult,
+            cast_to=ActionTouchResponse,
         )
 
     async def type(

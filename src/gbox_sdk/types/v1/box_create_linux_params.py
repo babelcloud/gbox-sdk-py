@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Dict
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Literal, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 
@@ -30,6 +30,9 @@ class BoxCreateLinuxParams(TypedDict, total=False):
 
 
 class Config(TypedDict, total=False):
+    device_type: Annotated[Literal["container", "vm"], PropertyInfo(alias="deviceType")]
+    """Device type - container or vm Linux device"""
+
     envs: Dict[str, str]
     """Environment variables for the box.
 
@@ -44,6 +47,22 @@ class Config(TypedDict, total=False):
     Example formats: "500ms", "30s", "5m", "1h" Default: 60m
     """
 
+    keep_alive: Annotated[str, PropertyInfo(alias="keepAlive")]
+    """Keep alive duration on activity.
+
+    When set to a positive value (e.g., '5m'), the box expiration time (expiresIn)
+    will be automatically extended to ensure at least this duration remains whenever
+    there is an box operation on this specific box. For example, when calling UI
+    Action, FS, Browser, Command, Media, or Run Code operations with this box's
+    boxId, the box will be kept alive. If keepAlive is '5m' and the box has 2
+    minutes remaining, any operation on this boxId will extend the remaining time to
+    5 minutes. Set to '0ms' to disable automatic keep alive extension. This helps
+    keep frequently-used boxes alive without manual intervention.
+
+    Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
+    Example formats: "500ms", "30s", "5m", "1h" Default: 0ms
+    """
+
     labels: Dict[str, str]
     """Key-value pairs of labels for the box.
 
@@ -52,3 +71,6 @@ class Config(TypedDict, total=False):
     applications, or any other organizational tags that help you organize and filter
     your boxes.
     """
+
+    snapshot_name: Annotated[str, PropertyInfo(alias="snapshotName")]
+    """Snapshot name - snapshot for creating vm linux box"""

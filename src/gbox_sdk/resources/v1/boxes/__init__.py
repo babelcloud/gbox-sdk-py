@@ -64,6 +64,14 @@ from .storage import (
     StorageResourceWithStreamingResponse,
     AsyncStorageResourceWithStreamingResponse,
 )
+from .snapshot import (
+    SnapshotResource,
+    AsyncSnapshotResource,
+    SnapshotResourceWithRawResponse,
+    AsyncSnapshotResourceWithRawResponse,
+    SnapshotResourceWithStreamingResponse,
+    AsyncSnapshotResourceWithStreamingResponse,
+)
 
 __all__ = [
     "StorageResource",
@@ -78,6 +86,12 @@ __all__ = [
     "AsyncActionsResourceWithRawResponse",
     "ActionsResourceWithStreamingResponse",
     "AsyncActionsResourceWithStreamingResponse",
+    "SnapshotResource",
+    "AsyncSnapshotResource",
+    "SnapshotResourceWithRawResponse",
+    "AsyncSnapshotResourceWithRawResponse",
+    "SnapshotResourceWithStreamingResponse",
+    "AsyncSnapshotResourceWithStreamingResponse",
     "ProxyResource",
     "AsyncProxyResource",
     "ProxyResourceWithRawResponse",

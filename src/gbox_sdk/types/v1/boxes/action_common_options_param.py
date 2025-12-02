@@ -13,7 +13,7 @@ Screenshot: TypeAlias = Union[ActionScreenshotOptionsParam, bool]
 
 
 class ActionCommonOptionsParam(TypedDict, total=False):
-    model: Literal["gpt-5", "gpt-4o", "ui-tars", "openai-computer-use"]
+    model: Literal["gpt-5", "gpt-4o", "gelato", "ui-tars", "openai-computer-use"]
     """Model to use for natural-language target resolution. Defaults to 'uitars'."""
 
     screenshot: Screenshot

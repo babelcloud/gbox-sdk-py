@@ -83,6 +83,7 @@ pip install --pre gbox_sdk[aiohttp]
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
+import os
 import asyncio
 from gbox_sdk import DefaultAioHttpClient
 from gbox_sdk import AsyncGboxClient
@@ -90,7 +91,7 @@ from gbox_sdk import AsyncGboxClient
 
 async def main() -> None:
     async with AsyncGboxClient(
-        api_key="My API Key",
+        api_key=os.environ.get("GBOX_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
         android_box = await client.v1.boxes.create_android()

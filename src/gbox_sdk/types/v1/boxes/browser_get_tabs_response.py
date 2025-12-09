@@ -8,6 +8,8 @@ __all__ = ["BrowserGetTabsResponse", "Data"]
 
 
 class Data(BaseModel):
+    """Browser tab"""
+
     id: str
     """The tab id"""
 
@@ -34,5 +36,7 @@ class Data(BaseModel):
 
 
 class BrowserGetTabsResponse(BaseModel):
+    """List tabs"""
+
     data: List[Data]
     """The tabs"""

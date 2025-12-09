@@ -6,6 +6,8 @@ __all__ = ["ActionSettingsUpdateResponse"]
 
 
 class ActionSettingsUpdateResponse(BaseModel):
+    """Action setting"""
+
     scale: float
     """The scale of the action to be performed.
 

@@ -11,6 +11,8 @@ __all__ = ["ActionElementsDetectResponse", "Screenshot", "ScreenshotMarked", "Sc
 
 
 class ScreenshotMarked(BaseModel):
+    """Result of screenshot capture action"""
+
     uri: str
     """URL of the screenshot"""
 
@@ -19,6 +21,8 @@ class ScreenshotMarked(BaseModel):
 
 
 class ScreenshotSource(BaseModel):
+    """Result of screenshot capture action"""
+
     uri: str
     """URL of the screenshot"""
 
@@ -27,6 +31,8 @@ class ScreenshotSource(BaseModel):
 
 
 class Screenshot(BaseModel):
+    """Detected elements screenshot"""
+
     marked: ScreenshotMarked
     """Result of screenshot capture action"""
 
@@ -35,6 +41,10 @@ class Screenshot(BaseModel):
 
 
 class ActionElementsDetectResponse(BaseModel):
+    """
+    Result containing original screenshot, annotated screenshot, and detected elements
+    """
+
     elements: List[DetectedElement]
     """Detected UI elements"""
 

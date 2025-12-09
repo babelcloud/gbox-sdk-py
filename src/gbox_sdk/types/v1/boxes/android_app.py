@@ -8,6 +8,8 @@ __all__ = ["AndroidApp"]
 
 
 class AndroidApp(BaseModel):
+    """Android app"""
+
     activity_class_name: str = FieldInfo(alias="activityClassName")
     """Activity class name"""
 

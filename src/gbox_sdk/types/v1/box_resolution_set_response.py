@@ -6,6 +6,8 @@ __all__ = ["BoxResolutionSetResponse"]
 
 
 class BoxResolutionSetResponse(BaseModel):
+    """Resolution configuration"""
+
     height: float
     """Height of the screen"""
 

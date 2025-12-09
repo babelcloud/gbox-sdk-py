@@ -11,6 +11,8 @@ __all__ = ["AndroidListPkgSimpleResponse", "Data"]
 
 
 class Data(BaseModel):
+    """Android pkg simple"""
+
     apk_path: str = FieldInfo(alias="apkPath")
     """Android apk path"""
 
@@ -22,5 +24,7 @@ class Data(BaseModel):
 
 
 class AndroidListPkgSimpleResponse(BaseModel):
+    """Response containing list of Android pkgs"""
+
     data: List[Data]
     """Android pkg simple list"""

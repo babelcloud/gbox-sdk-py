@@ -6,6 +6,8 @@ __all__ = ["BrowserSwitchTabResponse"]
 
 
 class BrowserSwitchTabResponse(BaseModel):
+    """Browser tab"""
+
     id: str
     """The tab id"""
 

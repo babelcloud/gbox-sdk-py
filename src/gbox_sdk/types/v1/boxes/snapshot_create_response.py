@@ -10,6 +10,8 @@ __all__ = ["SnapshotCreateResponse"]
 
 
 class SnapshotCreateResponse(BaseModel):
+    """Snapshot configuration"""
+
     id: str
     """Unique identifier for the snapshot"""
 

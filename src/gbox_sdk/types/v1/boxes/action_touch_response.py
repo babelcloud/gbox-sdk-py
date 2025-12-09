@@ -23,6 +23,8 @@ __all__ = [
 
 
 class ActualPointStart(BaseModel):
+    """Initial touch point position"""
+
     x: float
     """Starting X coordinate"""
 
@@ -31,6 +33,8 @@ class ActualPointStart(BaseModel):
 
 
 class ActualPointActionTouchPointMoveAction(BaseModel):
+    """Touch point movement action configuration"""
+
     duration: str
     """Duration of the movement (e.g. "200ms")
 
@@ -49,6 +53,8 @@ class ActualPointActionTouchPointMoveAction(BaseModel):
 
 
 class ActualPointActionTouchPointWaitAction(BaseModel):
+    """Touch point wait action configuration"""
+
     duration: str
     """Duration to wait (e.g. "500ms")
 
@@ -64,6 +70,8 @@ ActualPointAction: TypeAlias = Union[ActualPointActionTouchPointMoveAction, Actu
 
 
 class ActualPoint(BaseModel):
+    """Touch point configuration with start position and actions"""
+
     start: ActualPointStart
     """Initial touch point position"""
 
@@ -72,11 +80,15 @@ class ActualPoint(BaseModel):
 
 
 class Actual(BaseModel):
+    """Actual parameters used when executing the touch action"""
+
     points: List[ActualPoint]
     """Array of touch points with their normalized coordinates and actions"""
 
 
 class ScreenshotAfter(BaseModel):
+    """Screenshot taken after action execution"""
+
     uri: str
     """URI of the screenshot after the action"""
 
@@ -85,6 +97,8 @@ class ScreenshotAfter(BaseModel):
 
 
 class ScreenshotBefore(BaseModel):
+    """Screenshot taken before action execution"""
+
     uri: str
     """URI of the screenshot before the action"""
 
@@ -93,11 +107,15 @@ class ScreenshotBefore(BaseModel):
 
 
 class ScreenshotTrace(BaseModel):
+    """Screenshot with action operation trace"""
+
     uri: str
     """URI of the screenshot with operation trace"""
 
 
 class Screenshot(BaseModel):
+    """Complete screenshot result with operation trace, before and after images"""
+
     after: Optional[ScreenshotAfter] = None
     """Screenshot taken after action execution"""
 
@@ -109,6 +127,8 @@ class Screenshot(BaseModel):
 
 
 class ActionTouchResponse(BaseModel):
+    """Result of touch action execution with actual parameters used"""
+
     action_id: str = FieldInfo(alias="actionId")
     """Unique identifier for each action.
 

@@ -11,6 +11,8 @@ __all__ = ["File"]
 
 
 class File(BaseModel):
+    """File system file representation"""
+
     last_modified: datetime = FieldInfo(alias="lastModified")
     """Last modified time of the file"""
 

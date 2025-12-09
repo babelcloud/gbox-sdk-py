@@ -8,6 +8,8 @@ __all__ = ["BoxWebsocketURLResponse"]
 
 
 class BoxWebsocketURLResponse(BaseModel):
+    """Box WebSocket Url"""
+
     command: str
     """WebSocket URL for executing shell commands in the box.
 

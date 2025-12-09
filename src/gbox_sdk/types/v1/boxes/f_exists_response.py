@@ -9,6 +9,8 @@ __all__ = ["FExistsResponse", "ExistsFileResult", "NotExistsFileResult"]
 
 
 class ExistsFileResult(BaseModel):
+    """Response after checking if a file/directory exists"""
+
     exists: bool
     """Exists"""
 
@@ -17,6 +19,8 @@ class ExistsFileResult(BaseModel):
 
 
 class NotExistsFileResult(BaseModel):
+    """Response after checking if a file/directory not exists"""
+
     exists: bool
     """Exists"""
 

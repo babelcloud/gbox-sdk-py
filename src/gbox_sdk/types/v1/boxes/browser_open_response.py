@@ -8,6 +8,8 @@ __all__ = ["BrowserOpenResponse"]
 
 
 class BrowserOpenResponse(BaseModel):
+    """Browser open result"""
+
     cdp_url: str = FieldInfo(alias="cdpUrl")
     """The CDP url.
 

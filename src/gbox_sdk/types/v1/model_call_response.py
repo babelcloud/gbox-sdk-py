@@ -22,6 +22,8 @@ __all__ = [
 
 
 class ResponseModelClickResponseDataCoordinates(BaseModel):
+    """Single click result with coordinates"""
+
     x: float
     """X coordinate. Returns -1 if no valid target is found."""
 
@@ -30,6 +32,8 @@ class ResponseModelClickResponseDataCoordinates(BaseModel):
 
 
 class ResponseModelClickResponseData(BaseModel):
+    """Model click response data structure"""
+
     coordinates: ResponseModelClickResponseDataCoordinates
     """Single click result with coordinates"""
 
@@ -38,6 +42,8 @@ class ResponseModelClickResponseData(BaseModel):
 
 
 class ResponseModelDragResponseDataCoordinatesDestination(BaseModel):
+    """X and Y coordinates. Returns -1, -1 if no valid target is found."""
+
     x: float
     """X coordinate. Returns -1 if no valid target is found."""
 
@@ -46,6 +52,8 @@ class ResponseModelDragResponseDataCoordinatesDestination(BaseModel):
 
 
 class ResponseModelDragResponseDataCoordinatesTarget(BaseModel):
+    """X and Y coordinates. Returns -1, -1 if no valid target is found."""
+
     x: float
     """X coordinate. Returns -1 if no valid target is found."""
 
@@ -54,6 +62,8 @@ class ResponseModelDragResponseDataCoordinatesTarget(BaseModel):
 
 
 class ResponseModelDragResponseDataCoordinates(BaseModel):
+    """Single drag result with target and destination coordinates"""
+
     destination: ResponseModelDragResponseDataCoordinatesDestination
     """X and Y coordinates. Returns -1, -1 if no valid target is found."""
 
@@ -62,6 +72,8 @@ class ResponseModelDragResponseDataCoordinates(BaseModel):
 
 
 class ResponseModelDragResponseData(BaseModel):
+    """Drag response data structure"""
+
     coordinates: ResponseModelDragResponseDataCoordinates
     """Single drag result with target and destination coordinates"""
 
@@ -70,6 +82,8 @@ class ResponseModelDragResponseData(BaseModel):
 
 
 class ResponseModelScrollResponseDataCoordinates(BaseModel):
+    """Single scroll result with location and direction"""
+
     scroll_x: float = FieldInfo(alias="scrollX")
     """Horizontal scroll amount"""
 
@@ -84,6 +98,8 @@ class ResponseModelScrollResponseDataCoordinates(BaseModel):
 
 
 class ResponseModelScrollResponseData(BaseModel):
+    """Scroll response data structure"""
+
     coordinates: ResponseModelScrollResponseDataCoordinates
     """Single scroll result with location and direction"""
 
@@ -97,6 +113,8 @@ Response: TypeAlias = Union[
 
 
 class ModelCallResponse(BaseModel):
+    """Model response data structure"""
+
     id: str
     """Unique ID of this request, can be used for issue reporting and feedback"""
 

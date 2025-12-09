@@ -10,6 +10,8 @@ __all__ = ["ActionResult", "Screenshot", "ScreenshotAfter", "ScreenshotBefore", 
 
 
 class ScreenshotAfter(BaseModel):
+    """Screenshot taken after action execution"""
+
     uri: str
     """URI of the screenshot after the action"""
 
@@ -18,6 +20,8 @@ class ScreenshotAfter(BaseModel):
 
 
 class ScreenshotBefore(BaseModel):
+    """Screenshot taken before action execution"""
+
     uri: str
     """URI of the screenshot before the action"""
 
@@ -26,11 +30,15 @@ class ScreenshotBefore(BaseModel):
 
 
 class ScreenshotTrace(BaseModel):
+    """Screenshot with action operation trace"""
+
     uri: str
     """URI of the screenshot with operation trace"""
 
 
 class Screenshot(BaseModel):
+    """Complete screenshot result with operation trace, before and after images"""
+
     after: Optional[ScreenshotAfter] = None
     """Screenshot taken after action execution"""
 
@@ -42,6 +50,8 @@ class Screenshot(BaseModel):
 
 
 class ActionResult(BaseModel):
+    """Result of an UI action execution with optional screenshots"""
+
     action_id: str = FieldInfo(alias="actionId")
     """Unique identifier for each action.
 

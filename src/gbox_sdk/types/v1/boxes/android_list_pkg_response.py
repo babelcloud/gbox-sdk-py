@@ -9,5 +9,7 @@ __all__ = ["AndroidListPkgResponse"]
 
 
 class AndroidListPkgResponse(BaseModel):
+    """Response containing list of Android pkgs"""
+
     data: List[AndroidPkg]
     """Android pkg list"""

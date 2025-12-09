@@ -26,6 +26,8 @@ class ModelCallParams(TypedDict, total=False):
 
 
 class ActionClickAction(TypedDict, total=False):
+    """Click action structure"""
+
     target: Required[str]
     """Natural language description of what to click"""
 
@@ -34,6 +36,8 @@ class ActionClickAction(TypedDict, total=False):
 
 
 class ActionDragAction(TypedDict, total=False):
+    """Drag action structure"""
+
     destination: Required[str]
     """Natural language description of ending position"""
 
@@ -45,6 +49,8 @@ class ActionDragAction(TypedDict, total=False):
 
 
 class ActionScrollAction(TypedDict, total=False):
+    """Scroll action structure"""
+
     direction: Required[Literal["up", "down", "left", "right"]]
     """Scroll direction"""
 

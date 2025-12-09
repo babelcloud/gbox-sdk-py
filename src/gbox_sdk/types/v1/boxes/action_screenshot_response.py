@@ -10,6 +10,8 @@ __all__ = ["ActionScreenshotResponse"]
 
 
 class ActionScreenshotResponse(BaseModel):
+    """Result of screenshot capture action"""
+
     uri: str
     """URL of the screenshot"""
 

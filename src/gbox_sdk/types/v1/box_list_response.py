@@ -15,6 +15,8 @@ Data: TypeAlias = Union[LinuxBox, AndroidBox]
 
 
 class BoxListResponse(BaseModel):
+    """Response containing paginated list of box instances"""
+
     data: List[Data]
     """A box instance that can be either Linux or Android type"""
 

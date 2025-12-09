@@ -8,6 +8,8 @@ __all__ = ["MediaGetMediaSupportResponse"]
 
 
 class MediaGetMediaSupportResponse(BaseModel):
+    """Supported media extensions"""
+
     photo: List[str]
     """Supported photo extensions"""
 

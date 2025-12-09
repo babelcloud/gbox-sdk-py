@@ -13,5 +13,7 @@ Data: TypeAlias = Union[File, Dir]
 
 
 class FListResponse(BaseModel):
+    """Response containing directory listing results"""
+
     data: List[Data]
     """Array of files and directories"""

@@ -85,6 +85,8 @@ class DragSimple(TypedDict, total=False):
 
 
 class DragSimpleEndDragPathPoint(TypedDict, total=False):
+    """Single point in a drag path"""
+
     x: Required[float]
     """X coordinate of a point in the drag path"""
 
@@ -96,6 +98,8 @@ DragSimpleEnd: TypeAlias = Union[DragSimpleEndDragPathPoint, str]
 
 
 class DragSimpleStartDragPathPoint(TypedDict, total=False):
+    """Single point in a drag path"""
+
     x: Required[float]
     """X coordinate of a point in the drag path"""
 
@@ -168,6 +172,8 @@ class DragAdvanced(TypedDict, total=False):
 
 
 class DragAdvancedPath(TypedDict, total=False):
+    """Single point in a drag path"""
+
     x: Required[float]
     """X coordinate of a point in the drag path"""
 

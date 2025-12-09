@@ -8,6 +8,8 @@ __all__ = ["DetectedElement"]
 
 
 class DetectedElement(BaseModel):
+    """Detected UI element"""
+
     id: str
     """Element id"""
 

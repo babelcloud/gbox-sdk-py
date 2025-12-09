@@ -30,6 +30,8 @@ class BoxCreateLinuxParams(TypedDict, total=False):
 
 
 class Config(TypedDict, total=False):
+    """Configuration for a Linux box instance"""
+
     device_type: Annotated[Literal["container", "vm"], PropertyInfo(alias="deviceType")]
     """Device type - container or vm Linux device"""
 

@@ -6,6 +6,8 @@ __all__ = ["BrowserOpenTabResponse"]
 
 
 class BrowserOpenTabResponse(BaseModel):
+    """Browser tab"""
+
     id: str
     """The tab id"""
 

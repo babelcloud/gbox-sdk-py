@@ -8,6 +8,8 @@ __all__ = ["ActionExtractResponse"]
 
 
 class ActionExtractResponse(BaseModel):
+    """Result of extract action execution"""
+
     data: Dict[str, object]
     """The extracted data structure that conforms to the provided JSON schema.
 

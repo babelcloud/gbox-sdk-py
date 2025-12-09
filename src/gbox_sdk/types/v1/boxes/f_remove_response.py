@@ -6,5 +6,7 @@ __all__ = ["FRemoveResponse"]
 
 
 class FRemoveResponse(BaseModel):
+    """Response after deleting file/directory"""
+
     message: str
     """Success message"""

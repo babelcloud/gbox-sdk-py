@@ -10,6 +10,8 @@ __all__ = ["DetectedElementParam"]
 
 
 class DetectedElementParam(TypedDict, total=False):
+    """Detected UI element"""
+
     id: Required[str]
     """Element id"""
 

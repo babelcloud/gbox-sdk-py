@@ -10,6 +10,8 @@ __all__ = ["MediaAlbum"]
 
 
 class MediaAlbum(BaseModel):
+    """Album representation"""
+
     last_modified: datetime = FieldInfo(alias="lastModified")
     """Last modified time of the album"""
 

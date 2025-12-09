@@ -10,6 +10,8 @@ __all__ = ["ProxySetResponse", "Auth"]
 
 
 class Auth(BaseModel):
+    """Box Proxy Auth"""
+
     password: str
     """Password for the proxy"""
 
@@ -18,6 +20,8 @@ class Auth(BaseModel):
 
 
 class ProxySetResponse(BaseModel):
+    """Box Http Proxy"""
+
     host: str
     """The host address of the proxy server"""
 

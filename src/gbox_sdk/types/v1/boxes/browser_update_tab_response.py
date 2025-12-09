@@ -6,6 +6,8 @@ __all__ = ["BrowserUpdateTabResponse"]
 
 
 class BrowserUpdateTabResponse(BaseModel):
+    """Browser tab"""
+
     id: str
     """The tab id"""
 

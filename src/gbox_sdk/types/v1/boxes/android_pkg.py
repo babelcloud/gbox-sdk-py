@@ -10,6 +10,8 @@ __all__ = ["AndroidPkg"]
 
 
 class AndroidPkg(BaseModel):
+    """Android pkg information"""
+
     apk_path: str = FieldInfo(alias="apkPath")
     """Android apk path"""
 

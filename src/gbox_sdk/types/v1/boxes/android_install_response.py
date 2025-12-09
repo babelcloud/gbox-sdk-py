@@ -11,6 +11,8 @@ __all__ = ["AndroidInstallResponse", "Activity"]
 
 
 class Activity(BaseModel):
+    """Android pkg activity"""
+
     class_name: str = FieldInfo(alias="className")
     """Activity class name"""
 
@@ -39,6 +41,8 @@ class Activity(BaseModel):
 
 
 class AndroidInstallResponse(BaseModel):
+    """Response containing the result of installing an Android pkg"""
+
     activities: List[Activity]
     """Activity list"""
 

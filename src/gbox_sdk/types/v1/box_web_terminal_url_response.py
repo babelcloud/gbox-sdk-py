@@ -6,5 +6,7 @@ __all__ = ["BoxWebTerminalURLResponse"]
 
 
 class BoxWebTerminalURLResponse(BaseModel):
+    """Web terminal result"""
+
     url: str
     """Web terminal url"""

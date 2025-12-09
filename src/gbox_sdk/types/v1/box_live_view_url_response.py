@@ -8,6 +8,8 @@ __all__ = ["BoxLiveViewURLResponse"]
 
 
 class BoxLiveViewURLResponse(BaseModel):
+    """Live view result"""
+
     raw_url: str = FieldInfo(alias="rawUrl")
     """
     Raw live view url without additional layout content, typically used for

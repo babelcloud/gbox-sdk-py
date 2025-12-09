@@ -163,6 +163,8 @@ class SwipeAdvanced(TypedDict, total=False):
 
 
 class SwipeAdvancedEndSwipePath(TypedDict, total=False):
+    """Swipe path"""
+
     x: Required[float]
     """Start/end x coordinate of the swipe path"""
 
@@ -174,6 +176,8 @@ SwipeAdvancedEnd: TypeAlias = Union[SwipeAdvancedEndSwipePath, str]
 
 
 class SwipeAdvancedStartSwipePath(TypedDict, total=False):
+    """Swipe path"""
+
     x: Required[float]
     """Start/end x coordinate of the swipe path"""
 

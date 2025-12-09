@@ -12,11 +12,15 @@ __all__ = ["AndroidBox", "Config", "ConfigOs"]
 
 
 class ConfigOs(BaseModel):
+    """Android operating system configuration"""
+
     version: Literal["12", "13", "15"]
     """Supported Android versions"""
 
 
 class Config(BaseModel):
+    """Complete configuration for Android box instance"""
+
     cpu: float
     """CPU cores allocated to the box"""
 
@@ -59,6 +63,8 @@ class Config(BaseModel):
 
 
 class AndroidBox(BaseModel):
+    """Android box instance with full configuration and status"""
+
     id: str
     """Unique identifier for the box"""
 

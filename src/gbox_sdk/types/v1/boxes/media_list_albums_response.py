@@ -9,5 +9,7 @@ __all__ = ["MediaListAlbumsResponse"]
 
 
 class MediaListAlbumsResponse(BaseModel):
+    """List albums"""
+
     data: List[MediaAlbum]
     """List of albums"""

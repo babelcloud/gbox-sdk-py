@@ -10,6 +10,8 @@ __all__ = ["BrowserGetProxyResponse"]
 
 
 class BrowserGetProxyResponse(BaseModel):
+    """Browser proxy"""
+
     http_server: str = FieldInfo(alias="httpServer")
     """HTTP proxy server, format: http://<username>:<password>@<host>:<port>"""
 

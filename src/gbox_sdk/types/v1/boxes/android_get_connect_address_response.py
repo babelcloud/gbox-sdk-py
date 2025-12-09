@@ -6,6 +6,8 @@ __all__ = ["AndroidGetConnectAddressResponse"]
 
 
 class AndroidGetConnectAddressResponse(BaseModel):
+    """Android connection information"""
+
     adb: str
     """Android adb connect address.
 

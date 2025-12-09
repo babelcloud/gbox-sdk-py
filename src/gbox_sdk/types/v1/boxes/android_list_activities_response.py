@@ -10,6 +10,8 @@ __all__ = ["AndroidListActivitiesResponse", "Data"]
 
 
 class Data(BaseModel):
+    """Android pkg activity"""
+
     class_name: str = FieldInfo(alias="className")
     """Activity class name"""
 
@@ -38,5 +40,7 @@ class Data(BaseModel):
 
 
 class AndroidListActivitiesResponse(BaseModel):
+    """Android pkg activity list"""
+
     data: List[Data]
     """Activity list"""

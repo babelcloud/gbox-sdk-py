@@ -10,6 +10,8 @@ __all__ = ["AndroidAppiumURLResponse", "DefaultOption", "DefaultOptionCapabiliti
 
 
 class DefaultOptionCapabilities(BaseModel):
+    """Appium capabilities for WebdriverIO"""
+
     appium_automation_name: str = FieldInfo(alias="appium:automationName")
     """Appium automation name"""
 
@@ -24,6 +26,8 @@ class DefaultOptionCapabilities(BaseModel):
 
 
 class DefaultOption(BaseModel):
+    """Ready-to-use WebdriverIO remote options"""
+
     capabilities: DefaultOptionCapabilities
     """Appium capabilities for WebdriverIO"""
 
@@ -41,6 +45,8 @@ class DefaultOption(BaseModel):
 
 
 class AndroidAppiumURLResponse(BaseModel):
+    """Appium connection information"""
+
     default_option: DefaultOption = FieldInfo(alias="defaultOption")
     """Ready-to-use WebdriverIO remote options"""
 

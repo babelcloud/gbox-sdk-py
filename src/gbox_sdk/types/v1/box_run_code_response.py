@@ -8,6 +8,8 @@ __all__ = ["BoxRunCodeResponse"]
 
 
 class BoxRunCodeResponse(BaseModel):
+    """Result of code execution"""
+
     exit_code: float = FieldInfo(alias="exitCode")
     """The exit code of the code"""
 

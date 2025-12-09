@@ -11,6 +11,8 @@ __all__ = ["SnapshotListResponse", "Data"]
 
 
 class Data(BaseModel):
+    """Snapshot configuration"""
+
     id: str
     """Unique identifier for the snapshot"""
 
@@ -28,6 +30,8 @@ class Data(BaseModel):
 
 
 class SnapshotListResponse(BaseModel):
+    """Response containing paginated list of snapshots"""
+
     data: List[Data]
     """List of snapshots"""
 

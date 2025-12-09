@@ -11,6 +11,10 @@ __all__ = ["ActionClickResponse", "Actual", "Screenshot", "ScreenshotAfter", "Sc
 
 
 class Actual(BaseModel):
+    """
+    Actual parameters used when executing the click action, with the same field names as input parameters
+    """
+
     button: Literal["left", "right", "middle"]
     """Mouse button that was clicked"""
 
@@ -146,6 +150,8 @@ class Actual(BaseModel):
 
 
 class ScreenshotAfter(BaseModel):
+    """Screenshot taken after action execution"""
+
     uri: str
     """URI of the screenshot after the action"""
 
@@ -154,6 +160,8 @@ class ScreenshotAfter(BaseModel):
 
 
 class ScreenshotBefore(BaseModel):
+    """Screenshot taken before action execution"""
+
     uri: str
     """URI of the screenshot before the action"""
 
@@ -162,11 +170,15 @@ class ScreenshotBefore(BaseModel):
 
 
 class ScreenshotTrace(BaseModel):
+    """Screenshot with action operation trace"""
+
     uri: str
     """URI of the screenshot with operation trace"""
 
 
 class Screenshot(BaseModel):
+    """Complete screenshot result with operation trace, before and after images"""
+
     after: Optional[ScreenshotAfter] = None
     """Screenshot taken after action execution"""
 
@@ -178,6 +190,11 @@ class Screenshot(BaseModel):
 
 
 class ActionClickResponse(BaseModel):
+    """Result of click action execution with actual parameters used.
+
+    The actual field shows the exact parameters used when performing the click, which is especially useful when using natural language or element-based targeting to understand exactly what action was performed.
+    """
+
     action_id: str = FieldInfo(alias="actionId")
     """Unique identifier for each action.
 

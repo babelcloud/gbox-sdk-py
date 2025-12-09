@@ -11,6 +11,8 @@ __all__ = ["MediaVideo"]
 
 
 class MediaVideo(BaseModel):
+    """Video representation"""
+
     last_modified: datetime = FieldInfo(alias="lastModified")
     """Last modified time of the video"""
 

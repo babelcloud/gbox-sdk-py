@@ -11,6 +11,8 @@ __all__ = ["Dir"]
 
 
 class Dir(BaseModel):
+    """File system directory representation"""
+
     last_modified: datetime = FieldInfo(alias="lastModified")
     """Last modified time of the directory"""
 

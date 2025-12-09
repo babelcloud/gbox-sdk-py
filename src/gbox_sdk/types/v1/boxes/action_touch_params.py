@@ -73,6 +73,8 @@ class ActionTouchParams(TypedDict, total=False):
 
 
 class PointStart(TypedDict, total=False):
+    """Initial touch point position"""
+
     x: Required[float]
     """Starting X coordinate"""
 
@@ -81,6 +83,8 @@ class PointStart(TypedDict, total=False):
 
 
 class PointActionTouchPointMoveAction(TypedDict, total=False):
+    """Touch point movement action configuration"""
+
     duration: Required[str]
     """Duration of the movement (e.g. "200ms")
 
@@ -99,6 +103,8 @@ class PointActionTouchPointMoveAction(TypedDict, total=False):
 
 
 class PointActionTouchPointWaitAction(TypedDict, total=False):
+    """Touch point wait action configuration"""
+
     duration: Required[str]
     """Duration to wait (e.g. "500ms")
 
@@ -114,6 +120,8 @@ PointAction: TypeAlias = Union[PointActionTouchPointMoveAction, PointActionTouch
 
 
 class Point(TypedDict, total=False):
+    """Touch point configuration with start position and actions"""
+
     start: Required[PointStart]
     """Initial touch point position"""
 

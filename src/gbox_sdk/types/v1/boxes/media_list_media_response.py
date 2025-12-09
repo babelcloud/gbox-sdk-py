@@ -13,5 +13,7 @@ Data: TypeAlias = Union[MediaPhoto, MediaVideo]
 
 
 class MediaListMediaResponse(BaseModel):
+    """List album media"""
+
     data: List[Data]
     """List of media files (photos and videos) in the album"""

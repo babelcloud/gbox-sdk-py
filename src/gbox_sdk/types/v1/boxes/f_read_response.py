@@ -6,5 +6,7 @@ __all__ = ["FReadResponse"]
 
 
 class FReadResponse(BaseModel):
+    """Response containing file content"""
+
     content: str
     """Content of the file"""

@@ -11,6 +11,8 @@ __all__ = ["MediaPhoto"]
 
 
 class MediaPhoto(BaseModel):
+    """Photo representation"""
+
     last_modified: datetime = FieldInfo(alias="lastModified")
     """Last modified time of the photo"""
 

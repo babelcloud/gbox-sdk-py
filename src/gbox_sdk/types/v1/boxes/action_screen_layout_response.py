@@ -6,6 +6,23 @@ __all__ = ["ActionScreenLayoutResponse"]
 
 
 class ActionScreenLayoutResponse(BaseModel):
+    """Screen layout content.
+
+    Android boxes (XML):
+    <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+    <hierarchy rotation="0">
+      <node ... />
+    </hierarchy>
+
+    Browser (Linux) boxes (HTML):
+    <html>
+      <head><title>Example</title></head>
+      <body>
+        <h1>Hello World</h1>
+      </body>
+    </html>
+    """
+
     content: str
     """Screen layout content.
 

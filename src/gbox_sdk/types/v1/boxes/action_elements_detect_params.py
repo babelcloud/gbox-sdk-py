@@ -15,6 +15,8 @@ class ActionElementsDetectParams(TypedDict, total=False):
 
 
 class Screenshot(TypedDict, total=False):
+    """Detect elements screenshot options"""
+
     output_format: Annotated[Literal["base64", "storageKey"], PropertyInfo(alias="outputFormat")]
     """Type of the URI. default is base64."""
 

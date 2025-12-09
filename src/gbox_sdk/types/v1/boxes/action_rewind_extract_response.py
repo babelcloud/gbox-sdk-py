@@ -8,6 +8,8 @@ __all__ = ["ActionRewindExtractResponse"]
 
 
 class ActionRewindExtractResponse(BaseModel):
+    """Result of extracting the recording rewind"""
+
     presigned_url: str = FieldInfo(alias="presignedUrl")
     """Presigned URL of the recording.
 

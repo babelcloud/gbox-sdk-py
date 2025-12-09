@@ -9,5 +9,7 @@ __all__ = ["AndroidListAppResponse"]
 
 
 class AndroidListAppResponse(BaseModel):
+    """Android app list"""
+
     data: List[AndroidApp]
     """App list"""

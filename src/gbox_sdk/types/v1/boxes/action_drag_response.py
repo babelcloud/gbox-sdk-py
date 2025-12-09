@@ -19,6 +19,8 @@ __all__ = [
 
 
 class ActualEnd(BaseModel):
+    """Single point in a drag path"""
+
     x: float
     """X coordinate of a point in the drag path"""
 
@@ -27,6 +29,8 @@ class ActualEnd(BaseModel):
 
 
 class ActualStart(BaseModel):
+    """Single point in a drag path"""
+
     x: float
     """X coordinate of a point in the drag path"""
 
@@ -35,6 +39,8 @@ class ActualStart(BaseModel):
 
 
 class Actual(BaseModel):
+    """Actual parameters used when executing the drag action"""
+
     duration: str
     """Duration of the drag
 
@@ -50,6 +56,8 @@ class Actual(BaseModel):
 
 
 class ScreenshotAfter(BaseModel):
+    """Screenshot taken after action execution"""
+
     uri: str
     """URI of the screenshot after the action"""
 
@@ -58,6 +66,8 @@ class ScreenshotAfter(BaseModel):
 
 
 class ScreenshotBefore(BaseModel):
+    """Screenshot taken before action execution"""
+
     uri: str
     """URI of the screenshot before the action"""
 
@@ -66,11 +76,15 @@ class ScreenshotBefore(BaseModel):
 
 
 class ScreenshotTrace(BaseModel):
+    """Screenshot with action operation trace"""
+
     uri: str
     """URI of the screenshot with operation trace"""
 
 
 class Screenshot(BaseModel):
+    """Complete screenshot result with operation trace, before and after images"""
+
     after: Optional[ScreenshotAfter] = None
     """Screenshot taken after action execution"""
 
@@ -82,6 +96,8 @@ class Screenshot(BaseModel):
 
 
 class ActionDragResponse(BaseModel):
+    """Result of drag action execution with actual parameters used"""
+
     action_id: str = FieldInfo(alias="actionId")
     """Unique identifier for each action.
 

@@ -11,6 +11,8 @@ __all__ = ["ActionScreenshotOptionsParam"]
 
 
 class ActionScreenshotOptionsParam(TypedDict, total=False):
+    """Action screenshot options"""
+
     delay: str
     """Delay after performing the action, before taking the final screenshot.
 

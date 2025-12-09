@@ -6,6 +6,8 @@ __all__ = ["ActionSettingsResetResponse"]
 
 
 class ActionSettingsResetResponse(BaseModel):
+    """Action setting"""
+
     scale: float
     """The scale of the action to be performed.
 

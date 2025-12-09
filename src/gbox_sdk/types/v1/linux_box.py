@@ -12,11 +12,15 @@ __all__ = ["LinuxBox", "Config", "ConfigOs"]
 
 
 class ConfigOs(BaseModel):
+    """Linux operating system configuration"""
+
     version: str
     """OS version string (e.g. 'ubuntu-20.04')"""
 
 
 class Config(BaseModel):
+    """Complete configuration for Linux box instance"""
+
     cpu: float
     """CPU cores allocated to the box"""
 
@@ -68,6 +72,8 @@ class Config(BaseModel):
 
 
 class LinuxBox(BaseModel):
+    """Linux box instance with full configuration and status"""
+
     id: str
     """Unique identifier for the box"""
 

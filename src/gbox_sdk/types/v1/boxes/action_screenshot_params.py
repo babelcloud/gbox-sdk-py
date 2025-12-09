@@ -31,6 +31,8 @@ class ActionScreenshotParams(TypedDict, total=False):
 
 
 class Clip(TypedDict, total=False):
+    """Clipping region for screenshot capture"""
+
     height: Required[float]
     """Height of the clip"""
 
@@ -45,6 +47,8 @@ class Clip(TypedDict, total=False):
 
 
 class ScrollCapture(TypedDict, total=False):
+    """Scroll capture parameters"""
+
     max_height: Annotated[float, PropertyInfo(alias="maxHeight")]
     """Maximum height of the screenshot in pixels.
 

@@ -32,6 +32,8 @@ class ProxySetParams(TypedDict, total=False):
 
 
 class Auth(TypedDict, total=False):
+    """Box Proxy Auth"""
+
     password: Required[str]
     """Password for the proxy"""
 

@@ -8,6 +8,8 @@ __all__ = ["ActionRecordingStopResponse"]
 
 
 class ActionRecordingStopResponse(BaseModel):
+    """Recording stop result"""
+
     presigned_url: str = FieldInfo(alias="presignedUrl")
     """Presigned URL of the recording.
 

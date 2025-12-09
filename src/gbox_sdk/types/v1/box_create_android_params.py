@@ -30,6 +30,8 @@ class BoxCreateAndroidParams(TypedDict, total=False):
 
 
 class Config(TypedDict, total=False):
+    """Configuration for a Android box instance"""
+
     device_type: Annotated[Literal["virtual", "physical"], PropertyInfo(alias="deviceType")]
     """Device type - virtual or physical Android device"""
 

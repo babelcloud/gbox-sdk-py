@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Dict, Mapping, cast
+from typing import TYPE_CHECKING, Any, Dict, Mapping, cast
 from typing_extensions import Self, Literal, override
 
 import httpx
@@ -20,6 +20,7 @@ from ._types import (
     not_given,
 )
 from ._utils import is_given, get_async_library
+from ._compat import cached_property
 from ._version import __version__
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, GboxClientError
@@ -28,7 +29,10 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
-from .resources.v1 import v1
+
+if TYPE_CHECKING:
+    from .resources import v1
+    from .resources.v1.v1 import V1Resource, AsyncV1Resource
 
 __all__ = [
     "ENVIRONMENTS",
@@ -50,10 +54,6 @@ ENVIRONMENTS: Dict[str, str] = {
 
 
 class GboxClient(SyncAPIClient):
-    v1: v1.V1Resource
-    with_raw_response: GboxClientWithRawResponse
-    with_streaming_response: GboxClientWithStreamedResponse
-
     # client options
     api_key: str
 
@@ -132,9 +132,19 @@ class GboxClient(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.v1 = v1.V1Resource(self)
-        self.with_raw_response = GboxClientWithRawResponse(self)
-        self.with_streaming_response = GboxClientWithStreamedResponse(self)
+    @cached_property
+    def v1(self) -> V1Resource:
+        from .resources.v1 import V1Resource
+
+        return V1Resource(self)
+
+    @cached_property
+    def with_raw_response(self) -> GboxClientWithRawResponse:
+        return GboxClientWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> GboxClientWithStreamedResponse:
+        return GboxClientWithStreamedResponse(self)
 
     @property
     @override
@@ -244,10 +254,6 @@ class GboxClient(SyncAPIClient):
 
 
 class AsyncGboxClient(AsyncAPIClient):
-    v1: v1.AsyncV1Resource
-    with_raw_response: AsyncGboxClientWithRawResponse
-    with_streaming_response: AsyncGboxClientWithStreamedResponse
-
     # client options
     api_key: str
 
@@ -326,9 +332,19 @@ class AsyncGboxClient(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.v1 = v1.AsyncV1Resource(self)
-        self.with_raw_response = AsyncGboxClientWithRawResponse(self)
-        self.with_streaming_response = AsyncGboxClientWithStreamedResponse(self)
+    @cached_property
+    def v1(self) -> AsyncV1Resource:
+        from .resources.v1 import AsyncV1Resource
+
+        return AsyncV1Resource(self)
+
+    @cached_property
+    def with_raw_response(self) -> AsyncGboxClientWithRawResponse:
+        return AsyncGboxClientWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncGboxClientWithStreamedResponse:
+        return AsyncGboxClientWithStreamedResponse(self)
 
     @property
     @override
@@ -438,23 +454,55 @@ class AsyncGboxClient(AsyncAPIClient):
 
 
 class GboxClientWithRawResponse:
+    _client: GboxClient
+
     def __init__(self, client: GboxClient) -> None:
-        self.v1 = v1.V1ResourceWithRawResponse(client.v1)
+        self._client = client
+
+    @cached_property
+    def v1(self) -> v1.V1ResourceWithRawResponse:
+        from .resources.v1 import V1ResourceWithRawResponse
+
+        return V1ResourceWithRawResponse(self._client.v1)
 
 
 class AsyncGboxClientWithRawResponse:
+    _client: AsyncGboxClient
+
     def __init__(self, client: AsyncGboxClient) -> None:
-        self.v1 = v1.AsyncV1ResourceWithRawResponse(client.v1)
+        self._client = client
+
+    @cached_property
+    def v1(self) -> v1.AsyncV1ResourceWithRawResponse:
+        from .resources.v1 import AsyncV1ResourceWithRawResponse
+
+        return AsyncV1ResourceWithRawResponse(self._client.v1)
 
 
 class GboxClientWithStreamedResponse:
+    _client: GboxClient
+
     def __init__(self, client: GboxClient) -> None:
-        self.v1 = v1.V1ResourceWithStreamingResponse(client.v1)
+        self._client = client
+
+    @cached_property
+    def v1(self) -> v1.V1ResourceWithStreamingResponse:
+        from .resources.v1 import V1ResourceWithStreamingResponse
+
+        return V1ResourceWithStreamingResponse(self._client.v1)
 
 
 class AsyncGboxClientWithStreamedResponse:
+    _client: AsyncGboxClient
+
     def __init__(self, client: AsyncGboxClient) -> None:
-        self.v1 = v1.AsyncV1ResourceWithStreamingResponse(client.v1)
+        self._client = client
+
+    @cached_property
+    def v1(self) -> v1.AsyncV1ResourceWithStreamingResponse:
+        from .resources.v1 import AsyncV1ResourceWithStreamingResponse
+
+        return AsyncV1ResourceWithStreamingResponse(self._client.v1)
 
 
 Client = GboxClient

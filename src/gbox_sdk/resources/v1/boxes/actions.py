@@ -247,6 +247,9 @@ class ActionsResource(SyncAPIResource):
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
 
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
+
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
@@ -442,6 +445,9 @@ class ActionsResource(SyncAPIResource):
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
 
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
+
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
@@ -635,6 +641,9 @@ class ActionsResource(SyncAPIResource):
           presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
+
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -951,6 +960,9 @@ class ActionsResource(SyncAPIResource):
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
 
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
+
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
@@ -1028,6 +1040,9 @@ class ActionsResource(SyncAPIResource):
           presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
+
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -1250,6 +1265,9 @@ class ActionsResource(SyncAPIResource):
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
 
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
+
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
@@ -1329,6 +1347,9 @@ class ActionsResource(SyncAPIResource):
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
 
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
+
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
@@ -1406,6 +1427,9 @@ class ActionsResource(SyncAPIResource):
           presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
+
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -1526,6 +1550,9 @@ class ActionsResource(SyncAPIResource):
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
 
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
+
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
@@ -1614,6 +1641,9 @@ class ActionsResource(SyncAPIResource):
           presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
+
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -1823,6 +1853,9 @@ class ActionsResource(SyncAPIResource):
           presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
+
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -2137,6 +2170,9 @@ class ActionsResource(SyncAPIResource):
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
 
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
+
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
@@ -2212,6 +2248,9 @@ class ActionsResource(SyncAPIResource):
           output_format: Type of the URI. default is base64.
 
           presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -2300,6 +2339,9 @@ class ActionsResource(SyncAPIResource):
           presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
+
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -2391,6 +2433,9 @@ class ActionsResource(SyncAPIResource):
           presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
+
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -2643,6 +2688,9 @@ class ActionsResource(SyncAPIResource):
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
 
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
+
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
@@ -2721,6 +2769,9 @@ class ActionsResource(SyncAPIResource):
           presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
+
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -2844,6 +2895,9 @@ class ActionsResource(SyncAPIResource):
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
 
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
+
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
@@ -2915,6 +2969,9 @@ class ActionsResource(SyncAPIResource):
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
 
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
+
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
@@ -2984,6 +3041,9 @@ class ActionsResource(SyncAPIResource):
           presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
+
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -3099,6 +3159,9 @@ class ActionsResource(SyncAPIResource):
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
 
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
+
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
@@ -3193,6 +3256,9 @@ class ActionsResource(SyncAPIResource):
           presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
+
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -3435,6 +3501,9 @@ class AsyncActionsResource(AsyncAPIResource):
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
 
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
+
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
@@ -3630,6 +3699,9 @@ class AsyncActionsResource(AsyncAPIResource):
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
 
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
+
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
@@ -3823,6 +3895,9 @@ class AsyncActionsResource(AsyncAPIResource):
           presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
+
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -4141,6 +4216,9 @@ class AsyncActionsResource(AsyncAPIResource):
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
 
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
+
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
@@ -4218,6 +4296,9 @@ class AsyncActionsResource(AsyncAPIResource):
           presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
+
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -4442,6 +4523,9 @@ class AsyncActionsResource(AsyncAPIResource):
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
 
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
+
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
@@ -4521,6 +4605,9 @@ class AsyncActionsResource(AsyncAPIResource):
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
 
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
+
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
@@ -4598,6 +4685,9 @@ class AsyncActionsResource(AsyncAPIResource):
           presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
+
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -4718,6 +4808,9 @@ class AsyncActionsResource(AsyncAPIResource):
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
 
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
+
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
@@ -4806,6 +4899,9 @@ class AsyncActionsResource(AsyncAPIResource):
           presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
+
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -5015,6 +5111,9 @@ class AsyncActionsResource(AsyncAPIResource):
           presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
+
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -5331,6 +5430,9 @@ class AsyncActionsResource(AsyncAPIResource):
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
 
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
+
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
@@ -5406,6 +5508,9 @@ class AsyncActionsResource(AsyncAPIResource):
           output_format: Type of the URI. default is base64.
 
           presigned_expires_in: Presigned url expires in. Only takes effect when outputFormat is storageKey.
+
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -5494,6 +5599,9 @@ class AsyncActionsResource(AsyncAPIResource):
           presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
+
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -5585,6 +5693,9 @@ class AsyncActionsResource(AsyncAPIResource):
           presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
+
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -5839,6 +5950,9 @@ class AsyncActionsResource(AsyncAPIResource):
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
 
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
+
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
@@ -5917,6 +6031,9 @@ class AsyncActionsResource(AsyncAPIResource):
           presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
+
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -6040,6 +6157,9 @@ class AsyncActionsResource(AsyncAPIResource):
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
 
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
+
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
@@ -6111,6 +6231,9 @@ class AsyncActionsResource(AsyncAPIResource):
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
 
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
+
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
@@ -6180,6 +6303,9 @@ class AsyncActionsResource(AsyncAPIResource):
           presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
+
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
@@ -6295,6 +6421,9 @@ class AsyncActionsResource(AsyncAPIResource):
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
 
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
+
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m
 
@@ -6389,6 +6518,9 @@ class AsyncActionsResource(AsyncAPIResource):
           presigned_expires_in: ⚠️ DEPRECATED: Use `options.screenshot.presignedExpiresIn` instead. Presigned
               url expires in. Only takes effect when outputFormat is storageKey. This field
               will be ignored when `options.screenshot` is provided.
+
+              When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+              (never expires).
 
               Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
               Example formats: "500ms", "30s", "5m", "1h" Default: 30m

@@ -23,6 +23,9 @@ class Screenshot(TypedDict, total=False):
     presigned_expires_in: Annotated[str, PropertyInfo(alias="presignedExpiresIn")]
     """Presigned url expires in. Only takes effect when outputFormat is storageKey.
 
+    When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+    (never expires).
+
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """

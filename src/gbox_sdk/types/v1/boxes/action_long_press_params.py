@@ -50,6 +50,9 @@ class LongPress(TypedDict, total=False):
     Presigned url expires in. Only takes effect when outputFormat is storageKey.
     This field will be ignored when `options.screenshot` is provided.
 
+    When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+    (never expires).
+
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
@@ -114,6 +117,9 @@ class LongPressByNaturalLanguage(TypedDict, total=False):
     Presigned url expires in. Only takes effect when outputFormat is storageKey.
     This field will be ignored when `options.screenshot` is provided.
 
+    When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+    (never expires).
+
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m
     """
@@ -174,6 +180,9 @@ class LongPressByElement(TypedDict, total=False):
 
     Presigned url expires in. Only takes effect when outputFormat is storageKey.
     This field will be ignored when `options.screenshot` is provided.
+
+    When presignedExpiresIn = 0 (e.g., "0ms"), the returned URL will be permanent
+    (never expires).
 
     Supported time units: ms (milliseconds), s (seconds), m (minutes), h (hours)
     Example formats: "500ms", "30s", "5m", "1h" Default: 30m

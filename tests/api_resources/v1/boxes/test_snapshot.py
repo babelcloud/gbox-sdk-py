@@ -21,7 +21,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestSnapshot:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create(self, client: GboxClient) -> None:
         snapshot = client.v1.boxes.snapshot.create(
@@ -30,7 +30,7 @@ class TestSnapshot:
         )
         assert_matches_type(SnapshotCreateResponse, snapshot, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: GboxClient) -> None:
         response = client.v1.boxes.snapshot.with_raw_response.create(
@@ -43,7 +43,7 @@ class TestSnapshot:
         snapshot = response.parse()
         assert_matches_type(SnapshotCreateResponse, snapshot, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: GboxClient) -> None:
         with client.v1.boxes.snapshot.with_streaming_response.create(
@@ -58,7 +58,7 @@ class TestSnapshot:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_create(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -67,13 +67,13 @@ class TestSnapshot:
                 name="my-snapshot-1",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: GboxClient) -> None:
         snapshot = client.v1.boxes.snapshot.list()
         assert_matches_type(SnapshotListResponse, snapshot, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: GboxClient) -> None:
         snapshot = client.v1.boxes.snapshot.list(
@@ -82,7 +82,7 @@ class TestSnapshot:
         )
         assert_matches_type(SnapshotListResponse, snapshot, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: GboxClient) -> None:
         response = client.v1.boxes.snapshot.with_raw_response.list()
@@ -92,7 +92,7 @@ class TestSnapshot:
         snapshot = response.parse()
         assert_matches_type(SnapshotListResponse, snapshot, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: GboxClient) -> None:
         with client.v1.boxes.snapshot.with_streaming_response.list() as response:
@@ -104,7 +104,7 @@ class TestSnapshot:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get(self, client: GboxClient) -> None:
         snapshot = client.v1.boxes.snapshot.get(
@@ -112,7 +112,7 @@ class TestSnapshot:
         )
         assert_matches_type(SnapshotGetResponse, snapshot, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get(self, client: GboxClient) -> None:
         response = client.v1.boxes.snapshot.with_raw_response.get(
@@ -124,7 +124,7 @@ class TestSnapshot:
         snapshot = response.parse()
         assert_matches_type(SnapshotGetResponse, snapshot, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get(self, client: GboxClient) -> None:
         with client.v1.boxes.snapshot.with_streaming_response.get(
@@ -138,7 +138,7 @@ class TestSnapshot:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_get(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `snapshot_name` but received ''"):
@@ -146,7 +146,7 @@ class TestSnapshot:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_remove(self, client: GboxClient) -> None:
         snapshot = client.v1.boxes.snapshot.remove(
@@ -154,7 +154,7 @@ class TestSnapshot:
         )
         assert snapshot is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_remove(self, client: GboxClient) -> None:
         response = client.v1.boxes.snapshot.with_raw_response.remove(
@@ -166,7 +166,7 @@ class TestSnapshot:
         snapshot = response.parse()
         assert snapshot is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_remove(self, client: GboxClient) -> None:
         with client.v1.boxes.snapshot.with_streaming_response.remove(
@@ -180,7 +180,7 @@ class TestSnapshot:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_remove(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `snapshot_name` but received ''"):
@@ -194,7 +194,7 @@ class TestAsyncSnapshot:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncGboxClient) -> None:
         snapshot = await async_client.v1.boxes.snapshot.create(
@@ -203,7 +203,7 @@ class TestAsyncSnapshot:
         )
         assert_matches_type(SnapshotCreateResponse, snapshot, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.snapshot.with_raw_response.create(
@@ -216,7 +216,7 @@ class TestAsyncSnapshot:
         snapshot = await response.parse()
         assert_matches_type(SnapshotCreateResponse, snapshot, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.snapshot.with_streaming_response.create(
@@ -231,7 +231,7 @@ class TestAsyncSnapshot:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_create(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -240,13 +240,13 @@ class TestAsyncSnapshot:
                 name="my-snapshot-1",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncGboxClient) -> None:
         snapshot = await async_client.v1.boxes.snapshot.list()
         assert_matches_type(SnapshotListResponse, snapshot, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGboxClient) -> None:
         snapshot = await async_client.v1.boxes.snapshot.list(
@@ -255,7 +255,7 @@ class TestAsyncSnapshot:
         )
         assert_matches_type(SnapshotListResponse, snapshot, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.snapshot.with_raw_response.list()
@@ -265,7 +265,7 @@ class TestAsyncSnapshot:
         snapshot = await response.parse()
         assert_matches_type(SnapshotListResponse, snapshot, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.snapshot.with_streaming_response.list() as response:
@@ -277,7 +277,7 @@ class TestAsyncSnapshot:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get(self, async_client: AsyncGboxClient) -> None:
         snapshot = await async_client.v1.boxes.snapshot.get(
@@ -285,7 +285,7 @@ class TestAsyncSnapshot:
         )
         assert_matches_type(SnapshotGetResponse, snapshot, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.snapshot.with_raw_response.get(
@@ -297,7 +297,7 @@ class TestAsyncSnapshot:
         snapshot = await response.parse()
         assert_matches_type(SnapshotGetResponse, snapshot, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.snapshot.with_streaming_response.get(
@@ -311,7 +311,7 @@ class TestAsyncSnapshot:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_get(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `snapshot_name` but received ''"):
@@ -319,7 +319,7 @@ class TestAsyncSnapshot:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_remove(self, async_client: AsyncGboxClient) -> None:
         snapshot = await async_client.v1.boxes.snapshot.remove(
@@ -327,7 +327,7 @@ class TestAsyncSnapshot:
         )
         assert snapshot is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_remove(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.snapshot.with_raw_response.remove(
@@ -339,7 +339,7 @@ class TestAsyncSnapshot:
         snapshot = await response.parse()
         assert snapshot is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_remove(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.snapshot.with_streaming_response.remove(
@@ -353,7 +353,7 @@ class TestAsyncSnapshot:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_remove(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `snapshot_name` but received ''"):

@@ -20,13 +20,13 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestDevices:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: GboxClient) -> None:
         device = client.v1.devices.list()
         assert_matches_type(GetDeviceListResponse, device, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: GboxClient) -> None:
         device = client.v1.devices.list(
@@ -36,7 +36,7 @@ class TestDevices:
         )
         assert_matches_type(GetDeviceListResponse, device, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: GboxClient) -> None:
         response = client.v1.devices.with_raw_response.list()
@@ -46,7 +46,7 @@ class TestDevices:
         device = response.parse()
         assert_matches_type(GetDeviceListResponse, device, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: GboxClient) -> None:
         with client.v1.devices.with_streaming_response.list() as response:
@@ -58,7 +58,7 @@ class TestDevices:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get(self, client: GboxClient) -> None:
         device = client.v1.devices.get(
@@ -66,7 +66,7 @@ class TestDevices:
         )
         assert_matches_type(DeviceInfo, device, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get(self, client: GboxClient) -> None:
         response = client.v1.devices.with_raw_response.get(
@@ -78,7 +78,7 @@ class TestDevices:
         device = response.parse()
         assert_matches_type(DeviceInfo, device, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get(self, client: GboxClient) -> None:
         with client.v1.devices.with_streaming_response.get(
@@ -92,7 +92,7 @@ class TestDevices:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_get(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `device_id` but received ''"):
@@ -100,7 +100,7 @@ class TestDevices:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_to_box(self, client: GboxClient) -> None:
         device = client.v1.devices.to_box(
@@ -108,7 +108,7 @@ class TestDevices:
         )
         assert_matches_type(str, device, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_to_box_with_all_params(self, client: GboxClient) -> None:
         device = client.v1.devices.to_box(
@@ -117,7 +117,7 @@ class TestDevices:
         )
         assert_matches_type(str, device, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_to_box(self, client: GboxClient) -> None:
         response = client.v1.devices.with_raw_response.to_box(
@@ -129,7 +129,7 @@ class TestDevices:
         device = response.parse()
         assert_matches_type(str, device, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_to_box(self, client: GboxClient) -> None:
         with client.v1.devices.with_streaming_response.to_box(
@@ -143,7 +143,7 @@ class TestDevices:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_to_box(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `device_id` but received ''"):
@@ -157,13 +157,13 @@ class TestAsyncDevices:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncGboxClient) -> None:
         device = await async_client.v1.devices.list()
         assert_matches_type(GetDeviceListResponse, device, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGboxClient) -> None:
         device = await async_client.v1.devices.list(
@@ -173,7 +173,7 @@ class TestAsyncDevices:
         )
         assert_matches_type(GetDeviceListResponse, device, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.devices.with_raw_response.list()
@@ -183,7 +183,7 @@ class TestAsyncDevices:
         device = await response.parse()
         assert_matches_type(GetDeviceListResponse, device, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.devices.with_streaming_response.list() as response:
@@ -195,7 +195,7 @@ class TestAsyncDevices:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get(self, async_client: AsyncGboxClient) -> None:
         device = await async_client.v1.devices.get(
@@ -203,7 +203,7 @@ class TestAsyncDevices:
         )
         assert_matches_type(DeviceInfo, device, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.devices.with_raw_response.get(
@@ -215,7 +215,7 @@ class TestAsyncDevices:
         device = await response.parse()
         assert_matches_type(DeviceInfo, device, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.devices.with_streaming_response.get(
@@ -229,7 +229,7 @@ class TestAsyncDevices:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_get(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `device_id` but received ''"):
@@ -237,7 +237,7 @@ class TestAsyncDevices:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_to_box(self, async_client: AsyncGboxClient) -> None:
         device = await async_client.v1.devices.to_box(
@@ -245,7 +245,7 @@ class TestAsyncDevices:
         )
         assert_matches_type(str, device, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_to_box_with_all_params(self, async_client: AsyncGboxClient) -> None:
         device = await async_client.v1.devices.to_box(
@@ -254,7 +254,7 @@ class TestAsyncDevices:
         )
         assert_matches_type(str, device, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_to_box(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.devices.with_raw_response.to_box(
@@ -266,7 +266,7 @@ class TestAsyncDevices:
         device = await response.parse()
         assert_matches_type(str, device, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_to_box(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.devices.with_streaming_response.to_box(
@@ -280,7 +280,7 @@ class TestAsyncDevices:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_to_box(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `device_id` but received ''"):

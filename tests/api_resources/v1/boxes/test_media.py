@@ -31,7 +31,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestMedia:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_album(self, client: GboxClient) -> None:
         media = client.v1.boxes.media.create_album(
@@ -40,7 +40,7 @@ class TestMedia:
         )
         assert_matches_type(MediaAlbum, media, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_album_with_all_params(self, client: GboxClient) -> None:
         media = client.v1.boxes.media.create_album(
@@ -50,7 +50,7 @@ class TestMedia:
         )
         assert_matches_type(MediaAlbum, media, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create_album(self, client: GboxClient) -> None:
         response = client.v1.boxes.media.with_raw_response.create_album(
@@ -63,7 +63,7 @@ class TestMedia:
         media = response.parse()
         assert_matches_type(MediaAlbum, media, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create_album(self, client: GboxClient) -> None:
         with client.v1.boxes.media.with_streaming_response.create_album(
@@ -78,7 +78,7 @@ class TestMedia:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_create_album(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -87,7 +87,7 @@ class TestMedia:
                 name="Vacation Photos",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete_album(self, client: GboxClient) -> None:
         media = client.v1.boxes.media.delete_album(
@@ -96,7 +96,7 @@ class TestMedia:
         )
         assert media is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete_album(self, client: GboxClient) -> None:
         response = client.v1.boxes.media.with_raw_response.delete_album(
@@ -109,7 +109,7 @@ class TestMedia:
         media = response.parse()
         assert media is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_delete_album(self, client: GboxClient) -> None:
         with client.v1.boxes.media.with_streaming_response.delete_album(
@@ -124,7 +124,7 @@ class TestMedia:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_delete_album(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -139,7 +139,7 @@ class TestMedia:
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete_media(self, client: GboxClient) -> None:
         media = client.v1.boxes.media.delete_media(
@@ -149,7 +149,7 @@ class TestMedia:
         )
         assert media is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete_media(self, client: GboxClient) -> None:
         response = client.v1.boxes.media.with_raw_response.delete_media(
@@ -163,7 +163,7 @@ class TestMedia:
         media = response.parse()
         assert media is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_delete_media(self, client: GboxClient) -> None:
         with client.v1.boxes.media.with_streaming_response.delete_media(
@@ -179,7 +179,7 @@ class TestMedia:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_delete_media(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -281,7 +281,7 @@ class TestMedia:
                 album_name="Pictures",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_album_detail(self, client: GboxClient) -> None:
         media = client.v1.boxes.media.get_album_detail(
@@ -290,7 +290,7 @@ class TestMedia:
         )
         assert_matches_type(MediaAlbum, media, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_album_detail(self, client: GboxClient) -> None:
         response = client.v1.boxes.media.with_raw_response.get_album_detail(
@@ -303,7 +303,7 @@ class TestMedia:
         media = response.parse()
         assert_matches_type(MediaAlbum, media, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_album_detail(self, client: GboxClient) -> None:
         with client.v1.boxes.media.with_streaming_response.get_album_detail(
@@ -318,7 +318,7 @@ class TestMedia:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_get_album_detail(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -333,7 +333,7 @@ class TestMedia:
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_media(self, client: GboxClient) -> None:
         media = client.v1.boxes.media.get_media(
@@ -343,7 +343,7 @@ class TestMedia:
         )
         assert_matches_type(MediaGetMediaResponse, media, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_media(self, client: GboxClient) -> None:
         response = client.v1.boxes.media.with_raw_response.get_media(
@@ -357,7 +357,7 @@ class TestMedia:
         media = response.parse()
         assert_matches_type(MediaGetMediaResponse, media, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_media(self, client: GboxClient) -> None:
         with client.v1.boxes.media.with_streaming_response.get_media(
@@ -373,7 +373,7 @@ class TestMedia:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_get_media(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -397,7 +397,7 @@ class TestMedia:
                 album_name="Pictures",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_media_support(self, client: GboxClient) -> None:
         media = client.v1.boxes.media.get_media_support(
@@ -405,7 +405,7 @@ class TestMedia:
         )
         assert_matches_type(MediaGetMediaSupportResponse, media, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_media_support(self, client: GboxClient) -> None:
         response = client.v1.boxes.media.with_raw_response.get_media_support(
@@ -417,7 +417,7 @@ class TestMedia:
         media = response.parse()
         assert_matches_type(MediaGetMediaSupportResponse, media, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_media_support(self, client: GboxClient) -> None:
         with client.v1.boxes.media.with_streaming_response.get_media_support(
@@ -431,7 +431,7 @@ class TestMedia:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_get_media_support(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -439,7 +439,7 @@ class TestMedia:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_albums(self, client: GboxClient) -> None:
         media = client.v1.boxes.media.list_albums(
@@ -447,7 +447,7 @@ class TestMedia:
         )
         assert_matches_type(MediaListAlbumsResponse, media, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list_albums(self, client: GboxClient) -> None:
         response = client.v1.boxes.media.with_raw_response.list_albums(
@@ -459,7 +459,7 @@ class TestMedia:
         media = response.parse()
         assert_matches_type(MediaListAlbumsResponse, media, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list_albums(self, client: GboxClient) -> None:
         with client.v1.boxes.media.with_streaming_response.list_albums(
@@ -473,7 +473,7 @@ class TestMedia:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_list_albums(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -481,7 +481,7 @@ class TestMedia:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_media(self, client: GboxClient) -> None:
         media = client.v1.boxes.media.list_media(
@@ -490,7 +490,7 @@ class TestMedia:
         )
         assert_matches_type(MediaListMediaResponse, media, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list_media(self, client: GboxClient) -> None:
         response = client.v1.boxes.media.with_raw_response.list_media(
@@ -503,7 +503,7 @@ class TestMedia:
         media = response.parse()
         assert_matches_type(MediaListMediaResponse, media, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list_media(self, client: GboxClient) -> None:
         with client.v1.boxes.media.with_streaming_response.list_media(
@@ -518,7 +518,7 @@ class TestMedia:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_list_media(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -533,7 +533,7 @@ class TestMedia:
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update_album(self, client: GboxClient) -> None:
         media = client.v1.boxes.media.update_album(
@@ -543,7 +543,7 @@ class TestMedia:
         )
         assert_matches_type(MediaAlbum, media, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_update_album(self, client: GboxClient) -> None:
         response = client.v1.boxes.media.with_raw_response.update_album(
@@ -557,7 +557,7 @@ class TestMedia:
         media = response.parse()
         assert_matches_type(MediaAlbum, media, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_update_album(self, client: GboxClient) -> None:
         with client.v1.boxes.media.with_streaming_response.update_album(
@@ -573,7 +573,7 @@ class TestMedia:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_update_album(self, client: GboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -596,7 +596,7 @@ class TestAsyncMedia:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_album(self, async_client: AsyncGboxClient) -> None:
         media = await async_client.v1.boxes.media.create_album(
@@ -605,7 +605,7 @@ class TestAsyncMedia:
         )
         assert_matches_type(MediaAlbum, media, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_album_with_all_params(self, async_client: AsyncGboxClient) -> None:
         media = await async_client.v1.boxes.media.create_album(
@@ -615,7 +615,7 @@ class TestAsyncMedia:
         )
         assert_matches_type(MediaAlbum, media, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create_album(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.media.with_raw_response.create_album(
@@ -628,7 +628,7 @@ class TestAsyncMedia:
         media = await response.parse()
         assert_matches_type(MediaAlbum, media, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create_album(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.media.with_streaming_response.create_album(
@@ -643,7 +643,7 @@ class TestAsyncMedia:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_create_album(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -652,7 +652,7 @@ class TestAsyncMedia:
                 name="Vacation Photos",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete_album(self, async_client: AsyncGboxClient) -> None:
         media = await async_client.v1.boxes.media.delete_album(
@@ -661,7 +661,7 @@ class TestAsyncMedia:
         )
         assert media is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete_album(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.media.with_raw_response.delete_album(
@@ -674,7 +674,7 @@ class TestAsyncMedia:
         media = await response.parse()
         assert media is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_delete_album(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.media.with_streaming_response.delete_album(
@@ -689,7 +689,7 @@ class TestAsyncMedia:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_delete_album(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -704,7 +704,7 @@ class TestAsyncMedia:
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete_media(self, async_client: AsyncGboxClient) -> None:
         media = await async_client.v1.boxes.media.delete_media(
@@ -714,7 +714,7 @@ class TestAsyncMedia:
         )
         assert media is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete_media(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.media.with_raw_response.delete_media(
@@ -728,7 +728,7 @@ class TestAsyncMedia:
         media = await response.parse()
         assert media is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_delete_media(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.media.with_streaming_response.delete_media(
@@ -744,7 +744,7 @@ class TestAsyncMedia:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_delete_media(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -848,7 +848,7 @@ class TestAsyncMedia:
                 album_name="Pictures",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_album_detail(self, async_client: AsyncGboxClient) -> None:
         media = await async_client.v1.boxes.media.get_album_detail(
@@ -857,7 +857,7 @@ class TestAsyncMedia:
         )
         assert_matches_type(MediaAlbum, media, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_album_detail(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.media.with_raw_response.get_album_detail(
@@ -870,7 +870,7 @@ class TestAsyncMedia:
         media = await response.parse()
         assert_matches_type(MediaAlbum, media, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_album_detail(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.media.with_streaming_response.get_album_detail(
@@ -885,7 +885,7 @@ class TestAsyncMedia:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_get_album_detail(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -900,7 +900,7 @@ class TestAsyncMedia:
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_media(self, async_client: AsyncGboxClient) -> None:
         media = await async_client.v1.boxes.media.get_media(
@@ -910,7 +910,7 @@ class TestAsyncMedia:
         )
         assert_matches_type(MediaGetMediaResponse, media, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_media(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.media.with_raw_response.get_media(
@@ -924,7 +924,7 @@ class TestAsyncMedia:
         media = await response.parse()
         assert_matches_type(MediaGetMediaResponse, media, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_media(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.media.with_streaming_response.get_media(
@@ -940,7 +940,7 @@ class TestAsyncMedia:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_get_media(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -964,7 +964,7 @@ class TestAsyncMedia:
                 album_name="Pictures",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_media_support(self, async_client: AsyncGboxClient) -> None:
         media = await async_client.v1.boxes.media.get_media_support(
@@ -972,7 +972,7 @@ class TestAsyncMedia:
         )
         assert_matches_type(MediaGetMediaSupportResponse, media, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_media_support(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.media.with_raw_response.get_media_support(
@@ -984,7 +984,7 @@ class TestAsyncMedia:
         media = await response.parse()
         assert_matches_type(MediaGetMediaSupportResponse, media, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_media_support(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.media.with_streaming_response.get_media_support(
@@ -998,7 +998,7 @@ class TestAsyncMedia:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_get_media_support(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1006,7 +1006,7 @@ class TestAsyncMedia:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_albums(self, async_client: AsyncGboxClient) -> None:
         media = await async_client.v1.boxes.media.list_albums(
@@ -1014,7 +1014,7 @@ class TestAsyncMedia:
         )
         assert_matches_type(MediaListAlbumsResponse, media, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list_albums(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.media.with_raw_response.list_albums(
@@ -1026,7 +1026,7 @@ class TestAsyncMedia:
         media = await response.parse()
         assert_matches_type(MediaListAlbumsResponse, media, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list_albums(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.media.with_streaming_response.list_albums(
@@ -1040,7 +1040,7 @@ class TestAsyncMedia:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_list_albums(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1048,7 +1048,7 @@ class TestAsyncMedia:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_media(self, async_client: AsyncGboxClient) -> None:
         media = await async_client.v1.boxes.media.list_media(
@@ -1057,7 +1057,7 @@ class TestAsyncMedia:
         )
         assert_matches_type(MediaListMediaResponse, media, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list_media(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.media.with_raw_response.list_media(
@@ -1070,7 +1070,7 @@ class TestAsyncMedia:
         media = await response.parse()
         assert_matches_type(MediaListMediaResponse, media, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list_media(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.media.with_streaming_response.list_media(
@@ -1085,7 +1085,7 @@ class TestAsyncMedia:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_list_media(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
@@ -1100,7 +1100,7 @@ class TestAsyncMedia:
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update_album(self, async_client: AsyncGboxClient) -> None:
         media = await async_client.v1.boxes.media.update_album(
@@ -1110,7 +1110,7 @@ class TestAsyncMedia:
         )
         assert_matches_type(MediaAlbum, media, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_update_album(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.media.with_raw_response.update_album(
@@ -1124,7 +1124,7 @@ class TestAsyncMedia:
         media = await response.parse()
         assert_matches_type(MediaAlbum, media, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_update_album(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.media.with_streaming_response.update_album(
@@ -1140,7 +1140,7 @@ class TestAsyncMedia:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_update_album(self, async_client: AsyncGboxClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):

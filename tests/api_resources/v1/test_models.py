@@ -17,7 +17,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestModels:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_call(self, client: GboxClient) -> None:
         model = client.v1.models.call(
@@ -29,7 +29,7 @@ class TestModels:
         )
         assert_matches_type(ModelCallResponse, model, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_call_with_all_params(self, client: GboxClient) -> None:
         model = client.v1.models.call(
@@ -42,7 +42,7 @@ class TestModels:
         )
         assert_matches_type(ModelCallResponse, model, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_call(self, client: GboxClient) -> None:
         response = client.v1.models.with_raw_response.call(
@@ -58,7 +58,7 @@ class TestModels:
         model = response.parse()
         assert_matches_type(ModelCallResponse, model, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_call(self, client: GboxClient) -> None:
         with client.v1.models.with_streaming_response.call(
@@ -82,7 +82,7 @@ class TestAsyncModels:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_call(self, async_client: AsyncGboxClient) -> None:
         model = await async_client.v1.models.call(
@@ -94,7 +94,7 @@ class TestAsyncModels:
         )
         assert_matches_type(ModelCallResponse, model, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_call_with_all_params(self, async_client: AsyncGboxClient) -> None:
         model = await async_client.v1.models.call(
@@ -107,7 +107,7 @@ class TestAsyncModels:
         )
         assert_matches_type(ModelCallResponse, model, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_call(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.models.with_raw_response.call(
@@ -123,7 +123,7 @@ class TestAsyncModels:
         model = await response.parse()
         assert_matches_type(ModelCallResponse, model, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_call(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.models.with_streaming_response.call(

@@ -1,26 +1,24 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Union, Optional
+from typing import Optional
 from datetime import datetime
-from typing_extensions import Literal, TypeAlias
+from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
-from .linux_box import LinuxBox
-from .android_box import AndroidBox
 
-__all__ = ["BoxRetrieveResponse", "WindowsBox", "WindowsBoxConfig", "WindowsBoxConfigOs"]
+__all__ = ["BoxCreateWindowsResponse", "Config", "ConfigOs"]
 
 
-class WindowsBoxConfigOs(BaseModel):
+class ConfigOs(BaseModel):
     """Windows operating system configuration"""
 
     version: Literal["10", "11"]
     """Supported Windows versions"""
 
 
-class WindowsBoxConfig(BaseModel):
+class Config(BaseModel):
     """Windows box instance configuration"""
 
     arch: object
@@ -35,7 +33,7 @@ class WindowsBoxConfig(BaseModel):
     novnc_url: object = FieldInfo(alias="novncUrl")
     """NOVNC URL of the box"""
 
-    os: WindowsBoxConfigOs
+    os: ConfigOs
     """Windows operating system configuration"""
 
     public_ip: object = FieldInfo(alias="publicIp")
@@ -48,13 +46,13 @@ class WindowsBoxConfig(BaseModel):
     """VNC URL of the box"""
 
 
-class WindowsBox(BaseModel):
+class BoxCreateWindowsResponse(BaseModel):
     """Windows VM box instance with full configuration and status"""
 
     id: str
     """Unique identifier for the box"""
 
-    config: WindowsBoxConfig
+    config: Config
     """Windows box instance configuration"""
 
     created_at: datetime = FieldInfo(alias="createdAt")
@@ -74,6 +72,3 @@ class WindowsBox(BaseModel):
 
     reason: Optional[str] = None
     """The reason for the current status, if any"""
-
-
-BoxRetrieveResponse: TypeAlias = Union[LinuxBox, AndroidBox, WindowsBox]

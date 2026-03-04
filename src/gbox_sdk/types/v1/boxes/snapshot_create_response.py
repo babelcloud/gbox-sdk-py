@@ -15,7 +15,7 @@ class SnapshotCreateResponse(BaseModel):
     id: str
     """Unique identifier for the snapshot"""
 
-    box_type: Literal["linux", "android"] = FieldInfo(alias="boxType")
+    box_type: Literal["linux", "android", "windows"] = FieldInfo(alias="boxType")
     """The type of the box that the snapshot is taken from"""
 
     name: str

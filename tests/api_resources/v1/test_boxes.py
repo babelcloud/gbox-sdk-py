@@ -20,6 +20,7 @@ from gbox_sdk.types.v1 import (
     BoxRetrieveResponse,
     BoxLiveViewURLResponse,
     BoxWebsocketURLResponse,
+    BoxCreateWindowsResponse,
     BoxResolutionSetResponse,
     BoxWebTerminalURLResponse,
     BoxExecuteCommandsResponse,
@@ -212,6 +213,56 @@ class TestBoxes:
 
             box = response.parse()
             assert_matches_type(LinuxBox, box, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_create_windows(self, client: GboxClient) -> None:
+        box = client.v1.boxes.create_windows()
+        assert_matches_type(BoxCreateWindowsResponse, box, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_create_windows_with_all_params(self, client: GboxClient) -> None:
+        box = client.v1.boxes.create_windows(
+            config={
+                "envs": {
+                    "DEBUG": "true",
+                    "API_URL": "https://api.example.com",
+                },
+                "expires_in": "60m",
+                "keep_alive": "0ms",
+                "labels": {
+                    "environment": "development",
+                    "team": "qa",
+                },
+                "version": "11",
+            },
+            api_timeout="30s",
+            wait=True,
+        )
+        assert_matches_type(BoxCreateWindowsResponse, box, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_create_windows(self, client: GboxClient) -> None:
+        response = client.v1.boxes.with_raw_response.create_windows()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        box = response.parse()
+        assert_matches_type(BoxCreateWindowsResponse, box, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_create_windows(self, client: GboxClient) -> None:
+        with client.v1.boxes.with_streaming_response.create_windows() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            box = response.parse()
+            assert_matches_type(BoxCreateWindowsResponse, box, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -915,6 +966,56 @@ class TestAsyncBoxes:
 
             box = await response.parse()
             assert_matches_type(LinuxBox, box, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_create_windows(self, async_client: AsyncGboxClient) -> None:
+        box = await async_client.v1.boxes.create_windows()
+        assert_matches_type(BoxCreateWindowsResponse, box, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_create_windows_with_all_params(self, async_client: AsyncGboxClient) -> None:
+        box = await async_client.v1.boxes.create_windows(
+            config={
+                "envs": {
+                    "DEBUG": "true",
+                    "API_URL": "https://api.example.com",
+                },
+                "expires_in": "60m",
+                "keep_alive": "0ms",
+                "labels": {
+                    "environment": "development",
+                    "team": "qa",
+                },
+                "version": "11",
+            },
+            api_timeout="30s",
+            wait=True,
+        )
+        assert_matches_type(BoxCreateWindowsResponse, box, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_create_windows(self, async_client: AsyncGboxClient) -> None:
+        response = await async_client.v1.boxes.with_raw_response.create_windows()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        box = await response.parse()
+        assert_matches_type(BoxCreateWindowsResponse, box, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_create_windows(self, async_client: AsyncGboxClient) -> None:
+        async with async_client.v1.boxes.with_streaming_response.create_windows() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            box = await response.parse()
+            assert_matches_type(BoxCreateWindowsResponse, box, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

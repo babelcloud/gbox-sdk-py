@@ -212,7 +212,7 @@ class BoxesResource(SyncAPIResource):
         page: int | Omit = omit,
         page_size: int | Omit = omit,
         status: List[Literal["all", "pending", "running", "error", "terminated"]] | Omit = omit,
-        type: List[Literal["all", "linux", "android"]] | Omit = omit,
+        type: List[Literal["all", "linux", "android", "windows"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -242,8 +242,8 @@ class BoxesResource(SyncAPIResource):
               terminated, all). Must be an array of statuses. Use 'all' to get boxes with any
               status.
 
-          type: Filter boxes by their type (linux, android, all). Must be an array of types. Use
-              'all' to get boxes of any type.
+          type: Filter boxes by their type (linux, android, windows, all). Must be an array of
+              types. Use 'all' to get boxes of any type.
 
           extra_headers: Send extra headers
 
@@ -997,7 +997,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         page: int | Omit = omit,
         page_size: int | Omit = omit,
         status: List[Literal["all", "pending", "running", "error", "terminated"]] | Omit = omit,
-        type: List[Literal["all", "linux", "android"]] | Omit = omit,
+        type: List[Literal["all", "linux", "android", "windows"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1027,8 +1027,8 @@ class AsyncBoxesResource(AsyncAPIResource):
               terminated, all). Must be an array of statuses. Use 'all' to get boxes with any
               status.
 
-          type: Filter boxes by their type (linux, android, all). Must be an array of types. Use
-              'all' to get boxes of any type.
+          type: Filter boxes by their type (linux, android, windows, all). Must be an array of
+              types. Use 'all' to get boxes of any type.
 
           extra_headers: Send extra headers
 

@@ -35,8 +35,8 @@ class BoxListParams(TypedDict, total=False):
     status.
     """
 
-    type: List[Literal["all", "linux", "android"]]
-    """Filter boxes by their type (linux, android, all).
+    type: List[Literal["all", "linux", "android", "windows"]]
+    """Filter boxes by their type (linux, android, windows, all).
 
     Must be an array of types. Use 'all' to get boxes of any type.
     """

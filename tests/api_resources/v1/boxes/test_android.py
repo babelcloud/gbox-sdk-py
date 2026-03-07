@@ -453,7 +453,7 @@ class TestAndroid:
     def test_method_install_overload_1(self, client: GboxClient) -> None:
         android = client.v1.boxes.android.install(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            apk=b"raw file contents",
+            apk=b"Example data",
         )
         assert_matches_type(AndroidInstallResponse, android, path=["response"])
 
@@ -462,7 +462,7 @@ class TestAndroid:
     def test_method_install_with_all_params_overload_1(self, client: GboxClient) -> None:
         android = client.v1.boxes.android.install(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            apk=b"raw file contents",
+            apk=b"Example data",
             open=False,
         )
         assert_matches_type(AndroidInstallResponse, android, path=["response"])
@@ -472,7 +472,7 @@ class TestAndroid:
     def test_raw_response_install_overload_1(self, client: GboxClient) -> None:
         response = client.v1.boxes.android.with_raw_response.install(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            apk=b"raw file contents",
+            apk=b"Example data",
         )
 
         assert response.is_closed is True
@@ -485,7 +485,7 @@ class TestAndroid:
     def test_streaming_response_install_overload_1(self, client: GboxClient) -> None:
         with client.v1.boxes.android.with_streaming_response.install(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            apk=b"raw file contents",
+            apk=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -501,7 +501,7 @@ class TestAndroid:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.android.with_raw_response.install(
                 box_id="",
-                apk=b"raw file contents",
+                apk=b"Example data",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -886,7 +886,7 @@ class TestAndroid:
     def test_method_restore(self, client: GboxClient) -> None:
         android = client.v1.boxes.android.restore(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            backup=b"raw file contents",
+            backup=b"Example data",
         )
         assert android is None
 
@@ -895,7 +895,7 @@ class TestAndroid:
     def test_raw_response_restore(self, client: GboxClient) -> None:
         response = client.v1.boxes.android.with_raw_response.restore(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            backup=b"raw file contents",
+            backup=b"Example data",
         )
 
         assert response.is_closed is True
@@ -908,7 +908,7 @@ class TestAndroid:
     def test_streaming_response_restore(self, client: GboxClient) -> None:
         with client.v1.boxes.android.with_streaming_response.restore(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            backup=b"raw file contents",
+            backup=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -924,7 +924,7 @@ class TestAndroid:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.android.with_raw_response.restore(
                 box_id="",
-                backup=b"raw file contents",
+                backup=b"Example data",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -1413,7 +1413,7 @@ class TestAsyncAndroid:
     async def test_method_install_overload_1(self, async_client: AsyncGboxClient) -> None:
         android = await async_client.v1.boxes.android.install(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            apk=b"raw file contents",
+            apk=b"Example data",
         )
         assert_matches_type(AndroidInstallResponse, android, path=["response"])
 
@@ -1422,7 +1422,7 @@ class TestAsyncAndroid:
     async def test_method_install_with_all_params_overload_1(self, async_client: AsyncGboxClient) -> None:
         android = await async_client.v1.boxes.android.install(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            apk=b"raw file contents",
+            apk=b"Example data",
             open=False,
         )
         assert_matches_type(AndroidInstallResponse, android, path=["response"])
@@ -1432,7 +1432,7 @@ class TestAsyncAndroid:
     async def test_raw_response_install_overload_1(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.android.with_raw_response.install(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            apk=b"raw file contents",
+            apk=b"Example data",
         )
 
         assert response.is_closed is True
@@ -1445,7 +1445,7 @@ class TestAsyncAndroid:
     async def test_streaming_response_install_overload_1(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.android.with_streaming_response.install(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            apk=b"raw file contents",
+            apk=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1461,7 +1461,7 @@ class TestAsyncAndroid:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.android.with_raw_response.install(
                 box_id="",
-                apk=b"raw file contents",
+                apk=b"Example data",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -1846,7 +1846,7 @@ class TestAsyncAndroid:
     async def test_method_restore(self, async_client: AsyncGboxClient) -> None:
         android = await async_client.v1.boxes.android.restore(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            backup=b"raw file contents",
+            backup=b"Example data",
         )
         assert android is None
 
@@ -1855,7 +1855,7 @@ class TestAsyncAndroid:
     async def test_raw_response_restore(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.android.with_raw_response.restore(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            backup=b"raw file contents",
+            backup=b"Example data",
         )
 
         assert response.is_closed is True
@@ -1868,7 +1868,7 @@ class TestAsyncAndroid:
     async def test_streaming_response_restore(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.android.with_streaming_response.restore(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            backup=b"raw file contents",
+            backup=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1884,7 +1884,7 @@ class TestAsyncAndroid:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.android.with_raw_response.restore(
                 box_id="",
-                backup=b"raw file contents",
+                backup=b"Example data",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")

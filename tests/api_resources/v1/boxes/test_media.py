@@ -46,7 +46,7 @@ class TestMedia:
         media = client.v1.boxes.media.create_album(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             name="Vacation Photos",
-            media=[b"raw file contents"],
+            media=[b"Example data"],
         )
         assert_matches_type(MediaAlbum, media, path=["response"])
 
@@ -539,7 +539,7 @@ class TestMedia:
         media = client.v1.boxes.media.update_album(
             album_name="Pictures",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            media=[b"raw file contents"],
+            media=[b"Example data"],
         )
         assert_matches_type(MediaAlbum, media, path=["response"])
 
@@ -549,7 +549,7 @@ class TestMedia:
         response = client.v1.boxes.media.with_raw_response.update_album(
             album_name="Pictures",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            media=[b"raw file contents"],
+            media=[b"Example data"],
         )
 
         assert response.is_closed is True
@@ -563,7 +563,7 @@ class TestMedia:
         with client.v1.boxes.media.with_streaming_response.update_album(
             album_name="Pictures",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            media=[b"raw file contents"],
+            media=[b"Example data"],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -580,14 +580,14 @@ class TestMedia:
             client.v1.boxes.media.with_raw_response.update_album(
                 album_name="Pictures",
                 box_id="",
-                media=[b"raw file contents"],
+                media=[b"Example data"],
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `album_name` but received ''"):
             client.v1.boxes.media.with_raw_response.update_album(
                 album_name="",
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-                media=[b"raw file contents"],
+                media=[b"Example data"],
             )
 
 
@@ -611,7 +611,7 @@ class TestAsyncMedia:
         media = await async_client.v1.boxes.media.create_album(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
             name="Vacation Photos",
-            media=[b"raw file contents"],
+            media=[b"Example data"],
         )
         assert_matches_type(MediaAlbum, media, path=["response"])
 
@@ -1106,7 +1106,7 @@ class TestAsyncMedia:
         media = await async_client.v1.boxes.media.update_album(
             album_name="Pictures",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            media=[b"raw file contents"],
+            media=[b"Example data"],
         )
         assert_matches_type(MediaAlbum, media, path=["response"])
 
@@ -1116,7 +1116,7 @@ class TestAsyncMedia:
         response = await async_client.v1.boxes.media.with_raw_response.update_album(
             album_name="Pictures",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            media=[b"raw file contents"],
+            media=[b"Example data"],
         )
 
         assert response.is_closed is True
@@ -1130,7 +1130,7 @@ class TestAsyncMedia:
         async with async_client.v1.boxes.media.with_streaming_response.update_album(
             album_name="Pictures",
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            media=[b"raw file contents"],
+            media=[b"Example data"],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1147,12 +1147,12 @@ class TestAsyncMedia:
             await async_client.v1.boxes.media.with_raw_response.update_album(
                 album_name="Pictures",
                 box_id="",
-                media=[b"raw file contents"],
+                media=[b"Example data"],
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `album_name` but received ''"):
             await async_client.v1.boxes.media.with_raw_response.update_album(
                 album_name="",
                 box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-                media=[b"raw file contents"],
+                media=[b"Example data"],
             )

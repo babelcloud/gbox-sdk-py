@@ -433,7 +433,7 @@ class TestFs:
     def test_method_write_overload_2(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.write(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            content=b"raw file contents",
+            content=b"Example data",
             path="/home/user/documents/output.txt",
         )
         assert_matches_type(File, f, path=["response"])
@@ -443,7 +443,7 @@ class TestFs:
     def test_method_write_with_all_params_overload_2(self, client: GboxClient) -> None:
         f = client.v1.boxes.fs.write(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            content=b"raw file contents",
+            content=b"Example data",
             path="/home/user/documents/output.txt",
             working_dir="/home/user/documents",
         )
@@ -454,7 +454,7 @@ class TestFs:
     def test_raw_response_write_overload_2(self, client: GboxClient) -> None:
         response = client.v1.boxes.fs.with_raw_response.write(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            content=b"raw file contents",
+            content=b"Example data",
             path="/home/user/documents/output.txt",
         )
 
@@ -468,7 +468,7 @@ class TestFs:
     def test_streaming_response_write_overload_2(self, client: GboxClient) -> None:
         with client.v1.boxes.fs.with_streaming_response.write(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            content=b"raw file contents",
+            content=b"Example data",
             path="/home/user/documents/output.txt",
         ) as response:
             assert not response.is_closed
@@ -485,7 +485,7 @@ class TestFs:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             client.v1.boxes.fs.with_raw_response.write(
                 box_id="",
-                content=b"raw file contents",
+                content=b"Example data",
                 path="/home/user/documents/output.txt",
             )
 
@@ -903,7 +903,7 @@ class TestAsyncFs:
     async def test_method_write_overload_2(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.write(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            content=b"raw file contents",
+            content=b"Example data",
             path="/home/user/documents/output.txt",
         )
         assert_matches_type(File, f, path=["response"])
@@ -913,7 +913,7 @@ class TestAsyncFs:
     async def test_method_write_with_all_params_overload_2(self, async_client: AsyncGboxClient) -> None:
         f = await async_client.v1.boxes.fs.write(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            content=b"raw file contents",
+            content=b"Example data",
             path="/home/user/documents/output.txt",
             working_dir="/home/user/documents",
         )
@@ -924,7 +924,7 @@ class TestAsyncFs:
     async def test_raw_response_write_overload_2(self, async_client: AsyncGboxClient) -> None:
         response = await async_client.v1.boxes.fs.with_raw_response.write(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            content=b"raw file contents",
+            content=b"Example data",
             path="/home/user/documents/output.txt",
         )
 
@@ -938,7 +938,7 @@ class TestAsyncFs:
     async def test_streaming_response_write_overload_2(self, async_client: AsyncGboxClient) -> None:
         async with async_client.v1.boxes.fs.with_streaming_response.write(
             box_id="c9bdc193-b54b-4ddb-a035-5ac0c598d32d",
-            content=b"raw file contents",
+            content=b"Example data",
             path="/home/user/documents/output.txt",
         ) as response:
             assert not response.is_closed
@@ -955,6 +955,6 @@ class TestAsyncFs:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `box_id` but received ''"):
             await async_client.v1.boxes.fs.with_raw_response.write(
                 box_id="",
-                content=b"raw file contents",
+                content=b"Example data",
                 path="/home/user/documents/output.txt",
             )

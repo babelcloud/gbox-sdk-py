@@ -18,7 +18,7 @@ from ...._types import (
     omit,
     not_given,
 )
-from ...._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
+from ...._utils import extract_files, path_template, maybe_transform, deepcopy_minimal, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import (
@@ -109,7 +109,7 @@ class MediaResource(SyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{box_id}/media/albums",
+            path_template("/boxes/{box_id}/media/albums", box_id=box_id),
             body=maybe_transform(body, media_create_album_params.MediaCreateAlbumParams),
             files=files,
             options=make_request_options(
@@ -148,7 +148,7 @@ class MediaResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `album_name` but received {album_name!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/boxes/{box_id}/media/albums/{album_name}",
+            path_template("/boxes/{box_id}/media/albums/{album_name}", box_id=box_id, album_name=album_name),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -188,7 +188,12 @@ class MediaResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `media_name` but received {media_name!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/boxes/{box_id}/media/albums/{album_name}/media/{media_name}",
+            path_template(
+                "/boxes/{box_id}/media/albums/{album_name}/media/{media_name}",
+                box_id=box_id,
+                album_name=album_name,
+                media_name=media_name,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -228,7 +233,12 @@ class MediaResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `media_name` but received {media_name!r}")
         extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
         return self._get(
-            f"/boxes/{box_id}/media/albums/{album_name}/media/{media_name}/download",
+            path_template(
+                "/boxes/{box_id}/media/albums/{album_name}/media/{media_name}/download",
+                box_id=box_id,
+                album_name=album_name,
+                media_name=media_name,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -264,7 +274,7 @@ class MediaResource(SyncAPIResource):
         if not album_name:
             raise ValueError(f"Expected a non-empty value for `album_name` but received {album_name!r}")
         return self._get(
-            f"/boxes/{box_id}/media/albums/{album_name}",
+            path_template("/boxes/{box_id}/media/albums/{album_name}", box_id=box_id, album_name=album_name),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -305,7 +315,12 @@ class MediaResource(SyncAPIResource):
         return cast(
             MediaGetMediaResponse,
             self._get(
-                f"/boxes/{box_id}/media/albums/{album_name}/media/{media_name}",
+                path_template(
+                    "/boxes/{box_id}/media/albums/{album_name}/media/{media_name}",
+                    box_id=box_id,
+                    album_name=album_name,
+                    media_name=media_name,
+                ),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
@@ -341,7 +356,7 @@ class MediaResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._get(
-            f"/boxes/{box_id}/media/support",
+            path_template("/boxes/{box_id}/media/support", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -374,7 +389,7 @@ class MediaResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._get(
-            f"/boxes/{box_id}/media/albums",
+            path_template("/boxes/{box_id}/media/albums", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -410,7 +425,7 @@ class MediaResource(SyncAPIResource):
         if not album_name:
             raise ValueError(f"Expected a non-empty value for `album_name` but received {album_name!r}")
         return self._get(
-            f"/boxes/{box_id}/media/albums/{album_name}/media",
+            path_template("/boxes/{box_id}/media/albums/{album_name}/media", box_id=box_id, album_name=album_name),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -455,7 +470,7 @@ class MediaResource(SyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return self._patch(
-            f"/boxes/{box_id}/media/albums/{album_name}",
+            path_template("/boxes/{box_id}/media/albums/{album_name}", box_id=box_id, album_name=album_name),
             body=maybe_transform(body, media_update_album_params.MediaUpdateAlbumParams),
             files=files,
             options=make_request_options(
@@ -528,7 +543,7 @@ class AsyncMediaResource(AsyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{box_id}/media/albums",
+            path_template("/boxes/{box_id}/media/albums", box_id=box_id),
             body=await async_maybe_transform(body, media_create_album_params.MediaCreateAlbumParams),
             files=files,
             options=make_request_options(
@@ -567,7 +582,7 @@ class AsyncMediaResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `album_name` but received {album_name!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/boxes/{box_id}/media/albums/{album_name}",
+            path_template("/boxes/{box_id}/media/albums/{album_name}", box_id=box_id, album_name=album_name),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -607,7 +622,12 @@ class AsyncMediaResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `media_name` but received {media_name!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/boxes/{box_id}/media/albums/{album_name}/media/{media_name}",
+            path_template(
+                "/boxes/{box_id}/media/albums/{album_name}/media/{media_name}",
+                box_id=box_id,
+                album_name=album_name,
+                media_name=media_name,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -647,7 +667,12 @@ class AsyncMediaResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `media_name` but received {media_name!r}")
         extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
         return await self._get(
-            f"/boxes/{box_id}/media/albums/{album_name}/media/{media_name}/download",
+            path_template(
+                "/boxes/{box_id}/media/albums/{album_name}/media/{media_name}/download",
+                box_id=box_id,
+                album_name=album_name,
+                media_name=media_name,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -683,7 +708,7 @@ class AsyncMediaResource(AsyncAPIResource):
         if not album_name:
             raise ValueError(f"Expected a non-empty value for `album_name` but received {album_name!r}")
         return await self._get(
-            f"/boxes/{box_id}/media/albums/{album_name}",
+            path_template("/boxes/{box_id}/media/albums/{album_name}", box_id=box_id, album_name=album_name),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -724,7 +749,12 @@ class AsyncMediaResource(AsyncAPIResource):
         return cast(
             MediaGetMediaResponse,
             await self._get(
-                f"/boxes/{box_id}/media/albums/{album_name}/media/{media_name}",
+                path_template(
+                    "/boxes/{box_id}/media/albums/{album_name}/media/{media_name}",
+                    box_id=box_id,
+                    album_name=album_name,
+                    media_name=media_name,
+                ),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
@@ -760,7 +790,7 @@ class AsyncMediaResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._get(
-            f"/boxes/{box_id}/media/support",
+            path_template("/boxes/{box_id}/media/support", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -793,7 +823,7 @@ class AsyncMediaResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._get(
-            f"/boxes/{box_id}/media/albums",
+            path_template("/boxes/{box_id}/media/albums", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -829,7 +859,7 @@ class AsyncMediaResource(AsyncAPIResource):
         if not album_name:
             raise ValueError(f"Expected a non-empty value for `album_name` but received {album_name!r}")
         return await self._get(
-            f"/boxes/{box_id}/media/albums/{album_name}/media",
+            path_template("/boxes/{box_id}/media/albums/{album_name}/media", box_id=box_id, album_name=album_name),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -874,7 +904,7 @@ class AsyncMediaResource(AsyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return await self._patch(
-            f"/boxes/{box_id}/media/albums/{album_name}",
+            path_template("/boxes/{box_id}/media/albums/{album_name}", box_id=box_id, album_name=album_name),
             body=await async_maybe_transform(body, media_update_album_params.MediaUpdateAlbumParams),
             files=files,
             options=make_request_options(

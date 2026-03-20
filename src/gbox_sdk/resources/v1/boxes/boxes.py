@@ -72,7 +72,7 @@ from .snapshot import (
     AsyncSnapshotResourceWithStreamingResponse,
 )
 from ...._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
-from ...._utils import maybe_transform, async_maybe_transform
+from ...._utils import path_template, maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ....types.v1 import (
     box_list_params,
@@ -194,7 +194,7 @@ class BoxesResource(SyncAPIResource):
         return cast(
             BoxRetrieveResponse,
             self._get(
-                f"/boxes/{box_id}",
+                path_template("/boxes/{box_id}", box_id=box_id),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
@@ -472,7 +472,7 @@ class BoxesResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._get(
-            f"/boxes/{box_id}/display",
+            path_template("/boxes/{box_id}/display", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -524,7 +524,7 @@ class BoxesResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{box_id}/commands",
+            path_template("/boxes/{box_id}/commands", box_id=box_id),
             body=maybe_transform(
                 {
                     "command": command,
@@ -574,7 +574,7 @@ class BoxesResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{box_id}/live-view-url",
+            path_template("/boxes/{box_id}/live-view-url", box_id=box_id),
             body=maybe_transform({"expires_in": expires_in}, box_live_view_url_params.BoxLiveViewURLParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -614,7 +614,7 @@ class BoxesResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{box_id}/resolution",
+            path_template("/boxes/{box_id}/resolution", box_id=box_id),
             body=maybe_transform(
                 {
                     "height": height,
@@ -681,7 +681,7 @@ class BoxesResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{box_id}/run-code",
+            path_template("/boxes/{box_id}/run-code", box_id=box_id),
             body=maybe_transform(
                 {
                     "code": code,
@@ -730,7 +730,7 @@ class BoxesResource(SyncAPIResource):
         return cast(
             BoxStartResponse,
             self._post(
-                f"/boxes/{box_id}/start",
+                path_template("/boxes/{box_id}/start", box_id=box_id),
                 body=maybe_transform({"wait": wait}, box_start_params.BoxStartParams),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -770,7 +770,7 @@ class BoxesResource(SyncAPIResource):
         return cast(
             BoxStopResponse,
             self._post(
-                f"/boxes/{box_id}/stop",
+                path_template("/boxes/{box_id}/stop", box_id=box_id),
                 body=maybe_transform({"wait": wait}, box_stop_params.BoxStopParams),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -811,7 +811,7 @@ class BoxesResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{box_id}/terminate",
+            path_template("/boxes/{box_id}/terminate", box_id=box_id),
             body=maybe_transform({"wait": wait}, box_terminate_params.BoxTerminateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -853,7 +853,7 @@ class BoxesResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{box_id}/web-terminal-url",
+            path_template("/boxes/{box_id}/web-terminal-url", box_id=box_id),
             body=maybe_transform({"expires_in": expires_in}, box_web_terminal_url_params.BoxWebTerminalURLParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -891,7 +891,7 @@ class BoxesResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._get(
-            f"/boxes/{box_id}/websocket-url",
+            path_template("/boxes/{box_id}/websocket-url", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -979,7 +979,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         return cast(
             BoxRetrieveResponse,
             await self._get(
-                f"/boxes/{box_id}",
+                path_template("/boxes/{box_id}", box_id=box_id),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
@@ -1257,7 +1257,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._get(
-            f"/boxes/{box_id}/display",
+            path_template("/boxes/{box_id}/display", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1309,7 +1309,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{box_id}/commands",
+            path_template("/boxes/{box_id}/commands", box_id=box_id),
             body=await async_maybe_transform(
                 {
                     "command": command,
@@ -1359,7 +1359,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{box_id}/live-view-url",
+            path_template("/boxes/{box_id}/live-view-url", box_id=box_id),
             body=await async_maybe_transform({"expires_in": expires_in}, box_live_view_url_params.BoxLiveViewURLParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -1399,7 +1399,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{box_id}/resolution",
+            path_template("/boxes/{box_id}/resolution", box_id=box_id),
             body=await async_maybe_transform(
                 {
                     "height": height,
@@ -1466,7 +1466,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{box_id}/run-code",
+            path_template("/boxes/{box_id}/run-code", box_id=box_id),
             body=await async_maybe_transform(
                 {
                     "code": code,
@@ -1515,7 +1515,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         return cast(
             BoxStartResponse,
             await self._post(
-                f"/boxes/{box_id}/start",
+                path_template("/boxes/{box_id}/start", box_id=box_id),
                 body=await async_maybe_transform({"wait": wait}, box_start_params.BoxStartParams),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -1555,7 +1555,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         return cast(
             BoxStopResponse,
             await self._post(
-                f"/boxes/{box_id}/stop",
+                path_template("/boxes/{box_id}/stop", box_id=box_id),
                 body=await async_maybe_transform({"wait": wait}, box_stop_params.BoxStopParams),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -1596,7 +1596,7 @@ class AsyncBoxesResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{box_id}/terminate",
+            path_template("/boxes/{box_id}/terminate", box_id=box_id),
             body=await async_maybe_transform({"wait": wait}, box_terminate_params.BoxTerminateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -1638,7 +1638,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{box_id}/web-terminal-url",
+            path_template("/boxes/{box_id}/web-terminal-url", box_id=box_id),
             body=await async_maybe_transform(
                 {"expires_in": expires_in}, box_web_terminal_url_params.BoxWebTerminalURLParams
             ),
@@ -1678,7 +1678,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._get(
-            f"/boxes/{box_id}/websocket-url",
+            path_template("/boxes/{box_id}/websocket-url", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

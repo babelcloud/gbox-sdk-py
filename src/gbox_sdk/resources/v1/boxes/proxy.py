@@ -5,7 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ...._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
-from ...._utils import maybe_transform, async_maybe_transform
+from ...._utils import path_template, maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import (
@@ -69,7 +69,7 @@ class ProxyResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/boxes/{box_id}/proxy",
+            path_template("/boxes/{box_id}/proxy", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -104,7 +104,7 @@ class ProxyResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._get(
-            f"/boxes/{box_id}/proxy",
+            path_template("/boxes/{box_id}/proxy", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -156,7 +156,7 @@ class ProxyResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{box_id}/proxy",
+            path_template("/boxes/{box_id}/proxy", box_id=box_id),
             body=maybe_transform(
                 {
                     "host": host,
@@ -221,7 +221,7 @@ class AsyncProxyResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/boxes/{box_id}/proxy",
+            path_template("/boxes/{box_id}/proxy", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -256,7 +256,7 @@ class AsyncProxyResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._get(
-            f"/boxes/{box_id}/proxy",
+            path_template("/boxes/{box_id}/proxy", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -308,7 +308,7 @@ class AsyncProxyResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{box_id}/proxy",
+            path_template("/boxes/{box_id}/proxy", box_id=box_id),
             body=await async_maybe_transform(
                 {
                     "host": host,

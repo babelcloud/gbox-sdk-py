@@ -8,7 +8,14 @@ from typing_extensions import Literal, overload
 import httpx
 
 from ...._types import Body, Omit, Query, Headers, NoneType, NotGiven, FileTypes, omit, not_given
-from ...._utils import extract_files, required_args, maybe_transform, deepcopy_minimal, async_maybe_transform
+from ...._utils import (
+    extract_files,
+    path_template,
+    required_args,
+    maybe_transform,
+    deepcopy_minimal,
+    async_maybe_transform,
+)
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import (
@@ -101,7 +108,7 @@ class AndroidResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{box_id}/android/connect-url/appium",
+            path_template("/boxes/{box_id}/android/connect-url/appium", box_id=box_id),
             body=maybe_transform({"expires_in": expires_in}, android_appium_url_params.AndroidAppiumURLParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -139,7 +146,9 @@ class AndroidResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{box_id}/android/packages/{package_name}/backup",
+            path_template(
+                "/boxes/{box_id}/android/packages/{package_name}/backup", box_id=box_id, package_name=package_name
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -173,7 +182,7 @@ class AndroidResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{box_id}/android/packages/backup-all",
+            path_template("/boxes/{box_id}/android/packages/backup-all", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -210,7 +219,9 @@ class AndroidResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{box_id}/android/packages/{package_name}/close",
+            path_template(
+                "/boxes/{box_id}/android/packages/{package_name}/close", box_id=box_id, package_name=package_name
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -244,7 +255,7 @@ class AndroidResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{box_id}/android/packages/close-all",
+            path_template("/boxes/{box_id}/android/packages/close-all", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -280,7 +291,7 @@ class AndroidResource(SyncAPIResource):
         if not package_name:
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         return self._get(
-            f"/boxes/{box_id}/android/packages/{package_name}",
+            path_template("/boxes/{box_id}/android/packages/{package_name}", box_id=box_id, package_name=package_name),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -316,7 +327,7 @@ class AndroidResource(SyncAPIResource):
         if not package_name:
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         return self._get(
-            f"/boxes/{box_id}/android/apps/{package_name}",
+            path_template("/boxes/{box_id}/android/apps/{package_name}", box_id=box_id, package_name=package_name),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -349,7 +360,7 @@ class AndroidResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._get(
-            f"/boxes/{box_id}/android/connect-address",
+            path_template("/boxes/{box_id}/android/connect-address", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -495,7 +506,7 @@ class AndroidResource(SyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{box_id}/android/packages",
+            path_template("/boxes/{box_id}/android/packages", box_id=box_id),
             body=maybe_transform(body, android_install_params.AndroidInstallParams),
             files=files,
             options=make_request_options(
@@ -533,7 +544,9 @@ class AndroidResource(SyncAPIResource):
         if not package_name:
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         return self._get(
-            f"/boxes/{box_id}/android/packages/{package_name}/activities",
+            path_template(
+                "/boxes/{box_id}/android/packages/{package_name}/activities", box_id=box_id, package_name=package_name
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -566,7 +579,7 @@ class AndroidResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._get(
-            f"/boxes/{box_id}/android/apps",
+            path_template("/boxes/{box_id}/android/apps", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -608,7 +621,7 @@ class AndroidResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._get(
-            f"/boxes/{box_id}/android/packages",
+            path_template("/boxes/{box_id}/android/packages", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -657,7 +670,7 @@ class AndroidResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._get(
-            f"/boxes/{box_id}/android/packages/simple",
+            path_template("/boxes/{box_id}/android/packages/simple", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -703,7 +716,9 @@ class AndroidResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{box_id}/android/packages/{package_name}/open",
+            path_template(
+                "/boxes/{box_id}/android/packages/{package_name}/open", box_id=box_id, package_name=package_name
+            ),
             body=maybe_transform({"activity_name": activity_name}, android_open_params.AndroidOpenParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -744,7 +759,9 @@ class AndroidResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{box_id}/android/packages/{package_name}/restart",
+            path_template(
+                "/boxes/{box_id}/android/packages/{package_name}/restart", box_id=box_id, package_name=package_name
+            ),
             body=maybe_transform({"activity_name": activity_name}, android_restart_params.AndroidRestartParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -782,7 +799,7 @@ class AndroidResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{box_id}/android/packages/restore",
+            path_template("/boxes/{box_id}/android/packages/restore", box_id=box_id),
             body=maybe_transform({"backup": backup}, android_restore_params.AndroidRestoreParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -823,7 +840,7 @@ class AndroidResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/boxes/{box_id}/android/packages/{package_name}",
+            path_template("/boxes/{box_id}/android/packages/{package_name}", box_id=box_id, package_name=package_name),
             body=maybe_transform({"keep_data": keep_data}, android_uninstall_params.AndroidUninstallParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -884,7 +901,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{box_id}/android/connect-url/appium",
+            path_template("/boxes/{box_id}/android/connect-url/appium", box_id=box_id),
             body=await async_maybe_transform(
                 {"expires_in": expires_in}, android_appium_url_params.AndroidAppiumURLParams
             ),
@@ -924,7 +941,9 @@ class AsyncAndroidResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{box_id}/android/packages/{package_name}/backup",
+            path_template(
+                "/boxes/{box_id}/android/packages/{package_name}/backup", box_id=box_id, package_name=package_name
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -958,7 +977,7 @@ class AsyncAndroidResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{box_id}/android/packages/backup-all",
+            path_template("/boxes/{box_id}/android/packages/backup-all", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -995,7 +1014,9 @@ class AsyncAndroidResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{box_id}/android/packages/{package_name}/close",
+            path_template(
+                "/boxes/{box_id}/android/packages/{package_name}/close", box_id=box_id, package_name=package_name
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1029,7 +1050,7 @@ class AsyncAndroidResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{box_id}/android/packages/close-all",
+            path_template("/boxes/{box_id}/android/packages/close-all", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1065,7 +1086,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         if not package_name:
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         return await self._get(
-            f"/boxes/{box_id}/android/packages/{package_name}",
+            path_template("/boxes/{box_id}/android/packages/{package_name}", box_id=box_id, package_name=package_name),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1101,7 +1122,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         if not package_name:
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         return await self._get(
-            f"/boxes/{box_id}/android/apps/{package_name}",
+            path_template("/boxes/{box_id}/android/apps/{package_name}", box_id=box_id, package_name=package_name),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1134,7 +1155,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._get(
-            f"/boxes/{box_id}/android/connect-address",
+            path_template("/boxes/{box_id}/android/connect-address", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1280,7 +1301,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{box_id}/android/packages",
+            path_template("/boxes/{box_id}/android/packages", box_id=box_id),
             body=await async_maybe_transform(body, android_install_params.AndroidInstallParams),
             files=files,
             options=make_request_options(
@@ -1318,7 +1339,9 @@ class AsyncAndroidResource(AsyncAPIResource):
         if not package_name:
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         return await self._get(
-            f"/boxes/{box_id}/android/packages/{package_name}/activities",
+            path_template(
+                "/boxes/{box_id}/android/packages/{package_name}/activities", box_id=box_id, package_name=package_name
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1351,7 +1374,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._get(
-            f"/boxes/{box_id}/android/apps",
+            path_template("/boxes/{box_id}/android/apps", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1393,7 +1416,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._get(
-            f"/boxes/{box_id}/android/packages",
+            path_template("/boxes/{box_id}/android/packages", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -1442,7 +1465,7 @@ class AsyncAndroidResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._get(
-            f"/boxes/{box_id}/android/packages/simple",
+            path_template("/boxes/{box_id}/android/packages/simple", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -1488,7 +1511,9 @@ class AsyncAndroidResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{box_id}/android/packages/{package_name}/open",
+            path_template(
+                "/boxes/{box_id}/android/packages/{package_name}/open", box_id=box_id, package_name=package_name
+            ),
             body=await async_maybe_transform({"activity_name": activity_name}, android_open_params.AndroidOpenParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -1529,7 +1554,9 @@ class AsyncAndroidResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{box_id}/android/packages/{package_name}/restart",
+            path_template(
+                "/boxes/{box_id}/android/packages/{package_name}/restart", box_id=box_id, package_name=package_name
+            ),
             body=await async_maybe_transform(
                 {"activity_name": activity_name}, android_restart_params.AndroidRestartParams
             ),
@@ -1569,7 +1596,7 @@ class AsyncAndroidResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{box_id}/android/packages/restore",
+            path_template("/boxes/{box_id}/android/packages/restore", box_id=box_id),
             body=await async_maybe_transform({"backup": backup}, android_restore_params.AndroidRestoreParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -1610,7 +1637,7 @@ class AsyncAndroidResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `package_name` but received {package_name!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/boxes/{box_id}/android/packages/{package_name}",
+            path_template("/boxes/{box_id}/android/packages/{package_name}", box_id=box_id, package_name=package_name),
             body=await async_maybe_transform({"keep_data": keep_data}, android_uninstall_params.AndroidUninstallParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout

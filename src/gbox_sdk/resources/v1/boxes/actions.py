@@ -8,7 +8,7 @@ from typing_extensions import Literal, overload
 import httpx
 
 from ...._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from ...._utils import required_args, maybe_transform, async_maybe_transform
+from ...._utils import path_template, required_args, maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import (
@@ -816,7 +816,7 @@ class ActionsResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{box_id}/actions/click",
+            path_template("/boxes/{box_id}/actions/click", box_id=box_id),
             body=maybe_transform(
                 {
                     "x": x,
@@ -865,7 +865,7 @@ class ActionsResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._get(
-            f"/boxes/{box_id}/actions/clipboard",
+            path_template("/boxes/{box_id}/actions/clipboard", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -902,7 +902,7 @@ class ActionsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{box_id}/actions/clipboard",
+            path_template("/boxes/{box_id}/actions/clipboard", box_id=box_id),
             body=maybe_transform({"content": content}, action_clipboard_set_params.ActionClipboardSetParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -1099,7 +1099,7 @@ class ActionsResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{box_id}/actions/drag",
+            path_template("/boxes/{box_id}/actions/drag", box_id=box_id),
             body=maybe_transform(
                 {
                     "end": end,
@@ -1152,7 +1152,7 @@ class ActionsResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{box_id}/actions/elements/detect",
+            path_template("/boxes/{box_id}/actions/elements/detect", box_id=box_id),
             body=maybe_transform({"screenshot": screenshot}, action_elements_detect_params.ActionElementsDetectParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -1201,7 +1201,7 @@ class ActionsResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{box_id}/actions/extract",
+            path_template("/boxes/{box_id}/actions/extract", box_id=box_id),
             body=maybe_transform(
                 {
                     "instruction": instruction,
@@ -1486,7 +1486,7 @@ class ActionsResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{box_id}/actions/long-press",
+            path_template("/boxes/{box_id}/actions/long-press", box_id=box_id),
             body=maybe_transform(
                 {
                     "x": x,
@@ -1585,7 +1585,7 @@ class ActionsResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{box_id}/actions/move",
+            path_template("/boxes/{box_id}/actions/move", box_id=box_id),
             body=maybe_transform(
                 {
                     "x": x,
@@ -1677,7 +1677,7 @@ class ActionsResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{box_id}/actions/press-button",
+            path_template("/boxes/{box_id}/actions/press-button", box_id=box_id),
             body=maybe_transform(
                 {
                     "buttons": buttons,
@@ -1889,7 +1889,7 @@ class ActionsResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{box_id}/actions/press-key",
+            path_template("/boxes/{box_id}/actions/press-key", box_id=box_id),
             body=maybe_transform(
                 {
                     "keys": keys,
@@ -1938,7 +1938,7 @@ class ActionsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{box_id}/actions/recording/start",
+            path_template("/boxes/{box_id}/actions/recording/start", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1971,7 +1971,7 @@ class ActionsResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{box_id}/actions/recording/stop",
+            path_template("/boxes/{box_id}/actions/recording/stop", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -2005,7 +2005,7 @@ class ActionsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/boxes/{box_id}/actions/recording/rewind",
+            path_template("/boxes/{box_id}/actions/recording/rewind", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -2039,7 +2039,7 @@ class ActionsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{box_id}/actions/recording/rewind",
+            path_template("/boxes/{box_id}/actions/recording/rewind", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -2081,7 +2081,7 @@ class ActionsResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{box_id}/actions/recording/rewind/extract",
+            path_template("/boxes/{box_id}/actions/recording/rewind/extract", box_id=box_id),
             body=maybe_transform({"duration": duration}, action_rewind_extract_params.ActionRewindExtractParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -2122,7 +2122,7 @@ class ActionsResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._get(
-            f"/boxes/{box_id}/actions/screen-layout",
+            path_template("/boxes/{box_id}/actions/screen-layout", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -2205,7 +2205,7 @@ class ActionsResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{box_id}/actions/screen-rotation",
+            path_template("/boxes/{box_id}/actions/screen-rotation", box_id=box_id),
             body=maybe_transform(
                 {
                     "orientation": orientation,
@@ -2270,7 +2270,7 @@ class ActionsResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{box_id}/actions/screenshot",
+            path_template("/boxes/{box_id}/actions/screenshot", box_id=box_id),
             body=maybe_transform(
                 {
                     "clip": clip,
@@ -2496,7 +2496,7 @@ class ActionsResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{box_id}/actions/scroll",
+            path_template("/boxes/{box_id}/actions/scroll", box_id=box_id),
             body=maybe_transform(
                 {
                     "scroll_x": scroll_x,
@@ -2547,7 +2547,7 @@ class ActionsResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._get(
-            f"/boxes/{box_id}/actions/settings",
+            path_template("/boxes/{box_id}/actions/settings", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -2580,7 +2580,7 @@ class ActionsResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._delete(
-            f"/boxes/{box_id}/actions/settings",
+            path_template("/boxes/{box_id}/actions/settings", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -2625,7 +2625,7 @@ class ActionsResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._put(
-            f"/boxes/{box_id}/actions/settings",
+            path_template("/boxes/{box_id}/actions/settings", box_id=box_id),
             body=maybe_transform({"scale": scale}, action_settings_update_params.ActionSettingsUpdateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -2830,7 +2830,7 @@ class ActionsResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{box_id}/actions/swipe",
+            path_template("/boxes/{box_id}/actions/swipe", box_id=box_id),
             body=maybe_transform(
                 {
                     "direction": direction,
@@ -3099,7 +3099,7 @@ class ActionsResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{box_id}/actions/tap",
+            path_template("/boxes/{box_id}/actions/tap", box_id=box_id),
             body=maybe_transform(
                 {
                     "x": x,
@@ -3194,7 +3194,7 @@ class ActionsResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{box_id}/actions/touch",
+            path_template("/boxes/{box_id}/actions/touch", box_id=box_id),
             body=maybe_transform(
                 {
                     "points": points,
@@ -3294,7 +3294,7 @@ class ActionsResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{box_id}/actions/type",
+            path_template("/boxes/{box_id}/actions/type", box_id=box_id),
             body=maybe_transform(
                 {
                     "text": text,
@@ -4070,7 +4070,7 @@ class AsyncActionsResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{box_id}/actions/click",
+            path_template("/boxes/{box_id}/actions/click", box_id=box_id),
             body=await async_maybe_transform(
                 {
                     "x": x,
@@ -4119,7 +4119,7 @@ class AsyncActionsResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._get(
-            f"/boxes/{box_id}/actions/clipboard",
+            path_template("/boxes/{box_id}/actions/clipboard", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -4156,7 +4156,7 @@ class AsyncActionsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{box_id}/actions/clipboard",
+            path_template("/boxes/{box_id}/actions/clipboard", box_id=box_id),
             body=await async_maybe_transform(
                 {"content": content}, action_clipboard_set_params.ActionClipboardSetParams
             ),
@@ -4355,7 +4355,7 @@ class AsyncActionsResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{box_id}/actions/drag",
+            path_template("/boxes/{box_id}/actions/drag", box_id=box_id),
             body=await async_maybe_transform(
                 {
                     "end": end,
@@ -4408,7 +4408,7 @@ class AsyncActionsResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{box_id}/actions/elements/detect",
+            path_template("/boxes/{box_id}/actions/elements/detect", box_id=box_id),
             body=await async_maybe_transform(
                 {"screenshot": screenshot}, action_elements_detect_params.ActionElementsDetectParams
             ),
@@ -4459,7 +4459,7 @@ class AsyncActionsResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{box_id}/actions/extract",
+            path_template("/boxes/{box_id}/actions/extract", box_id=box_id),
             body=await async_maybe_transform(
                 {
                     "instruction": instruction,
@@ -4744,7 +4744,7 @@ class AsyncActionsResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{box_id}/actions/long-press",
+            path_template("/boxes/{box_id}/actions/long-press", box_id=box_id),
             body=await async_maybe_transform(
                 {
                     "x": x,
@@ -4843,7 +4843,7 @@ class AsyncActionsResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{box_id}/actions/move",
+            path_template("/boxes/{box_id}/actions/move", box_id=box_id),
             body=await async_maybe_transform(
                 {
                     "x": x,
@@ -4935,7 +4935,7 @@ class AsyncActionsResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{box_id}/actions/press-button",
+            path_template("/boxes/{box_id}/actions/press-button", box_id=box_id),
             body=await async_maybe_transform(
                 {
                     "buttons": buttons,
@@ -5147,7 +5147,7 @@ class AsyncActionsResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{box_id}/actions/press-key",
+            path_template("/boxes/{box_id}/actions/press-key", box_id=box_id),
             body=await async_maybe_transform(
                 {
                     "keys": keys,
@@ -5196,7 +5196,7 @@ class AsyncActionsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{box_id}/actions/recording/start",
+            path_template("/boxes/{box_id}/actions/recording/start", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -5229,7 +5229,7 @@ class AsyncActionsResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{box_id}/actions/recording/stop",
+            path_template("/boxes/{box_id}/actions/recording/stop", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -5263,7 +5263,7 @@ class AsyncActionsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/boxes/{box_id}/actions/recording/rewind",
+            path_template("/boxes/{box_id}/actions/recording/rewind", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -5297,7 +5297,7 @@ class AsyncActionsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{box_id}/actions/recording/rewind",
+            path_template("/boxes/{box_id}/actions/recording/rewind", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -5339,7 +5339,7 @@ class AsyncActionsResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{box_id}/actions/recording/rewind/extract",
+            path_template("/boxes/{box_id}/actions/recording/rewind/extract", box_id=box_id),
             body=await async_maybe_transform(
                 {"duration": duration}, action_rewind_extract_params.ActionRewindExtractParams
             ),
@@ -5382,7 +5382,7 @@ class AsyncActionsResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._get(
-            f"/boxes/{box_id}/actions/screen-layout",
+            path_template("/boxes/{box_id}/actions/screen-layout", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -5465,7 +5465,7 @@ class AsyncActionsResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{box_id}/actions/screen-rotation",
+            path_template("/boxes/{box_id}/actions/screen-rotation", box_id=box_id),
             body=await async_maybe_transform(
                 {
                     "orientation": orientation,
@@ -5530,7 +5530,7 @@ class AsyncActionsResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{box_id}/actions/screenshot",
+            path_template("/boxes/{box_id}/actions/screenshot", box_id=box_id),
             body=await async_maybe_transform(
                 {
                     "clip": clip,
@@ -5756,7 +5756,7 @@ class AsyncActionsResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{box_id}/actions/scroll",
+            path_template("/boxes/{box_id}/actions/scroll", box_id=box_id),
             body=await async_maybe_transform(
                 {
                     "scroll_x": scroll_x,
@@ -5807,7 +5807,7 @@ class AsyncActionsResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._get(
-            f"/boxes/{box_id}/actions/settings",
+            path_template("/boxes/{box_id}/actions/settings", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -5840,7 +5840,7 @@ class AsyncActionsResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._delete(
-            f"/boxes/{box_id}/actions/settings",
+            path_template("/boxes/{box_id}/actions/settings", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -5885,7 +5885,7 @@ class AsyncActionsResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._put(
-            f"/boxes/{box_id}/actions/settings",
+            path_template("/boxes/{box_id}/actions/settings", box_id=box_id),
             body=await async_maybe_transform(
                 {"scale": scale}, action_settings_update_params.ActionSettingsUpdateParams
             ),
@@ -6092,7 +6092,7 @@ class AsyncActionsResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{box_id}/actions/swipe",
+            path_template("/boxes/{box_id}/actions/swipe", box_id=box_id),
             body=await async_maybe_transform(
                 {
                     "direction": direction,
@@ -6361,7 +6361,7 @@ class AsyncActionsResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{box_id}/actions/tap",
+            path_template("/boxes/{box_id}/actions/tap", box_id=box_id),
             body=await async_maybe_transform(
                 {
                     "x": x,
@@ -6456,7 +6456,7 @@ class AsyncActionsResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{box_id}/actions/touch",
+            path_template("/boxes/{box_id}/actions/touch", box_id=box_id),
             body=await async_maybe_transform(
                 {
                     "points": points,
@@ -6556,7 +6556,7 @@ class AsyncActionsResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{box_id}/actions/type",
+            path_template("/boxes/{box_id}/actions/type", box_id=box_id),
             body=await async_maybe_transform(
                 {
                     "text": text,

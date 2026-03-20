@@ -5,7 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ...._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
-from ...._utils import maybe_transform, async_maybe_transform
+from ...._utils import path_template, maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import (
@@ -87,7 +87,7 @@ class BrowserResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{box_id}/browser/connect-url/cdp",
+            path_template("/boxes/{box_id}/browser/connect-url/cdp", box_id=box_id),
             body=maybe_transform({"expires_in": expires_in}, browser_cdp_url_params.BrowserCdpURLParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -120,7 +120,7 @@ class BrowserResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/boxes/{box_id}/browser/proxy",
+            path_template("/boxes/{box_id}/browser/proxy", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -154,7 +154,7 @@ class BrowserResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/boxes/{box_id}/browser/close",
+            path_template("/boxes/{box_id}/browser/close", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -193,7 +193,7 @@ class BrowserResource(SyncAPIResource):
         if not tab_id:
             raise ValueError(f"Expected a non-empty value for `tab_id` but received {tab_id!r}")
         return self._delete(
-            f"/boxes/{box_id}/browser/tabs/{tab_id}",
+            path_template("/boxes/{box_id}/browser/tabs/{tab_id}", box_id=box_id, tab_id=tab_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -224,7 +224,7 @@ class BrowserResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._get(
-            f"/boxes/{box_id}/browser/proxy",
+            path_template("/boxes/{box_id}/browser/proxy", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -262,7 +262,7 @@ class BrowserResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._get(
-            f"/boxes/{box_id}/browser/tabs",
+            path_template("/boxes/{box_id}/browser/tabs", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -309,7 +309,7 @@ class BrowserResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{box_id}/browser/open",
+            path_template("/boxes/{box_id}/browser/open", box_id=box_id),
             body=maybe_transform(
                 {
                     "maximize": maximize,
@@ -360,7 +360,7 @@ class BrowserResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._post(
-            f"/boxes/{box_id}/browser/tabs",
+            path_template("/boxes/{box_id}/browser/tabs", box_id=box_id),
             body=maybe_transform({"url": url}, browser_open_tab_params.BrowserOpenTabParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -410,7 +410,7 @@ class BrowserResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{box_id}/browser/proxy",
+            path_template("/boxes/{box_id}/browser/proxy", box_id=box_id),
             body=maybe_transform(
                 {
                     "http_server": http_server,
@@ -460,7 +460,7 @@ class BrowserResource(SyncAPIResource):
         if not tab_id:
             raise ValueError(f"Expected a non-empty value for `tab_id` but received {tab_id!r}")
         return self._post(
-            f"/boxes/{box_id}/browser/tabs/{tab_id}/switch",
+            path_template("/boxes/{box_id}/browser/tabs/{tab_id}/switch", box_id=box_id, tab_id=tab_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -505,7 +505,7 @@ class BrowserResource(SyncAPIResource):
         if not tab_id:
             raise ValueError(f"Expected a non-empty value for `tab_id` but received {tab_id!r}")
         return self._put(
-            f"/boxes/{box_id}/browser/tabs/{tab_id}",
+            path_template("/boxes/{box_id}/browser/tabs/{tab_id}", box_id=box_id, tab_id=tab_id),
             body=maybe_transform({"url": url}, browser_update_tab_params.BrowserUpdateTabParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -568,7 +568,7 @@ class AsyncBrowserResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{box_id}/browser/connect-url/cdp",
+            path_template("/boxes/{box_id}/browser/connect-url/cdp", box_id=box_id),
             body=await async_maybe_transform({"expires_in": expires_in}, browser_cdp_url_params.BrowserCdpURLParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -601,7 +601,7 @@ class AsyncBrowserResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/boxes/{box_id}/browser/proxy",
+            path_template("/boxes/{box_id}/browser/proxy", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -635,7 +635,7 @@ class AsyncBrowserResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/boxes/{box_id}/browser/close",
+            path_template("/boxes/{box_id}/browser/close", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -674,7 +674,7 @@ class AsyncBrowserResource(AsyncAPIResource):
         if not tab_id:
             raise ValueError(f"Expected a non-empty value for `tab_id` but received {tab_id!r}")
         return await self._delete(
-            f"/boxes/{box_id}/browser/tabs/{tab_id}",
+            path_template("/boxes/{box_id}/browser/tabs/{tab_id}", box_id=box_id, tab_id=tab_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -705,7 +705,7 @@ class AsyncBrowserResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._get(
-            f"/boxes/{box_id}/browser/proxy",
+            path_template("/boxes/{box_id}/browser/proxy", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -743,7 +743,7 @@ class AsyncBrowserResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._get(
-            f"/boxes/{box_id}/browser/tabs",
+            path_template("/boxes/{box_id}/browser/tabs", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -790,7 +790,7 @@ class AsyncBrowserResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{box_id}/browser/open",
+            path_template("/boxes/{box_id}/browser/open", box_id=box_id),
             body=await async_maybe_transform(
                 {
                     "maximize": maximize,
@@ -841,7 +841,7 @@ class AsyncBrowserResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._post(
-            f"/boxes/{box_id}/browser/tabs",
+            path_template("/boxes/{box_id}/browser/tabs", box_id=box_id),
             body=await async_maybe_transform({"url": url}, browser_open_tab_params.BrowserOpenTabParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -891,7 +891,7 @@ class AsyncBrowserResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{box_id}/browser/proxy",
+            path_template("/boxes/{box_id}/browser/proxy", box_id=box_id),
             body=await async_maybe_transform(
                 {
                     "http_server": http_server,
@@ -941,7 +941,7 @@ class AsyncBrowserResource(AsyncAPIResource):
         if not tab_id:
             raise ValueError(f"Expected a non-empty value for `tab_id` but received {tab_id!r}")
         return await self._post(
-            f"/boxes/{box_id}/browser/tabs/{tab_id}/switch",
+            path_template("/boxes/{box_id}/browser/tabs/{tab_id}/switch", box_id=box_id, tab_id=tab_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -986,7 +986,7 @@ class AsyncBrowserResource(AsyncAPIResource):
         if not tab_id:
             raise ValueError(f"Expected a non-empty value for `tab_id` but received {tab_id!r}")
         return await self._put(
-            f"/boxes/{box_id}/browser/tabs/{tab_id}",
+            path_template("/boxes/{box_id}/browser/tabs/{tab_id}", box_id=box_id, tab_id=tab_id),
             body=await async_maybe_transform({"url": url}, browser_update_tab_params.BrowserUpdateTabParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout

@@ -8,7 +8,14 @@ from typing_extensions import overload
 import httpx
 
 from ...._types import Body, Omit, Query, Headers, NotGiven, FileTypes, omit, not_given
-from ...._utils import extract_files, required_args, maybe_transform, deepcopy_minimal, async_maybe_transform
+from ...._utils import (
+    extract_files,
+    path_template,
+    required_args,
+    maybe_transform,
+    deepcopy_minimal,
+    async_maybe_transform,
+)
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import (
@@ -97,7 +104,7 @@ class FsResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._get(
-            f"/boxes/{box_id}/fs/list",
+            path_template("/boxes/{box_id}/fs/list", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -152,7 +159,7 @@ class FsResource(SyncAPIResource):
         return cast(
             FExistsResponse,
             self._post(
-                f"/boxes/{box_id}/fs/exists",
+                path_template("/boxes/{box_id}/fs/exists", box_id=box_id),
                 body=maybe_transform(
                     {
                         "path": path,
@@ -203,7 +210,7 @@ class FsResource(SyncAPIResource):
         return cast(
             FInfoResponse,
             self._get(
-                f"/boxes/{box_id}/fs/info",
+                path_template("/boxes/{box_id}/fs/info", box_id=box_id),
                 options=make_request_options(
                     extra_headers=extra_headers,
                     extra_query=extra_query,
@@ -257,7 +264,7 @@ class FsResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._get(
-            f"/boxes/{box_id}/fs/read",
+            path_template("/boxes/{box_id}/fs/read", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -311,7 +318,7 @@ class FsResource(SyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return self._delete(
-            f"/boxes/{box_id}/fs",
+            path_template("/boxes/{box_id}/fs", box_id=box_id),
             body=maybe_transform(
                 {
                     "path": path,
@@ -369,7 +376,7 @@ class FsResource(SyncAPIResource):
         return cast(
             FRenameResponse,
             self._post(
-                f"/boxes/{box_id}/fs/rename",
+                path_template("/boxes/{box_id}/fs/rename", box_id=box_id),
                 body=maybe_transform(
                     {
                         "new_path": new_path,
@@ -497,7 +504,7 @@ class FsResource(SyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return self._post(
-            f"/boxes/{box_id}/fs/write",
+            path_template("/boxes/{box_id}/fs/write", box_id=box_id),
             body=maybe_transform(body, f_write_params.FWriteParams),
             files=files,
             options=make_request_options(
@@ -566,7 +573,7 @@ class AsyncFsResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._get(
-            f"/boxes/{box_id}/fs/list",
+            path_template("/boxes/{box_id}/fs/list", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -621,7 +628,7 @@ class AsyncFsResource(AsyncAPIResource):
         return cast(
             FExistsResponse,
             await self._post(
-                f"/boxes/{box_id}/fs/exists",
+                path_template("/boxes/{box_id}/fs/exists", box_id=box_id),
                 body=await async_maybe_transform(
                     {
                         "path": path,
@@ -672,7 +679,7 @@ class AsyncFsResource(AsyncAPIResource):
         return cast(
             FInfoResponse,
             await self._get(
-                f"/boxes/{box_id}/fs/info",
+                path_template("/boxes/{box_id}/fs/info", box_id=box_id),
                 options=make_request_options(
                     extra_headers=extra_headers,
                     extra_query=extra_query,
@@ -726,7 +733,7 @@ class AsyncFsResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._get(
-            f"/boxes/{box_id}/fs/read",
+            path_template("/boxes/{box_id}/fs/read", box_id=box_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -780,7 +787,7 @@ class AsyncFsResource(AsyncAPIResource):
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         return await self._delete(
-            f"/boxes/{box_id}/fs",
+            path_template("/boxes/{box_id}/fs", box_id=box_id),
             body=await async_maybe_transform(
                 {
                     "path": path,
@@ -838,7 +845,7 @@ class AsyncFsResource(AsyncAPIResource):
         return cast(
             FRenameResponse,
             await self._post(
-                f"/boxes/{box_id}/fs/rename",
+                path_template("/boxes/{box_id}/fs/rename", box_id=box_id),
                 body=await async_maybe_transform(
                     {
                         "new_path": new_path,
@@ -966,7 +973,7 @@ class AsyncFsResource(AsyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return await self._post(
-            f"/boxes/{box_id}/fs/write",
+            path_template("/boxes/{box_id}/fs/write", box_id=box_id),
             body=await async_maybe_transform(body, f_write_params.FWriteParams),
             files=files,
             options=make_request_options(

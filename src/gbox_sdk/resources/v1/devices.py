@@ -5,7 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ..._utils import maybe_transform, strip_not_given, async_maybe_transform
+from ..._utils import path_template, maybe_transform, strip_not_given, async_maybe_transform
 from ..._compat import cached_property
 from ...types.v1 import device_list_params, device_to_box_params
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -116,7 +116,7 @@ class DevicesResource(SyncAPIResource):
         if not device_id:
             raise ValueError(f"Expected a non-empty value for `device_id` but received {device_id!r}")
         return self._get(
-            f"/devices/{device_id}",
+            path_template("/devices/{device_id}", device_id=device_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -155,7 +155,7 @@ class DevicesResource(SyncAPIResource):
         if not device_id:
             raise ValueError(f"Expected a non-empty value for `device_id` but received {device_id!r}")
         return self._post(
-            f"/devices/{device_id}/box",
+            path_template("/devices/{device_id}/box", device_id=device_id),
             body=maybe_transform({"force": force}, device_to_box_params.DeviceToBoxParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -258,7 +258,7 @@ class AsyncDevicesResource(AsyncAPIResource):
         if not device_id:
             raise ValueError(f"Expected a non-empty value for `device_id` but received {device_id!r}")
         return await self._get(
-            f"/devices/{device_id}",
+            path_template("/devices/{device_id}", device_id=device_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -297,7 +297,7 @@ class AsyncDevicesResource(AsyncAPIResource):
         if not device_id:
             raise ValueError(f"Expected a non-empty value for `device_id` but received {device_id!r}")
         return await self._post(
-            f"/devices/{device_id}/box",
+            path_template("/devices/{device_id}/box", device_id=device_id),
             body=await async_maybe_transform({"force": force}, device_to_box_params.DeviceToBoxParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout

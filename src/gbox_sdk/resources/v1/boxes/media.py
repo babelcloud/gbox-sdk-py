@@ -6,6 +6,7 @@ from typing import Any, Mapping, cast
 
 import httpx
 
+from ...._files import deepcopy_with_paths
 from ...._types import (
     Body,
     Omit,
@@ -18,7 +19,7 @@ from ...._types import (
     omit,
     not_given,
 )
-from ...._utils import extract_files, path_template, maybe_transform, deepcopy_minimal, async_maybe_transform
+from ...._utils import extract_files, path_template, maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import (
@@ -97,11 +98,12 @@ class MediaResource(SyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        body = deepcopy_minimal(
+        body = deepcopy_with_paths(
             {
                 "name": name,
                 "media": media,
-            }
+            },
+            [["media", "<array>"]],
         )
         files = extract_files(cast(Mapping[str, object], body), paths=[["media", "<array>"]])
         # It should be noted that the actual Content-Type header that will be
@@ -463,7 +465,7 @@ class MediaResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         if not album_name:
             raise ValueError(f"Expected a non-empty value for `album_name` but received {album_name!r}")
-        body = deepcopy_minimal({"media": media})
+        body = deepcopy_with_paths({"media": media}, [["media", "<array>"]])
         files = extract_files(cast(Mapping[str, object], body), paths=[["media", "<array>"]])
         # It should be noted that the actual Content-Type header that will be
         # sent to the server will contain a `boundary` parameter, e.g.
@@ -531,11 +533,12 @@ class AsyncMediaResource(AsyncAPIResource):
         """
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        body = deepcopy_minimal(
+        body = deepcopy_with_paths(
             {
                 "name": name,
                 "media": media,
-            }
+            },
+            [["media", "<array>"]],
         )
         files = extract_files(cast(Mapping[str, object], body), paths=[["media", "<array>"]])
         # It should be noted that the actual Content-Type header that will be
@@ -897,7 +900,7 @@ class AsyncMediaResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
         if not album_name:
             raise ValueError(f"Expected a non-empty value for `album_name` but received {album_name!r}")
-        body = deepcopy_minimal({"media": media})
+        body = deepcopy_with_paths({"media": media}, [["media", "<array>"]])
         files = extract_files(cast(Mapping[str, object], body), paths=[["media", "<array>"]])
         # It should be noted that the actual Content-Type header that will be
         # sent to the server will contain a `boundary` parameter, e.g.

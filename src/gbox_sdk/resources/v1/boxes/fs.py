@@ -7,15 +7,9 @@ from typing_extensions import overload
 
 import httpx
 
+from ...._files import deepcopy_with_paths
 from ...._types import Body, Omit, Query, Headers, NotGiven, FileTypes, omit, not_given
-from ...._utils import (
-    extract_files,
-    path_template,
-    required_args,
-    maybe_transform,
-    deepcopy_minimal,
-    async_maybe_transform,
-)
+from ...._utils import extract_files, path_template, required_args, maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import (
@@ -491,12 +485,13 @@ class FsResource(SyncAPIResource):
     ) -> File:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        body = deepcopy_minimal(
+        body = deepcopy_with_paths(
             {
                 "content": content,
                 "path": path,
                 "working_dir": working_dir,
-            }
+            },
+            [["content"]],
         )
         files = extract_files(cast(Mapping[str, object], body), paths=[["content"]])
         # It should be noted that the actual Content-Type header that will be
@@ -960,12 +955,13 @@ class AsyncFsResource(AsyncAPIResource):
     ) -> File:
         if not box_id:
             raise ValueError(f"Expected a non-empty value for `box_id` but received {box_id!r}")
-        body = deepcopy_minimal(
+        body = deepcopy_with_paths(
             {
                 "content": content,
                 "path": path,
                 "working_dir": working_dir,
-            }
+            },
+            [["content"]],
         )
         files = extract_files(cast(Mapping[str, object], body), paths=[["content"]])
         # It should be noted that the actual Content-Type header that will be

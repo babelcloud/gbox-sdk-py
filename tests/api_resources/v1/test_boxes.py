@@ -10,8 +10,6 @@ import pytest
 from gbox_sdk import GboxClient, AsyncGboxClient
 from tests.utils import assert_matches_type
 from gbox_sdk.types.v1 import (
-    LinuxBox,
-    AndroidBox,
     BoxListResponse,
     BoxStopResponse,
     BoxStartResponse,
@@ -20,7 +18,6 @@ from gbox_sdk.types.v1 import (
     BoxRetrieveResponse,
     BoxLiveViewURLResponse,
     BoxWebsocketURLResponse,
-    BoxCreateWindowsResponse,
     BoxResolutionSetResponse,
     BoxWebTerminalURLResponse,
     BoxExecuteCommandsResponse,
@@ -119,7 +116,7 @@ class TestBoxes:
     @parametrize
     def test_method_create_android(self, client: GboxClient) -> None:
         box = client.v1.boxes.create_android()
-        assert_matches_type(AndroidBox, box, path=["response"])
+        assert box is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -141,7 +138,7 @@ class TestBoxes:
             api_timeout="30s",
             wait=True,
         )
-        assert_matches_type(AndroidBox, box, path=["response"])
+        assert box is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -151,7 +148,7 @@ class TestBoxes:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         box = response.parse()
-        assert_matches_type(AndroidBox, box, path=["response"])
+        assert box is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -161,7 +158,7 @@ class TestBoxes:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             box = response.parse()
-            assert_matches_type(AndroidBox, box, path=["response"])
+            assert box is None
 
         assert cast(Any, response.is_closed) is True
 
@@ -169,7 +166,7 @@ class TestBoxes:
     @parametrize
     def test_method_create_linux(self, client: GboxClient) -> None:
         box = client.v1.boxes.create_linux()
-        assert_matches_type(LinuxBox, box, path=["response"])
+        assert box is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -192,7 +189,7 @@ class TestBoxes:
             api_timeout="30s",
             wait=True,
         )
-        assert_matches_type(LinuxBox, box, path=["response"])
+        assert box is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -202,7 +199,7 @@ class TestBoxes:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         box = response.parse()
-        assert_matches_type(LinuxBox, box, path=["response"])
+        assert box is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -212,7 +209,7 @@ class TestBoxes:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             box = response.parse()
-            assert_matches_type(LinuxBox, box, path=["response"])
+            assert box is None
 
         assert cast(Any, response.is_closed) is True
 
@@ -220,7 +217,7 @@ class TestBoxes:
     @parametrize
     def test_method_create_windows(self, client: GboxClient) -> None:
         box = client.v1.boxes.create_windows()
-        assert_matches_type(BoxCreateWindowsResponse, box, path=["response"])
+        assert box is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -242,7 +239,7 @@ class TestBoxes:
             api_timeout="30s",
             wait=True,
         )
-        assert_matches_type(BoxCreateWindowsResponse, box, path=["response"])
+        assert box is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -252,7 +249,7 @@ class TestBoxes:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         box = response.parse()
-        assert_matches_type(BoxCreateWindowsResponse, box, path=["response"])
+        assert box is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -262,7 +259,7 @@ class TestBoxes:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             box = response.parse()
-            assert_matches_type(BoxCreateWindowsResponse, box, path=["response"])
+            assert box is None
 
         assert cast(Any, response.is_closed) is True
 
@@ -872,7 +869,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_method_create_android(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.create_android()
-        assert_matches_type(AndroidBox, box, path=["response"])
+        assert box is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -894,7 +891,7 @@ class TestAsyncBoxes:
             api_timeout="30s",
             wait=True,
         )
-        assert_matches_type(AndroidBox, box, path=["response"])
+        assert box is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -904,7 +901,7 @@ class TestAsyncBoxes:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         box = await response.parse()
-        assert_matches_type(AndroidBox, box, path=["response"])
+        assert box is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -914,7 +911,7 @@ class TestAsyncBoxes:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             box = await response.parse()
-            assert_matches_type(AndroidBox, box, path=["response"])
+            assert box is None
 
         assert cast(Any, response.is_closed) is True
 
@@ -922,7 +919,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_method_create_linux(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.create_linux()
-        assert_matches_type(LinuxBox, box, path=["response"])
+        assert box is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -945,7 +942,7 @@ class TestAsyncBoxes:
             api_timeout="30s",
             wait=True,
         )
-        assert_matches_type(LinuxBox, box, path=["response"])
+        assert box is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -955,7 +952,7 @@ class TestAsyncBoxes:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         box = await response.parse()
-        assert_matches_type(LinuxBox, box, path=["response"])
+        assert box is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -965,7 +962,7 @@ class TestAsyncBoxes:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             box = await response.parse()
-            assert_matches_type(LinuxBox, box, path=["response"])
+            assert box is None
 
         assert cast(Any, response.is_closed) is True
 
@@ -973,7 +970,7 @@ class TestAsyncBoxes:
     @parametrize
     async def test_method_create_windows(self, async_client: AsyncGboxClient) -> None:
         box = await async_client.v1.boxes.create_windows()
-        assert_matches_type(BoxCreateWindowsResponse, box, path=["response"])
+        assert box is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -995,7 +992,7 @@ class TestAsyncBoxes:
             api_timeout="30s",
             wait=True,
         )
-        assert_matches_type(BoxCreateWindowsResponse, box, path=["response"])
+        assert box is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -1005,7 +1002,7 @@ class TestAsyncBoxes:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         box = await response.parse()
-        assert_matches_type(BoxCreateWindowsResponse, box, path=["response"])
+        assert box is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -1015,7 +1012,7 @@ class TestAsyncBoxes:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             box = await response.parse()
-            assert_matches_type(BoxCreateWindowsResponse, box, path=["response"])
+            assert box is None
 
         assert cast(Any, response.is_closed) is True
 

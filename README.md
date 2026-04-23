@@ -34,8 +34,7 @@ client = GboxClient(
     environment="selfHosting",
 )
 
-android_box = client.v1.boxes.create_android()
-print(android_box.id)
+client.v1.boxes.create_android()
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -60,8 +59,7 @@ client = AsyncGboxClient(
 
 
 async def main() -> None:
-    android_box = await client.v1.boxes.create_android()
-    print(android_box.id)
+    await client.v1.boxes.create_android()
 
 
 asyncio.run(main())
@@ -94,8 +92,7 @@ async def main() -> None:
         api_key=os.environ.get("GBOX_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
-        android_box = await client.v1.boxes.create_android()
-        print(android_box.id)
+        await client.v1.boxes.create_android()
 
 
 asyncio.run(main())
@@ -119,7 +116,7 @@ from gbox_sdk import GboxClient
 
 client = GboxClient()
 
-android_box = client.v1.boxes.create_android(
+client.v1.boxes.create_android(
     config={
         "envs": {
             "ANDROID_LOG_TAGS": "*:V",
@@ -132,7 +129,6 @@ android_box = client.v1.boxes.create_android(
         },
     },
 )
-print(android_box.config)
 ```
 
 ## File uploads
@@ -281,7 +277,7 @@ response = client.v1.boxes.with_raw_response.create_android()
 print(response.headers.get('X-My-Header'))
 
 box = response.parse()  # get the object that `v1.boxes.create_android()` would have returned
-print(box.id)
+print(box)
 ```
 
 These methods return an [`APIResponse`](https://github.com/babelcloud/gbox-sdk-py/tree/main/src/gbox_sdk/_response.py) object.

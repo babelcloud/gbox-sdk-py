@@ -29,7 +29,6 @@ from .box_create_windows_params import BoxCreateWindowsParams as BoxCreateWindow
 from .box_resolution_set_params import BoxResolutionSetParams as BoxResolutionSetParams
 from .box_live_view_url_response import BoxLiveViewURLResponse as BoxLiveViewURLResponse
 from .box_websocket_url_response import BoxWebsocketURLResponse as BoxWebsocketURLResponse
-from .box_create_windows_response import BoxCreateWindowsResponse as BoxCreateWindowsResponse
 from .box_execute_commands_params import BoxExecuteCommandsParams as BoxExecuteCommandsParams
 from .box_resolution_set_response import BoxResolutionSetResponse as BoxResolutionSetResponse
 from .box_web_terminal_url_params import BoxWebTerminalURLParams as BoxWebTerminalURLParams

@@ -96,8 +96,6 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.v1.linux_box import LinuxBox
-from ....types.v1.android_box import AndroidBox
 from ....types.v1.box_list_response import BoxListResponse
 from ....types.v1.box_stop_response import BoxStopResponse
 from ....types.v1.box_start_response import BoxStartResponse
@@ -106,7 +104,6 @@ from ....types.v1.box_retrieve_response import BoxRetrieveResponse
 from ....types.v1.box_run_code_response import BoxRunCodeResponse
 from ....types.v1.box_live_view_url_response import BoxLiveViewURLResponse
 from ....types.v1.box_websocket_url_response import BoxWebsocketURLResponse
-from ....types.v1.box_create_windows_response import BoxCreateWindowsResponse
 from ....types.v1.box_resolution_set_response import BoxResolutionSetResponse
 from ....types.v1.box_execute_commands_response import BoxExecuteCommandsResponse
 from ....types.v1.box_web_terminal_url_response import BoxWebTerminalURLResponse
@@ -287,7 +284,7 @@ class BoxesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AndroidBox:
+    ) -> None:
         """Provisions a new Android box that you can operate through the GBOX SDK.
 
         Use this
@@ -315,6 +312,7 @@ class BoxesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
             "/boxes/android",
             body=maybe_transform(
@@ -328,7 +326,7 @@ class BoxesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AndroidBox,
+            cast_to=NoneType,
         )
 
     def create_linux(
@@ -343,7 +341,7 @@ class BoxesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> LinuxBox:
+    ) -> None:
         """Provisions a new Linux box that you can operate through the GBOX SDK.
 
         Use this
@@ -371,6 +369,7 @@ class BoxesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
             "/boxes/linux",
             body=maybe_transform(
@@ -384,7 +383,7 @@ class BoxesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=LinuxBox,
+            cast_to=NoneType,
         )
 
     def create_windows(
@@ -399,7 +398,7 @@ class BoxesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BoxCreateWindowsResponse:
+    ) -> None:
         """Provisions a new Windows box that you can operate through the GBOX SDK.
 
         Use this
@@ -427,6 +426,7 @@ class BoxesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
             "/boxes/windows",
             body=maybe_transform(
@@ -440,7 +440,7 @@ class BoxesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=BoxCreateWindowsResponse,
+            cast_to=NoneType,
         )
 
     def display(
@@ -1072,7 +1072,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AndroidBox:
+    ) -> None:
         """Provisions a new Android box that you can operate through the GBOX SDK.
 
         Use this
@@ -1100,6 +1100,7 @@ class AsyncBoxesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
             "/boxes/android",
             body=await async_maybe_transform(
@@ -1113,7 +1114,7 @@ class AsyncBoxesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AndroidBox,
+            cast_to=NoneType,
         )
 
     async def create_linux(
@@ -1128,7 +1129,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> LinuxBox:
+    ) -> None:
         """Provisions a new Linux box that you can operate through the GBOX SDK.
 
         Use this
@@ -1156,6 +1157,7 @@ class AsyncBoxesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
             "/boxes/linux",
             body=await async_maybe_transform(
@@ -1169,7 +1171,7 @@ class AsyncBoxesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=LinuxBox,
+            cast_to=NoneType,
         )
 
     async def create_windows(
@@ -1184,7 +1186,7 @@ class AsyncBoxesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BoxCreateWindowsResponse:
+    ) -> None:
         """Provisions a new Windows box that you can operate through the GBOX SDK.
 
         Use this
@@ -1212,6 +1214,7 @@ class AsyncBoxesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
             "/boxes/windows",
             body=await async_maybe_transform(
@@ -1225,7 +1228,7 @@ class AsyncBoxesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=BoxCreateWindowsResponse,
+            cast_to=NoneType,
         )
 
     async def display(
